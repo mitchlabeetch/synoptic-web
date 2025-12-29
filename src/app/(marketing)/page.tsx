@@ -19,12 +19,12 @@ export default async function LandingPage() {
           <div className="w-10 h-10 flex items-center justify-center group-hover:rotate-6 transition-transform">
             <img src="/logo-icon.svg" alt="Synoptic Icon" className="h-10 w-10" />
           </div>
-          <span className="ml-3 text-2xl font-black tracking-tighter text-[#30b8c8] font-sans lowercase">synoptic</span>
+          <span className="ml-3 text-2xl font-bold tracking-tighter text-[#30b8c8] font-sans lowercase leading-none">synoptic</span>
         </Link>
         <nav className="ml-auto hidden md:flex gap-8 items-center">
-          <Link className="text-sm font-bold uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors" href="#features">{t('features')}</Link>
-          <Link className="text-sm font-bold uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors" href="#pricing">{t('pricing')}</Link>
-          <Link className="text-sm font-bold uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors" href="/library">{t('library')}</Link>
+          <Link className="text-sm font-semibold uppercase tracking-[0.15em] text-muted-foreground hover:text-primary transition-colors font-outfit" href="#features">{t('features')}</Link>
+          <Link className="text-sm font-semibold uppercase tracking-[0.15em] text-muted-foreground hover:text-primary transition-colors font-outfit" href="#pricing">{t('pricing')}</Link>
+          <Link className="text-sm font-semibold uppercase tracking-[0.15em] text-muted-foreground hover:text-primary transition-colors font-outfit" href="/library">{t('library')}</Link>
           
           <div className="h-4 w-px bg-muted mx-2" />
           
@@ -35,10 +35,10 @@ export default async function LandingPage() {
           <div className="h-4 w-px bg-muted mx-2" />
           
           <Link href="/auth/login">
-            <Button variant="ghost" className="font-bold">{t('logIn')}</Button>
+            <Button variant="ghost" className="font-bold rounded-full px-6 transition-all hover:bg-primary/5 hover:text-primary">{t('logIn')}</Button>
           </Link>
           <Link href="/auth/login">
-            <Button className="font-bold rounded-xl px-6">{t('joinNow')}</Button>
+            <Button className="font-bold rounded-full px-8 bg-[#22687a] hover:bg-[#1a5160] transition-shadow shadow-lg shadow-primary/10">{t('joinNow')}</Button>
           </Link>
         </nav>
       </header>
@@ -56,7 +56,7 @@ export default async function LandingPage() {
           <div className="col-span-1 md:col-span-2 space-y-4">
             <div className="flex items-center gap-2">
               <img src="/logo-icon.svg" alt="Synoptic Logo" className="h-8 w-8" />
-              <span className="text-xl font-black tracking-tighter text-[#30b8c8] font-sans lowercase">synoptic</span>
+              <span className="text-xl font-bold tracking-tighter text-[#30b8c8] font-sans lowercase">synoptic</span>
             </div>
             <p className="max-w-xs text-muted-foreground text-sm font-medium leading-relaxed">
               {tf('tagline')}

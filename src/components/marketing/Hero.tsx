@@ -73,7 +73,7 @@ const LANGUAGES_ANNOTATIONS: Record<string, LanguageData> = {
       { text: "ال", role: "article", highlight: true },
       { text: "استوديو ", role: "noun" },
       { text: "ثنائي اللغة ", role: "other" },
-      { text: "النهائي", role: "adjective" }
+      { text: "المثالي", role: "adjective" }
     ],
     arrow: [3, 1]
   },
@@ -90,18 +90,17 @@ const LANGUAGES_ANNOTATIONS: Record<string, LanguageData> = {
 
 const getLangData = (code: string) => LANGUAGES_ANNOTATIONS[code] || LANGUAGES_ANNOTATIONS.en;
 
-// Role colors synced with app branding
 const ROLE_COLORS = {
-  article: "#30b8c8", // Branding Cyan
-  adjective: "#f9726e", // Accent Pink
-  noun: "#22687a", // Primary Teal
+  article: "#30b8c8", 
+  adjective: "#f9726e", 
+  noun: "#22687a", 
   other: "currentColor"
 };
 
 /**
- * Enhanced Curved Arrow that handles wrapping and positioning accurately.
+ * Advanced Curve Logic to avoid word crossing.
  */
-function CurvedArrow({ fromRef, toRef, containerRef, color }: { fromRef: HTMLElement | null; toRef: HTMLElement | null; containerRef: React.RefObject<HTMLDivElement | null>; color: string }) {
+function CurvedArrow({ fromRef, toRef, containerRef, color, isRTL }: { fromRef: HTMLElement | null; toRef: HTMLElement | null; containerRef: React.RefObject<HTMLDivElement | null>; color: string; isRTL?: boolean }) {
   const [path, setPath] = useState("");
   const [endPos, setEndPos] = useState({ x: 0, y: 0 });
 
@@ -113,22 +112,22 @@ function CurvedArrow({ fromRef, toRef, containerRef, color }: { fromRef: HTMLEle
       const fromRect = fromRef.getBoundingClientRect();
       const toRect = toRef.getBoundingClientRect();
 
-      // We want to anchor to the center-bottom of the word text, ignoring trailing space
-      // Since we use whitespace-pre, we can't easily ignore trailing space in bounding rect
-      // But we can approximate by shifting slightly if it has a space
       const startX = fromRect.left - containerRect.left + fromRect.width / 2.2;
-      const startY = fromRect.top - containerRect.top + fromRect.height - 5;
+      const startY = fromRect.top - containerRect.top + fromRect.height - 4;
       const endX = toRect.left - containerRect.left + toRect.width / 2.2;
-      const endY = toRect.top - containerRect.top + toRect.height - 5;
+      const endY = toRect.top - containerRect.top + toRect.height - 4;
 
-      const sameLine = Math.abs(fromRect.top - toRect.top) < 20;
+      const deltaY = Math.abs(fromRect.top - toRect.top);
+      const isWrapped = deltaY > 20;
       
       let midX, midY;
-      if (sameLine) {
+      
+      if (!isWrapped) {
         midX = (startX + endX) / 2;
-        midY = startY + 40; // Deeper curve for clarity
+        midY = startY + 30;
       } else {
-        midX = Math.min(startX, endX) - 30;
+        const curveOutward = isRTL ? -40 : 40;
+        midX = Math.min(startX, endX) - curveOutward;
         midY = (startY + endY) / 2;
       }
 
@@ -139,13 +138,12 @@ function CurvedArrow({ fromRef, toRef, containerRef, color }: { fromRef: HTMLEle
     updatePath();
     const observer = new ResizeObserver(updatePath);
     observer.observe(containerRef.current);
-    // Also update on scroll since refs might shift
     window.addEventListener('resize', updatePath);
     return () => {
       observer.disconnect();
       window.removeEventListener('resize', updatePath);
     };
-  }, [fromRef, toRef, containerRef]);
+  }, [fromRef, toRef, containerRef, isRTL]);
 
   if (!path) return null;
 
@@ -155,21 +153,21 @@ function CurvedArrow({ fromRef, toRef, containerRef, color }: { fromRef: HTMLEle
         d={path} 
         fill="transparent" 
         stroke={color} 
-        strokeWidth="2.5" 
+        strokeWidth="1.5" 
         strokeLinecap="round" 
-        strokeDasharray="4 2"
+        strokeDasharray="4 3"
         initial={{ pathLength: 0 }} 
         animate={{ pathLength: 1 }} 
-        transition={{ duration: 1.2, ease: "easeOut" }} 
+        transition={{ duration: 1, ease: "easeInOut" }} 
       />
       <motion.circle 
         cx={endPos.x} 
         cy={endPos.y} 
-        r="3" 
+        r="2" 
         fill={color}
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
-        transition={{ delay: 1 }}
+        transition={{ delay: 0.8 }}
       />
     </motion.svg>
   );
@@ -210,7 +208,7 @@ function AnnotatedSentence({
         clearInterval(interval);
         setTimeout(() => {
           setShowAnnotations(true);
-          setTimeout(onComplete, 3500);
+          setTimeout(onComplete, 4000);
         }, 600);
         return;
       }
@@ -225,7 +223,7 @@ function AnnotatedSentence({
         setTypedSegments(currentSegment);
         setTypedChars(0);
       }
-    }, 50);
+    }, 45);
 
     return () => clearInterval(interval);
   }, [active, data, onComplete, staticMode]);
@@ -249,7 +247,7 @@ function AnnotatedSentence({
               color: showAnnotations && s.role && s.role !== 'other' ? roleColor : 'inherit'
             }}
             className={cn(
-              "text-5xl md:text-7xl lg:text-[7rem] tracking-tight leading-[1.1] inline-block transition-colors duration-500 whitespace-pre",
+              "text-3xl md:text-4xl lg:text-5xl tracking-tight leading-[1.2] inline-block transition-colors duration-500 whitespace-pre",
               showAnnotations && s.role === 'noun' ? 'font-bold' : 'font-medium'
             )}
           >
@@ -259,7 +257,7 @@ function AnnotatedSentence({
               <motion.span
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
-                className="absolute inset-x-0 bottom-[10%] h-[25%] bg-[#30b8c8]/10 -z-10 origin-left rounded-md"
+                className="absolute inset-x-0 bottom-[10%] h-[15%] bg-[#30b8c8]/10 -z-10 origin-left rounded-md"
               />
             )}
             
@@ -267,7 +265,7 @@ function AnnotatedSentence({
               <motion.span 
                 animate={{ opacity: [1, 0] }} 
                 transition={{ repeat: Infinity, duration: 0.8 }}
-                className="inline-block w-[4px] h-[0.7em] bg-primary ml-0.5 align-middle"
+                className="inline-block w-[2px] h-[0.7em] bg-primary ml-0.5 align-middle"
               />
             )}
           </motion.span>
@@ -280,6 +278,7 @@ function AnnotatedSentence({
           toRef={segmentsRefs.current[data.arrow[1]]!} 
           containerRef={containerRef}
           color={ROLE_COLORS.adjective} 
+          isRTL={langCode === 'ar'}
         />
       )}
     </div>
@@ -291,8 +290,7 @@ export function Hero() {
   const currentLocale = useLocale();
   const [currentLangIndex, setCurrentLangIndex] = useState(0);
   const [isSaving, setIsSaving] = useState(false);
-  const [animationStage, setAnimationStage] = useState<'initial_left' | 'cycling_right' | 'dwell'>('initial_left');
-  const [hasAnimatedLeft, setHasAnimatedLeft] = useState(false);
+  const [animationStage, setAnimationStage] = useState<'sync' | 'cycling' | 'dwell'>('sync');
 
   const rotationLanguages = useMemo(() => {
     return Object.keys(LANGUAGES_ANNOTATIONS).filter(code => code !== currentLocale);
@@ -300,68 +298,75 @@ export function Hero() {
 
   const currentLangCode = rotationLanguages[currentLangIndex];
 
-  const handleLeftComplete = () => {
-    setHasAnimatedLeft(true);
-    setAnimationStage('cycling_right');
+  const handleSyncComplete = () => {
+    setAnimationStage('cycling');
   };
 
-  const handleRightComplete = () => {
+  const handleCycleComplete = () => {
     setAnimationStage('dwell');
     setTimeout(() => {
       setCurrentLangIndex((prev) => (prev + 1) % rotationLanguages.length);
-      setAnimationStage('cycling_right');
+      setAnimationStage('cycling');
       setIsSaving(true);
       setTimeout(() => setIsSaving(false), 800);
-    }, 3000);
+    }, 2500);
   };
 
   return (
-    <section className="relative pt-12 pb-20 md:pt-16 md:pb-32 overflow-hidden bg-background">
+    <section className="relative pt-8 pb-16 md:pt-10 md:pb-32 overflow-hidden bg-background">
+      {/* Background Gradient */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(48,184,200,0.05),transparent_60%),radial-gradient(circle_at_bottom_left,rgba(249,114,110,0.03),transparent_60%)] -z-10" />
+      
       <div className="container px-4 mx-auto">
         <motion.div
-          initial={{ opacity: 0, scale: 0.98 }}
-          animate={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, scale: 0.995, y: 10 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="relative mx-auto max-w-[1400px]"
+          className="relative mx-auto max-w-[1240px]"
         >
-          <div className="rounded-[4rem] border border-border/50 bg-card/30 backdrop-blur-[100px] shadow-2xl overflow-hidden font-sans">
-            {/* Header */}
-            <div className="h-16 border-b bg-muted/5 flex items-center px-10 justify-between">
-              <div className="flex gap-3">
-                <div className="w-3.5 h-3.5 rounded-full bg-red-400/20" />
-                <div className="w-3.5 h-3.5 rounded-full bg-amber-400/20" />
-                <div className="w-3.5 h-3.5 rounded-full bg-green-400/20" />
+          {/* Studio Interface Mockup */}
+          <div className="rounded-[3rem] border border-border/30 bg-card/20 backdrop-blur-[60px] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.08)] overflow-hidden font-sans">
+            {/* Window Controls */}
+            <div className="h-12 border-b bg-muted/5 flex items-center px-8 justify-between">
+              <div className="flex gap-2.5">
+                <div className="w-2.5 h-2.5 rounded-full bg-red-400/20" />
+                <div className="w-2.5 h-2.5 rounded-full bg-amber-400/20" />
+                <div className="w-2.5 h-2.5 rounded-full bg-green-400/20" />
               </div>
               <div className="flex items-center gap-6">
-                <div className={cn("w-2.5 h-2.5 rounded-full transition-all duration-700", isSaving ? "bg-primary animate-pulse scale-125" : "bg-muted-foreground/20")} />
-                <Save className={cn("h-5 w-5 transition-colors duration-500", isSaving ? "text-primary" : "text-muted-foreground/20")} />
+                <div className={cn("w-1.5 h-1.5 rounded-full transition-all duration-700", isSaving ? "bg-primary animate-pulse scale-125" : "bg-muted-foreground/10")} />
+                <Save className={cn("h-3.5 w-3.5 transition-colors duration-500", isSaving ? "text-primary" : "text-muted-foreground/10")} />
               </div>
             </div>
             
             <div className="flex flex-col lg:flex-row">
               {/* Sidebar */}
-              <div className="hidden lg:flex w-20 border-r flex-col items-center py-16 gap-12 bg-muted/5">
+              <div className="hidden lg:flex w-14 border-r flex-col items-center py-10 gap-10 bg-muted/5">
                 {[Shapes, Layers, Globe, Zap].map((Icon, i) => (
-                  <Icon key={i} className={cn("h-7 w-7 transition-all duration-500", i === 2 ? "text-primary opacity-100 drop-shadow-sm" : "text-muted-foreground/10")} />
+                  <Icon key={i} className={cn("h-5.5 w-5.5 transition-all duration-500", i === 2 ? "text-primary opacity-100" : "text-muted-foreground/10")} />
                 ))}
               </div>
 
-              {/* Workspaces */}
-              <div className="flex-1 flex flex-col lg:flex-row min-h-[600px] md:min-h-[850px] relative">
-                <div className="flex-1 p-16 md:p-24 border-b lg:border-b-0 lg:border-r border-border/10 flex flex-col justify-center">
+              {/* Translation Panels */}
+              <div className="flex-1 flex flex-col lg:flex-row min-h-[400px] md:min-h-[550px] relative">
+                
+                {/* Visual Separator */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-px h-[50%] bg-border/20 hidden lg:block" />
+
+                <div className="flex-1 p-10 md:p-16 lg:p-14 flex flex-col justify-center">
                    <AnnotatedSentence 
                       langCode={currentLocale} 
-                      active={animationStage === 'initial_left'} 
-                      staticMode={hasAnimatedLeft}
-                      onComplete={handleLeftComplete} 
+                      active={animationStage === 'sync'} 
+                      staticMode={animationStage === 'cycling' || animationStage === 'dwell'}
+                      onComplete={handleSyncComplete} 
                    />
                 </div>
 
-                <div className="flex-1 p-16 md:p-24 flex flex-col justify-center bg-muted/5">
+                <div className="flex-1 p-10 md:p-16 lg:p-14 flex flex-col justify-center bg-muted/5">
                    <AnnotatedSentence 
                       langCode={currentLangCode} 
-                      active={animationStage === 'cycling_right'} 
-                      onComplete={handleRightComplete}
+                      active={animationStage === 'sync' || animationStage === 'cycling'} 
+                      onComplete={handleCycleComplete}
                    />
                 </div>
               </div>
@@ -369,24 +374,24 @@ export function Hero() {
           </div>
         </motion.div>
 
-        {/* Global Branding & CTA */}
+        {/* Marketing Copy */}
         <motion.div 
-           initial={{ opacity: 0, y: 40 }}
+           initial={{ opacity: 0, y: 20 }}
            animate={{ opacity: 1, y: 0 }}
-           transition={{ delay: 0.8 }}
-           className="mt-24 text-center max-w-5xl mx-auto space-y-12"
+           transition={{ delay: 0.7 }}
+           className="mt-12 text-center max-w-5xl mx-auto space-y-8 pb-10"
         >
-           <h1 className="text-6xl md:text-8xl font-bold tracking-tighter font-sans leading-[0.85] text-foreground">
+           <h1 className="text-4xl md:text-5xl lg:text-[5.5rem] font-bold tracking-tighter font-outfit leading-[0.85] text-foreground">
               {t('titlePlain')}
            </h1>
-           <p className="text-muted-foreground font-medium text-3xl leading-relaxed px-12 opacity-80">
+           <p className="text-muted-foreground font-medium text-lg md:text-xl leading-relaxed px-12 font-quicksand opacity-80">
               {t('subtitle')}
            </p>
-           <div className="pt-10">
-             <Link href="/auth/login">
-                <Button size="lg" className="h-20 px-16 font-black rounded-[2rem] gap-5 text-3xl shadow-2xl shadow-primary/40 bg-primary hover:bg-primary/90 transition-all hover:scale-[1.03] active:scale-95">
+           <div className="pt-4">
+             <Link href="/auth/login" className="inline-block">
+                <Button size="lg" className="h-16 px-12 font-bold rounded-full gap-5 text-xl shadow-lg shadow-primary/10 bg-primary hover:bg-primary/90 transition-all hover:scale-[1.02] active:scale-95 font-outfit">
                   {t('ctaPrimary')}
-                  <ArrowRight className="h-8 w-8" />
+                  <ArrowRight className="h-5 w-5" />
                 </Button>
              </Link>
            </div>

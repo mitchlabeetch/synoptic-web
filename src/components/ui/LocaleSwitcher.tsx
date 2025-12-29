@@ -26,7 +26,7 @@ export default function LocaleSwitcher() {
     <div className="flex items-center gap-2">
       <Globe className="h-4 w-4 text-muted-foreground" />
       <Select value={locale} onValueChange={handleLocaleChange}>
-        <SelectTrigger className="w-[140px] h-9 text-xs font-bold uppercase tracking-wider border-none bg-transparent hover:bg-accent transition-colors">
+        <SelectTrigger className="w-[140px] h-9 text-xs font-bold uppercase tracking-widest border-none bg-transparent hover:bg-accent rounded-full transition-colors font-outfit">
           <SelectValue />
         </SelectTrigger>
         <SelectContent align="end" className="max-h-[300px] z-[2000]">

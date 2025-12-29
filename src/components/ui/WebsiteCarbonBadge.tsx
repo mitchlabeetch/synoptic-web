@@ -33,7 +33,7 @@ export function WebsiteCarbonBadge({ className }: { className?: string }) {
             <Leaf className="w-2.5 h-2.5 text-emerald-500/40" />
           </div>
           <span className="text-sm font-black text-emerald-900 dark:text-emerald-100 flex items-center gap-1">
-            Global A+ <span className="text-xs opacity-60 font-medium">Ranked Grade</span>
+            A+ <span className="text-xs opacity-60 font-medium">websitecarbon.com</span>
           </span>
       </div>
       
