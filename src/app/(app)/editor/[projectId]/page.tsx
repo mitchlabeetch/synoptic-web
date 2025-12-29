@@ -24,7 +24,7 @@ export default async function EditorPage({ params }: { params: Promise<{ project
 
       <div className="flex flex-1 overflow-hidden">
         {/* Left Sidebar - Design & Navigation */}
-        <div className="w-16 lg:w-64 border-r bg-card hidden md:flex flex-col shadow-sm">
+        <div className="border-r bg-card hidden md:flex flex-col shadow-sm transition-all duration-300">
           <Sidebar />
         </div>
 

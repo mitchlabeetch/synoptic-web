@@ -1,6 +1,7 @@
 // src/components/editor/Sidebar.tsx
 'use client';
 
+import { useState } from 'react';
 import { useProjectStore } from '@/lib/store/projectStore';
 import { cn } from '@/lib/utils';
 import { 
@@ -13,7 +14,9 @@ import {
   Settings2,
   Layers,
   PlusCircle,
-  Hash
+  Hash,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { 
@@ -22,9 +25,12 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import PageManager from './PageManager';
 
 export default function Sidebar() {
   const { addBlock, addPage, currentPageIndex, meta } = useProjectStore();
+  const [activeTab, setActiveTab] = useState<'tools' | 'pages'>('pages');
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   const handleAddTextBlock = () => {
     addBlock(currentPageIndex, {
@@ -52,81 +58,112 @@ export default function Sidebar() {
   };
 
   const tools = [
-    { icon: Layout, label: 'Page Manager', onClick: () => {} }, // Active by default
-    { icon: Type, label: 'Add Text', onClick: handleAddTextBlock },
-    { icon: SeparatorHorizontal, label: 'Separator', onClick: handleAddSeparator },
-    { icon: ImageIcon, label: 'Media', onClick: () => {} },
-    { icon: MessageSquare, label: 'Annotations', onClick: () => {} },
-    { icon: Languages, label: 'Translation AI', onClick: () => {} },
-    { icon: Layers, label: 'Style Presets', onClick: () => {} },
-    { icon: Settings2, label: 'Studio Settings', onClick: () => {} },
+    { id: 'pages', icon: Layout, label: 'Page Manager', onClick: () => setActiveTab('pages') },
+    { id: 'text', icon: Type, label: 'Add Text', onClick: handleAddTextBlock },
+    { id: 'separator', icon: SeparatorHorizontal, label: 'Separator', onClick: handleAddSeparator },
+    { id: 'media', icon: ImageIcon, label: 'Media', onClick: () => {} },
+    { id: 'annotations', icon: MessageSquare, label: 'Annotations', onClick: () => {} },
+    { id: 'ai', icon: Languages, label: 'Translation AI', onClick: () => {} },
+    { id: 'presets', icon: Layers, label: 'Style Presets', onClick: () => {} },
+    { id: 'settings', icon: Settings2, label: 'Studio Settings', onClick: () => {} },
   ];
 
   return (
     <TooltipProvider>
-      <div className="flex flex-col h-full bg-card border-r shadow-sm">
-        {/* Quick Add Section */}
-        <div className="p-4 border-b bg-muted/20">
-          <Button 
-            onClick={() => addPage(currentPageIndex)} 
-            className="w-full gap-2 shadow-sm hover:shadow-md transition-all font-bold"
-            size="sm"
-          >
-            <PlusCircle className="h-4 w-4" />
-            <span className="lg:inline hidden">New Page</span>
-          </Button>
+      <div className={cn(
+        "flex h-full bg-card border-r shadow-sm transition-all duration-300 relative",
+        isCollapsed ? "w-16" : "w-64 lg:w-72"
+      )}>
+        {/* Toggle Collapse Button */}
+        <Button 
+          variant="ghost" 
+          size="icon" 
+          className="absolute -right-3 top-20 h-6 w-6 rounded-full border bg-background shadow-sm z-50 hover:bg-muted"
+          onClick={() => setIsCollapsed(!isCollapsed)}
+        >
+          {isCollapsed ? <ChevronRight className="h-3 w-3" /> : <ChevronLeft className="h-3 w-3" />}
+        </Button>
+
+        {/* Sidebar Navigation (Always icons) */}
+        <div className="w-16 border-r flex flex-col items-center py-4 bg-muted/10 shrink-0">
+          <nav className="space-y-4 w-full px-2">
+            {tools.map((tool) => (
+              <Tooltip key={tool.id}>
+                <TooltipTrigger asChild>
+                  <button
+                    onClick={() => {
+                      if (tool.id === 'pages') setActiveTab('pages');
+                      else {
+                        setActiveTab('tools');
+                        tool.onClick();
+                      }
+                    }}
+                    className={cn(
+                      "w-full aspect-square flex items-center justify-center rounded-xl transition-all",
+                      (activeTab === 'pages' && tool.id === 'pages') || (activeTab === 'tools' && tool.id !== 'pages' && tool.id !== 'settings')
+                        ? "bg-primary text-primary-foreground shadow-md"
+                        : "text-muted-foreground hover:bg-primary/10 hover:text-primary"
+                    )}
+                  >
+                    <tool.icon className="h-5 w-5" />
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent side="right">
+                  {tool.label}
+                </TooltipContent>
+              </Tooltip>
+            ))}
+          </nav>
         </div>
 
-        {/* Studio Tools */}
-        <div className="flex-1 overflow-auto py-4">
-          <div className="px-3 mb-4">
-            <h3 className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 px-2 py-2">
-              Studio Tools
-            </h3>
-            <nav className="space-y-1">
-              {tools.map((tool) => (
-                <Tooltip key={tool.label}>
-                  <TooltipTrigger asChild>
-                    <button
-                      onClick={tool.onClick}
-                      className={cn(
-                        "w-full flex items-center justify-center lg:justify-start gap-3 px-3 py-2.5 text-sm font-medium rounded-lg transition-all",
-                        "text-muted-foreground hover:bg-primary/5 hover:text-primary active:scale-95"
-                      )}
-                    >
-                      <tool.icon className="h-5 w-5 shrink-0" />
-                      <span className="lg:inline hidden truncate">{tool.label}</span>
-                    </button>
-                  </TooltipTrigger>
-                  <TooltipContent side="right" className="lg:hidden">
-                    {tool.label}
-                  </TooltipContent>
-                </Tooltip>
-              ))}
-            </nav>
-          </div>
+        {/* Dynamic Panel Content (Hidden if collapsed) */}
+        {!isCollapsed && (
+          <div className="flex-1 flex flex-col overflow-hidden">
+            {activeTab === 'pages' ? (
+              <PageManager />
+            ) : (
+              <div className="flex-1 flex flex-col">
+                <div className="p-4 border-b bg-muted/20">
+                  <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Editor Tools</h3>
+                </div>
+                <div className="flex-1 overflow-auto p-4 space-y-6">
+                   <div className="space-y-2">
+                     <Label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">Canvas Actions</Label>
+                     <Button variant="outline" className="w-full justify-start gap-2" size="sm" onClick={() => addPage(currentPageIndex)}>
+                        <PlusCircle className="h-4 w-4" />
+                        Add Blank Page
+                     </Button>
+                     <Button variant="outline" className="w-full justify-start gap-2" size="sm" onClick={handleAddTextBlock}>
+                        <Type className="h-4 w-4" />
+                        Insert Text Block
+                     </Button>
+                   </div>
 
-          <div className="px-3">
-            <h3 className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 px-2 py-2">
-              Organization
-            </h3>
-            <button
-               className="w-full flex items-center justify-center lg:justify-start gap-3 px-3 py-2.5 text-sm font-medium rounded-lg text-muted-foreground hover:bg-muted"
-            >
-              <Hash className="h-5 w-5 shrink-0" />
-              <span className="lg:inline hidden">Chapter Breaks</span>
-            </button>
+                   <div className="space-y-2">
+                     <Label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">Drafting</Label>
+                     <button className="w-full flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg text-muted-foreground hover:bg-muted transition-colors">
+                        <Hash className="h-4 w-4" />
+                        Chapter Start
+                     </button>
+                   </div>
+                </div>
+              </div>
+            )}
+            
+            {/* Footer Info (Hidden if collapsed) */}
+            <div className="p-4 border-t bg-muted/5 mt-auto">
+              <div className="flex items-center gap-2 text-[10px] text-muted-foreground italic">
+                <div className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
+                <span className="uppercase tracking-tighter font-bold opacity-60">Engine v0.2.0-Alpha</span>
+              </div>
+            </div>
           </div>
-        </div>
-
-        {/* Footer Info */}
-        <div className="p-4 border-t bg-muted/5">
-          <div className="flex items-center gap-2 justify-center lg:justify-start text-xs text-muted-foreground italic">
-            <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
-            <span className="lg:inline hidden uppercase tracking-tighter font-bold opacity-60">Engine Online</span>
-          </div>
-        </div>
+        )}
       </div>
     </TooltipProvider>
   );
+}
+
+function Label({ children, className }: { children: React.ReactNode, className?: string }) {
+  return <span className={cn("block mb-1", className)}>{children}</span>;
 }
