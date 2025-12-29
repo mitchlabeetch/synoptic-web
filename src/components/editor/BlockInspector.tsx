@@ -7,14 +7,18 @@ import {
   Type, 
   Trash2,
   Copy,
-  Maximize2,
   Image as ImageIcon,
   AlignCenter,
   AlignLeft,
   AlignRight,
-  Scaling,
   SeparatorHorizontal,
-  Palette
+  Palette,
+  FileText,
+  MessageSquare,
+  Eye,
+  EyeOff,
+  Hash,
+  Maximize2
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
@@ -28,6 +32,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { Switch } from "@/components/ui/switch"
 
 export default function BlockInspector() {
   const { 
@@ -35,23 +40,117 @@ export default function BlockInspector() {
     currentPageIndex, 
     selectedBlockId, 
     updateBlock, 
-    deleteBlock 
+    deleteBlock,
+    updatePage
   } = useProjectStore();
   
-  const selectedBlock = content.pages[currentPageIndex]?.blocks.find(
+  const currentPage = content.pages[currentPageIndex];
+  const selectedBlock = currentPage?.blocks.find(
     (b) => b.id === selectedBlockId
   );
 
+  // IF NO BLOCK SELECTED: Show Page Inspector
   if (!selectedBlock) {
+    if (!currentPage) return null;
+
     return (
-      <div className="flex-1 p-8 text-center py-20 bg-muted/5">
-        <div className="h-20 w-20 mx-auto bg-muted/30 rounded-2xl flex items-center justify-center mb-6">
-          <Settings2 className="h-10 w-10 text-muted-foreground/40" />
+      <div className="flex-1 flex flex-col overflow-hidden bg-card animate-in fade-in duration-300">
+        <div className="p-4 border-b bg-muted/20 flex items-center justify-between">
+          <h3 className="text-sm font-bold uppercase tracking-widest text-foreground flex items-center gap-2">
+            <FileText className="h-4 w-4 text-primary" />
+            Page {currentPage.number} Settings
+          </h3>
         </div>
-        <h4 className="font-medium mb-2 text-foreground">Nothing Selected</h4>
-        <p className="text-sm text-muted-foreground italic px-4">
-          Select a block on the page to adjust its fine-grained properties.
-        </p>
+
+        <div className="flex-1 overflow-auto p-6 space-y-8">
+          <section className="space-y-4">
+            <Label className="text-xs font-bold text-muted-foreground uppercase">Visibility Overrides</Label>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between p-2 rounded-lg border bg-muted/10">
+                <div className="flex items-center gap-2">
+                  <Eye className="h-3.5 w-3.5 text-muted-foreground" />
+                  <span className="text-xs font-medium">Header</span>
+                </div>
+                <Switch 
+                  checked={currentPage.showHeader !== false} 
+                  onCheckedChange={(val) => updatePage(currentPageIndex, { showHeader: val })}
+                />
+              </div>
+              <div className="flex items-center justify-between p-2 rounded-lg border bg-muted/10">
+                <div className="flex items-center gap-2">
+                  <Hash className="h-3.5 w-3.5 text-muted-foreground" />
+                  <span className="text-xs font-medium">Page Number</span>
+                </div>
+                <Switch 
+                  checked={currentPage.showPageNumber !== false} 
+                  onCheckedChange={(val) => updatePage(currentPageIndex, { showPageNumber: val })}
+                />
+              </div>
+              <div className="flex items-center justify-between p-2 rounded-lg border bg-muted/10">
+                <div className="flex items-center gap-2">
+                  <Eye className="h-3.5 w-3.5 text-muted-foreground" />
+                  <span className="text-xs font-medium">Footer</span>
+                </div>
+                <Switch 
+                  checked={currentPage.showFooter !== false} 
+                  onCheckedChange={(val) => updatePage(currentPageIndex, { showFooter: val })}
+                />
+              </div>
+            </div>
+          </section>
+
+          <section className="space-y-4">
+            <Label className="text-xs font-bold text-muted-foreground uppercase">Content Overrides</Label>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="header-text" className="text-[10px] text-muted-foreground">Custom Header Text</Label>
+                <Input 
+                  id="header-text"
+                  placeholder="Override global title..."
+                  value={currentPage.headerText || ''}
+                  onChange={(e) => updatePage(currentPageIndex, { headerText: e.target.value })}
+                  className="h-8 text-xs"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="footer-text" className="text-[10px] text-muted-foreground">Custom Footer Text</Label>
+                <Input 
+                  id="footer-text"
+                  placeholder="e.g. Chapter 1 Notes..."
+                  value={currentPage.footerText || ''}
+                  onChange={(e) => updatePage(currentPageIndex, { footerText: e.target.value })}
+                  className="h-8 text-xs"
+                />
+              </div>
+            </div>
+          </section>
+
+          <section className="space-y-4">
+            <Label className="text-xs font-bold text-muted-foreground uppercase">Printing & Flow</Label>
+            <div className="space-y-2">
+               <Button 
+                variant={currentPage.isChapterStart ? 'default' : 'outline'} 
+                className="w-full justify-start gap-2 h-10 text-xs"
+                onClick={() => updatePage(currentPageIndex, { isChapterStart: !currentPage.isChapterStart })}
+               >
+                 <Hash className="h-4 w-4" />
+                 Mark as Chapter Start
+               </Button>
+               <Button 
+                variant={currentPage.isBlankPage ? 'default' : 'outline'} 
+                className="w-full justify-start gap-2 h-10 text-xs"
+                onClick={() => updatePage(currentPageIndex, { isBlankPage: !currentPage.isBlankPage })}
+               >
+                 <Maximize2 className="h-4 w-4" />
+                 Forced Blank Page
+               </Button>
+            </div>
+          </section>
+        </div>
+
+        <div className="p-4 border-t bg-muted/5 text-[10px] text-muted-foreground italic text-center">
+          Changes here only affect the current page.
+        </div>
       </div>
     );
   }
@@ -59,6 +158,7 @@ export default function BlockInspector() {
   const isText = selectedBlock.type === 'text';
   const isImage = selectedBlock.type === 'image';
   const isSeparator = selectedBlock.type === 'separator';
+  const isCallout = selectedBlock.type === 'callout';
 
   return (
     <div className="flex-1 flex flex-col overflow-hidden bg-card">
@@ -67,6 +167,7 @@ export default function BlockInspector() {
           {isText && <Type className="h-4 w-4 text-primary" />}
           {isImage && <ImageIcon className="h-4 w-4 text-primary" />}
           {isSeparator && <SeparatorHorizontal className="h-4 w-4 text-primary" />}
+          {isCallout && <MessageSquare className="h-4 w-4 text-primary" />}
           {selectedBlock.type} Inspector
         </h3>
         <Button 
@@ -254,6 +355,49 @@ export default function BlockInspector() {
                     onValueChange={([val]) => updateBlock(currentPageIndex, selectedBlock.id, { thickness: val } as any)}
                   />
                 </div>
+              </div>
+            </section>
+          </>
+        )}
+
+        {/* CALLOUT SPECIFIC CONTROLS */}
+        {isCallout && (
+          <>
+            <section className="space-y-4">
+              <Label className="text-xs font-bold text-muted-foreground uppercase">Context Type</Label>
+              <Select 
+                value={(selectedBlock as any).calloutType || 'note'}
+                onValueChange={(val) => updateBlock(currentPageIndex, selectedBlock.id, { calloutType: val } as any)}
+              >
+                <SelectTrigger className="w-full h-10">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="note">General Note</SelectItem>
+                  <SelectItem value="tip">Learning Tip</SelectItem>
+                  <SelectItem value="warning">Grammar Warning</SelectItem>
+                  <SelectItem value="grammar">Grammar Rule</SelectItem>
+                  <SelectItem value="vocabulary">Vocabulary Spark</SelectItem>
+                  <SelectItem value="culture">Cultural Insight</SelectItem>
+                  <SelectItem value="pronunciation">Pronunciation Guide</SelectItem>
+                </SelectContent>
+              </Select>
+            </section>
+
+            <section className="space-y-4">
+              <Label className="text-xs font-bold text-muted-foreground uppercase">Branding Color</Label>
+              <div className="grid grid-cols-5 gap-2">
+                {['#2563eb', '#10b981', '#f59e0b', '#ef4444', '#6366f1', '#8b5cf6', '#ec4899', '#f43f5e', '#64748b', '#000000'].map((color) => (
+                  <button
+                    key={color}
+                    className={cn(
+                      "h-8 rounded-md border shadow-sm transition-all hover:scale-110",
+                      (selectedBlock as any).headerColor === color ? "ring-2 ring-primary ring-offset-2" : ""
+                    )}
+                    style={{ backgroundColor: color }}
+                    onClick={() => updateBlock(currentPageIndex, selectedBlock.id, { headerColor: color } as any)}
+                  />
+                ))}
               </div>
             </section>
           </>

@@ -8,7 +8,12 @@ import {
 import { TextBlockComponent } from './blocks/TextBlock';
 import { ImageBlockComponent } from './blocks/ImageBlock';
 import { SeparatorBlockComponent } from './blocks/SeparatorBlock';
+import { CalloutBlockComponent } from './blocks/CalloutBlock';
 import { useProjectStore } from '@/lib/store/projectStore';
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+import { GripVertical } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface BlockRendererProps {
   block: ContentBlock;
@@ -27,6 +32,21 @@ export default function BlockRenderer({
     setSelectedBlockId
   } = useProjectStore();
 
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: block.id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    zIndex: isDragging ? 50 : 'auto',
+  };
+
   const commonProps = {
     isSelected: selectedBlockId === block.id,
     onSelect: () => setSelectedBlockId(block.id),
@@ -40,40 +60,64 @@ export default function BlockRenderer({
     targetLang: meta?.target_lang || 'en',
   };
 
-  switch (block.type) {
-    case 'text':
-      return (
-        <TextBlockComponent
-          block={block as TextBlock}
-          {...commonProps}
-        />
-      );
+  const renderBlockContent = () => {
+    switch (block.type) {
+      case 'text':
+        return (
+          <TextBlockComponent
+            block={block as TextBlock}
+            {...commonProps}
+          />
+        );
 
-    case 'image':
-      return (
-        <ImageBlockComponent
-          block={block as any}
-          {...commonProps}
-        />
-      );
+      case 'image':
+        return (
+          <ImageBlockComponent
+            block={block as any}
+            {...commonProps}
+          />
+        );
 
-    case 'separator':
-      return (
-        <SeparatorBlockComponent
-          block={block as any}
-          {...commonProps}
-        />
-      );
+      case 'separator':
+        return (
+          <SeparatorBlockComponent
+            block={block as any}
+            {...commonProps}
+          />
+        );
 
-    case 'callout':
-      return (
-        <div className="p-6 my-4 bg-muted/20 border-l-4 border-primary rounded-r-xl transition-all hover:bg-muted/30 group relative">
-          <p className="font-bold text-primary mb-1 text-xs uppercase tracking-widest">Callout Block</p>
-          <div className="text-sm text-foreground italic">Integration pending in Phase 3...</div>
-        </div>
-      );
+      case 'callout':
+        return (
+          <CalloutBlockComponent
+            block={block as any}
+            {...commonProps}
+          />
+        );
 
-    default:
-      return null;
-  }
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div
+      ref={setNodeRef}
+      style={style}
+      className={cn(
+        "relative group/block",
+        isDragging && "opacity-40"
+      )}
+    >
+      {/* Drag Handle */}
+      <div 
+        {...attributes} 
+        {...listeners}
+        className="absolute -left-8 top-1/2 -translate-y-1/2 p-1.5 opacity-0 group-hover/block:opacity-100 transition-opacity cursor-grab active:cursor-grabbing text-muted-foreground/30 hover:text-muted-foreground z-50"
+      >
+        <GripVertical className="h-4 w-4" />
+      </div>
+
+      {renderBlockContent()}
+    </div>
+  );
 }

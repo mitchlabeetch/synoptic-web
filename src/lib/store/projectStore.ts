@@ -7,6 +7,7 @@ import {
   WordGroup,
   ArrowConnector,
   ProjectContent,
+  StylePreset,
 } from '@/types/blocks';
 
 interface ProjectMeta {
@@ -58,6 +59,7 @@ interface ProjectState {
   currentPageIndex: number;
   setCurrentPageIndex: (index: number) => void;
   addPage: (afterIndex?: number) => void;
+  updatePage: (index: number, updates: Partial<PageData>) => void;
   deletePage: (index: number) => void;
 
   // Block operations
@@ -83,6 +85,11 @@ interface ProjectState {
   addArrow: (arrow: ArrowConnector) => void;
   updateArrow: (arrowId: string, updates: Partial<ArrowConnector>) => void;
   deleteArrow: (arrowId: string) => void;
+  
+  // Style Presets
+  addPreset: (preset: StylePreset) => void;
+  deletePreset: (presetId: string) => void;
+  applyPreset: (pageIndex: number, blockId: string, presetId: string) => void;
 
   // Undo/Redo
   history: ProjectContent[];
@@ -101,6 +108,7 @@ const DEFAULT_CONTENT: ProjectContent = {
   wordGroups: [],
   arrows: [],
   stamps: [],
+  presets: [],
 };
 
 const DEFAULT_SETTINGS: ProjectSettings = {
@@ -153,23 +161,33 @@ export const useProjectStore = create<ProjectState>()(
     // Page operations
     setCurrentPageIndex: (index) => set({ currentPageIndex: index }),
 
-    addPage: (afterIndex) =>
-      set((state) => {
-        const nextNumber = state.content.pages.length + 1;
-        const newPage: PageData = {
-          id: `page-${Date.now()}`,
-          number: nextNumber,
-          blocks: [],
-          isBlankPage: false,
-          avoidPageBreak: false,
-        };
-        const insertIndex =
-          afterIndex !== undefined
-            ? afterIndex + 1
-            : state.content.pages.length;
-        state.content.pages.splice(insertIndex, 0, newPage);
-        state.currentPageIndex = insertIndex;
-      }),
+    addPage: (afterIndex) => set((state) => {
+      const newPage: PageData = {
+        id: `page-${Date.now()}`,
+        number: state.content.pages.length + 1,
+        blocks: [],
+        isBlankPage: false,
+        avoidPageBreak: false,
+        showPageNumber: true,
+        showHeader: true,
+        showFooter: true,
+      };
+      
+      const insertAt = afterIndex !== undefined ? afterIndex + 1 : state.content.pages.length;
+      state.content.pages.splice(insertAt, 0, newPage);
+      
+      // Update page numbers
+      state.content.pages.forEach((p, i) => { p.number = i + 1; });
+      state.pushHistory();
+    }),
+
+    updatePage: (index, updates) => set((state) => {
+      const page = state.content.pages[index];
+      if (page) {
+        state.content.pages[index] = { ...page, ...updates };
+        state.pushHistory();
+      }
+    }),
 
     deletePage: (index) =>
       set((state) => {
@@ -185,6 +203,7 @@ export const useProjectStore = create<ProjectState>()(
     addBlock: (pageIndex, block) =>
       set((state) => {
         state.content.pages[pageIndex].blocks.push(block);
+        state.pushHistory();
       }),
 
     updateBlock: (pageIndex, blockId, updates) =>
@@ -192,14 +211,20 @@ export const useProjectStore = create<ProjectState>()(
         const block = state.content.pages[pageIndex].blocks.find(
           (b) => b.id === blockId
         );
-        if (block) Object.assign(block, updates);
+        if (block) {
+          Object.assign(block, updates);
+          state.pushHistory();
+        }
       }),
 
     deleteBlock: (pageIndex, blockId) =>
       set((state) => {
         const blocks = state.content.pages[pageIndex].blocks;
         const index = blocks.findIndex((b) => b.id === blockId);
-        if (index !== -1) blocks.splice(index, 1);
+        if (index !== -1) {
+          blocks.splice(index, 1);
+          state.pushHistory();
+        }
       }),
 
     reorderBlocks: (pageIndex, fromIndex, toIndex) =>
@@ -207,6 +232,7 @@ export const useProjectStore = create<ProjectState>()(
         const blocks = state.content.pages[pageIndex].blocks;
         const [moved] = blocks.splice(fromIndex, 1);
         blocks.splice(toIndex, 0, moved);
+        state.pushHistory();
       }),
 
     // Word Group operations
@@ -241,11 +267,35 @@ export const useProjectStore = create<ProjectState>()(
         if (arrow) Object.assign(arrow, updates);
       }),
 
-    deleteArrow: (arrowId) =>
-      set((state) => {
-        const index = state.content.arrows.findIndex((a) => a.id === arrowId);
-        if (index !== -1) state.content.arrows.splice(index, 1);
-      }),
+    deleteArrow: (arrowId) => set((state) => {
+      state.content.arrows = state.content.arrows.filter(a => a.id !== arrowId);
+      state.pushHistory();
+    }),
+
+    addPreset: (preset) => set((state) => {
+      if (!state.content.presets) state.content.presets = [];
+      state.content.presets.push(preset);
+      state.pushHistory();
+    }),
+
+    deletePreset: (presetId) => set((state) => {
+      if (state.content.presets) {
+        state.content.presets = state.content.presets.filter(p => p.id !== presetId);
+        state.pushHistory();
+      }
+    }),
+
+    applyPreset: (pageIndex, blockId, presetId) => set((state) => {
+      const preset = state.content.presets?.find(p => p.id === presetId);
+      const page = state.content.pages[pageIndex];
+      const block = page?.blocks.find(b => b.id === blockId);
+      
+      if (preset && block) {
+        // Apply only styling fields, preserve content and ID
+        Object.assign(block, { ...preset.settings });
+        state.pushHistory();
+      }
+    }),
 
     // Undo/Redo
     pushHistory: () =>

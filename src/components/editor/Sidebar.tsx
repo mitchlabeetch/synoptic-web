@@ -28,10 +28,11 @@ import {
 } from "@/components/ui/tooltip";
 import PageManager from './PageManager';
 import ThemeInspector from './ThemeInspector';
+import StylePresetManager from './StylePresetManager';
 
 export default function Sidebar() {
   const { addBlock, addPage, currentPageIndex, meta } = useProjectStore();
-  const [activeTab, setActiveTab] = useState<'tools' | 'pages' | 'design'>('pages');
+  const [activeTab, setActiveTab] = useState<'tools' | 'pages' | 'design' | 'presets'>('pages');
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   const handleAddTextBlock = () => {
@@ -73,15 +74,28 @@ export default function Sidebar() {
     } as any);
   };
 
+  const handleAddCallout = () => {
+    addBlock(currentPageIndex, {
+      id: `block-${Date.now()}`,
+      type: 'callout',
+      calloutType: 'note',
+      title: '',
+      content: '',
+      headerColor: '#2563eb',
+      backgroundColor: '#eff6ff',
+      textColor: '#1e40af',
+    } as any);
+  };
+
   const tools = [
     { id: 'pages', icon: Layout, label: 'Page Manager', onClick: () => { setActiveTab('pages'); setIsCollapsed(false); } },
     { id: 'design', icon: Palette, label: 'Global Design', onClick: () => { setActiveTab('design'); setIsCollapsed(false); } },
+    { id: 'presets', icon: Layers, label: 'Style Presets', onClick: () => { setActiveTab('presets'); setIsCollapsed(false); } },
     { id: 'text', icon: Type, label: 'Add Text', onClick: handleAddTextBlock },
     { id: 'separator', icon: SeparatorHorizontal, label: 'Separator', onClick: handleAddSeparator },
+    { id: 'callout', icon: MessageSquare, label: 'Callout', onClick: handleAddCallout },
     { id: 'media', icon: ImageIcon, label: 'Media', onClick: handleAddImageBlock },
-    { id: 'annotations', icon: MessageSquare, label: 'Annotations', onClick: () => {} },
     { id: 'ai', icon: Languages, label: 'Translation AI', onClick: () => {} },
-    { id: 'presets', icon: Layers, label: 'Style Presets', onClick: () => {} },
     { id: 'settings', icon: Settings2, label: 'Studio Settings', onClick: () => {} },
   ];
 
@@ -109,8 +123,8 @@ export default function Sidebar() {
                 <TooltipTrigger asChild>
                   <button
                     onClick={() => {
-                      if (tool.id === 'pages' || tool.id === 'design') {
-                        setActiveTab(tool.id);
+                      if (['pages', 'design', 'presets'].includes(tool.id)) {
+                        setActiveTab(tool.id as any);
                         setIsCollapsed(false);
                       } else {
                         setActiveTab('tools');
@@ -120,7 +134,7 @@ export default function Sidebar() {
                     }}
                     className={cn(
                       "w-full aspect-square flex items-center justify-center rounded-xl transition-all",
-                      (activeTab === tool.id) || (activeTab === 'tools' && !['pages', 'design', 'settings'].includes(tool.id))
+                      (activeTab === tool.id) || (activeTab === 'tools' && !['pages', 'design', 'presets', 'settings'].includes(tool.id))
                         ? "bg-primary text-primary-foreground shadow-md"
                         : "text-muted-foreground hover:bg-primary/10 hover:text-primary"
                     )}
@@ -141,6 +155,7 @@ export default function Sidebar() {
           <div className="flex-1 flex flex-col overflow-hidden">
             {activeTab === 'pages' && <PageManager />}
             {activeTab === 'design' && <ThemeInspector />}
+            {activeTab === 'presets' && <StylePresetManager />}
             {activeTab === 'tools' && (
               <div className="flex-1 flex flex-col">
                 <div className="p-4 border-b bg-muted/20">
@@ -174,7 +189,7 @@ export default function Sidebar() {
             <div className="p-4 border-t bg-muted/5 mt-auto">
               <div className="flex items-center gap-2 text-[10px] text-muted-foreground italic">
                 <div className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
-                <span className="uppercase tracking-tighter font-bold opacity-60">Engine v0.3.0-Theme</span>
+                <span className="uppercase tracking-tighter font-bold opacity-60">Engine v0.4.0-Studio</span>
               </div>
             </div>
           </div>

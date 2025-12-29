@@ -258,6 +258,17 @@ export interface ArrowConnector {
 }
 
 // ============================================
+// STYLE PRESETS
+// ============================================
+
+export interface StylePreset {
+  id: string;
+  name: string;
+  type: BlockType;
+  settings: any; // Snapshot of styling fields
+}
+
+// ============================================
 // UNION TYPE
 // ============================================
 
@@ -294,9 +305,17 @@ export interface PageData {
   isBlankPage: boolean;
   avoidPageBreak: boolean;
 
+  // Header & Footer visibility overrides
+  showPageNumber?: boolean;
+  showHeader?: boolean;
+  showFooter?: boolean;
+  headerText?: string;
+  footerText?: string;
+
   // Chapter info
   chapterId?: string;
   chapterTitle?: string;
+  isChapterStart?: boolean;
 }
 
 export interface ProjectContent {
@@ -304,4 +323,5 @@ export interface ProjectContent {
   wordGroups: WordGroup[];
   arrows: ArrowConnector[];
   stamps: any[];
+  presets?: StylePreset[];
 }
