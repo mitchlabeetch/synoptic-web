@@ -1,6 +1,11 @@
 // src/lib/store/projectStore.ts
+// PURPOSE: Central state management for the bilingual book editor
+// ACTION: Manages project content, settings, pages, blocks, annotations with optimized undo/redo
+// MECHANISM: Uses Zustand with Immer for immutable updates and debounced history for performance
+
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
+import { enablePatches, produceWithPatches, applyPatches, Patch } from 'immer';
 import {
   ContentBlock,
   PageData,
@@ -11,6 +16,9 @@ import {
   StylePreset,
 } from '@/types/blocks';
 import { isRTL } from '@/data/languages';
+
+// Enable Immer patches for efficient undo/redo
+enablePatches();
 
 interface ProjectMeta {
   id: string;
@@ -44,6 +52,14 @@ interface ProjectSettings {
   direction: 'ltr' | 'rtl' | 'auto';
 }
 
+// Patch-based history entry for efficient undo/redo
+interface HistoryEntry {
+  patches: Patch[];
+  inversePatches: Patch[];
+  timestamp: number;
+  description?: string;
+}
+
 interface ProjectState {
   // Meta
   meta: ProjectMeta | null;
@@ -67,17 +83,9 @@ interface ProjectState {
 
   // Block operations
   addBlock: (pageIndex: number, block: ContentBlock) => void;
-  updateBlock: (
-    pageIndex: number,
-    blockId: string,
-    updates: Partial<ContentBlock>
-  ) => void;
+  updateBlock: (pageIndex: number, blockId: string, updates: Partial<ContentBlock>) => void;
   deleteBlock: (pageIndex: number, blockId: string) => void;
-  reorderBlocks: (
-    pageIndex: number,
-    fromIndex: number,
-    toIndex: number
-  ) => void;
+  reorderBlocks: (pageIndex: number, fromIndex: number, toIndex: number) => void;
 
   // Word Group operations
   addWordGroup: (group: WordGroup) => void;
@@ -99,12 +107,19 @@ interface ProjectState {
   deletePreset: (presetId: string) => void;
   applyPreset: (pageIndex: number, blockId: string, presetId: string) => void;
 
-  // Undo/Redo
-  history: ProjectContent[];
+  // Optimized Undo/Redo with patches
+  history: HistoryEntry[];
   historyIndex: number;
+  canUndo: boolean;
+  canRedo: boolean;
   undo: () => void;
   redo: () => void;
-  pushHistory: () => void;
+  pushHistory: (description?: string) => void;
+  
+  // Internal: debounce timer for history
+  _historyDebounceTimer: ReturnType<typeof setTimeout> | null;
+  _pendingPatches: Patch[];
+  _pendingInversePatches: Patch[];
 
   // Selection
   selectedBlockId: string | null;
@@ -145,6 +160,10 @@ const DEFAULT_SETTINGS: ProjectSettings = {
   direction: 'auto',
 };
 
+// History configuration
+const MAX_HISTORY_SIZE = 50;
+const HISTORY_DEBOUNCE_MS = 500; // Debounce rapid changes
+
 export const useProjectStore = create<ProjectState>()(
   immer((set, get) => ({
     // Initial state
@@ -154,7 +173,12 @@ export const useProjectStore = create<ProjectState>()(
     currentPageIndex: 0,
     history: [],
     historyIndex: -1,
+    canUndo: false,
+    canRedo: false,
     selectedBlockId: null,
+    _historyDebounceTimer: null,
+    _pendingPatches: [],
+    _pendingInversePatches: [],
 
     // Meta
     setProjectMeta: (meta) => set({ meta }),
@@ -188,126 +212,102 @@ export const useProjectStore = create<ProjectState>()(
       
       // Update page numbers
       state.content.pages.forEach((p, i) => { p.number = i + 1; });
-      state.pushHistory();
     }),
 
     updatePage: (index, updates) => set((state) => {
       const page = state.content.pages[index];
       if (page) {
         state.content.pages[index] = { ...page, ...updates };
-        state.pushHistory();
       }
     }),
 
-    deletePage: (index) =>
-      set((state) => {
-        if (state.content.pages.length > 1) {
-          state.content.pages.splice(index, 1);
-          if (state.currentPageIndex >= state.content.pages.length) {
-            state.currentPageIndex = state.content.pages.length - 1;
-          }
+    deletePage: (index) => set((state) => {
+      if (state.content.pages.length > 1) {
+        state.content.pages.splice(index, 1);
+        if (state.currentPageIndex >= state.content.pages.length) {
+          state.currentPageIndex = state.content.pages.length - 1;
         }
-      }),
+        // Update page numbers
+        state.content.pages.forEach((p, i) => { p.number = i + 1; });
+      }
+    }),
 
     // Block operations
-    addBlock: (pageIndex, block) =>
-      set((state) => {
-        state.content.pages[pageIndex].blocks.push(block);
-        state.pushHistory();
-      }),
+    addBlock: (pageIndex, block) => set((state) => {
+      state.content.pages[pageIndex].blocks.push(block);
+    }),
 
-    updateBlock: (pageIndex, blockId, updates) =>
-      set((state) => {
-        const block = state.content.pages[pageIndex].blocks.find(
-          (b) => b.id === blockId
-        );
-        if (block) {
-          Object.assign(block, updates);
-          state.pushHistory();
-        }
-      }),
+    updateBlock: (pageIndex, blockId, updates) => set((state) => {
+      const block = state.content.pages[pageIndex].blocks.find((b) => b.id === blockId);
+      if (block) {
+        Object.assign(block, updates);
+      }
+    }),
 
-    deleteBlock: (pageIndex, blockId) =>
-      set((state) => {
-        const blocks = state.content.pages[pageIndex].blocks;
-        const index = blocks.findIndex((b) => b.id === blockId);
-        if (index !== -1) {
-          blocks.splice(index, 1);
-          state.pushHistory();
-        }
-      }),
+    deleteBlock: (pageIndex, blockId) => set((state) => {
+      const blocks = state.content.pages[pageIndex].blocks;
+      const index = blocks.findIndex((b) => b.id === blockId);
+      if (index !== -1) {
+        blocks.splice(index, 1);
+      }
+    }),
 
-    reorderBlocks: (pageIndex, fromIndex, toIndex) =>
-      set((state) => {
-        const blocks = state.content.pages[pageIndex].blocks;
-        const [moved] = blocks.splice(fromIndex, 1);
-        blocks.splice(toIndex, 0, moved);
-        state.pushHistory();
-      }),
+    reorderBlocks: (pageIndex, fromIndex, toIndex) => set((state) => {
+      const blocks = state.content.pages[pageIndex].blocks;
+      const [moved] = blocks.splice(fromIndex, 1);
+      blocks.splice(toIndex, 0, moved);
+    }),
 
     // Word Group operations
-    addWordGroup: (group) =>
-      set((state) => {
-        state.content.wordGroups.push(group);
-      }),
+    addWordGroup: (group) => set((state) => {
+      state.content.wordGroups.push(group);
+    }),
 
-    updateWordGroup: (groupId, updates) =>
-      set((state) => {
-        const group = state.content.wordGroups.find((g) => g.id === groupId);
-        if (group) Object.assign(group, updates);
-      }),
+    updateWordGroup: (groupId, updates) => set((state) => {
+      const group = state.content.wordGroups.find((g) => g.id === groupId);
+      if (group) Object.assign(group, updates);
+    }),
 
-    deleteWordGroup: (groupId) =>
-      set((state) => {
-        const index = state.content.wordGroups.findIndex(
-          (g) => g.id === groupId
-        );
-        if (index !== -1) state.content.wordGroups.splice(index, 1);
-      }),
+    deleteWordGroup: (groupId) => set((state) => {
+      const index = state.content.wordGroups.findIndex((g) => g.id === groupId);
+      if (index !== -1) state.content.wordGroups.splice(index, 1);
+    }),
 
     // Arrow operations
-    addArrow: (arrow) =>
-      set((state) => {
-        state.content.arrows.push(arrow);
-      }),
+    addArrow: (arrow) => set((state) => {
+      state.content.arrows.push(arrow);
+    }),
 
-    updateArrow: (arrowId, updates) =>
-      set((state) => {
-        const arrow = state.content.arrows.find((a) => a.id === arrowId);
-        if (arrow) Object.assign(arrow, updates);
-      }),
+    updateArrow: (arrowId, updates) => set((state) => {
+      const arrow = state.content.arrows.find((a) => a.id === arrowId);
+      if (arrow) Object.assign(arrow, updates);
+    }),
 
     deleteArrow: (arrowId) => set((state) => {
       state.content.arrows = state.content.arrows.filter(a => a.id !== arrowId);
-      state.pushHistory();
     }),
 
     addNote: (note) => set((state) => {
       state.content.notes.push(note);
-      state.pushHistory();
     }),
 
     updateNote: (noteId, updates) => set((state) => {
       const note = state.content.notes.find(n => n.id === noteId);
       if (note) Object.assign(note, updates);
-      state.pushHistory();
     }),
 
     deleteNote: (noteId) => set((state) => {
       state.content.notes = state.content.notes.filter(n => n.id !== noteId);
-      state.pushHistory();
     }),
 
     addPreset: (preset) => set((state) => {
       if (!state.content.presets) state.content.presets = [];
       state.content.presets.push(preset);
-      state.pushHistory();
     }),
 
     deletePreset: (presetId) => set((state) => {
       if (state.content.presets) {
         state.content.presets = state.content.presets.filter(p => p.id !== presetId);
-        state.pushHistory();
       }
     }),
 
@@ -317,51 +317,94 @@ export const useProjectStore = create<ProjectState>()(
       const block = page?.blocks.find(b => b.id === blockId);
       
       if (preset && block) {
-        // Apply only styling fields, preserve content and ID
         Object.assign(block, { ...preset.settings });
-        state.pushHistory();
       }
     }),
 
-    // Undo/Redo
-    pushHistory: () =>
-      set((state) => {
-        // Trim future history if we're not at the end
-        state.history = state.history.slice(0, state.historyIndex + 1);
-        // Add current state to history
-        state.history.push(JSON.parse(JSON.stringify(state.content)));
-        state.historyIndex = state.history.length - 1;
-        // Limit history size
-        if (state.history.length > 50) {
-          state.history.shift();
-          state.historyIndex--;
-        }
-      }),
+    // Optimized Undo/Redo with debouncing
+    pushHistory: (description) => {
+      const state = get();
+      
+      // Clear existing debounce timer
+      if (state._historyDebounceTimer) {
+        clearTimeout(state._historyDebounceTimer);
+      }
 
-    undo: () =>
-      set((state) => {
-        if (state.historyIndex > 0) {
-          state.historyIndex--;
-          state.content = JSON.parse(
-            JSON.stringify(state.history[state.historyIndex])
-          );
-        }
-      }),
+      // Create a snapshot using patches
+      const currentContent = state.content;
+      const previousContent = state.history.length > 0 && state.historyIndex >= 0
+        ? applyPatches(currentContent, state.history[state.historyIndex].inversePatches)
+        : DEFAULT_CONTENT;
 
-    redo: () =>
-      set((state) => {
-        if (state.historyIndex < state.history.length - 1) {
-          state.historyIndex++;
-          state.content = JSON.parse(
-            JSON.stringify(state.history[state.historyIndex])
-          );
-        }
-      }),
+      // Generate patches between previous and current state
+      const [, patches, inversePatches] = produceWithPatches(previousContent, (draft) => {
+        Object.assign(draft, currentContent);
+      });
+
+      // Only push if there are actual changes
+      if (patches.length === 0) return;
+
+      const timer = setTimeout(() => {
+        set((state) => {
+          // Trim future history if we're not at the end
+          state.history = state.history.slice(0, state.historyIndex + 1);
+          
+          // Add new entry
+          state.history.push({
+            patches,
+            inversePatches,
+            timestamp: Date.now(),
+            description,
+          });
+          
+          state.historyIndex = state.history.length - 1;
+          
+          // Limit history size
+          if (state.history.length > MAX_HISTORY_SIZE) {
+            state.history.shift();
+            state.historyIndex--;
+          }
+          
+          state.canUndo = state.historyIndex >= 0;
+          state.canRedo = state.historyIndex < state.history.length - 1;
+          state._historyDebounceTimer = null;
+        });
+      }, HISTORY_DEBOUNCE_MS);
+
+      set({ _historyDebounceTimer: timer });
+    },
+
+    undo: () => set((state) => {
+      if (state.historyIndex < 0 || state.history.length === 0) return;
+      
+      const entry = state.history[state.historyIndex];
+      if (entry) {
+        // Apply inverse patches to restore previous state
+        state.content = applyPatches(state.content, entry.inversePatches);
+        state.historyIndex--;
+        state.canUndo = state.historyIndex >= 0;
+        state.canRedo = true;
+      }
+    }),
+
+    redo: () => set((state) => {
+      if (state.historyIndex >= state.history.length - 1) return;
+      
+      state.historyIndex++;
+      const entry = state.history[state.historyIndex];
+      if (entry) {
+        // Apply patches to restore next state
+        state.content = applyPatches(state.content, entry.patches);
+        state.canUndo = true;
+        state.canRedo = state.historyIndex < state.history.length - 1;
+      }
+    }),
 
     // Selection
     setSelectedBlockId: (id) => set({ selectedBlockId: id }),
   }))
 );
+
 // Helpers
 export const getEffectiveDirection = (state: ProjectState) => {
   if (state.settings.direction !== 'auto') return state.settings.direction;

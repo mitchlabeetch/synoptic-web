@@ -1,12 +1,16 @@
 // src/components/editor/blocks/TextBlock.tsx
+// PURPOSE: Bilingual text block with professional rich text editing (Tiptap)
+// ACTION: Renders L1/L2 content with proper DOM management, formatting support, and AI integration
+// MECHANISM: Uses Tiptap (ProseMirror) instead of raw contentEditable to avoid React/DOM conflicts
+
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useCallback } from 'react';
 import { TextBlock } from '@/types/blocks';
 import { isRTL, getDefaultFont } from '@/data/languages';
 import { useProjectStore } from '@/lib/store/projectStore';
 import { cn } from '@/lib/utils';
-import { FloatingToolbar } from './FloatingToolbar';
+import { TiptapEditor, TiptapEditorRef } from '../TiptapEditor';
 
 import { Sparkles, Loader2, Trash2, BookOpen } from 'lucide-react';
 
@@ -31,44 +35,55 @@ export function TextBlockComponent({
   onDelete,
   isEditing,
 }: TextBlockComponentProps) {
-  const { settings } = useProjectStore();
+  const { settings, pushHistory } = useProjectStore();
   const [isAiProcessing, setIsAiProcessing] = useState(false);
+  const [l1Selection, setL1Selection] = useState({ hasSelection: false, text: '' });
+  const [l2Selection, setL2Selection] = useState({ hasSelection: false, text: '' });
+
+  const l1EditorRef = useRef<TiptapEditorRef>(null);
+  const l2EditorRef = useRef<TiptapEditorRef>(null);
 
   const direction = useProjectStore((state) => {
     if (state.settings.direction !== 'auto') return state.settings.direction;
     return isRTL(sourceLang) ? 'rtl' : 'ltr';
   });
-  
-  const l1Ref = useRef<HTMLDivElement>(null);
-  const l2Ref = useRef<HTMLDivElement>(null);
-  const [toolbarVisible, setToolbarVisible] = useState(false);
-  const [toolbarPos, setToolbarPos] = useState({ top: 0, left: 0 });
 
   const isL1RTL = isRTL(sourceLang);
   const isL2RTL = isRTL(targetLang);
 
-  const handleTextChange = (lang: 'L1' | 'L2') => {
-    const ref = lang === 'L1' ? l1Ref : l2Ref;
-    if (!ref.current) return;
-    
-    onUpdate({
-      [lang]: { 
-        ...block[lang], 
-        content: ref.current.innerHTML 
-      },
-    });
-  };
+  // Handle content updates on blur (not every keystroke - performance optimization)
+  const handleL1Blur = useCallback((html: string) => {
+    if (html !== block.L1.content) {
+      onUpdate({
+        L1: { ...block.L1, content: html }
+      });
+      // Push history on blur, not every keystroke
+      pushHistory();
+    }
+  }, [block.L1, onUpdate, pushHistory]);
+
+  const handleL2Blur = useCallback((html: string) => {
+    if (html !== block.L2.content) {
+      onUpdate({
+        L2: { ...block.L2, content: html }
+      });
+      pushHistory();
+    }
+  }, [block.L2, onUpdate, pushHistory]);
 
   const handleAiTranslate = async () => {
     if (!block.L1.content || isAiProcessing) return;
     
     setIsAiProcessing(true);
     try {
+      // Get plain text for translation
+      const plainText = l1EditorRef.current?.getText() || block.L1.content.replace(/<[^>]*>/g, '');
+      
       const response = await fetch('/api/ai/translate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          text: block.L1.content.replace(/<[^>]*>/g, ''), // Strip HTML for translation
+          text: plainText,
           sourceLang,
           targetLang
         }),
@@ -77,9 +92,12 @@ export function TextBlockComponent({
       if (!response.ok) throw new Error('Translation failed');
       const data = await response.json();
 
+      // Update L2 content and sync editor
       onUpdate({
         L2: { ...block.L2, content: data.translation }
       });
+      l2EditorRef.current?.setContent(data.translation);
+      pushHistory();
     } catch (error) {
       console.error('AI Translation Error:', error);
     } finally {
@@ -92,12 +110,15 @@ export function TextBlockComponent({
     
     setIsAiProcessing(true);
     try {
+      const l1Text = l1EditorRef.current?.getText() || block.L1.content.replace(/<[^>]*>/g, '');
+      const l2Text = l2EditorRef.current?.getText() || block.L2.content.replace(/<[^>]*>/g, '');
+      
       const response = await fetch('/api/ai/annotate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          L1Text: block.L1.content.replace(/<[^>]*>/g, ''),
-          L2Text: block.L2.content.replace(/<[^>]*>/g, ''),
+          L1Text: l1Text,
+          L2Text: l2Text,
           L1Lang: sourceLang,
           L2Lang: targetLang
         }),
@@ -106,34 +127,31 @@ export function TextBlockComponent({
       if (!response.ok) throw new Error('Annotation failed');
       const data = await response.json();
 
-      // Clear existing annotations for this block
+      // Add annotations to store
       const store = useProjectStore.getState();
       
-      // Add Word Groups
-      data.wordGroups?.forEach((g: any) => {
+      data.wordGroups?.forEach((g: Record<string, unknown>) => {
         store.addWordGroup({
           id: `wg-${block.id}-${Math.random().toString(36).substr(2, 9)}`,
           blockId: block.id,
           ...g
-        });
+        } as Parameters<typeof store.addWordGroup>[0]);
       });
 
-      // Add Arrows
-      data.arrows?.forEach((a: any) => {
+      data.arrows?.forEach((a: Record<string, unknown>) => {
         store.addArrow({
           id: `ar-${block.id}-${Math.random().toString(36).substr(2, 9)}`,
           blockId: block.id,
           ...a
-        });
+        } as Parameters<typeof store.addArrow>[0]);
       });
 
-      // Add Notes
-      data.notes?.forEach((n: any) => {
+      data.notes?.forEach((n: Record<string, unknown>) => {
         store.addNote({
           id: `nt-${block.id}-${Math.random().toString(36).substr(2, 9)}`,
           blockId: block.id,
           ...n
-        });
+        } as Parameters<typeof store.addNote>[0]);
       });
 
     } catch (error) {
@@ -143,91 +161,32 @@ export function TextBlockComponent({
     }
   };
 
-  // Helper to tokenized text into targetable spans
-  const TokenizedText = ({ content, lang, side }: { content: string, lang: string, side: 'L1' | 'L2' }) => {
-    // Basic tokenizer that preserves some HTML if needed, but for annotations we focus on words
-    const words = content.replace(/<[^>]*>/g, '').split(/\s+/);
-    return (
-      <>
-        {words.map((word, i) => (
-          <span 
-            key={i} 
-            data-word-id={`${block.id}-${side}-${i}`}
-            className="inline-block mr-1 hover:bg-primary/10 transition-colors rounded px-0.5"
-          >
-            {word}
-          </span>
-        ))}
-      </>
-    );
-  };
-
-  useEffect(() => {
-    const handleSelection = () => {
-      const selection = window.getSelection();
-      if (!selection || selection.isCollapsed || !isSelected) {
-        setToolbarVisible(false);
-        return;
-      }
-
-      const range = selection.getRangeAt(0);
-      const rect = range.getBoundingClientRect();
-
-      setToolbarPos({
-        top: rect.top + window.scrollY,
-        left: rect.left + rect.width / 2,
-      });
-      setToolbarVisible(true);
-    };
-
-    document.addEventListener('selectionchange', handleSelection);
-    return () => document.removeEventListener('selectionchange', handleSelection);
-  }, [isSelected]);
-
-  const currentLayout = block.layout || settings.layout || 'side-by-side';
-
-  // Logical grid classes
-  const layoutStyles = {
-    'side-by-side': direction === 'rtl' ? 'book-grid-rtl gap-8' : 'book-grid-ltr gap-8',
-    'interlinear': 'flex flex-col gap-1',
-    'stacked': 'flex flex-col gap-4',
-    'alternating': 'flex flex-col gap-4',
-  };
-
-  const handleAiExplain = async () => {
-    const selection = window.getSelection();
-    if (!selection || selection.isCollapsed || isAiProcessing) return;
+  const handleAiExplain = async (lang: 'L1' | 'L2') => {
+    const selection = lang === 'L1' ? l1Selection : l2Selection;
+    if (!selection.hasSelection || isAiProcessing) return;
     
-    const word = selection.toString();
-    const range = selection.getRangeAt(0);
-    
-    // Determine which language the selection is in
-    let lang = sourceLang;
-    let context = '';
-    
-    if (l1Ref.current?.contains(range.commonAncestorContainer)) {
-      lang = sourceLang;
-      context = l1Ref.current.innerText;
-    } else if (l2Ref.current?.contains(range.commonAncestorContainer)) {
-      lang = targetLang;
-      context = l2Ref.current.innerText;
-    } else {
-      return;
-    }
-
     setIsAiProcessing(true);
     try {
+      const context = lang === 'L1' 
+        ? l1EditorRef.current?.getText() 
+        : l2EditorRef.current?.getText();
+      const language = lang === 'L1' ? sourceLang : targetLang;
+
       const response = await fetch('/api/ai/explain', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ word, context, language: lang }),
+        body: JSON.stringify({ 
+          word: selection.text, 
+          context, 
+          language 
+        }),
       });
 
       if (!response.ok) throw new Error('AI explanation failed');
       const data = await response.json();
       
-      // For now, show a native alert, we'll implement a premium modal later
-      alert(`${data.role.toUpperCase()}: ${data.explanation}\n\nExamples: ${data.examples?.join(', ')}`);
+      // TODO: Replace with premium modal component
+      alert(`${data.role?.toUpperCase() || 'INFO'}: ${data.explanation}\n\nExamples: ${data.examples?.join(', ')}`);
     } catch (error) {
       console.error('AI Explain Error:', error);
     } finally {
@@ -235,11 +194,35 @@ export function TextBlockComponent({
     }
   };
 
+  const currentLayout = block.layout || settings.layout || 'side-by-side';
+
+  // Layout grid classes
+  const layoutStyles = {
+    'side-by-side': direction === 'rtl' ? 'book-grid-rtl gap-8' : 'book-grid-ltr gap-8',
+    'interlinear': 'flex flex-col gap-1',
+    'stacked': 'flex flex-col gap-4',
+    'alternating': 'flex flex-col gap-4',
+  };
+
+  // Common editor styles
+  const getEditorStyle = (langContent: typeof block.L1, isL1: boolean): React.CSSProperties => ({
+    direction: (isL1 ? isL1RTL : isL2RTL) ? 'rtl' : 'ltr',
+    fontFamily: langContent.formatting?.fontFamily || 
+      ((block.isTitle || block.isChapterHeading) ? settings.fonts.heading : settings.fonts.body),
+    fontSize: langContent.formatting?.fontSize 
+      ? `${langContent.formatting.fontSize}px` 
+      : `${settings.typography.baseSize}pt`,
+    color: langContent.formatting?.color || (isL1 ? settings.colors.primary : settings.colors.secondary),
+    textAlign: langContent.formatting?.alignment || 'start',
+  });
+
   return (
     <div
       className={cn(
         'group relative rounded-xl transition-all duration-300 outline-none mb-4 border border-transparent',
-        isSelected ? 'ring-2 ring-primary ring-offset-4 bg-background shadow-lg' : 'hover:border-primary/20 hover:bg-neutral-50/50 dark:hover:bg-neutral-800/50 hover:shadow-sm'
+        isSelected 
+          ? 'ring-2 ring-primary ring-offset-4 bg-background shadow-lg' 
+          : 'hover:border-primary/20 hover:bg-neutral-50/50 dark:hover:bg-neutral-800/50 hover:shadow-sm'
       )}
       style={{
         lineHeight: block.lineSpacing || settings.typography.lineHeight,
@@ -250,62 +233,51 @@ export function TextBlockComponent({
         onSelect();
       }}
     >
-      <FloatingToolbar 
-        isVisible={toolbarVisible} 
-        position={toolbarPos} 
-        onAiExplain={handleAiExplain}
-      />
-
       <div className={cn(
         layoutStyles[currentLayout as keyof typeof layoutStyles],
         (block.isTitle || block.isChapterHeading) && "text-center"
       )}>
         {/* L1 (Source Language) */}
-        <div
-          ref={l1Ref}
-          className={cn(
-            'p-2 rounded transition-colors min-h-[1.5em] prose prose-sm max-w-none dark:prose-invert',
-            isEditing && 'hover:bg-primary/5 focus:bg-primary/5 focus:outline-none focus:ring-1 focus:ring-primary/20',
-            block.isTitle && 'text-3xl font-extrabold tracking-tight mb-4',
-            block.isChapterHeading && 'text-2xl font-bold italic text-muted-foreground mb-4'
-          )}
-          style={{
-            direction: isL1RTL ? 'rtl' : 'ltr',
-            fontFamily: block.L1.formatting?.fontFamily || (block.isTitle || block.isChapterHeading ? settings.fonts.heading : settings.fonts.body),
-            fontSize: block.L1.formatting?.fontSize ? `${block.L1.formatting.fontSize}px` : `${settings.typography.baseSize}pt`,
-            color: block.L1.formatting?.color || settings.colors.primary,
-            textAlign: block.L1.formatting?.alignment || 'start',
-          }}
-          contentEditable={isEditing}
-          suppressContentEditableWarning
-          onBlur={() => handleTextChange('L1')}
-          // dangerouslySetInnerHTML={{ __html: block.L1.content }}
-        >
-          <TokenizedText content={block.L1.content} lang={sourceLang} side="L1" />
+        <div className={cn(
+          'p-2 rounded transition-colors',
+          isEditing && 'hover:bg-primary/5 focus-within:bg-primary/5 focus-within:ring-1 focus-within:ring-primary/20',
+          block.isTitle && 'text-3xl font-extrabold tracking-tight mb-4',
+          block.isChapterHeading && 'text-2xl font-bold italic text-muted-foreground mb-4'
+        )}>
+          <TiptapEditor
+            ref={l1EditorRef}
+            content={block.L1.content}
+            editable={isEditing}
+            direction={isL1RTL ? 'rtl' : 'ltr'}
+            placeholder="Enter source text..."
+            style={getEditorStyle(block.L1, true)}
+            onBlur={handleL1Blur}
+            onSelectionChange={(hasSelection, text) => setL1Selection({ hasSelection, text })}
+            onAiExplain={() => handleAiExplain('L1')}
+            isAiProcessing={isAiProcessing}
+          />
         </div>
 
         {/* L2 (Target Language) */}
-        <div
-          ref={l2Ref}
-          className={cn(
-            'p-2 rounded transition-colors min-h-[1.5em] prose prose-sm max-w-none dark:prose-invert opacity-80 relative',
-            isEditing && 'hover:bg-primary/5 focus:bg-primary/5 focus:outline-none focus:ring-1 focus:ring-primary/20',
-            block.isTitle && 'text-3xl font-extrabold tracking-tight mb-4',
-            block.isChapterHeading && 'text-2xl font-bold italic text-muted-foreground mb-4'
-          )}
-          style={{
-            direction: isL2RTL ? 'rtl' : 'ltr',
-            fontFamily: block.L2.formatting?.fontFamily || (block.isTitle || block.isChapterHeading ? settings.fonts.heading : settings.fonts.body),
-            fontSize: block.L2.formatting?.fontSize ? `${block.L2.formatting.fontSize}px` : `${settings.typography.baseSize}pt`,
-            color: block.L2.formatting?.color || settings.colors.secondary,
-            textAlign: block.L2.formatting?.alignment || 'start',
-          }}
-          contentEditable={isEditing}
-          suppressContentEditableWarning
-          onBlur={() => handleTextChange('L2')}
-          // dangerouslySetInnerHTML={{ __html: block.L2.content }}
-        >
-          <TokenizedText content={block.L2.content} lang={targetLang} side="L2" />
+        <div className={cn(
+          'p-2 rounded transition-colors opacity-80 relative',
+          isEditing && 'hover:bg-primary/5 focus-within:bg-primary/5 focus-within:ring-1 focus-within:ring-primary/20',
+          block.isTitle && 'text-3xl font-extrabold tracking-tight mb-4',
+          block.isChapterHeading && 'text-2xl font-bold italic text-muted-foreground mb-4'
+        )}>
+          <TiptapEditor
+            ref={l2EditorRef}
+            content={block.L2.content}
+            editable={isEditing}
+            direction={isL2RTL ? 'rtl' : 'ltr'}
+            placeholder="Enter translation..."
+            style={getEditorStyle(block.L2, false)}
+            onBlur={handleL2Blur}
+            onSelectionChange={(hasSelection, text) => setL2Selection({ hasSelection, text })}
+            onAiExplain={() => handleAiExplain('L2')}
+            isAiProcessing={isAiProcessing}
+          />
+          
           {isAiProcessing && (
             <div className="absolute inset-0 bg-background/50 flex items-center justify-center rounded-lg z-10 backdrop-blur-[1px]">
                <Loader2 className="h-5 w-5 animate-spin text-primary" />

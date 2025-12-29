@@ -145,3 +145,46 @@
     direction: ltr;
   }
 }
+
+/* Tiptap Editor Styles */
+.tiptap-wrapper .ProseMirror {
+  outline: none;
+  min-height: 1.5em;
+}
+
+.tiptap-wrapper .ProseMirror p.is-editor-empty:first-child::before {
+  color: #9ca3af;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+.tiptap-wrapper .ProseMirror:focus {
+  outline: none;
+}
+
+/* Preserve formatting in editor */
+.tiptap-wrapper .ProseMirror p {
+  margin: 0.25em 0;
+}
+
+.tiptap-wrapper .ProseMirror strong {
+  font-weight: 600;
+}
+
+.tiptap-wrapper .ProseMirror em {
+  font-style: italic;
+}
+
+.tiptap-wrapper .ProseMirror u {
+  text-decoration: underline;
+}
+
+.tiptap-wrapper .ProseMirror blockquote {
+  border-left: 3px solid var(--border);
+  padding-left: 1rem;
+  margin-left: 0;
+  font-style: italic;
+}
+

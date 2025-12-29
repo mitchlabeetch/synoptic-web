@@ -2,6 +2,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { isRTL } from '@/data/languages';
+import { sanitizeHTMLStrict, escapeHTML } from '@/lib/sanitize';
 
 const PDF_SERVICE_URL = process.env.PDF_SERVICE_URL || 'http://synoptic-pdf:3000';
 
@@ -123,10 +124,14 @@ function renderBlock(block: any, project: any, isFirstInChapter: boolean): strin
     const l1Dir = isRTL(project.source_lang || 'fr') ? 'rtl' : 'ltr';
     const l2Dir = isRTL(project.target_lang || 'en') ? 'rtl' : 'ltr';
     
+    // Sanitize user content to prevent XSS
+    const l1Content = sanitizeHTMLStrict(block.L1?.content || '');
+    const l2Content = sanitizeHTMLStrict(block.L2?.content || '');
+    
     return `
       <div class="block text-block ${layout} ${isFirstInChapter ? 'first-paragraph' : ''}">
-        <div class="l1-col" dir="${l1Dir}">${block.L1.content}</div>
-        <div class="l2-col" dir="${l2Dir}">${block.L2.content}</div>
+        <div class="l1-col" dir="${l1Dir}">${l1Content}</div>
+        <div class="l2-col" dir="${l2Dir}">${l2Content}</div>
       </div>
     `;
   }
@@ -136,19 +141,35 @@ function renderBlock(block: any, project: any, isFirstInChapter: boolean): strin
     if (style === 'ornament-fleuron') {
       return `<div class="block separator ornament">❦</div>`;
     }
-    return `<div class="block separator ${style}" style="width: ${block.width || 80}%; border-bottom-width: ${block.thickness || 1}px"></div>`;
+    if (style === 'ornament-stars') {
+      return `<div class="block separator ornament">✦ ✦ ✦</div>`;
+    }
+    if (style === 'ornament-diamond') {
+      return `<div class="block separator ornament">◆</div>`;
+    }
+    if (style === 'ornament-vine') {
+      return `<div class="block separator ornament">❧</div>`;
+    }
+    if (style === 'custom' && block.customEmoji) {
+      return `<div class="block separator ornament">${escapeHTML(block.customEmoji)}</div>`;
+    }
+    return `<div class="block separator ${escapeHTML(style)}" style="width: ${block.width || 80}%; border-bottom-width: ${block.thickness || 1}px"></div>`;
   }
 
   if (block.type === 'image') {
+    const altText = escapeHTML(block.altText || 'Image');
+    const captionL1 = block.caption?.L1 ? sanitizeHTMLStrict(block.caption.L1) : '';
+    const captionL2 = block.caption?.L2 ? sanitizeHTMLStrict(block.caption.L2) : '';
+    
     return `
       <div class="block image-block" style="text-align: ${block.alignment || 'center'}">
         <div class="image-wrapper" style="width: ${block.width || 100}%; border-radius: ${block.borderRadius || 0}px; ${block.shadow ? 'box-shadow: 0 4px 12px rgba(0,0,0,0.1);' : ''}">
-          <img src="${block.url}" alt="${block.altText}" />
+          <img src="${escapeHTML(block.url)}" alt="${altText}" />
         </div>
-        ${block.caption?.L1 || block.caption?.L2 ? `
+        ${captionL1 || captionL2 ? `
           <div class="caption">
-            <span class="l1">${block.caption.L1}</span>
-            <span class="l2">${block.caption.L2}</span>
+            <span class="l1">${captionL1}</span>
+            <span class="l2">${captionL2}</span>
           </div>
         ` : ''}
       </div>
@@ -156,15 +177,44 @@ function renderBlock(block: any, project: any, isFirstInChapter: boolean): strin
   }
 
   if (block.type === 'callout') {
+    const calloutType = escapeHTML(block.calloutType?.toUpperCase() || 'NOTE');
+    const l1Content = sanitizeHTMLStrict(block.L1?.content || block.content || '');
+    const l2Content = sanitizeHTMLStrict(block.L2?.content || '');
+    
     return `
       <div class="block callout shadow-sm" style="border-left-color: ${block.headerColor || '#3b82f6'}; background-color: ${block.backgroundColor || '#f8fafc'}">
         <div class="callout-header" style="color: ${block.headerColor || '#2563eb'}">
-          ${block.calloutType?.toUpperCase() || 'NOTE'}
+          ${calloutType}
         </div>
         <div class="callout-body">
-          <div class="l1">${block.L1?.content || block.content}</div>
-          <div class="l2">${block.L2?.content || ''}</div>
+          <div class="l1">${l1Content}</div>
+          <div class="l2">${l2Content}</div>
         </div>
+      </div>
+    `;
+  }
+
+  if (block.type === 'table') {
+    const rows = block.rows || [];
+    const tableContent = rows.map((row: any[]) => {
+      const cells = row.map((cell: any) => {
+        const tag = cell.isHeader ? 'th' : 'td';
+        const attrs = [];
+        if (cell.colspan && cell.colspan > 1) attrs.push(`colspan="${cell.colspan}"`);
+        if (cell.rowspan && cell.rowspan > 1) attrs.push(`rowspan="${cell.rowspan}"`);
+        if (cell.alignment) attrs.push(`style="text-align: ${cell.alignment}"`);
+        
+        return `<${tag}${attrs.length ? ' ' + attrs.join(' ') : ''}>${sanitizeHTMLStrict(cell.content || '')}</${tag}>`;
+      }).join('');
+      
+      return `<tr>${cells}</tr>`;
+    }).join('');
+
+    return `
+      <div class="block table-block">
+        <table style="border-color: ${block.borderColor || '#dddddd'}; border-width: ${block.borderWidth || 1}px;">
+          ${tableContent}
+        </table>
       </div>
     `;
   }
@@ -318,6 +368,29 @@ function generateProjectCSS(project: any): string {
       display: flex;
       flex-direction: column;
       gap: 2mm;
+    }
+
+    /* Table Blocks */
+    .table-block {
+      margin: 8mm 0;
+    }
+    .table-block table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 10pt;
+    }
+    .table-block th,
+    .table-block td {
+      padding: 3mm;
+      border: 0.5pt solid #ddd;
+      text-align: left;
+    }
+    .table-block th {
+      background-color: #f3f4f6;
+      font-weight: 600;
+    }
+    .table-block tr:nth-child(even) {
+      background-color: #fafafa;
     }
 
     .footer {
