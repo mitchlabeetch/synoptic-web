@@ -57,11 +57,25 @@ export default function Sidebar() {
     } as any);
   };
 
+  const handleAddImageBlock = () => {
+    addBlock(currentPageIndex, {
+      id: `block-${Date.now()}`,
+      type: 'image',
+      url: '', // Prompt user to add URL or upload
+      altText: '',
+      alignment: 'center',
+      width: 100,
+      borderRadius: 8,
+      shadow: true,
+      caption: { L1: '', L2: '' },
+    } as any);
+  };
+
   const tools = [
     { id: 'pages', icon: Layout, label: 'Page Manager', onClick: () => setActiveTab('pages') },
     { id: 'text', icon: Type, label: 'Add Text', onClick: handleAddTextBlock },
     { id: 'separator', icon: SeparatorHorizontal, label: 'Separator', onClick: handleAddSeparator },
-    { id: 'media', icon: ImageIcon, label: 'Media', onClick: () => {} },
+    { id: 'media', icon: ImageIcon, label: 'Media', onClick: handleAddImageBlock },
     { id: 'annotations', icon: MessageSquare, label: 'Annotations', onClick: () => {} },
     { id: 'ai', icon: Languages, label: 'Translation AI', onClick: () => {} },
     { id: 'presets', icon: Layers, label: 'Style Presets', onClick: () => {} },

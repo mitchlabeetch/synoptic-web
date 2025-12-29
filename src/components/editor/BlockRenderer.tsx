@@ -6,6 +6,8 @@ import {
   TextBlock,
 } from '@/types/blocks';
 import { TextBlockComponent } from './blocks/TextBlock';
+import { ImageBlockComponent } from './blocks/ImageBlock';
+import { SeparatorBlockComponent } from './blocks/SeparatorBlock';
 import { useProjectStore } from '@/lib/store/projectStore';
 
 interface BlockRendererProps {
@@ -25,9 +27,6 @@ export default function BlockRenderer({
     setSelectedBlockId
   } = useProjectStore();
 
-  // For now, only text is fully implemented with a specialized component
-  // As we add ImageBlock, SeparatorBlock, etc., we'll add them here
-  
   const commonProps = {
     isSelected: selectedBlockId === block.id,
     onSelect: () => setSelectedBlockId(block.id),
@@ -36,7 +35,7 @@ export default function BlockRenderer({
       deleteBlock(pageIndex, block.id);
       if (selectedBlockId === block.id) setSelectedBlockId(null);
     },
-    isEditing: true, // Default to true for now
+    isEditing: true,
     sourceLang: meta?.source_lang || 'fr',
     targetLang: meta?.target_lang || 'en',
   };
@@ -52,18 +51,25 @@ export default function BlockRenderer({
 
     case 'image':
       return (
-        <div className="p-4 border-2 border-dashed border-muted rounded-lg text-center text-muted-foreground italic">
-          Image Block Placeholder
-        </div>
+        <ImageBlockComponent
+          block={block as any}
+          {...commonProps}
+        />
       );
 
     case 'separator':
-      return <hr className="my-8 border-t border-muted-foreground/20" />;
+      return (
+        <SeparatorBlockComponent
+          block={block as any}
+          {...commonProps}
+        />
+      );
 
     case 'callout':
       return (
-        <div className="p-4 bg-muted/30 border-l-4 border-primary rounded-r-lg">
-          <p className="font-medium">Callout Block Placeholder</p>
+        <div className="p-6 my-4 bg-muted/20 border-l-4 border-primary rounded-r-xl transition-all hover:bg-muted/30 group relative">
+          <p className="font-bold text-primary mb-1 text-xs uppercase tracking-widest">Callout Block</p>
+          <div className="text-sm text-foreground italic">Integration pending in Phase 3...</div>
         </div>
       );
 

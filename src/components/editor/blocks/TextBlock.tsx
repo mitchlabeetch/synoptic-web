@@ -1,10 +1,11 @@
 // src/components/editor/blocks/TextBlock.tsx
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { TextBlock } from '@/types/blocks';
 import { isRTL, getDefaultFont } from '@/data/languages';
 import { cn } from '@/lib/utils';
+import { FloatingToolbar } from './FloatingToolbar';
 
 interface TextBlockComponentProps {
   block: TextBlock;
@@ -29,21 +30,45 @@ export function TextBlockComponent({
 }: TextBlockComponentProps) {
   const l1Ref = useRef<HTMLDivElement>(null);
   const l2Ref = useRef<HTMLDivElement>(null);
+  const [toolbarVisible, setToolbarVisible] = useState(false);
+  const [toolbarPos, setToolbarPos] = useState({ top: 0, left: 0 });
 
   const isL1RTL = isRTL(sourceLang);
   const isL2RTL = isRTL(targetLang);
 
-  const handleL1Change = (content: string) => {
+  const handleTextChange = (lang: 'L1' | 'L2') => {
+    const ref = lang === 'L1' ? l1Ref : l2Ref;
+    if (!ref.current) return;
+    
     onUpdate({
-      L1: { ...block.L1, content },
+      [lang]: { 
+        ...block[lang], 
+        content: ref.current.innerHTML // Use innerHTML for rich text
+      },
     });
   };
 
-  const handleL2Change = (content: string) => {
-    onUpdate({
-      L2: { ...block.L2, content },
-    });
-  };
+  useEffect(() => {
+    const handleSelection = () => {
+      const selection = window.getSelection();
+      if (!selection || selection.isCollapsed || !isSelected) {
+        setToolbarVisible(false);
+        return;
+      }
+
+      const range = selection.getRangeAt(0);
+      const rect = range.getBoundingClientRect();
+
+      setToolbarPos({
+        top: rect.top + window.scrollY,
+        left: rect.left + rect.width / 2,
+      });
+      setToolbarVisible(true);
+    };
+
+    document.addEventListener('selectionchange', handleSelection);
+    return () => document.removeEventListener('selectionchange', handleSelection);
+  }, [isSelected]);
 
   const layoutStyles = {
     'side-by-side': 'grid grid-cols-2 gap-8',
@@ -63,6 +88,8 @@ export function TextBlockComponent({
         onSelect();
       }}
     >
+      <FloatingToolbar isVisible={toolbarVisible} position={toolbarPos} />
+
       <div className={cn(
         layoutStyles[block.layout || 'side-by-side'],
         (block.isTitle || block.isChapterHeading) && "text-center"
@@ -71,8 +98,8 @@ export function TextBlockComponent({
         <div
           ref={l1Ref}
           className={cn(
-            'p-2 rounded transition-colors min-h-[1.5em]',
-            isEditing && 'hover:bg-muted/50 focus:bg-muted/30 focus:outline-none',
+            'p-2 rounded transition-colors min-h-[1.5em] prose prose-sm max-w-none dark:prose-invert',
+            isEditing && 'hover:bg-primary/5 focus:bg-primary/5 focus:outline-none focus:ring-1 focus:ring-primary/20',
             block.isTitle && 'text-3xl font-extrabold tracking-tight',
             block.isChapterHeading && 'text-2xl font-bold italic text-muted-foreground'
           )}
@@ -85,17 +112,16 @@ export function TextBlockComponent({
           }}
           contentEditable={isEditing}
           suppressContentEditableWarning
-          onBlur={(e) => handleL1Change(e.currentTarget.textContent || '')}
-        >
-          {block.L1.content}
-        </div>
+          onBlur={() => handleTextChange('L1')}
+          dangerouslySetInnerHTML={{ __html: block.L1.content }}
+        />
 
         {/* L2 (Target Language) */}
         <div
           ref={l2Ref}
           className={cn(
-            'p-2 rounded transition-colors min-h-[1.5em]',
-            isEditing && 'hover:bg-muted/50 focus:bg-muted/30 focus:outline-none',
+            'p-2 rounded transition-colors min-h-[1.5em] prose prose-sm max-w-none dark:prose-invert',
+            isEditing && 'hover:bg-primary/5 focus:bg-primary/5 focus:outline-none focus:ring-1 focus:ring-primary/20',
             block.isTitle && 'text-3xl font-extrabold tracking-tight',
             block.isChapterHeading && 'text-2xl font-bold italic text-muted-foreground'
           )}
@@ -108,13 +134,12 @@ export function TextBlockComponent({
           }}
           contentEditable={isEditing}
           suppressContentEditableWarning
-          onBlur={(e) => handleL2Change(e.currentTarget.textContent || '')}
-        >
-          {block.L2.content}
-        </div>
+          onBlur={() => handleTextChange('L2')}
+          dangerouslySetInnerHTML={{ __html: block.L2.content }}
+        />
       </div>
 
-      {/* Block Actions Overlay (only visible on hover when selected) */}
+      {/* Block Actions Overlay */}
       {isSelected && (
         <div className="absolute -right-12 top-0 flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
           <button 
