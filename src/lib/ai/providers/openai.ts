@@ -6,12 +6,21 @@ export class OpenAIProvider implements AIProvider {
   private openai: OpenAI;
 
   constructor() {
+    // Use a dummy key during build to avoid errors, but check at runtime
+    const apiKey = process.env.OPENAI_API_KEY || 'dummy-key-for-build';
     this.openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY,
+      apiKey,
     });
   }
 
+  private ensureApiKey() {
+    if (!process.env.OPENAI_API_KEY) {
+      throw new Error('OPENAI_API_KEY environment variable is required but not set. Configure it in your environment or switch to a different AI provider using the AI_PROVIDER environment variable.');
+    }
+  }
+
   async translate(text: string, sourceLang: string, targetLang: string): Promise<AITranslationResult> {
+    this.ensureApiKey();
     const response = await this.openai.chat.completions.create({
       model: 'gpt-4o-mini',
       messages: [
@@ -32,6 +41,7 @@ export class OpenAIProvider implements AIProvider {
   }
 
   async annotate(L1Text: string, L2Text: string, L1Lang: string, L2Lang: string): Promise<AIAnnotationResult> {
+    this.ensureApiKey();
     const prompt = `Analyze this bilingual text pair and provide educational annotations for language learners.
     
     SOURCE (${L1Lang}): "${L1Text}"
@@ -66,6 +76,7 @@ export class OpenAIProvider implements AIProvider {
   }
 
   async explain(word: string, context: string, language: string): Promise<any> {
+    this.ensureApiKey();
     const response = await this.openai.chat.completions.create({
       model: 'gpt-4o-mini',
       messages: [
