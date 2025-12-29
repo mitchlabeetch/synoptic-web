@@ -141,7 +141,7 @@ const DEFAULT_SETTINGS: ProjectSettings = {
   pageWidth: 152,
   pageHeight: 229,
   fonts: {
-    heading: 'Crimson Pro',
+    heading: 'Quicksand',
     body: 'Crimson Pro',
     annotation: 'Inter',
   },
