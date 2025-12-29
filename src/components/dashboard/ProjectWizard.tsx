@@ -168,13 +168,27 @@ export default function ProjectWizard() {
           page_width_mm: data.customWidth || pageSize?.width,
           page_height_mm: data.customHeight || pageSize?.height,
           settings: {
-            template: data.template,
+            theme: 'classic',
+            pageSize: data.pageSize,
+            pageWidth: data.customWidth || pageSize?.width || 152,
+            pageHeight: data.customHeight || pageSize?.height || 229,
             fonts: {
               heading: getLanguageByCode(data.sourceLang)?.suggestedFonts[0] || 'Crimson Pro',
               body: getLanguageByCode(data.sourceLang)?.suggestedFonts[0] || 'Crimson Pro',
               annotation: 'Inter',
             },
-            layout: data.template === 'interlinear' ? 'interlinear' : 'side-by-side',
+            typography: {
+              baseSize: 12,
+              headingSize: 24,
+              lineHeight: 1.5,
+            },
+            colors: {
+              primary: '#1a1a2e',
+              secondary: '#4a4a68',
+              accent: '#2563eb',
+              background: '#ffffff',
+            },
+            layout: (data.template === 'interlinear' ? 'interlinear' : 'side-by-side') as 'side-by-side' | 'interlinear' | 'alternating',
           },
           content: {
             pages: [

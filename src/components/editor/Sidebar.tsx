@@ -16,7 +16,8 @@ import {
   PlusCircle,
   Hash,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Palette
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { 
@@ -26,10 +27,11 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import PageManager from './PageManager';
+import ThemeInspector from './ThemeInspector';
 
 export default function Sidebar() {
   const { addBlock, addPage, currentPageIndex, meta } = useProjectStore();
-  const [activeTab, setActiveTab] = useState<'tools' | 'pages'>('pages');
+  const [activeTab, setActiveTab] = useState<'tools' | 'pages' | 'design'>('pages');
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   const handleAddTextBlock = () => {
@@ -61,7 +63,7 @@ export default function Sidebar() {
     addBlock(currentPageIndex, {
       id: `block-${Date.now()}`,
       type: 'image',
-      url: '', // Prompt user to add URL or upload
+      url: '', 
       altText: '',
       alignment: 'center',
       width: 100,
@@ -72,7 +74,8 @@ export default function Sidebar() {
   };
 
   const tools = [
-    { id: 'pages', icon: Layout, label: 'Page Manager', onClick: () => setActiveTab('pages') },
+    { id: 'pages', icon: Layout, label: 'Page Manager', onClick: () => { setActiveTab('pages'); setIsCollapsed(false); } },
+    { id: 'design', icon: Palette, label: 'Global Design', onClick: () => { setActiveTab('design'); setIsCollapsed(false); } },
     { id: 'text', icon: Type, label: 'Add Text', onClick: handleAddTextBlock },
     { id: 'separator', icon: SeparatorHorizontal, label: 'Separator', onClick: handleAddSeparator },
     { id: 'media', icon: ImageIcon, label: 'Media', onClick: handleAddImageBlock },
@@ -106,15 +109,18 @@ export default function Sidebar() {
                 <TooltipTrigger asChild>
                   <button
                     onClick={() => {
-                      if (tool.id === 'pages') setActiveTab('pages');
-                      else {
+                      if (tool.id === 'pages' || tool.id === 'design') {
+                        setActiveTab(tool.id);
+                        setIsCollapsed(false);
+                      } else {
                         setActiveTab('tools');
+                        setIsCollapsed(false);
                         tool.onClick();
                       }
                     }}
                     className={cn(
                       "w-full aspect-square flex items-center justify-center rounded-xl transition-all",
-                      (activeTab === 'pages' && tool.id === 'pages') || (activeTab === 'tools' && tool.id !== 'pages' && tool.id !== 'settings')
+                      (activeTab === tool.id) || (activeTab === 'tools' && !['pages', 'design', 'settings'].includes(tool.id))
                         ? "bg-primary text-primary-foreground shadow-md"
                         : "text-muted-foreground hover:bg-primary/10 hover:text-primary"
                     )}
@@ -133,9 +139,9 @@ export default function Sidebar() {
         {/* Dynamic Panel Content (Hidden if collapsed) */}
         {!isCollapsed && (
           <div className="flex-1 flex flex-col overflow-hidden">
-            {activeTab === 'pages' ? (
-              <PageManager />
-            ) : (
+            {activeTab === 'pages' && <PageManager />}
+            {activeTab === 'design' && <ThemeInspector />}
+            {activeTab === 'tools' && (
               <div className="flex-1 flex flex-col">
                 <div className="p-4 border-b bg-muted/20">
                   <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Editor Tools</h3>
@@ -168,7 +174,7 @@ export default function Sidebar() {
             <div className="p-4 border-t bg-muted/5 mt-auto">
               <div className="flex items-center gap-2 text-[10px] text-muted-foreground italic">
                 <div className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
-                <span className="uppercase tracking-tighter font-bold opacity-60">Engine v0.2.0-Alpha</span>
+                <span className="uppercase tracking-tighter font-bold opacity-60">Engine v0.3.0-Theme</span>
               </div>
             </div>
           </div>

@@ -18,15 +18,24 @@ interface ProjectMeta {
 
 interface ProjectSettings {
   theme: string;
+  pageSize: string;
+  pageWidth: number;
+  pageHeight: number;
   fonts: {
     heading: string;
     body: string;
     annotation: string;
   };
+  typography: {
+    baseSize: number;
+    headingSize: number;
+    lineHeight: number;
+  };
   colors: {
     primary: string;
     secondary: string;
     accent: string;
+    background: string;
   };
   layout: 'side-by-side' | 'interlinear' | 'alternating';
 }
@@ -43,6 +52,7 @@ interface ProjectState {
   // Settings
   settings: ProjectSettings;
   setSettings: (settings: ProjectSettings) => void;
+  updateSettings: (updates: Partial<ProjectSettings>) => void;
 
   // Page operations
   currentPageIndex: number;
@@ -95,15 +105,24 @@ const DEFAULT_CONTENT: ProjectContent = {
 
 const DEFAULT_SETTINGS: ProjectSettings = {
   theme: 'classic',
+  pageSize: '6x9',
+  pageWidth: 152,
+  pageHeight: 229,
   fonts: {
     heading: 'Crimson Pro',
     body: 'Crimson Pro',
     annotation: 'Inter',
   },
+  typography: {
+    baseSize: 12,
+    headingSize: 24,
+    lineHeight: 1.5,
+  },
   colors: {
     primary: '#1a1a2e',
     secondary: '#4a4a68',
     accent: '#2563eb',
+    background: '#ffffff',
   },
   layout: 'side-by-side',
 };
@@ -127,6 +146,9 @@ export const useProjectStore = create<ProjectState>()(
 
     // Settings
     setSettings: (settings) => set({ settings }),
+    updateSettings: (updates) => set((state) => {
+      state.settings = { ...state.settings, ...updates };
+    }),
 
     // Page operations
     setCurrentPageIndex: (index) => set({ currentPageIndex: index }),

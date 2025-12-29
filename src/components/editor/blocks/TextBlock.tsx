@@ -4,6 +4,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { TextBlock } from '@/types/blocks';
 import { isRTL, getDefaultFont } from '@/data/languages';
+import { useProjectStore } from '@/lib/store/projectStore';
 import { cn } from '@/lib/utils';
 import { FloatingToolbar } from './FloatingToolbar';
 
@@ -28,6 +29,7 @@ export function TextBlockComponent({
   onDelete,
   isEditing,
 }: TextBlockComponentProps) {
+  const { settings } = useProjectStore();
   const l1Ref = useRef<HTMLDivElement>(null);
   const l2Ref = useRef<HTMLDivElement>(null);
   const [toolbarVisible, setToolbarVisible] = useState(false);
@@ -43,7 +45,7 @@ export function TextBlockComponent({
     onUpdate({
       [lang]: { 
         ...block[lang], 
-        content: ref.current.innerHTML // Use innerHTML for rich text
+        content: ref.current.innerHTML 
       },
     });
   };
@@ -74,8 +76,10 @@ export function TextBlockComponent({
     'side-by-side': 'grid grid-cols-2 gap-8',
     'interlinear': 'flex flex-col gap-1',
     'stacked': 'flex flex-col gap-4',
-    'floating': 'relative',
+    'alternating': 'flex flex-col gap-4', // Alternating handled via CSS logic usually, but here just stacked fallback
   };
+
+  const currentLayout = block.layout || settings.layout || 'side-by-side';
 
   return (
     <div
@@ -83,6 +87,10 @@ export function TextBlockComponent({
         'group relative rounded-sm transition-all duration-200 outline-none mb-4',
         isSelected ? 'ring-2 ring-primary ring-offset-4' : 'hover:ring-1 hover:ring-muted-foreground/20'
       )}
+      style={{
+        lineHeight: block.lineSpacing || settings.typography.lineHeight,
+        marginBottom: `${block.paragraphSpacing || 20}px`
+      }}
       onClick={(e) => {
         e.stopPropagation();
         onSelect();
@@ -91,7 +99,7 @@ export function TextBlockComponent({
       <FloatingToolbar isVisible={toolbarVisible} position={toolbarPos} />
 
       <div className={cn(
-        layoutStyles[block.layout || 'side-by-side'],
+        layoutStyles[currentLayout as keyof typeof layoutStyles],
         (block.isTitle || block.isChapterHeading) && "text-center"
       )}>
         {/* L1 (Source Language) */}
@@ -100,14 +108,14 @@ export function TextBlockComponent({
           className={cn(
             'p-2 rounded transition-colors min-h-[1.5em] prose prose-sm max-w-none dark:prose-invert',
             isEditing && 'hover:bg-primary/5 focus:bg-primary/5 focus:outline-none focus:ring-1 focus:ring-primary/20',
-            block.isTitle && 'text-3xl font-extrabold tracking-tight',
-            block.isChapterHeading && 'text-2xl font-bold italic text-muted-foreground'
+            block.isTitle && 'text-3xl font-extrabold tracking-tight mb-4',
+            block.isChapterHeading && 'text-2xl font-bold italic text-muted-foreground mb-4'
           )}
           style={{
             direction: isL1RTL ? 'rtl' : 'ltr',
-            fontFamily: block.L1.formatting?.fontFamily || getDefaultFont(sourceLang),
-            fontSize: block.L1.formatting?.fontSize ? `${block.L1.formatting.fontSize}px` : 'inherit',
-            color: block.L1.formatting?.color || 'inherit',
+            fontFamily: block.L1.formatting?.fontFamily || (block.isTitle || block.isChapterHeading ? settings.fonts.heading : settings.fonts.body),
+            fontSize: block.L1.formatting?.fontSize ? `${block.L1.formatting.fontSize}px` : `${settings.typography.baseSize}pt`,
+            color: block.L1.formatting?.color || settings.colors.primary,
             textAlign: block.L1.formatting?.alignment || (isL1RTL ? 'right' : 'left'),
           }}
           contentEditable={isEditing}
@@ -120,16 +128,16 @@ export function TextBlockComponent({
         <div
           ref={l2Ref}
           className={cn(
-            'p-2 rounded transition-colors min-h-[1.5em] prose prose-sm max-w-none dark:prose-invert',
+            'p-2 rounded transition-colors min-h-[1.5em] prose prose-sm max-w-none dark:prose-invert opacity-80',
             isEditing && 'hover:bg-primary/5 focus:bg-primary/5 focus:outline-none focus:ring-1 focus:ring-primary/20',
-            block.isTitle && 'text-3xl font-extrabold tracking-tight',
-            block.isChapterHeading && 'text-2xl font-bold italic text-muted-foreground'
+            block.isTitle && 'text-3xl font-extrabold tracking-tight mb-4',
+            block.isChapterHeading && 'text-2xl font-bold italic text-muted-foreground mb-4'
           )}
           style={{
             direction: isL2RTL ? 'rtl' : 'ltr',
-            fontFamily: block.L2.formatting?.fontFamily || getDefaultFont(targetLang),
-            fontSize: block.L2.formatting?.fontSize ? `${block.L2.formatting.fontSize}px` : 'inherit',
-            color: block.L2.formatting?.color || 'inherit',
+            fontFamily: block.L2.formatting?.fontFamily || (block.isTitle || block.isChapterHeading ? settings.fonts.heading : settings.fonts.body),
+            fontSize: block.L2.formatting?.fontSize ? `${block.L2.formatting.fontSize}px` : `${settings.typography.baseSize}pt`,
+            color: block.L2.formatting?.color || settings.colors.secondary,
             textAlign: block.L2.formatting?.alignment || (isL2RTL ? 'right' : 'left'),
           }}
           contentEditable={isEditing}

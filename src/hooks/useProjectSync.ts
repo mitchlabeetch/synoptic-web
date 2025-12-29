@@ -54,8 +54,8 @@ export function useProjectSync(projectId: string) {
         setProjectMeta({
           id: data.id,
           title: data.title,
-          sourceLang: data.source_lang,
-          targetLang: data.target_lang,
+          source_lang: data.source_lang,
+          target_lang: data.target_lang,
         });
         setContent(data.content);
         setSettings(data.settings);

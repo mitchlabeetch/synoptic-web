@@ -45,7 +45,13 @@ export default function Workspace({ projectId }: WorkspaceProps) {
   }
 
   return (
-    <div className="flex-1 relative bg-muted/20 overflow-auto scroll-smooth h-full">
+    <div 
+      className="flex-1 relative bg-neutral-100 dark:bg-neutral-900 overflow-auto scroll-smooth h-full transition-colors duration-500"
+      style={{
+        backgroundImage: `radial-gradient(circle at 1px 1px, rgba(0,0,0,0.05) 1px, transparent 0)`,
+        backgroundSize: '40px 40px',
+      }}
+    >
       {/* Top Floating Status Indicator */}
       <div className="sticky top-4 z-50 flex justify-center pointer-events-none">
         <div className={cn(
