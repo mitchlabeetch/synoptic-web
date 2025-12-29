@@ -127,7 +127,12 @@
     "poetryTemplate": "Poésie / Vers",
     "poetryDesc": "Lignes numérotées",
     "width": "Largeur (mm)",
-    "height": "Hauteur (mm)"
+    "height": "Hauteur (mm)",
+    "upgradeToCreateMore": "Mettre à niveau pour créer plus",
+    "reachedFreeLimit": "Limite gratuite atteinte",
+    "freeLimitDesc": "Les comptes gratuits sont limités à 1 projet actif. Passez à Pro pour débloquer les projets illimités et les fonctions IA avancées.",
+    "upgradeToPro": "Passer à Pro",
+    "maybeLater": "Plus tard"
   },
   "Common": {
     "delete": "Supprimer",
@@ -137,5 +142,45 @@
     "cancel": "Annuler",
     "on": "Actif",
     "off": "Inactif"
+  },
+  "Export": {
+    "publishingPipeline": "Pipeline de Publication",
+    "pdfManuscript": "Manuscrit PDF (Impression)",
+    "epubEbook": "Livre Électronique (EPUB)",
+    "generate": "Générer",
+    "quality": "Qualité",
+    "bleed": "Fond perdu",
+    "preFlightTitle": "Vérification Avant-Vol",
+    "symmetryCheck": "Symétrie Bilingue Vérifiée",
+    "largeDocWarning": "Les documents volumineux peuvent prendre jusqu'à 30 secondes.",
+    "upgradeToPro": "Passer à Pro",
+    "watermarkPolicy": "Supprimez les filigranes, débloquez l'impression HD et obtenez 50 000 mots IA par mois.",
+    "viewPlans": "Voir les Forfaits",
+    "proQuality": "Qualité Pro (Brouillon)",
+    "freeWarning": "Un filigrane sera appliqué à cet export sur le forfait gratuit.",
+    "pdfDesc": "Export haute fidélité via Puppeteer 300 DPI. Optimisé pour Amazon KDP.",
+    "epubDesc": "Mise en page bilingue ajustable. Optimisé pour Kindle et Apple Books.",
+    "qualityPrint": "Impression",
+    "qualityWeb": "Web",
+    "qualityDraft": "Brouillon"
+  },
+  "Onboarding": {
+    "tourDashboardContent": "Bienvenue sur Synoptic ! C'est ici que vous gérez vos projets.",
+    "tourNewProjectContent": "Commencez ici pour créer votre premier chef-d'œuvre bilingue.",
+    "tourLibraryContent": "Importez des textes classiques depuis notre bibliothèque publique.",
+    "tourPageListContent": "Naviguez à travers les pages de votre livre ici.",
+    "tourToolsContent": "Ajoutez des blocs de texte, des images et des annotations IA.",
+    "tourPublishContent": "Prêt pour l'impression ? Exportez en PDF ou EPUB en quelques secondes.",
+    "tourWorkspaceContent": "C'est votre canevas. La colonne de gauche est la source, celle de droite est votre traduction."
+  },
+  "CommandPalette": {
+    "placeholder": "Tapez une commande ou cherchez...",
+    "noResults": "Aucun résultat trouvé.",
+    "actions": "Actions",
+    "addText": "Ajouter un bloc de texte",
+    "undo": "Annuler l'action",
+    "redo": "Rétablir l'action",
+    "deleteBlock": "Supprimer le bloc sélectionné",
+    "exportPdf": "Exporter en PDF"
   }
 }

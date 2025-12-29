@@ -8,6 +8,9 @@ import { Loader2, CloudCheck, AlertCircle, PlusCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useTranslations } from 'next-intl';
 import { AnnotationLayer } from './annotations/AnnotationLayer';
+import { OnboardingTour } from '../onboarding/OnboardingTour';
+import { CommandPalette } from '../CommandPalette';
+import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
 
 interface WorkspaceProps {
   projectId: string;
@@ -18,6 +21,8 @@ export default function Workspace({ projectId }: WorkspaceProps) {
   const { content, addPage } = useProjectStore();
   const direction = useProjectStore((state) => getEffectiveDirection(state));
   const t = useTranslations('Studio');
+  
+  useKeyboardShortcuts();
 
   if (syncStatus.status === 'loading') {
     return (
@@ -57,6 +62,8 @@ export default function Workspace({ projectId }: WorkspaceProps) {
         backgroundSize: '40px 40px',
       }}
     >
+      <OnboardingTour context="editor" />
+      <CommandPalette />
       {/* Top Floating Status Indicator */}
       <div className="sticky top-4 z-50 flex justify-center pointer-events-none">
         <div className={cn(

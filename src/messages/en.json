@@ -127,7 +127,12 @@
     "poetryTemplate": "Poetry / Verses",
     "poetryDesc": "Numbered lines, centered focus",
     "width": "Width (mm)",
-    "height": "Height (mm)"
+    "height": "Height (mm)",
+    "upgradeToCreateMore": "Upgrade to Create More",
+    "reachedFreeLimit": "You've reached the Free Limit",
+    "freeLimitDesc": "Free accounts are limited to 1 active project. Upgrade to Pro to unlock unlimited projects and advanced AI features.",
+    "upgradeToPro": "Upgrade to Pro",
+    "maybeLater": "Maybe Later"
   },
   "Common": {
     "delete": "Delete",
@@ -137,5 +142,45 @@
     "cancel": "Cancel",
     "on": "On",
     "off": "Off"
+  },
+  "Export": {
+    "publishingPipeline": "Publishing Pipeline",
+    "pdfManuscript": "Print-Ready PDF",
+    "epubEbook": "eBook (EPUB 3.0)",
+    "generate": "Generate",
+    "quality": "Quality",
+    "bleed": "Bleed",
+    "preFlightTitle": "Pre-flight Integrity Check",
+    "symmetryCheck": "Bilingual Symmetry Verified",
+    "largeDocWarning": "Large documents may take up to 30 seconds to render.",
+    "upgradeToPro": "Upgrade to Pro",
+    "watermarkPolicy": "Remove watermarks, unlock high-DPI printing, and get 50,000 AI words per month.",
+    "viewPlans": "View Plans",
+    "proQuality": "Pro Quality (Draft)",
+    "freeWarning": "A watermark will be applied to this export on the Free Tier.",
+    "pdfDesc": "High-fidelity export via 300 DPI Puppeteer Engine. Optimized for Amazon KDP.",
+    "epubDesc": "Reflowable bilingual text layout. Optimized for Kindle and Apple Books.",
+    "qualityPrint": "Print",
+    "qualityWeb": "Web",
+    "qualityDraft": "Draft"
+  },
+  "Onboarding": {
+    "tourDashboardContent": "Welcome to Synoptic! This is your project hub.",
+    "tourNewProjectContent": "Start here to create your first bilingual masterpiece.",
+    "tourLibraryContent": "Import classic texts from our public domain library.",
+    "tourPageListContent": "Navigate through your book's pages here.",
+    "tourToolsContent": "Add text blocks, images, and AI-powered annotations.",
+    "tourPublishContent": "Ready to print? Export to PDF or EPUB in seconds.",
+    "tourWorkspaceContent": "This is your canvas. The left column is the source, the right is your translation."
+  },
+  "CommandPalette": {
+    "placeholder": "Type a command or search...",
+    "noResults": "No results found.",
+    "actions": "Actions",
+    "addText": "Add Text Block",
+    "undo": "Undo Action",
+    "redo": "Redo Action",
+    "deleteBlock": "Delete Selected Block",
+    "exportPdf": "Export to PDF"
   }
 }

@@ -17,7 +17,8 @@ import {
   Hash,
   ChevronLeft,
   ChevronRight,
-  Palette
+  Palette,
+  Printer
 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
@@ -31,10 +32,11 @@ import PageManager from './PageManager';
 import ThemeInspector from './ThemeInspector';
 import StylePresetManager from './StylePresetManager';
 import LocaleSwitcher from './LocaleSwitcher';
+import ExportManager from './ExportManager';
 
 export default function Sidebar() {
   const { addBlock, addPage, currentPageIndex, meta } = useProjectStore();
-  const [activeTab, setActiveTab] = useState<'tools' | 'pages' | 'design' | 'presets'>('pages');
+  const [activeTab, setActiveTab] = useState<'tools' | 'pages' | 'design' | 'presets' | 'publish'>('pages');
   const [isCollapsed, setIsCollapsed] = useState(false);
   const t = useTranslations('Blocks');
   const tStudio = useTranslations('Studio');
@@ -94,6 +96,7 @@ export default function Sidebar() {
   const tools = [
     { id: 'pages', icon: Layout, label: tStudio('pageManager'), onClick: () => { setActiveTab('pages'); setIsCollapsed(false); } },
     { id: 'design', icon: Palette, label: tStudio('globalDesign'), onClick: () => { setActiveTab('design'); setIsCollapsed(false); } },
+    { id: 'publish', icon: Printer, label: 'Publishing Pipeline', onClick: () => { setActiveTab('publish'); setIsCollapsed(false); } },
     { id: 'presets', icon: Layers, label: tStudio('stylePresets'), onClick: () => { setActiveTab('presets'); setIsCollapsed(false); } },
     { id: 'text', icon: Type, label: t('text'), onClick: handleAddTextBlock },
     { id: 'separator', icon: SeparatorHorizontal, label: t('separator'), onClick: handleAddSeparator },
@@ -127,7 +130,7 @@ export default function Sidebar() {
                 <TooltipTrigger asChild>
                   <button
                     onClick={() => {
-                      if (['pages', 'design', 'presets'].includes(tool.id)) {
+                      if (['pages', 'design', 'presets', 'publish'].includes(tool.id)) {
                         setActiveTab(tool.id as any);
                         setIsCollapsed(false);
                       } else {
@@ -138,10 +141,15 @@ export default function Sidebar() {
                     }}
                     className={cn(
                       "w-full aspect-square flex items-center justify-center rounded-xl transition-all",
-                      (activeTab === tool.id) || (activeTab === 'tools' && !['pages', 'design', 'presets', 'settings'].includes(tool.id))
+                      (activeTab === tool.id) || (activeTab === 'tools' && !['pages', 'design', 'presets', 'settings', 'publish'].includes(tool.id))
                         ? "bg-primary text-primary-foreground shadow-md"
                         : "text-muted-foreground hover:bg-primary/10 hover:text-primary"
                     )}
+                    data-tour={
+                      tool.id === 'pages' ? 'sidebar-pages' : 
+                      tool.id === 'publish' ? 'sidebar-publish' : 
+                      (['text', 'separator', 'callout', 'media', 'ai'].includes(tool.id)) ? 'sidebar-tools' : undefined
+                    }
                   >
                     <tool.icon className="h-5 w-5" />
                   </button>
@@ -160,6 +168,7 @@ export default function Sidebar() {
             {activeTab === 'pages' && <PageManager />}
             {activeTab === 'design' && <ThemeInspector />}
             {activeTab === 'presets' && <StylePresetManager />}
+            {activeTab === 'publish' && <ExportManager />}
             {activeTab === 'tools' && (
               <div className="flex-1 flex flex-col">
                 <div className="p-4 border-b bg-muted/20">

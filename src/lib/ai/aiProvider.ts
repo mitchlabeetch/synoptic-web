@@ -1,7 +1,7 @@
 // src/lib/ai/aiProvider.ts
 import { AIProvider } from './types';
-import { OpenAIProvider } from './providers/openai';
-import { DOGenAIProvider } from './providers/digitalocean';
+import { OpenAIProvider } from '@/lib/ai/providers/openai';
+import { DOGenAIProvider } from '@/lib/ai/providers/digitalocean';
 
 export type ProviderType = 'openai' | 'digitalocean';
 

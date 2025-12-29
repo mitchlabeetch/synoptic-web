@@ -238,8 +238,8 @@ export function TextBlockComponent({
   return (
     <div
       className={cn(
-        'group relative rounded-sm transition-all duration-200 outline-none mb-4',
-        isSelected ? 'ring-2 ring-primary ring-offset-4' : 'hover:ring-1 hover:ring-muted-foreground/20'
+        'group relative rounded-xl transition-all duration-300 outline-none mb-4 border border-transparent',
+        isSelected ? 'ring-2 ring-primary ring-offset-4 bg-background shadow-lg' : 'hover:border-primary/20 hover:bg-neutral-50/50 dark:hover:bg-neutral-800/50 hover:shadow-sm'
       )}
       style={{
         lineHeight: block.lineSpacing || settings.typography.lineHeight,

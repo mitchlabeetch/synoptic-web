@@ -3,6 +3,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
 import { SUPPORTED_LANGUAGES, getLanguageByCode } from '@/data/languages';
 import {
@@ -48,12 +49,19 @@ interface WizardData {
   template: string;
 }
 
-export default function ProjectWizard() {
+interface ProjectWizardProps {
+  projectCount?: number;
+  tier?: string;
+}
+
+export default function ProjectWizard({ projectCount = 0, tier = 'free' }: ProjectWizardProps) {
   const router = useRouter();
   const supabase = createClient();
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState<WizardStep>('metadata');
   const [isCreating, setIsCreating] = useState(false);
+  
+  const isLimited = tier === 'free' && projectCount >= 1;
   
   const t = useTranslations('Wizard');
 
@@ -233,276 +241,302 @@ export default function ProjectWizard() {
       </DialogTrigger>
       <DialogContent className="max-w-2xl">
         <DialogHeader>
-          <DialogTitle className="text-2xl">{t('createMasterpiece')}</DialogTitle>
+          <DialogTitle className="text-2xl">
+            {isLimited ? t('upgradeToCreateMore') : t('createMasterpiece')}
+          </DialogTitle>
         </DialogHeader>
 
-        {/* Progress Indicator */}
-        <div className="flex items-center justify-between mb-8 mt-2 px-12">
-          {steps.map((s, i) => (
-            <div key={s} className="flex items-center">
-              <div
-                className={cn(
-                  'w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all',
-                  i <= currentStepIndex
-                    ? 'bg-primary text-primary-foreground shadow-md'
-                    : 'bg-muted text-muted-foreground'
-                )}
-              >
-                {i + 1}
-              </div>
-              {i < steps.length - 1 && (
-                <div
-                  className={cn(
-                    'w-16 h-1 mx-2 rounded-full transition-all',
-                    i < currentStepIndex ? 'bg-primary' : 'bg-muted'
-                  )}
-                />
-              )}
+        {isLimited ? (
+          <div className="py-12 flex flex-col items-center text-center space-y-6">
+            <div className="w-20 h-20 rounded-3xl bg-primary/10 flex items-center justify-center">
+               <Sparkles className="h-10 w-10 text-primary" />
             </div>
-          ))}
-        </div>
-
-        {/* Step Content */}
-        <div className="min-h-[350px] py-4">
-          {step === 'metadata' && (
-            <div className="space-y-6">
-              <div>
-                <Label htmlFor="title" className="text-base">{t('projectTitle')}</Label>
-                <Input
-                  id="title"
-                  value={data.title}
-                  onChange={(e) => setData({ ...data, title: e.target.value })}
-                  placeholder={t('titlePlaceholder')}
-                  className="mt-2 h-12 text-lg"
-                />
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <Label htmlFor="author">{t('author')}</Label>
-                  <Input
-                    id="author"
-                    value={data.author}
-                    onChange={(e) => setData({ ...data, author: e.target.value })}
-                    placeholder={t('authorPlaceholder')}
-                    className="mt-2"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="description">{t('category')}</Label>
-                  <Input
-                    id="description"
-                    value={data.description}
-                    onChange={(e) => setData({ ...data, description: e.target.value })}
-                    placeholder={t('categoryPlaceholder')}
-                    className="mt-2"
-                  />
-                </div>
-              </div>
+            <div className="space-y-2">
+              <h3 className="text-xl font-bold">{t('reachedFreeLimit')}</h3>
+              <p className="text-muted-foreground max-w-sm">
+                {t('freeLimitDesc')}
+              </p>
             </div>
-          )}
-
-          {step === 'languages' && (
-            <div className="space-y-8">
-              <div className="grid grid-cols-2 gap-8">
-                <div>
-                  <Label className="text-base">{t('sourceLang')}</Label>
-                  <Select
-                    value={data.sourceLang}
-                    onValueChange={(v) => setData({ ...data, sourceLang: v })}
-                  >
-                    <SelectTrigger className="mt-2 h-12">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent className="max-h-[300px]">
-                      {SUPPORTED_LANGUAGES.map((lang) => (
-                        <SelectItem key={lang.code} value={lang.code}>
-                          <span className="flex items-center gap-2">
-                            <span className="font-semibold">{lang.label}</span>
-                            <span className="text-muted-foreground text-xs italic">
-                              ({lang.labelEn})
-                            </span>
-                          </span>
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div>
-                  <Label className="text-base">{t('targetLang')}</Label>
-                  <Select
-                    value={data.targetLang}
-                    onValueChange={(v) => setData({ ...data, targetLang: v })}
-                  >
-                    <SelectTrigger className="mt-2 h-12">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent className="max-h-[300px]">
-                      {SUPPORTED_LANGUAGES.map((lang) => (
-                        <SelectItem key={lang.code} value={lang.code}>
-                          <span className="flex items-center gap-2">
-                            <span className="font-semibold">{lang.label}</span>
-                            <span className="text-muted-foreground text-xs italic">
-                              ({lang.labelEn})
-                            </span>
-                          </span>
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-
-              {data.sourceLang === data.targetLang && (
-                <div className="p-4 bg-destructive/10 border-l-4 border-destructive rounded flex items-center gap-3">
-                  <span className="text-destructive font-medium">Warning:</span>
-                  <p className="text-sm text-destructive-foreground">
-                    {t('langWarning')}
-                  </p>
-                </div>
-              )}
-              
-              <div className="p-4 bg-primary/5 rounded-xl border border-primary/10">
-                <p className="text-sm text-muted-foreground italic">
-                  {t('langTip')}
-                </p>
-              </div>
+            <div className="flex flex-col gap-3 w-full max-w-xs">
+              <Link href="/pricing" className="w-full">
+                <Button className="w-full h-12 rounded-2xl font-bold shadow-xl shadow-primary/20 bg-gradient-to-r from-primary to-blue-600 border-none">
+                   {t('upgradeToPro')}
+                </Button>
+              </Link>
+              <Button variant="ghost" onClick={() => setOpen(false)}>{t('maybeLater')}</Button>
             </div>
-          )}
-
-          {step === 'format' && (
-            <div className="space-y-6">
-              <Label className="text-base">{t('dimensions')}</Label>
-              <RadioGroup
-                value={data.pageSize}
-                onValueChange={(v: string) => setData({ ...data, pageSize: v })}
-                className="grid grid-cols-2 gap-4"
-              >
-                {PAGE_SIZES.map((size) => (
-                  <div key={size.id}>
-                    <RadioGroupItem
-                      value={size.id}
-                      id={size.id}
-                      className="peer sr-only"
-                    />
-                    <Label
-                      htmlFor={size.id}
-                      className={cn(
-                        'flex flex-col items-start p-4 rounded-xl border-2 cursor-pointer transition-all hover:shadow-md h-full',
-                        'hover:bg-accent hover:text-accent-foreground',
-                        'peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/5 peer-data-[state=checked]:shadow-inner'
-                      )}
-                    >
-                      <span className="font-bold">{size.label}</span>
-                      <span className="text-xs text-muted-foreground mt-1">
-                        {size.description}
-                      </span>
-                    </Label>
-                  </div>
-                ))}
-              </RadioGroup>
-
-              {data.pageSize === 'custom' && (
-                <div className="grid grid-cols-2 gap-6 p-6 bg-muted/30 rounded-2xl border border-dashed border-muted-foreground/20 mt-4">
-                  <div>
-                    <Label htmlFor="customWidth">{t('width')}</Label>
-                    <Input
-                      id="customWidth"
-                      type="number"
-                      value={data.customWidth || ''}
-                      onChange={(e) => setData({ ...data, customWidth: parseInt(e.target.value) || undefined })}
-                      placeholder="140"
-                      className="mt-2"
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="customHeight">{t('height')}</Label>
-                    <Input
-                      id="customHeight"
-                      type="number"
-                      value={data.customHeight || ''}
-                      onChange={(e) => setData({ ...data, customHeight: parseInt(e.target.value) || undefined })}
-                      placeholder="216"
-                      className="mt-2"
-                    />
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
-
-          {step === 'template' && (
-            <div className="space-y-4">
-              <Label className="text-base">{t('layoutStyle')}</Label>
-              <RadioGroup
-                value={data.template}
-                onValueChange={(v: string) => setData({ ...data, template: v })}
-                className="space-y-3"
-              >
-                {TEMPLATES.map((template) => (
-                  <div key={template.id}>
-                    <RadioGroupItem
-                      value={template.id}
-                      id={template.id}
-                      className="peer sr-only"
-                    />
-                    <Label
-                      htmlFor={template.id}
-                      className={cn(
-                        'flex items-center gap-5 p-5 rounded-xl border-2 cursor-pointer transition-all hover:shadow-md',
-                        'hover:bg-accent hover:text-accent-foreground',
-                        'peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/5'
-                      )}
-                    >
-                      <div className="h-12 w-12 rounded-lg bg-muted flex items-center justify-center">
-                        <template.icon className="w-6 h-6 text-muted-foreground" />
-                      </div>
-                      <div className="flex-1">
-                        <span className="font-bold text-lg">{template.label}</span>
-                        <p className="text-sm text-muted-foreground">
-                          {template.description}
-                        </p>
-                      </div>
-                    </Label>
-                  </div>
-                ))}
-              </RadioGroup>
-            </div>
-          )}
-        </div>
-
-        {/* Navigation */}
-        <div className="flex justify-between items-center mt-8 pt-6 border-t">
-          <Button
-            variant="ghost"
-            onClick={handleBack}
-            disabled={currentStepIndex === 0}
-            className="flex items-center gap-2"
-          >
-            <ChevronLeft className="w-4 h-4" />
-            {t('back')}
-          </Button>
-
-          <div className="flex gap-3">
-            {currentStepIndex < steps.length - 1 ? (
-              <Button 
-                onClick={handleNext} 
-                disabled={!canProceed()}
-                className="w-32 font-bold"
-              >
-                {t('next')}
-                <ChevronRight className="w-4 h-4 ml-2" />
-              </Button>
-            ) : (
-              <Button
-                onClick={handleCreate}
-                disabled={isCreating || !canProceed()}
-                className="w-56 font-bold animate-pulse hover:animate-none"
-              >
-                {isCreating ? t('creating') : t('launch')}
-              </Button>
-            )}
           </div>
-        </div>
+        ) : (
+          <>
+            {/* Progress Indicator */}
+            <div className="flex items-center justify-between mb-8 mt-2 px-12">
+              {steps.map((s, i) => (
+                <div key={s} className="flex items-center">
+                  <div
+                    className={cn(
+                      'w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all',
+                      i <= currentStepIndex
+                        ? 'bg-primary text-primary-foreground shadow-md'
+                        : 'bg-muted text-muted-foreground'
+                    )}
+                  >
+                    {i + 1}
+                  </div>
+                  {i < steps.length - 1 && (
+                    <div
+                      className={cn(
+                        'w-16 h-1 mx-2 rounded-full transition-all',
+                        i < currentStepIndex ? 'bg-primary' : 'bg-muted'
+                      )}
+                    />
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Step Content */}
+            <div className="min-h-[350px] py-4">
+              {step === 'metadata' && (
+                <div className="space-y-6">
+                  <div>
+                    <Label htmlFor="title" className="text-base">{t('projectTitle')}</Label>
+                    <Input
+                      id="title"
+                      value={data.title}
+                      onChange={(e) => setData({ ...data, title: e.target.value })}
+                      placeholder={t('titlePlaceholder')}
+                      className="mt-2 h-12 text-lg"
+                    />
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="author">{t('author')}</Label>
+                      <Input
+                        id="author"
+                        value={data.author}
+                        onChange={(e) => setData({ ...data, author: e.target.value })}
+                        placeholder={t('authorPlaceholder')}
+                        className="mt-2"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="description">{t('category')}</Label>
+                      <Input
+                        id="description"
+                        value={data.description}
+                        onChange={(e) => setData({ ...data, description: e.target.value })}
+                        placeholder={t('categoryPlaceholder')}
+                        className="mt-2"
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {step === 'languages' && (
+                <div className="space-y-8">
+                  <div className="grid grid-cols-2 gap-8">
+                    <div>
+                      <Label className="text-base">{t('sourceLang')}</Label>
+                      <Select
+                        value={data.sourceLang}
+                        onValueChange={(v) => setData({ ...data, sourceLang: v })}
+                      >
+                        <SelectTrigger className="mt-2 h-12">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent className="max-h-[300px]">
+                          {SUPPORTED_LANGUAGES.map((lang) => (
+                            <SelectItem key={lang.code} value={lang.code}>
+                              <span className="flex items-center gap-2">
+                                <span className="font-semibold">{lang.label}</span>
+                                <span className="text-muted-foreground text-xs italic">
+                                  ({lang.labelEn})
+                                </span>
+                              </span>
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Label className="text-base">{t('targetLang')}</Label>
+                      <Select
+                        value={data.targetLang}
+                        onValueChange={(v) => setData({ ...data, targetLang: v })}
+                      >
+                        <SelectTrigger className="mt-2 h-12">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent className="max-h-[300px]">
+                          {SUPPORTED_LANGUAGES.map((lang) => (
+                            <SelectItem key={lang.code} value={lang.code}>
+                              <span className="flex items-center gap-2">
+                                <span className="font-semibold">{lang.label}</span>
+                                <span className="text-muted-foreground text-xs italic">
+                                  ({lang.labelEn})
+                                </span>
+                              </span>
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  {data.sourceLang === data.targetLang && (
+                    <div className="p-4 bg-destructive/10 border-l-4 border-destructive rounded flex items-center gap-3">
+                      <span className="text-destructive font-medium">Warning:</span>
+                      <p className="text-sm text-destructive-foreground">
+                        {t('langWarning')}
+                      </p>
+                    </div>
+                  )}
+                  
+                  <div className="p-4 bg-primary/5 rounded-xl border border-primary/10">
+                    <p className="text-sm text-muted-foreground italic">
+                      {t('langTip')}
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {step === 'format' && (
+                <div className="space-y-6">
+                  <Label className="text-base">{t('dimensions')}</Label>
+                  <RadioGroup
+                    value={data.pageSize}
+                    onValueChange={(v: string) => setData({ ...data, pageSize: v })}
+                    className="grid grid-cols-2 gap-4"
+                  >
+                    {PAGE_SIZES.map((size) => (
+                      <div key={size.id}>
+                        <RadioGroupItem
+                          value={size.id}
+                          id={size.id}
+                          className="peer sr-only"
+                        />
+                        <Label
+                          htmlFor={size.id}
+                          className={cn(
+                            'flex flex-col items-start p-4 rounded-xl border-2 cursor-pointer transition-all hover:shadow-md h-full',
+                            'hover:bg-accent hover:text-accent-foreground',
+                            'peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/5 peer-data-[state=checked]:shadow-inner'
+                          )}
+                        >
+                          <span className="font-bold">{size.label}</span>
+                          <span className="text-xs text-muted-foreground mt-1">
+                            {size.description}
+                          </span>
+                        </Label>
+                      </div>
+                    ))}
+                  </RadioGroup>
+
+                  {data.pageSize === 'custom' && (
+                    <div className="grid grid-cols-2 gap-6 p-6 bg-muted/30 rounded-2xl border border-dashed border-muted-foreground/20 mt-4">
+                      <div>
+                        <Label htmlFor="customWidth">{t('width')}</Label>
+                        <Input
+                          id="customWidth"
+                          type="number"
+                          value={data.customWidth || ''}
+                          onChange={(e) => setData({ ...data, customWidth: parseInt(e.target.value) || undefined })}
+                          placeholder="140"
+                          className="mt-2"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="customHeight">{t('height')}</Label>
+                        <Input
+                          id="customHeight"
+                          type="number"
+                          value={data.customHeight || ''}
+                          onChange={(e) => setData({ ...data, customHeight: parseInt(e.target.value) || undefined })}
+                          placeholder="216"
+                          className="mt-2"
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {step === 'template' && (
+                <div className="space-y-4">
+                  <Label className="text-base">{t('layoutStyle')}</Label>
+                  <RadioGroup
+                    value={data.template}
+                    onValueChange={(v: string) => setData({ ...data, template: v })}
+                    className="space-y-3"
+                  >
+                    {TEMPLATES.map((template) => (
+                      <div key={template.id}>
+                        <RadioGroupItem
+                          value={template.id}
+                          id={template.id}
+                          className="peer sr-only"
+                        />
+                        <Label
+                          htmlFor={template.id}
+                          className={cn(
+                            'flex items-center gap-5 p-5 rounded-xl border-2 cursor-pointer transition-all hover:shadow-md',
+                            'hover:bg-accent hover:text-accent-foreground',
+                            'peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/5'
+                          )}
+                        >
+                          <div className="h-12 w-12 rounded-lg bg-muted flex items-center justify-center">
+                            <template.icon className="w-6 h-6 text-muted-foreground" />
+                          </div>
+                          <div className="flex-1">
+                            <span className="font-bold text-lg">{template.label}</span>
+                            <p className="text-sm text-muted-foreground">
+                              {template.description}
+                            </p>
+                          </div>
+                        </Label>
+                      </div>
+                    ))}
+                  </RadioGroup>
+                </div>
+              )}
+            </div>
+
+            {/* Navigation */}
+            <div className="flex justify-between items-center mt-8 pt-6 border-t">
+              <Button
+                variant="ghost"
+                onClick={handleBack}
+                disabled={currentStepIndex === 0}
+                className="flex items-center gap-2"
+              >
+                <ChevronLeft className="w-4 h-4" />
+                {t('back')}
+              </Button>
+
+              <div className="flex gap-3">
+                {currentStepIndex < steps.length - 1 ? (
+                  <Button 
+                    onClick={handleNext} 
+                    disabled={!canProceed()}
+                    className="w-32 font-bold"
+                  >
+                    {t('next')}
+                    <ChevronRight className="w-4 h-4 ml-2" />
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={handleCreate}
+                    disabled={isCreating || !canProceed()}
+                    className="w-56 font-bold animate-pulse hover:animate-none"
+                  >
+                    {isCreating ? t('creating') : t('launch')}
+                  </Button>
+                )}
+              </div>
+            </div>
+          </>
+        )}
       </DialogContent>
     </Dialog>
   );
