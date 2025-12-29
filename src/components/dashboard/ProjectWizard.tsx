@@ -67,28 +67,28 @@ export default function ProjectWizard({ projectCount = 0, tier = 'free' }: Proje
     {
       id: '6x9',
       label: '6" × 9"',
-      description: 'US Trade Paper',
+      description: t('usTrade'),
       width: 152,
       height: 229,
     },
     {
       id: '5.5x8.5',
       label: '5.5" × 8.5"',
-      description: 'Digest',
+      description: t('digest'),
       width: 140,
       height: 216,
     },
     {
       id: 'A4',
       label: 'A4',
-      description: 'International Standard',
+      description: t('intlStandard'),
       width: 210,
       height: 297,
     },
     {
       id: 'custom',
       label: t('custom'),
-      description: 'Define your own',
+      description: t('custom'),
       width: 0,
       height: 0,
     },
@@ -380,7 +380,6 @@ export default function ProjectWizard({ projectCount = 0, tier = 'free' }: Proje
 
                   {data.sourceLang === data.targetLang && (
                     <div className="p-4 bg-destructive/10 border-l-4 border-destructive rounded flex items-center gap-3">
-                      <span className="text-destructive font-medium">Warning:</span>
                       <p className="text-sm text-destructive-foreground">
                         {t('langWarning')}
                       </p>

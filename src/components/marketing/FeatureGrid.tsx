@@ -12,59 +12,56 @@ import {
   Zap,
   Globe
 } from 'lucide-react';
-
-const features = [
-  {
-    title: "AI Typesetter",
-    desc: "Automatically aligns sentence pairs across 25+ languages, ensuring flawless symmetry even with varying sentence lengths.",
-    icon: Sparkles,
-    color: "text-amber-500",
-    bg: "bg-amber-500/10"
-  },
-  {
-    title: "Cloud Sync Engine",
-    desc: "Your work is saved instantly as you type. Access your studio from any device with a persistent, infinite undo history.",
-    icon: Cloud,
-    color: "text-blue-500",
-    bg: "bg-blue-500/10"
-  },
-  {
-    title: "Print-Ready PDF",
-    desc: "High-resolution export via Puppeteer engine. Perfect for Amazon KDP, IngramSpark, and local print shops.",
-    icon: Printer,
-    color: "text-red-500",
-    bg: "bg-red-500/10"
-  },
-  {
-    title: "EPUB 3.0 Support",
-    desc: "Generate reflowable eBooks with native bilingual alternating mode, optimized for Kindle and Apple Books.",
-    icon: FileDown,
-    color: "text-indigo-500",
-    bg: "bg-indigo-500/10"
-  },
-  {
-    title: "Deep Annotation",
-    desc: "AI-powered linguistic insights. Word grouping, relationship arrows, and contextual explanations at your fingertips.",
-    icon: Zap,
-    color: "text-yellow-500",
-    bg: "bg-yellow-500/10"
-  },
-  {
-    title: "Global Marketplace",
-    desc: "Share and sell your custom book templates or browse our library of curated, professional bilingual designs.",
-    icon: Globe,
-    color: "text-green-500",
-    bg: "bg-green-500/10"
-  }
-];
+import { useTranslations } from 'next-intl';
 
 export function FeatureGrid() {
+  const t = useTranslations('Features');
+  
+  const features = [
+    {
+      key: "aiTypesetter",
+      icon: Sparkles,
+      color: "text-amber-500",
+      bg: "bg-amber-500/10"
+    },
+    {
+      key: "cloudSync",
+      icon: Cloud,
+      color: "text-blue-500",
+      bg: "bg-blue-500/10"
+    },
+    {
+      key: "pdfExport",
+      icon: Printer,
+      color: "text-red-500",
+      bg: "bg-red-500/10"
+    },
+    {
+      key: "epubSupport",
+      icon: FileDown,
+      color: "text-indigo-500",
+      bg: "bg-indigo-500/10"
+    },
+    {
+      key: "deepAnnotation",
+      icon: Zap,
+      color: "text-yellow-500",
+      bg: "bg-yellow-500/10"
+    },
+    {
+      key: "marketplace",
+      icon: Globe,
+      color: "text-green-500",
+      bg: "bg-green-500/10"
+    }
+  ];
+
   return (
     <section className="py-24 bg-muted/30">
       <div className="container px-4 mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl md:text-5xl font-black tracking-tight mb-4">Built for Creators</h2>
-          <p className="text-muted-foreground text-lg italic">The infrastructure of a publishing house, simplified into a studio.</p>
+          <h2 className="text-3xl md:text-5xl font-black tracking-tight mb-4">{t('title')}</h2>
+          <p className="text-muted-foreground text-lg italic">{t('subtitle')}</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -80,8 +77,8 @@ export function FeatureGrid() {
               <div className={`w-12 h-12 rounded-2xl ${f.bg} flex items-center justify-center mb-6 transition-transform group-hover:scale-110`}>
                 <f.icon className={`h-6 w-6 ${f.color}`} />
               </div>
-              <h3 className="text-xl font-bold mb-3">{f.title}</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">{f.desc}</p>
+              <h3 className="text-xl font-bold mb-3">{t(`${f.key}.title`)}</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">{t(`${f.key}.desc`)}</p>
             </motion.div>
           ))}
         </div>

@@ -2,7 +2,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getCurrentUser, getUserId } from '@/lib/auth/jwt';
 import { getProject, getUserProfile } from '@/lib/db/server';
-import { isRTL } from '@/data/languages';
+import { isRTL, getLanguageByCode } from '@/data/languages';
 import { sanitizeHTMLStrict, escapeHTML } from '@/lib/sanitize';
 
 const PDF_SERVICE_URL = process.env.PDF_SERVICE_URL || 'http://synoptic-pdf:3000';
@@ -113,14 +113,17 @@ function renderBlock(block: any, project: any, isFirstInChapter: boolean): strin
     const l1Dir = isRTL(project.source_lang || 'fr') ? 'rtl' : 'ltr';
     const l2Dir = isRTL(project.target_lang || 'en') ? 'rtl' : 'ltr';
     
+    const l1Script = getLanguageByCode(project.source_lang || 'fr')?.script || 'latin';
+    const l2Script = getLanguageByCode(project.target_lang || 'en')?.script || 'latin';
+    
     // Sanitize user content to prevent XSS
     const l1Content = sanitizeHTMLStrict(block.L1?.content || '');
     const l2Content = sanitizeHTMLStrict(block.L2?.content || '');
     
     return `
       <div class="block text-block ${layout} ${isFirstInChapter ? 'first-paragraph' : ''}">
-        <div class="l1-col" dir="${l1Dir}">${l1Content}</div>
-        <div class="l2-col" dir="${l2Dir}">${l2Content}</div>
+        <div class="l1-col script-${l1Script}" dir="${l1Dir}" lang="${project.source_lang || 'fr'}">${l1Content}</div>
+        <div class="l2-col script-${l2Script}" dir="${l2Dir}" lang="${project.target_lang || 'en'}">${l2Content}</div>
       </div>
     `;
   }
@@ -212,8 +215,34 @@ function renderBlock(block: any, project: any, isFirstInChapter: boolean): strin
 }
 
 function generateProjectCSS(project: any): string {
+  const sourceLang = project.source_lang || 'fr';
+  const targetLang = project.target_lang || 'en';
+  
+  const sourceConfig = getLanguageByCode(sourceLang);
+  const targetConfig = getLanguageByCode(targetLang);
+  
+  const fonts = new Set<string>();
+  
+  // Add base project fonts
+  if (project.settings?.fonts?.body) fonts.add(project.settings.fonts.body);
+  if (project.settings?.fonts?.heading) fonts.add(project.settings.fonts.heading);
+  
+  // Add suggested fonts for both languages
+  sourceConfig?.suggestedFonts.forEach(f => fonts.add(f));
+  targetConfig?.suggestedFonts.forEach(f => fonts.add(f));
+  
+  // Base fallbacks
+  fonts.add('Crimson Pro');
+  fonts.add('Spectral');
+
+  const fontImport = Array.from(fonts)
+    .map((f: string) => `family=${f.replace(/ /g, '+')}:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,700`)
+    .join('&');
+
+  const fontUrl = `https://fonts.googleapis.com/css2?${fontImport}&display=swap`;
+
   return `
-    @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Spectral:ital,wght@0,300;0,500;0,700;1,300&display=swap');
+    @import url('${fontUrl}');
 
     :root {
       --primary-serif: 'Crimson Pro', serif;
@@ -303,6 +332,23 @@ function generateProjectCSS(project: any): string {
 
     .l1-col { font-weight: 400; color: #111; }
     .l2-col { font-weight: 400; color: #555; font-style: italic; }
+
+    /* Script Specifics in PDF */
+    .script-cjk {
+      line-break: strict;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+      text-align: justify;
+    }
+
+    .script-thai {
+      line-height: 1.8;
+      word-break: break-all;
+    }
+
+    .script-arabic, .script-hebrew, .script-devanagari {
+      line-height: 1.6;
+    }
 
     .interlinear {
       display: flex;

@@ -5,9 +5,9 @@
 
 'use client';
 
-import { useRef, useState, useCallback } from 'react';
+import { useRef, useState, useCallback, useMemo } from 'react';
 import { TextBlock } from '@/types/blocks';
-import { isRTL, getDefaultFont } from '@/data/languages';
+import { isRTL, getDefaultFont, getLanguageByCode } from '@/data/languages';
 import { useProjectStore } from '@/lib/store/projectStore';
 import { cn } from '@/lib/utils';
 import { TiptapEditor, TiptapEditorRef } from '../TiptapEditor';
@@ -50,6 +50,9 @@ export function TextBlockComponent({
 
   const isL1RTL = isRTL(sourceLang);
   const isL2RTL = isRTL(targetLang);
+
+  const l1Script = useMemo(() => getLanguageByCode(sourceLang)?.script || 'latin', [sourceLang]);
+  const l2Script = useMemo(() => getLanguageByCode(targetLang)?.script || 'latin', [targetLang]);
 
   // Handle content updates on blur (not every keystroke - performance optimization)
   const handleL1Blur = useCallback((html: string) => {
@@ -238,12 +241,16 @@ export function TextBlockComponent({
         (block.isTitle || block.isChapterHeading) && "text-center"
       )}>
         {/* L1 (Source Language) */}
-        <div className={cn(
-          'p-2 rounded transition-colors',
-          isEditing && 'hover:bg-primary/5 focus-within:bg-primary/5 focus-within:ring-1 focus-within:ring-primary/20',
-          block.isTitle && 'text-3xl font-extrabold tracking-tight mb-4',
-          block.isChapterHeading && 'text-2xl font-bold italic text-muted-foreground mb-4'
-        )}>
+        <div 
+          className={cn(
+            'p-2 rounded transition-colors',
+            isEditing && 'hover:bg-primary/5 focus-within:bg-primary/5 focus-within:ring-1 focus-within:ring-primary/20',
+            block.isTitle && 'text-3xl font-extrabold tracking-tight mb-4',
+            block.isChapterHeading && 'text-2xl font-bold italic text-muted-foreground mb-4',
+            `script-${l1Script}`
+          )}
+          lang={sourceLang}
+        >
           <TiptapEditor
             ref={l1EditorRef}
             content={block.L1.content}
@@ -259,12 +266,16 @@ export function TextBlockComponent({
         </div>
 
         {/* L2 (Target Language) */}
-        <div className={cn(
-          'p-2 rounded transition-colors opacity-80 relative',
-          isEditing && 'hover:bg-primary/5 focus-within:bg-primary/5 focus-within:ring-1 focus-within:ring-primary/20',
-          block.isTitle && 'text-3xl font-extrabold tracking-tight mb-4',
-          block.isChapterHeading && 'text-2xl font-bold italic text-muted-foreground mb-4'
-        )}>
+        <div 
+          className={cn(
+            'p-2 rounded transition-colors opacity-80 relative',
+            isEditing && 'hover:bg-primary/5 focus-within:bg-primary/5 focus-within:ring-1 focus-within:ring-primary/20',
+            block.isTitle && 'text-3xl font-extrabold tracking-tight mb-4',
+            block.isChapterHeading && 'text-2xl font-bold italic text-muted-foreground mb-4',
+            `script-${l2Script}`
+          )}
+          lang={targetLang}
+        >
           <TiptapEditor
             ref={l2EditorRef}
             content={block.L2.content}

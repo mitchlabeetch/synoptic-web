@@ -4,8 +4,11 @@ import Sidebar from '@/components/editor/Sidebar';
 import Toolbar from '@/components/editor/Toolbar';
 import BlockInspector from '@/components/editor/BlockInspector';
 
+import { getTranslations } from 'next-intl/server';
+
 export default async function EditorPage({ params }: { params: Promise<{ projectId: string }> }) {
   const { projectId } = await params;
+  const t = await getTranslations('Studio');
 
   return (
     <div className="flex flex-col h-screen overflow-hidden bg-background">
@@ -14,10 +17,10 @@ export default async function EditorPage({ params }: { params: Promise<{ project
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
             <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center text-primary-foreground font-bold italic">S</div>
-            <span className="font-bold text-lg tracking-tight hidden sm:inline">Synoptic Studio</span>
+            <span className="font-bold text-lg tracking-tight hidden sm:inline">{t('title')}</span>
           </div>
           <div className="h-4 w-[1px] bg-muted mx-2" />
-          <span className="text-sm text-muted-foreground font-medium truncate max-w-[200px]">Bilingual Editor</span>
+          <span className="text-sm text-muted-foreground font-medium truncate max-w-[200px]">{t('bilingualEditor')}</span>
         </div>
         <Toolbar />
       </div>

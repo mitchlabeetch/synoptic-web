@@ -10,7 +10,12 @@ import { OnboardingTour } from '@/components/onboarding/OnboardingTour';
 import { getCurrentUser, getUserId } from '@/lib/auth/jwt';
 import { getUserProjects, getUserProfile } from '@/lib/db/server';
 
+import { getTranslations } from 'next-intl/server';
+import LocaleSwitcher from '@/components/ui/LocaleSwitcher';
+import UserSettings from '@/components/dashboard/UserSettings';
+
 export default async function DashboardPage() {
+  const t = await getTranslations('Dashboard');
   const user = await getCurrentUser();
 
   if (!user) {
@@ -29,10 +34,14 @@ export default async function DashboardPage() {
       <OnboardingTour context="dashboard" />
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Your Projects</h1>
-          <p className="text-muted-foreground mt-1">Manage and edit your bilingual books.</p>
+          <h1 className="text-3xl font-bold tracking-tight">{t('title')}</h1>
+          <p className="text-muted-foreground mt-1">{t('subtitle')}</p>
         </div>
-        <div data-tour="new-project">
+        <div className="flex items-center gap-4" data-tour="new-project">
+          <LocaleSwitcher />
+          <div className="h-6 w-px bg-border mx-1" />
+          {profile && <UserSettings user={profile} />}
+          <div className="h-6 w-px bg-border mx-1" />
           <ProjectWizard tier={tier} projectCount={projectCount} />
         </div>
       </div>
@@ -43,7 +52,7 @@ export default async function DashboardPage() {
         ))}
         {projects?.length === 0 && (
           <div className="col-span-full flex flex-col items-center justify-center py-20 bg-muted/30 rounded-3xl border-2 border-dashed border-muted-foreground/20">
-            <p className="text-muted-foreground mb-6 text-lg font-medium italic">You haven't created any projects yet.</p>
+            <p className="text-muted-foreground mb-6 text-lg font-medium italic">{t('emptyState')}</p>
             <ProjectWizard tier={tier} projectCount={projectCount} />
           </div>
         )}

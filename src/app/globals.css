@@ -144,6 +144,27 @@
     grid-template-columns: 1fr 1fr;
     direction: ltr;
   }
+
+  /* Script-Specific Typography */
+  .script-cjk {
+    line-break: strict;
+    word-break: keep-all; /* Standard for modern CJK */
+    overflow-wrap: break-word;
+    text-align: justify;
+  }
+
+  .script-thai {
+    line-height: 1.8 !important;
+    word-break: break-all;
+  }
+
+  .script-arabic, .script-hebrew, .script-devanagari {
+    line-height: 1.6 !important;
+  }
+
+  .script-cyrillic {
+    hyphens: auto;
+  }
 }
 
 /* Tiptap Editor Styles */

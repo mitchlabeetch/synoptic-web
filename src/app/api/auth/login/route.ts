@@ -43,6 +43,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Get preferred locale
+    const profileResult = await query(
+      'SELECT preferred_locale FROM profiles WHERE id = $1',
+      [user.id]
+    );
+    const preferredLocale = profileResult.rows[0]?.preferred_locale || 'en';
+
     // Create JWT token
     const token = await createToken({
       id: user.id,
@@ -54,7 +61,7 @@ export async function POST(request: NextRequest) {
     // Set auth cookie
     await setAuthCookie(token);
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       success: true,
       user: {
         id: user.id,
@@ -63,6 +70,16 @@ export async function POST(request: NextRequest) {
         tier: user.tier,
       },
     });
+
+    // Set locale cookie
+    response.cookies.set('NEXT_LOCALE', preferredLocale, {
+      path: '/',
+      maxAge: 60 * 60 * 24 * 365, // 1 year
+      sameSite: 'lax',
+    });
+
+    return response;
+
   } catch (error: any) {
     console.error('[Auth Login Error]', error);
     return NextResponse.json(

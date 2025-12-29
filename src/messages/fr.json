@@ -20,7 +20,8 @@
     "chapters": "Chapitres",
     "noChapters": "Aucun chapitre défini",
     "deletePage": "Supprimer la page",
-    "resetFactory": "Réinitialiser"
+    "resetFactory": "Réinitialiser",
+    "bilingualEditor": "Éditeur Bilingue"
   },
   "Blocks": {
     "text": "Bloc de texte",
@@ -132,7 +133,10 @@
     "reachedFreeLimit": "Limite gratuite atteinte",
     "freeLimitDesc": "Les comptes gratuits sont limités à 1 projet actif. Passez à Pro pour débloquer les projets illimités et les fonctions IA avancées.",
     "upgradeToPro": "Passer à Pro",
-    "maybeLater": "Plus tard"
+    "maybeLater": "Plus tard",
+    "usTrade": "Papier Trade US",
+    "digest": "Digest",
+    "intlStandard": "Standard International"
   },
   "Common": {
     "delete": "Supprimer",
@@ -141,7 +145,137 @@
     "save": "Enregistrer",
     "cancel": "Annuler",
     "on": "Actif",
-    "off": "Inactif"
+    "off": "Inactif",
+    "backToHome": "Retour à l'accueil"
+  },
+  "Dashboard": {
+    "title": "Vos Projets",
+    "subtitle": "Gérez et modifiez vos livres bilingues.",
+    "emptyState": "Vous n'avez pas encore créé de projets.",
+    "noDescription": "Aucune description fournie.",
+    "lastUpdated": "Dernière mise à jour"
+  },
+  "Auth": {
+    "login": "Connexion",
+    "signup": "Inscription",
+    "welcomeBack": "Bon retour",
+    "createAccount": "Créer un compte",
+    "signInDesc": "Connectez-vous à votre compte Synoptic",
+    "signUpDesc": "Commencez à créer des livres bilingues dès aujourd'hui",
+    "email": "Email",
+    "password": "Mot de passe",
+    "emailPlaceholder": "nom@exemple.com",
+    "passwordPlaceholderLogin": "Entrez votre mot de passe",
+    "passwordPlaceholderSignup": "Créez un mot de passe",
+    "signIn": "Se connecter",
+    "signingIn": "Connexion en cours...",
+    "creatingAccount": "Création du compte...",
+    "noAccount": "Vous n'avez pas de compte ?",
+    "hasAccount": "Vous avez déjà un compte ?",
+    "termsPrompt": "En continuant, vous acceptez les Conditions d'utilisation et la Politique de confidentialité de Synoptic.",
+    "failed": "Échec de l'authentification",
+    "errorOccurred": "Une erreur est survenue"
+  },
+  "Marketing": {
+    "nav": {
+      "features": "Fonctionnalités",
+      "pricing": "Tarifs",
+      "library": "Bibliothèque",
+      "logIn": "Connexion",
+      "joinNow": "S'abonner",
+      "templates": "Modèles",
+      "product": "Produit",
+      "company": "Entreprise",
+      "about": "À propos",
+      "privacy": "Confidentialité",
+      "terms": "Conditions"
+    },
+    "hero": {
+      "badge": "Beta Privée Synoptic v1.0",
+      "title": "Le Studio <span>Bilingue Ultime</span>",
+      "subtitle": "Concevez des livres côte-à-côte professionnels avec mise en page assistée par IA, synchronisation cloud en temps réel et publication KDP en un clic.",
+      "ctaPrimary": "Commencer gratuitement",
+      "ctaSecondary": "Explorer la bibliothèque",
+      "aiSuggestion": "Suggestion IA"
+    },
+    "footer": {
+      "tagline": "L'éditeur bilingue professionnel pour les auteurs, les apprenants et les maisons d'édition. Conçu à SF, construit pour le monde.",
+      "copyright": "© 2025 Synoptic Studio. Tous droits réservés."
+    }
+  },
+  "Features": {
+    "title": "Conçu pour les Créateurs",
+    "subtitle": "L'imprimerie professionnelle, simplifiée en un studio.",
+    "aiTypesetter": {
+      "title": "Compositeur IA",
+      "desc": "Aligne automatiquement les paires de phrases dans plus de 25 langues, assurant une symétrie parfaite."
+    },
+    "cloudSync": {
+      "title": "Moteur de Synchro Cloud",
+      "desc": "Votre travail est sauvegardé instantanément. Accédez à votre studio depuis n'importe quel appareil."
+    },
+    "pdfExport": {
+      "title": "PDF Prêt pour l'Impression",
+      "desc": "Export haute résolution via Puppeteer. Parfait pour Amazon KDP et IngramSpark."
+    },
+    "epubSupport": {
+      "title": "Support EPUB 3.0",
+      "desc": "Générez des eBooks bilingues ajustables, optimisés pour Kindle et Apple Books."
+    },
+    "deepAnnotation": {
+      "title": "Annotation Profonde",
+      "desc": "Analyses linguistiques par IA. Groupement de mots et explications contextuelles à portée de main."
+    },
+    "marketplace": {
+      "title": "Marché Global",
+      "desc": "Partagez et vendez vos modèles ou parcourez notre bibliothèque de designs professionnels."
+    }
+  },
+  "Pricing": {
+    "title": "Tarifs Simples et Justes",
+    "subtitle": "Choisissez le forfait qui correspond à vos objectifs de publication.",
+    "mostPopular": "Le Plus Populaire",
+    "month": "/mois",
+    "pageTitle": "Investissez dans vos livres.",
+    "pageSubtitle": "Que vous traduisiez un mémoire familial ou que vous publiiez une série commerciale, nous avons les bons outils pour vous.",
+    "nonProfitTitle": "Vous êtes une association ou un éducateur ?",
+    "nonProfitDesc": "Nous offrons des réductions spéciales pour les institutions éducatives et les traductions à but non lucratif. Contactez-nous pour un devis personnalisé.",
+    "contactSupport": "Contactez le support",
+    "free": {
+      "name": "Gratuit",
+      "desc": "Parfait pour tester le studio.",
+      "button": "Essayer Gratuitement"
+    },
+    "pro": {
+      "name": "Pro",
+      "desc": "Pour les auteurs sérieux et les polyglottes.",
+      "button": "Devenir Pro"
+    },
+    "publisher": {
+      "name": "Éditeur",
+      "desc": "Pour les maisons d'édition professionnelles.",
+      "button": "Passer à Éditeur"
+    },
+    "featuresList": {
+      "activeProject": "1 Projet Actif",
+      "standardLayout": "Moteur de Mise en Page Standard",
+      "manualTranslation": "Traduction Manuelle",
+      "lowDpiPdf": "Export PDF Basse Résolution",
+      "watermarked": "Publication avec Filigrane",
+      "unlimitedProjects": "Projets Illimités",
+      "aiAssistedLayout": "Mise en Page Assistée par IA",
+      "aiWordsMonth": "50k Mots IA / Mois",
+      "highDpiPdf": "Export 300 DPI (Prêt pour Impression)",
+      "epubMobi": "Export EPUB & MOBI",
+      "removeWatermarks": "Retrait des Filigranes",
+      "priorityHistory": "Historique Cloud Prioritaire",
+      "everythingPro": "Tout ce qu'il y a dans Pro",
+      "unlimitedAi": "Crédits IA Illimités",
+      "teamCollab": "Collaboration d'Équipe",
+      "brandCustom": "Personnalisation de Marque",
+      "fontUpload": "Upload de Polices Personnalisées",
+      "apiAccess": "Accès API (Bientôt disponible)"
+    }
   },
   "Export": {
     "publishingPipeline": "Pipeline de Publication",
@@ -181,6 +315,10 @@
     "undo": "Annuler l'action",
     "redo": "Rétablir l'action",
     "deleteBlock": "Supprimer le bloc sélectionné",
-    "exportPdf": "Exporter en PDF"
+    "exportPdf": "Exporter en PDF",
+    "select": "sélectionner",
+    "navigate": "naviguer",
+    "paletteTitle": "Palette de Commandes Synoptic",
+    "commandMenu": "Menu de Commande"
   }
 }

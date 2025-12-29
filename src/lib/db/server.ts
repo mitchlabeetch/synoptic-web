@@ -11,6 +11,7 @@ export interface User {
   email: string;
   name?: string;
   tier: string;
+  preferred_locale: string;
   ai_credits_used: number;
   ai_credits_limit: number;
   created_at: string;
@@ -42,6 +43,24 @@ export async function getAuthenticatedUser(): Promise<UserTokenPayload | null> {
 export async function getUserProfile(userId: string): Promise<User | null> {
   return getById<User>('profiles', userId);
 }
+
+/**
+ * Update user profile
+ */
+export async function updateUserProfile(userId: string, updates: Partial<Pick<User, 'name' | 'preferred_locale'>>): Promise<User | null> {
+  const keys = Object.keys(updates);
+  if (keys.length === 0) return getUserProfile(userId);
+
+  const setClause = keys.map((key, i) => `${key} = $${i + 2}`).join(', ');
+  const values = Object.values(updates);
+
+  const result = await query<User>(
+    `UPDATE profiles SET ${setClause}, updated_at = NOW() WHERE id = $1 RETURNING *`,
+    [userId, ...values]
+  );
+  return result.rows[0] || null;
+}
+
 
 /**
  * Get all projects for a user

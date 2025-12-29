@@ -8,8 +8,11 @@ import { Label } from '@/components/ui/label'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Loader2, BookOpen, ArrowLeft } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 export default function LoginPage() {
+  const t = useTranslations('Auth');
+  const tc = useTranslations('Common');
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
@@ -33,14 +36,14 @@ export default function LoginPage() {
       const data = await response.json()
 
       if (!response.ok) {
-        throw new Error(data.error || 'Authentication failed')
+        throw new Error(data.error || t('failed'))
       }
 
       // Redirect to dashboard on success
       router.push('/dashboard')
       router.refresh()
     } catch (err: any) {
-      setError(err.message || 'Something went wrong')
+      setError(err.message || t('errorOccurred'))
     } finally {
       setLoading(false)
     }
@@ -53,7 +56,7 @@ export default function LoginPage() {
         <Link href="/">
           <Button variant="ghost" size="sm" className="gap-2">
             <ArrowLeft className="h-4 w-4" />
-            Back to Home
+            {tc('backToHome')}
           </Button>
         </Link>
       </div>
@@ -69,22 +72,22 @@ export default function LoginPage() {
       <Card className="w-full max-w-md shadow-xl border-2">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl">
-            {mode === 'login' ? 'Welcome Back' : 'Create Account'}
+            {mode === 'login' ? t('welcomeBack') : t('createAccount')}
           </CardTitle>
           <CardDescription>
             {mode === 'login' 
-              ? 'Sign in to your Synoptic account' 
-              : 'Start creating bilingual books today'}
+              ? t('signInDesc') 
+              : t('signUpDesc')}
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">{t('email')}</Label>
               <Input
                 id="email"
                 type="email"
-                placeholder="name@example.com"
+                placeholder={t('emailPlaceholder')}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -92,11 +95,11 @@ export default function LoginPage() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">{t('password')}</Label>
               <Input
                 id="password"
                 type="password"
-                placeholder={mode === 'signup' ? 'Create a password' : 'Enter your password'}
+                placeholder={mode === 'signup' ? t('passwordPlaceholderSignup') : t('passwordPlaceholderLogin')}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -115,10 +118,10 @@ export default function LoginPage() {
               {loading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  {mode === 'login' ? 'Signing in...' : 'Creating account...'}
+                  {mode === 'login' ? t('signingIn') : t('creatingAccount')}
                 </>
               ) : (
-                mode === 'login' ? 'Sign In' : 'Create Account'
+                mode === 'login' ? t('signIn') : t('createAccount')
               )}
             </Button>
           </form>
@@ -127,22 +130,22 @@ export default function LoginPage() {
           <p className="text-sm text-muted-foreground">
             {mode === 'login' ? (
               <>
-                Don't have an account?{' '}
+                {t('noAccount')}{' '}
                 <button 
                   onClick={() => { setMode('signup'); setError(''); }}
                   className="text-primary hover:underline font-medium"
                 >
-                  Sign up
+                  {t('signup')}
                 </button>
               </>
             ) : (
               <>
-                Already have an account?{' '}
+                {t('hasAccount')}{' '}
                 <button 
                   onClick={() => { setMode('login'); setError(''); }}
                   className="text-primary hover:underline font-medium"
                 >
-                  Sign in
+                  {t('signIn')}
                 </button>
               </>
             )}
@@ -151,7 +154,7 @@ export default function LoginPage() {
       </Card>
 
       <p className="mt-8 text-xs text-muted-foreground text-center max-w-md">
-        By continuing, you agree to Synoptic's Terms of Service and Privacy Policy.
+        {t('termsPrompt')}
       </p>
     </div>
   )

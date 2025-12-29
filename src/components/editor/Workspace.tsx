@@ -11,6 +11,7 @@ import { AnnotationLayer } from './annotations/AnnotationLayer';
 import { OnboardingTour } from '../onboarding/OnboardingTour';
 import { CommandPalette } from '../CommandPalette';
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
+import { FontLoader } from './FontLoader';
 
 interface WorkspaceProps {
   projectId: string;
@@ -62,6 +63,7 @@ export default function Workspace({ projectId }: WorkspaceProps) {
         backgroundSize: '40px 40px',
       }}
     >
+      <FontLoader />
       <OnboardingTour context="editor" />
       <CommandPalette />
       {/* Top Floating Status Indicator */}

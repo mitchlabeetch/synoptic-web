@@ -5,8 +5,10 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Sparkles, BookOpen, Layers } from 'lucide-react';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 export function Hero() {
+  const t = useTranslations('Marketing.hero');
   return (
     <section className="relative pt-20 pb-20 md:pt-32 md:pb-32 overflow-hidden">
       {/* Background Orbs */}
@@ -23,7 +25,7 @@ export function Hero() {
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold mb-8 backdrop-blur-sm">
             <Sparkles className="h-3 w-3" />
-            <span>Synoptic v1.0 Private Beta</span>
+            <span>{t('badge')}</span>
           </div>
         </motion.div>
 
@@ -33,8 +35,10 @@ export function Hero() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.1] mb-8"
         >
-          The <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-blue-600 to-indigo-600">Ultimate</span> <br />
-          Bilingual Studio
+          {t.rich('title', {
+            br: () => <br />,
+            span: (chunks) => <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-blue-600 to-indigo-600">{chunks}</span>
+          })}
         </motion.h1>
 
         <motion.p
@@ -43,8 +47,7 @@ export function Hero() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="max-w-2xl mx-auto text-lg md:text-xl text-muted-foreground mb-12"
         >
-          Craft professional side-by-side books with AI-assisted typesetting, 
-          real-time cloud sync, and one-click KDP publishing.
+          {t('subtitle')}
         </motion.p>
 
         <motion.div
@@ -55,13 +58,13 @@ export function Hero() {
         >
           <Link href="/auth/login">
             <Button size="lg" className="h-14 px-8 text-lg font-bold rounded-2xl shadow-xl shadow-primary/20 group">
-              Start Writing Free
+              {t('ctaPrimary')}
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Button>
           </Link>
           <Link href="/library">
             <Button variant="outline" size="lg" className="h-14 px-8 text-lg font-bold rounded-2xl bg-background/50 backdrop-blur-sm">
-              Explore Library
+              {t('ctaSecondary')}
             </Button>
           </Link>
         </motion.div>
@@ -104,7 +107,7 @@ export function Hero() {
                     <div className="h-4 w-3/4 rounded bg-blue-500/20" />
                     <div className="h-4 w-full rounded bg-muted/20" />
                     <div className="h-4 w-2/3 rounded bg-muted/20 text-xs italic flex items-center gap-1 opacity-50">
-                       <Sparkles className="h-3 w-3" /> AI Suggestion
+                       <Sparkles className="h-3 w-3" /> {t('aiSuggestion')}
                     </div>
                     <div className="h-4 w-4/5 rounded bg-muted/20" />
                  </div>

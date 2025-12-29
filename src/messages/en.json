@@ -20,7 +20,8 @@
     "chapters": "Chapters",
     "noChapters": "No Chapters Defined",
     "deletePage": "Delete Page",
-    "resetFactory": "Reset to Factory"
+    "resetFactory": "Reset to Factory",
+    "bilingualEditor": "Bilingual Editor"
   },
   "Blocks": {
     "text": "Text Block",
@@ -132,7 +133,10 @@
     "reachedFreeLimit": "You've reached the Free Limit",
     "freeLimitDesc": "Free accounts are limited to 1 active project. Upgrade to Pro to unlock unlimited projects and advanced AI features.",
     "upgradeToPro": "Upgrade to Pro",
-    "maybeLater": "Maybe Later"
+    "maybeLater": "Maybe Later",
+    "usTrade": "US Trade Paper",
+    "digest": "Digest",
+    "intlStandard": "International Standard"
   },
   "Common": {
     "delete": "Delete",
@@ -141,7 +145,137 @@
     "save": "Save",
     "cancel": "Cancel",
     "on": "On",
-    "off": "Off"
+    "off": "Off",
+    "backToHome": "Back to Home"
+  },
+  "Dashboard": {
+    "title": "Your Projects",
+    "subtitle": "Manage and edit your bilingual books.",
+    "emptyState": "You haven't created any projects yet.",
+    "noDescription": "No description provided.",
+    "lastUpdated": "Last updated"
+  },
+  "Auth": {
+    "login": "Login",
+    "signup": "Sign Up",
+    "welcomeBack": "Welcome Back",
+    "createAccount": "Create Account",
+    "signInDesc": "Sign in to your Synoptic account",
+    "signUpDesc": "Start creating bilingual books today",
+    "email": "Email",
+    "password": "Password",
+    "emailPlaceholder": "name@example.com",
+    "passwordPlaceholderLogin": "Enter your password",
+    "passwordPlaceholderSignup": "Create a password",
+    "signIn": "Sign In",
+    "signingIn": "Signing in...",
+    "creatingAccount": "Creating account...",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "termsPrompt": "By continuing, you agree to Synoptic's Terms of Service and Privacy Policy.",
+    "failed": "Authentication failed",
+    "errorOccurred": "Something went wrong"
+  },
+  "Marketing": {
+    "nav": {
+      "features": "Features",
+      "pricing": "Pricing",
+      "library": "Library",
+      "logIn": "Log In",
+      "joinNow": "Join Now",
+      "templates": "Templates",
+      "product": "Product",
+      "company": "Company",
+      "about": "About",
+      "privacy": "Privacy",
+      "terms": "Terms"
+    },
+    "hero": {
+      "badge": "Synoptic v1.0 Private Beta",
+      "title": "The <span>Ultimate</span> <br /> Bilingual Studio",
+      "subtitle": "Craft professional side-by-side books with AI-assisted typesetting, real-time cloud sync, and one-click KDP publishing.",
+      "ctaPrimary": "Start Writing Free",
+      "ctaSecondary": "Explore Library",
+      "aiSuggestion": "AI Suggestion"
+    },
+    "footer": {
+      "tagline": "The professional bilingual publisher for authors, language learners, and publishing houses. Designed in SF, Built for the world.",
+      "copyright": "© 2025 Synoptic Studio. All rights reserved."
+    }
+  },
+  "Features": {
+    "title": "Built for Creators",
+    "subtitle": "The infrastructure of a publishing house, simplified into a studio.",
+    "aiTypesetter": {
+      "title": "AI Typesetter",
+      "desc": "Automatically aligns sentence pairs across 25+ languages, ensuring flawless symmetry even with varying sentence lengths."
+    },
+    "cloudSync": {
+      "title": "Cloud Sync Engine",
+      "desc": "Your work is saved instantly as you type. Access your studio from any device with a persistent, infinite undo history."
+    },
+    "pdfExport": {
+      "title": "Print-Ready PDF",
+      "desc": "High-resolution export via Puppeteer engine. Perfect for Amazon KDP, IngramSpark, and local print shops."
+    },
+    "epubSupport": {
+      "title": "EPUB 3.0 Support",
+      "desc": "Generate reflowable eBooks with native bilingual alternating mode, optimized for Kindle and Apple Books."
+    },
+    "deepAnnotation": {
+      "title": "Deep Annotation",
+      "desc": "AI-powered linguistic insights. Word grouping, relationship arrows, and contextual explanations at your fingertips."
+    },
+    "marketplace": {
+      "title": "Global Marketplace",
+      "desc": "Share and sell your custom book templates or browse our library of curated, professional bilingual designs."
+    }
+  },
+  "Pricing": {
+    "title": "Simple, Fair Pricing",
+    "subtitle": "Choose the plan that fits your publishing goals.",
+    "mostPopular": "Most Popular",
+    "month": "/mo",
+    "pageTitle": "Invest in Your Books.",
+    "pageSubtitle": "Whether you're translating a family memoir or publishing a commercial series, we have the right tools for you.",
+    "nonProfitTitle": "Are you a non-profit or educator?",
+    "nonProfitDesc": "We offer special discounts for educational institutions and non-profit translations. Contact our team for a custom quote.",
+    "contactSupport": "Contact Support",
+    "free": {
+      "name": "Free",
+      "desc": "Perfect for testing the studio.",
+      "button": "Start Free"
+    },
+    "pro": {
+      "name": "Pro",
+      "desc": "For serious authors and polyglots.",
+      "button": "Join Pro"
+    },
+    "publisher": {
+      "name": "Publisher",
+      "desc": "For professional publishing houses.",
+      "button": "Go Publisher"
+    },
+    "featuresList": {
+      "activeProject": "1 Active Project",
+      "standardLayout": "Standard Layout Engine",
+      "manualTranslation": "Manual Translation",
+      "lowDpiPdf": "Low-DPI PDF Export",
+      "watermarked": "Watermarked Publishing",
+      "unlimitedProjects": "Unlimited Projects",
+      "aiAssistedLayout": "AI-Assisted Layout",
+      "aiWordsMonth": "50k AI Words / Month",
+      "highDpiPdf": "300 DPI Export (Print-Ready)",
+      "epubMobi": "EPUB & MOBI Export",
+      "removeWatermarks": "Removing Watermarks",
+      "priorityHistory": "Priority Cloud History",
+      "everythingPro": "Everything in Pro",
+      "unlimitedAi": "Unlimited AI Credits",
+      "teamCollab": "Team Collaboration",
+      "brandCustom": "Brand Customization",
+      "fontUpload": "Custom Font Upload",
+      "apiAccess": "API Access (Coming Soon)"
+    }
   },
   "Export": {
     "publishingPipeline": "Publishing Pipeline",
@@ -181,6 +315,10 @@
     "undo": "Undo Action",
     "redo": "Redo Action",
     "deleteBlock": "Delete Selected Block",
-    "exportPdf": "Export to PDF"
+    "exportPdf": "Export to PDF",
+    "select": "select",
+    "navigate": "navigate",
+    "paletteTitle": "Synoptic Command Palette",
+    "commandMenu": "Command Menu"
   }
 }

@@ -1,5 +1,8 @@
+'use client'
+
 import Link from 'next/link'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
+import { useTranslations } from 'next-intl'
 
 interface Project {
   id: string
@@ -11,6 +14,8 @@ interface Project {
 }
 
 export default function ProjectCard({ project }: { project: Project }) {
+  const t = useTranslations('Dashboard')
+
   return (
     <Link href={`/editor/${project.id}`}>
       <Card className="hover:border-primary transition-colors cursor-pointer h-full">
@@ -22,10 +27,10 @@ export default function ProjectCard({ project }: { project: Project }) {
         </CardHeader>
         <CardContent>
           <p className="text-sm text-muted-foreground line-clamp-2">
-            {project.description || 'No description provided.'}
+            {project.description || t('noDescription')}
           </p>
           <div className="mt-4 text-xs text-muted-foreground">
-            Last updated: {new Date(project.updated_at).toLocaleDateString()}
+            {t('lastUpdated')}: {new Date(project.updated_at).toLocaleDateString()}
           </div>
         </CardContent>
       </Card>
