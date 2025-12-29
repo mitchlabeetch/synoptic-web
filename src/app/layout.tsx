@@ -1,16 +1,37 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { Providers } from "./providers";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const quicksand = localFont({
+  src: [
+    {
+      path: "../../Quicksand-Light.ttf",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../../Quicksand-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../Quicksand-Medium.ttf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../../Quicksand-SemiBold.ttf",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "../../Quicksand-Bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-quicksand",
 });
 
 export const metadata: Metadata = {
@@ -32,7 +53,7 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${quicksand.variable} antialiased`}
       >
         <NextIntlClientProvider messages={messages}>
           <Providers>{children}</Providers>

@@ -25,6 +25,7 @@ import {
 import { useTranslations } from 'next-intl';
 
 const FONT_OPTIONS = [
+  'Quicksand',
   'Crimson Pro',
   'Inter',
   'Inter Tight',
