@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Check, Sparkles } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 
 export function PricingTable() {
   const t = useTranslations('Pricing');
@@ -18,7 +19,8 @@ export function PricingTable() {
         "standardLayout",
         "manualTranslation",
         "lowDpiPdf",
-        "watermarked"
+        "watermarked",
+        "limitedAi"
       ],
       premium: false
     },
@@ -33,7 +35,9 @@ export function PricingTable() {
         "highDpiPdf",
         "epubMobi",
         "removeWatermarks",
-        "priorityHistory"
+        "priorityHistory",
+        "flashcards",
+        "tts"
       ],
       premium: true,
       highlight: true
@@ -44,11 +48,11 @@ export function PricingTable() {
       period: t('month'),
       features: [
         "everythingPro",
-        "unlimitedAi",
+        "bigAiLimit",
         "teamCollab",
         "brandCustom",
         "fontUpload",
-        "apiAccess"
+        "ttsPremium"
       ],
       premium: true
     }
@@ -70,7 +74,7 @@ export function PricingTable() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className={`relative p-8 rounded-[2.5rem] border ${tier.highlight ? 'border-primary shadow-2xl shadow-primary/10 bg-card z-10' : 'bg-card/50'}`}
+              className={`relative p-8 rounded-[2.5rem] border flex flex-col h-full ${tier.highlight ? 'border-primary shadow-2xl shadow-primary/10 bg-card z-10' : 'bg-card/50'}`}
             >
               {tier.highlight && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full flex items-center gap-1 shadow-lg">
@@ -87,7 +91,7 @@ export function PricingTable() {
                 <p className="text-xs text-muted-foreground mt-2">{t(`${tier.key}.desc`)}</p>
               </div>
 
-              <div className="space-y-4 mb-8">
+              <div className="space-y-4 mb-8 flex-grow">
                 {tier.features.map((f, j) => (
                   <div key={j} className="flex items-start gap-2 text-sm">
                     <Check className="h-4 w-4 text-emerald-500 mt-0.5" />
@@ -96,15 +100,49 @@ export function PricingTable() {
                 ))}
               </div>
 
-              <Button 
-                variant={tier.highlight ? "default" : "outline"} 
-                className={`w-full h-12 rounded-2xl font-bold ${tier.highlight ? 'shadow-xl shadow-primary/20' : ''}`}
-              >
-                {t(`${tier.key}.button`)}
-              </Button>
+              <Link href="/auth/signup" className="mt-auto">
+                <Button 
+                  variant={tier.highlight ? "default" : "outline"} 
+                  className={`w-full h-12 rounded-2xl font-bold ${tier.highlight ? 'shadow-xl shadow-primary/20' : ''}`}
+                >
+                  {t(`${tier.key}.button`)}
+                </Button>
+              </Link>
             </motion.div>
           ))}
         </div>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-20 max-w-4xl mx-auto p-12 rounded-[3.5rem] bg-muted/20 border border-border/50 backdrop-blur-sm"
+        >
+          <div className="flex flex-col md:flex-row gap-12 items-start">
+            <div className="flex-1">
+              <h3 className="text-2xl font-bold mb-4 font-outfit">{t('aiExplanation.title')}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed italic mb-8">
+                {t('aiExplanation.note')}
+              </p>
+              <div className="p-6 rounded-2xl bg-background/50 border border-primary/10">
+                <div className="text-primary font-bold text-lg mb-2">{t('aiExplanation.whatIsAUnit')}</div>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  {t('aiExplanation.unitDesc')}
+                </p>
+              </div>
+            </div>
+            <div className="flex-1 grid gap-6">
+              {['free', 'pro', 'publisher'].map((key) => (
+                <div key={key} className="flex gap-4">
+                  <div className="w-2 h-2 rounded-full bg-primary mt-1.5 flex-shrink-0" />
+                  <div>
+                    <h4 className="text-sm font-bold uppercase tracking-wider text-muted-foreground/80 mb-1">{t(`${key}.name`)}</h4>
+                    <p className="text-sm text-muted-foreground">{t(`aiExplanation.tiers.${key}`)}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

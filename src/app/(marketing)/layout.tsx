@@ -28,14 +28,21 @@ export const metadata: Metadata = {
   },
 };
 
+import { MarketingHeader } from '@/components/marketing/MarketingHeader';
+import { MarketingFooter } from '@/components/marketing/MarketingFooter';
+
 export default function MarketingLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <div className="antialiased font-sans">
-      {children}
+    <div className="antialiased font-sans min-h-screen flex flex-col">
+      <MarketingHeader />
+      <main className="flex-grow">
+        {children}
+      </main>
+      <MarketingFooter />
     </div>
   );
 }

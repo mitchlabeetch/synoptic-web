@@ -25,54 +25,54 @@ interface LanguageData {
 const LANGUAGES_ANNOTATIONS: Record<string, LanguageData> = {
   en: {
     segments: [
-      { text: "The ", role: "article", highlight: true },
+      { text: "The ", role: "other" },
       { text: "ultimate ", role: "adjective" },
-      { text: "bilingual ", role: "other" },
+      { text: "bilingual ", role: "other", highlight: true },
       { text: "studio", role: "noun" }
     ],
     arrow: [1, 3]
   },
   fr: {
     segments: [
-      { text: "Le ", role: "article", highlight: true },
+      { text: "Le ", role: "other" },
       { text: "studio ", role: "noun" },
-      { text: "bilingue ", role: "other" },
+      { text: "bilingue ", role: "other", highlight: true },
       { text: "ultime", role: "adjective" }
     ],
     arrow: [3, 1]
   },
   es: {
     segments: [
-      { text: "El ", role: "article", highlight: true },
+      { text: "El ", role: "other" },
       { text: "estudio ", role: "noun" },
-      { text: "bilingüe ", role: "other" },
+      { text: "bilingüe ", role: "other", highlight: true },
       { text: "definitivo", role: "adjective" }
     ],
     arrow: [3, 1]
   },
   de: {
     segments: [
-      { text: "Das ", role: "article", highlight: true },
+      { text: "Das ", role: "other" },
       { text: "ultimative ", role: "adjective" },
-      { text: "zweisprachige ", role: "other" },
+      { text: "zweisprachige ", role: "other", highlight: true },
       { text: "studio", role: "noun" }
     ],
     arrow: [1, 3]
   },
   it: {
     segments: [
-      { text: "Lo ", role: "article", highlight: true },
+      { text: "Lo ", role: "other" },
       { text: "studio ", role: "noun" },
-      { text: "bilingue ", role: "other" },
+      { text: "bilingue ", role: "other", highlight: true },
       { text: "definitivo", role: "adjective" }
     ],
     arrow: [3, 1]
   },
   ar: {
     segments: [
-      { text: "ال", role: "article", highlight: true },
+      { text: "ال", role: "other" },
       { text: "استوديو ", role: "noun" },
-      { text: "ثنائي اللغة ", role: "other" },
+      { text: "ثنائي اللغة ", role: "other", highlight: true },
       { text: "المثالي", role: "adjective" }
     ],
     arrow: [3, 1]
@@ -80,8 +80,8 @@ const LANGUAGES_ANNOTATIONS: Record<string, LanguageData> = {
   ja: {
     segments: [
       { text: "究極", role: "adjective" },
-      { text: "の", role: "article", highlight: true },
-      { text: "バイリンガル", role: "other" },
+      { text: "の", role: "other" },
+      { text: "バイリンガル", role: "other", highlight: true },
       { text: "スタジオ", role: "noun" }
     ],
     arrow: [0, 3]
@@ -112,21 +112,34 @@ function CurvedArrow({ fromRef, toRef, containerRef, color, isRTL }: { fromRef: 
       const fromRect = fromRef.getBoundingClientRect();
       const toRect = toRef.getBoundingClientRect();
 
-      const startX = fromRect.left - containerRect.left + fromRect.width / 2.2;
-      const startY = fromRect.top - containerRect.top + fromRect.height - 4;
-      const endX = toRect.left - containerRect.left + toRect.width / 2.2;
-      const endY = toRect.top - containerRect.top + toRect.height - 4;
+      const isRTL_context = isRTL;
+      
+      // Determine if we should go TOP or BOTTOM to avoid other words
+      // Default to BOTTOM for standard bilingual look, but allow TOP if it looks cleaner
+      const useTop = false; // We can add logic here if needed
+      
+      const startX = fromRect.left - containerRect.left + fromRect.width / 2;
+      const endX = toRect.left - containerRect.left + toRect.width / 2;
+      
+      let startY, endY, midY;
+      const padding = 6;
+      const dist = Math.abs(startX - endX);
 
-      const deltaY = Math.abs(fromRect.top - toRect.top);
-      const isWrapped = deltaY > 20;
-      
-      let midX, midY;
-      
-      if (!isWrapped) {
-        midX = (startX + endX) / 2;
-        midY = startY + 30;
+      if (useTop) {
+        startY = fromRect.top - containerRect.top - padding;
+        endY = toRect.top - containerRect.top - padding;
+        midY = Math.min(startY, endY) - Math.min(80, dist * 0.5);
       } else {
-        const curveOutward = isRTL ? -40 : 40;
+        startY = fromRect.top - containerRect.top + fromRect.height + padding;
+        endY = toRect.top - containerRect.top + toRect.height + padding;
+        midY = Math.max(startY, endY) + Math.min(80, dist * 0.5);
+      }
+
+      const isWrapped = Math.abs(fromRect.top - toRect.top) > 20;
+      let midX = (startX + endX) / 2;
+      
+      if (isWrapped) {
+        const curveOutward = isRTL_context ? -80 : 80;
         midX = Math.min(startX, endX) - curveOutward;
         midY = (startY + endY) / 2;
       }
@@ -208,8 +221,8 @@ function AnnotatedSentence({
         clearInterval(interval);
         setTimeout(() => {
           setShowAnnotations(true);
-          setTimeout(onComplete, 4000);
-        }, 600);
+          setTimeout(onComplete, 1333);
+        }, 200);
         return;
       }
 
@@ -247,7 +260,7 @@ function AnnotatedSentence({
               color: showAnnotations && s.role && s.role !== 'other' ? roleColor : 'inherit'
             }}
             className={cn(
-              "text-3xl md:text-4xl lg:text-5xl tracking-tight leading-[1.2] inline-block transition-colors duration-500 whitespace-pre",
+              "text-5xl md:text-6xl lg:text-8xl tracking-tight leading-[1.3] inline-block transition-colors duration-500 whitespace-pre relative",
               showAnnotations && s.role === 'noun' ? 'font-bold' : 'font-medium'
             )}
           >
@@ -257,7 +270,7 @@ function AnnotatedSentence({
               <motion.span
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
-                className="absolute inset-x-0 bottom-[10%] h-[15%] bg-[#30b8c8]/10 -z-10 origin-left rounded-md"
+                className="absolute inset-x-0 bottom-[5%] h-[40%] bg-[#30b8c8]/40 -z-10 origin-left rounded-lg blur-[4px]"
               />
             )}
             
@@ -309,7 +322,7 @@ export function Hero() {
       setAnimationStage('cycling');
       setIsSaving(true);
       setTimeout(() => setIsSaving(false), 800);
-    }, 2500);
+    }, 833);
   };
 
   return (
@@ -348,12 +361,12 @@ export function Hero() {
               </div>
 
               {/* Translation Panels */}
-              <div className="flex-1 flex flex-col lg:flex-row min-h-[400px] md:min-h-[550px] relative">
+              <div className="flex-1 flex flex-col lg:flex-row min-h-[300px] md:min-h-[400px] relative">
                 
                 {/* Visual Separator */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-px h-[50%] bg-border/20 hidden lg:block" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-px h-[50%] bg-border/60 hidden lg:block" />
 
-                <div className="flex-1 p-10 md:p-16 lg:p-14 flex flex-col justify-center">
+                <div className="flex-1 p-8 md:p-12 lg:p-10 flex flex-col justify-center">
                    <AnnotatedSentence 
                       langCode={currentLocale} 
                       active={animationStage === 'sync'} 
@@ -362,7 +375,7 @@ export function Hero() {
                    />
                 </div>
 
-                <div className="flex-1 p-10 md:p-16 lg:p-14 flex flex-col justify-center bg-muted/5">
+                <div className="flex-1 p-8 md:p-12 lg:p-10 flex flex-col justify-center bg-muted/5">
                    <AnnotatedSentence 
                       langCode={currentLangCode} 
                       active={animationStage === 'sync' || animationStage === 'cycling'} 
@@ -381,7 +394,7 @@ export function Hero() {
            transition={{ delay: 0.7 }}
            className="mt-12 text-center max-w-5xl mx-auto space-y-8 pb-10"
         >
-           <h1 className="text-4xl md:text-5xl lg:text-[5.5rem] font-bold tracking-tighter font-outfit leading-[0.85] text-foreground">
+           <h1 className="text-4xl md:text-6xl lg:text-[8rem] font-bold tracking-tighter font-outfit leading-[0.85] text-foreground">
               {t('titlePlain')}
            </h1>
            <p className="text-muted-foreground font-medium text-lg md:text-xl leading-relaxed px-12 font-quicksand opacity-80">

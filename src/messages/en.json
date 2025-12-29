@@ -178,6 +178,8 @@
   },
   "Marketing": {
     "nav": {
+      "toLearn": "for language learning",
+      "toPublish": "for book publishing",
       "features": "Features",
       "pricing": "Pricing",
       "library": "Library",
@@ -202,6 +204,7 @@
       "pauseRotation": "Pause language rotation",
       "resumeRotation": "Resume language rotation",
       "studioTitle": "Hero Title — Synoptic Studio",
+      "titlePlain": "the ultimate bilingual studio",
       "neuralEngine": "Neural Engine",
       "activeLayer": "Active Layer",
       "typographyAssistant": "Typography Assistant",
@@ -215,7 +218,7 @@
       "origin": "Origin"
     },
     "footer": {
-      "tagline": "The professional bilingual publisher for authors, language learners, and publishing houses. Designed in SF, Built for the world.",
+      "tagline": "The professional bilingual publisher for authors, language learners, and publishing houses. Built for the world.",
       "copyright": "© 2025 Synoptic Studio. All rights reserved."
     },
     "carbon": {
@@ -227,32 +230,84 @@
     }
   },
   "Features": {
-    "title": "Built for Creators",
-    "subtitle": "The infrastructure of a publishing house, simplified into a studio.",
-    "aiTypesetter": {
-      "title": "AI Typesetter",
-      "desc": "Automatically aligns sentence pairs across 25+ languages, ensuring flawless symmetry even with varying sentence lengths."
+    "title": "Built for Every Scale",
+    "subtitle": "From private flashcards to global book launches.",
+    "ctaLearn": "Learn how to master a language",
+    "ctaPublish": "Explore professional publishing",
+    "learn": {
+      "title": "For Language Learners",
+      "subtitle": "The ultimate tool for self-study and mastery.",
+      "items": {
+        "flashcards": {
+          "title": "Dynamic Flashcards",
+          "desc": "Turn any sentence from your bilingual book into a smart flashcard with one click."
+        },
+        "deepInsights": {
+          "title": "Deep Insights",
+          "desc": "Grammar rules, cultural context, and pronunciation guides attached directly to the text."
+        },
+        "sideBySide": {
+          "title": "Immersive Side-by-Side",
+          "desc": "The most natural way to read in your target language, with the safety net of your native tongue."
+        }
+      }
     },
-    "cloudSync": {
-      "title": "Cloud Sync Engine",
-      "desc": "Your work is saved instantly as you type. Access your studio from any device with a persistent, infinite undo history."
-    },
-    "pdfExport": {
-      "title": "Print-Ready PDF",
-      "desc": "High-resolution export via Puppeteer engine. Perfect for Amazon KDP, IngramSpark, and local print shops."
-    },
-    "epubSupport": {
-      "title": "EPUB 3.0 Support",
-      "desc": "Generate reflowable eBooks with native bilingual alternating mode, optimized for Kindle and Apple Books."
-    },
-    "deepAnnotation": {
-      "title": "Deep Annotation",
-      "desc": "AI-powered linguistic insights. Word grouping, relationship arrows, and contextual explanations at your fingertips."
-    },
-    "marketplace": {
-      "title": "Global Marketplace",
-      "desc": "Share and sell your custom book templates or browse our library of curated, professional bilingual designs."
+    "publish": {
+      "title": "For Authors & Publishers",
+      "subtitle": "Professional tools to bring your books to the world.",
+      "items": {
+        "kdpReady": {
+          "title": "KDP One-Click",
+          "desc": "Export perfectly formatted, bleed-ready PDFs that pass Amazon's verification every time."
+        },
+        "aiTypesetter": {
+          "title": "AI Master Typesetter",
+          "desc": "Balance columns, manage orphans, and ensure perfect bilingual symmetry automatically."
+        },
+        "branding": {
+          "title": "Custom Branding",
+          "desc": "Add your own logos, watermarks, and custom fonts to create a unique publisher identity."
+        }
+      }
     }
+  },
+  "LearnPage": {
+    "title": "Master any language through immersion",
+    "subtitle": "Forget boring textbooks. Create your own bilingual learning materials from the books you actually want to read.",
+    "features": {
+      "reader": {
+        "title": "The Intelligent Reader",
+        "desc": "Read comfortably with our synchronized scrolling. Your eyes never lose the translation."
+      },
+      "study": {
+        "title": "AI Study Assistant",
+        "desc": "Ask questions about grammar or nuance directly within the text. It's like having a tutor in every page."
+      },
+      "custom": {
+        "title": "Personal Materials",
+        "desc": "Import your own articles, PDFs, or web clips. Synoptic formats them perfectly for study."
+      }
+    },
+    "cta": "Start Your Learning Journey"
+  },
+  "PublishPage": {
+    "title": "The Cloud Studio for Professional Publishers",
+    "subtitle": "From manuscript to bookshelf in record time. Professional-grade bilingual typesetting for authors and houses.",
+    "features": {
+      "engine": {
+        "title": "High-Performance Engine",
+        "desc": "Handles 500+ page manuscripts with ease. Real-time preview of exact print dimensions."
+      },
+      "exports": {
+        "title": "Global Export Standards",
+        "desc": "Native support for PDF/X, EPUB 3.0, and high-DPI image bundles."
+      },
+      "distribution": {
+        "title": "One-Click Distribution",
+        "desc": "Optimized metadata and formatting for Amazon KDP, Apple Books, and IngramSpark."
+      }
+    },
+    "cta": "Launch Your Publishing Empire"
   },
   "Pricing": {
     "title": "Simple, Fair Pricing",
@@ -283,21 +338,38 @@
       "activeProject": "1 Active Project",
       "standardLayout": "Standard Layout Engine",
       "manualTranslation": "Manual Translation",
-      "lowDpiPdf": "Low-DPI PDF Export",
+      "lowDpiPdf": "Online-Only PDF (72 DPI)",
       "watermarked": "Watermarked Publishing",
-      "unlimitedProjects": "Unlimited Projects",
+      "limitedAi": "20 AI Units* / mo (Drafting)",
+      "unlimitedProjects": "Unlimited Cloud Projects",
       "aiAssistedLayout": "AI-Assisted Layout",
-      "aiWordsMonth": "50k AI Words / Month",
+      "aiWordsMonth": "500 AI Units* / mo (Professional)",
       "highDpiPdf": "300 DPI Export (Print-Ready)",
-      "epubMobi": "EPUB & MOBI Export",
+      "epubMobi": "EPUB & e-Ink Optimized",
       "removeWatermarks": "Removing Watermarks",
-      "priorityHistory": "Priority Cloud History",
+      "priorityHistory": "Priority Cloud Storage",
+      "flashcards": "Mastery Flashcards",
+      "tts": "Neural TTS (Standard)",
+      "models": "Model Library",
+      "about": "About Us",
       "everythingPro": "Everything in Pro",
-      "unlimitedAi": "Unlimited AI Credits",
+      "bigAiLimit": "5,000 AI Units* / mo (High Volume)",
       "teamCollab": "Team Collaboration",
-      "brandCustom": "Brand Customization",
+      "brandCustom": "Publisher Branding",
       "fontUpload": "Custom Font Upload",
-      "apiAccess": "API Access (Coming Soon)"
+      "apiAccess": "API Access (Bientôt)",
+      "ttsPremium": "Neural TTS (Ultra-HD)"
+    },
+    "aiExplanation": {
+      "title": "* Understanding AI Units",
+      "note": "AI units are only consumed when using our Neural Intelligence Layer. Manual translation and layout remain free and unlimited.",
+      "whatIsAUnit": "1 Unit = 1 Full Linguistic Analysis",
+      "unitDesc": "This includes contextual translation, semantic grouping, syntactic arrows, and intelligent layout adjustment for a single block of text.",
+      "tiers": {
+        "free": "Perfect for testing our typesetter on short excerpts.",
+        "pro": "Standard for independent authors and polyglots (approx. 100 pages/mo).",
+        "publisher": "Designed for heavy production and volume publishing houses."
+      }
     }
   },
   "Export": {
@@ -343,5 +415,79 @@
     "navigate": "navigate",
     "paletteTitle": "Synoptic Command Palette",
     "commandMenu": "Command Menu"
+  },
+  "AboutPage": {
+    "title": "The Future of Translation.",
+    "subtitle": "Synoptic was born from a simple realization: the world is getting closer, but our books are still monolingual. We built the first cloud-native studio dedicated to the art (and science) of bilingual publishing.",
+    "sovereignTitle": "Sovereign Knowledge",
+    "sovereignDesc": "We believe that language is the ultimate currency of culture. Our mission is to make bilingualism accessible to everyone, from independent authors to global institutions.",
+    "soulTitle": "AI with a Soul",
+    "soulDesc": "We don't just \"auto-translate\". Our neural engine is grounded in philological precision, ensuring that the nuance of your voice remains intact across every border.",
+    "values": "Our Values.",
+    "privacyTitle": "Privacy First",
+    "privacyDesc": "Your manuscripts are your property. We use secure, siloed infrastructure to ensure your intellectual property never leaves your control.",
+    "perfTitle": "High Performance",
+    "perfDesc": "Built for the modern web. Every interaction in Synoptic is designed for speed, from real-time cloud sync to 300 DPI Puppeteer exports.",
+    "communityTitle": "Built for the Community",
+    "communityDesc": "We are constantly evolving based on feedback from our community of authors, polyglots, and educators.",
+    "cta": "Join the Revolution"
+  },
+  "PrivacyPage": {
+    "title": "Privacy @ Synoptic",
+    "subtitle": "We understand that your manuscripts are your soul. Our privacy policy is designed with a single goal: protecting your intellectual property.",
+    "collectTitle": "What we collect",
+    "collectDesc": "We only collect what is strictly necessary to run the studio: your email for authentication, and your project data to allow for real-time cloud sync and AI-assisted layout.",
+    "collectItems": [
+      "Account Information (Email, Name)",
+      "Project Metadata (Titles, Chapters)",
+      "Usage Data (to improve the interface)"
+    ],
+    "protectTitle": "Data Protection",
+    "protectDesc": "We use industry-standard encryption to protect your data both in transit and at rest. Our DigitalOcean-native infrastructure is monitored 24/7 for security threats.",
+    "aiPrivacyTitle": "AI Privacy",
+    "aiPrivacyDesc": "Your manuscripts are NOT used to train global AI models. We use specialized, siloed agents that process your text in real-time and clear the memory buffer immediately after the task is complete.",
+    "lastUpdated": "Last updated: December 29, 2025."
+  },
+  "TermsPage": {
+    "title": "Terms of Service",
+    "subtitle": "Clear rules for a better studio. By using Synoptic, you agree to these terms.",
+    "ownershipTitle": "Ownership",
+    "ownershipDesc": "You retain 100% ownership of your manuscripts, translations, and any generated exports. Synoptic does NOT claim any rights to your intellectual property.",
+    "useTitle": "Acceptable Use",
+    "useDesc": "You agree not to use Synoptic for generating or publishing material that is illegal, defamatory, or violates international copyright laws.",
+    "useItems": [
+      "No automated scraping or bulk API usage.",
+      "No reverse-engineering of our neural engine.",
+      "Respect the Fair Use policy for AI Units."
+    ],
+    "subTitle": "Subscription & Termination",
+    "subDesc": "Subscriptions are billed in advance. You can cancel at any time. Upon cancellation, you will retain access to your projects until the end of the billing period."
+  },
+  "ModelsPage": {
+    "title": "Library of Structures.",
+    "subtitle": "Every story demands its own architecture. Choose from our curated collection of professional bilingual templates.",
+    "pixelPerfect": "Pixel-Perfect Layouts.",
+    "gutterTitle": "Mirror Gutter Logic",
+    "gutterDesc": "Automatic adjustment for inner and outer margins based on the binding type.",
+    "symmetryTitle": "Symmetry Guard",
+    "symmetryDesc": "Real-time alerts if bilingual blocks become desynchronized across pages.",
+    "templates": {
+      "classic": {
+        "title": "Classic Parallel",
+        "desc": "The gold standard of bilingual reading. Strictly aligned side-by-side columns."
+      },
+      "alternating": {
+        "title": "Alternating Flow",
+        "desc": "Perfect for eBooks. Paragraph by paragraph immersion for a focused reading experience."
+      },
+      "academic": {
+        "title": "Academic Interlinear",
+        "desc": "Deep philological analysis with word-for-word annotations directly below the source."
+      },
+      "modern": {
+        "title": "Modern Poetry",
+        "desc": "Minimalist layout optimized for verse-by-verse translation with generous margins."
+      }
+    }
   }
 }
