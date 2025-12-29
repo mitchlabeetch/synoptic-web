@@ -192,15 +192,38 @@
     },
     "hero": {
       "badge": "Synoptic v1.0 Private Beta",
-      "title": "The <span>Ultimate</span> <br /> Bilingual Studio",
       "subtitle": "Craft professional side-by-side books with AI-assisted typesetting, real-time cloud sync, and one-click KDP publishing.",
+      "subtitleShort": "Craft professional side-by-side books with AI-assisted typesetting",
+      "featuresLine": "Real-time cloud sync • Print-ready PDF/EPUB • One-click KDP publishing",
       "ctaPrimary": "Start Writing Free",
       "ctaSecondary": "Explore Library",
-      "aiSuggestion": "AI Suggestion"
+      "aiSuggestion": "AI Suggestion",
+      "aiTranslation": "AI-powered translation",
+      "pauseRotation": "Pause language rotation",
+      "resumeRotation": "Resume language rotation",
+      "studioTitle": "Hero Title — Synoptic Studio",
+      "neuralEngine": "Neural Engine",
+      "activeLayer": "Active Layer",
+      "typographyAssistant": "Typography Assistant",
+      "syncingLocales": "Syncing {count} Locales",
+      "syncing": "Syncing...",
+      "readyStudio": "Ready — Synoptic Studio v1.2",
+      "canvasA": "Canvas A",
+      "canvasB": "Canvas B",
+      "output": "Output",
+      "livePreview": "Live Preview",
+      "origin": "Origin"
     },
     "footer": {
       "tagline": "The professional bilingual publisher for authors, language learners, and publishing houses. Designed in SF, Built for the world.",
       "copyright": "© 2025 Synoptic Studio. All rights reserved."
+    },
+    "carbon": {
+      "calculating": "Measuring...",
+      "cleanerThan": "Cleaner than {percentage}%",
+      "co2": "{amount}g CO2",
+      "ecoFriendly": "Eco-Friendly",
+      "measure": "Measure Impact"
     }
   },
   "Features": {

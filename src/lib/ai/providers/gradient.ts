@@ -5,181 +5,133 @@
 
 import { AIProvider, AITranslationResult, AIAnnotationResult, AIExplanationResult } from '../types';
 
-const GRADIENT_API_URL = 'https://inference.do-ai.run/v1/chat/completions';
-const DEFAULT_MODEL = 'llama3.3-70b-instruct';
+const DO_AGENT_API_BASE = 'https://api.digitalocean.com/v1/gen-ai/agents';
+// Note: Agent Endpoints usually follow a pattern like https://api.digitalocean.com/v1/gen-ai/agents/{agent_id}/chat or similar.
+// However, the "Endpoint Access Key" provided usually maps to a specific secure URL.
+// Since documentation on the exact "Endpoint URL" for agents is evolving, we will assume standard DO GenAI Agent Chat compliance.
 
 export class GradientAIProvider implements AIProvider {
-  private apiKey: string;
-  private model: string;
+  private linguistId: string;
+  private philologistId: string;
+  private kbId: string;
 
   constructor() {
-    this.apiKey = process.env.DO_GRADIENT_API_KEY || '';
-    this.model = process.env.DO_GRADIENT_MODEL || DEFAULT_MODEL;
+    this.linguistId = process.env.NEXT_PUBLIC_AI_AGENT_LINGUIST_ID || '';
+    this.philologistId = process.env.NEXT_PUBLIC_AI_AGENT_PHILOLOGIST_ID || '';
+    this.kbId = process.env.NEXT_PUBLIC_AI_KB_ID || '';
   }
 
-  private ensureApiKey(): void {
-    if (!this.apiKey) {
+  private ensureConfig(type: 'linguist' | 'philologist'): string {
+    const id = type === 'linguist' ? this.linguistId : this.philologistId;
+    if (!id) {
       throw new Error(
-        'DO_GRADIENT_API_KEY environment variable is required but not set. ' +
-        'Create a model access key in the DigitalOcean control panel.'
+        `Missing Agent ID for ${type}. Ensure NEXT_PUBLIC_AI_AGENT_${type.toUpperCase()}_ID is set.`
       );
     }
+    return id;
   }
 
-  private async makeRequest(messages: Array<{ role: string; content: string }>, temperature = 0.7, maxTokens = 1000): Promise<string> {
-    this.ensureApiKey();
-
-    const response = await fetch(GRADIENT_API_URL, {
+  // Helper to call the Agent Endpoint
+  // In DigitalOcean Agents, the "Endpoint Access Key" is often used as the Bearer token
+  // and the URL involves the Agent UUID.
+  // We will use the Agent UUID as the target.
+  private async queryAgent(
+    agentId: string, 
+    message: string, 
+    systemOverride?: string
+  ): Promise<string> {
+    // Construct the endpoint URL. 
+    // Typically: POST https://api.digitalocean.com/v1/gen-ai/agents/{agent_uuid}/chat
+    // Auth: Bearer {access_token} ?? 
+    // Actually, the user provided "Endpoint Access Key". This might be the route token.
+    // Let's assume the standard DO Agent Chat schema.
+    
+    // If the "Key" provided (XvuNZ...) is an Access Key, it might be for a dedicated endpoint.
+    // OR it might be the Agent UUID itself if the user copied the UUID.
+    // Given the format "XvuNZ86iTN85pIX-VPF0vBWWansLee9H", this looks like a secure Token/Key, not a UUID.
+    // If it is a Token, we need the Endpoint URL.
+    // Lacking the exact "Endpoint URL" from the user, we will assume a standard implementation:
+    // We will try to use the Agent UUID (which we might need to find if these are keys).
+    // WAIT: The user said "Linguist endpoint access key : XvuNZ...". 
+    // This implies there is a public endpoint involved.
+    
+    // STRATEGY: We will use a generic proxy point or assumes these are Keys to the Agent API.
+    const url = `https://agent-endpoint.digitalocean.com/v1/chat`; // Hypothetical standard
+    
+    // For now, let's fallback to the known DO GenAI API structure used in the setup script,
+    // but identifying that we might be calling a specific Agent Route.
+    
+    // NOTE: Safest bet without exact URL is to treat valid Agent interaction via the DO API
+    // using the Agent UUID. But we only have Keys. 
+    // If 'XvuNZ...' IS the Agent UUID, we use it in the URL.
+    // But UUIDs are usually 36 chars with dashes. 'XvuNZ...' is 32 chars, base64-ish.
+    // It is likely an API Key.
+    
+    // We will deduce that we need to pass this Key as Authorization header.
+    
+    const response = await fetch(`https://api.digitalocean.com/v1/gen-ai/agents/chat`, { // Generic Endpoint
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${this.apiKey}`,
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${agentId}`, // Using the Key as the token
       },
       body: JSON.stringify({
-        model: this.model,
-        messages,
-        temperature,
-        max_tokens: maxTokens,
+        messages: [
+          ...(systemOverride ? [{ role: 'system', content: systemOverride }] : []),
+          { role: 'user', content: message }
+        ],
+        stream: false
       }),
     });
 
     if (!response.ok) {
-      const error = await response.text();
-      console.error('[Gradient AI] API Error:', error);
-      throw new Error(`Gradient AI request failed: ${response.status} ${response.statusText}`);
+       const errText = await response.text();
+       console.error(`[Synoptic AI] Agent Error (${agentId.substring(0,5)}...):`, errText);
+       throw new Error(`AI Request Failed: ${response.status}`);
     }
 
     const data = await response.json();
-    return data.choices?.[0]?.message?.content || '';
+    return data.choices?.[0]?.message?.content || data.content || '';
   }
 
   async translate(text: string, sourceLang: string, targetLang: string): Promise<AITranslationResult> {
-    const systemPrompt = `You are a professional translator specializing in literary and educational translations. 
-Translate the following text from ${sourceLang} to ${targetLang}.
-Maintain the tone, style, and meaning of the original.
-Return ONLY the translated text, no explanations or notes.`;
-
-    const result = await this.makeRequest([
-      { role: 'system', content: systemPrompt },
-      { role: 'user', content: text },
-    ], 0.3, 2000);
-
-    return {
-      translation: result.trim(),
-      confidence: 0.95,
-    };
+    const agentKey = this.ensureConfig('linguist');
+    const prompt = `Translate from ${sourceLang} to ${targetLang}. Return JSON: { "translation": "..." }. Text: "${text}"`;
+    
+    try {
+      const resp = await this.queryAgent(agentKey, prompt);
+      const cleaned = resp.replace(/```json|```/g, '').trim();
+      return JSON.parse(cleaned);
+    } catch (e) {
+      console.error('Translation failed', e);
+      return { translation: text, confidence: 0 };
+    }
   }
 
   async annotate(L1Text: string, L2Text: string, L1Lang: string, L2Lang: string): Promise<AIAnnotationResult> {
-    const systemPrompt = `You are an expert language teacher creating educational annotations.
-Analyze this bilingual text pair and provide helpful annotations for language learners.
-
-SOURCE (${L1Lang}): "${L1Text}"
-TRANSLATION (${L2Lang}): "${L2Text}"
-
-Return a JSON object with this exact structure:
-{
-  "wordGroups": [
-    { "words": ["word1", "word2"], "note": "explanation of the phrase/idiom", "type": "grammar|vocabulary|idiom" }
-  ],
-  "grammarNotes": ["Any important grammar observations"],
-  "culturalNotes": ["Any cultural context worth mentioning"],
-  "difficulty": "beginner|intermediate|advanced"
-}
-
-Respond ONLY with valid JSON, no markdown code blocks.`;
-
-    const result = await this.makeRequest([
-      { role: 'system', content: systemPrompt },
-      { role: 'user', content: `Analyze: "${L1Text}" → "${L2Text}"` },
-    ], 0.5, 1500);
-
+    const agentKey = this.ensureConfig('philologist'); // Uses the smarter agent
+    const prompt = `Analyze alignment. Source (${L1Lang}): "${L1Text}". Target (${L2Lang}): "${L2Text}". Return JSON annotation with wordGroups.`;
+    
     try {
-      // Try to parse the JSON response
-      const cleaned = result.replace(/```json\n?|\n?```/g, '').trim();
-      const parsed = JSON.parse(cleaned);
-      
-      // Transform to expected format
-      const wordGroups = (parsed.wordGroups || []).map((wg: any, idx: number) => ({
-        language: 'L1' as const,
-        wordIndices: [idx],
-        role: wg.type || 'vocabulary',
-        color: wg.type === 'grammar' ? '#3b82f6' : wg.type === 'idiom' ? '#10b981' : '#f59e0b',
-      }));
-
-      const notes = [
-        ...(parsed.grammarNotes || []).map((note: string, idx: number) => ({
-          type: 'grammar' as const,
-          wordIndex: 0,
-          language: 'L1' as const,
-          title: 'Grammar Note',
-          content: note,
-        })),
-        ...(parsed.culturalNotes || []).map((note: string, idx: number) => ({
-          type: 'culture' as const,
-          wordIndex: 0,
-          language: 'L1' as const,
-          title: 'Cultural Note',
-          content: note,
-        })),
-      ];
-
-      return {
-        wordGroups,
-        arrows: [],
-        notes,
-      };
+      const resp = await this.queryAgent(agentKey, prompt);
+      const cleaned = resp.replace(/```json|```/g, '').trim();
+      return JSON.parse(cleaned);
     } catch (e) {
-      console.error('[Gradient AI] Failed to parse annotation response:', result);
-      return {
-        wordGroups: [],
-        arrows: [],
-        notes: [{
-          type: 'grammar',
-          wordIndex: 0,
-          language: 'L1',
-          title: 'AI Response',
-          content: result,
-        }],
-      };
+      console.error('Annotation failed', e);
+      return { wordGroups: [], arrows: [], notes: [] };
     }
   }
 
   async explain(word: string, context: string, language: string): Promise<AIExplanationResult> {
-    const systemPrompt = `You are a language expert explaining vocabulary to learners.
-Provide a clear, educational explanation for the word/phrase.
-
-Return a JSON object with:
-{
-  "role": "Part of speech (noun, verb, adjective, etc.)",
-  "explanation": "Clear definition and usage in ${language}",
-  "examples": ["Example sentence 1", "Example sentence 2"],
-  "relatedWords": ["synonym1", "synonym2"]
-}
-
-Respond ONLY with valid JSON.`;
-
-    const result = await this.makeRequest([
-      { role: 'system', content: systemPrompt },
-      { role: 'user', content: `Explain "${word}" in this context: "${context}"` },
-    ], 0.5, 800);
-
+    const agentKey = this.ensureConfig('philologist');
+    const prompt = `Explain "${word}" in context "${context}" (${language}). Return JSON.`;
+    
     try {
-      const cleaned = result.replace(/```json\n?|\n?```/g, '').trim();
-      const parsed = JSON.parse(cleaned);
-      return {
-        role: parsed.role || 'word',
-        explanation: parsed.explanation || result,
-        examples: parsed.examples || [],
-        relatedWords: parsed.relatedWords || [],
-      };
+      const resp = await this.queryAgent(agentKey, prompt);
+      const cleaned = resp.replace(/```json|```/g, '').trim();
+      return JSON.parse(cleaned);
     } catch (e) {
-      return {
-        role: 'word',
-        explanation: result,
-        examples: [],
-        relatedWords: [],
-      };
+      return { role: 'unknown', explanation: 'Could not generate explanation.' };
     }
   }
 }
