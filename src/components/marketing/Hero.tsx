@@ -19,13 +19,16 @@ const HERO_TRANSLATIONS = [
 
 export function Hero() {
   const [currentLangIndex, setCurrentLangIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
+    if (isPaused) return;
+    
     const interval = setInterval(() => {
       setCurrentLangIndex((prev) => (prev + 1) % HERO_TRANSLATIONS.length);
-    }, 2500);
+    }, 3500); // Increased to 3.5 seconds for better accessibility
     return () => clearInterval(interval);
-  }, []);
+  }, [isPaused]);
 
   const currentTranslation = HERO_TRANSLATIONS[currentLangIndex];
 
@@ -162,6 +165,15 @@ export function Hero() {
                         {currentTranslation.lang.toUpperCase()}
                       </motion.span>
                     </AnimatePresence>
+                    {/* Pause/Play button for accessibility */}
+                    <button
+                      onClick={() => setIsPaused(!isPaused)}
+                      className="ml-2 p-1 rounded hover:bg-muted/50 transition-colors"
+                      aria-label={isPaused ? "Resume language rotation" : "Pause language rotation"}
+                      title={isPaused ? "Resume" : "Pause"}
+                    >
+                      {isPaused ? '▶' : '⏸'}
+                    </button>
                   </div>
                   
                   <div className="space-y-6 relative" dir={currentTranslation.dir}>
@@ -175,7 +187,7 @@ export function Hero() {
                         animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
                         exit={{ opacity: 0, x: -20, filter: 'blur(4px)' }}
                         transition={{ duration: 0.5 }}
-                        className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600"
+                        className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 motion-reduce:transition-none motion-reduce:animate-none"
                       >
                         {currentTranslation.text}
                       </motion.h1>
