@@ -1,8 +1,11 @@
 // src/components/editor/BlockRenderer.tsx
-"use client";
+'use client';
 
-import { ContentBlock, TextBlock, ImageBlock, SeparatorBlock, CalloutBlock } from '@/types/blocks';
-import { cn } from '@/lib/utils';
+import {
+  ContentBlock,
+  TextBlock,
+} from '@/types/blocks';
+import { TextBlockComponent } from './blocks/TextBlock';
 import { useProjectStore } from '@/lib/store/projectStore';
 
 interface BlockRendererProps {
@@ -10,90 +13,61 @@ interface BlockRendererProps {
   pageIndex: number;
 }
 
-export default function BlockRenderer({ block, pageIndex }: BlockRendererProps) {
-  const { updateBlock } = useProjectStore();
+export default function BlockRenderer({
+  block,
+  pageIndex,
+}: BlockRendererProps) {
+  const { 
+    updateBlock, 
+    deleteBlock, 
+    meta,
+    selectedBlockId,
+    setSelectedBlockId
+  } = useProjectStore();
+
+  // For now, only text is fully implemented with a specialized component
+  // As we add ImageBlock, SeparatorBlock, etc., we'll add them here
+  
+  const commonProps = {
+    isSelected: selectedBlockId === block.id,
+    onSelect: () => setSelectedBlockId(block.id),
+    onUpdate: (updates: Partial<ContentBlock>) => updateBlock(pageIndex, block.id, updates),
+    onDelete: () => {
+      deleteBlock(pageIndex, block.id);
+      if (selectedBlockId === block.id) setSelectedBlockId(null);
+    },
+    isEditing: true, // Default to true for now
+    sourceLang: meta?.source_lang || 'fr',
+    targetLang: meta?.target_lang || 'en',
+  };
 
   switch (block.type) {
     case 'text':
-      return <TextRenderer block={block as TextBlock} />;
+      return (
+        <TextBlockComponent
+          block={block as TextBlock}
+          {...commonProps}
+        />
+      );
+
     case 'image':
-      return <ImageRenderer block={block as ImageBlock} />;
+      return (
+        <div className="p-4 border-2 border-dashed border-muted rounded-lg text-center text-muted-foreground italic">
+          Image Block Placeholder
+        </div>
+      );
+
     case 'separator':
-      return <SeparatorRenderer block={block as SeparatorBlock} />;
+      return <hr className="my-8 border-t border-muted-foreground/20" />;
+
     case 'callout':
-      return <CalloutRenderer block={block as CalloutBlock} />;
+      return (
+        <div className="p-4 bg-muted/30 border-l-4 border-primary rounded-r-lg">
+          <p className="font-medium">Callout Block Placeholder</p>
+        </div>
+      );
+
     default:
-      return <div>Unknown block type: {block.type}</div>;
+      return null;
   }
-}
-
-function TextRenderer({ block }: { block: TextBlock }) {
-  const { layout } = block;
-  
-  if (layout === 'side-by-side') {
-    return (
-      <div className="grid grid-cols-2 gap-8 py-2 group relative">
-        <div className="prose prose-sm dark:prose-invert">
-          {block.L1.content}
-        </div>
-        <div className="prose prose-sm dark:prose-invert italic text-muted-foreground">
-          {block.L2.content}
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="py-2">
-      <p className="prose prose-sm dark:prose-invert">{block.L1.content}</p>
-      <p className="prose prose-sm dark:prose-invert italic text-muted-foreground">{block.L2.content}</p>
-    </div>
-  );
-}
-
-function ImageRenderer({ block }: { block: ImageBlock }) {
-  return (
-    <div className="py-4 flex justify-center">
-      <img
-        src={block.url}
-        alt={block.altText}
-        className="rounded-lg shadow-md max-w-full"
-        style={{ width: `${block.width}%` }}
-      />
-    </div>
-  );
-}
-
-function SeparatorRenderer({ block }: { block: SeparatorBlock }) {
-  return (
-    <div className="py-4 flex justify-center">
-      <hr 
-        className="border-t-2" 
-        style={{ 
-          width: `${block.width}%`, 
-          borderColor: block.color,
-          borderStyle: block.style === 'dashed' ? 'dashed' : 'solid'
-        }} 
-      />
-    </div>
-  );
-}
-
-function CalloutRenderer({ block }: { block: CalloutBlock }) {
-  return (
-    <div 
-      className="p-4 rounded-lg my-4 border-l-4"
-      style={{ 
-        backgroundColor: block.backgroundColor,
-        borderColor: block.headerColor,
-        color: block.textColor
-      }}
-    >
-      <div className="font-bold flex items-center gap-2 mb-1">
-        <span>{block.icon}</span>
-        {block.title}
-      </div>
-      <div className="text-sm opacity-90">{block.content}</div>
-    </div>
-  );
 }

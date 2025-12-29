@@ -12,8 +12,8 @@ import {
 interface ProjectMeta {
   id: string;
   title: string;
-  sourceLang: string;
-  targetLang: string;
+  source_lang: string;
+  target_lang: string;
 }
 
 interface ProjectSettings {
@@ -80,6 +80,10 @@ interface ProjectState {
   undo: () => void;
   redo: () => void;
   pushHistory: () => void;
+
+  // Selection
+  selectedBlockId: string | null;
+  setSelectedBlockId: (id: string | null) => void;
 }
 
 const DEFAULT_CONTENT: ProjectContent = {
@@ -113,6 +117,7 @@ export const useProjectStore = create<ProjectState>()(
     currentPageIndex: 0,
     history: [],
     historyIndex: -1,
+    selectedBlockId: null,
 
     // Meta
     setProjectMeta: (meta) => set({ meta }),
@@ -254,5 +259,8 @@ export const useProjectStore = create<ProjectState>()(
           );
         }
       }),
+
+    // Selection
+    setSelectedBlockId: (id) => set({ selectedBlockId: id }),
   }))
 );
