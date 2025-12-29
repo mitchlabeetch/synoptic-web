@@ -19,7 +19,7 @@ export default async function LandingPage() {
           <div className="w-10 h-10 flex items-center justify-center group-hover:rotate-6 transition-transform">
             <img src="/logo-icon.svg" alt="Synoptic Icon" className="h-10 w-10" />
           </div>
-          <span className="ml-3 text-2xl font-black tracking-tighter text-[#30b8c8] font-sans" style={{ fontVariant: 'all-small-caps' }}>synoptic</span>
+          <span className="ml-3 text-2xl font-black tracking-tighter text-[#30b8c8] font-sans lowercase">synoptic</span>
         </Link>
         <nav className="ml-auto hidden md:flex gap-8 items-center">
           <Link className="text-sm font-bold uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors" href="#features">{t('features')}</Link>
@@ -56,7 +56,7 @@ export default async function LandingPage() {
           <div className="col-span-1 md:col-span-2 space-y-4">
             <div className="flex items-center gap-2">
               <img src="/logo-icon.svg" alt="Synoptic Logo" className="h-8 w-8" />
-              <span className="text-xl font-black tracking-tighter text-[#30b8c8] font-sans" style={{ fontVariant: 'all-small-caps' }}>synoptic</span>
+              <span className="text-xl font-black tracking-tighter text-[#30b8c8] font-sans lowercase">synoptic</span>
             </div>
             <p className="max-w-xs text-muted-foreground text-sm font-medium leading-relaxed">
               {tf('tagline')}
