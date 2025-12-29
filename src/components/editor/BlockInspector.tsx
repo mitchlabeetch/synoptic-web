@@ -112,7 +112,7 @@ export default function BlockInspector() {
             <Label className="text-xs font-bold text-muted-foreground uppercase">{t('content')}</Label>
             <div className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="header-text" className="text-[10px] text-muted-foreground">L1 Header Overlay</Label>
+                <Label htmlFor="header-text" className="text-[10px] text-muted-foreground">{t('headerOverlay')}</Label>
                 <Input 
                   id="header-text"
                   placeholder="..."
@@ -122,7 +122,7 @@ export default function BlockInspector() {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="footer-text" className="text-[10px] text-muted-foreground">L1 Footer Overlay</Label>
+                <Label htmlFor="footer-text" className="text-[10px] text-muted-foreground">{t('footerOverlay')}</Label>
                 <Input 
                   id="footer-text"
                   placeholder="..."
@@ -200,7 +200,7 @@ export default function BlockInspector() {
               <section className="space-y-4">
                 <Label className="text-xs font-bold text-primary uppercase flex items-center gap-2">
                   <Sparkles className="h-3 w-3 animate-pulse" />
-                  AI Insights
+                  {t('aiInsights')}
                 </Label>
                 <div className="space-y-3">
                   {blockNotes.map((note) => (
@@ -233,7 +233,7 @@ export default function BlockInspector() {
                     onClick={() => updateBlock(currentPageIndex, selectedBlock.id, { layout: layout as any })}
                   >
                     <div className="w-2 h-2 rounded-full bg-current opacity-50" />
-                    {layout.replace('-', ' ')}
+                    {t(layout === 'side-by-side' ? 'sideBySide' : layout === 'interlinear' ? 'interlinear' : 'stacked')}
                   </Button>
                 ))}
               </div>

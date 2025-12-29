@@ -21,7 +21,10 @@
     "noChapters": "Sin capítulos definidos",
     "deletePage": "Eliminar página",
     "resetFactory": "Restablecer ajustes de fábrica",
-    "bilingualEditor": "Editor bilingüe"
+    "bilingualEditor": "Editor bilingüe",
+    "collaborate": "Colaborar",
+    "export": "Exportar",
+    "preview": "Vista previa"
   },
   "Blocks": {
     "text": "Bloque de texto",
@@ -56,6 +59,9 @@
     "inspectorTitle": "Inspector de {type}",
     "lineHeight": "Interlineado",
     "paraSpacing": "Espaciado de párrafos",
+    "headerOverlay": "Superposición de encabezado L1",
+    "footerOverlay": "Superposición de pie de página L1",
+    "aiInsights": "Análisis de IA",
     "dimensions": "Dimensiones",
     "width": "Ancho (%)",
     "alignment": "Alineación",
@@ -72,7 +78,10 @@
     "dashedLine": "Línea discontinua",
     "dottedLine": "Línea punteada",
     "gradientFade": "Desvanecimiento gradual",
-    "ornament": "Ornamento floral"
+    "ornament": "Ornamento floral",
+    "sideBySide": "En paralelo",
+    "interlinear": "Interlineal",
+    "stacked": "Apilado"
   },
   "Theme": {
     "title": "Diseño global",
@@ -146,7 +155,9 @@
     "cancel": "Cancelar",
     "on": "Activo",
     "off": "Inactivo",
-    "backToHome": "Volver al inicio"
+    "backToHome": "Volver al inicio",
+    "pdf": "PDF",
+    "epub": "EPUB"
   },
   "Dashboard": {
     "title": "Tus proyectos",
@@ -178,13 +189,15 @@
   },
   "Marketing": {
     "nav": {
+      "toLearn": "Para aprender idiomas",
+      "toPublish": "Para editoriales",
       "features": "Funciones",
       "pricing": "Precios",
       "library": "Biblioteca",
       "logIn": "Entrar",
       "joinNow": "Unirse ahora",
       "templates": "Plantillas",
-      "product": "Producto",
+      "product": "El Studio",
       "company": "Empresa",
       "about": "Acerca de",
       "privacy": "Privacidad",
@@ -192,44 +205,138 @@
     },
     "hero": {
       "badge": "Beta privada de Synoptic v1.0",
-      "title": "El Studio Bilingüe <span>Definitivo</span>",
       "subtitle": "Crea libros profesionales en paralelo con composición asistida por IA, sincronización en la nube en tiempo real y publicación en KDP con un solo clic.",
+      "subtitleShort": "Crea libros profesionales en paralelo con composición asistida por IA",
+      "featuresLine": "Sincro en tiempo real • PDF/EPUB listo para imprimir • Publicación KDP con un clic",
       "ctaPrimary": "Empezar gratis",
       "ctaSecondary": "Explorar biblioteca",
-      "aiSuggestion": "Sugerencia de IA"
+      "aiSuggestion": "Sugerencia de IA",
+      "aiTranslation": "Traducción impulsada por IA",
+      "pauseRotation": "Pausar rotación de idiomas",
+      "resumeRotation": "Reanudar rotación de idiomas",
+      "studioTitle": "Título de Obra Maestra — Synoptic Studio",
+      "titlePlain": "La herramienta más intuitiva para crear desde cero tus propios libros, hojas de estudio y materiales bilingües con el contenido que amas.",
+      "neuralEngine": "Inteligencia Lingüística",
+      "activeLayer": "Capa Activa",
+      "typographyAssistant": "Asistente de Tipografía",
+      "syncingLocales": "Sincronizando {count} Idiomas",
+      "syncing": "Sincronizando...",
+      "readyStudio": "Listo — Synoptic Studio v1.2",
+      "canvasA": "Lienzo A",
+      "canvasB": "Lienzo B",
+      "output": "Salida",
+      "livePreview": "Vista Previa",
+      "origin": "Origen"
     },
     "footer": {
-      "tagline": "La editorial bilingüe profesional para autores, estudiantes de idiomas y editoriales. Diseñado en SF, construido para el mundo.",
+      "tagline": "La editorial bilingüe profesional para autores, estudiantes de idiomas y editoriales. Tu voz sin fronteras.",
       "copyright": "© 2025 Synoptic Studio. Todos los derechos reservados."
+    },
+    "carbon": {
+      "calculating": "Midiendo...",
+      "cleanerThan": "Más limpio que el {percentage}%",
+      "co2": "{amount}g CO2",
+      "ecoFriendly": "Ecológico",
+      "measure": "Medir impacto"
     }
   },
   "Features": {
-    "title": "Creado para Creadores",
-    "subtitle": "La infraestructura de una editorial, simplificada en un estudio.",
-    "aiTypesetter": {
-      "title": "Maquetador IA",
-      "desc": "Alinea automáticamente pares de frases en más de 25 idiomas, garantizando una simetría impecable incluso con longitudes de frase variables."
+    "title": "Creado para cada escala",
+    "subtitle": "Desde **flashcards** personales y **hojas de estudio** hasta lanzamientos de libros globales en un nicho en auge.",
+    "ctaLearn": "Aprende a dominar un idioma",
+    "ctaPublish": "Explora la edición profesional",
+    "learn": {
+      "title": "Para Estudiantes de Idiomas",
+      "subtitle": "La herramienta definitiva para el autoestudio y la maestría.",
+      "items": {
+        "flashcards": {
+          "title": "Flashcards Dinámicas",
+          "desc": "Convierte cualquier frase de tu libro bilingüe en una flashcard inteligente con un solo clic."
+        },
+        "deepInsights": {
+          "title": "Análisis Profundos",
+          "desc": "Reglas gramaticales, contexto cultural y guías de pronunciación adjuntas directamente al texto."
+        },
+        "sideBySide": {
+          "title": "Lectura Immersiva",
+          "desc": "La forma más natural de leer en tu idioma de destino, con la red de seguridad de tu lengua materna."
+        }
+      }
     },
-    "cloudSync": {
-      "title": "Motor de sincronización en la nube",
-      "desc": "Tu trabajo se guarda instantáneamente mientras escribes. Accede a tu estudio desde cualquier dispositivo con un historial de deshacer infinito y persistente."
-    },
-    "pdfExport": {
-      "title": "PDF listo para imprimir",
-      "desc": "Exportación de alta resolución mediante el motor Puppeteer. Perfecto para Amazon KDP, IngramSpark y copisterías locales."
-    },
-    "epubSupport": {
-      "title": "Soporte para EPUB 3.0",
-      "desc": "Genera libros electrónicos adaptables con modo bilingüe alterno nativo, optimizado para Kindle y Apple Books."
-    },
-    "deepAnnotation": {
-      "title": "Anotación profunda",
-      "desc": "Perspectivas lingüísticas impulsadas por IA. Agrupación de palabras, flechas de relación y explicaciones contextuales a tu alcance."
-    },
-    "marketplace": {
-      "title": "Mercado global",
-      "desc": "Comparte y vende tus plantillas de libros personalizadas o explora nuestra biblioteca de diseños bilingües profesionales seleccionados."
+    "publish": {
+      "title": "Para Autores y Editoriales",
+      "subtitle": "Herramientas profesionales para llevar tus libros al mundo.",
+      "items": {
+        "kdpReady": {
+          "title": "KDP en un clic",
+          "desc": "Exporta PDFs perfectamente formateados y listos para sangría que pasan la verificación de Amazon siempre."
+        },
+        "aiTypesetter": {
+          "title": "Maquetador Maestro IA",
+          "desc": "Equilibra columnas, gestiona huérfanas y asegura una simetría bilingüe perfecta automáticamente."
+        },
+        "branding": {
+          "title": "Marca Personalizada",
+          "desc": "Añade tus propios logos, marcas de agua y fuentes para crear una identidad editorial única."
+        }
+      }
     }
+  },
+  "LearnPage": {
+    "title": "Domina cualquier idioma por inmersión",
+    "subtitle": "Olvida los libros de texto aburridos. Crea tus propios materiales de aprendizaje de los libros que realmente quieres leer.",
+    "features": {
+      "reader": {
+        "title": "El Lector Inteligente",
+        "desc": "Lee cómodamente con nuestro desplazamiento sincronizado. Tus ojos nunca pierden la traducción."
+      },
+      "study": {
+        "title": "Asistente de Estudio IA",
+        "desc": "Haz preguntas sobre gramática o matices directamente en el texto. Es como tener un tutor en cada página."
+      },
+      "custom": {
+        "title": "Materiales Personales",
+        "desc": "Importa tus propios artículos, PDFs o clips web. Synoptic los formatea perfectamente para el estudio."
+      }
+    },
+    "cta": "Empieza tu viaje de aprendizaje"
+  },
+  "PublishPage": {
+    "title": "El Studio Cloud para Editores Profesionales",
+    "subtitle": "Del manuscrito a la estantería en tiempo récord. Maquetación bilingüe de nivel profesional para autores y editoriales.",
+    "features": {
+      "engine": {
+        "title": "Motor de Alto Rendimiento",
+        "desc": "Maneja manuscritos de más de 500 páginas con facilidad. Vista previa en tiempo real de las dimensiones exactas de impresión."
+      },
+      "exports": {
+        "title": "Estándares Globales de Exportación",
+        "desc": "Soporte nativo para PDF/X, EPUB 3.0 y paquetes de imágenes de alta resolución."
+      },
+      "distribution": {
+        "title": "Distribución en un Clic",
+        "desc": "Metadatos y formato optimizados para Amazon KDP, Apple Books e IngramSpark."
+      }
+    },
+    "cta": "Lanza tu imperio editorial",
+    "infra": "Infraestructura editorial profesional",
+    "enterprise": "Soluciones para empresas",
+    "volumeTitle": "Creado para producción de alto volumen",
+    "volumeSubtitle": "Deja de pelear con plantillas de InDesign y alineación manual. Nuestro motor cloud hace el trabajo pesado.",
+    "step1": "Importar manuscrito",
+    "step1Desc": "Sube tu texto de origen y destino en cualquier formato. Nuestra IA identifica saltos de párrafo y capítulos al instante.",
+    "step2": "Auto-maquetación",
+    "step2Desc": "El maquetador IA equilibra columnas y elimina viudas y huérfanas en cientos de páginas en segundos.",
+    "step3": "KDP en un clic",
+    "step3Desc": "Exporta un PDF listo para imprimir con sangrías y márgenes correctos. Garantizado para pasar el control de Amazon.",
+    "epubTitle": "Soporte EPUB 3.0 bilingüe",
+    "epubDesc": "Genera e-books adaptables para Kindle y Apple Books con selección nativa de modo paralelo o alterno.",
+    "available": "Disponible ahora",
+    "compliant": "Cumple con XHTML",
+    "fixed": "Opción de diseño fijo",
+    "scaleTitle": "Escala tu centro editorial.",
+    "scaleDesc": "Tanto si eres un autor independiente como una gran casa, Synoptic escala contigo. Seguro, fiable y listo para tu próxima obra maestra.",
+    "sales": "Contactar con ventas"
   },
   "Pricing": {
     "title": "Precios sencillos y justos",
@@ -239,7 +346,7 @@
     "pageTitle": "Invierte en tus libros.",
     "pageSubtitle": "Tanto si traduces una memoria familiar como si publicas una serie comercial, tenemos las herramientas adecuadas para ti.",
     "nonProfitTitle": "¿Eres una organización sin ánimo de lucro o educador?",
-    "nonProfitDesc": "Ofrecemos descuentos especiales para instituciones educativas y traducciones sin ánimo de lucro. Contacta con nuestro equipo para un presupuesto personalizado.",
+    "nonProfitDesc": "Ofrecemos descuentos especiales para instituciones educativas y traducciones sin ánimo de lucro. Contacta con nosotros para un presupuesto.",
     "contactSupport": "Contactar con soporte",
     "free": {
       "name": "Gratis",
@@ -260,21 +367,38 @@
       "activeProject": "1 proyecto activo",
       "standardLayout": "Motor de diseño estándar",
       "manualTranslation": "Traducción manual",
-      "lowDpiPdf": "Exportación de PDF en baja resolución",
+      "lowDpiPdf": "PDF solo online (72 DPI)",
       "watermarked": "Publicación con marca de agua",
-      "unlimitedProjects": "Proyectos ilimitados",
+      "limitedAi": "20 Unidades IA* / mes (Borrador)",
+      "unlimitedProjects": "Proyectos cloud ilimitados",
       "aiAssistedLayout": "Diseño asistido por IA",
-      "aiWordsMonth": "50k palabras de IA / mes",
-      "highDpiPdf": "Exportación a 300 DPI (listo para imprimir)",
-      "epubMobi": "Exportación a EPUB y MOBI",
-      "removeWatermarks": "Eliminación de marcas de agua",
-      "priorityHistory": "Historial en la nube prioritario",
+      "aiWordsMonth": "500 Unidades IA* / mes (Profesional)",
+      "highDpiPdf": "Exportación a 300 DPI (Listo para imprimir)",
+      "epubMobi": "Optimizado para EPUB y e-Ink",
+      "removeWatermarks": "Sin marcas de agua",
+      "priorityHistory": "Almacenamiento cloud prioritario",
+      "flashcards": "Mastery Flashcards",
+      "tts": "TTS Neural (Estándar)",
+      "models": "Biblioteca de modelos",
+      "about": "Acerca de",
       "everythingPro": "Todo lo de Pro",
-      "unlimitedAi": "Créditos de IA ilimitados",
+      "bigAiLimit": "5.000 Unidades IA* / mes (Alto Volumen)",
       "teamCollab": "Colaboración en equipo",
-      "brandCustom": "Personalización de marca",
+      "brandCustom": "Marca editorial",
       "fontUpload": "Carga de fuentes personalizadas",
-      "apiAccess": "Acceso a la API (Próximamente)"
+      "apiAccess": "Acceso a la API (Próximamente)",
+      "ttsPremium": "TTS Neural (Ultra-HD)"
+    },
+    "aiExplanation": {
+      "title": "* Entendiendo las Unidades IA",
+      "note": "Las unidades IA solo se consumen al usar nuestras funciones de traducción avanzada y maquetación profesional. El diseño manual es gratuito.",
+      "whatIsAUnit": "1 Unidad = 1 Análisis Lingüístico Completo",
+      "unitDesc": "Incluye traducción contextual, agrupación semántica y ajuste inteligente del diseño para un bloque de texto.",
+      "tiers": {
+        "free": "Perfecto para probar en extractos cortos.",
+        "pro": "Estándar para autores independientes (aprox. 100 páginas/mes).",
+        "publisher": "Diseñado para editoriales de alto volumen de producción."
+      }
     }
   },
   "Export": {
@@ -284,7 +408,7 @@
     "generate": "Generar",
     "quality": "Calidad",
     "bleed": "Sangría",
-    "preFlightTitle": "Comprobación de integridad previa",
+    "preFlightTitle": "Control de integridad previo",
     "symmetryCheck": "Simetría bilingüe verificada",
     "largeDocWarning": "Los documentos grandes pueden tardar hasta 30 segundos en renderizarse.",
     "upgradeToPro": "Mejorar a Pro",
@@ -292,11 +416,15 @@
     "viewPlans": "Ver planes",
     "proQuality": "Calidad Pro (Borrador)",
     "freeWarning": "Se aplicará una marca de agua a esta exportación en el plan gratuito.",
-    "pdfDesc": "Exportación de alta fidelidad mediante el motor Puppeteer de 300 DPI. Optimizado para Amazon KDP.",
+    "pdfDesc": "Exportación de alta fidelidad mediante motor Puppeteer de 300 DPI. Optimizado para Amazon KDP.",
     "epubDesc": "Diseño de texto bilingüe adaptable. Optimizado para Kindle y Apple Books.",
     "qualityPrint": "Impresión",
     "qualityWeb": "Web",
-    "qualityDraft": "Borrador"
+    "qualityDraft": "Borrador",
+    "pdfError": "Error al exportar PDF",
+    "pdfErrorDesc": "La exportación falló. Por favor, comprueba tu conexión con el motor de impresión.",
+    "epubError": "Error al generar EPUB",
+    "epubErrorDesc": "La generación del EPUB falló."
   },
   "Onboarding": {
     "tourDashboardContent": "¡Bienvenido a Synoptic! Este es tu centro de proyectos.",
@@ -320,5 +448,83 @@
     "navigate": "navegar",
     "paletteTitle": "Paleta de comandos de Synoptic",
     "commandMenu": "Menú de comandos"
+  },
+  "AboutPage": {
+    "title": "El futuro de la traducción",
+    "subtitle": "Synoptic nació de una idea simple: el mundo está más cerca, pero nuestros libros siguen siendo monolingües. Creamos el primer studio cloud para la edición bilingüe.",
+    "sovereignTitle": "Conocimiento Soberano",
+    "sovereignDesc": "Creemos que el idioma es la moneda de la cultura. Nuestra misión es hacer el bilingüismo accesible para todos.",
+    "soulTitle": "IA con Alma",
+    "soulDesc": "No solo \"auto-traducimos\". Nuestro motor se basa en la precisión filológica, asegurando que el matiz de tu voz se mantenga intacto.",
+    "values": "Nuestros valores",
+    "privacyTitle": "Privacidad Primero",
+    "privacyDesc": "Tus manuscritos son tu propiedad. Usamos infraestructura segura para que tu propiedad intelectual nunca salga de tu control.",
+    "perfTitle": "Alto Rendimiento",
+    "perfDesc": "Diseñado para la web moderna. Cada interacción es rápida, desde el sync hasta el export de 300 DPI.",
+    "communityTitle": "Para la Comunidad",
+    "communityDesc": "Evolucionamos constantemente gracias al feedback de nuestra comunidad de autores y políglotas.",
+    "cta": "Únete a la Revolución"
+  },
+  "PrivacyPage": {
+    "title": "Privacidad @ Synoptic",
+    "subtitle": "Tus manuscritos son tu alma. Nuestra política protege tu propiedad intelectual.",
+    "collectTitle": "Qué recolectamos",
+    "collectDesc": "Solo lo necesario para el studio: email para auth y datos de proyecto para sync y layout IA.",
+    "collectItems": [
+      "Cuenta (Email, nombre)",
+      "Metadatos (Títulos, capítulos)",
+      "Uso (para mejorar la interfaz)"
+    ],
+    "protectTitle": "Protección de Datos",
+    "protectDesc": "Usamos encriptación estándar para tus datos. Nuestra infraestructura se monitorea 24/7.",
+    "aiPrivacyTitle": "Privacidad IA",
+    "aiPrivacyDesc": "Tus manuscritos NO se usan para entrenar modelos globales. Usamos agentes aislados que limpian la memoria tras la tarea.",
+    "lastUpdated": "Última actualización: 29 de diciembre de 2025."
+  },
+  "TermsPage": {
+    "title": "Términos de Servicio",
+    "subtitle": "Reglas claras para un mejor studio. Al usar Synoptic, aceptas estos términos.",
+    "ownershipTitle": "Propiedad",
+    "ownershipDesc": "Mantienes el 100% de la propiedad de tus manuscritos y traducciones. Synoptic no reclama derechos sobre tu IP.",
+    "useTitle": "Uso Aceptable",
+    "useDesc": "No usar para contenido ilegal o difamatorio. Respeta los derechos de autor internacionales.",
+    "useItems": [
+      "Sin scraping automatizado.",
+      "Sin ingeniería inversa del motor.",
+      "Respeta la política de Fair Use de IA."
+    ],
+    "subTitle": "Suscripción y Cancelación",
+    "subDesc": "Facturación por adelantado. Cancela cuando quieras. Mantén el acceso hasta el fin del periodo."
+  },
+  "ModelsPage": {
+    "title": "Biblioteca de estructuras",
+    "subtitle": "Cada historia necesita su arquitectura. Elige entre nuestras plantillas bilingües profesionales.",
+    "pixelPerfect": "Diseños pixel-perfect",
+    "gutterTitle": "Lógica de Margen Espejo",
+    "gutterDesc": "Ajuste automático de márgenes interiores basado en la encuadernación.",
+    "symmetryTitle": "Protección de Simetría",
+    "symmetryDesc": "Alertas si los bloques bilingües se desincronizan entre páginas.",
+    "templates": {
+      "classic": {
+        "title": "Clásico paralelo",
+        "desc": "El estándar de oro. Columnas alineadas estrictamente para ediciones impresas premium."
+      },
+      "alternating": {
+        "title": "Inmersión alterna",
+        "desc": "Perfecto para dispositivos digitales. Flujo párrafo a párrafo sin perder contexto."
+      },
+      "academic": {
+        "title": "Estudio filológico",
+        "desc": "Análisis académico con anotaciones palabra por palabra debajo de la fuente."
+      },
+      "modern": {
+        "title": "Versos modernos",
+        "desc": "Diseño minimalista optimizado para poesía con amplios márgenes artísticos."
+      }
+    },
+    "viewTemplate": "Descubrir estructura",
+    "typesettingTitle": "Lógica bilingüe",
+    "exampleSource": "The stars were bright above the silent lake.",
+    "exampleTarget": "Las estrellas brillaban sobre el lago silencioso."
   }
 }

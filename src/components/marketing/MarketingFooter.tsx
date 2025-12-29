@@ -14,7 +14,7 @@ export function MarketingFooter() {
         <div className="col-span-1 md:col-span-2 space-y-4">
           <div className="flex items-center gap-2">
             <img src="/logo-icon.svg" alt="Synoptic Logo" className="h-8 w-8" />
-            <span className="text-xl font-bold tracking-tighter text-[#30b8c8] font-sans lowercase">synoptic</span>
+            <span className="text-xl font-bold tracking-tighter text-[#30b8c8] font-quicksand lowercase">synoptic</span>
           </div>
           <p className="max-w-xs text-muted-foreground text-sm font-medium leading-relaxed">
             {tf('tagline')}

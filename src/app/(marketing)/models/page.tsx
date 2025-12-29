@@ -46,7 +46,7 @@ export default function ModelsPage() {
                 <h3 className="text-xl font-bold mb-2">{t(`templates.${key}.title`)}</h3>
                 <p className="text-sm text-muted-foreground mb-4">{t(`templates.${key}.desc`)}</p>
                 <Button variant="ghost" className="p-0 hover:bg-transparent text-primary font-bold gap-2 group-hover:translate-x-2 transition-transform">
-                  View Template <ChevronRight className="h-4 w-4" />
+                  {t('viewTemplate')} <ChevronRight className="h-4 w-4" />
                 </Button>
               </div>
             </motion.div>
@@ -56,7 +56,7 @@ export default function ModelsPage() {
         <div className="bg-muted/30 rounded-[4rem] p-12 md:p-20 border border-border/50">
           <div className="grid md:grid-cols-2 gap-20 items-center">
             <div>
-              <h2 className="text-4xl md:text-5xl font-black mb-8 font-outfit">{t('pixelPerfect')}</h2>
+              <h2 className="text-4xl md:text-5xl font-black mb-8 font-outfit">{t('typesettingTitle')}</h2>
               <div className="space-y-8">
                 <div className="flex gap-4">
                   <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
@@ -80,20 +80,21 @@ export default function ModelsPage() {
             </div>
             <div className="bg-background rounded-3xl border p-2 shadow-2xl relative overflow-hidden group">
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent pointer-events-none" />
-              <div className="border-2 border-dashed border-primary/20 rounded-2xl p-12 flex flex-col items-center justify-center gap-6">
-                 <div className="flex gap-4 w-full">
-                    <div className="h-4 w-full bg-muted rounded-full animate-pulse" />
-                    <div className="h-4 w-full bg-primary/20 rounded-full animate-pulse delay-75" />
+              <div className="border-2 border-dashed border-primary/20 rounded-2xl p-8 flex flex-col gap-6">
+                 <div className="space-y-2">
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/50">Source (EN)</p>
+                    <p className="text-sm font-medium italic text-muted-foreground leading-relaxed">
+                       {t('exampleSource')}
+                    </p>
                  </div>
-                 <div className="flex gap-4 w-full">
-                    <div className="h-4 w-full bg-muted rounded-full animate-pulse delay-100" />
-                    <div className="h-4 w-full bg-primary/20 rounded-full animate-pulse delay-150" />
+                 <div className="h-px bg-border/50" />
+                 <div className="space-y-2 text-right">
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-[#30b8c8]/50">Translation (FR)</p>
+                    <p className="text-sm font-bold text-foreground leading-relaxed">
+                       {t('exampleTarget')}
+                    </p>
                  </div>
-                 <div className="flex gap-4 w-full">
-                    <div className="h-4 w-full bg-muted rounded-full animate-pulse delay-200" />
-                    <div className="h-4 w-full bg-primary/20 rounded-full animate-pulse delay-300" />
-                 </div>
-                 <p className="text-xs font-black uppercase tracking-[0.2em] text-primary/40 mt-4">Typesetting Engine v4.0</p>
+                 <p className="text-[10px] font-black uppercase tracking-[0.2em] text-primary/40 mt-4 text-center">Typesetting Engine v4.0</p>
               </div>
             </div>
           </div>

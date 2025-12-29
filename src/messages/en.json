@@ -21,7 +21,10 @@
     "noChapters": "No Chapters Defined",
     "deletePage": "Delete Page",
     "resetFactory": "Reset to Factory",
-    "bilingualEditor": "Bilingual Editor"
+    "bilingualEditor": "Bilingual Editor",
+    "collaborate": "Collaborate",
+    "export": "Export",
+    "preview": "Preview"
   },
   "Blocks": {
     "text": "Text Block",
@@ -56,6 +59,9 @@
     "inspectorTitle": "{type} Inspector",
     "lineHeight": "Line Height",
     "paraSpacing": "Paragraph Spacing",
+    "headerOverlay": "L1 Header Overlay",
+    "footerOverlay": "L1 Footer Overlay",
+    "aiInsights": "AI Insights",
     "dimensions": "Dimensions",
     "width": "Width (%)",
     "alignment": "Alignment",
@@ -72,7 +78,10 @@
     "dashedLine": "Dashed Line",
     "dottedLine": "Dotted Line",
     "gradientFade": "Gradient Fade",
-    "ornament": "Fleuron Ornament"
+    "ornament": "Fleuron Ornament",
+    "sideBySide": "Side-by-Side",
+    "interlinear": "Interlinear",
+    "stacked": "Stacked"
   },
   "Theme": {
     "title": "Global Design",
@@ -146,7 +155,9 @@
     "cancel": "Cancel",
     "on": "On",
     "off": "Off",
-    "backToHome": "Back to Home"
+    "backToHome": "Back to Home",
+    "pdf": "PDF",
+    "epub": "EPUB"
   },
   "Dashboard": {
     "title": "Your Projects",
@@ -178,16 +189,16 @@
   },
   "Marketing": {
     "nav": {
-      "toLearn": "for language learning",
-      "toPublish": "for book publishing",
+      "toLearn": "For language learning",
+      "toPublish": "For book publishing",
       "features": "Features",
       "pricing": "Pricing",
       "library": "Library",
       "logIn": "Log In",
       "joinNow": "Join Now",
       "templates": "Templates",
-      "product": "Product",
-      "company": "Company",
+      "product": "The Studio",
+      "company": "Who we are",
       "about": "About",
       "privacy": "Privacy",
       "terms": "Terms"
@@ -204,8 +215,8 @@
       "pauseRotation": "Pause language rotation",
       "resumeRotation": "Resume language rotation",
       "studioTitle": "Hero Title — Synoptic Studio",
-      "titlePlain": "the ultimate bilingual studio",
-      "neuralEngine": "Neural Engine",
+      "titlePlain": "The most intuitive tool to create your own books, study sheets, and bilingual assets from scratch with the content you love.",
+      "neuralEngine": "Linguistic Intelligence",
       "activeLayer": "Active Layer",
       "typographyAssistant": "Typography Assistant",
       "syncingLocales": "Syncing {count} Locales",
@@ -218,7 +229,7 @@
       "origin": "Origin"
     },
     "footer": {
-      "tagline": "The professional bilingual publisher for authors, language learners, and publishing houses. Built for the world.",
+      "tagline": "The professional bilingual publisher for authors, language learners, and publishing houses. Empowering your voice across any border.",
       "copyright": "© 2025 Synoptic Studio. All rights reserved."
     },
     "carbon": {
@@ -230,8 +241,8 @@
     }
   },
   "Features": {
-    "title": "Built for Every Scale",
-    "subtitle": "From private flashcards to global book launches.",
+    "title": "Built for every scale",
+    "subtitle": "From private **flashcards**, **study sheets**, and **posters** to professional global book launches in a thriving niche.",
     "ctaLearn": "Learn how to master a language",
     "ctaPublish": "Explore professional publishing",
     "learn": {
@@ -307,7 +318,25 @@
         "desc": "Optimized metadata and formatting for Amazon KDP, Apple Books, and IngramSpark."
       }
     },
-    "cta": "Launch Your Publishing Empire"
+    "cta": "Launch Your Publishing Empire",
+    "infra": "Professional publishing infrastructure",
+    "enterprise": "Enterprise solutions",
+    "volumeTitle": "Built for high-volume production",
+    "volumeSubtitle": "Stop wrestling with InDesign templates and manual alignment. Our cloud-native engine handles the heavy lifting.",
+    "step1": "Import manuscript",
+    "step1Desc": "Upload your source and target text in any format. Our AI identifies paragraph breaks and chapter structures instantly.",
+    "step2": "Auto-typeset",
+    "step2Desc": "The AI typesetter automatically balances columns and eliminates widows/orphans across hundreds of pages in seconds.",
+    "step3": "One-click KDP",
+    "step3Desc": "Export a print-ready PDF with correct bleeds, trim marks, and gutters. Guaranteed to pass Amazon's quality check.",
+    "epubTitle": "EPUB 3.0 bilingual support",
+    "epubDesc": "Generate reflowable e-books for Kindle and Apple Books with native side-by-side or alternating mode selection.",
+    "available": "Available now",
+    "compliant": "XHTML compliant",
+    "fixed": "Fixed-layout option",
+    "scaleTitle": "Scale your publishing hub.",
+    "scaleDesc": "Whether you are an independent author or a global house, Synoptic scales with you. Secure, reliable, and ready for your next masterpiece.",
+    "sales": "Contact sales"
   },
   "Pricing": {
     "title": "Simple, Fair Pricing",
@@ -357,12 +386,12 @@
       "teamCollab": "Team Collaboration",
       "brandCustom": "Publisher Branding",
       "fontUpload": "Custom Font Upload",
-      "apiAccess": "API Access (Bientôt)",
+      "apiAccess": "API access (Coming soon)",
       "ttsPremium": "Neural TTS (Ultra-HD)"
     },
     "aiExplanation": {
       "title": "* Understanding AI Units",
-      "note": "AI units are only consumed when using our Neural Intelligence Layer. Manual translation and layout remain free and unlimited.",
+      "note": "AI units are only consumed when using our advanced translation and professional typesetting features. Manual translation and layout remain free and unlimited.",
       "whatIsAUnit": "1 Unit = 1 Full Linguistic Analysis",
       "unitDesc": "This includes contextual translation, semantic grouping, syntactic arrows, and intelligent layout adjustment for a single block of text.",
       "tiers": {
@@ -391,7 +420,11 @@
     "epubDesc": "Reflowable bilingual text layout. Optimized for Kindle and Apple Books.",
     "qualityPrint": "Print",
     "qualityWeb": "Web",
-    "qualityDraft": "Draft"
+    "qualityDraft": "Draft",
+    "pdfError": "PDF Export failed",
+    "pdfErrorDesc": "Export failed. Please check your connection to the print engine.",
+    "epubError": "EPUB Export failed",
+    "epubErrorDesc": "EPUB generation failed."
   },
   "Onboarding": {
     "tourDashboardContent": "Welcome to Synoptic! This is your project hub.",
@@ -417,17 +450,17 @@
     "commandMenu": "Command Menu"
   },
   "AboutPage": {
-    "title": "The Future of Translation.",
+    "title": "The future of translation",
     "subtitle": "Synoptic was born from a simple realization: the world is getting closer, but our books are still monolingual. We built the first cloud-native studio dedicated to the art (and science) of bilingual publishing.",
     "sovereignTitle": "Sovereign Knowledge",
     "sovereignDesc": "We believe that language is the ultimate currency of culture. Our mission is to make bilingualism accessible to everyone, from independent authors to global institutions.",
     "soulTitle": "AI with a Soul",
-    "soulDesc": "We don't just \"auto-translate\". Our neural engine is grounded in philological precision, ensuring that the nuance of your voice remains intact across every border.",
-    "values": "Our Values.",
+    "soulDesc": "We don't just \"auto-translate\". Our intelligence engine is grounded in philological precision, ensuring that the nuance of your voice remains intact across every border.",
+    "values": "Our values",
     "privacyTitle": "Privacy First",
     "privacyDesc": "Your manuscripts are your property. We use secure, siloed infrastructure to ensure your intellectual property never leaves your control.",
     "perfTitle": "High Performance",
-    "perfDesc": "Built for the modern web. Every interaction in Synoptic is designed for speed, from real-time cloud sync to 300 DPI Puppeteer exports.",
+    "perfDesc": "Built for the modern web. Every interaction in Synoptic is designed for speed, from real-time cloud sync to professional 300 DPI PDF exports.",
     "communityTitle": "Built for the Community",
     "communityDesc": "We are constantly evolving based on feedback from our community of authors, polyglots, and educators.",
     "cta": "Join the Revolution"
@@ -443,7 +476,7 @@
       "Usage Data (to improve the interface)"
     ],
     "protectTitle": "Data Protection",
-    "protectDesc": "We use industry-standard encryption to protect your data both in transit and at rest. Our DigitalOcean-native infrastructure is monitored 24/7 for security threats.",
+    "protectDesc": "We use industry-standard encryption to protect your data both in transit and at rest. Our secure infrastructure is monitored 24/7 for privacy and security.",
     "aiPrivacyTitle": "AI Privacy",
     "aiPrivacyDesc": "Your manuscripts are NOT used to train global AI models. We use specialized, siloed agents that process your text in real-time and clear the memory buffer immediately after the task is complete.",
     "lastUpdated": "Last updated: December 29, 2025."
@@ -457,37 +490,41 @@
     "useDesc": "You agree not to use Synoptic for generating or publishing material that is illegal, defamatory, or violates international copyright laws.",
     "useItems": [
       "No automated scraping or bulk API usage.",
-      "No reverse-engineering of our neural engine.",
+      "No reverse-engineering of our intelligence engine.",
       "Respect the Fair Use policy for AI Units."
     ],
     "subTitle": "Subscription & Termination",
     "subDesc": "Subscriptions are billed in advance. You can cancel at any time. Upon cancellation, you will retain access to your projects until the end of the billing period."
   },
   "ModelsPage": {
-    "title": "Library of Structures.",
+    "title": "Library of structures",
     "subtitle": "Every story demands its own architecture. Choose from our curated collection of professional bilingual templates.",
-    "pixelPerfect": "Pixel-Perfect Layouts.",
+    "pixelPerfect": "Pixel-perfect layouts",
     "gutterTitle": "Mirror Gutter Logic",
     "gutterDesc": "Automatic adjustment for inner and outer margins based on the binding type.",
     "symmetryTitle": "Symmetry Guard",
     "symmetryDesc": "Real-time alerts if bilingual blocks become desynchronized across pages.",
     "templates": {
       "classic": {
-        "title": "Classic Parallel",
-        "desc": "The gold standard of bilingual reading. Strictly aligned side-by-side columns."
+        "title": "Classic parallel",
+        "desc": "The gold standard of bilingual reading. Strictly aligned side-by-side columns for premium print editions."
       },
       "alternating": {
-        "title": "Alternating Flow",
-        "desc": "Perfect for eBooks. Paragraph by paragraph immersion for a focused reading experience."
+        "title": "Alternating immersion",
+        "desc": "Perfect for digital devices. Paragraph-by-paragraph flow that keeps your focus sharp without losing context."
       },
       "academic": {
-        "title": "Academic Interlinear",
-        "desc": "Deep philological analysis with word-for-word annotations directly below the source."
+        "title": "Philological study",
+        "desc": "Deep academic analysis with word-for-word annotations and cross-references directly below the source."
       },
       "modern": {
-        "title": "Modern Poetry",
-        "desc": "Minimalist layout optimized for verse-by-verse translation with generous margins."
+        "title": "Modern verse",
+        "desc": "Minimalist layout optimized for poetry and numbered verses with generous artistic margins."
       }
-    }
+    },
+    "viewTemplate": "Discover structure",
+    "typesettingTitle": "Bilingual logic",
+    "exampleSource": "The stars were bright above the silent lake.",
+    "exampleTarget": "Les étoiles brillaient au-dessus du lac silencieux."
   }
 }

@@ -38,7 +38,7 @@ export default function PublishPage() {
               className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#30b8c8]/10 border border-[#30b8c8]/20 text-[#22687a] text-sm font-bold mb-8 uppercase tracking-widest"
             >
               <ShieldCheck className="h-4 w-4" />
-              Professional Publishing Infrastructure
+              {t('infra')}
             </motion.div>
             
             <motion.h1
@@ -66,14 +66,14 @@ export default function PublishPage() {
               className="flex flex-col sm:flex-row gap-4 justify-center items-center"
             >
               <Link href="/auth/signup">
-                <Button size="lg" className="h-16 px-10 rounded-2xl text-lg font-bold bg-[#22687a] hover:bg-[#1a5160] shadow-2xl shadow-[#30b8c8]/20 hover:scale-[1.02] transition-transform active:scale-95">
+                <Button size="lg" className="h-[72px] px-12 rounded-full text-xl font-bold bg-[#22687a] hover:bg-[#1a5160] shadow-2xl shadow-[#30b8c8]/20 hover:scale-[1.03] transition-all active:scale-95">
                   {t('cta')}
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  <ArrowRight className="ml-2 h-6 w-6" />
                 </Button>
               </Link>
               <Link href="/pricing">
-                <Button size="lg" variant="outline" className="h-16 px-10 rounded-2xl text-lg font-bold border-2 hover:bg-muted/50 transition-all">
-                  Enterprise Solutions
+                <Button size="lg" variant="outline" className="h-[72px] px-12 rounded-full text-xl font-bold border-2 hover:bg-muted/50 transition-all hover:scale-[1.03]">
+                  {t('enterprise')}
                 </Button>
               </Link>
             </motion.div>
@@ -110,25 +110,25 @@ export default function PublishPage() {
         <section className="py-40 relative">
           <div className="container px-4 mx-auto">
             <div className="text-center max-w-3xl mx-auto mb-20">
-              <h2 className="text-4xl md:text-6xl font-black mb-6 font-outfit">Built for High-Volume Production</h2>
-              <p className="text-xl text-muted-foreground font-medium">Stop wrestling with indesign templates and manual alignment. Our cloud-native engine handles the heavy lifting.</p>
+              <h2 className="text-4xl md:text-6xl font-black mb-6 font-outfit">{t('volumeTitle')}</h2>
+              <p className="text-xl text-muted-foreground font-medium">{t('volumeSubtitle')}</p>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
               <div className="space-y-6">
                 <div className="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-black text-xl">1</div>
-                <h4 className="text-2xl font-bold">Import Manuscript</h4>
-                <p className="text-muted-foreground">Upload your source and target text in any format. Our AI identifies paragraph breaks and chapter structures instantly.</p>
+                <h4 className="text-2xl font-bold">{t('step1')}</h4>
+                <p className="text-muted-foreground">{t('step1Desc')}</p>
               </div>
               <div className="space-y-6">
                 <div className="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-black text-xl">2</div>
-                <h4 className="text-2xl font-bold">Auto-Typeset</h4>
-                <p className="text-muted-foreground">The AI Typesetter automatically balances columns and eliminates widows/orphans across hundreds of pages in seconds.</p>
+                <h4 className="text-2xl font-bold">{t('step2')}</h4>
+                <p className="text-muted-foreground">{t('step2Desc')}</p>
               </div>
               <div className="space-y-6">
                 <div className="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-black text-xl">3</div>
-                <h4 className="text-2xl font-bold">One-Click KDP</h4>
-                <p className="text-muted-foreground">Export a print-ready PDF with correct bleeds, trim marks, and gutters. Guaranteed to pass Amazon's quality check.</p>
+                <h4 className="text-2xl font-bold">{t('step3')}</h4>
+                <p className="text-muted-foreground">{t('step3Desc')}</p>
               </div>
             </div>
 
@@ -136,18 +136,18 @@ export default function PublishPage() {
               <div className="bg-background rounded-[3.4rem] p-12 overflow-hidden flex flex-col md:flex-row items-center gap-12">
                 <div className="flex-1 space-y-6">
                   <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-green-500/10 text-green-600 text-xs font-black uppercase tracking-widest">
-                    Available Now
+                    {t('available')}
                   </div>
-                  <h3 className="text-4xl font-black font-outfit italic">EPUB 3.0 Bilingual Support</h3>
-                  <p className="text-lg text-muted-foreground">Generate reflowable e-books for Kindle and Apple Books with native side-by-side or alternating mode selection.</p>
+                  <h3 className="text-4xl font-black font-outfit italic">{t('epubTitle')}</h3>
+                  <p className="text-lg text-muted-foreground">{t('epubDesc')}</p>
                   <ul className="space-y-3">
                     <li className="flex items-center gap-2 font-bold text-sm">
                       <FileCheck className="h-4 w-4 text-green-500" />
-                      XHTML Compliant
+                      {t('compliant')}
                     </li>
                     <li className="flex items-center gap-2 font-bold text-sm">
                       <FileCheck className="h-4 w-4 text-green-500" />
-                      Fixed-Layout Option
+                      {t('fixed')}
                     </li>
                   </ul>
                 </div>
@@ -166,16 +166,16 @@ export default function PublishPage() {
             <div className="p-12 md:p-24 rounded-[3.5rem] bg-black text-white relative overflow-hidden text-center">
               <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/20 blur-[100px] rounded-full" />
               <div className="relative z-10 max-w-2xl mx-auto">
-                <h2 className="text-4xl md:text-6xl font-black mb-8 font-outfit">Scale Your Publishing Hub.</h2>
-                <p className="text-xl text-white/70 mb-12">Whether you are an independent author or a global house, Synoptic scales with you. Built on top-tier DigitalOcean infrastructure.</p>
+                <h2 className="text-4xl md:text-6xl font-black mb-8 font-outfit">{t('scaleTitle')}</h2>
+                <p className="text-xl text-white/70 mb-12">{t('scaleDesc')}</p>
                 <div className="flex flex-col sm:flex-row gap-6 justify-center">
                   <Link href="/auth/signup">
-                    <Button size="lg" className="h-16 px-12 rounded-2xl bg-white text-black font-black text-xl hover:bg-[#30b8c8] hover:text-white transition-all shadow-xl shadow-white/5">
-                      Get Started
+                    <Button size="lg" className="h-[72px] px-12 rounded-full bg-white text-black font-black text-xl hover:bg-[#30b8c8] hover:text-white transition-all shadow-xl shadow-white/5 hover:scale-[1.03]">
+                      {t('cta')}
                     </Button>
                   </Link>
-                  <Button size="lg" variant="outline" className="h-16 px-12 rounded-2xl border-white/20 text-white font-bold text-xl hover:bg-white/10">
-                    Contact Sales
+                  <Button size="lg" variant="outline" className="h-[72px] px-12 rounded-full border-white/20 text-white font-bold text-xl hover:bg-white/10 transition-all hover:scale-[1.03]">
+                    {t('sales')}
                   </Button>
                 </div>
               </div>

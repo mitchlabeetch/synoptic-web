@@ -96,7 +96,7 @@ export default function Sidebar() {
   const tools = [
     { id: 'pages', icon: Layout, label: tStudio('pageManager'), onClick: () => { setActiveTab('pages'); setIsCollapsed(false); } },
     { id: 'design', icon: Palette, label: tStudio('globalDesign'), onClick: () => { setActiveTab('design'); setIsCollapsed(false); } },
-    { id: 'publish', icon: Printer, label: 'Publishing Pipeline', onClick: () => { setActiveTab('publish'); setIsCollapsed(false); } },
+    { id: 'publish', icon: Printer, label: tStudio('publishingPipeline'), onClick: () => { setActiveTab('publish'); setIsCollapsed(false); } },
     { id: 'presets', icon: Layers, label: tStudio('stylePresets'), onClick: () => { setActiveTab('presets'); setIsCollapsed(false); } },
     { id: 'text', icon: Type, label: t('text'), onClick: handleAddTextBlock },
     { id: 'separator', icon: SeparatorHorizontal, label: t('separator'), onClick: handleAddSeparator },
@@ -202,7 +202,7 @@ export default function Sidebar() {
             <div className="p-4 border-t bg-muted/5 mt-auto flex items-center justify-between">
               <div className="flex items-center gap-2 text-[10px] text-muted-foreground italic">
                 <div className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
-                <span className="uppercase tracking-tighter font-bold opacity-60">Engine v0.4.0-Studio</span>
+                <span className="uppercase tracking-tighter font-bold opacity-60">{tStudio('bilingualEditor')} — Engine v0.4.0</span>
               </div>
               <LocaleSwitcher />
             </div>

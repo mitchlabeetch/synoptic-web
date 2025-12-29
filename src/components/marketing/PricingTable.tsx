@@ -103,7 +103,7 @@ export function PricingTable() {
               <Link href="/auth/signup" className="mt-auto">
                 <Button 
                   variant={tier.highlight ? "default" : "outline"} 
-                  className={`w-full h-12 rounded-2xl font-bold ${tier.highlight ? 'shadow-xl shadow-primary/20' : ''}`}
+                  className={`w-full h-[60px] rounded-full font-bold text-lg transition-all hover:scale-[1.03] ${tier.highlight ? 'shadow-xl shadow-primary/20 bg-primary hover:bg-primary/90' : 'hover:bg-muted/50'}`}
                 >
                   {t(`${tier.key}.button`)}
                 </Button>

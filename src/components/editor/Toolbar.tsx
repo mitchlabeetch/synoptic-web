@@ -1,5 +1,6 @@
 // src/components/editor/Toolbar.tsx
-"use client";
+'use client';
+import { useTranslations } from 'next-intl';
 
 import { Button } from '@/components/ui/button';
 import { 
@@ -14,6 +15,7 @@ import { useProjectStore } from '@/lib/store/projectStore';
 
 export default function Toolbar() {
   const { undo, redo } = useProjectStore();
+  const t = useTranslations('Studio');
 
   return (
     <div className="flex items-center gap-2">
@@ -30,17 +32,17 @@ export default function Toolbar() {
 
       <Button variant="outline" size="sm" className="gap-2">
         <Share2 className="h-4 w-4" />
-        Collaborate
+        {t('collaborate')}
       </Button>
 
       <Button variant="outline" size="sm" className="gap-2">
         <Download className="h-4 w-4" />
-        Export
+        {t('export')}
       </Button>
 
       <Button size="sm" className="bg-primary hover:bg-primary/90 gap-2">
         <Play className="h-4 w-4" />
-        Preview
+        {t('preview')}
       </Button>
       
       <div className="h-4 w-[1px] bg-muted mx-1" />

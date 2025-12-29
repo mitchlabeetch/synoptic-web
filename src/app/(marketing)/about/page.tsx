@@ -70,7 +70,7 @@ export default function AboutPage() {
         
         <div className="mt-32 text-center">
           <Link href="/auth/signup">
-            <Button size="lg" className="h-16 px-12 rounded-2xl bg-primary font-bold text-lg hover:scale-[1.02] transition-transform">
+            <Button size="lg" className="h-[72px] px-12 rounded-full bg-primary font-bold text-xl hover:scale-[1.03] transition-all shadow-xl shadow-primary/20">
               {t('cta')}
             </Button>
           </Link>

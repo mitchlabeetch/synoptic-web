@@ -63,7 +63,7 @@ export default function ExportManager() {
         }),
       });
 
-      if (!response.ok) throw new Error('PDF Export failed');
+      if (!response.ok) throw new Error(t('pdfError'));
 
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
@@ -76,7 +76,7 @@ export default function ExportManager() {
       setLastExport({ type: 'pdf', url });
     } catch (error) {
       console.error(error);
-      alert('Export failed. Please check your connection to the print engine.');
+      alert(t('pdfErrorDesc'));
     } finally {
       setIsExporting(null);
     }
@@ -94,7 +94,7 @@ export default function ExportManager() {
         }),
       });
 
-      if (!response.ok) throw new Error('EPUB Export failed');
+      if (!response.ok) throw new Error(t('epubError'));
 
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
@@ -106,7 +106,7 @@ export default function ExportManager() {
       window.URL.revokeObjectURL(url);
     } catch (error) {
       console.error(error);
-      alert('EPUB generation failed.');
+      alert(t('epubErrorDesc'));
     } finally {
       setIsExporting(null);
     }
@@ -197,7 +197,7 @@ export default function ExportManager() {
                disabled={isExporting !== null}
              >
                {isExporting === 'pdf' ? <Loader2 className="h-4 w-4 animate-spin" /> : <Printer className="h-4 w-4" />}
-               {t('generate')} PDF
+               {t('generate')} {tCommon('pdf')}
              </Button>
           </div>
         </section>
@@ -221,7 +221,7 @@ export default function ExportManager() {
                disabled={isExporting !== null}
              >
                {isExporting === 'epub' ? <Loader2 className="h-3 w-3 animate-spin" /> : <Book className="h-3 w-3" />}
-               {t('generate')} EPUB
+               {t('generate')} {tCommon('epub')}
              </Button>
           </div>
         </section>
