@@ -81,16 +81,16 @@ export function WebsiteCarbonBadge({ url = "https://synoptic.studio", className 
         )}
       </div>
 
-      <div className="flex flex-col relative overflow-hidden h-4 justify-center w-[70px]">
+      <div className="flex flex-col relative h-4 justify-center">
         {/* Animated Carousel for Text */}
         <div className={cn(
-            "absolute transition-all duration-500 flex flex-col gap-1 top-0",
-            hovered ? "-top-5" : "top-0"
+            "relative transition-all duration-500 flex flex-col gap-1",
+            hovered ? "-top-[1.25rem]" : "top-0"
         )}>
-             <span className="h-4 flex items-center whitespace-nowrap text-muted-foreground group-hover:text-foreground transition-colors">
-                {loading ? t('calculating') : error ? t('ecoFriendly') : t('co2', { amount: grams })}
+             <span className="h-[1.25rem] flex items-center whitespace-nowrap text-muted-foreground group-hover:text-foreground transition-colors overflow-hidden">
+                {loading ? t('calculating') : error ? "Eco-Friendly" : t('co2', { amount: grams })}
             </span>
-            <span className="h-4 flex items-center whitespace-nowrap text-emerald-600 dark:text-emerald-400 font-bold">
+            <span className="h-[1.25rem] flex items-center whitespace-nowrap text-emerald-600 dark:text-emerald-400 font-bold overflow-hidden">
                  {!loading && !error && data ? t('cleanerThan', { percentage: cleanerThan }) : t('measure')}
             </span>
         </div>

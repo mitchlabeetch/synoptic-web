@@ -29,7 +29,7 @@ export default function LocaleSwitcher() {
         <SelectTrigger className="w-[140px] h-9 text-xs font-bold uppercase tracking-wider border-none bg-transparent hover:bg-accent transition-colors">
           <SelectValue />
         </SelectTrigger>
-        <SelectContent align="end" className="max-h-[300px]">
+        <SelectContent align="end" className="max-h-[300px] z-[2000]">
           {SUPPORTED_LANGUAGES.map((lang) => (
             <SelectItem 
               key={lang.code} 
