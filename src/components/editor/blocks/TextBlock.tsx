@@ -8,6 +8,8 @@ import { useProjectStore } from '@/lib/store/projectStore';
 import { cn } from '@/lib/utils';
 import { FloatingToolbar } from './FloatingToolbar';
 
+import { Sparkles, Loader2, Trash2, BookOpen } from 'lucide-react';
+
 interface TextBlockComponentProps {
   block: TextBlock;
   sourceLang: string;
@@ -30,6 +32,8 @@ export function TextBlockComponent({
   isEditing,
 }: TextBlockComponentProps) {
   const { settings } = useProjectStore();
+  const [isAiProcessing, setIsAiProcessing] = useState(false);
+
   const direction = useProjectStore((state) => {
     if (state.settings.direction !== 'auto') return state.settings.direction;
     return isRTL(sourceLang) ? 'rtl' : 'ltr';
@@ -53,6 +57,109 @@ export function TextBlockComponent({
         content: ref.current.innerHTML 
       },
     });
+  };
+
+  const handleAiTranslate = async () => {
+    if (!block.L1.content || isAiProcessing) return;
+    
+    setIsAiProcessing(true);
+    try {
+      const response = await fetch('/api/ai/translate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          text: block.L1.content.replace(/<[^>]*>/g, ''), // Strip HTML for translation
+          sourceLang,
+          targetLang
+        }),
+      });
+
+      if (!response.ok) throw new Error('Translation failed');
+      const data = await response.json();
+
+      onUpdate({
+        L2: { ...block.L2, content: data.translation }
+      });
+    } catch (error) {
+      console.error('AI Translation Error:', error);
+    } finally {
+      setIsAiProcessing(false);
+    }
+  };
+
+  const handleAiAnnotate = async () => {
+    if (isAiProcessing) return;
+    
+    setIsAiProcessing(true);
+    try {
+      const response = await fetch('/api/ai/annotate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          L1Text: block.L1.content.replace(/<[^>]*>/g, ''),
+          L2Text: block.L2.content.replace(/<[^>]*>/g, ''),
+          L1Lang: sourceLang,
+          L2Lang: targetLang
+        }),
+      });
+
+      if (!response.ok) throw new Error('Annotation failed');
+      const data = await response.json();
+
+      // Clear existing annotations for this block
+      const store = useProjectStore.getState();
+      
+      // Add Word Groups
+      data.wordGroups?.forEach((g: any) => {
+        store.addWordGroup({
+          id: `wg-${block.id}-${Math.random().toString(36).substr(2, 9)}`,
+          blockId: block.id,
+          ...g
+        });
+      });
+
+      // Add Arrows
+      data.arrows?.forEach((a: any) => {
+        store.addArrow({
+          id: `ar-${block.id}-${Math.random().toString(36).substr(2, 9)}`,
+          blockId: block.id,
+          ...a
+        });
+      });
+
+      // Add Notes
+      data.notes?.forEach((n: any) => {
+        store.addNote({
+          id: `nt-${block.id}-${Math.random().toString(36).substr(2, 9)}`,
+          blockId: block.id,
+          ...n
+        });
+      });
+
+    } catch (error) {
+      console.error('AI Annotation Error:', error);
+    } finally {
+      setIsAiProcessing(false);
+    }
+  };
+
+  // Helper to tokenized text into targetable spans
+  const TokenizedText = ({ content, lang, side }: { content: string, lang: string, side: 'L1' | 'L2' }) => {
+    // Basic tokenizer that preserves some HTML if needed, but for annotations we focus on words
+    const words = content.replace(/<[^>]*>/g, '').split(/\s+/);
+    return (
+      <>
+        {words.map((word, i) => (
+          <span 
+            key={i} 
+            data-word-id={`${block.id}-${side}-${i}`}
+            className="inline-block mr-1 hover:bg-primary/10 transition-colors rounded px-0.5"
+          >
+            {word}
+          </span>
+        ))}
+      </>
+    );
   };
 
   useEffect(() => {
@@ -87,6 +194,47 @@ export function TextBlockComponent({
     'alternating': 'flex flex-col gap-4',
   };
 
+  const handleAiExplain = async () => {
+    const selection = window.getSelection();
+    if (!selection || selection.isCollapsed || isAiProcessing) return;
+    
+    const word = selection.toString();
+    const range = selection.getRangeAt(0);
+    
+    // Determine which language the selection is in
+    let lang = sourceLang;
+    let context = '';
+    
+    if (l1Ref.current?.contains(range.commonAncestorContainer)) {
+      lang = sourceLang;
+      context = l1Ref.current.innerText;
+    } else if (l2Ref.current?.contains(range.commonAncestorContainer)) {
+      lang = targetLang;
+      context = l2Ref.current.innerText;
+    } else {
+      return;
+    }
+
+    setIsAiProcessing(true);
+    try {
+      const response = await fetch('/api/ai/explain', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ word, context, language: lang }),
+      });
+
+      if (!response.ok) throw new Error('AI explanation failed');
+      const data = await response.json();
+      
+      // For now, show a native alert, we'll implement a premium modal later
+      alert(`${data.role.toUpperCase()}: ${data.explanation}\n\nExamples: ${data.examples?.join(', ')}`);
+    } catch (error) {
+      console.error('AI Explain Error:', error);
+    } finally {
+      setIsAiProcessing(false);
+    }
+  };
+
   return (
     <div
       className={cn(
@@ -102,7 +250,11 @@ export function TextBlockComponent({
         onSelect();
       }}
     >
-      <FloatingToolbar isVisible={toolbarVisible} position={toolbarPos} />
+      <FloatingToolbar 
+        isVisible={toolbarVisible} 
+        position={toolbarPos} 
+        onAiExplain={handleAiExplain}
+      />
 
       <div className={cn(
         layoutStyles[currentLayout as keyof typeof layoutStyles],
@@ -127,14 +279,16 @@ export function TextBlockComponent({
           contentEditable={isEditing}
           suppressContentEditableWarning
           onBlur={() => handleTextChange('L1')}
-          dangerouslySetInnerHTML={{ __html: block.L1.content }}
-        />
+          // dangerouslySetInnerHTML={{ __html: block.L1.content }}
+        >
+          <TokenizedText content={block.L1.content} lang={sourceLang} side="L1" />
+        </div>
 
         {/* L2 (Target Language) */}
         <div
           ref={l2Ref}
           className={cn(
-            'p-2 rounded transition-colors min-h-[1.5em] prose prose-sm max-w-none dark:prose-invert opacity-80',
+            'p-2 rounded transition-colors min-h-[1.5em] prose prose-sm max-w-none dark:prose-invert opacity-80 relative',
             isEditing && 'hover:bg-primary/5 focus:bg-primary/5 focus:outline-none focus:ring-1 focus:ring-primary/20',
             block.isTitle && 'text-3xl font-extrabold tracking-tight mb-4',
             block.isChapterHeading && 'text-2xl font-bold italic text-muted-foreground mb-4'
@@ -149,18 +303,43 @@ export function TextBlockComponent({
           contentEditable={isEditing}
           suppressContentEditableWarning
           onBlur={() => handleTextChange('L2')}
-          dangerouslySetInnerHTML={{ __html: block.L2.content }}
-        />
+          // dangerouslySetInnerHTML={{ __html: block.L2.content }}
+        >
+          <TokenizedText content={block.L2.content} lang={targetLang} side="L2" />
+          {isAiProcessing && (
+            <div className="absolute inset-0 bg-background/50 flex items-center justify-center rounded-lg z-10 backdrop-blur-[1px]">
+               <Loader2 className="h-5 w-5 animate-spin text-primary" />
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Block Actions Overlay */}
       {isSelected && (
         <div className="absolute -right-12 top-0 flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
           <button 
+            onClick={(e) => { e.stopPropagation(); handleAiTranslate(); }}
+            disabled={isAiProcessing}
+            title="AI Translate (L1 → L2)"
+            className="p-1.5 bg-primary text-primary-foreground rounded-md shadow-sm hover:scale-110 transition-transform disabled:opacity-50"
+          >
+            {isAiProcessing ? <Loader2 className="h-[14px] w-[14px] animate-spin" /> : <Sparkles className="h-[14px] w-[14px]" />}
+          </button>
+
+          <button 
+            onClick={(e) => { e.stopPropagation(); handleAiAnnotate(); }}
+            disabled={isAiProcessing}
+            title="AI Deep Analysis"
+            className="p-1.5 bg-accent text-accent-foreground rounded-md shadow-sm hover:scale-110 transition-transform disabled:opacity-50"
+          >
+            <BookOpen className="h-[14px] w-[14px]" />
+          </button>
+          
+          <button 
             onClick={(e) => { e.stopPropagation(); onDelete(); }}
             className="p-1.5 bg-destructive text-destructive-foreground rounded-md shadow-sm hover:scale-110 transition-transform"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+            <Trash2 className="h-[14px] w-[14px]" />
           </button>
         </div>
       )}

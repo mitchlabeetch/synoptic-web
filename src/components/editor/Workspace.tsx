@@ -4,9 +4,10 @@
 import { useProjectStore, getEffectiveDirection } from '@/lib/store/projectStore';
 import { useProjectSync } from '@/hooks/useProjectSync';
 import PageRenderer from './PageRenderer';
-import { Loader2, CloudCheck, CloudUpload, AlertCircle, PlusCircle } from 'lucide-react';
+import { Loader2, CloudCheck, AlertCircle, PlusCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useTranslations } from 'next-intl';
+import { AnnotationLayer } from './annotations/AnnotationLayer';
 
 interface WorkspaceProps {
   projectId: string;
@@ -80,7 +81,8 @@ export default function Workspace({ projectId }: WorkspaceProps) {
 
       {/* The Actual Canvas */}
       <div className="p-12 pb-32">
-        <div className="max-w-[1000px] mx-auto space-y-12">
+        <div id="editor-workspace" className="max-w-[1000px] mx-auto space-y-12 relative min-h-screen">
+          <AnnotationLayer />
           {content.pages.map((page, index) => (
             <PageRenderer 
               key={page.id} 

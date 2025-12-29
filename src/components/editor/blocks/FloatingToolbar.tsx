@@ -7,7 +7,8 @@ import {
   Underline, 
   Strikethrough,
   Highlighter,
-  Link2
+  Link2,
+  Sparkles
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -16,9 +17,10 @@ import { useEffect, useState, useRef } from 'react';
 interface FloatingToolbarProps {
   isVisible: boolean;
   position: { top: number; left: number };
+  onAiExplain?: () => void;
 }
 
-export function FloatingToolbar({ isVisible, position }: FloatingToolbarProps) {
+export function FloatingToolbar({ isVisible, position, onAiExplain }: FloatingToolbarProps) {
   const [show, setShow] = useState(isVisible);
 
   useEffect(() => {
@@ -50,6 +52,18 @@ export function FloatingToolbar({ isVisible, position }: FloatingToolbarProps) {
       
       <ToolbarButton onClick={() => {}} icon={Highlighter} label="Highlight" color="text-yellow-500" />
       <ToolbarButton onClick={() => {}} icon={Link2} label="Link" />
+      
+      {onAiExplain && (
+        <>
+          <div className="w-[1px] h-4 bg-muted mx-1" />
+          <ToolbarButton 
+            onClick={onAiExplain} 
+            icon={Sparkles} 
+            label="AI Explain" 
+            color="text-primary animate-pulse hover:animate-none" 
+          />
+        </>
+      )}
     </div>
   );
 }

@@ -6,6 +6,7 @@ import {
   PageData,
   WordGroup,
   ArrowConnector,
+  AINote,
   ProjectContent,
   StylePreset,
 } from '@/types/blocks';
@@ -87,6 +88,11 @@ interface ProjectState {
   addArrow: (arrow: ArrowConnector) => void;
   updateArrow: (arrowId: string, updates: Partial<ArrowConnector>) => void;
   deleteArrow: (arrowId: string) => void;
+
+  // Note operations
+  addNote: (note: AINote) => void;
+  updateNote: (noteId: string, updates: Partial<AINote>) => void;
+  deleteNote: (noteId: string) => void;
   
   // Style Presets
   addPreset: (preset: StylePreset) => void;
@@ -109,6 +115,7 @@ const DEFAULT_CONTENT: ProjectContent = {
   pages: [{ id: 'page-1', number: 1, blocks: [], isBlankPage: false, avoidPageBreak: false }],
   wordGroups: [],
   arrows: [],
+  notes: [],
   stamps: [],
   presets: [],
 };
@@ -272,6 +279,22 @@ export const useProjectStore = create<ProjectState>()(
 
     deleteArrow: (arrowId) => set((state) => {
       state.content.arrows = state.content.arrows.filter(a => a.id !== arrowId);
+      state.pushHistory();
+    }),
+
+    addNote: (note) => set((state) => {
+      state.content.notes.push(note);
+      state.pushHistory();
+    }),
+
+    updateNote: (noteId, updates) => set((state) => {
+      const note = state.content.notes.find(n => n.id === noteId);
+      if (note) Object.assign(note, updates);
+      state.pushHistory();
+    }),
+
+    deleteNote: (noteId) => set((state) => {
+      state.content.notes = state.content.notes.filter(n => n.id !== noteId);
       state.pushHistory();
     }),
 

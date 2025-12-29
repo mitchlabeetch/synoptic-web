@@ -239,22 +239,29 @@ export interface TableBlock extends BaseBlock {
 export interface WordGroup {
   id: string;
   blockId: string;
-  text: string;
-  translation: string;
+  language: 'L1' | 'L2';
+  wordIndices: number[]; // Index of words in the text
+  role: string; // 'subject', 'verb', etc.
   color: string;
-  startIndex: number;
-  endIndex: number;
 }
 
 export interface ArrowConnector {
   id: string;
-  sourceBlockId: string;
-  sourceWordGroupId?: string;
-  targetBlockId: string;
-  targetWordGroupId?: string;
-  color: string;
-  curve: number;
-  thickness: number;
+  blockId: string; // The text block this arrow belongs to
+  source: { language: 'L1' | 'L2'; wordIndices: number[] };
+  target: { language: 'L1' | 'L2'; wordIndices: number[] };
+  label?: string;
+  color?: string;
+}
+
+export interface AINote {
+  id: string;
+  blockId: string;
+  type: 'grammar' | 'vocabulary' | 'culture';
+  language: 'L1' | 'L2';
+  wordIndex: number;
+  title: string;
+  content: string;
 }
 
 // ============================================
@@ -322,6 +329,7 @@ export interface ProjectContent {
   pages: PageData[];
   wordGroups: WordGroup[];
   arrows: ArrowConnector[];
+  notes: AINote[];
   stamps: any[];
   presets?: StylePreset[];
 }

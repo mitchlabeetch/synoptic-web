@@ -18,7 +18,11 @@ import {
   Eye,
   EyeOff,
   Hash,
-  Maximize2
+  Maximize2,
+  Sparkles,
+  BookOpen,
+  Globe,
+  Languages
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
@@ -165,6 +169,8 @@ export default function BlockInspector() {
   const isSeparator = selectedBlock.type === 'separator';
   const isCallout = selectedBlock.type === 'callout';
 
+  const blockNotes = content.notes.filter(n => n.blockId === selectedBlockId);
+
   return (
     <div className="flex-1 flex flex-col overflow-hidden bg-card">
       <div className="p-4 border-b bg-muted/20 flex items-center justify-between">
@@ -189,6 +195,33 @@ export default function BlockInspector() {
         {/* TEXT SPECIFIC CONTROLS */}
         {isText && (
           <>
+            {/* AI INSIGHTS SECTION */}
+            {blockNotes.length > 0 && (
+              <section className="space-y-4">
+                <Label className="text-xs font-bold text-primary uppercase flex items-center gap-2">
+                  <Sparkles className="h-3 w-3 animate-pulse" />
+                  AI Insights
+                </Label>
+                <div className="space-y-3">
+                  {blockNotes.map((note) => (
+                    <div 
+                      key={note.id} 
+                      className="p-3 rounded-lg border bg-gradient-to-br from-primary/5 to-accent/5 space-y-2 group hover:border-primary/30 transition-all"
+                    >
+                      <div className="flex items-center gap-2">
+                        {note.type === 'grammar' && <BookOpen className="h-3 w-3 text-blue-500" />}
+                        {note.type === 'culture' && <Globe className="h-3 w-3 text-green-500" />}
+                        {note.type === 'vocabulary' && <Languages className="h-3 w-3 text-orange-500" />}
+                        <span className="text-[10px] font-bold uppercase text-muted-foreground">{note.type}</span>
+                      </div>
+                      <h4 className="text-xs font-bold leading-tight">{note.title}</h4>
+                      <p className="text-[11px] text-muted-foreground leading-relaxed">{note.content}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
             <section className="space-y-4">
               <Label className="text-xs font-bold text-muted-foreground uppercase">{t('layout')}</Label>
               <div className="grid grid-cols-2 gap-2">
