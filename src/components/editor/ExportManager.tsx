@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useProjectStore } from '@/lib/store/projectStore';
-import { createClient } from '@/lib/supabase/client';
 import { Button } from '@/components/ui/button';
 import { 
   FileDown, 
@@ -35,17 +34,15 @@ export default function ExportManager() {
 
   useEffect(() => {
     async function fetchTier() {
-      const supabase = createClient();
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
-
-      const { data: profile } = await supabase
-        .from('profiles')
-        .select('tier')
-        .eq('id', user.id)
-        .single();
-      
-      if (profile?.tier) setTier(profile.tier);
+      try {
+        const response = await fetch('/api/auth/me');
+        if (!response.ok) return;
+        
+        const data = await response.json();
+        if (data.user?.tier) setTier(data.user.tier);
+      } catch (err) {
+        console.error('Failed to fetch user tier:', err);
+      }
     }
     fetchTier();
   }, []);

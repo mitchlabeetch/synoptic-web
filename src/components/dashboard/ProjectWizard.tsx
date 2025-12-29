@@ -4,7 +4,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { createClient } from '@/lib/supabase/client';
 import { SUPPORTED_LANGUAGES, getLanguageByCode } from '@/data/languages';
 import {
   Dialog,
@@ -56,7 +55,6 @@ interface ProjectWizardProps {
 
 export default function ProjectWizard({ projectCount = 0, tier = 'free' }: ProjectWizardProps) {
   const router = useRouter();
-  const supabase = createClient();
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState<WizardStep>('metadata');
   const [isCreating, setIsCreating] = useState(false);
@@ -161,23 +159,29 @@ export default function ProjectWizard({ projectCount = 0, tier = 'free' }: Proje
     setIsCreating(true);
 
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) throw new Error('Not authenticated');
-
       const pageSize = PAGE_SIZES.find((p) => p.id === data.pageSize);
 
-      const { data: project, error } = await supabase
-        .from('projects')
-        .insert({
-          user_id: user.id,
+      const response = await fetch('/api/projects', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
           title: data.title,
-          author: data.author,
-          description: data.description,
           source_lang: data.sourceLang,
           target_lang: data.targetLang,
-          page_size: data.pageSize,
-          page_width_mm: data.customWidth || pageSize?.width,
-          page_height_mm: data.customHeight || pageSize?.height,
+          content: {
+            pages: [
+              {
+                id: `page-${Date.now()}`,
+                number: 1,
+                blocks: [],
+                isBlankPage: false,
+                isChapterStart: true,
+              },
+            ],
+            wordGroups: [],
+            arrows: [],
+            stamps: [],
+          },
           settings: {
             theme: 'classic',
             pageSize: data.pageSize,
@@ -202,25 +206,15 @@ export default function ProjectWizard({ projectCount = 0, tier = 'free' }: Proje
             layout: (data.template === 'poetry' ? 'alternating' : 'side-by-side') as 'side-by-side' | 'interlinear' | 'alternating',
             direction: 'auto'
           },
-          content: {
-            pages: [
-              {
-                id: `page-${Date.now()}`,
-                number: 1,
-                blocks: [],
-                isBlankPage: false,
-                isChapterStart: true,
-              },
-            ],
-            wordGroups: [],
-            arrows: [],
-            stamps: [],
-          },
-        })
-        .select()
-        .single();
+        }),
+      });
 
-      if (error) throw error;
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || 'Failed to create project');
+      }
+
+      const { project } = await response.json();
 
       setOpen(false);
       router.push(`/editor/${project.id}`);

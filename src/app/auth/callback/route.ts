@@ -1,20 +1,13 @@
-import { createClient } from '@/lib/supabase/server'
-import { NextResponse } from 'next/server'
+// src/app/auth/callback/route.ts
+// PURPOSE: Auth callback handler (legacy route, no longer used with JWT auth)
+// ACTION: Redirects to dashboard
+// MECHANISM: Simple redirect for backward compatibility
+
+import { NextResponse } from 'next/server';
 
 export async function GET(request: Request) {
-  const { searchParams, origin } = new URL(request.url)
-  const code = searchParams.get('code')
-  // if "next" is in search params, use it as the redirection URL
-  const next = searchParams.get('next') ?? '/dashboard'
-
-  if (code) {
-    const supabase = await createClient()
-    const { error } = await supabase.auth.exchangeCodeForSession(code)
-    if (!error) {
-      return NextResponse.redirect(`${origin}${next}`)
-    }
-  }
-
-  // return the user to an error page with instructions
-  return NextResponse.redirect(`${origin}/auth/auth-code-error`)
+  const { origin } = new URL(request.url);
+  
+  // Redirect to dashboard - actual auth is handled by /api/auth routes now
+  return NextResponse.redirect(`${origin}/dashboard`);
 }

@@ -1,38 +1,41 @@
 // src/app/api/ai/annotate/route.ts
+// PURPOSE: AI-powered annotation endpoint
+// ACTION: Generates educational annotations for bilingual text pairs
+// MECHANISM: Validates auth, calls AI provider for annotation analysis
+
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase/server';
+import { getCurrentUser, getUserId } from '@/lib/auth/jwt';
+import { query } from '@/lib/db/client';
 import { ai } from '@/lib/ai/aiProvider';
 
 export async function POST(request: NextRequest) {
-  const supabase = await createClient();
-  
-  const { data: { user }, error: authError } = await supabase.auth.getUser();
-  if (authError || !user) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
-
-  const { L1Text, L2Text, L1Lang, L2Lang } = await request.json();
-
   try {
+    // 1. Authenticate user
+    const user = await getCurrentUser();
+    if (!user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const userId = getUserId(user);
+
+    // 2. Extract request body
+    const { L1Text, L2Text, L1Lang, L2Lang } = await request.json();
+
+    // 3. Call AI Provider
     const result = await ai.annotate(L1Text, L2Text, L1Lang, L2Lang);
 
-    // Track usage (using 2 credits for complex annotation)
-    const { data: profile } = await supabase
-      .from('profiles')
-      .select('ai_credits_used')
-      .eq('id', user.id)
-      .single();
-
-    if (profile) {
-      await supabase
-        .from('profiles')
-        .update({ ai_credits_used: (profile.ai_credits_used || 0) + 2 })
-        .eq('id', user.id);
-    }
+    // 4. Track usage (2 credits for annotation)
+    await query(
+      'UPDATE profiles SET ai_credits_used = ai_credits_used + 2 WHERE id = $1',
+      [userId]
+    );
 
     return NextResponse.json(result);
   } catch (error: any) {
     console.error('AI Annotation Route Error:', error);
-    return NextResponse.json({ error: error.message || 'Internal AI Error' }, { status: 500 });
+    return NextResponse.json(
+      { error: error.message || 'Internal AI Error' },
+      { status: 500 }
+    );
   }
 }

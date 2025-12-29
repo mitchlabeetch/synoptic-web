@@ -1,9 +1,8 @@
 // src/components/onboarding/OnboardingTour.tsx
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Joyride, { Step, CallBackProps, STATUS } from 'react-joyride';
-import { createClient } from '@/lib/supabase/client';
 import { useTranslations } from 'next-intl';
 
 const TOUR_STEPS = (t: any): Step[] => [
@@ -56,65 +55,28 @@ export function OnboardingTour({
 }) {
   const [run, setRun] = useState(false);
   const t = useTranslations('Onboarding');
-  const supabase = createClient();
+
+  const checkOnboardingStatus = useCallback(async () => {
+    // Check local storage for onboarding status
+    const localCompleted = JSON.parse(localStorage.getItem('synoptic_onboarding') || '{}');
+    
+    if (!localCompleted[context]) {
+      setTimeout(() => setRun(true), 1000);
+    }
+  }, [context]);
 
   useEffect(() => {
     checkOnboardingStatus();
-  }, [context]);
-
-  const checkOnboardingStatus = async () => {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (!user) return;
-
-    const { data: profile } = await supabase
-      .from('profiles')
-      .select('onboarding_completed')
-      .eq('id', user.id)
-      .single();
-
-    const completed = profile?.onboarding_completed || {};
-    const localCompleted = JSON.parse(localStorage.getItem('synoptic_onboarding') || '{}');
-    
-    if (!completed[context] && !localCompleted[context]) {
-      setTimeout(() => setRun(true), 1000);
-    }
-  };
+  }, [checkOnboardingStatus]);
 
   const handleCallback = async (data: CallBackProps) => {
     const { status } = data;
     if (status === STATUS.FINISHED || status === STATUS.SKIPPED) {
       setRun(false);
 
-      // Save to localStorage as fallback
+      // Save to localStorage
       const localCompleted = JSON.parse(localStorage.getItem('synoptic_onboarding') || '{}');
       localStorage.setItem('synoptic_onboarding', JSON.stringify({ ...localCompleted, [context]: true }));
-
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      if (user) {
-        try {
-          // First get current state to avoid overwriting other context completions
-          const { data: profile } = await supabase
-            .from('profiles')
-            .select('onboarding_completed')
-            .eq('id', user.id)
-            .single();
-          
-          const currentCompletion = profile?.onboarding_completed || {};
-          
-          await supabase
-            .from('profiles')
-            .update({
-              onboarding_completed: { ...currentCompletion, [context]: true },
-            })
-            .eq('id', user.id);
-        } catch (e) {
-          console.warn('Could not save onboarding status to DB (missing column?)');
-        }
-      }
     }
   };
 

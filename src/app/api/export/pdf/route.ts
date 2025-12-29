@@ -1,42 +1,31 @@
 // src/app/api/export/pdf/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase/server';
+import { getCurrentUser, getUserId } from '@/lib/auth/jwt';
+import { getProject, getUserProfile } from '@/lib/db/server';
 import { isRTL } from '@/data/languages';
 import { sanitizeHTMLStrict, escapeHTML } from '@/lib/sanitize';
 
 const PDF_SERVICE_URL = process.env.PDF_SERVICE_URL || 'http://synoptic-pdf:3000';
 
 export async function POST(request: NextRequest) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getCurrentUser();
 
   if (!user) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
+  const userId = getUserId(user);
   const { projectId, options } = await request.json();
 
   // Fetch project
-  // Based on the columns we saw: id, user_id, title, content, updated_at
-  const { data: project, error } = await supabase
-    .from('projects')
-    .select('*')
-    .eq('id', projectId)
-    .single();
+  const project = await getProject(projectId, userId);
 
-  if (error || !project) {
+  if (!project) {
     return NextResponse.json({ error: 'Project not found' }, { status: 404 });
   }
 
   // Check tier
-  const { data: profile } = await supabase
-    .from('profiles')
-    .select('tier')
-    .eq('id', user.id)
-    .single();
-
+  const profile = await getUserProfile(userId);
   const isFreeTier = profile?.tier === 'free' || !profile?.tier;
 
   // Render HTML and CSS

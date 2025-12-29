@@ -1,28 +1,23 @@
 // src/app/api/export/epub/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase/server';
+import { getCurrentUser, getUserId } from '@/lib/auth/jwt';
+import { getProject } from '@/lib/db/server';
 import { generateEpub } from '@/services/epubExport';
 
 export async function POST(request: NextRequest) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getCurrentUser();
 
   if (!user) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
+  const userId = getUserId(user);
   const { projectId } = await request.json();
 
   // Fetch project
-  const { data: project, error } = await supabase
-    .from('projects')
-    .select('*')
-    .eq('id', projectId)
-    .single();
+  const project = await getProject(projectId, userId);
 
-  if (error || !project) {
+  if (!project) {
     return NextResponse.json({ error: 'Project not found' }, { status: 404 });
   }
 

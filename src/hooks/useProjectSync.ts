@@ -1,7 +1,11 @@
 'use client';
 
+// src/hooks/useProjectSync.ts
+// PURPOSE: Sync project state with cloud database
+// ACTION: Loads project on mount, auto-saves on changes
+// MECHANISM: Uses debounced API calls to sync with PostgreSQL
+
 import { useEffect, useRef, useCallback, useState } from 'react';
-import { createClient } from '@/lib/supabase/client';
 import { useProjectStore } from '@/lib/store/projectStore';
 import { debounce } from 'lodash';
 
@@ -12,7 +16,6 @@ interface SyncStatus {
 }
 
 export function useProjectSync(projectId: string) {
-  const supabase = createClient();
   const [syncStatus, setSyncStatus] = useState<SyncStatus>({
     status: 'idle',
     lastSaved: null,
@@ -35,34 +38,44 @@ export function useProjectSync(projectId: string) {
     async function loadProject() {
       setSyncStatus((s) => ({ ...s, status: 'loading' }));
 
-      const { data, error } = await supabase
-        .from('projects')
-        .select('*')
-        .eq('id', projectId)
-        .single();
+      try {
+        const response = await fetch(`/api/projects/${projectId}`);
+        
+        if (!response.ok) {
+          throw new Error('Failed to load project');
+        }
 
-      if (error) {
+        const data = await response.json();
+
+        if (data.project) {
+          setProjectMeta({
+            id: data.project.id,
+            title: data.project.title,
+            source_lang: data.project.source_lang,
+            target_lang: data.project.target_lang,
+          });
+          
+          // Parse JSON content if it's a string
+          const projectContent = typeof data.project.content === 'string' 
+            ? JSON.parse(data.project.content) 
+            : data.project.content;
+          const projectSettings = typeof data.project.settings === 'string'
+            ? JSON.parse(data.project.settings)
+            : data.project.settings;
+            
+          setContent(projectContent);
+          setSettings(projectSettings);
+          setSyncStatus({
+            status: 'saved',
+            lastSaved: new Date(data.project.updated_at),
+            error: null,
+          });
+        }
+      } catch (error: any) {
         setSyncStatus({
           status: 'error',
           lastSaved: null,
           error: error.message,
-        });
-        return;
-      }
-
-      if (data) {
-        setProjectMeta({
-          id: data.id,
-          title: data.title,
-          source_lang: data.source_lang,
-          target_lang: data.target_lang,
-        });
-        setContent(data.content);
-        setSettings(data.settings);
-        setSyncStatus({
-          status: 'saved',
-          lastSaved: new Date(data.updated_at),
-          error: null,
         });
       }
     }
@@ -70,33 +83,37 @@ export function useProjectSync(projectId: string) {
     if (projectId) {
       loadProject();
     }
-  }, [projectId, supabase, setContent, setSettings, setProjectMeta]);
+  }, [projectId, setContent, setSettings, setProjectMeta]);
 
   // Debounced save function
   const saveToCloud = useCallback(
     debounce(async () => {
       setSyncStatus((s) => ({ ...s, status: 'saving' }));
 
-      const { error } = await supabase
-        .from('projects')
-        .update({
-          content: contentRef.current,
-          settings: settingsRef.current,
-          updated_at: new Date().toISOString(),
-        })
-        .eq('id', projectId);
+      try {
+        const response = await fetch(`/api/projects/${projectId}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            content: contentRef.current,
+            settings: settingsRef.current,
+          }),
+        });
 
-      if (error) {
+        if (!response.ok) {
+          throw new Error('Failed to save project');
+        }
+
+        setSyncStatus({ status: 'saved', lastSaved: new Date(), error: null });
+      } catch (error: any) {
         setSyncStatus({
           status: 'error',
           lastSaved: null,
           error: error.message,
         });
-      } else {
-        setSyncStatus({ status: 'saved', lastSaved: new Date(), error: null });
       }
     }, 2000),
-    [projectId, supabase]
+    [projectId]
   );
 
   // Auto-save on content/settings change

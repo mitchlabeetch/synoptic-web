@@ -1,18 +1,26 @@
 // src/lib/ai/aiProvider.ts
+// PURPOSE: AI Provider factory for translation and annotation services
+// ACTION: Creates the appropriate AI provider based on configuration
+// MECHANISM: Lazy-loads providers to avoid build-time initialization issues
+
 import { AIProvider } from './types';
 import { OpenAIProvider } from '@/lib/ai/providers/openai';
 import { DOGenAIProvider } from '@/lib/ai/providers/digitalocean';
+import { GradientAIProvider } from '@/lib/ai/providers/gradient';
 
-export type ProviderType = 'openai' | 'digitalocean';
+export type ProviderType = 'openai' | 'digitalocean' | 'gradient';
 
-export function getAIProvider(type: ProviderType = 'openai'): AIProvider {
+export function getAIProvider(type: ProviderType = 'gradient'): AIProvider {
   switch (type) {
     case 'openai':
       return new OpenAIProvider();
     case 'digitalocean':
       return new DOGenAIProvider();
+    case 'gradient':
+      return new GradientAIProvider();
     default:
-      return new OpenAIProvider();
+      // Default to Gradient AI for DigitalOcean deployment
+      return new GradientAIProvider();
   }
 }
 
@@ -21,7 +29,8 @@ let aiInstance: AIProvider | null = null;
 
 function getOrCreateInstance(): AIProvider {
   if (!aiInstance) {
-    aiInstance = getAIProvider((process.env.AI_PROVIDER as ProviderType) || 'openai');
+    const providerType = (process.env.AI_PROVIDER as ProviderType) || 'gradient';
+    aiInstance = getAIProvider(providerType);
   }
   return aiInstance;
 }

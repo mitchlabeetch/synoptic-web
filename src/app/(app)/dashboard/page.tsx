@@ -1,32 +1,28 @@
 // src/app/(app)/dashboard/page.tsx
-import { createClient } from '@/lib/supabase/server'
-import { redirect } from 'next/navigation'
-import ProjectCard from '@/components/dashboard/ProjectCard'
-import ProjectWizard from '@/components/dashboard/ProjectWizard'
-import { OnboardingTour } from '@/components/onboarding/OnboardingTour'
+// PURPOSE: Dashboard page showing user's projects
+// ACTION: Displays project list and creation wizard
+// MECHANISM: Server component that fetches projects from PostgreSQL
+
+import { redirect } from 'next/navigation';
+import ProjectCard from '@/components/dashboard/ProjectCard';
+import ProjectWizard from '@/components/dashboard/ProjectWizard';
+import { OnboardingTour } from '@/components/onboarding/OnboardingTour';
+import { getCurrentUser, getUserId } from '@/lib/auth/jwt';
+import { getUserProjects, getUserProfile } from '@/lib/db/server';
 
 export default async function DashboardPage() {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const user = await getCurrentUser();
 
   if (!user) {
-    redirect('/auth/login')
+    redirect('/auth/login');
   }
 
-  const { data: projects } = await supabase
-    .from('projects')
-    .select('*')
-    .eq('user_id', user.id)
-    .order('updated_at', { ascending: false })
+  const userId = getUserId(user);
+  const projects = await getUserProjects(userId);
+  const profile = await getUserProfile(userId);
 
-  const { data: profile } = await supabase
-    .from('profiles')
-    .select('tier')
-    .eq('id', user.id)
-    .single()
-
-  const tier = profile?.tier || 'free'
-  const projectCount = projects?.length || 0
+  const tier = profile?.tier || 'free';
+  const projectCount = projects?.length || 0;
 
   return (
     <div className="container mx-auto py-8 px-4 relative">
@@ -53,5 +49,5 @@ export default async function DashboardPage() {
         )}
       </div>
     </div>
-  )
+  );
 }
