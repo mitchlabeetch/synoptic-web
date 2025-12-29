@@ -33,6 +33,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Switch } from "@/components/ui/switch"
+import { useTranslations } from 'next-intl';
 
 export default function BlockInspector() {
   const { 
@@ -44,6 +45,10 @@ export default function BlockInspector() {
     updatePage
   } = useProjectStore();
   
+  const t = useTranslations('Inspector');
+  const tBlocks = useTranslations('Blocks');
+  const tCommon = useTranslations('Common');
+
   const currentPage = content.pages[currentPageIndex];
   const selectedBlock = currentPage?.blocks.find(
     (b) => b.id === selectedBlockId
@@ -58,18 +63,18 @@ export default function BlockInspector() {
         <div className="p-4 border-b bg-muted/20 flex items-center justify-between">
           <h3 className="text-sm font-bold uppercase tracking-widest text-foreground flex items-center gap-2">
             <FileText className="h-4 w-4 text-primary" />
-            Page {currentPage.number} Settings
+            {useTranslations('Studio')('pageSettings', { number: currentPage.number })}
           </h3>
         </div>
 
         <div className="flex-1 overflow-auto p-6 space-y-8">
           <section className="space-y-4">
-            <Label className="text-xs font-bold text-muted-foreground uppercase">Visibility Overrides</Label>
+            <Label className="text-xs font-bold text-muted-foreground uppercase">{t('visibility')}</Label>
             <div className="space-y-3">
               <div className="flex items-center justify-between p-2 rounded-lg border bg-muted/10">
                 <div className="flex items-center gap-2">
                   <Eye className="h-3.5 w-3.5 text-muted-foreground" />
-                  <span className="text-xs font-medium">Header</span>
+                  <span className="text-xs font-medium">{t('header')}</span>
                 </div>
                 <Switch 
                   checked={currentPage.showHeader !== false} 
@@ -79,7 +84,7 @@ export default function BlockInspector() {
               <div className="flex items-center justify-between p-2 rounded-lg border bg-muted/10">
                 <div className="flex items-center gap-2">
                   <Hash className="h-3.5 w-3.5 text-muted-foreground" />
-                  <span className="text-xs font-medium">Page Number</span>
+                  <span className="text-xs font-medium">{t('pageNumber')}</span>
                 </div>
                 <Switch 
                   checked={currentPage.showPageNumber !== false} 
@@ -89,7 +94,7 @@ export default function BlockInspector() {
               <div className="flex items-center justify-between p-2 rounded-lg border bg-muted/10">
                 <div className="flex items-center gap-2">
                   <Eye className="h-3.5 w-3.5 text-muted-foreground" />
-                  <span className="text-xs font-medium">Footer</span>
+                  <span className="text-xs font-medium">{t('footer')}</span>
                 </div>
                 <Switch 
                   checked={currentPage.showFooter !== false} 
@@ -100,23 +105,23 @@ export default function BlockInspector() {
           </section>
 
           <section className="space-y-4">
-            <Label className="text-xs font-bold text-muted-foreground uppercase">Content Overrides</Label>
+            <Label className="text-xs font-bold text-muted-foreground uppercase">{t('content')}</Label>
             <div className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="header-text" className="text-[10px] text-muted-foreground">Custom Header Text</Label>
+                <Label htmlFor="header-text" className="text-[10px] text-muted-foreground">L1 Header Overlay</Label>
                 <Input 
                   id="header-text"
-                  placeholder="Override global title..."
+                  placeholder="..."
                   value={currentPage.headerText || ''}
                   onChange={(e) => updatePage(currentPageIndex, { headerText: e.target.value })}
                   className="h-8 text-xs"
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="footer-text" className="text-[10px] text-muted-foreground">Custom Footer Text</Label>
+                <Label htmlFor="footer-text" className="text-[10px] text-muted-foreground">L1 Footer Overlay</Label>
                 <Input 
                   id="footer-text"
-                  placeholder="e.g. Chapter 1 Notes..."
+                  placeholder="..."
                   value={currentPage.footerText || ''}
                   onChange={(e) => updatePage(currentPageIndex, { footerText: e.target.value })}
                   className="h-8 text-xs"
@@ -126,7 +131,7 @@ export default function BlockInspector() {
           </section>
 
           <section className="space-y-4">
-            <Label className="text-xs font-bold text-muted-foreground uppercase">Printing & Flow</Label>
+            <Label className="text-xs font-bold text-muted-foreground uppercase">{t('printingFlow')}</Label>
             <div className="space-y-2">
                <Button 
                 variant={currentPage.isChapterStart ? 'default' : 'outline'} 
@@ -134,7 +139,7 @@ export default function BlockInspector() {
                 onClick={() => updatePage(currentPageIndex, { isChapterStart: !currentPage.isChapterStart })}
                >
                  <Hash className="h-4 w-4" />
-                 Mark as Chapter Start
+                 {t('markChapterStart')}
                </Button>
                <Button 
                 variant={currentPage.isBlankPage ? 'default' : 'outline'} 
@@ -142,14 +147,14 @@ export default function BlockInspector() {
                 onClick={() => updatePage(currentPageIndex, { isBlankPage: !currentPage.isBlankPage })}
                >
                  <Maximize2 className="h-4 w-4" />
-                 Forced Blank Page
+                 {t('forceBlank')}
                </Button>
             </div>
           </section>
         </div>
 
         <div className="p-4 border-t bg-muted/5 text-[10px] text-muted-foreground italic text-center">
-          Changes here only affect the current page.
+          {t('pageLocalOnly')}
         </div>
       </div>
     );
@@ -168,7 +173,7 @@ export default function BlockInspector() {
           {isImage && <ImageIcon className="h-4 w-4 text-primary" />}
           {isSeparator && <SeparatorHorizontal className="h-4 w-4 text-primary" />}
           {isCallout && <MessageSquare className="h-4 w-4 text-primary" />}
-          {selectedBlock.type} Inspector
+          {t('inspectorTitle', { type: tBlocks(selectedBlock.type) })}
         </h3>
         <Button 
           variant="ghost" 
@@ -185,7 +190,7 @@ export default function BlockInspector() {
         {isText && (
           <>
             <section className="space-y-4">
-              <Label className="text-xs font-bold text-muted-foreground uppercase">Layout & Strategy</Label>
+              <Label className="text-xs font-bold text-muted-foreground uppercase">{t('layout')}</Label>
               <div className="grid grid-cols-2 gap-2">
                 {['side-by-side', 'interlinear', 'stacked'].map((layout) => (
                   <Button
@@ -202,11 +207,11 @@ export default function BlockInspector() {
             </section>
 
             <section className="space-y-4">
-              <Label className="text-xs font-bold text-muted-foreground uppercase">Typography</Label>
+              <Label className="text-xs font-bold text-muted-foreground uppercase">{t('typography')}</Label>
               <div className="space-y-6">
                 <div className="space-y-2">
                   <div className="flex justify-between text-xs text-muted-foreground">
-                    <span>Line Height</span>
+                    <span>{t('lineHeight')}</span>
                     <span className="font-medium">{(selectedBlock as any).lineSpacing || 1.5}</span>
                   </div>
                   <Slider 
@@ -219,7 +224,7 @@ export default function BlockInspector() {
                 </div>
                 <div className="space-y-2">
                   <div className="flex justify-between text-xs text-muted-foreground">
-                    <span>Paragraph Spacing</span>
+                    <span>{t('paraSpacing')}</span>
                     <span className="font-medium">{(selectedBlock as any).paragraphSpacing || 20}px</span>
                   </div>
                   <Slider 
@@ -238,11 +243,11 @@ export default function BlockInspector() {
         {isImage && (
           <>
             <section className="space-y-4">
-              <Label className="text-xs font-bold text-muted-foreground uppercase">Dimensions & Alignment</Label>
+              <Label className="text-xs font-bold text-muted-foreground uppercase">{t('dimensions')} & {t('alignment')}</Label>
               <div className="space-y-6">
                 <div className="space-y-2">
                   <div className="flex justify-between text-xs text-muted-foreground">
-                    <span>Width (%)</span>
+                    <span>{t('width')}</span>
                     <span className="font-medium">{(selectedBlock as any).width || 100}%</span>
                   </div>
                   <Slider 
@@ -273,22 +278,22 @@ export default function BlockInspector() {
             </section>
 
             <section className="space-y-4">
-              <Label className="text-xs font-bold text-muted-foreground uppercase">Style & Effects</Label>
+              <Label className="text-xs font-bold text-muted-foreground uppercase">{t('styleEffects')}</Label>
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs text-muted-foreground">Shadow</span>
+                  <span className="text-xs text-muted-foreground">{t('shadow')}</span>
                   <Button 
                     variant={(selectedBlock as any).shadow ? 'default' : 'outline'} 
                     size="sm" 
                     className="h-7 w-12"
                     onClick={() => updateBlock(currentPageIndex, selectedBlock.id, { shadow: !(selectedBlock as any).shadow } as any)}
                   >
-                    {(selectedBlock as any).shadow ? 'On' : 'Off'}
+                    {(selectedBlock as any).shadow ? tCommon('on') : tCommon('off')}
                   </Button>
                 </div>
                 <div className="space-y-2">
                   <div className="flex justify-between text-xs text-muted-foreground">
-                    <span>Border Radius</span>
+                    <span>{t('borderRadius')}</span>
                     <span className="font-medium">{(selectedBlock as any).borderRadius || 0}px</span>
                   </div>
                   <Slider 
@@ -307,31 +312,31 @@ export default function BlockInspector() {
         {isSeparator && (
           <>
             <section className="space-y-4">
-              <Label className="text-xs font-bold text-muted-foreground uppercase">Style & Pattern</Label>
+              <Label className="text-xs font-bold text-muted-foreground uppercase">{t('stylePattern')}</Label>
               <Select 
                 value={(selectedBlock as any).style || 'line'}
                 onValueChange={(val) => updateBlock(currentPageIndex, selectedBlock.id, { style: val } as any)}
               >
                 <SelectTrigger className="w-full h-10">
-                  <SelectValue placeholder="Select Style" />
+                  <SelectValue placeholder={t('stylePattern')} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="line">Solid Line</SelectItem>
-                  <SelectItem value="double-line">Double Line</SelectItem>
-                  <SelectItem value="dashed">Dashed Line</SelectItem>
-                  <SelectItem value="dotted">Dotted Line</SelectItem>
-                  <SelectItem value="gradient">Gradient Fade</SelectItem>
-                  <SelectItem value="ornament-fleuron">Fleuron Ornament</SelectItem>
+                  <SelectItem value="line">{t('solidLine')}</SelectItem>
+                  <SelectItem value="double-line">{t('doubleLine')}</SelectItem>
+                  <SelectItem value="dashed">{t('dashedLine')}</SelectItem>
+                  <SelectItem value="dotted">{t('dottedLine')}</SelectItem>
+                  <SelectItem value="gradient">{t('gradientFade')}</SelectItem>
+                  <SelectItem value="ornament-fleuron">{t('ornament')}</SelectItem>
                 </SelectContent>
               </Select>
             </section>
 
             <section className="space-y-4">
-              <Label className="text-xs font-bold text-muted-foreground uppercase">Dimensions</Label>
+              <Label className="text-xs font-bold text-muted-foreground uppercase">{t('dimensions')}</Label>
               <div className="space-y-6">
                 <div className="space-y-2">
                   <div className="flex justify-between text-xs text-muted-foreground">
-                    <span>Width (%)</span>
+                    <span>{t('width')}</span>
                     <span className="font-medium">{(selectedBlock as any).width || 80}%</span>
                   </div>
                   <Slider 
@@ -344,7 +349,7 @@ export default function BlockInspector() {
                 </div>
                 <div className="space-y-2">
                   <div className="flex justify-between text-xs text-muted-foreground">
-                    <span>Thickness</span>
+                    <span>{t('thickness')}</span>
                     <span className="font-medium">{(selectedBlock as any).thickness || 1}px</span>
                   </div>
                   <Slider 
@@ -364,7 +369,7 @@ export default function BlockInspector() {
         {isCallout && (
           <>
             <section className="space-y-4">
-              <Label className="text-xs font-bold text-muted-foreground uppercase">Context Type</Label>
+              <Label className="text-xs font-bold text-muted-foreground uppercase">{t('contextType')}</Label>
               <Select 
                 value={(selectedBlock as any).calloutType || 'note'}
                 onValueChange={(val) => updateBlock(currentPageIndex, selectedBlock.id, { calloutType: val } as any)}
@@ -373,19 +378,19 @@ export default function BlockInspector() {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="note">General Note</SelectItem>
-                  <SelectItem value="tip">Learning Tip</SelectItem>
-                  <SelectItem value="warning">Grammar Warning</SelectItem>
-                  <SelectItem value="grammar">Grammar Rule</SelectItem>
-                  <SelectItem value="vocabulary">Vocabulary Spark</SelectItem>
-                  <SelectItem value="culture">Cultural Insight</SelectItem>
-                  <SelectItem value="pronunciation">Pronunciation Guide</SelectItem>
+                  <SelectItem value="note">{tBlocks('note')}</SelectItem>
+                  <SelectItem value="tip">{tBlocks('tip')}</SelectItem>
+                  <SelectItem value="warning">{tBlocks('warning')}</SelectItem>
+                  <SelectItem value="grammar">{tBlocks('grammar')}</SelectItem>
+                  <SelectItem value="vocabulary">{tBlocks('vocabulary')}</SelectItem>
+                  <SelectItem value="culture">{tBlocks('culture')}</SelectItem>
+                  <SelectItem value="pronunciation">{tBlocks('pronunciation')}</SelectItem>
                 </SelectContent>
               </Select>
             </section>
 
             <section className="space-y-4">
-              <Label className="text-xs font-bold text-muted-foreground uppercase">Branding Color</Label>
+              <Label className="text-xs font-bold text-muted-foreground uppercase">{t('brandingColor')}</Label>
               <div className="grid grid-cols-5 gap-2">
                 {['#2563eb', '#10b981', '#f59e0b', '#ef4444', '#6366f1', '#8b5cf6', '#ec4899', '#f43f5e', '#64748b', '#000000'].map((color) => (
                   <button
@@ -407,11 +412,11 @@ export default function BlockInspector() {
       <div className="p-4 border-t bg-muted/5 flex gap-2 mt-auto">
         <Button variant="outline" className="flex-1 gap-2 text-xs" onClick={() => {}}>
           <Copy className="h-3 w-3" />
-          Duplicate
+          {tCommon('duplicate')}
         </Button>
         <Button variant="outline" className="flex-1 gap-2 text-xs" onClick={() => {}}>
           <Palette className="h-3 w-3" />
-          Style Preset
+          {t('stylePreset')}
         </Button>
       </div>
     </div>

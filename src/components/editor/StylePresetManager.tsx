@@ -15,6 +15,7 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { ContentBlock, StylePreset } from '@/types/blocks';
+import { useTranslations } from 'next-intl';
 
 export default function StylePresetManager() {
   const { 
@@ -25,6 +26,9 @@ export default function StylePresetManager() {
     deletePreset, 
     applyPreset 
   } = useProjectStore();
+
+  const t = useTranslations('Presets');
+  const tBlocks = useTranslations('Blocks');
 
   const presets = content.presets || [];
   
@@ -52,7 +56,7 @@ export default function StylePresetManager() {
       <div className="p-4 border-b bg-muted/20 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Bookmark className="h-4 w-4 text-primary" />
-          <h3 className="text-sm font-bold uppercase tracking-widest text-foreground">Style Presets</h3>
+          <h3 className="text-sm font-bold uppercase tracking-widest text-foreground">{t('title')}</h3>
         </div>
         {selectedBlock && (
           <Button size="icon" variant="ghost" className="h-8 w-8 hover:bg-primary/10" onClick={handleCapturePreset}>
@@ -66,24 +70,24 @@ export default function StylePresetManager() {
           <div className="text-center py-12 px-6">
             <Palette className="h-12 w-12 mx-auto text-muted-foreground/20 mb-4" />
             <p className="text-xs text-muted-foreground italic">
-              Select a block to capture its style as a reusable preset.
+              {t('empty')}
             </p>
           </div>
         )}
 
         {selectedBlock && (
           <div className="p-4 rounded-xl border-2 border-dashed border-primary/20 bg-primary/5">
-             <span className="text-[10px] font-bold uppercase tracking-wider text-primary block mb-2">Selected Context</span>
-             <p className="text-xs text-muted-foreground">You can capture the styling of this {selectedBlock.type} block.</p>
+             <span className="text-[10px] font-bold uppercase tracking-wider text-primary block mb-2">{t('selected')}</span>
+             <p className="text-xs text-muted-foreground">{t('canCapture', { type: tBlocks(selectedBlock.type) })}</p>
              <Button className="w-full mt-3 h-8 text-xs gap-2" onClick={handleCapturePreset}>
-               <Plus className="h-3 w-3" /> Save Current Style
+               <Plus className="h-3 w-3" /> {t('saveCurrent')}
              </Button>
           </div>
         )}
 
         {presets.length > 0 && (
           <div className="space-y-4">
-            <Label className="text-[10px] font-bold text-muted-foreground uppercase opacity-60">Global Library</Label>
+            <Label className="text-[10px] font-bold text-muted-foreground uppercase opacity-60">{t('library')}</Label>
             <div className="grid grid-cols-1 gap-2">
               {presets.map((preset) => (
                 <div 
@@ -98,7 +102,7 @@ export default function StylePresetManager() {
                   
                   <div className="flex-1 min-w-0">
                     <span className="text-xs font-bold block truncate">{preset.name}</span>
-                    <span className="text-[10px] text-muted-foreground uppercase">{preset.type} style</span>
+                    <span className="text-[10px] text-muted-foreground uppercase">{t('typeStyle', { type: tBlocks(preset.type) })}</span>
                   </div>
 
                   <div className="flex opacity-0 group-hover:opacity-100 transition-opacity">
@@ -131,7 +135,7 @@ export default function StylePresetManager() {
       {presets.length > 0 && (
         <div className="p-4 border-t bg-muted/5 flex items-center gap-2">
           <div className="h-2 w-2 rounded-full bg-primary" />
-          <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-widest">Library Synced</span>
+          <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-widest">{t('synced')}</span>
         </div>
       )}
     </div>

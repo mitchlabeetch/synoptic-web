@@ -32,6 +32,7 @@ import {
   Sparkles,
   Plus,
 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 type WizardStep = 'metadata' | 'languages' | 'format' | 'template';
 
@@ -47,64 +48,66 @@ interface WizardData {
   template: string;
 }
 
-const PAGE_SIZES = [
-  {
-    id: '6x9',
-    label: '6" × 9"',
-    description: 'US Trade Paper',
-    width: 152,
-    height: 229,
-  },
-  {
-    id: '5.5x8.5',
-    label: '5.5" × 8.5"',
-    description: 'Digest',
-    width: 140,
-    height: 216,
-  },
-  {
-    id: 'A4',
-    label: 'A4',
-    description: 'International Standard',
-    width: 210,
-    height: 297,
-  },
-  {
-    id: 'custom',
-    label: 'Custom',
-    description: 'Define your own',
-    width: 0,
-    height: 0,
-  },
-];
-
-const TEMPLATES = [
-  {
-    id: 'blank',
-    label: 'Start Blank',
-    description: 'Zero content, clean slate',
-    icon: FileText,
-  },
-  {
-    id: 'classic',
-    label: 'Classic Side-by-Side',
-    description: 'Balanced columns, serif fonts',
-    icon: BookOpen,
-  },
-  {
-    id: 'poetry',
-    label: 'Poetry / Verses',
-    description: 'Numbered lines, centered focus',
-    icon: Sparkles,
-  },
-];
-
 export default function ProjectWizard() {
   const router = useRouter();
   const supabase = createClient();
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState<WizardStep>('metadata');
   const [isCreating, setIsCreating] = useState(false);
+  
+  const t = useTranslations('Wizard');
+
+  const PAGE_SIZES = [
+    {
+      id: '6x9',
+      label: '6" × 9"',
+      description: 'US Trade Paper',
+      width: 152,
+      height: 229,
+    },
+    {
+      id: '5.5x8.5',
+      label: '5.5" × 8.5"',
+      description: 'Digest',
+      width: 140,
+      height: 216,
+    },
+    {
+      id: 'A4',
+      label: 'A4',
+      description: 'International Standard',
+      width: 210,
+      height: 297,
+    },
+    {
+      id: 'custom',
+      label: t('custom'),
+      description: 'Define your own',
+      width: 0,
+      height: 0,
+    },
+  ];
+
+  const TEMPLATES = [
+    {
+      id: 'blank',
+      label: t('blankTemplate'),
+      description: t('blankDesc'),
+      icon: FileText,
+    },
+    {
+      id: 'classic',
+      label: t('classicTemplate'),
+      description: t('classicDesc'),
+      icon: BookOpen,
+    },
+    {
+      id: 'poetry',
+      label: t('poetryTemplate'),
+      description: t('poetryDesc'),
+      icon: Sparkles,
+    },
+  ];
 
   const [data, setData] = useState<WizardData>({
     title: '',
@@ -188,7 +191,8 @@ export default function ProjectWizard() {
               accent: '#2563eb',
               background: '#ffffff',
             },
-            layout: (data.template === 'interlinear' ? 'interlinear' : 'side-by-side') as 'side-by-side' | 'interlinear' | 'alternating',
+            layout: (data.template === 'poetry' ? 'alternating' : 'side-by-side') as 'side-by-side' | 'interlinear' | 'alternating',
+            direction: 'auto'
           },
           content: {
             pages: [
@@ -224,12 +228,12 @@ export default function ProjectWizard() {
       <DialogTrigger asChild>
         <Button size="lg" className="shadow-lg hover:shadow-xl transition-all gap-2">
           <Plus className="h-5 w-5" />
-          Create New Project
+          {t('createTitle')}
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-2xl">
         <DialogHeader>
-          <DialogTitle className="text-2xl">Create New Masterpiece</DialogTitle>
+          <DialogTitle className="text-2xl">{t('createMasterpiece')}</DialogTitle>
         </DialogHeader>
 
         {/* Progress Indicator */}
@@ -263,33 +267,33 @@ export default function ProjectWizard() {
           {step === 'metadata' && (
             <div className="space-y-6">
               <div>
-                <Label htmlFor="title" className="text-base">Project Title *</Label>
+                <Label htmlFor="title" className="text-base">{t('projectTitle')}</Label>
                 <Input
                   id="title"
                   value={data.title}
                   onChange={(e) => setData({ ...data, title: e.target.value })}
-                  placeholder="e.g. Twenty Thousand Leagues Under the Sea"
+                  placeholder={t('titlePlaceholder')}
                   className="mt-2 h-12 text-lg"
                 />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="author">Author</Label>
+                  <Label htmlFor="author">{t('author')}</Label>
                   <Input
                     id="author"
                     value={data.author}
                     onChange={(e) => setData({ ...data, author: e.target.value })}
-                    placeholder="Your name or Original Author"
+                    placeholder={t('authorPlaceholder')}
                     className="mt-2"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="description">Category / Tag</Label>
+                  <Label htmlFor="description">{t('category')}</Label>
                   <Input
                     id="description"
                     value={data.description}
                     onChange={(e) => setData({ ...data, description: e.target.value })}
-                    placeholder="e.g. Fiction, Education"
+                    placeholder={t('categoryPlaceholder')}
                     className="mt-2"
                   />
                 </div>
@@ -301,7 +305,7 @@ export default function ProjectWizard() {
             <div className="space-y-8">
               <div className="grid grid-cols-2 gap-8">
                 <div>
-                  <Label className="text-base">Source Language (L1)</Label>
+                  <Label className="text-base">{t('sourceLang')}</Label>
                   <Select
                     value={data.sourceLang}
                     onValueChange={(v) => setData({ ...data, sourceLang: v })}
@@ -324,7 +328,7 @@ export default function ProjectWizard() {
                   </Select>
                 </div>
                 <div>
-                  <Label className="text-base">Target Language (L2)</Label>
+                  <Label className="text-base">{t('targetLang')}</Label>
                   <Select
                     value={data.targetLang}
                     onValueChange={(v) => setData({ ...data, targetLang: v })}
@@ -352,14 +356,14 @@ export default function ProjectWizard() {
                 <div className="p-4 bg-destructive/10 border-l-4 border-destructive rounded flex items-center gap-3">
                   <span className="text-destructive font-medium">Warning:</span>
                   <p className="text-sm text-destructive-foreground">
-                    Source and target languages must be different for a bilingual project.
+                    {t('langWarning')}
                   </p>
                 </div>
               )}
               
               <div className="p-4 bg-primary/5 rounded-xl border border-primary/10">
                 <p className="text-sm text-muted-foreground italic">
-                  Tip: Most users choose their native language as the target and the language they are learning as the source.
+                  {t('langTip')}
                 </p>
               </div>
             </div>
@@ -367,7 +371,7 @@ export default function ProjectWizard() {
 
           {step === 'format' && (
             <div className="space-y-6">
-              <Label className="text-base">Physical Dimensons (mm)</Label>
+              <Label className="text-base">{t('dimensions')}</Label>
               <RadioGroup
                 value={data.pageSize}
                 onValueChange={(v: string) => setData({ ...data, pageSize: v })}
@@ -400,7 +404,7 @@ export default function ProjectWizard() {
               {data.pageSize === 'custom' && (
                 <div className="grid grid-cols-2 gap-6 p-6 bg-muted/30 rounded-2xl border border-dashed border-muted-foreground/20 mt-4">
                   <div>
-                    <Label htmlFor="customWidth">Width (mm)</Label>
+                    <Label htmlFor="customWidth">{t('width')}</Label>
                     <Input
                       id="customWidth"
                       type="number"
@@ -411,7 +415,7 @@ export default function ProjectWizard() {
                     />
                   </div>
                   <div>
-                    <Label htmlFor="customHeight">Height (mm)</Label>
+                    <Label htmlFor="customHeight">{t('height')}</Label>
                     <Input
                       id="customHeight"
                       type="number"
@@ -428,7 +432,7 @@ export default function ProjectWizard() {
 
           {step === 'template' && (
             <div className="space-y-4">
-              <Label className="text-base">Layout Style</Label>
+              <Label className="text-base">{t('layoutStyle')}</Label>
               <RadioGroup
                 value={data.template}
                 onValueChange={(v: string) => setData({ ...data, template: v })}
@@ -475,7 +479,7 @@ export default function ProjectWizard() {
             className="flex items-center gap-2"
           >
             <ChevronLeft className="w-4 h-4" />
-            Back
+            {t('back')}
           </Button>
 
           <div className="flex gap-3">
@@ -485,16 +489,16 @@ export default function ProjectWizard() {
                 disabled={!canProceed()}
                 className="w-32 font-bold"
               >
-                Next Step
+                {t('next')}
                 <ChevronRight className="w-4 h-4 ml-2" />
               </Button>
             ) : (
               <Button
                 onClick={handleCreate}
                 disabled={isCreating || !canProceed()}
-                className="w-48 font-bold animate-pulse hover:animate-none"
+                className="w-56 font-bold animate-pulse hover:animate-none"
               >
-                {isCreating ? 'Forging Studio...' : 'Launch Studio'}
+                {isCreating ? t('creating') : t('launch')}
               </Button>
             )}
           </div>

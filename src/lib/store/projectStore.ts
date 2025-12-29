@@ -9,6 +9,7 @@ import {
   ProjectContent,
   StylePreset,
 } from '@/types/blocks';
+import { isRTL } from '@/data/languages';
 
 interface ProjectMeta {
   id: string;
@@ -39,6 +40,7 @@ interface ProjectSettings {
     background: string;
   };
   layout: 'side-by-side' | 'interlinear' | 'alternating';
+  direction: 'ltr' | 'rtl' | 'auto';
 }
 
 interface ProjectState {
@@ -133,6 +135,7 @@ const DEFAULT_SETTINGS: ProjectSettings = {
     background: '#ffffff',
   },
   layout: 'side-by-side',
+  direction: 'auto',
 };
 
 export const useProjectStore = create<ProjectState>()(
@@ -336,3 +339,10 @@ export const useProjectStore = create<ProjectState>()(
     setSelectedBlockId: (id) => set({ selectedBlockId: id }),
   }))
 );
+// Helpers
+export const getEffectiveDirection = (state: ProjectState) => {
+  if (state.settings.direction !== 'auto') return state.settings.direction;
+  const sourceLang = state.meta?.source_lang;
+  if (!sourceLang) return 'ltr';
+  return isRTL(sourceLang) ? 'rtl' : 'ltr';
+};

@@ -1,11 +1,12 @@
 // src/components/editor/Workspace.tsx
 "use client";
 
-import { useProjectStore } from '@/lib/store/projectStore';
+import { useProjectStore, getEffectiveDirection } from '@/lib/store/projectStore';
 import { useProjectSync } from '@/hooks/useProjectSync';
 import PageRenderer from './PageRenderer';
 import { Loader2, CloudCheck, CloudUpload, AlertCircle, PlusCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useTranslations } from 'next-intl';
 
 interface WorkspaceProps {
   projectId: string;
@@ -14,13 +15,15 @@ interface WorkspaceProps {
 export default function Workspace({ projectId }: WorkspaceProps) {
   const { syncStatus } = useProjectSync(projectId);
   const { content, addPage } = useProjectStore();
+  const direction = useProjectStore((state) => getEffectiveDirection(state));
+  const t = useTranslations('Studio');
 
   if (syncStatus.status === 'loading') {
     return (
       <div className="flex-1 flex items-center justify-center h-full">
         <div className="text-center space-y-4">
           <Loader2 className="h-8 w-8 animate-spin mx-auto text-primary" />
-          <p className="text-muted-foreground animate-pulse">Entering the Studio...</p>
+          <p className="text-muted-foreground animate-pulse">{t('enteringStudio')}</p>
         </div>
       </div>
     );
@@ -31,13 +34,13 @@ export default function Workspace({ projectId }: WorkspaceProps) {
       <div className="flex-1 flex items-center justify-center h-full">
         <div className="text-center space-y-4 max-w-md p-6 border-2 border-destructive/20 rounded-xl bg-destructive/5">
           <AlertCircle className="h-12 w-12 mx-auto text-destructive" />
-          <h2 className="text-xl font-bold">Failed to load project</h2>
+          <h2 className="text-xl font-bold">{t('failedToLoadProject')}</h2>
           <p className="text-muted-foreground">{syncStatus.error}</p>
           <button 
             onClick={() => window.location.reload()}
             className="px-4 py-2 bg-primary text-primary-foreground rounded-md shadow-sm"
           >
-            Retry Connection
+            {t('retryConnection')}
           </button>
         </div>
       </div>
@@ -46,6 +49,7 @@ export default function Workspace({ projectId }: WorkspaceProps) {
 
   return (
     <div 
+      dir={direction}
       className="flex-1 relative bg-neutral-100 dark:bg-neutral-900 overflow-auto scroll-smooth h-full transition-colors duration-500"
       style={{
         backgroundImage: `radial-gradient(circle at 1px 1px, rgba(0,0,0,0.05) 1px, transparent 0)`,
@@ -62,13 +66,13 @@ export default function Workspace({ projectId }: WorkspaceProps) {
           {syncStatus.status === 'saving' && (
             <>
               <Loader2 className="h-4 w-4 animate-spin text-primary" />
-              <span>Saving draft...</span>
+              <span>{t('saving')}</span>
             </>
           )}
           {syncStatus.status === 'saved' && (
             <>
               <CloudCheck className="h-4 w-4 text-green-500" />
-              <span>All changes saved to cloud</span>
+              <span>{t('saved')}</span>
             </>
           )}
         </div>
@@ -96,12 +100,12 @@ export default function Workspace({ projectId }: WorkspaceProps) {
           <div className="h-12 w-12 rounded-full border-2 border-dashed border-muted-foreground/30 flex items-center justify-center group-hover:border-primary group-hover:bg-primary/5 group-hover:scale-110 transition-all">
             <PlusCircle className="h-6 w-6 text-muted-foreground group-hover:text-primary" />
           </div>
-          <span className="text-sm font-medium text-muted-foreground group-hover:text-primary">Add New Page</span>
+          <span className="text-sm font-medium text-muted-foreground group-hover:text-primary">{t('addPage')}</span>
         </button>
 
         <div className="text-xs text-muted-foreground italic flex flex-col items-center gap-2 mt-8">
           <div className="w-1 h-8 bg-muted rounded-full" />
-          <span>Genesis of your bilingual masterpiece</span>
+          <span>{t('ready')}</span>
         </div>
       </div>
     </div>

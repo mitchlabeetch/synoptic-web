@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -121,5 +121,27 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .dir-rtl {
+    direction: rtl;
+  }
+  .dir-ltr {
+    direction: ltr;
+  }
+
+  /* Book Specific RTL logic */
+  .book-grid-rtl {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    direction: rtl;
+  }
+
+  .book-grid-ltr {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    direction: ltr;
   }
 }

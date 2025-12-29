@@ -24,9 +24,9 @@ export function ImageBlockComponent({
 }: ImageBlockComponentProps) {
   
   const alignmentStyles = {
-    left: 'justify-start mr-auto',
+    left: 'justify-start me-auto',
     center: 'justify-center mx-auto',
-    right: 'justify-end ml-auto',
+    right: 'justify-end ms-auto',
   };
 
   const wrapStyles = {

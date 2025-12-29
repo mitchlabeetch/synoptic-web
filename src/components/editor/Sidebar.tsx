@@ -19,6 +19,7 @@ import {
   ChevronRight,
   Palette
 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { 
   Tooltip,
@@ -29,11 +30,14 @@ import {
 import PageManager from './PageManager';
 import ThemeInspector from './ThemeInspector';
 import StylePresetManager from './StylePresetManager';
+import LocaleSwitcher from './LocaleSwitcher';
 
 export default function Sidebar() {
   const { addBlock, addPage, currentPageIndex, meta } = useProjectStore();
   const [activeTab, setActiveTab] = useState<'tools' | 'pages' | 'design' | 'presets'>('pages');
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const t = useTranslations('Blocks');
+  const tStudio = useTranslations('Studio');
 
   const handleAddTextBlock = () => {
     addBlock(currentPageIndex, {
@@ -88,15 +92,15 @@ export default function Sidebar() {
   };
 
   const tools = [
-    { id: 'pages', icon: Layout, label: 'Page Manager', onClick: () => { setActiveTab('pages'); setIsCollapsed(false); } },
-    { id: 'design', icon: Palette, label: 'Global Design', onClick: () => { setActiveTab('design'); setIsCollapsed(false); } },
-    { id: 'presets', icon: Layers, label: 'Style Presets', onClick: () => { setActiveTab('presets'); setIsCollapsed(false); } },
-    { id: 'text', icon: Type, label: 'Add Text', onClick: handleAddTextBlock },
-    { id: 'separator', icon: SeparatorHorizontal, label: 'Separator', onClick: handleAddSeparator },
-    { id: 'callout', icon: MessageSquare, label: 'Callout', onClick: handleAddCallout },
-    { id: 'media', icon: ImageIcon, label: 'Media', onClick: handleAddImageBlock },
-    { id: 'ai', icon: Languages, label: 'Translation AI', onClick: () => {} },
-    { id: 'settings', icon: Settings2, label: 'Studio Settings', onClick: () => {} },
+    { id: 'pages', icon: Layout, label: tStudio('pageManager'), onClick: () => { setActiveTab('pages'); setIsCollapsed(false); } },
+    { id: 'design', icon: Palette, label: tStudio('globalDesign'), onClick: () => { setActiveTab('design'); setIsCollapsed(false); } },
+    { id: 'presets', icon: Layers, label: tStudio('stylePresets'), onClick: () => { setActiveTab('presets'); setIsCollapsed(false); } },
+    { id: 'text', icon: Type, label: t('text'), onClick: handleAddTextBlock },
+    { id: 'separator', icon: SeparatorHorizontal, label: t('separator'), onClick: handleAddSeparator },
+    { id: 'callout', icon: MessageSquare, label: t('callout'), onClick: handleAddCallout },
+    { id: 'media', icon: ImageIcon, label: t('media'), onClick: handleAddImageBlock },
+    { id: 'ai', icon: Languages, label: t('ai'), onClick: () => {} },
+    { id: 'settings', icon: Settings2, label: t('settings'), onClick: () => {} },
   ];
 
   return (
@@ -159,26 +163,26 @@ export default function Sidebar() {
             {activeTab === 'tools' && (
               <div className="flex-1 flex flex-col">
                 <div className="p-4 border-b bg-muted/20">
-                  <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Editor Tools</h3>
+                  <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground">{tStudio('editorTools')}</h3>
                 </div>
                 <div className="flex-1 overflow-auto p-4 space-y-6">
                    <div className="space-y-2">
-                     <Label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">Canvas Actions</Label>
+                     <Label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">{tStudio('canvasActions')}</Label>
                      <Button variant="outline" className="w-full justify-start gap-2" size="sm" onClick={() => addPage(currentPageIndex)}>
                         <PlusCircle className="h-4 w-4" />
-                        Add Blank Page
+                        {t('addBlankPage')}
                      </Button>
                      <Button variant="outline" className="w-full justify-start gap-2" size="sm" onClick={handleAddTextBlock}>
                         <Type className="h-4 w-4" />
-                        Insert Text Block
+                        {t('insertText')}
                      </Button>
                    </div>
 
                    <div className="space-y-2">
-                     <Label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">Drafting</Label>
+                     <Label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">{tStudio('drafting')}</Label>
                      <button className="w-full flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg text-muted-foreground hover:bg-muted transition-colors">
                         <Hash className="h-4 w-4" />
-                        Chapter Start
+                        {tStudio('chapterStart')}
                      </button>
                    </div>
                 </div>
@@ -186,11 +190,12 @@ export default function Sidebar() {
             )}
             
             {/* Footer Info (Hidden if collapsed) */}
-            <div className="p-4 border-t bg-muted/5 mt-auto">
+            <div className="p-4 border-t bg-muted/5 mt-auto flex items-center justify-between">
               <div className="flex items-center gap-2 text-[10px] text-muted-foreground italic">
                 <div className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
                 <span className="uppercase tracking-tighter font-bold opacity-60">Engine v0.4.0-Studio</span>
               </div>
+              <LocaleSwitcher />
             </div>
           </div>
         )}

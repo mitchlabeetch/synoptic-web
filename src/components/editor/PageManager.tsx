@@ -41,6 +41,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { useTranslations } from 'next-intl';
 
 interface SortablePageItemProps {
   id: string;
@@ -59,6 +60,8 @@ function SortablePageItem({ id, index, isActive, onSelect, onDelete }: SortableP
     transition,
     isDragging,
   } = useSortable({ id });
+
+  const t = useTranslations('Studio');
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -110,7 +113,7 @@ function SortablePageItem({ id, index, isActive, onSelect, onDelete }: SortableP
           <DropdownMenuContent align="end">
             <DropdownMenuItem className="text-destructive gap-2" onClick={(e) => { e.stopPropagation(); onDelete(); }}>
               <Trash2 className="h-3.5 w-3.5" />
-              Delete Page
+              {t('deletePage')}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -130,6 +133,7 @@ export default function PageManager() {
   } = useProjectStore();
   
   const [isExpanded, setIsExpanded] = useState(true);
+  const t = useTranslations('Studio');
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -175,7 +179,7 @@ export default function PageManager() {
         >
           {isExpanded ? <ChevronDown className="h-3 w-3" /> : <ChevronRight className="h-3 w-3" />}
           <Book className="h-3 w-3 text-primary" />
-          Manuscript
+          {t('manuscript')}
         </button>
         <Button 
           variant="outline" 
@@ -219,12 +223,12 @@ export default function PageManager() {
       {/* Chapter View Placeholder */}
       <div className="p-3 border-t bg-muted/5">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/40">Chapters</span>
+          <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/40">{t('chapters')}</span>
           <Plus className="h-3 w-3 text-muted-foreground/40 cursor-pointer" />
         </div>
         <div className="space-y-1">
           <div className="flex items-center gap-2 px-2 py-1.5 text-xs text-muted-foreground/60 italic rounded-md border border-dashed border-muted">
-            No Chapters Defined
+            {t('noChapters')}
           </div>
         </div>
       </div>

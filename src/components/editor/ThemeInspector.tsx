@@ -22,6 +22,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { useTranslations } from 'next-intl';
 
 const FONT_OPTIONS = [
   'Crimson Pro',
@@ -35,15 +36,17 @@ const FONT_OPTIONS = [
   'Merriweather',
 ];
 
-const THEME_PALETTES = [
-  { id: 'classic', label: 'Classic Noir', primary: '#1a1a1a', accent: '#3b82f6', bg: '#ffffff' },
-  { id: 'sepia', label: 'Vintage Sepia', primary: '#433422', accent: '#b45309', bg: '#fdf6e3' },
-  { id: 'modern', label: 'Modern Slate', primary: '#0f172a', accent: '#10b981', bg: '#f8fafc' },
-  { id: 'midnight', label: 'Midnight Blue', primary: '#d1d5db', accent: '#60a5fa', bg: '#020617' },
-];
-
 export default function ThemeInspector() {
   const { settings, updateSettings } = useProjectStore();
+  const t = useTranslations('Theme');
+  const tStudio = useTranslations('Studio');
+
+  const THEME_PALETTES = [
+    { id: 'classic', label: 'Classic Noir', primary: '#1a1a1a', accent: '#3b82f6', bg: '#ffffff' },
+    { id: 'sepia', label: 'Vintage Sepia', primary: '#433422', accent: '#b45309', bg: '#fdf6e3' },
+    { id: 'modern', label: 'Modern Slate', primary: '#0f172a', accent: '#10b981', bg: '#f8fafc' },
+    { id: 'midnight', label: 'Midnight Blue', primary: '#d1d5db', accent: '#60a5fa', bg: '#020617' },
+  ];
 
   const handleFontChange = (type: 'heading' | 'body' | 'annotation', value: string) => {
     updateSettings({
@@ -72,13 +75,13 @@ export default function ThemeInspector() {
     <div className="flex-1 flex flex-col overflow-hidden bg-card animate-in slide-in-from-right duration-300">
       <div className="p-4 border-b bg-muted/20 flex items-center gap-2">
         <Palette className="h-4 w-4 text-primary" />
-        <h3 className="text-sm font-bold uppercase tracking-widest text-foreground">Global Design</h3>
+        <h3 className="text-sm font-bold uppercase tracking-widest text-foreground">{t('title')}</h3>
       </div>
 
       <div className="flex-1 overflow-auto p-6 space-y-8">
         {/* Layout Strategy */}
         <section className="space-y-4">
-          <Label className="text-xs font-bold text-muted-foreground uppercase">Global Layout</Label>
+          <Label className="text-xs font-bold text-muted-foreground uppercase">{t('layout')}</Label>
           <div className="grid grid-cols-2 gap-2">
             {(['side-by-side', 'interlinear', 'alternating'] as const).map((mode) => (
               <Button
@@ -96,10 +99,10 @@ export default function ThemeInspector() {
 
         {/* Fonts */}
         <section className="space-y-4">
-          <Label className="text-xs font-bold text-muted-foreground uppercase font-outfit">Typography (Global)</Label>
+          <Label className="text-xs font-bold text-muted-foreground uppercase font-outfit">{t('typography')}</Label>
           <div className="space-y-4">
             <div className="space-y-1.5">
-              <span className="text-[10px] text-muted-foreground uppercase tracking-tight">Body Text</span>
+              <span className="text-[10px] text-muted-foreground uppercase tracking-tight">{t('bodyText')}</span>
               <Select value={settings.fonts.body} onValueChange={(v) => handleFontChange('body', v)}>
                 <SelectTrigger className="h-9">
                   <SelectValue />
@@ -112,7 +115,7 @@ export default function ThemeInspector() {
               </Select>
             </div>
             <div className="space-y-1.5">
-              <span className="text-[10px] text-muted-foreground uppercase tracking-tight">Main Headings</span>
+              <span className="text-[10px] text-muted-foreground uppercase tracking-tight">{t('headings')}</span>
               <Select value={settings.fonts.heading} onValueChange={(v) => handleFontChange('heading', v)}>
                 <SelectTrigger className="h-9 font-bold">
                   <SelectValue />
@@ -129,11 +132,11 @@ export default function ThemeInspector() {
 
         {/* Global Sizes */}
         <section className="space-y-4">
-          <Label className="text-xs font-bold text-muted-foreground uppercase">Base Scaling</Label>
+          <Label className="text-xs font-bold text-muted-foreground uppercase">{t('baseScaling')}</Label>
           <div className="space-y-6">
             <div className="space-y-2">
               <div className="flex justify-between text-xs">
-                <span className="text-muted-foreground">Body Font Size</span>
+                <span className="text-muted-foreground">{t('fontSize')}</span>
                 <span className="font-medium font-mono">{settings.typography.baseSize}pt</span>
               </div>
               <Slider 
@@ -144,7 +147,7 @@ export default function ThemeInspector() {
             </div>
             <div className="space-y-2">
               <div className="flex justify-between text-xs">
-                <span className="text-muted-foreground">Global Line Height</span>
+                <span className="text-muted-foreground">{t('lineHeight')}</span>
                 <span className="font-medium font-mono">{settings.typography.lineHeight}</span>
               </div>
               <Slider 
@@ -158,7 +161,7 @@ export default function ThemeInspector() {
 
         {/* Color Palettes */}
         <section className="space-y-4">
-          <Label className="text-xs font-bold text-muted-foreground uppercase">Color Presets</Label>
+          <Label className="text-xs font-bold text-muted-foreground uppercase">{t('colorPresets')}</Label>
           <div className="grid grid-cols-1 gap-2">
             {THEME_PALETTES.map((p) => (
               <button
@@ -176,7 +179,7 @@ export default function ThemeInspector() {
                 </div>
                 <div className="flex-1">
                   <span className="text-xs font-bold block">{p.label}</span>
-                  <span className="text-[10px] text-muted-foreground">{p.id === 'midnight' ? 'Dark Mode' : 'Light Mode'}</span>
+                  <span className="text-[10px] text-muted-foreground">{p.id === 'midnight' ? t('darkMode') : t('lightMode')}</span>
                 </div>
                 {settings.colors.background === p.bg && <Check className="h-4 w-4 text-primary" />}
               </button>
@@ -187,7 +190,7 @@ export default function ThemeInspector() {
 
       <div className="p-4 border-t bg-muted/5 flex gap-2 mt-auto">
         <Button variant="outline" className="flex-1 gap-2 text-xs uppercase font-bold tracking-tighter">
-          Reset to Factory
+          {tStudio('resetFactory')}
         </Button>
       </div>
     </div>

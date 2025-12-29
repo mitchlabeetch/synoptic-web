@@ -30,6 +30,11 @@ export function TextBlockComponent({
   isEditing,
 }: TextBlockComponentProps) {
   const { settings } = useProjectStore();
+  const direction = useProjectStore((state) => {
+    if (state.settings.direction !== 'auto') return state.settings.direction;
+    return isRTL(sourceLang) ? 'rtl' : 'ltr';
+  });
+  
   const l1Ref = useRef<HTMLDivElement>(null);
   const l2Ref = useRef<HTMLDivElement>(null);
   const [toolbarVisible, setToolbarVisible] = useState(false);
@@ -72,14 +77,15 @@ export function TextBlockComponent({
     return () => document.removeEventListener('selectionchange', handleSelection);
   }, [isSelected]);
 
+  const currentLayout = block.layout || settings.layout || 'side-by-side';
+
+  // Logical grid classes
   const layoutStyles = {
-    'side-by-side': 'grid grid-cols-2 gap-8',
+    'side-by-side': direction === 'rtl' ? 'book-grid-rtl gap-8' : 'book-grid-ltr gap-8',
     'interlinear': 'flex flex-col gap-1',
     'stacked': 'flex flex-col gap-4',
-    'alternating': 'flex flex-col gap-4', // Alternating handled via CSS logic usually, but here just stacked fallback
+    'alternating': 'flex flex-col gap-4',
   };
-
-  const currentLayout = block.layout || settings.layout || 'side-by-side';
 
   return (
     <div
@@ -116,7 +122,7 @@ export function TextBlockComponent({
             fontFamily: block.L1.formatting?.fontFamily || (block.isTitle || block.isChapterHeading ? settings.fonts.heading : settings.fonts.body),
             fontSize: block.L1.formatting?.fontSize ? `${block.L1.formatting.fontSize}px` : `${settings.typography.baseSize}pt`,
             color: block.L1.formatting?.color || settings.colors.primary,
-            textAlign: block.L1.formatting?.alignment || (isL1RTL ? 'right' : 'left'),
+            textAlign: block.L1.formatting?.alignment || 'start',
           }}
           contentEditable={isEditing}
           suppressContentEditableWarning
@@ -138,7 +144,7 @@ export function TextBlockComponent({
             fontFamily: block.L2.formatting?.fontFamily || (block.isTitle || block.isChapterHeading ? settings.fonts.heading : settings.fonts.body),
             fontSize: block.L2.formatting?.fontSize ? `${block.L2.formatting.fontSize}px` : `${settings.typography.baseSize}pt`,
             color: block.L2.formatting?.color || settings.colors.secondary,
-            textAlign: block.L2.formatting?.alignment || (isL2RTL ? 'right' : 'left'),
+            textAlign: block.L2.formatting?.alignment || 'start',
           }}
           contentEditable={isEditing}
           suppressContentEditableWarning
