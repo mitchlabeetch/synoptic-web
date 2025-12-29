@@ -16,4 +16,26 @@ export function getAIProvider(type: ProviderType = 'openai'): AIProvider {
   }
 }
 
-export const ai = getAIProvider((process.env.AI_PROVIDER as ProviderType) || 'openai');
+// Lazy initialization to avoid instantiating the provider during build time
+let aiInstance: AIProvider | null = null;
+
+export const ai: AIProvider = {
+  translate: (text: string, sourceLang: string, targetLang: string) => {
+    if (!aiInstance) {
+      aiInstance = getAIProvider((process.env.AI_PROVIDER as ProviderType) || 'openai');
+    }
+    return aiInstance.translate(text, sourceLang, targetLang);
+  },
+  annotate: (L1Text: string, L2Text: string, L1Lang: string, L2Lang: string) => {
+    if (!aiInstance) {
+      aiInstance = getAIProvider((process.env.AI_PROVIDER as ProviderType) || 'openai');
+    }
+    return aiInstance.annotate(L1Text, L2Text, L1Lang, L2Lang);
+  },
+  explain: (word: string, context: string, language: string) => {
+    if (!aiInstance) {
+      aiInstance = getAIProvider((process.env.AI_PROVIDER as ProviderType) || 'openai');
+    }
+    return aiInstance.explain(word, context, language);
+  },
+};
