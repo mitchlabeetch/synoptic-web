@@ -3,7 +3,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Sparkles, MoveRight, Shapes } from 'lucide-react';
+import { ArrowRight, Sparkles, MoveRight, Shapes, Play, Pause } from 'lucide-react';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
@@ -172,7 +172,7 @@ export function Hero() {
                       aria-label={isPaused ? "Resume language rotation" : "Pause language rotation"}
                       title={isPaused ? "Resume" : "Pause"}
                     >
-                      {isPaused ? '▶' : '⏸'}
+                      {isPaused ? <Play className="h-3 w-3" /> : <Pause className="h-3 w-3" />}
                     </button>
                   </div>
                   
