@@ -155,7 +155,10 @@ const LANGUAGES_ANNOTATIONS: Record<string, LanguageData> = {
   }
 };
 
-const getLangData = (code: string) => LANGUAGES_ANNOTATIONS[code] || LANGUAGES_ANNOTATIONS.en;
+const getLangData = (code: string) => {
+  const baseCode = code.split('-')[0];
+  return LANGUAGES_ANNOTATIONS[code] || LANGUAGES_ANNOTATIONS[baseCode] || LANGUAGES_ANNOTATIONS.en;
+};
 
 const ROLE_COLORS = {
   article: "#30b8c8", 
@@ -193,31 +196,39 @@ function CurvedArrow({ fromRef, toRef, containerRef, color, isRTL }: { fromRef: 
       startX = fromCenterX;
       endX = toCenterX;
 
+      const isBackwards = startX > endX;
+      const dist = Math.abs(startX - endX);
+      let controlY;
+
       if (diffY < -verticalThreshold) {
         // TARGET IS ABOVE ORIGIN
         startY = fromRect.top - containerRect.top - padding;
         endY = toRect.top - containerRect.top + toRect.height + padding;
+        controlY = (startY + endY) / 2;
       } else if (diffY > verticalThreshold) {
         // TARGET IS BELOW ORIGIN
         startY = fromRect.top - containerRect.top + fromRect.height + padding;
         endY = toRect.top - containerRect.top - padding;
+        controlY = (startY + endY) / 2;
       } else {
         // SAME LEVEL
-        startY = fromRect.top - containerRect.top + fromRect.height + padding;
-        endY = toRect.top - containerRect.top + toRect.height + padding;
+        if (isBackwards) {
+           // Right to Left -> Arc Over Top
+           startY = fromRect.top - containerRect.top - padding;
+           endY = toRect.top - containerRect.top - padding;
+           // Curve Upward
+           const arcHeight = Math.min(80, dist * 0.5 + 20);
+           controlY = Math.min(startY, endY) - arcHeight;
+        } else {
+           // Left to Right -> Arc Under Bottom
+           startY = fromRect.top - containerRect.top + fromRect.height + padding;
+           endY = toRect.top - containerRect.top + toRect.height + padding;
+           // Curve Downward
+           const arcHeight = Math.min(80, dist * 0.5 + 20);
+           controlY = Math.max(startY, endY) + arcHeight;
+        }
       }
       
-      const dist = Math.abs(startX - endX);
-
-      // Increased curvature to "clear" intermediate words significantly
-      let controlY;
-      if (Math.abs(diffY) <= verticalThreshold) {
-        controlY = Math.max(startY, endY) + Math.min(150, dist * 0.8 + 40);
-      } else {
-        // For vertical transitions, move the control point horizontally to create a nice sweep
-        controlY = (startY + endY) / 2;
-      }
-
       const isWrapped = Math.abs(fromRect.top - toRect.top) > 30;
       let midX = (startX + endX) / 2;
       midY = controlY;
@@ -462,37 +473,52 @@ export function Hero() {
                 <PenTool className="h-4 w-4 text-muted-foreground/20" />
               </div>
             </div>
-            
-            <div className="flex flex-col lg:flex-row">
-              {/* Sidebar Renders */}
-              <div className="hidden lg:flex w-16 border-r flex-col items-center py-12 gap-12 bg-muted/5">
-                {[BookOpen, Sparkles, Globe, Zap, Languages].map((Icon, i) => (
-                  <Icon key={i} className={cn("h-5 w-5 transition-all duration-500", i === 2 || i === 4 ? "text-primary opacity-90" : "text-muted-foreground/20")} />
-                ))}
-              </div>
+            <div className="flex flex-col items-center gap-12 py-12 md:py-24 bg-background/50">
+        
+              <div className="text-center space-y-8 max-w-4xl mx-auto">
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/50 border border-border backdrop-blur-sm shadow-sm"
+                >
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#30b8c8] opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#30b8c8]"></span>
+                  </span>
+                  <span className="text-xs font-bold tracking-widest uppercase text-muted-foreground">{t('badge')}</span>
+                </motion.div>
 
-              {/* Translation Panels - Realistic Flow with Overflow Safety */}
-              <div className="flex-1 flex flex-col lg:flex-row min-h-[350px] md:min-h-[450px] relative overflow-hidden">
-                
-                {/* Visual Separator - Increased Opacity */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-px h-[60%] bg-border hidden lg:block z-20" />
+                <div className="relative">
+                  <h1 className="sr-only">Synoptic Studio</h1>
+                  {/* Dynamic Bilingual Headline */}
+                  <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 md:text-left">
+                      {/* Source Language - Left -> Right */}
+                      <AnnotatedSentence 
+                        langCode={currentLocale} 
+                        active={animationStage === 'sync'} 
+                        staticMode={animationStage === 'cycling' || animationStage === 'dwell'}
+                        onComplete={handleSyncComplete} 
+                      />
+                      
+                      {/* Arrow or Separator */}
+                      <motion.div 
+                        initial={{ opacity: 0, scale: 0.5 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.5 }}
+                        className="hidden md:flex items-center justify-center w-12 h-12 rounded-full border border-border bg-background shadow-sm z-20"
+                      >
+                        <ArrowRight className="w-5 h-5 text-muted-foreground" />
+                      </motion.div>
 
-                <div className="flex-1 p-8 md:p-14 lg:p-12 flex flex-col justify-center overflow-hidden [container-type:inline-size]">
-                   <AnnotatedSentence 
-                      langCode={currentLocale} 
-                      active={animationStage === 'sync'} 
-                      staticMode={animationStage === 'cycling' || animationStage === 'dwell'}
-                      onComplete={handleSyncComplete} 
-                   />
+                      {/* Target Language - Cycling */}
+                      <AnnotatedSentence 
+                        langCode={currentLangCode} 
+                        active={animationStage === 'sync' || animationStage === 'cycling'} 
+                        onComplete={handleCycleComplete}
+                      />
+                  </div>
                 </div>
 
-                <div className="flex-1 p-8 md:p-14 lg:p-12 flex flex-col justify-center bg-muted/5 overflow-hidden [container-type:inline-size]">
-                   <AnnotatedSentence 
-                      langCode={currentLangCode} 
-                      active={animationStage === 'sync' || animationStage === 'cycling'} 
-                      onComplete={handleCycleComplete}
-                   />
-                </div>
               </div>
             </div>
           </div>
@@ -505,7 +531,7 @@ export function Hero() {
            transition={{ delay: 0.8 }}
            className="mt-20 text-center max-w-6xl mx-auto space-y-10"
         >
-           <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight font-outfit leading-[1.1] text-foreground max-w-5xl mx-auto italic decoration-primary/30">
+           <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight font-serif leading-[1.1] text-foreground max-w-5xl mx-auto italic decoration-primary/30">
               {t('titlePlain')}
            </h1>
             <p className="text-muted-foreground font-medium text-lg md:text-2xl leading-relaxed max-w-4xl mx-auto font-outfit opacity-80 decoration-primary/10 underline underline-offset-8 decoration-dashed">

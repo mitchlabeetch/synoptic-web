@@ -1,196 +1,158 @@
 {
-  "Studio": {
-    "title": "Synoptic Studio",
-    "saving": "Saving draft...",
-    "saved": "All changes saved to cloud",
-    "ready": "Ready for your bilingual masterpiece",
-    "addPage": "Add New Page",
-    "pageSettings": "Page {number} Settings",
-    "enteringStudio": "Entering the Studio...",
-    "failedToLoadProject": "Failed to load project",
-    "retryConnection": "Retry Connection",
-    "pageManager": "Page Manager",
-    "globalDesign": "Global Design",
-    "stylePresets": "Style Presets",
-    "editorTools": "Editor Tools",
-    "canvasActions": "Canvas Actions",
-    "drafting": "Drafting",
-    "chapterStart": "Chapter Start",
-    "manuscript": "Manuscript",
-    "chapters": "Chapters",
-    "noChapters": "No Chapters Defined",
-    "deletePage": "Delete Page",
-    "resetFactory": "Reset to Factory",
-    "bilingualEditor": "Bilingual Editor",
-    "collaborate": "Collaborate",
-    "export": "Export",
-    "preview": "Preview"
-  },
-  "Blocks": {
-    "text": "Text Block",
-    "image": "Image Block",
-    "separator": "Separator",
-    "callout": "Callout",
-    "insertText": "Insert Text Block",
-    "addBlankPage": "Add Blank Page",
-    "media": "Media",
-    "ai": "Translation AI",
-    "settings": "Studio Settings",
-    "grammar": "Grammar Rule",
-    "culture": "Cultural Insight",
-    "vocabulary": "Vocabulary Spark",
-    "tip": "Learning Tip",
-    "warning": "Grammar Warning",
-    "note": "General Note",
-    "pronunciation": "Pronunciation Guide"
-  },
-  "Inspector": {
-    "visibility": "Visibility Overrides",
-    "header": "Header",
-    "footer": "Footer",
-    "pageNumber": "Page Number",
-    "content": "Content Overrides",
-    "typography": "Typography",
-    "layout": "Layout & Strategy",
-    "printingFlow": "Printing & Flow",
-    "markChapterStart": "Mark as Chapter Start",
-    "forceBlank": "Forced Blank Page",
-    "pageLocalOnly": "Changes here only affect the current page.",
-    "inspectorTitle": "{type} Inspector",
-    "lineHeight": "Line Height",
-    "paraSpacing": "Paragraph Spacing",
-    "headerOverlay": "L1 Header Overlay",
-    "footerOverlay": "L1 Footer Overlay",
-    "aiInsights": "AI Insights",
-    "dimensions": "Dimensions",
-    "width": "Width (%)",
-    "alignment": "Alignment",
-    "styleEffects": "Style & Effects",
-    "shadow": "Shadow",
-    "borderRadius": "Border Radius",
-    "stylePattern": "Style & Pattern",
-    "thickness": "Thickness",
-    "contextType": "Context Type",
-    "brandingColor": "Branding Color",
-    "stylePreset": "Style Preset",
-    "solidLine": "Solid Line",
-    "doubleLine": "Double Line",
-    "dashedLine": "Dashed Line",
-    "dottedLine": "Dotted Line",
-    "gradientFade": "Gradient Fade",
-    "ornament": "Fleuron Ornament",
-    "sideBySide": "Side-by-Side",
-    "interlinear": "Interlinear",
-    "stacked": "Stacked"
-  },
-  "Theme": {
-    "title": "Global Design",
-    "layout": "Global Layout",
-    "typography": "Typography (Global)",
-    "bodyText": "Body Text",
-    "headings": "Main Headings",
-    "baseScaling": "Base Scaling",
-    "fontSize": "Body Font Size",
-    "lineHeight": "Global Line Height",
-    "colorPresets": "Color Presets",
-    "lightMode": "Light Mode",
-    "darkMode": "Dark Mode"
-  },
-  "Presets": {
-    "title": "Style Presets",
-    "empty": "Select a block to capture its style as a reusable preset.",
-    "selected": "Selected Context",
-    "canCapture": "You can capture the styling of this {type} block.",
-    "saveCurrent": "Save Current Style",
-    "library": "Global Library",
-    "typeStyle": "{type} style",
-    "synced": "Library Synced"
-  },
-  "Wizard": {
-    "createTitle": "Create New Project",
-    "createMasterpiece": "Create New Masterpiece",
-    "stepInformation": "Information",
-    "stepLanguages": "Languages",
-    "stepFormat": "Format",
-    "stepTemplate": "Template",
-    "projectTitle": "Project Title *",
-    "titlePlaceholder": "e.g. Twenty Thousand Leagues Under the Sea",
-    "author": "Author",
-    "authorPlaceholder": "Your name or Original Author",
-    "category": "Category / Tag",
-    "categoryPlaceholder": "e.g. Fiction, Education",
-    "sourceLang": "Source Language (L1)",
-    "targetLang": "Target Language (L2)",
-    "langWarning": "Warning: Source and target languages must be different for a bilingual project.",
-    "langTip": "Tip: Most users choose their native language as the target and the language they are learning as the source.",
-    "dimensions": "Physical Dimensons (mm)",
-    "custom": "Define your own",
-    "layoutStyle": "Layout Style",
-    "back": "Back",
-    "next": "Next Step",
-    "creating": "Forging Studio...",
-    "launch": "Launch Studio",
-    "blankTemplate": "Start Blank",
-    "blankDesc": "Zero content, clean slate",
-    "classicTemplate": "Classic Side-by-Side",
-    "classicDesc": "Balanced columns, serif fonts",
-    "poetryTemplate": "Poetry / Verses",
-    "poetryDesc": "Numbered lines, centered focus",
-    "width": "Width (mm)",
-    "height": "Height (mm)",
-    "upgradeToCreateMore": "Upgrade to Create More",
-    "reachedFreeLimit": "You've reached the Free Limit",
-    "freeLimitDesc": "Free accounts are limited to 1 active project. Upgrade to Pro to unlock unlimited projects and advanced AI features.",
-    "upgradeToPro": "Upgrade to Pro",
-    "maybeLater": "Maybe Later",
-    "usTrade": "US Trade Paper",
-    "digest": "Digest",
-    "intlStandard": "International Standard"
-  },
   "Common": {
-    "delete": "Delete",
-    "copy": "Copy",
-    "duplicate": "Duplicate",
     "save": "Save",
     "cancel": "Cancel",
-    "on": "On",
-    "off": "Off",
-    "backToHome": "Back to Home",
-    "pdf": "PDF",
-    "epub": "EPUB"
-  },
-  "Dashboard": {
-    "title": "Your Projects",
-    "subtitle": "Manage and edit your bilingual books.",
-    "emptyState": "You haven't created any projects yet.",
-    "noDescription": "No description provided.",
-    "lastUpdated": "Last updated"
+    "delete": "Delete",
+    "edit": "Edit",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success",
+    "back": "Back",
+    "next": "Next"
   },
   "Auth": {
-    "login": "Login",
+    "login": "Log In",
     "signup": "Sign Up",
-    "welcomeBack": "Welcome Back",
-    "createAccount": "Create Account",
-    "signInDesc": "Sign in to your Synoptic account",
-    "signUpDesc": "Start creating bilingual books today",
+    "logout": "Log Out",
     "email": "Email",
     "password": "Password",
-    "emailPlaceholder": "name@example.com",
-    "passwordPlaceholderLogin": "Enter your password",
-    "passwordPlaceholderSignup": "Create a password",
-    "signIn": "Sign In",
-    "signingIn": "Signing in...",
-    "creatingAccount": "Creating account...",
+    "forgotPassword": "Forgot password?",
     "noAccount": "Don't have an account?",
-    "hasAccount": "Already have an account?",
-    "termsPrompt": "By continuing, you agree to Synoptic's Terms of Service and Privacy Policy.",
-    "failed": "Authentication failed",
-    "errorOccurred": "Something went wrong"
+    "haveAccount": "Already have an account?",
+    "verifyEmail": "Verify Email",
+    "welcomeBack": "Welcome back",
+    "createAccount": "Create account"
+  },
+  "Dashboard": {
+    "title": "My Projects",
+    "newProject": "New Project",
+    "noProjects": "No projects found. Create your first one!",
+    "settings": "Settings",
+    "profile": "Profile",
+    "billing": "Billing",
+    "stats": {
+      "projects": "Projects",
+      "pages": "Pages",
+      "words": "Words"
+    },
+    "projectCard": {
+      "edited": "Edited",
+      "open": "Open",
+      "delete": "Delete",
+      "confirmDelete": "Are you sure you want to delete this project?"
+    }
+  },
+  "Editor": {
+    "toolbar": {
+      "bold": "Bold",
+      "italic": "Italic",
+      "underline": "Underline",
+      "alignLeft": "Align Left",
+      "alignCenter": "Align Center",
+      "alignRight": "Align Right",
+      "addBlock": "Add Block",
+      "export": "Export",
+      "ai": "AI Assistant"
+    },
+    "sidebar": {
+      "pages": "Pages",
+      "style": "Style",
+      "inspector": "Inspector",
+      "chat": "AI Chat"
+    },
+    "inspector": {
+      "layout": "Layout",
+      "spacing": "Spacing",
+      "typography": "Typography",
+      "colors": "Colors",
+      "border": "Border",
+      "shadow": "Shadow",
+      "actions": "Actions",
+      "labels": {
+         "color": "Color",
+         "backgroundColor": "Background Color",
+         "fontSize": "Font Size",
+         "lineHeight": "Line Height",
+         "letterSpacing": "Letter Spacing",
+         "margin": "Margin",
+         "padding": "Padding",
+         "width": "Width",
+         "alignment": "Alignment",
+         "fontFamily": "Font Family"
+      }
+    },
+    "messages": {
+      "saved": "Project saved successfully",
+      "error": "Failed to save project"
+    },
+    "onboarding": {
+      "welcome": "Welcome to the Editor",
+      "step1": "This is your canvas. Type on either side to start.",
+      "step2": "Use the toolbar to format your text.",
+      "step3": "Click Export to download your book."
+    },
+    "blocks": {
+      "text": "Text Paragraph",
+      "image": "Image",
+      "separator": "Separator",
+      "callout": "Callout Box",
+      "verse": "Verse / Poem"
+    }
+  },
+  "Models": {
+    "parallel": "Parallel Columns",
+    "interlinear": "Interlinear",
+    "bilingual": "Bilingual Spread",
+    "modern": "Modern Minimalist"
+  },
+  "Pricing": {
+    "free": {
+      "name": "Free",
+      "price": "$0",
+      "description": "Perfect for testing the engine."
+    },
+    "pro": {
+      "name": "Pro",
+      "price": "$12",
+      "description": "For independent authors and polyglots."
+    },
+    "publisher": {
+      "name": "Publisher",
+      "price": "$49",
+      "description": "For high-volume production."
+    },
+    "features": {
+      "unlimited": "Unlimited Projects",
+      "highDpi": "High-DPI 300 DPI Exports",
+      "noWatermark": "Remove Watermarks",
+      "aiUnits": "AI Intelligence Units",
+      "customFonts": "Upload Custom Fonts"
+    },
+    "cta": "Choose Plan",
+    "monthly": "monthly",
+    "yearly": "yearly",
+    "popular": "Most Popular"
+  },
+  "Landing": {
+    "hero": {
+      "title": "The Future of Bilingual Publishing",
+      "subtitle": "Create professional books in any two languages. AI-powered layout, perfect symmetry, global distribution.",
+      "cta": "Get Started for Free"
+    },
+    "features": {
+      "title": "Everything you need to publish",
+      "items": {
+        "layout": "Automatic Layout",
+        "export": "Professional Exports",
+        "sync": "Cloud Sync",
+        "ai": "Linguistic AI"
+      }
+    }
   },
   "Marketing": {
     "nav": {
-      "toLearn": "For language learning",
-      "toPublish": "For book publishing",
+      "toLearn": "For Language Learning",
+      "toPublish": "For Professional Publishing",
       "features": "Features",
       "pricing": "Pricing",
       "library": "Library",
@@ -198,7 +160,7 @@
       "joinNow": "Join Now",
       "templates": "Templates",
       "product": "The Studio",
-      "company": "Who we are",
+      "company": "Who We Are",
       "about": "About",
       "privacy": "Privacy",
       "terms": "Terms"
@@ -229,7 +191,7 @@
       "origin": "Origin"
     },
     "footer": {
-      "tagline": "The professional bilingual publisher for authors, language learners, and publishing houses. Empowering your voice across any border.",
+      "tagline": "The professional bilingual studio for authors, polyglots, and global publishers. Crafting clarity across every border.",
       "copyright": "© 2025 Synoptic Studio. All rights reserved."
     },
     "carbon": {
@@ -248,158 +210,49 @@
     "ctaPublish": "Explore professional publishing",
     "learn": {
       "title": "For Language Learners",
-      "subtitle": "The ultimate tool for self-study and mastery.",
+      "subtitle": "The ultimate tool for self-acquisition.",
       "items": {
         "flashcards": {
           "title": "Dynamic Flashcards",
-          "desc": "Turn any sentence from your bilingual book into a smart flashcard with one click."
+          "desc": "Generate flashcards automatically from the sentences you're reading."
         },
-        "deepInsights": {
-          "title": "Deep Insights",
-          "desc": "Grammar rules, cultural context, and pronunciation guides attached directly to the text."
+        "annotations": {
+          "title": "Philological Annotations",
+          "desc": "Deep dive into grammar and nuance with AI-powered word-for-word analysis."
         },
-        "sideBySide": {
-          "title": "Immersive Side-by-Side",
-          "desc": "The most natural way to read in your target language, with the safety net of your native tongue."
+        "immersion": {
+          "title": "Symmetrical Immersion",
+          "desc": "Your brain maps languages naturally when side-by-side. No more context loss."
         }
       }
     },
     "publish": {
-      "title": "For Authors & Publishers",
-      "subtitle": "Professional tools to bring your books to the world.",
+      "title": "For Professional Publishers",
+      "subtitle": "Industrial grade typesetting for bilingual editions.",
       "items": {
-        "kdpReady": {
-          "title": "KDP One-Click",
-          "desc": "Export perfectly formatted, bleed-ready PDFs that pass Amazon's verification every time."
+        "typesetting": {
+          "title": "Mirror Gutter Logic",
+          "desc": "Automatic margin adjustments for print binding. No manual calculations needed."
         },
-        "aiTypesetter": {
-          "title": "AI Master Typesetter",
-          "desc": "Balance columns, manage orphans, and ensure perfect bilingual symmetry automatically."
+        "multiformat": {
+          "title": "EPUB 3.0 Reflowable",
+          "desc": "The first engine that exports bilingual layouts to Kindle and Apple Books without breaking."
         },
-        "branding": {
-          "title": "Custom Branding",
-          "desc": "Add your own logos, watermarks, and custom fonts to create a unique publisher identity."
+        "distribution": {
+          "title": "KDP Mastery",
+          "desc": "Pre-flight checks specifically optimized for Amazon KDP and IngramSpark distribution."
         }
       }
     }
   },
-  "LearnPage": {
-    "title": "Master any language through immersion",
-    "subtitle": "Forget boring textbooks. Create your own bilingual learning materials from the books you actually want to read.",
-    "features": {
-      "reader": {
-        "title": "The Intelligent Reader",
-        "desc": "Read comfortably with our synchronized scrolling. Your eyes never lose the translation."
-      },
-      "study": {
-        "title": "AI Study Assistant",
-        "desc": "Ask questions about grammar or nuance directly within the text. It's like having a tutor in every page."
-      },
-      "custom": {
-        "title": "Personal Materials",
-        "desc": "Import your own articles, PDFs, or web clips. Synoptic formats them perfectly for study."
-      }
-    },
-    "cta": "Start Your Learning Journey"
-  },
-  "PublishPage": {
-    "title": "The Cloud Studio for Professional Publishers",
-    "subtitle": "From manuscript to bookshelf in record time. Professional-grade bilingual typesetting for authors and houses.",
-    "features": {
-      "engine": {
-        "title": "High-Performance Engine",
-        "desc": "Handles 500+ page manuscripts with ease. Real-time preview of exact print dimensions."
-      },
-      "exports": {
-        "title": "Global Export Standards",
-        "desc": "Native support for PDF/X, EPUB 3.0, and high-DPI image bundles."
-      },
-      "distribution": {
-        "title": "One-Click Distribution",
-        "desc": "Optimized metadata and formatting for Amazon KDP, Apple Books, and IngramSpark."
-      }
-    },
-    "cta": "Launch Your Publishing Empire",
-    "infra": "Professional publishing infrastructure",
-    "enterprise": "Enterprise solutions",
-    "volumeTitle": "Built for high-volume production",
-    "volumeSubtitle": "Stop wrestling with InDesign templates and manual alignment. Our cloud-native engine handles the heavy lifting.",
-    "step1": "Import manuscript",
-    "step1Desc": "Upload your source and target text in any format. Our AI identifies paragraph breaks and chapter structures instantly.",
-    "step2": "Auto-typeset",
-    "step2Desc": "The AI typesetter automatically balances columns and eliminates widows/orphans across hundreds of pages in seconds.",
-    "step3": "One-click KDP",
-    "step3Desc": "Export a print-ready PDF with correct bleeds, trim marks, and gutters. Guaranteed to pass Amazon's quality check.",
-    "epubTitle": "EPUB 3.0 bilingual support",
-    "epubDesc": "Generate reflowable e-books for Kindle and Apple Books with native side-by-side or alternating mode selection.",
-    "available": "Available now",
-    "compliant": "XHTML compliant",
-    "fixed": "Fixed-layout option",
-    "scaleTitle": "Scale your publishing hub.",
-    "scaleDesc": "Whether you are an independent author or a global house, Synoptic scales with you. Secure, reliable, and ready for your next masterpiece.",
-    "sales": "Contact sales"
-  },
-  "Pricing": {
-    "title": "Simple, Fair Pricing",
-    "subtitle": "Choose the plan that fits your publishing goals.",
-    "mostPopular": "Most Popular",
-    "month": "/mo",
-    "pageTitle": "Invest in Your Books.",
-    "pageSubtitle": "Whether you're translating a family memoir or publishing a commercial series, we have the right tools for you.",
-    "nonProfitTitle": "Are you a non-profit or educator?",
-    "nonProfitDesc": "We offer special discounts for educational institutions and non-profit translations. Contact our team for a custom quote.",
-    "contactSupport": "Contact Support",
-    "free": {
-      "name": "Free",
-      "desc": "Perfect for testing the studio.",
-      "button": "Start Free"
-    },
-    "pro": {
-      "name": "Pro",
-      "desc": "For serious authors and polyglots.",
-      "button": "Join Pro"
-    },
-    "publisher": {
-      "name": "Publisher",
-      "desc": "For professional publishing houses.",
-      "button": "Go Publisher"
-    },
-    "featuresList": {
-      "activeProject": "1 Active Project",
-      "standardLayout": "Standard Layout Engine",
-      "manualTranslation": "Manual Translation",
-      "lowDpiPdf": "Online-Only PDF (72 DPI)",
-      "watermarked": "Watermarked Publishing",
-      "limitedAi": "20 AI Units* / mo (Drafting)",
-      "unlimitedProjects": "Unlimited Cloud Projects",
-      "aiAssistedLayout": "AI-Assisted Layout",
-      "aiWordsMonth": "500 AI Units* / mo (Professional)",
-      "highDpiPdf": "300 DPI Export (Print-Ready)",
-      "epubMobi": "EPUB & e-Ink Optimized",
-      "removeWatermarks": "Removing Watermarks",
-      "priorityHistory": "Priority Cloud Storage",
-      "flashcards": "Mastery Flashcards",
-      "tts": "Neural TTS (Standard)",
-      "models": "Model Library",
-      "about": "About Us",
-      "everythingPro": "Everything in Pro",
-      "bigAiLimit": "5,000 AI Units* / mo (High Volume)",
-      "teamCollab": "Team Collaboration",
-      "brandCustom": "Publisher Branding",
-      "fontUpload": "Custom Font Upload",
-      "apiAccess": "API access (Coming soon)",
-      "ttsPremium": "Neural TTS (Ultra-HD)"
-    },
-    "aiExplanation": {
-      "title": "* Understanding AI Units",
-      "note": "AI units are only consumed when using our advanced translation and professional typesetting features. Manual translation and layout remain free and unlimited.",
-      "whatIsAUnit": "1 Unit = 1 Full Linguistic Analysis",
-      "unitDesc": "This includes contextual translation, semantic grouping, syntactic arrows, and intelligent layout adjustment for a single block of text.",
-      "tiers": {
-        "free": "Perfect for testing our typesetter on short excerpts.",
-        "pro": "Standard for independent authors and polyglots (approx. 100 pages/mo).",
-        "publisher": "Designed for heavy production and volume publishing houses."
-      }
+  "PricingPage": {
+    "title": "Invest in your story",
+    "subtitle": "Transparent pricing for every stage of your publishing journey.",
+    "yearly": "Save 20% with yearly",
+    "tiers": {
+      "free": "Basic",
+      "pro": "Standard for independent authors and polyglots (approx. 100 pages/mo).",
+      "publisher": "Designed for heavy production and volume publishing houses."
     }
   },
   "Export": {
@@ -425,7 +278,9 @@
     "pdfError": "PDF Export failed",
     "pdfErrorDesc": "Export failed. Please check your connection to the print engine.",
     "epubError": "EPUB Export failed",
-    "epubErrorDesc": "EPUB generation failed."
+    "epubErrorDesc": "EPUB generation failed.",
+    "chapter": "Chapter",
+    "engineLabel": "BILINGUAL PUBLISHING ENGINE"
   },
   "Onboarding": {
     "tourDashboardContent": "Welcome to Synoptic! This is your project hub.",
@@ -526,6 +381,46 @@
     "viewTemplate": "Discover structure",
     "typesettingTitle": "Bilingual logic",
     "exampleSource": "The stars were bright above the silent lake.",
-    "exampleTarget": "Les étoiles brillaient au-dessus du lac silencieux."
+    "exampleTarget": "Les étoiles brillaient au-dessus du lac silencieux.",
+    "labels": {
+      "source": "Source ({lang})",
+      "translation": "Translation ({lang})",
+      "engine": "Typesetting Engine v4.0"
+    }
+  },
+  "LearnPage": {
+    "title": "Master any language through immersion",
+    "subtitle": "Forget boring textbooks. Create your own learning materials from the books you actually want to read.",
+    "badge": "For Polyglots & Students",
+    "browseLibrary": "Browse Library",
+    "features": {
+      "reader": {
+        "title": "The Intelligent Reader",
+        "desc": "Read comfortably with our synchronized scrolling. Your eyes never lose the translation."
+      },
+      "study": {
+        "title": "AI Study Assistant",
+        "desc": "Ask grammar questions directly in the text. It's like having a tutor on every page."
+      },
+      "custom": {
+        "title": "Personal Materials",
+        "desc": "Import your own articles, PDFs or web clips. Synoptic formats them perfectly for study."
+      }
+    },
+    "immersion": {
+      "title": "The Science of Side-by-Side",
+      "p1": "Reading in your target language is the most effective way to acquire vocabulary naturally. But jumping into a foreign book can be overwhelming.",
+      "p2": "Synoptic eliminates that barrier. By providing a perfect, sentence-aligned translation right next to your text, we allow your brain to focus on the story while effortlessly mapping new words and structures.",
+      "tag1": "Natural Acquisition",
+      "tag2": "Bilingual Mapping",
+      "verified": "AI Translation Verified",
+      "flashcard": "Flashcard Generated!"
+    },
+    "ctaSection": {
+      "title": "Ready to become fluent?",
+      "subtitle": "Join thousands of language learners who have ditched the textbooks for a more immersive experience.",
+      "button": "Create Free Account"
+    },
+    "cta": "Start my learning journey"
   }
 }

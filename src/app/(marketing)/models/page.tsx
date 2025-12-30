@@ -6,16 +6,49 @@ import { Layout, Layers, ChevronRight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 
+const TemplatePreview = ({ type }: { type: string }) => {
+  return (
+    <div className="w-full h-full bg-muted/20 flex items-center justify-center p-8 group-hover:bg-muted/30 transition-colors">
+      <svg viewBox="0 0 100 140" className="w-full h-full drop-shadow-sm transition-transform duration-700 group-hover:scale-105">
+        <rect x="0" y="0" width="100" height="140" fill="white" rx="2" />
+        {type === 'classic' && (
+          <g fill="#e2e8f0">
+            <rect x="10" y="15" width="38" height="2" />
+            <rect x="10" y="20" width="38" height="100" rx="1" />
+            <rect x="52" y="15" width="38" height="2" />
+            <rect x="52" y="20" width="38" height="100" rx="1" />
+          </g>
+        )}
+        {type === 'alternating' && (
+          <g fill="#e2e8f0">
+            <rect x="10" y="15" width="80" height="20" rx="1" />
+            <rect x="10" y="40" width="80" height="20" rx="1" fill="#cbd5e1" />
+            <rect x="10" y="65" width="80" height="20" rx="1" />
+            <rect x="10" y="90" width="80" height="20" rx="1" fill="#cbd5e1" />
+          </g>
+        )}
+        {type === 'academic' && (
+          <g fill="#e2e8f0">
+            <rect x="15" y="15" width="70" height="60" rx="1" />
+            <line x1="10" y1="85" x2="90" y2="85" stroke="#cbd5e1" strokeWidth="0.5" />
+            <rect x="15" y="95" width="70" height="30" rx="1" fill="#cbd5e1" opacity="0.6" />
+          </g>
+        )}
+        {type === 'modern' && (
+          <g fill="#e2e8f0">
+            <rect x="25" y="25" width="50" height="90" rx="1" />
+            <circle cx="50" cy="15" r="2" fill="#cbd5e1" />
+          </g>
+        )}
+      </svg>
+    </div>
+  );
+};
+
 export default function ModelsPage() {
   const t = useTranslations('ModelsPage');
 
   const templateKeys = ['classic', 'alternating', 'academic', 'modern'];
-  const images: Record<string, string> = {
-    classic: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=400",
-    alternating: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=400",
-    academic: "https://images.unsplash.com/photo-1543003322-b2da835a8289?auto=format&fit=crop&q=80&w=400",
-    modern: "https://images.unsplash.com/photo-1474932430478-367dbb6832c1?auto=format&fit=crop&q=80&w=400"
-  };
 
   return (
     <div className="py-24 bg-background selection:bg-primary/20">
@@ -39,8 +72,8 @@ export default function ModelsPage() {
               transition={{ delay: i * 0.1 }}
               className="group relative rounded-3xl overflow-hidden border bg-card hover:shadow-2xl transition-all"
             >
-              <div className="aspect-[3/4] overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
-                <img src={images[key]} alt={key} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+              <div className="aspect-[3/4] overflow-hidden">
+                <TemplatePreview type={key} />
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-bold mb-2">{t(`templates.${key}.title`)}</h3>
@@ -82,19 +115,22 @@ export default function ModelsPage() {
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent pointer-events-none" />
               <div className="border-2 border-dashed border-primary/20 rounded-2xl p-8 flex flex-col gap-6">
                  <div className="space-y-2">
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/50">Source (EN)</p>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/50">
+                       {t('labels.source', { lang: 'EN' })}
+                    </p>
                     <p className="text-sm font-medium italic text-muted-foreground leading-relaxed">
                        {t('exampleSource')}
                     </p>
                  </div>
                  <div className="h-px bg-border/50" />
                  <div className="space-y-2 text-right">
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-[#30b8c8]/50">Translation (FR)</p>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-[#30b8c8]/50">
+                       {t('labels.translation', { lang: 'FR' })}
+                    </p>
                     <p className="text-sm font-bold text-foreground leading-relaxed">
                        {t('exampleTarget')}
                     </p>
                  </div>
-                 <p className="text-[10px] font-black uppercase tracking-[0.2em] text-primary/40 mt-4 text-center">Typesetting Engine v4.0</p>
               </div>
             </div>
           </div>
