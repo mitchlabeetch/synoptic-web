@@ -798,5 +798,215 @@
     "scaleTitle": "Ready to scale your catalog?",
     "scaleDesc": "Whether you're publishing 5 titles or 500, Synoptic grows with your operation.",
     "sales": "Talk to Sales"
+  },
+  "Library": {
+    "title": "Discovery Library",
+    "subtitle": "Browse 85+ free content sources for your bilingual book projects.",
+    "searchPlaceholder": "Search by title, topic, author, or keyword...",
+    "badge": "60+ Free Content Sources",
+    "heroTitle": "Discovery Library",
+    "heroSubtitle": "Browse free, curated content for your bilingual book projects. Sacred texts, classic literature, museum art, and more—all license-verified.",
+    "browseLibrary": "Browse Library",
+    "commercialSafe": "Commercial Safe",
+    "attributionRequired": "Attribution Required",
+    "categories": {
+      "all": "All",
+      "sacred": "Sacred & Wisdom",
+      "literature": "Literature",
+      "visual": "Visual & Art",
+      "knowledge": "Knowledge & Facts",
+      "news": "News & Media",
+      "history": "History",
+      "language": "Language Learning",
+      "academic": "Academic & Research",
+      "popculture": "Pop Culture"
+    },
+    "categoryDescriptions": {
+      "sacred": "Spiritual texts from world traditions",
+      "literature": "Novels, poetry, drama, and folklore",
+      "visual": "Museum art, NASA photography, and more",
+      "news": "Headlines, articles, and media",
+      "history": "Historical documents and archives",
+      "language": "Sentences, vocabulary, and drills",
+      "knowledge": "Facts, quotes, recipes, and geography",
+      "academic": "Research, formal writing, and test prep",
+      "popculture": "Comics, games, and entertainment"
+    },
+    "licenses": {
+      "all": "All Licenses",
+      "commercialSafe": "Commercial Safe",
+      "attribution": "Attribution Required",
+      "personalOnly": "Personal Use Only",
+      "licenseType": "License Type"
+    },
+    "difficulty": {
+      "all": "All Levels",
+      "level": "Level",
+      "difficultyLevel": "Difficulty Level",
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "expert": "Expert"
+    },
+    "tile": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "expert": "Expert",
+      "studyOnly": "Study Only"
+    },
+    "search": {
+      "placeholder": "Search by title, topic, author, or keyword...",
+      "quickFilters": "Quick filters:",
+      "showing": "Showing",
+      "of": "of",
+      "templates": "templates",
+      "clearAllFilters": "Clear all filters",
+      "noTemplatesFound": "No templates found",
+      "tryAdjusting": "Try adjusting your search or filters."
+    },
+    "quickTags": {
+      "bestsellers": "🏆 Bestsellers",
+      "dailyPractice": "📅 Daily Practice",
+      "quickSessions": "⚡ Quick Sessions",
+      "giftIdeas": "🎁 Gift Ideas",
+      "posters": "🖼️ Posters",
+      "flashcards": "📚 Flashcards",
+      "vocabulary": "📖 Vocabulary",
+      "socialMedia": "📱 Social Media"
+    },
+    "wizard": {
+      "start": "Start",
+      "back": "Back",
+      "import": "Import Content",
+      "cancel": "Cancel",
+      "search": "Search",
+      "preview": "Preview",
+      "randomize": "Surprise Me!",
+      "loading": "Fetching content...",
+      "error": "Something went wrong",
+      "whatYouCanDo": "What you can do",
+      "searchContent": "Search content",
+      "pickByReference": "Pick by reference",
+      "randomSelection": "Random selection",
+      "imagesIncluded": "Images included",
+      "audioIncluded": "Audio included"
+    },
+    "license": {
+      "commercialSafeDesc": "This content is public domain or explicitly licensed for commercial use. You can publish and sell works using this content.",
+      "attributionDesc": "Commercial use allowed with required attribution.",
+      "personalOnlyDesc": "For personal study only. You cannot sell or commercially distribute works using this content.",
+      "viewFull": "View full license →"
+    },
+    "warning": {
+      "title": "Restricted Content License",
+      "personalUseOnly": "Personal Use Only",
+      "whyRestricted": "Why is this restricted?",
+      "youCan": "You CAN use this for:",
+      "youCannot": "You CANNOT:",
+      "personalStudy": "Personal study",
+      "languagePractice": "Language practice",
+      "teachingMaterials": "Teaching materials",
+      "academicResearch": "Academic research",
+      "sellTranslations": "Sell translations",
+      "publishEbook": "Publish as ebook",
+      "commercialDistribution": "Commercial distribution",
+      "monetizeSocial": "Monetize on social",
+      "acknowledge": "I understand this content is for personal study only and I will not commercially publish or sell any work created from it.",
+      "chooseAnother": "Choose Another Source",
+      "understand": "I Understand, Continue"
+    },
+    "credits": {
+      "title": "Credits & Attribution",
+      "intro": "This project uses content from the following sources, which require attribution:",
+      "generated": "Credits generated by Synoptic on",
+      "attributionRequired": "Attribution Required"
+    },
+    "cta": {
+      "browseLibrary": "Browse Library",
+      "getStartedFree": "Get Started Free",
+      "learnMore": "Learn More",
+      "readyToStart": "Ready to start your bilingual book?",
+      "importAndStart": "Import any source above and start translating in Synoptic Studio."
+    }
+  },
+  "Tools": {
+    "aiDraft": {
+      "title": "AI Translation Draft",
+      "button": "AI Draft",
+      "original": "Original:",
+      "translation": "Translation:",
+      "translating": "Translating...",
+      "tryAgain": "Try Again",
+      "copy": "Copy",
+      "copied": "Copied!",
+      "applyToL2": "Apply to L2",
+      "poweredBy": "Powered by LibreTranslate"
+    },
+    "grammar": {
+      "title": "Grammar Check",
+      "button": "Grammar",
+      "checking": "Checking grammar...",
+      "detected": "Detected:",
+      "noIssuesFound": "No issues found!",
+      "textLooksGreat": "Your text looks great.",
+      "issuesFound": "{count} issue{count, plural, one {} other {s}} found",
+      "fixAll": "Fix All",
+      "tryAgain": "Try Again",
+      "poweredBy": "Powered by LanguageTool"
+    },
+    "definition": {
+      "origin": "Origin",
+      "lookingUp": "Looking up...",
+      "wordNotFound": "Word not found",
+      "more": "More",
+      "poweredBy": "Free Dictionary API"
+    },
+    "synonyms": {
+      "synonymsFor": "Synonyms for:",
+      "findingSynonyms": "Finding synonyms...",
+      "noSynonymsFound": "No synonyms found",
+      "synonyms": "Synonyms",
+      "antonyms": "Antonyms",
+      "related": "Related",
+      "selectWordFirst": "Select a word first, then right-click",
+      "poweredBy": "Powered by Datamuse"
+    },
+    "polisher": {
+      "title": "Word Polisher",
+      "polishing": "Polishing...",
+      "suggestedImprovements": "Suggested Improvements"
+    }
+  },
+  "Settings": {
+    "title": "User Settings",
+    "displayName": "Display Name",
+    "displayNamePlaceholder": "Your name",
+    "interfaceLanguage": "Interface Language",
+    "interfaceLanguageHint": "This sets your default UI language across all devices.",
+    "saving": "Saving...",
+    "saveSettings": "Save Settings",
+    "cancel": "Cancel"
+  },
+  "Filters": {
+    "license": "License",
+    "commercial": "Commercial",
+    "attribution": "Attribution",
+    "personal": "Personal"
+  },
+  "Errors": {
+    "translationFailed": "Translation failed",
+    "grammarCheckFailed": "Grammar check failed",
+    "lookupFailed": "Lookup failed",
+    "fetchFailed": "Failed to fetch content",
+    "connectionError": "Connection error. Please try again.",
+    "unexpectedError": "An unexpected error occurred"
+  },
+  "Accessibility": {
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "loading": "Loading",
+    "searchResults": "Search results",
+    "noResults": "No results found",
+    "sortBy": "Sort by",
+    "filterBy": "Filter by"
   }
 }

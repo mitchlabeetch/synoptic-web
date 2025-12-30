@@ -1,9 +1,8 @@
 // src/components/CommandPalette.tsx
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { Command } from 'cmdk';
-import { useRouter } from 'next/navigation';
 import { useProjectStore } from '@/lib/store/projectStore';
 import {
   FileText,
@@ -41,19 +40,29 @@ export function CommandPalette() {
     return () => document.removeEventListener('keydown', down);
   }, []);
 
+  // Generate unique block ID - wrapped in useCallback to avoid lint warning
+  const generateBlockId = useCallback(() => {
+    return `block-${crypto.randomUUID().slice(0, 8)}`;
+  }, []);
+
+  const handleAddBlock = useCallback(() => {
+    addBlock(currentPageIndex, { 
+      id: generateBlockId(), 
+      type: 'text', 
+      L1: { content: '', lang: meta?.source_lang || 'en' },
+      L2: { content: '', lang: meta?.target_lang || 'en' },
+      layout: 'side-by-side'
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any);
+  }, [addBlock, currentPageIndex, generateBlockId, meta?.source_lang, meta?.target_lang]);
+
   const actions = [
     {
       id: 'add-text',
       label: t('addText'),
       icon: FileText,
       shortcut: 'T',
-      action: () => addBlock(currentPageIndex, { 
-        id: `block-${Date.now()}`, 
-        type: 'text', 
-        L1: { content: '', lang: meta?.source_lang || 'en' },
-        L2: { content: '', lang: meta?.target_lang || 'en' },
-        layout: 'side-by-side'
-      } as any),
+      action: handleAddBlock,
     },
     {
       id: 'undo',

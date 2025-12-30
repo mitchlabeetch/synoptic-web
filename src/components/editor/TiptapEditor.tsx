@@ -20,9 +20,11 @@ import { cn } from '@/lib/utils';
 import { 
   Bold, Italic, Underline as UnderlineIcon, 
   AlignLeft, AlignCenter, AlignRight, AlignJustify,
-  Sparkles, Loader2, Wand2
+  Sparkles, Loader2, Wand2, Languages, SpellCheck
 } from 'lucide-react';
 import { WordPolisher } from '@/components/tools/WordPolisher';
+import { AIDraftButton } from '@/components/tools/AIDraftButton';
+import { GrammarChecker } from '@/components/tools/GrammarChecker';
 
 export interface TiptapEditorRef {
   getHTML: () => string;
@@ -292,6 +294,28 @@ export const TiptapEditor = forwardRef<TiptapEditorRef, TiptapEditorProps>(
               <WordPolisher 
                 selectedText={selectedText.trim()} 
                 onReplace={handleWordReplace}
+              />
+            </>
+          )}
+
+          {/* AI Draft - Quick translation for selected text */}
+          {selectedText.trim().length > 0 && (
+            <>
+              <div className="w-px h-4 bg-border mx-1" />
+              <AIDraftButton
+                selectedText={selectedText.trim()}
+                onApply={handleWordReplace}
+              />
+            </>
+          )}
+
+          {/* Grammar Check - For longer selections */}
+          {selectedText.trim().length > 10 && (
+            <>
+              <div className="w-px h-4 bg-border mx-1" />
+              <GrammarChecker
+                text={selectedText.trim()}
+                onFix={handleWordReplace}
               />
             </>
           )}

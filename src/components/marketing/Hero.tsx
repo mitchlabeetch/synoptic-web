@@ -8,7 +8,7 @@ import { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 
-// --- Types ---
+// --- 1. DATA STRUCTURES ---
 
 interface Segment {
   text: string;
@@ -21,7 +21,14 @@ interface LanguageData {
   arrow: [number, number]; // Index From -> To
 }
 
-// --- 1. DATA: Complete 33-Language Matrix ---
+const ROLE_COLORS = {
+  article: "#30b8c8", 
+  adjective: "#f9726e", 
+  noun: "#22687a", 
+  other: "currentColor"
+};
+
+// Full 33-Language Matrix
 const LANGUAGES_ANNOTATIONS: Record<string, LanguageData> = {
   en: { segments: [{ text: "The", role: "other" }, { text: "ultimate", role: "adjective" }, { text: "bilingual", role: "other", highlight: true }, { text: "studio", role: "noun" }], arrow: [1, 3] },
   fr: { segments: [{ text: "Le", role: "other" }, { text: "studio", role: "noun" }, { text: "bilingue", role: "other", highlight: true }, { text: "ultime", role: "adjective" }], arrow: [3, 1] },
@@ -63,15 +70,10 @@ const getLangData = (code: string) => {
   return LANGUAGES_ANNOTATIONS[code] || LANGUAGES_ANNOTATIONS[baseCode] || LANGUAGES_ANNOTATIONS.en;
 };
 
-const ROLE_COLORS = {
-  article: "#30b8c8", 
-  adjective: "#f9726e", 
-  noun: "#22687a", 
-  other: "currentColor"
-};
+// --- 2. COMPONENTS ---
 
-// --- 2. Smart Connector (Dynamic Arrow Logic) ---
-// Always arcs DOWN below the text to prevent crossing
+// FIXED: Uses offsetLeft/Top instead of getBoundingClientRect
+// This ensures arrows track correctly even inside scaled containers (Dutch fix)
 function SmartConnector({ 
   fromRef, 
   toRef, 
@@ -86,38 +88,41 @@ function SmartConnector({
   visible: boolean;
 }) {
   const [pathData, setPathData] = useState<string>("");
+  const [arrowHead, setArrowHead] = useState<{x: number, y: number} | null>(null);
 
   useEffect(() => {
+    // Strict null checks to prevent crashes on remount
     if (!visible || !fromRef || !toRef || !containerRef.current) return;
 
     const calculate = () => {
-      const parent = containerRef.current!.getBoundingClientRect();
-      const startRect = fromRef.getBoundingClientRect();
-      const endRect = toRef.getBoundingClientRect();
+      // Internal safety check
+      if (!containerRef.current || !fromRef || !toRef) return;
 
-      // Anchors: Bottom-Center relative to container
-      const x1 = (startRect.left + startRect.width / 2) - parent.left;
-      const y1 = (startRect.bottom) - parent.top;
+      // Use OFFSET logic (Layout coordinates) not RECT logic (Screen coordinates)
+      // This bypasses the CSS transform scale of the parent
+      const x1 = fromRef.offsetLeft + fromRef.offsetWidth / 2;
+      const y1 = fromRef.offsetTop + fromRef.offsetHeight; // Bottom center
 
-      const x2 = (endRect.left + endRect.width / 2) - parent.left;
-      const y2 = (endRect.bottom) - parent.top;
+      const x2 = toRef.offsetLeft + toRef.offsetWidth / 2;
+      const y2 = toRef.offsetTop + toRef.offsetHeight; // Bottom center
 
-      // "Gravity" Logic: Arc Depth based on distance
+      // Gravity Logic: Dip down based on distance
       const dist = Math.abs(x2 - x1);
-      const dipAmount = Math.min(50, Math.max(20, dist * 0.35)); 
+      const dipAmount = Math.min(60, Math.max(25, dist * 0.4)); 
       
       const cx = (x1 + x2) / 2;
       const cy = Math.max(y1, y2) + dipAmount;
 
-      // Spacing so line doesn't touch letters
-      const padY = 6; 
+      const padY = 4;
 
       setPathData(`M ${x1} ${y1 + padY} Q ${cx} ${cy} ${x2} ${y2 + padY}`);
+      setArrowHead({ x: x2, y: y2 + padY });
     };
 
     calculate();
+    // Observe container specifically
     const observer = new ResizeObserver(calculate);
-    observer.observe(containerRef.current);
+    if (containerRef.current) observer.observe(containerRef.current);
     
     return () => observer.disconnect();
   }, [fromRef, toRef, containerRef, visible]);
@@ -153,8 +158,7 @@ function SmartConnector({
   );
 }
 
-// --- 3. ScaleToFitContainer (Layout Stability) ---
-// Wraps changing text so it never expands the parent grid
+// FIXED: Uses min-w-0 to prevent flex blowout
 function ScaleToFitContainer({ children }: { children: React.ReactNode }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -166,24 +170,26 @@ function ScaleToFitContainer({ children }: { children: React.ReactNode }) {
       const containerWidth = containerRef.current.offsetWidth;
       const contentWidth = contentRef.current.scrollWidth;
       
-      if (contentWidth > containerWidth) {
+      if (contentWidth > containerWidth && containerWidth > 0) {
         const scale = containerWidth / contentWidth;
         contentRef.current.style.transform = `scale(${scale})`;
         contentRef.current.style.transformOrigin = 'left center'; 
       } else {
         contentRef.current.style.transform = 'scale(1)';
+        contentRef.current.style.transformOrigin = 'left center';
       }
     };
 
     const observer = new ResizeObserver(adjustScale);
     if (containerRef.current) observer.observe(containerRef.current);
     if (contentRef.current) observer.observe(contentRef.current);
-    
+    adjustScale();
+
     return () => observer.disconnect();
   }, [children]);
 
   return (
-    <div ref={containerRef} className="w-full h-full relative flex items-center overflow-hidden">
+    <div ref={containerRef} className="w-full h-full relative flex items-center overflow-hidden min-w-0">
       <div ref={contentRef} className="whitespace-nowrap transition-transform duration-300 ease-out origin-left">
         {children}
       </div>
@@ -191,8 +197,7 @@ function ScaleToFitContainer({ children }: { children: React.ReactNode }) {
   );
 }
 
-// --- 4. Annotated Sentence (The Typewriter) ---
-// Fast typing, smart dwell time
+// FIXED: Simultaneous start logic + Static Mode support
 function AnnotatedSentence({ 
   langCode, 
   active, 
@@ -212,40 +217,38 @@ function AnnotatedSentence({
   const segmentsRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
   useEffect(() => {
-    // If static, show everything immediately
+    // 1. Static Mode (Left Side Final State)
     if (staticMode) {
       setTypedSegments(data.segments.length);
       setShowAnnotations(true);
       return;
     }
     
+    // 2. Inactive State
     if (!active) {
       setTypedSegments(0);
       setShowAnnotations(false);
       return;
     }
 
-    // Reset when language changes or becomes active
+    // 3. Active Animation
     setTypedSegments(0);
     setShowAnnotations(false);
 
     const interval = setInterval(() => {
       setTypedSegments(prev => {
-        // Reveal words one by one
         if (prev < data.segments.length) return prev + 1;
         
         clearInterval(interval);
+        setShowAnnotations(true); // Immediate reveal
         
-        // Words done -> Show Arrows/Highlights
-        setShowAnnotations(true);
-        
-        // Wait 1.2s -> Trigger Next Language
+        // Wait 1.2s before triggering cycle
         if (onComplete) {
           setTimeout(onComplete, 1200); 
         }
         return prev;
       });
-    }, 150); // 150ms per word = snappy feel
+    }, 150); // Fast 150ms typing
 
     return () => clearInterval(interval);
   }, [active, data, staticMode, onComplete, langCode]);
@@ -257,7 +260,7 @@ function AnnotatedSentence({
     <div 
       ref={containerRef} 
       className={cn(
-        "relative flex flex-row items-baseline pb-12 pt-2", // Padding for arrows
+        "relative flex flex-row items-baseline pb-12 pt-2",
         isNoGap_lang ? "gap-0" : "gap-[0.4em]"
       )} 
       dir={isRTL_lang ? 'rtl' : 'ltr'}
@@ -285,7 +288,6 @@ function AnnotatedSentence({
             >
               {s.text}
               
-              {/* Highlight Background */}
               {showAnnotations && s.highlight && (
                 <motion.span
                   initial={{ scaleX: 0, opacity: 0 }}
@@ -310,40 +312,42 @@ function AnnotatedSentence({
   );
 }
 
-// --- 5. Main Hero Logic ---
+// --- 3. HERO COMPONENT ---
 export function Hero() {
   const t = useTranslations('Marketing.hero');
   const currentLocale = useLocale();
   
-  // State for sequencing
+  const [introComplete, setIntroComplete] = useState(false);
   const [currentLangIndex, setCurrentLangIndex] = useState(0);
 
-  // Filter out current locale so we don't repeat it on the right
+  // Filter out the current locale so it doesn't appear on the right side
   const rotationLanguages = useMemo(() => 
     Object.keys(LANGUAGES_ANNOTATIONS).filter(code => code !== currentLocale)
   , [currentLocale]);
 
-  // Handle Rotation Logic
+  // Handle Cycling
   const handleCycleComplete = useCallback(() => {
-    // Immediate index swap to trigger re-mount of right side
-    setCurrentLangIndex((prev) => (prev + 1) % rotationLanguages.length);
+    setTimeout(() => {
+      setCurrentLangIndex((prev) => (prev + 1) % rotationLanguages.length);
+    }, 200); 
   }, [rotationLanguages.length]);
 
   const currentRotationLang = rotationLanguages[currentLangIndex];
 
   return (
-    <section className="relative px-4 pt-16 pb-24 md:pt-24 md:pb-32 overflow-hidden bg-background">
+    // FIX: Overflow Hidden to prevent scrollbars from gradients
+    <section className="relative px-4 pt-16 pb-24 md:pt-24 md:pb-32 overflow-hidden">
       
-      {/* Clean, Professional Light Gradient */}
-      <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
-        <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[140%] h-[800px] bg-[radial-gradient(ellipse_at_center,rgba(48,184,200,0.08),transparent_60%)] blur-3xl" />
-        <div className="absolute top-[20%] right-[-10%] w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(249,114,110,0.05),transparent_70%)] blur-3xl" />
-        <div className="absolute inset-0 bg-grid-slate-50/[0.04] [mask-image:linear-gradient(0deg,transparent,black)]" />
+      {/* BACKGROUND FIX: Increased Opacity, Correct Z-Index */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute inset-0 bg-background" /> {/* Base layer */}
+        <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[140%] h-[800px] bg-[radial-gradient(ellipse_at_center,rgba(48,184,200,0.15),transparent_60%)] blur-3xl opacity-80" />
+        <div className="absolute top-[20%] right-[-10%] w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(249,114,110,0.15),transparent_70%)] blur-3xl opacity-80" />
+        <div className="absolute inset-0 bg-grid-slate-50/[0.03] [mask-image:linear-gradient(0deg,transparent,black)]" />
       </div>
       
-      <div className="container px-4 mx-auto">
+      <div className="container px-4 mx-auto relative z-10">
         
-        {/* Mock Window Container */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -352,7 +356,6 @@ export function Hero() {
         >
           <div className="rounded-xl border border-border/60 bg-white/60 dark:bg-card/30 backdrop-blur-xl shadow-2xl overflow-hidden font-quicksand">
             
-            {/* Window Title Bar */}
             <div className="h-10 border-b bg-muted/20 flex items-center px-4 justify-between">
               <div className="flex gap-2">
                 <div className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
@@ -365,72 +368,72 @@ export function Hero() {
               </div>
             </div>
 
-            {/* Editor Canvas */}
             <div className="flex flex-col items-center justify-center min-h-[300px] p-8 md:p-12">
                 
-                {/* Grid Layout for Stability */}
+                {/* LAYOUT FIX: 1fr-auto-1fr grid with min-w-0 */}
                 <div className="w-full grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] items-center gap-4 md:gap-12">
                   
-                  {/* Left Side: Locale Language (Stays static after load) */}
-                  <div className="flex items-center justify-center md:justify-end">
+                  {/* Left Side: Locale Language */}
+                  {/* active={true} + staticMode={introComplete} means it types once then freezes */}
+                  <div className="flex items-center justify-center md:justify-end min-w-0">
                     <AnnotatedSentence 
                       langCode={currentLocale} 
                       active={true}
-                      staticMode={true}
+                      staticMode={introComplete} 
+                      onComplete={() => setIntroComplete(true)} 
                     />
                   </div>
 
-                  {/* The Vertical/Horizontal Separator */}
+                  {/* Separator */}
                   <div className="self-stretch flex items-center justify-center">
-                    {/* Desktop: Vertical */}
                     <div className="hidden md:block w-px bg-gradient-to-b from-transparent via-border/50 to-transparent h-24" />
-                    {/* Mobile: Horizontal */}
                     <div className="block md:hidden h-px w-24 bg-gradient-to-r from-transparent via-border/50 to-transparent" />
                   </div>
 
                   {/* Right Side: Rotating Language */}
-                  <div className="flex items-center justify-center md:justify-start overflow-hidden w-full">
+                  {/* ScaleToFitContainer protects the layout from long words */}
+                  <div className="flex items-center justify-center md:justify-start overflow-hidden w-full min-w-0">
                     <ScaleToFitContainer>
-                      {/* Key change triggers remount -> re-typing */}
-                      <AnnotatedSentence 
-                        key={currentRotationLang} 
-                        langCode={currentRotationLang} 
-                        active={true} 
-                        staticMode={false}
-                        onComplete={handleCycleComplete}
-                      />
+                      {/* Starts cycling only after Left Side finishes (introComplete) */}
+                      {introComplete && (
+                        <AnnotatedSentence 
+                          key={currentRotationLang} 
+                          langCode={currentRotationLang} 
+                          active={true} 
+                          staticMode={false} 
+                          onComplete={handleCycleComplete}
+                        />
+                      )}
                     </ScaleToFitContainer>
                   </div>
-
                 </div>
-
             </div>
           </div>
         </motion.div>
 
-        {/* Marketing Copy */}
+        {/* COPY FIX: Reduced Font Size & Spacing */}
         <motion.div 
            initial={{ opacity: 0, y: 20 }}
            animate={{ opacity: 1, y: 0 }}
            transition={{ delay: 0.4 }}
            className="mt-16 text-center max-w-4xl mx-auto space-y-8"
         >
-           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight font-serif text-foreground">
+           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight font-serif text-foreground leading-tight">
               {t('titlePlain')}
            </h1>
-            <p className="text-muted-foreground text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
+            <p className="text-muted-foreground text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
               {t('subtitle')}
             </p>
            
            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
               <Link href="/auth/signup">
-                 <Button size="lg" className="h-14 px-8 rounded-full font-bold text-lg shadow-lg shadow-primary/20">
+                 <Button size="lg" className="h-12 px-8 rounded-full font-bold text-base shadow-lg shadow-primary/20">
                    {t('ctaPrimary')}
-                   <ArrowRight className="ml-2 h-5 w-5" />
+                   <ArrowRight className="ml-2 h-4 w-4" />
                  </Button>
               </Link>
               <Link href="/models">
-                 <Button variant="outline" size="lg" className="h-14 px-8 rounded-full text-lg border-2">
+                 <Button variant="outline" size="lg" className="h-12 px-8 rounded-full text-base border-2">
                    {t('ctaSecondary')}
                  </Button>
               </Link>

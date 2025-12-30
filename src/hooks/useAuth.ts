@@ -27,12 +27,7 @@ export function useAuth() {
   });
   const router = useRouter();
 
-  // Check auth status on mount
-  useEffect(() => {
-    checkAuth();
-  }, []);
-
-  const checkAuth = async () => {
+  const checkAuth = useCallback(async () => {
     try {
       const response = await fetch('/api/auth/me');
       if (response.ok) {
@@ -44,7 +39,12 @@ export function useAuth() {
     } catch {
       setState({ user: null, loading: false });
     }
-  };
+  }, []);
+
+  // Check auth status on mount
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
 
   const logout = useCallback(async () => {
     try {
@@ -60,7 +60,7 @@ export function useAuth() {
   const refreshUser = useCallback(async () => {
     setState(s => ({ ...s, loading: true }));
     await checkAuth();
-  }, []);
+  }, [checkAuth]);
 
   return { 
     user: state.user, 

@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Loader2, BookOpen, ArrowLeft } from 'lucide-react'
+import { Loader2, ArrowLeft } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
 export default function SignupPage() {

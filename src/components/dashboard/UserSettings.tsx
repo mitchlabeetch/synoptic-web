@@ -39,8 +39,8 @@ export default function UserSettings({ user }: UserSettingsProps) {
   const [name, setName] = useState(user.name || '');
   const [locale, setLocale] = useState(user.preferred_locale || 'en');
   
-  const tStudio = useTranslations('Studio');
   const tAuth = useTranslations('Auth');
+  const tSettings = useTranslations('Settings');
 
   const handleSave = async () => {
     setIsLoading(true);
@@ -75,7 +75,7 @@ export default function UserSettings({ user }: UserSettingsProps) {
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <UserIcon className="h-5 w-5 text-primary" />
-            User Settings
+            {tSettings('title')}
           </DialogTitle>
         </DialogHeader>
 
@@ -86,17 +86,17 @@ export default function UserSettings({ user }: UserSettingsProps) {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="name">Display Name</Label>
+            <Label htmlFor="name">{tSettings('displayName')}</Label>
             <Input 
               id="name" 
               value={name} 
               onChange={(e) => setName(e.target.value)} 
-              placeholder="Your name" 
+              placeholder={tSettings('displayNamePlaceholder')} 
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="locale">Interface Language</Label>
+            <Label htmlFor="locale">{tSettings('interfaceLanguage')}</Label>
             <Select value={locale} onValueChange={setLocale}>
               <SelectTrigger id="locale">
                 <SelectValue />
@@ -113,16 +113,16 @@ export default function UserSettings({ user }: UserSettingsProps) {
               </SelectContent>
             </Select>
             <p className="text-[10px] text-muted-foreground italic mt-1">
-              This sets your default UI language across all devices.
+              {tSettings('interfaceLanguageHint')}
             </p>
           </div>
         </div>
 
         <div className="flex justify-end gap-3 mt-4">
-          <Button variant="ghost" onClick={() => setOpen(false)}>Cancel</Button>
+          <Button variant="ghost" onClick={() => setOpen(false)}>{tSettings('cancel') || 'Cancel'}</Button>
           <Button onClick={handleSave} disabled={isLoading} className="gap-2">
             <Save className="h-4 w-4" />
-            {isLoading ? 'Saving...' : 'Save Settings'}
+            {isLoading ? tSettings('saving') : tSettings('saveSettings')}
           </Button>
         </div>
       </DialogContent>

@@ -3,7 +3,6 @@
 
 import { useProjectStore } from '@/lib/store/projectStore';
 import { 
-  Settings2, 
   Type, 
   Trash2,
   Copy,
@@ -16,7 +15,6 @@ import {
   FileText,
   MessageSquare,
   Eye,
-  EyeOff,
   Hash,
   Maximize2,
   Sparkles,
@@ -52,6 +50,8 @@ export default function BlockInspector() {
   const t = useTranslations('Inspector');
   const tBlocks = useTranslations('Blocks');
   const tCommon = useTranslations('Common');
+  const tStudio = useTranslations('Studio');
+
 
   const currentPage = content.pages[currentPageIndex];
   const selectedBlock = currentPage?.blocks.find(
@@ -67,7 +67,7 @@ export default function BlockInspector() {
         <div className="p-4 border-b bg-muted/20 flex items-center justify-between">
           <h3 className="text-sm font-bold uppercase tracking-widest text-foreground flex items-center gap-2">
             <FileText className="h-4 w-4 text-primary" />
-            {useTranslations('Studio')('pageSettings', { number: currentPage.number })}
+            {tStudio('pageSettings', { number: currentPage.number })}
           </h3>
         </div>
 
