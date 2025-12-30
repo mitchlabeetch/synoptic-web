@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useProjectStore } from '@/lib/store/projectStore';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
+import { Slider } from '@/components/ui/slider';
 import { 
   FileDown, 
   Printer, 
@@ -19,8 +20,17 @@ import {
   Headphones,
   Volume2,
   Instagram,
-  Image as ImageIcon
+  Image as ImageIcon,
+  Mic,
+  Languages,
+  Timer,
+  GraduationCap
 } from 'lucide-react';
+import { 
+  AudioExportMode, 
+  DEFAULT_PIMSLEUR_SETTINGS, 
+  generateSilenceBlob 
+} from '@/types/audioLab';
 import { 
   Select,
   SelectContent,
@@ -46,6 +56,15 @@ export default function ExportManager() {
   const [audioProgress, setAudioProgress] = useState(0);
   const [audioChapter, setAudioChapter] = useState(0);
   const [selectedVoice, setSelectedVoice] = useState<string>('');
+  
+  // ═══════════════════════════════════════════
+  // AUDIO LAB (PIMSLEUR MODE) STATE
+  // ═══════════════════════════════════════════
+  const [audioMode, setAudioMode] = useState<AudioExportMode>('standard');
+  const [sourceVoice, setSourceVoice] = useState<string>('');
+  const [thinkingPause, setThinkingPause] = useState<number>(DEFAULT_PIMSLEUR_SETTINGS.thinkingPause);
+  const [preSourcePause, setPreSourcePause] = useState<number>(DEFAULT_PIMSLEUR_SETTINGS.preSourcePause);
+  const [postTargetPause, setPostTargetPause] = useState<number>(DEFAULT_PIMSLEUR_SETTINGS.postTargetPause);
   
   // Social Share State
   const [socialFormat, setSocialFormat] = useState<SocialFormat>('square');
@@ -84,6 +103,16 @@ export default function ExportManager() {
       }
     }
   }, [meta?.target_lang, selectedVoice]);
+
+  // Initialize source voice when source language is available (for Pimsleur mode)
+  useEffect(() => {
+    if (meta?.source_lang && !sourceVoice) {
+      const voices = getVoicesForLang(meta.source_lang);
+      if (voices[0]) {
+        setSourceVoice(voices[0].id);
+      }
+    }
+  }, [meta?.source_lang, sourceVoice]);
 
   const handleExportPdf = async () => {
     if (!meta?.id || isExporting) return;
@@ -151,134 +180,265 @@ export default function ExportManager() {
   };
 
   // ═══════════════════════════════════════════
-  // AUDIOBOOK EXPORT HANDLER
+  // AUDIOBOOK EXPORT HANDLER (with Pimsleur Mode)
   // ═══════════════════════════════════════════
   const handleAudiobookExport = async () => {
+    // Validate voices
     if (!selectedVoice || isExporting) return;
+    if (audioMode === 'pimsleur' && !sourceVoice) {
+      alert(t('selectSourceVoice'));
+      return;
+    }
+
     setIsExporting('audio');
     setAudioProgress(0);
     setAudioChapter(0);
 
     try {
       const zip = new JSZip();
-      const folder = zip.folder(`Audiobook - ${meta?.title || 'Untitled'}`);
+      const modeLabel = audioMode === 'pimsleur' ? 'Pimsleur_Course' : 'Audiobook';
+      const folder = zip.folder(`${modeLabel} - ${meta?.title || 'Untitled'}`);
       
-      // Build task list: concatenate text by chapter for natural audiobook flow
-      const tasks: { filename: string; text: string; chapter: number }[] = [];
-      let chapterNum = 0;
-      let chapterTextBuffer = '';
-      let lastPageIdx = -1;
-
+      // ═══════════════════════════════════════════
+      // BUILD SENTENCE PAIRS FOR PIMSLEUR MODE
+      // ═══════════════════════════════════════════
+      interface SentencePair {
+        L1: string;
+        L2: string;
+        pageIndex: number;
+        blockId: string;
+      }
+      
+      const sentencePairs: SentencePair[] = [];
+      
+      // Extract L1/L2 sentence pairs from text blocks
       content?.pages.forEach((page, pIdx) => {
-        // Check if this is a new chapter
-        if (page.isChapterStart || pIdx === 0) {
-          // Save previous chapter if it has content
-          if (chapterTextBuffer.trim() && chapterNum > 0) {
-            tasks.push({
-              filename: `Chapter_${String(chapterNum).padStart(2, '0')}.mp3`,
-              text: chapterTextBuffer.trim(),
-              chapter: chapterNum
-            });
-          }
-          chapterNum++;
-          chapterTextBuffer = '';
-        }
-        
-        // Collect text from blocks
         page.blocks.forEach((block) => {
           if (block.type === 'text') {
-            const textBlock = block as { L2?: { content?: string } };
-            if (textBlock.L2?.content) {
-              // Strip HTML tags and add natural pauses
-              const plainText = textBlock.L2.content
-                .replace(/<[^>]*>/g, '')
-                .trim();
-              if (plainText) {
-                chapterTextBuffer += plainText + '. ';
-              }
+            const textBlock = block as { 
+              id: string; 
+              L1?: { content?: string }; 
+              L2?: { content?: string } 
+            };
+            
+            const l1Text = textBlock.L1?.content?.replace(/<[^>]*>/g, '').trim() || '';
+            const l2Text = textBlock.L2?.content?.replace(/<[^>]*>/g, '').trim() || '';
+            
+            if (l1Text && l2Text) {
+              sentencePairs.push({
+                L1: l1Text,
+                L2: l2Text,
+                pageIndex: pIdx,
+                blockId: textBlock.id
+              });
             }
           }
         });
-        
-        lastPageIdx = pIdx;
       });
 
-      // Don't forget the last chapter
-      if (chapterTextBuffer.trim()) {
-        tasks.push({
-          filename: `Chapter_${String(chapterNum).padStart(2, '0')}.mp3`,
-          text: chapterTextBuffer.trim(),
-          chapter: chapterNum
-        });
-      }
-
-      if (tasks.length === 0) {
+      if (sentencePairs.length === 0) {
         alert(t('noAudioContent'));
         setIsExporting(null);
         return;
       }
 
-      // Process Queue with progress updates
-      const total = tasks.length;
-      for (let i = 0; i < total; i++) {
-        const task = tasks[i];
-        setAudioChapter(task.chapter);
+      // ═══════════════════════════════════════════
+      // PIMSLEUR MODE: Generate Interleaved Audio
+      // ═══════════════════════════════════════════
+      if (audioMode === 'pimsleur') {
+        // Group pairs into lessons (e.g., 20 pairs per lesson for ~10-15 min)
+        const PAIRS_PER_LESSON = 20;
+        const lessons: SentencePair[][] = [];
         
-        try {
-          // Split long texts into chunks (Edge TTS limit ~10000 chars)
-          const maxChunkSize = 8000;
-          const textChunks: string[] = [];
-          let remainingText = task.text;
+        for (let i = 0; i < sentencePairs.length; i += PAIRS_PER_LESSON) {
+          lessons.push(sentencePairs.slice(i, i + PAIRS_PER_LESSON));
+        }
+
+        const total = lessons.length;
+        
+        for (let lessonIdx = 0; lessonIdx < lessons.length; lessonIdx++) {
+          const lesson = lessons[lessonIdx];
+          setAudioChapter(lessonIdx + 1);
           
-          while (remainingText.length > 0) {
-            if (remainingText.length <= maxChunkSize) {
-              textChunks.push(remainingText);
-              break;
+          const lessonAudioParts: Blob[] = [];
+          
+          // Generate intro silence
+          lessonAudioParts.push(generateSilenceBlob(2));
+          
+          for (const pair of lesson) {
+            try {
+              // 1. Pre-source pause (mental preparation)
+              lessonAudioParts.push(generateSilenceBlob(preSourcePause));
+              
+              // 2. L1 (Source language - what the learner hears first)
+              const l1Response = await fetch('/api/export/audio', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                  text: pair.L1, 
+                  voiceId: sourceVoice 
+                })
+              });
+              if (l1Response.ok) {
+                lessonAudioParts.push(await l1Response.blob());
+              }
+              
+              // 3. Thinking pause (learner attempts to formulate response)
+              lessonAudioParts.push(generateSilenceBlob(thinkingPause));
+              
+              // 4. L2 (Target language - the "answer")
+              const l2Response = await fetch('/api/export/audio', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                  text: pair.L2, 
+                  voiceId: selectedVoice 
+                })
+              });
+              if (l2Response.ok) {
+                lessonAudioParts.push(await l2Response.blob());
+              }
+              
+              // 5. Post-target pause (consolidation)
+              lessonAudioParts.push(generateSilenceBlob(postTargetPause));
+              
+            } catch (pairError) {
+              console.error('Failed to generate pair audio:', pairError);
             }
-            // Find a natural break point (sentence end)
-            let breakPoint = remainingText.lastIndexOf('. ', maxChunkSize);
-            if (breakPoint === -1) breakPoint = maxChunkSize;
-            textChunks.push(remainingText.substring(0, breakPoint + 1));
-            remainingText = remainingText.substring(breakPoint + 1).trim();
           }
-
-          // Generate audio for each chunk and combine
-          const audioChunks: Blob[] = [];
-          for (const chunk of textChunks) {
-            const res = await fetch('/api/export/audio', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ 
-                text: chunk, 
-                voiceId: selectedVoice 
-              })
-            });
-
-            if (res.ok) {
-              const blob = await res.blob();
-              audioChunks.push(blob);
-            }
+          
+          // Combine all parts into a single lesson file
+          if (lessonAudioParts.length > 0) {
+            const lessonBlob = new Blob(lessonAudioParts, { type: 'audio/mpeg' });
+            folder?.file(`Lesson_${String(lessonIdx + 1).padStart(2, '0')}.mp3`, lessonBlob);
           }
-
-          // Combine chunks into single file
-          if (audioChunks.length > 0) {
-            const combinedBlob = new Blob(audioChunks, { type: 'audio/mpeg' });
-            folder?.file(task.filename, combinedBlob);
-          }
-        } catch (e) {
-          console.error(`Failed to generate ${task.filename}:`, e);
+          
+          setAudioProgress(Math.round(((lessonIdx + 1) / total) * 100));
         }
         
-        // Update Progress
-        setAudioProgress(Math.round(((i + 1) / total) * 100));
-      }
+        // Generate and download ZIP
+        const zipBlob = await zip.generateAsync({ type: 'blob' });
+        saveAs(zipBlob, `${meta?.title || 'Course'}_Pimsleur_Audio.zip`);
+        
+      } else {
+        // ═══════════════════════════════════════════
+        // STANDARD MODE: L2 Only Audiobook
+        // ═══════════════════════════════════════════
+        
+        // Build task list: concatenate text by chapter for natural audiobook flow
+        const tasks: { filename: string; text: string; chapter: number }[] = [];
+        let chapterNum = 0;
+        let chapterTextBuffer = '';
 
-      // Generate and download ZIP
-      const zipBlob = await zip.generateAsync({ type: 'blob' });
-      saveAs(zipBlob, `${meta?.title || 'Audiobook'}_Neural_Audio.zip`);
+        content?.pages.forEach((page, pIdx) => {
+          // Check if this is a new chapter
+          if (page.isChapterStart || pIdx === 0) {
+            // Save previous chapter if it has content
+            if (chapterTextBuffer.trim() && chapterNum > 0) {
+              tasks.push({
+                filename: `Chapter_${String(chapterNum).padStart(2, '0')}.mp3`,
+                text: chapterTextBuffer.trim(),
+                chapter: chapterNum
+              });
+            }
+            chapterNum++;
+            chapterTextBuffer = '';
+          }
+          
+          // Collect text from blocks
+          page.blocks.forEach((block) => {
+            if (block.type === 'text') {
+              const textBlock = block as { L2?: { content?: string } };
+              if (textBlock.L2?.content) {
+                // Strip HTML tags and add natural pauses
+                const plainText = textBlock.L2.content
+                  .replace(/<[^>]*>/g, '')
+                  .trim();
+                if (plainText) {
+                  chapterTextBuffer += plainText + '. ';
+                }
+              }
+            }
+          });
+        });
+
+        // Don't forget the last chapter
+        if (chapterTextBuffer.trim()) {
+          tasks.push({
+            filename: `Chapter_${String(chapterNum).padStart(2, '0')}.mp3`,
+            text: chapterTextBuffer.trim(),
+            chapter: chapterNum
+          });
+        }
+
+        if (tasks.length === 0) {
+          alert(t('noAudioContent'));
+          setIsExporting(null);
+          return;
+        }
+
+        // Process Queue with progress updates
+        const total = tasks.length;
+        for (let i = 0; i < total; i++) {
+          const task = tasks[i];
+          setAudioChapter(task.chapter);
+          
+          try {
+            // Split long texts into chunks (Edge TTS limit ~10000 chars)
+            const maxChunkSize = 8000;
+            const textChunks: string[] = [];
+            let remainingText = task.text;
+            
+            while (remainingText.length > 0) {
+              if (remainingText.length <= maxChunkSize) {
+                textChunks.push(remainingText);
+                break;
+              }
+              // Find a natural break point (sentence end)
+              let breakPoint = remainingText.lastIndexOf('. ', maxChunkSize);
+              if (breakPoint === -1) breakPoint = maxChunkSize;
+              textChunks.push(remainingText.substring(0, breakPoint + 1));
+              remainingText = remainingText.substring(breakPoint + 1).trim();
+            }
+
+            // Generate audio for each chunk and combine
+            const audioChunks: Blob[] = [];
+            for (const chunk of textChunks) {
+              const res = await fetch('/api/export/audio', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                  text: chunk, 
+                  voiceId: selectedVoice 
+                })
+              });
+
+              if (res.ok) {
+                const blob = await res.blob();
+                audioChunks.push(blob);
+              }
+            }
+
+            // Combine chunks into single file
+            if (audioChunks.length > 0) {
+              const combinedBlob = new Blob(audioChunks, { type: 'audio/mpeg' });
+              folder?.file(task.filename, combinedBlob);
+            }
+          } catch (e) {
+            console.error(`Failed to generate ${task.filename}:`, e);
+          }
+          
+          // Update Progress
+          setAudioProgress(Math.round(((i + 1) / total) * 100));
+        }
+
+        // Generate and download ZIP
+        const zipBlob = await zip.generateAsync({ type: 'blob' });
+        saveAs(zipBlob, `${meta?.title || 'Audiobook'}_Neural_Audio.zip`);
+      }
       
     } catch (error) {
-      console.error('Audiobook export failed:', error);
+      console.error('Audio export failed:', error);
       alert(t('audioExportError'));
     } finally {
       setIsExporting(null);
@@ -401,26 +561,124 @@ export default function ExportManager() {
           </div>
         </section>
 
-        {/* AUDIOBOOK ENGINE SECTION */}
+        {/* AUDIO LAB SECTION (Audiobook + Pimsleur Mode) */}
         <section className="space-y-4">
           <div className="flex items-center gap-2 mb-2">
             <div className="h-6 w-6 rounded-md bg-violet-500/10 flex items-center justify-center">
               <Headphones className="h-4 w-4 text-violet-600" />
             </div>
             <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-              {t('audiobookEngine')}
+              {t('audioLab')}
             </h4>
           </div>
           
           <div className="p-4 rounded-xl border bg-gradient-to-br from-violet-50/50 to-transparent dark:from-violet-950/20 space-y-4">
-            <p className="text-[11px] text-muted-foreground leading-relaxed">
-              {t('audiobookDesc')}
-            </p>
-            
-            {/* Voice Selection */}
+            {/* Mode Toggle */}
             <div className="space-y-2">
               <label className="text-[10px] font-bold uppercase text-muted-foreground tracking-wide">
-                {t('voicePersona')}
+                {t('audioMode')}
+              </label>
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  onClick={() => setAudioMode('standard')}
+                  className={`p-3 rounded-lg border text-left transition-all ${
+                    audioMode === 'standard' 
+                      ? 'border-violet-500 bg-violet-50 dark:bg-violet-950/50' 
+                      : 'border-muted hover:border-violet-300'
+                  }`}
+                >
+                  <div className="flex items-center gap-2">
+                    <Headphones className="h-4 w-4 text-violet-500" />
+                    <span className="text-xs font-bold">{t('standardMode')}</span>
+                  </div>
+                  <p className="text-[9px] text-muted-foreground mt-1">{t('standardModeDesc')}</p>
+                </button>
+                <button
+                  onClick={() => setAudioMode('pimsleur')}
+                  className={`p-3 rounded-lg border text-left transition-all ${
+                    audioMode === 'pimsleur' 
+                      ? 'border-amber-500 bg-amber-50 dark:bg-amber-950/50' 
+                      : 'border-muted hover:border-amber-300'
+                  }`}
+                >
+                  <div className="flex items-center gap-2">
+                    <GraduationCap className="h-4 w-4 text-amber-500" />
+                    <span className="text-xs font-bold">{t('pimsleurMode')}</span>
+                  </div>
+                  <p className="text-[9px] text-muted-foreground mt-1">{t('pimsleurModeDesc')}</p>
+                </button>
+              </div>
+            </div>
+
+            {/* Pimsleur Mode Settings */}
+            {audioMode === 'pimsleur' && (
+              <div className="space-y-4 p-3 rounded-lg bg-amber-50/50 dark:bg-amber-950/30 border border-amber-200/50 dark:border-amber-800/50">
+                <div className="flex items-center gap-2">
+                  <Languages className="h-4 w-4 text-amber-600" />
+                  <span className="text-[10px] font-bold uppercase text-amber-700 dark:text-amber-400">
+                    {t('pimsleurSettings')}
+                  </span>
+                </div>
+                
+                {/* Source Voice (L1) Selection */}
+                <div className="space-y-1">
+                  <label className="text-[10px] font-bold text-muted-foreground">
+                    {t('sourceVoice')} ({meta?.source_lang?.toUpperCase() || 'L1'})
+                  </label>
+                  <Select 
+                    value={sourceVoice} 
+                    onValueChange={setSourceVoice} 
+                    disabled={isExporting === 'audio'}
+                  >
+                    <SelectTrigger className="h-8 text-xs">
+                      <SelectValue placeholder={t('selectVoice')} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {getVoicesForLang(meta?.source_lang || 'en').map((v: VoiceOption) => (
+                        <SelectItem key={v.id} value={v.id} className="text-xs">
+                          <span className="flex items-center gap-2">
+                            <Mic className="h-3 w-3 text-muted-foreground" />
+                            {v.name} 
+                            <span className="text-muted-foreground">({v.gender})</span>
+                          </span>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Pause Duration Settings */}
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2">
+                    <Timer className="h-3 w-3 text-muted-foreground" />
+                    <span className="text-[10px] font-bold text-muted-foreground">{t('pauseSettings')}</span>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] text-muted-foreground">{t('thinkingPause')}</span>
+                      <span className="text-[10px] font-mono text-amber-600">{thinkingPause}s</span>
+                    </div>
+                    <Slider
+                      value={[thinkingPause]}
+                      onValueChange={(v) => setThinkingPause(v[0])}
+                      min={1}
+                      max={10}
+                      step={0.5}
+                      className="w-full"
+                    />
+                    <p className="text-[9px] text-muted-foreground italic">
+                      {t('thinkingPauseHint')}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Target Voice Selection (Always shown) */}
+            <div className="space-y-2">
+              <label className="text-[10px] font-bold uppercase text-muted-foreground tracking-wide">
+                {audioMode === 'pimsleur' ? t('targetVoice') : t('voicePersona')} ({meta?.target_lang?.toUpperCase() || 'L2'})
               </label>
               <Select 
                 value={selectedVoice} 
@@ -452,30 +710,41 @@ export default function ExportManager() {
               <div className="space-y-2 pt-2">
                 <Progress value={audioProgress} className="h-1.5" />
                 <p className="text-[10px] text-violet-600 dark:text-violet-400 text-center font-medium animate-pulse">
-                  {t('renderingChapter', { chapter: audioChapter })}
+                  {audioMode === 'pimsleur' 
+                    ? t('renderingLesson', { lesson: audioChapter })
+                    : t('renderingChapter', { chapter: audioChapter })
+                  }
                 </p>
               </div>
             )}
 
             {/* Export Button */}
             <Button 
-              className="w-full gap-2 text-xs font-bold bg-violet-600 hover:bg-violet-700 text-white shadow-lg shadow-violet-500/20 transition-all" 
+              className={`w-full gap-2 text-xs font-bold text-white shadow-lg transition-all ${
+                audioMode === 'pimsleur'
+                  ? 'bg-amber-600 hover:bg-amber-700 shadow-amber-500/20'
+                  : 'bg-violet-600 hover:bg-violet-700 shadow-violet-500/20'
+              }`}
               onClick={handleAudiobookExport}
-              disabled={isExporting !== null || !selectedVoice}
+              disabled={isExporting !== null || !selectedVoice || (audioMode === 'pimsleur' && !sourceVoice)}
             >
               {isExporting === 'audio' ? (
                 <Loader2 className="h-3 w-3 animate-spin" />
+              ) : audioMode === 'pimsleur' ? (
+                <GraduationCap className="h-3 w-3" />
               ) : (
                 <Headphones className="h-3 w-3" />
               )}
-              {t('exportAudioZip')}
+              {audioMode === 'pimsleur' ? t('exportPimsleurCourse') : t('exportAudioZip')}
             </Button>
             
-            {/* Neural Engine Badge */}
+            {/* Engine Badge */}
             <div className="flex items-center justify-center gap-2 pt-1">
-              <div className="h-1.5 w-1.5 rounded-full bg-violet-500 animate-pulse" />
+              <div className={`h-1.5 w-1.5 rounded-full animate-pulse ${
+                audioMode === 'pimsleur' ? 'bg-amber-500' : 'bg-violet-500'
+              }`} />
               <span className="text-[9px] text-muted-foreground font-medium uppercase tracking-wider">
-                {t('neuralEngine')}
+                {audioMode === 'pimsleur' ? t('pimsleurEngine') : t('neuralEngine')}
               </span>
             </div>
           </div>

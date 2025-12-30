@@ -20,7 +20,9 @@ import {
   Palette,
   Printer,
   BookOpen,
-  FileText
+  FileText,
+  Shield,
+  ImageIcon as CoverIcon
 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
@@ -36,10 +38,12 @@ import StylePresetManager from './StylePresetManager';
 import LocaleSwitcher from './LocaleSwitcher';
 import ExportManager from './ExportManager';
 import StructureManager from './StructureManager';
+import GlossaryGuard from './GlossaryGuard';
+import CoverArchitect from './CoverArchitect';
 
 export default function Sidebar() {
   const { addBlock, addPage, addQuizBlock, currentPageIndex, meta } = useProjectStore();
-  const [activeTab, setActiveTab] = useState<'tools' | 'pages' | 'design' | 'presets' | 'publish' | 'structure'>('pages');
+  const [activeTab, setActiveTab] = useState<'tools' | 'pages' | 'design' | 'presets' | 'publish' | 'structure' | 'glossary' | 'cover'>('pages');
   const [isCollapsed, setIsCollapsed] = useState(false);
   const t = useTranslations('Blocks');
   const tStudio = useTranslations('Studio');
@@ -100,10 +104,15 @@ export default function Sidebar() {
     addQuizBlock(currentPageIndex, 'The word for book in French is', 'livre', '.');
   };
 
+  const tGlossary = useTranslations('GlossaryGuard');
+  const tCover = useTranslations('CoverArchitect');
+
   const tools = [
     { id: 'pages', icon: Layout, label: tStudio('pageManager'), onClick: () => { setActiveTab('pages'); setIsCollapsed(false); } },
     { id: 'structure', icon: FileText, label: tStudio('bookStructure') || 'Book Structure', onClick: () => { setActiveTab('structure'); setIsCollapsed(false); } },
     { id: 'design', icon: Palette, label: tStudio('globalDesign'), onClick: () => { setActiveTab('design'); setIsCollapsed(false); } },
+    { id: 'glossary', icon: Shield, label: tGlossary('title'), onClick: () => { setActiveTab('glossary'); setIsCollapsed(false); } },
+    { id: 'cover', icon: CoverIcon, label: tCover('title'), onClick: () => { setActiveTab('cover'); setIsCollapsed(false); } },
     { id: 'publish', icon: Printer, label: tStudio('publishingPipeline'), onClick: () => { setActiveTab('publish'); setIsCollapsed(false); } },
     { id: 'presets', icon: Layers, label: tStudio('stylePresets'), onClick: () => { setActiveTab('presets'); setIsCollapsed(false); } },
     { id: 'text', icon: Type, label: t('text'), onClick: handleAddTextBlock },
@@ -139,7 +148,7 @@ export default function Sidebar() {
                 <TooltipTrigger asChild>
                   <button
                     onClick={() => {
-                      if (['pages', 'structure', 'design', 'presets', 'publish'].includes(tool.id)) {
+                      if (['pages', 'structure', 'design', 'presets', 'publish', 'glossary', 'cover'].includes(tool.id)) {
                         setActiveTab(tool.id as any);
                         setIsCollapsed(false);
                       } else {
@@ -178,6 +187,8 @@ export default function Sidebar() {
             {activeTab === 'pages' && <PageManager />}
             {activeTab === 'structure' && <StructureManager />}
             {activeTab === 'design' && <ThemeInspector />}
+            {activeTab === 'glossary' && <GlossaryGuard />}
+            {activeTab === 'cover' && <CoverArchitect />}
             {activeTab === 'presets' && <StylePresetManager />}
             {activeTab === 'publish' && <ExportManager />}
             {activeTab === 'tools' && (

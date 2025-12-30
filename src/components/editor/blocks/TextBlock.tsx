@@ -9,11 +9,14 @@ import { useRef, useState, useCallback, useMemo } from 'react';
 import { TextBlock } from '@/types/blocks';
 import { isRTL, getDefaultFont, getLanguageByCode } from '@/data/languages';
 import { useProjectStore } from '@/lib/store/projectStore';
+import { useGlossaryStore } from '@/lib/store/glossaryStore';
+import { applyGlossaryToTranslation } from '@/lib/glossary/applyGlossary';
 import { cn } from '@/lib/utils';
 import { TiptapEditor, TiptapEditorRef } from '../TiptapEditor';
 import { LinePlayer } from '../tools/LinePlayer';
+import { GlossaryLintWarning } from '../GlossaryLintWarning';
 
-import { Sparkles, Loader2, Trash2, BookOpen, Volume2 } from 'lucide-react';
+import { Sparkles, Loader2, Trash2, BookOpen, Volume2, Shield } from 'lucide-react';
 
 interface TextBlockComponentProps {
   block: TextBlock;
@@ -36,13 +39,20 @@ export function TextBlockComponent({
   onDelete,
   isEditing,
 }: TextBlockComponentProps) {
-  const { settings, pushHistory } = useProjectStore();
+  const { settings, pushHistory, currentPageIndex, content } = useProjectStore();
+  const { entries, lintContent, warnings } = useGlossaryStore();
   const [isAiProcessing, setIsAiProcessing] = useState(false);
   const [l1Selection, setL1Selection] = useState({ hasSelection: false, text: '' });
   const [l2Selection, setL2Selection] = useState({ hasSelection: false, text: '' });
 
   const l1EditorRef = useRef<TiptapEditorRef>(null);
   const l2EditorRef = useRef<TiptapEditorRef>(null);
+
+  // Get current page ID for linting
+  const currentPageId = content?.pages[currentPageIndex]?.id || 'page-0';
+  
+  // Get warnings for this block
+  const blockWarnings = warnings.filter(w => w.blockId === block.id);
 
   const direction = useProjectStore((state) => {
     if (state.settings.direction !== 'auto') return state.settings.direction;
@@ -63,8 +73,12 @@ export function TextBlockComponent({
       });
       // Push history on blur, not every keystroke
       pushHistory();
+      
+      // Lint L1 content for glossary violations
+      const plainText = html.replace(/<[^>]*>/g, '');
+      lintContent(plainText, block.id, currentPageId, 'L1');
     }
-  }, [block.L1, onUpdate, pushHistory]);
+  }, [block.L1, block.id, currentPageId, onUpdate, pushHistory, lintContent]);
 
   const handleL2Blur = useCallback((html: string) => {
     if (html !== block.L2.content) {
@@ -72,8 +86,12 @@ export function TextBlockComponent({
         L2: { ...block.L2, content: html }
       });
       pushHistory();
+      
+      // Lint L2 content for glossary violations
+      const plainText = html.replace(/<[^>]*>/g, '');
+      lintContent(plainText, block.id, currentPageId, 'L2');
     }
-  }, [block.L2, onUpdate, pushHistory]);
+  }, [block.L2, block.id, currentPageId, onUpdate, pushHistory, lintContent]);
 
   const handleAiTranslate = async () => {
     if (!block.L1.content || isAiProcessing) return;
@@ -96,11 +114,16 @@ export function TextBlockComponent({
       if (!response.ok) throw new Error('Translation failed');
       const data = await response.json();
 
+      // Apply Glossary Guard overrides to the AI translation
+      const finalTranslation = entries.length > 0
+        ? applyGlossaryToTranslation(data.translation, entries, 'L2')
+        : data.translation;
+
       // Update L2 content and sync editor
       onUpdate({
-        L2: { ...block.L2, content: data.translation }
+        L2: { ...block.L2, content: finalTranslation }
       });
-      l2EditorRef.current?.setContent(data.translation);
+      l2EditorRef.current?.setContent(finalTranslation);
       pushHistory();
     } catch (error) {
       console.error('AI Translation Error:', error);
@@ -277,6 +300,21 @@ export function TextBlockComponent({
           )}
           lang={targetLang}
         >
+          {/* Glossary Lint Warnings */}
+          {blockWarnings.length > 0 && (
+            <GlossaryLintWarning 
+              blockId={block.id}
+              onFix={(oldText, newText) => {
+                // Replace the term in L2 content
+                const currentContent = block.L2.content;
+                const updatedContent = currentContent.replace(oldText, newText);
+                onUpdate({ L2: { ...block.L2, content: updatedContent } });
+                l2EditorRef.current?.setContent(updatedContent);
+              }}
+              className="mb-2"
+            />
+          )}
+          
           <TiptapEditor
             ref={l2EditorRef}
             content={block.L2.content}

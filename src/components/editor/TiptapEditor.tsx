@@ -25,6 +25,7 @@ import {
 import { WordPolisher } from '@/components/tools/WordPolisher';
 import { AIDraftButton } from '@/components/tools/AIDraftButton';
 import { GrammarChecker } from '@/components/tools/GrammarChecker';
+import { AddToGlossary } from '@/components/tools/AddToGlossary';
 
 export interface TiptapEditorRef {
   getHTML: () => string;
@@ -316,6 +317,16 @@ export const TiptapEditor = forwardRef<TiptapEditorRef, TiptapEditorProps>(
               <GrammarChecker
                 text={selectedText.trim()}
                 onFix={handleWordReplace}
+              />
+            </>
+          )}
+
+          {/* Add to Glossary - For any selection */}
+          {selectedText.trim().length > 0 && (
+            <>
+              <div className="w-px h-4 bg-border mx-1" />
+              <AddToGlossary
+                selectedText={selectedText.trim()}
               />
             </>
           )}
