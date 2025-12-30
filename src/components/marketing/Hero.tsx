@@ -216,6 +216,12 @@ function AnnotatedSentence({
   const containerRef = useRef<HTMLDivElement>(null);
   const segmentsRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
+  // Store onComplete in ref to prevent effect re-triggers when callback changes
+  const onCompleteRef = useRef(onComplete);
+  useEffect(() => {
+    onCompleteRef.current = onComplete;
+  }, [onComplete]);
+
   useEffect(() => {
     // 1. Static Mode (Left Side Final State)
     if (staticMode) {
@@ -235,6 +241,9 @@ function AnnotatedSentence({
     setTypedSegments(0);
     setShowAnnotations(false);
 
+    // Track completion timeout for cleanup
+    let completionTimeout: NodeJS.Timeout | null = null;
+
     const interval = setInterval(() => {
       setTypedSegments(prev => {
         if (prev < data.segments.length) return prev + 1;
@@ -242,16 +251,23 @@ function AnnotatedSentence({
         clearInterval(interval);
         setShowAnnotations(true); // Immediate reveal
         
-        // Wait 1.2s before triggering cycle
-        if (onComplete) {
-          setTimeout(onComplete, 1200); 
+        // Wait 1.2s before triggering cycle - use ref to avoid stale closure
+        if (onCompleteRef.current) {
+          completionTimeout = setTimeout(() => {
+            onCompleteRef.current?.();
+          }, 1200); 
         }
         return prev;
       });
     }, 150); // Fast 150ms typing
 
-    return () => clearInterval(interval);
-  }, [active, data, staticMode, onComplete, langCode]);
+    return () => {
+      clearInterval(interval);
+      if (completionTimeout) {
+        clearTimeout(completionTimeout);
+      }
+    };
+  }, [active, data, staticMode, langCode]);
 
   const isRTL_lang = ['ar', 'he', 'fa'].includes(langCode);
   const isNoGap_lang = ['zh', 'zh-TW', 'ja', 'ko', 'th'].includes(langCode);
@@ -325,6 +341,12 @@ export function Hero() {
     Object.keys(LANGUAGES_ANNOTATIONS).filter(code => code !== currentLocale)
   , [currentLocale]);
 
+  // Reset animation state when locale changes to prevent speed issues
+  useEffect(() => {
+    setCurrentLangIndex(0);
+    setIntroComplete(false);
+  }, [currentLocale]);
+
   // Handle Cycling
   const handleCycleComplete = useCallback(() => {
     setTimeout(() => {
@@ -338,11 +360,18 @@ export function Hero() {
     // FIX: Overflow Hidden to prevent scrollbars from gradients
     <section className="relative px-4 pt-16 pb-24 md:pt-24 md:pb-32 overflow-hidden">
       
-      {/* BACKGROUND FIX: Increased Opacity, Correct Z-Index */}
+      {/* Enhanced Background Gradients - More visible and beautiful */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-background" /> {/* Base layer */}
-        <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[140%] h-[800px] bg-[radial-gradient(ellipse_at_center,rgba(48,184,200,0.15),transparent_60%)] blur-3xl opacity-80" />
-        <div className="absolute top-[20%] right-[-10%] w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(249,114,110,0.15),transparent_70%)] blur-3xl opacity-80" />
+        {/* Primary teal gradient - top center */}
+        <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[140%] h-[800px] bg-[radial-gradient(ellipse_at_center,rgba(48,184,200,0.25),transparent_60%)] blur-3xl" />
+        {/* Coral/pink accent - right side */}
+        <div className="absolute top-[10%] right-[-10%] w-[700px] h-[700px] bg-[radial-gradient(circle,rgba(249,114,110,0.20),transparent_65%)] blur-3xl" />
+        {/* Deep teal accent - bottom left */}
+        <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(34,104,122,0.18),transparent_65%)] blur-3xl" />
+        {/* Subtle purple accent for depth */}
+        <div className="absolute top-[40%] left-[20%] w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(147,112,219,0.10),transparent_70%)] blur-3xl" />
+        {/* Grid overlay */}
         <div className="absolute inset-0 bg-grid-slate-50/[0.03] [mask-image:linear-gradient(0deg,transparent,black)]" />
       </div>
       
@@ -375,13 +404,17 @@ export function Hero() {
                   
                   {/* Left Side: Locale Language */}
                   {/* active={true} + staticMode={introComplete} means it types once then freezes */}
-                  <div className="flex items-center justify-center md:justify-end min-w-0">
-                    <AnnotatedSentence 
-                      langCode={currentLocale} 
-                      active={true}
-                      staticMode={introComplete} 
-                      onComplete={() => setIntroComplete(true)} 
-                    />
+                  {/* ScaleToFitContainer protects the layout from long words (matching right side) */}
+                  <div className="flex items-center justify-center md:justify-end overflow-hidden w-full min-w-0">
+                    <ScaleToFitContainer>
+                      <AnnotatedSentence 
+                        key={`left-${currentLocale}`}
+                        langCode={currentLocale} 
+                        active={true}
+                        staticMode={introComplete} 
+                        onComplete={() => setIntroComplete(true)} 
+                      />
+                    </ScaleToFitContainer>
                   </div>
 
                   {/* Separator */}
@@ -408,36 +441,36 @@ export function Hero() {
                   </div>
                 </div>
             </div>
-          </div>
-        </motion.div>
 
-        {/* COPY FIX: Reduced Font Size & Spacing */}
-        <motion.div 
-           initial={{ opacity: 0, y: 20 }}
-           animate={{ opacity: 1, y: 0 }}
-           transition={{ delay: 0.4 }}
-           className="mt-16 text-center max-w-4xl mx-auto space-y-8"
-        >
-           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight font-serif text-foreground leading-tight">
-              {t('titlePlain')}
-           </h1>
-            <p className="text-muted-foreground text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
-              {t('subtitle')}
-            </p>
-           
-           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-              <Link href="/auth/signup">
-                 <Button size="lg" className="h-12 px-8 rounded-full font-bold text-base shadow-lg shadow-primary/20">
-                   {t('ctaPrimary')}
-                   <ArrowRight className="ml-2 h-4 w-4" />
-                 </Button>
-              </Link>
-              <Link href="/models">
-                 <Button variant="outline" size="lg" className="h-12 px-8 rounded-full text-base border-2">
-                   {t('ctaSecondary')}
-                 </Button>
-              </Link>
-           </div>
+            {/* Enriched Mock UI Elements */}
+            <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between px-4">
+              {/* Left: Fake Sidebar Icons */}
+              <div className="flex gap-2">
+                <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <div className="w-3 h-3 rounded bg-primary/40" />
+                </div>
+                <div className="w-8 h-8 rounded-lg bg-muted/50 flex items-center justify-center">
+                  <div className="w-3 h-3 rounded bg-muted-foreground/20" />
+                </div>
+                <div className="w-8 h-8 rounded-lg bg-muted/50 flex items-center justify-center">
+                  <div className="w-3 h-3 rounded bg-muted-foreground/20" />
+                </div>
+              </div>
+              
+              {/* Center: Fake Page Indicator */}
+              <div className="flex items-center gap-2 text-[10px] text-muted-foreground/60 font-medium">
+                <div className="w-1.5 h-1.5 rounded-full bg-primary/60" />
+                <span>Page 1 / 24</span>
+              </div>
+              
+              {/* Right: Fake Toolbar */}
+              <div className="flex gap-1.5">
+                <div className="w-6 h-6 rounded bg-muted/60" />
+                <div className="w-6 h-6 rounded bg-muted/60" />
+                <div className="w-6 h-6 rounded bg-primary/20" />
+              </div>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>

@@ -130,20 +130,55 @@
     "modern": "Modern Minimalistisch"
   },
   "Pricing": {
+    "title": "Einfache und transparente Preise",
+    "subtitle": "Wählen Sie den Plan, der zu Ihren Veröffentlichungszielen passt.",
+    "mostPopular": "Beliebteste Wahl",
+    "month": "/Monat",
     "free": {
       "name": "Kostenlos",
       "price": "0 €",
-      "description": "Perfekt zum Testen der Engine."
+      "desc": "Perfekt zum Testen der Engine.",
+      "description": "Perfekt zum Testen der Engine.",
+      "button": "Kostenlos Starten"
     },
     "pro": {
       "name": "Pro",
       "price": "12 €",
-      "description": "Für unabhängige Autor*innen und Polyglotte."
+      "desc": "Für unabhängige Autor*innen und Polyglotte.",
+      "description": "Für unabhängige Autor*innen und Polyglotte.",
+      "button": "Pro Auswählen"
     },
     "publisher": {
       "name": "Publisher",
-      "price": "49 €",
-      "description": "Für Großproduktion und Verlage."
+      "price": "29 €",
+      "desc": "Für Großproduktion.",
+      "description": "Für Großproduktion und Verlage.",
+      "button": "Publisher Auswählen"
+    },
+    "featuresList": {
+      "activeProject": "1 aktives Projekt",
+      "standardLayout": "Standard-Layout-Engine",
+      "manualTranslation": "Manuelle Übersetzung",
+      "lowDpiPdf": "Niedriges DPI PDF-Export",
+      "watermarked": "Mit Wasserzeichen",
+      "unlimitedProjects": "Unbegrenzte Projekte",
+      "aiAssistedLayout": "KI-gestütztes Layout",
+      "aiWordsMonth": "50k KI-Wörter / Monat",
+      "highDpiPdf": "300 DPI Export (druckfertig)",
+      "epubMobi": "EPUB & MOBI Export",
+      "removeWatermarks": "Wasserzeichen entfernen",
+      "priorityHistory": "Priorisierte Cloud-Historie",
+      "flashcards": "Dynamische Lernkarten-Erstellung",
+      "tts": "Text-to-Speech Vorlesung",
+      "everythingPro": "Alles aus Pro",
+      "bigAiLimit": "500k KI-Wörter / Monat",
+      "unlimitedAi": "Unbegrenzte KI-Credits",
+      "teamCollab": "Team-Zusammenarbeit",
+      "brandCustom": "Markenanpassung",
+      "fontUpload": "Eigene Schriftarten hochladen",
+      "apiAccess": "API-Zugang (bald verfügbar)",
+      "ttsPremium": "Premium neuronale Stimmen",
+      "limitedAi": "Begrenzte KI"
     },
     "features": {
       "unlimited": "Unbegrenzte Projekte",

@@ -1,16 +1,21 @@
 // src/components/library/TileCard.tsx
 // PURPOSE: Individual tile in the Library Bento Grid
-// ACTION: Displays marketing info, license badge, and opens wizard on click
-// MECHANISM: Card component with hover effects and license indicator
+// ACTION: Displays marketing info, license/difficulty indicators with tooltips
+// MECHANISM: Card component with hover effects and indicator dots
 
 'use client';
 
 import { memo } from 'react';
 import { cn } from '@/lib/utils';
 import { LibraryTile } from '@/services/library/types';
-import { LicenseIndicator } from './LicenseBadge';
 import * as LucideIcons from 'lucide-react';
 import Image from 'next/image';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 
 interface TileCardProps {
   tile: LibraryTile;
@@ -24,29 +29,76 @@ function TileIcon({ name, className }: { name: string; className?: string }) {
   return <IconComponent className={className} />;
 }
 
+// Difficulty indicator with label
+function DifficultyIndicator({ difficulty }: { difficulty: 'beginner' | 'intermediate' | 'expert' }) {
+  const config = {
+    beginner: { color: 'bg-green-500', label: 'Easy', tooltip: 'Beginner friendly content' },
+    intermediate: { color: 'bg-amber-500', label: 'Medium', tooltip: 'Intermediate difficulty' },
+    expert: { color: 'bg-red-500', label: 'Hard', tooltip: 'Expert level content' },
+  };
+
+  const { color, label, tooltip } = config[difficulty];
+
+  return (
+    <TooltipProvider delayDuration={200}>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <div className="flex flex-col items-center gap-0.5 cursor-help">
+            <span className="text-[8px] font-semibold uppercase tracking-wide opacity-60">Difficulty</span>
+            <div className={cn('w-3 h-3 rounded-full shadow-sm ring-2 ring-white/50', color)} />
+          </div>
+        </TooltipTrigger>
+        <TooltipContent side="top" className="text-xs font-medium">
+          <span className="font-bold">{label}</span> — {tooltip}
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  );
+}
+
+// License indicator with label
+function LicenseIndicator({ license }: { license: LibraryTile['license'] }) {
+  const config = {
+    'commercial-safe': { color: 'bg-green-500', label: 'Free', tooltip: 'Commercial use allowed, no restrictions' },
+    'attribution': { color: 'bg-amber-500', label: 'Credit', tooltip: 'Attribution required for use' },
+    'personal-only': { color: 'bg-red-500', label: 'Study', tooltip: 'Personal study only, no commercial use' },
+  };
+
+  const { color, label, tooltip } = config[license.type];
+
+  return (
+    <TooltipProvider delayDuration={200}>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <div className="flex flex-col items-center gap-0.5 cursor-help">
+            <span className="text-[8px] font-semibold uppercase tracking-wide opacity-60">License</span>
+            <div className={cn('w-3 h-3 rounded-full shadow-sm ring-2 ring-white/50', color)} />
+          </div>
+        </TooltipTrigger>
+        <TooltipContent side="top" className="text-xs font-medium max-w-48">
+          <span className="font-bold">{license.name}</span> — {tooltip}
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  );
+}
+
 export const TileCard = memo(function TileCard({ 
   tile, 
   onClick,
   className 
 }: TileCardProps) {
-  // Determine grid span based on size
+  // Determine grid span based on size - fixed for stable layout
   const sizeClasses = {
     sm: 'col-span-1 row-span-1',
-    md: 'col-span-1 row-span-2 md:col-span-2 md:row-span-1',
+    md: 'col-span-1 row-span-1 md:col-span-2 md:row-span-1',
     lg: 'col-span-1 row-span-2 md:col-span-2 md:row-span-2',
   };
 
   const heightClasses = {
     sm: 'min-h-[180px]',
-    md: 'min-h-[200px]',
+    md: 'min-h-[180px]',
     lg: 'min-h-[280px]',
-  };
-
-  // Difficulty indicator colors
-  const difficultyColors = {
-    beginner: 'bg-green-500',
-    intermediate: 'bg-yellow-500',
-    expert: 'bg-red-500',
   };
 
   return (
@@ -56,7 +108,7 @@ export const TileCard = memo(function TileCard({
         // Base
         'relative group overflow-hidden rounded-2xl',
         'text-left transition-all duration-300',
-        // Sizing
+        // Sizing - stable grid
         sizeClasses[tile.size],
         heightClasses[tile.size],
         // Colors
@@ -82,7 +134,7 @@ export const TileCard = memo(function TileCard({
 
       {/* Content */}
       <div className="relative h-full p-5 flex flex-col">
-        {/* Top Row: Icon + License */}
+        {/* Top Row: Icon + Indicators */}
         <div className="flex items-start justify-between mb-3">
           <div className={cn(
             'p-2.5 rounded-xl',
@@ -92,13 +144,10 @@ export const TileCard = memo(function TileCard({
             <TileIcon name={tile.icon} className="w-6 h-6" />
           </div>
           
-          {/* License indicator */}
-          <div className="flex items-center gap-2">
+          {/* License + Difficulty indicators with labels */}
+          <div className="flex items-start gap-3">
             <LicenseIndicator license={tile.license} />
-            <span className={cn(
-              'w-2 h-2 rounded-full',
-              difficultyColors[tile.difficulty]
-            )} title={tile.difficulty} />
+            <DifficultyIndicator difficulty={tile.difficulty} />
           </div>
         </div>
 

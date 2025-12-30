@@ -162,15 +162,15 @@ export const SearchToolbar = memo(function SearchToolbar({
                 </DropdownMenuRadioItem>
                 <DropdownMenuRadioItem value="commercial-safe" className="gap-2">
                   <ShieldCheck className="w-4 h-4 text-green-600" />
-                  Commercial Safe 🟢
+                  Commercial Safe
                 </DropdownMenuRadioItem>
                 <DropdownMenuRadioItem value="attribution" className="gap-2">
                   <ShieldAlert className="w-4 h-4 text-yellow-600" />
-                  Attribution Required 🟡
+                  Attribution Required
                 </DropdownMenuRadioItem>
                 <DropdownMenuRadioItem value="personal-only" className="gap-2">
                   <ShieldX className="w-4 h-4 text-red-600" />
-                  Personal Use Only 🔴
+                  Personal Use Only
                 </DropdownMenuRadioItem>
               </DropdownMenuRadioGroup>
             </DropdownMenuContent>
@@ -207,8 +207,8 @@ export const SearchToolbar = memo(function SearchToolbar({
         </div>
       </div>
 
-      {/* Quick Filter Tags */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide">
+      {/* Quick Filter Tags - added mt-2 for more margin */}
+      <div className="flex items-center gap-2 overflow-x-auto pb-2 pt-1 mt-2 scrollbar-hide">
         <span className="text-xs text-muted-foreground whitespace-nowrap">Quick filters:</span>
         {QUICK_TAGS.map(qt => (
           <button

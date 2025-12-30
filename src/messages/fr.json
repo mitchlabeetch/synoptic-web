@@ -38,7 +38,16 @@
     "creatingAccount": "Création du compte...",
     "signIn": "Se connecter",
     "hasAccount": "Vous avez déjà un compte ?",
-    "termsPrompt": "En continuant, vous acceptez nos Conditions d'Utilisation et notre Politique de Confidentialité."
+    "termsPrompt": "En continuant, vous acceptez nos Conditions d'Utilisation et notre Politique de Confidentialité.",
+    "continueWithGoogle": "Continuer avec Google",
+    "orContinueWithEmail": "ou continuer par email",
+    "passwordStrength": "Force du mot de passe",
+    "weak": "Faible",
+    "fair": "Correct",
+    "strong": "Fort",
+    "oauthError": "L'authentification OAuth a échoué. Veuillez réessayer.",
+    "emailNotVerified": "Veuillez d'abord vérifier votre email avec Google.",
+    "securityNote": "Chiffrement SSL 256 bits • Conforme RGPD"
   },
   "Dashboard": {
     "title": "Mes Projets",
@@ -179,20 +188,55 @@
     "modern": "Minimaliste Moderne"
   },
   "Pricing": {
+    "title": "Tarification simple et transparente",
+    "subtitle": "Choisissez le plan qui correspond à vos objectifs de publication.",
+    "mostPopular": "Le Plus Populaire",
+    "month": "/mois",
     "free": {
       "name": "Gratuit",
       "price": "0 €",
-      "description": "Parfait pour tester le moteur."
+      "desc": "Parfait pour tester le moteur.",
+      "description": "Parfait pour tester le moteur.",
+      "button": "Démarrer Gratuitement"
     },
     "pro": {
       "name": "Pro",
       "price": "12 €",
-      "description": "Pour les auteur·rice·s indépendant·e·s et polyglottes."
+      "desc": "Pour les auteur·rice·s indépendant·e·s et polyglottes.",
+      "description": "Pour les auteur·rice·s indépendant·e·s et polyglottes.",
+      "button": "Passer à Pro"
     },
     "publisher": {
       "name": "Éditeur",
-      "price": "49 €",
-      "description": "Pour la production à haut volume et les maisons d'édition."
+      "price": "29 €",
+      "desc": "Pour la production à haut volume.",
+      "description": "Pour la production à haut volume et les maisons d'édition.",
+      "button": "Passer à Éditeur"
+    },
+    "featuresList": {
+      "activeProject": "1 projet actif",
+      "standardLayout": "Moteur de mise en page standard",
+      "manualTranslation": "Traduction manuelle",
+      "lowDpiPdf": "Export PDF basse résolution",
+      "watermarked": "Sortie avec filigrane",
+      "unlimitedProjects": "Projets illimités",
+      "aiAssistedLayout": "Mise en page assistée par IA",
+      "aiWordsMonth": "50k mots IA / mois",
+      "highDpiPdf": "Export 300 DPI (prêt à imprimer)",
+      "epubMobi": "Export EPUB & MOBI",
+      "removeWatermarks": "Suppression des filigranes",
+      "priorityHistory": "Historique cloud prioritaire",
+      "flashcards": "Génération de flashcards dynamiques",
+      "tts": "Narration Text-to-Speech",
+      "everythingPro": "Tout ce qui est inclus dans Pro",
+      "bigAiLimit": "500k mots IA / mois",
+      "unlimitedAi": "Crédits IA illimités",
+      "teamCollab": "Collaboration en équipe",
+      "brandCustom": "Personnalisation de marque",
+      "fontUpload": "Upload de polices personnalisées",
+      "apiAccess": "Accès API (bientôt disponible)",
+      "ttsPremium": "Voix neurales premium",
+      "limitedAi": "IA limitée"
     },
     "features": {
       "unlimited": "Projets illimités",

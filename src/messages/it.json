@@ -130,20 +130,55 @@
     "modern": "Moderno Minimalista"
   },
   "Pricing": {
+    "title": "Prezzi semplici e trasparenti",
+    "subtitle": "Scegli il piano che si adatta ai tuoi obiettivi di pubblicazione.",
+    "mostPopular": "Più Popolare",
+    "month": "/mese",
     "free": {
       "name": "Gratis",
       "price": "0 €",
-      "description": "Perfetto per testare il motore."
+      "desc": "Perfetto per testare il motore.",
+      "description": "Perfetto per testare il motore.",
+      "button": "Inizia Gratis"
     },
     "pro": {
       "name": "Pro",
       "price": "12 €",
-      "description": "Per autori indipendenti e poliglotti."
+      "desc": "Per autori indipendenti e poliglotti.",
+      "description": "Per autori indipendenti e poliglotti.",
+      "button": "Scegli Pro"
     },
     "publisher": {
       "name": "Publisher",
-      "price": "49 €",
-      "description": "Per produzione ad alto volume ed editori."
+      "price": "29 €",
+      "desc": "Per produzione ad alto volume.",
+      "description": "Per produzione ad alto volume ed editori.",
+      "button": "Scegli Publisher"
+    },
+    "featuresList": {
+      "activeProject": "1 progetto attivo",
+      "standardLayout": "Motore di layout standard",
+      "manualTranslation": "Traduzione manuale",
+      "lowDpiPdf": "Esportazione PDF bassa risoluzione",
+      "watermarked": "Output con filigrana",
+      "unlimitedProjects": "Progetti illimitati",
+      "aiAssistedLayout": "Layout assistito da IA",
+      "aiWordsMonth": "50k parole IA / mese",
+      "highDpiPdf": "Esportazione 300 DPI (pronta per la stampa)",
+      "epubMobi": "Esportazione EPUB & MOBI",
+      "removeWatermarks": "Rimozione filigrana",
+      "priorityHistory": "Cronologia cloud prioritaria",
+      "flashcards": "Generazione flashcard dinamiche",
+      "tts": "Narrazione Text-to-Speech",
+      "everythingPro": "Tutto incluso in Pro",
+      "bigAiLimit": "500k parole IA / mese",
+      "unlimitedAi": "Crediti IA illimitati",
+      "teamCollab": "Collaborazione team",
+      "brandCustom": "Personalizzazione brand",
+      "fontUpload": "Caricamento font personalizzati",
+      "apiAccess": "Accesso API (prossimamente)",
+      "ttsPremium": "Voci neurali premium",
+      "limitedAi": "IA limitata"
     },
     "features": {
       "unlimited": "Progetti illimitati",

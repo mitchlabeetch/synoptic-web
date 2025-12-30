@@ -1,11 +1,11 @@
 // src/components/library/LibraryGrid.tsx
-// PURPOSE: Asymmetric Bento Grid layout for Library tiles
-// ACTION: Renders all tiles with category, license, and difficulty filtering
-// MECHANISM: CSS Grid with dynamic spans and enhanced filtering
+// PURPOSE: Randomized Tetris-like Bento Grid layout for Library tiles
+// ACTION: Renders all tiles without category grouping, with search filtering
+// MECHANISM: CSS Grid with stable gaps and shuffled tile order
 
 'use client';
 
-import { useState, useMemo, memo } from 'react';
+import { useState, useMemo, memo, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { LibraryTile, TileCategory } from '@/services/library/types';
 import { TileCard } from './TileCard';
@@ -15,6 +15,25 @@ interface LibraryGridProps {
   tiles: LibraryTile[];
   onTileClick: (tile: LibraryTile) => void;
   className?: string;
+}
+
+// Deterministic shuffle using seed for consistent SSR/CSR
+function shuffleArray<T>(array: T[], seed: number = 42): T[] {
+  const result = [...array];
+  let m = result.length;
+  
+  // Simple seeded random
+  const random = () => {
+    seed = (seed * 9301 + 49297) % 233280;
+    return seed / 233280;
+  };
+  
+  while (m) {
+    const i = Math.floor(random() * m--);
+    [result[m], result[i]] = [result[i], result[m]];
+  }
+  
+  return result;
 }
 
 export const LibraryGrid = memo(function LibraryGrid({
@@ -27,9 +46,12 @@ export const LibraryGrid = memo(function LibraryGrid({
   const [licenseFilter, setLicenseFilter] = useState<'all' | 'commercial-safe' | 'attribution' | 'personal-only'>('all');
   const [difficultyFilter, setDifficultyFilter] = useState<'all' | 'beginner' | 'intermediate' | 'expert'>('all');
 
+  // Shuffle tiles once for randomized tetris-like display
+  const shuffledTiles = useMemo(() => shuffleArray(tiles), [tiles]);
+
   // Filter tiles based on search and filters
   const filteredTiles = useMemo(() => {
-    let result = [...tiles];
+    let result = [...shuffledTiles];
 
     // Apply search (matches title, subtitle, tags, description, sourceName)
     if (searchQuery.trim()) {
@@ -40,7 +62,8 @@ export const LibraryGrid = memo(function LibraryGrid({
         tile.tags.some(tag => tag.includes(q)) ||
         tile.description?.toLowerCase().includes(q) ||
         tile.sourceName?.toLowerCase().includes(q) ||
-        tile.sourceId.toLowerCase().includes(q)
+        tile.sourceId.toLowerCase().includes(q) ||
+        tile.category.toLowerCase().includes(q)
       );
     }
 
@@ -60,63 +83,7 @@ export const LibraryGrid = memo(function LibraryGrid({
     }
 
     return result;
-  }, [tiles, searchQuery, selectedCategory, licenseFilter, difficultyFilter]);
-
-  // Group tiles by category for organized display
-  const groupedTiles = useMemo(() => {
-    if (selectedCategory !== 'all') {
-      return { [selectedCategory]: filteredTiles };
-    }
-
-    // Custom category order for better presentation
-    const categoryOrder: TileCategory[] = [
-      'sacred',
-      'literature', 
-      'visual',
-      'knowledge',
-      'language',
-      'history',
-      'academic',
-      'popculture',
-      'news',
-    ];
-
-    const groups: Record<string, LibraryTile[]> = {};
-    
-    // Initialize groups in order
-    categoryOrder.forEach(cat => {
-      const categoryTiles = filteredTiles.filter(t => t.category === cat);
-      if (categoryTiles.length > 0) {
-        groups[cat] = categoryTiles;
-      }
-    });
-
-    return groups;
-  }, [filteredTiles, selectedCategory]);
-
-  const categoryLabels: Record<TileCategory, string> = {
-    sacred: '📖 Sacred & Wisdom',
-    literature: '✍️ Literature',
-    visual: '🎨 Visual & Art',
-    news: '📰 News & Media',
-    history: '📜 History',
-    language: '💬 Language Learning',
-    knowledge: '🧠 Knowledge & Facts',
-    academic: '🎓 Academic & Research',
-    popculture: '🎮 Pop Culture',
-  };
-
-  const categoryDescriptions: Record<TileCategory, string> = {
-    sacred: 'Spiritual texts from world traditions',
-    literature: 'Novels, poetry, drama, and folklore',
-    visual: 'Museum art, NASA photography, and more',
-    news: 'Headlines, articles, and media',
-    history: 'Historical documents and archives',
-    language: 'Sentences, vocabulary, and drills',
-    knowledge: 'Facts, quotes, recipes, and geography',
-    academic: 'Research, formal writing, and test prep',
-    popculture: 'Comics, games, and entertainment',
-  };
+  }, [shuffledTiles, searchQuery, selectedCategory, licenseFilter, difficultyFilter]);
 
   return (
     <div className={cn('space-y-8', className)}>
@@ -157,40 +124,22 @@ export const LibraryGrid = memo(function LibraryGrid({
         </div>
       )}
 
-      {/* Tile Groups */}
-      {Object.entries(groupedTiles).map(([category, categoryTiles]) => (
-        <section key={category} className="space-y-4">
-          {/* Category Header (if showing all) */}
-          {selectedCategory === 'all' && (
-            <div className="space-y-1">
-              <h2 className="text-xl font-bold flex items-center gap-2">
-                {categoryLabels[category as TileCategory] || category}
-                <span className="text-sm font-normal text-muted-foreground">
-                  ({categoryTiles.length})
-                </span>
-              </h2>
-              <p className="text-sm text-muted-foreground">
-                {categoryDescriptions[category as TileCategory]}
-              </p>
-            </div>
-          )}
-
-          {/* Bento Grid */}
-          <div className={cn(
-            'grid gap-4',
-            'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4',
-            'auto-rows-[180px]'
-          )}>
-            {categoryTiles.map(tile => (
-              <TileCard
-                key={tile.id}
-                tile={tile}
-                onClick={onTileClick}
-              />
-            ))}
-          </div>
-        </section>
-      ))}
+      {/* Randomized Tetris-like Bento Grid - No category grouping */}
+      {filteredTiles.length > 0 && (
+        <div className={cn(
+          'grid gap-5',
+          'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4',
+          'auto-rows-[180px]'
+        )}>
+          {filteredTiles.map(tile => (
+            <TileCard
+              key={tile.id}
+              tile={tile}
+              onClick={onTileClick}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 });

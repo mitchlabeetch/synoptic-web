@@ -40,7 +40,16 @@
     "signingIn": "Signing in...",
     "creatingAccount": "Creating account...",
     "signIn": "Sign In",
-    "termsPrompt": "By continuing, you agree to our Terms of Service and Privacy Policy."
+    "termsPrompt": "By continuing, you agree to our Terms of Service and Privacy Policy.",
+    "continueWithGoogle": "Continue with Google",
+    "orContinueWithEmail": "or continue with email",
+    "passwordStrength": "Password strength",
+    "weak": "Weak",
+    "fair": "Fair",
+    "strong": "Strong",
+    "oauthError": "OAuth authentication failed. Please try again.",
+    "emailNotVerified": "Please verify your email with Google first.",
+    "securityNote": "256-bit SSL encryption • GDPR compliant"
   },
   "Dashboard": {
     "title": "My Projects",
@@ -377,12 +386,16 @@
       "epubMobi": "EPUB & MOBI export",
       "removeWatermarks": "Watermark removal",
       "priorityHistory": "Priority cloud history",
+      "flashcards": "Dynamic flashcard generation",
+      "tts": "Text-to-Speech narration",
       "everythingPro": "Everything in Pro",
+      "bigAiLimit": "500k AI words / month",
       "unlimitedAi": "Unlimited AI credits",
       "teamCollab": "Team collaboration",
       "brandCustom": "Brand customization",
       "fontUpload": "Custom font upload",
       "apiAccess": "API access (coming soon)",
+      "ttsPremium": "Premium neural voices",
       "limitedAi": "Limited AI"
     },
     "features": {
