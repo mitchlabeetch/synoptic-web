@@ -1,4 +1,8 @@
 // src/components/editor/blocks/FloatingToolbar.tsx
+// PURPOSE: Contextual formatting toolbar that appears on text selection
+// ACTION: Provides quick formatting, AI explain, word polishing, and social share
+// MECHANISM: Positioned absolutely near selection, triggers document.execCommand or modal opens
+
 'use client';
 
 import { 
@@ -8,12 +12,14 @@ import {
   Strikethrough,
   Highlighter,
   Link2,
-  Sparkles
+  Sparkles,
+  Share2
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
 import { WordPolisher } from '@/components/tools/WordPolisher';
+import { SocialShareModal } from '../tools/SocialShareModal';
 
 interface FloatingToolbarProps {
   isVisible: boolean;
@@ -21,6 +27,11 @@ interface FloatingToolbarProps {
   onAiExplain?: () => void;
   selectedText?: string;
   onReplaceText?: (newText: string) => void;
+  // For Social Share
+  sourceText?: string;
+  targetText?: string;
+  sourceLang?: string;
+  targetLang?: string;
 }
 
 export function FloatingToolbar({ 
@@ -28,7 +39,11 @@ export function FloatingToolbar({
   position, 
   onAiExplain,
   selectedText = '',
-  onReplaceText
+  onReplaceText,
+  sourceText = '',
+  targetText = '',
+  sourceLang = 'EN',
+  targetLang = 'FR'
 }: FloatingToolbarProps) {
   const [show, setShow] = useState(isVisible);
 
@@ -54,6 +69,9 @@ export function FloatingToolbar({
 
   // Check if selected text is a single word (for WordPolisher)
   const isSingleWord = selectedText.trim().split(/\s+/).length === 1 && selectedText.trim().length > 0;
+  
+  // Check if we have content for social share
+  const hasShareableContent = (sourceText && sourceText.length > 0) || (targetText && targetText.length > 0);
 
   return (
     <div
@@ -94,6 +112,29 @@ export function FloatingToolbar({
             icon={Sparkles} 
             label="AI Explain" 
             color="text-primary animate-pulse hover:animate-none" 
+          />
+        </>
+      )}
+
+      {/* Social Share Button - Viral loop for Instagram/Twitter */}
+      {hasShareableContent && (
+        <>
+          <div className="w-[1px] h-4 bg-muted mx-1" />
+          <SocialShareModal
+            triggerContent={
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8 hover:bg-pink-50 hover:text-pink-500 transition-colors"
+                title="Share as Image"
+              >
+                <Share2 className="h-4 w-4" />
+              </Button>
+            }
+            sourceText={sourceText || selectedText}
+            targetText={targetText || selectedText}
+            sourceLang={sourceLang}
+            targetLang={targetLang}
           />
         </>
       )}

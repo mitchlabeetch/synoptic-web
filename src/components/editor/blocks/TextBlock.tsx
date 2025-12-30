@@ -11,8 +11,9 @@ import { isRTL, getDefaultFont, getLanguageByCode } from '@/data/languages';
 import { useProjectStore } from '@/lib/store/projectStore';
 import { cn } from '@/lib/utils';
 import { TiptapEditor, TiptapEditorRef } from '../TiptapEditor';
+import { LinePlayer } from '../tools/LinePlayer';
 
-import { Sparkles, Loader2, Trash2, BookOpen } from 'lucide-react';
+import { Sparkles, Loader2, Trash2, BookOpen, Volume2 } from 'lucide-react';
 
 interface TextBlockComponentProps {
   block: TextBlock;
@@ -299,7 +300,30 @@ export function TextBlockComponent({
 
       {/* Block Actions Overlay */}
       {isSelected && (
-        <div className="absolute -right-12 top-0 flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="absolute -right-14 top-0 flex flex-col gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
+          {/* Audio Players Section */}
+          <div className="flex flex-col gap-0.5 p-1 bg-background/90 backdrop-blur-sm rounded-lg border shadow-sm">
+            {/* L2 Player (Target - Priority) */}
+            {block.L2.content && (
+              <LinePlayer 
+                text={block.L2.content.replace(/<[^>]*>/g, '')} 
+                lang={targetLang}
+                variant="compact"
+                className="opacity-100"
+              />
+            )}
+            {/* L1 Player (Source - Secondary) */}
+            {block.L1.content && (
+              <LinePlayer 
+                text={block.L1.content.replace(/<[^>]*>/g, '')} 
+                lang={sourceLang}
+                variant="compact"
+                className="opacity-70 hover:opacity-100"
+              />
+            )}
+          </div>
+
+          {/* AI Actions */}
           <button 
             onClick={(e) => { e.stopPropagation(); handleAiTranslate(); }}
             disabled={isAiProcessing}

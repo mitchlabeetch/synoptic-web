@@ -165,7 +165,12 @@
   "Studio": {
     "collaborate": "Collaborer",
     "export": "Exporter",
-    "preview": "Aperçu"
+    "preview": "Aperçu",
+    "playAudio": "Lire à voix haute",
+    "stopAudio": "Arrêter la lecture",
+    "normalSpeed": "Vitesse normale",
+    "slowMode": "Mode lent (0.7×)",
+    "audioSettings": "Paramètres vocaux"
   },
   "Models": {
     "parallel": "Colonnes Parallèles",
@@ -366,7 +371,16 @@
     "engineActive": "Moteur Actif",
     "waitingContent": "En attente de contenu...",
     "mirrorGutter": "Logique de Gouttière Miroir",
-    "profileLoaded": "Profil Chargé"
+    "profileLoaded": "Profil Chargé",
+    "audiobookEngine": "Livre Audio Neural",
+    "audiobookDesc": "Générez des livres audio de qualité studio avec Microsoft Neural TTS. Les fichiers sont organisés par chapitre et exportés en archive ZIP.",
+    "voicePersona": "Voix du Narrateur",
+    "selectVoice": "Sélectionnez une voix...",
+    "renderingChapter": "Synthèse du Chapitre {chapter}...",
+    "exportAudioZip": "Exporter Audio (ZIP)",
+    "neuralEngine": "Moteur Microsoft Neural TTS",
+    "noAudioContent": "Aucun contenu textuel trouvé pour générer l'audio. Ajoutez d'abord des blocs de texte !",
+    "audioExportError": "L'export audio a échoué. Veuillez vérifier votre connexion et réessayer."
   },
   "Onboarding": {
     "tourDashboardContent": "Bienvenue sur Synoptic ! Voici votre hub de projets.",

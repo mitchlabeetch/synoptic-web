@@ -50,7 +50,7 @@ export function CommandPalette() {
       action: () => addBlock(currentPageIndex, { 
         id: `block-${Date.now()}`, 
         type: 'text', 
-        L1: { content: '', lang: meta?.source_lang || 'fr' },
+        L1: { content: '', lang: meta?.source_lang || 'en' },
         L2: { content: '', lang: meta?.target_lang || 'en' },
         layout: 'side-by-side'
       } as any),

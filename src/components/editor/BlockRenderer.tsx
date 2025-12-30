@@ -58,7 +58,7 @@ export default function BlockRenderer({
       if (selectedBlockId === block.id) setSelectedBlockId(null);
     },
     isEditing: true,
-    sourceLang: meta?.source_lang || 'fr',
+    sourceLang: meta?.source_lang || 'en',
     targetLang: meta?.target_lang || 'en',
   };
 

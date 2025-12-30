@@ -125,10 +125,10 @@ function renderBlock(block: any, project: any, isFirstInChapter: boolean): strin
   const layout = block.layout || 'side-by-side';
   
   if (block.type === 'text') {
-    const l1Dir = isRTL(project.source_lang || 'fr') ? 'rtl' : 'ltr';
+    const l1Dir = isRTL(project.source_lang || 'en') ? 'rtl' : 'ltr';
     const l2Dir = isRTL(project.target_lang || 'en') ? 'rtl' : 'ltr';
     
-    const l1Script = getLanguageByCode(project.source_lang || 'fr')?.script || 'latin';
+    const l1Script = getLanguageByCode(project.source_lang || 'en')?.script || 'latin';
     const l2Script = getLanguageByCode(project.target_lang || 'en')?.script || 'latin';
     
     // Sanitize user content to prevent XSS
@@ -137,7 +137,7 @@ function renderBlock(block: any, project: any, isFirstInChapter: boolean): strin
     
     return `
       <div class="block text-block ${layout} ${isFirstInChapter ? 'first-paragraph' : ''}">
-        <div class="l1-col script-${l1Script}" dir="${l1Dir}" lang="${project.source_lang || 'fr'}">${l1Content}</div>
+        <div class="l1-col script-${l1Script}" dir="${l1Dir}" lang="${project.source_lang || 'en'}">${l1Content}</div>
         <div class="l2-col script-${l2Script}" dir="${l2Dir}" lang="${project.target_lang || 'en'}">${l2Content}</div>
       </div>
     `;
@@ -266,7 +266,7 @@ function renderBlock(block: any, project: any, isFirstInChapter: boolean): strin
 }
 
 function generateProjectCSS(project: any): string {
-  const sourceLang = project.source_lang || 'fr';
+  const sourceLang = project.source_lang || 'en';
   const targetLang = project.target_lang || 'en';
   
   const sourceConfig = getLanguageByCode(sourceLang);

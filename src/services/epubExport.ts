@@ -183,7 +183,7 @@ ${items}
  */
 function generateChapterXHTML(page: any, index: number, project: any): string {
   const blocks = page.blocks || [];
-  const sourceLang = project.source_lang || project.meta?.source_lang || 'fr';
+  const sourceLang = project.source_lang || project.meta?.source_lang || 'en';
   const targetLang = project.target_lang || project.meta?.target_lang || 'en';
   
   const content = blocks

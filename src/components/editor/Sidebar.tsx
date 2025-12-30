@@ -49,11 +49,11 @@ export default function Sidebar() {
       id: `block-${Date.now()}`,
       type: 'text',
       L1: { 
-        content: 'Nouveau paragraphe...', 
-        lang: meta?.source_lang || 'fr' 
+        content: '...', // Placeholder - user will type their content
+        lang: meta?.source_lang || 'en' 
       },
       L2: { 
-        content: 'New paragraph...', 
+        content: '...', // Placeholder - user will type their content
         lang: meta?.target_lang || 'en' 
       },
       layout: 'side-by-side',

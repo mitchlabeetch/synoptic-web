@@ -13,6 +13,8 @@ import TextAlign from '@tiptap/extension-text-align';
 import Underline from '@tiptap/extension-underline';
 import { TextStyle } from '@tiptap/extension-text-style';
 import { Color } from '@tiptap/extension-color';
+import { GrammarMark } from './extensions/GrammarMark';
+import { ArrowAnchor } from './extensions/ArrowAnchor';
 import { useCallback, useEffect, forwardRef, useImperativeHandle, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { 
@@ -88,6 +90,10 @@ export const TiptapEditor = forwardRef<TiptapEditorRef, TiptapEditorProps>(
         Color.configure({
           types: ['textStyle'],
         }),
+        // Grammar Painter Extension - enables semantic highlighting
+        GrammarMark,
+        // Arrow Anchor Extension - enables syntax arrow connections
+        ArrowAnchor,
       ],
       content,
       editable,

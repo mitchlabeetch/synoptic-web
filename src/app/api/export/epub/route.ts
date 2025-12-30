@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
     const epubBlob = await generateEpub(project, {
       title: project.title,
       author: user.email || 'Synoptic Author',
-      language: project.source_lang || 'fr',
+      language: project.source_lang || 'en',
       identifier: project.id,
     });
 

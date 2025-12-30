@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useProjectStore } from '@/lib/store/projectStore';
 import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
 import { 
   FileDown, 
   Printer, 
@@ -14,7 +15,11 @@ import {
   Lock,
   Grid,
   Activity,
-  FileSpreadsheet
+  FileSpreadsheet,
+  Headphones,
+  Volume2,
+  Instagram,
+  Image
 } from 'lucide-react';
 import { 
   Select,
@@ -25,12 +30,27 @@ import {
 } from "@/components/ui/select"
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
+import JSZip from 'jszip';
+import { saveAs } from 'file-saver';
+import { getVoicesForLang, VoiceOption } from '@/data/voices';
+import { exportAsImage, SocialFormat } from '@/services/socialExport';
+import { Switch } from '@/components/ui/switch';
 
 export default function ExportManager() {
   const { meta, content, settings } = useProjectStore();
   const [isExporting, setIsExporting] = useState<string | null>(null);
   const [lastExport, setLastExport] = useState<{ type: string; url: string } | null>(null);
   const [tier, setTier] = useState<string>('free');
+  
+  // Audio Engine State
+  const [audioProgress, setAudioProgress] = useState(0);
+  const [audioChapter, setAudioChapter] = useState(0);
+  const [selectedVoice, setSelectedVoice] = useState<string>('');
+  
+  // Social Share State
+  const [socialFormat, setSocialFormat] = useState<SocialFormat>('square');
+  const [socialBranding, setSocialBranding] = useState(true);
+  const [selectedBlockIndex, setSelectedBlockIndex] = useState<number | null>(null);
   
   // Dynamic logic to make the status "Real"
   const hasContent = content?.pages && content.pages.length > 0 && 
@@ -54,6 +74,16 @@ export default function ExportManager() {
     }
     fetchTier();
   }, []);
+
+  // Initialize default voice when target language is available
+  useEffect(() => {
+    if (meta?.target_lang && !selectedVoice) {
+      const voices = getVoicesForLang(meta.target_lang);
+      if (voices[0]) {
+        setSelectedVoice(voices[0].id);
+      }
+    }
+  }, [meta?.target_lang, selectedVoice]);
 
   const handleExportPdf = async () => {
     if (!meta?.id || isExporting) return;
@@ -117,6 +147,143 @@ export default function ExportManager() {
       alert(t('epubErrorDesc'));
     } finally {
       setIsExporting(null);
+    }
+  };
+
+  // ═══════════════════════════════════════════
+  // AUDIOBOOK EXPORT HANDLER
+  // ═══════════════════════════════════════════
+  const handleAudiobookExport = async () => {
+    if (!selectedVoice || isExporting) return;
+    setIsExporting('audio');
+    setAudioProgress(0);
+    setAudioChapter(0);
+
+    try {
+      const zip = new JSZip();
+      const folder = zip.folder(`Audiobook - ${meta?.title || 'Untitled'}`);
+      
+      // Build task list: concatenate text by chapter for natural audiobook flow
+      const tasks: { filename: string; text: string; chapter: number }[] = [];
+      let chapterNum = 0;
+      let chapterTextBuffer = '';
+      let lastPageIdx = -1;
+
+      content?.pages.forEach((page, pIdx) => {
+        // Check if this is a new chapter
+        if (page.isChapterStart || pIdx === 0) {
+          // Save previous chapter if it has content
+          if (chapterTextBuffer.trim() && chapterNum > 0) {
+            tasks.push({
+              filename: `Chapter_${String(chapterNum).padStart(2, '0')}.mp3`,
+              text: chapterTextBuffer.trim(),
+              chapter: chapterNum
+            });
+          }
+          chapterNum++;
+          chapterTextBuffer = '';
+        }
+        
+        // Collect text from blocks
+        page.blocks.forEach((block) => {
+          if (block.type === 'text') {
+            const textBlock = block as { L2?: { content?: string } };
+            if (textBlock.L2?.content) {
+              // Strip HTML tags and add natural pauses
+              const plainText = textBlock.L2.content
+                .replace(/<[^>]*>/g, '')
+                .trim();
+              if (plainText) {
+                chapterTextBuffer += plainText + '. ';
+              }
+            }
+          }
+        });
+        
+        lastPageIdx = pIdx;
+      });
+
+      // Don't forget the last chapter
+      if (chapterTextBuffer.trim()) {
+        tasks.push({
+          filename: `Chapter_${String(chapterNum).padStart(2, '0')}.mp3`,
+          text: chapterTextBuffer.trim(),
+          chapter: chapterNum
+        });
+      }
+
+      if (tasks.length === 0) {
+        alert(t('noAudioContent'));
+        setIsExporting(null);
+        return;
+      }
+
+      // Process Queue with progress updates
+      const total = tasks.length;
+      for (let i = 0; i < total; i++) {
+        const task = tasks[i];
+        setAudioChapter(task.chapter);
+        
+        try {
+          // Split long texts into chunks (Edge TTS limit ~10000 chars)
+          const maxChunkSize = 8000;
+          const textChunks: string[] = [];
+          let remainingText = task.text;
+          
+          while (remainingText.length > 0) {
+            if (remainingText.length <= maxChunkSize) {
+              textChunks.push(remainingText);
+              break;
+            }
+            // Find a natural break point (sentence end)
+            let breakPoint = remainingText.lastIndexOf('. ', maxChunkSize);
+            if (breakPoint === -1) breakPoint = maxChunkSize;
+            textChunks.push(remainingText.substring(0, breakPoint + 1));
+            remainingText = remainingText.substring(breakPoint + 1).trim();
+          }
+
+          // Generate audio for each chunk and combine
+          const audioChunks: Blob[] = [];
+          for (const chunk of textChunks) {
+            const res = await fetch('/api/export/audio', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ 
+                text: chunk, 
+                voiceId: selectedVoice 
+              })
+            });
+
+            if (res.ok) {
+              const blob = await res.blob();
+              audioChunks.push(blob);
+            }
+          }
+
+          // Combine chunks into single file
+          if (audioChunks.length > 0) {
+            const combinedBlob = new Blob(audioChunks, { type: 'audio/mpeg' });
+            folder?.file(task.filename, combinedBlob);
+          }
+        } catch (e) {
+          console.error(`Failed to generate ${task.filename}:`, e);
+        }
+        
+        // Update Progress
+        setAudioProgress(Math.round(((i + 1) / total) * 100));
+      }
+
+      // Generate and download ZIP
+      const zipBlob = await zip.generateAsync({ type: 'blob' });
+      saveAs(zipBlob, `${meta?.title || 'Audiobook'}_Neural_Audio.zip`);
+      
+    } catch (error) {
+      console.error('Audiobook export failed:', error);
+      alert(t('audioExportError'));
+    } finally {
+      setIsExporting(null);
+      setAudioProgress(0);
+      setAudioChapter(0);
     }
   };
 
@@ -231,6 +398,200 @@ export default function ExportManager() {
                {isExporting === 'epub' ? <Loader2 className="h-3 w-3 animate-spin" /> : <Book className="h-3 w-3" />}
                {t('generate')} {tCommon('epub')}
              </Button>
+          </div>
+        </section>
+
+        {/* AUDIOBOOK ENGINE SECTION */}
+        <section className="space-y-4">
+          <div className="flex items-center gap-2 mb-2">
+            <div className="h-6 w-6 rounded-md bg-violet-500/10 flex items-center justify-center">
+              <Headphones className="h-4 w-4 text-violet-600" />
+            </div>
+            <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+              {t('audiobookEngine')}
+            </h4>
+          </div>
+          
+          <div className="p-4 rounded-xl border bg-gradient-to-br from-violet-50/50 to-transparent dark:from-violet-950/20 space-y-4">
+            <p className="text-[11px] text-muted-foreground leading-relaxed">
+              {t('audiobookDesc')}
+            </p>
+            
+            {/* Voice Selection */}
+            <div className="space-y-2">
+              <label className="text-[10px] font-bold uppercase text-muted-foreground tracking-wide">
+                {t('voicePersona')}
+              </label>
+              <Select 
+                value={selectedVoice} 
+                onValueChange={setSelectedVoice} 
+                disabled={isExporting === 'audio'}
+              >
+                <SelectTrigger className="h-8 text-xs bg-white/50 dark:bg-background/50">
+                  <SelectValue placeholder={t('selectVoice')} />
+                </SelectTrigger>
+                <SelectContent>
+                  {getVoicesForLang(meta?.target_lang || 'en').map((v: VoiceOption) => (
+                    <SelectItem key={v.id} value={v.id} className="text-xs">
+                      <span className="flex items-center gap-2">
+                        <Volume2 className="h-3 w-3 text-muted-foreground" />
+                        {v.name} 
+                        <span className="text-muted-foreground">({v.gender})</span>
+                        {v.region && (
+                          <span className="text-[9px] text-muted-foreground/70">• {v.region}</span>
+                        )}
+                      </span>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Progress Indicator */}
+            {isExporting === 'audio' && (
+              <div className="space-y-2 pt-2">
+                <Progress value={audioProgress} className="h-1.5" />
+                <p className="text-[10px] text-violet-600 dark:text-violet-400 text-center font-medium animate-pulse">
+                  {t('renderingChapter', { chapter: audioChapter })}
+                </p>
+              </div>
+            )}
+
+            {/* Export Button */}
+            <Button 
+              className="w-full gap-2 text-xs font-bold bg-violet-600 hover:bg-violet-700 text-white shadow-lg shadow-violet-500/20 transition-all" 
+              onClick={handleAudiobookExport}
+              disabled={isExporting !== null || !selectedVoice}
+            >
+              {isExporting === 'audio' ? (
+                <Loader2 className="h-3 w-3 animate-spin" />
+              ) : (
+                <Headphones className="h-3 w-3" />
+              )}
+              {t('exportAudioZip')}
+            </Button>
+            
+            {/* Neural Engine Badge */}
+            <div className="flex items-center justify-center gap-2 pt-1">
+              <div className="h-1.5 w-1.5 rounded-full bg-violet-500 animate-pulse" />
+              <span className="text-[9px] text-muted-foreground font-medium uppercase tracking-wider">
+                {t('neuralEngine')}
+              </span>
+            </div>
+          </div>
+        </section>
+
+        {/* SOCIAL SHARE SECTION */}
+        <section className="space-y-4">
+          <div className="flex items-center gap-2 mb-2">
+            <div className="h-6 w-6 rounded-md bg-pink-500/10 flex items-center justify-center">
+              <Instagram className="h-4 w-4 text-pink-600" />
+            </div>
+            <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+              {t('socialShare')}
+            </h4>
+          </div>
+          
+          <div className="p-4 rounded-xl border bg-gradient-to-br from-pink-50/50 to-transparent dark:from-pink-950/20 space-y-4">
+            <p className="text-[11px] text-muted-foreground leading-relaxed">
+              {t('socialShareDesc')}
+            </p>
+            
+            {/* Format Selection */}
+            <div className="space-y-2">
+              <label className="text-[10px] font-bold uppercase text-muted-foreground tracking-wide">
+                {t('socialFormat')}
+              </label>
+              <Select 
+                value={socialFormat} 
+                onValueChange={(v) => setSocialFormat(v as SocialFormat)}
+              >
+                <SelectTrigger className="h-8 text-xs bg-white/50 dark:bg-background/50">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="square" className="text-xs">
+                    <span className="flex items-center gap-2">
+                      <Grid className="h-3 w-3" />
+                      {t('squareFormat')}
+                    </span>
+                  </SelectItem>
+                  <SelectItem value="story" className="text-xs">
+                    <span className="flex items-center gap-2">
+                      <Image className="h-3 w-3" />
+                      {t('storyFormat')}
+                    </span>
+                  </SelectItem>
+                  <SelectItem value="twitter" className="text-xs">
+                    <span className="flex items-center gap-2">
+                      <Grid className="h-3 w-3" />
+                      {t('twitterFormat')}
+                    </span>
+                  </SelectItem>
+                  <SelectItem value="pinterest" className="text-xs">
+                    <span className="flex items-center gap-2">
+                      <Image className="h-3 w-3" />
+                      {t('pinterestFormat')}
+                    </span>
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Branding Toggle */}
+            <div className="flex items-center justify-between">
+              <label className="text-[10px] font-medium text-muted-foreground">
+                {t('includeBranding')}
+              </label>
+              <Switch 
+                checked={socialBranding} 
+                onCheckedChange={setSocialBranding}
+              />
+            </div>
+
+            {/* Export Button */}
+            <Button 
+              className="w-full gap-2 text-xs font-bold bg-pink-600 hover:bg-pink-700 text-white shadow-lg shadow-pink-500/20" 
+              onClick={async () => {
+                // Get first text block with content
+                const allBlocks = content?.pages.flatMap(p => p.blocks) || [];
+                const firstBlock = allBlocks.find(b => {
+                  if (b.type !== 'text') return false;
+                  const textBlock = b as { L2?: { content?: string } };
+                  return !!textBlock.L2?.content;
+                });
+                  
+                if (!firstBlock) {
+                  alert(t('selectBlock'));
+                  return;
+                }
+                
+                const textBlock = firstBlock as { L1?: { content?: string }; L2?: { content?: string } };
+                
+                await exportAsImage({
+                  source: textBlock.L1?.content || '',
+                  target: textBlock.L2?.content || '',
+                  sourceLang: meta?.source_lang?.toUpperCase() || 'EN',
+                  targetLang: meta?.target_lang?.toUpperCase() || 'FR'
+                }, {
+                  format: socialFormat,
+                  showBranding: socialBranding,
+                  theme: 'light'
+                });
+              }}
+              disabled={isExporting !== null}
+            >
+              <Instagram className="h-3 w-3" />
+              {t('exportImage')}
+            </Button>
+            
+            {/* Viral Badge */}
+            <div className="flex items-center justify-center gap-2 pt-1">
+              <div className="h-1.5 w-1.5 rounded-full bg-pink-500" />
+              <span className="text-[9px] text-muted-foreground font-medium uppercase tracking-wider">
+                Instagram • Twitter • Pinterest
+              </span>
+            </div>
           </div>
         </section>
 
