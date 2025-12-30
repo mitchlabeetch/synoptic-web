@@ -1,65 +1,140 @@
 {
-  "Studio": {
-    "title": "Synoptic Studio",
-    "saving": "Piszkozat mentése...",
-    "saved": "Minden módosítás mentve a felhőbe",
-    "ready": "Készen áll a kétnyelvű remekművéhez",
-    "addPage": "Új oldal hozzáadása",
-    "pageSettings": "{number}. oldal beállításai",
-    "enteringStudio": "Belépés a Studióba...",
-    "failedToLoadProject": "A projekt betöltése sikertelen",
-    "retryConnection": "Csatlakozás újrapróbálása",
-    "pageManager": "Oldalkezelő",
-    "globalDesign": "Globális dizájn",
-    "stylePresets": "Stílus előbeállítások",
-    "editorTools": "Szerkesztő eszközök",
-    "canvasActions": "Vászon műveletek",
-    "drafting": "Vázlatkészítés",
-    "chapterStart": "Fejezet kezdete",
-    "manuscript": "Kézirat",
-    "chapters": "Fejezetek",
-    "noChapters": "Nincsenek fejezetek definiálva",
-    "deletePage": "Oldal törlése",
-    "resetFactory": "Gyári beállítások visszaállítása",
-    "bilingualEditor": "Kétnyelvű szerkesztő"
+  "Common": {
+    "save": "Mentés",
+    "cancel": "Mégse",
+    "delete": "Törlés",
+    "copy": "Másolás",
+    "duplicate": "Duplikálás",
+    "edit": "Szerkesztés",
+    "loading": "Betöltés...",
+    "error": "Hiba történt",
+    "success": "Sikeres",
+    "back": "Vissza",
+    "next": "Tovább",
+    "backToHome": "Vissza a kezdőlapra",
+    "on": "Be",
+    "off": "Ki",
+    "pdf": "PDF",
+    "epub": "EPUB",
+    "close": "Bezárás",
+    "original": "Eredeti",
+    "translation": "Fordítás",
+    "importFailed": "Az importálás sikertelen"
+  },
+  "Auth": {
+    "login": "Bejelentkezés",
+    "signup": "Regisztráció",
+    "logout": "Kijelentkezés",
+    "email": "E-mail",
+    "password": "Jelszó",
+    "forgotPassword": "Elfelejtetted a jelszavad?",
+    "noAccount": "Nincs még fiókod?",
+    "hasAccount": "Van már fiókod?",
+    "haveAccount": "Van már fiókod?",
+    "verifyEmail": "E-mail megerősítése",
+    "welcomeBack": "Üdvözlünk ismét",
+    "createAccount": "Fiók létrehozása",
+    "signInDesc": "Jelentkezz be a projektjeid eléréséhez.",
+    "signUpDesc": "Hozz létre egy fiókot a publikálás megkezdéséhez.",
+    "emailPlaceholder": "nev@pelda.hu",
+    "passwordPlaceholderLogin": "••••••••",
+    "passwordPlaceholderSignup": "Minimum 8 karakter",
+    "failed": "A hitelesítés sikertelen",
+    "errorOccurred": "Váratlan hiba történt",
+    "signingIn": "Bejelentkezés...",
+    "creatingAccount": "Fiók létrehozása...",
+    "signIn": "Bejelentkezés",
+    "termsPrompt": "A folytatással elfogadod a Szolgáltatási feltételeket és az Adatvédelmi irányelveket.",
+    "continueWithGoogle": "Folytatás Google-fiókkal",
+    "orContinueWithEmail": "vagy folytatás e-maillel",
+    "passwordStrength": "Jelszó erőssége",
+    "weak": "Gyenge",
+    "fair": "Közepes",
+    "strong": "Erős",
+    "oauthError": "Az OAuth hitelesítés sikertelen. Kérjük, próbáld újra.",
+    "emailNotVerified": "Kérjük, előbb igazold vissza az e-mail címedet a Google-nél.",
+    "securityNote": "256 bites SSL titkosítás • GDPR megfelelőség",
+    "recentActivity": "Legutóbbi tevékenység",
+    "lastSession": "Utolsó munkamenet",
+    "savedSecurely": "Biztonságosan mentve",
+    "cloudSync": "Felhő szinkronizálás",
+    "active": "Aktív"
+  },
+  "Dashboard": {
+    "title": "Projektjeim",
+    "subtitle": "Kezeld és szerkeszd a kétnyelvű könyveidet.",
+    "newProject": "Új projekt",
+    "noProjects": "Nem találhatók projektek. Hozd létre az elsőt!",
+    "emptyState": "Még nem hoztál létre projektet.",
+    "yourProjects": "Projektjeid",
+    "settings": "Beállítások",
+    "profile": "Profil",
+    "billing": "Számlázás",
+    "noDescription": "Nincs leírás.",
+    "lastUpdated": "Utolsó frissítés",
+    "stats": {
+      "projects": "Projekt",
+      "pages": "Oldal",
+      "words": "Szó"
+    },
+    "projectCard": {
+      "edited": "Szerkesztve",
+      "open": "Megnyitás",
+      "delete": "Törlés",
+      "confirmDelete": "Biztosan törölni szeretnéd ezt a projektet?"
+    }
   },
   "Blocks": {
     "text": "Szövegblokk",
     "image": "Képblokk",
     "separator": "Elválasztó",
     "callout": "Kiemelés",
+    "quiz": "Kvíz",
     "insertText": "Szövegblokk beszúrása",
     "addBlankPage": "Üres oldal hozzáadása",
     "media": "Média",
     "ai": "Fordító AI",
-    "settings": "Studio beállítások",
+    "settings": "Stúdió beállítások",
     "grammar": "Nyelvtani szabály",
-    "culture": "Kulturális betekintés",
+    "culture": "Kulturális megjegyzés",
     "vocabulary": "Szókincs",
     "tip": "Tanulási tipp",
     "warning": "Nyelvtani figyelmeztetés",
     "note": "Általános megjegyzés",
-    "pronunciation": "Kiejtési útmutató"
+    "pronunciation": "Kiejtési útmutató",
+    "workbookExercise": "Gyakorlat",
+    "autoHint": "Auto-segítség",
+    "regenerateHint": "Segítség újragenerálása",
+    "showAnswer": "Válasz megjelenítése",
+    "hideAnswer": "Válasz elrejtése",
+    "customHint": "Egyéni segítség",
+    "difficulty": "Nehézség",
+    "difficultyEasy": "Könnyű",
+    "difficultyMedium": "Közepes",
+    "difficultyHard": "Nehéz",
+    "emptyImageBlock": "Üres képblokk"
   },
   "Inspector": {
-    "visibility": "Láthatóság felülbírálása",
+    "visibility": "Láthatóság felülírása",
     "header": "Fejléc",
-    "footer": "Lábléc",
+    "headerOverlay": "Fejléc rátét",
+    "footer": "Lábjegyzet",
+    "footerOverlay": "Lábjegyzet rátét",
     "pageNumber": "Oldalszám",
-    "content": "Tartalom felülbírálása",
+    "content": "Tartalom felülírása",
     "typography": "Tipográfia",
     "layout": "Elrendezés és stratégia",
     "printingFlow": "Nyomtatás és folyamat",
     "markChapterStart": "Megjelölés fejezetkezdésként",
-    "forceBlank": "Kényszerített üres oldal",
+    "forceBlank": "Üres oldal kényszerítése",
     "pageLocalOnly": "Az itt végzett módosítások csak az aktuális oldalt érintik.",
-    "inspectorTitle": "{type} vizsgáló",
+    "inspectorTitle": "Stúdió ellenőrző: {type}",
     "lineHeight": "Sormagasság",
-    "paraSpacing": "Bekezdésköz",
+    "paraSpacing": "Bekezdés köz",
     "dimensions": "Méretek",
     "width": "Szélesség (%)",
     "alignment": "Igazítás",
-    "styleEffects": "Stílus és effektusok",
+    "styleEffects": "Stílusok és effektusok",
     "shadow": "Árnyék",
     "borderRadius": "Sarokkerekítés",
     "stylePattern": "Stílus és minta",
@@ -75,13 +150,13 @@
     "ornament": "Díszítés"
   },
   "Theme": {
-    "title": "Globális dizájn",
+    "title": "Globális design",
     "layout": "Globális elrendezés",
     "typography": "Tipográfia (globális)",
-    "bodyText": "Törzsszöveg",
-    "headings": "Főcímek",
+    "bodyText": "Föszöveg",
+    "headings": "Címsorok",
     "baseScaling": "Alapméretezés",
-    "fontSize": "Törzsszöveg betűmérete",
+    "fontSize": "Betűméret",
     "lineHeight": "Globális sormagasság",
     "colorPresets": "Szín előbeállítások",
     "lightMode": "Világos mód",
@@ -89,9 +164,9 @@
   },
   "Presets": {
     "title": "Stílus előbeállítások",
-    "empty": "Válasszon ki egy blokkot a stílusának mentéséhez újrafelhasználható előbeállításként.",
+    "empty": "Válassz ki egy blokkot a stílusa mentéséhez újrafelhasználható előbeállításként.",
     "selected": "Kiválasztott kontextus",
-    "canCapture": "Mentheti ennek a {type} blokknak a stílusát.",
+    "canCapture": "Mentheted a stílust ehhez a {type} blokkhoz.",
     "saveCurrent": "Aktuális stílus mentése",
     "library": "Globális könyvtár",
     "typeStyle": "{type} stílus",
@@ -99,7 +174,7 @@
   },
   "Wizard": {
     "createTitle": "Új projekt létrehozása",
-    "createMasterpiece": "Hozzon létre egy új remekművet",
+    "createMasterpiece": "Új biztonságos projekt",
     "stepInformation": "Információ",
     "stepLanguages": "Nyelvek",
     "stepFormat": "Formátum",
@@ -107,218 +182,887 @@
     "projectTitle": "Projekt címe *",
     "titlePlaceholder": "pl. Húszezer mérföld a tenger alatt",
     "author": "Szerző",
-    "authorPlaceholder": "Az Ön neve vagy az eredeti szerző",
+    "authorPlaceholder": "A te neved vagy az eredeti szerző",
     "category": "Kategória / Címke",
     "categoryPlaceholder": "pl. Szépirodalom, Oktatás",
     "sourceLang": "Forrásnyelv (L1)",
     "targetLang": "Célnyelv (L2)",
-    "langWarning": "Figyelem: A forrás- és célnyelvnek különbözőnek kell lennie egy kétnyelvű projektnél.",
-    "langTip": "Tipp: A legtöbb felhasználó az anyanyelvét választja célnyelvnek, a tanult nyelvet pedig forrásnyelvnek.",
+    "langWarning": "Figyelem: A forrásnyelvnek és a célnyelvnek különböznie kell egy kétnyelvű projektben.",
+    "langTip": "Tipp: A legtöbben az anyanyelvüket választják célnyelvnek, és a tanulni kívánt nyelvet forrásnyelvnek.",
     "dimensions": "Fizikai méretek (mm)",
-    "custom": "Egyéni meghatározás",
-    "layoutStyle": "Elrendezési stílus",
+    "custom": "Egyéni beállítás",
+    "layoutStyle": "Elrendezés stílusa",
     "back": "Vissza",
     "next": "Következő lépés",
-    "creating": "Studio felépítése...",
-    "launch": "Studio indítása",
-    "blankTemplate": "Kezdés üresről",
-    "blankDesc": "Nincs tartalom, tiszta vászon",
-    "classicTemplate": "Klasszikus egymás mellett",
-    "classicDesc": "Kiegyensúlyozott oszlopok, serif betűtípusok",
+    "creating": "Stúdió inicializálása...",
+    "launch": "Stúdió indítása",
+    "secureNote": "Titkosított és izolált projektkörnyezet",
+    "blankTemplate": "Kezdés a nulláról",
+    "blankDesc": "Üres oldal egyéni elrendezésekhez",
+    "classicTemplate": "Klasszikus egymás melletti",
+    "classicDesc": "Sűrű prózához optimalizálva",
     "poetryTemplate": "Költészet / Vers",
-    "poetryDesc": "Sorszámozott sorok, központi fókusz",
+    "poetryDesc": "Verssorokhoz és dalszövegekhez optimalizálva (Modern)",
+    "academicTemplate": "Filológiai tanulmány",
+    "academicDesc": "Széles margók, lábjegyzetek",
     "width": "Szélesség (mm)",
     "height": "Magasság (mm)",
-    "upgradeToCreateMore": "Frissítsen továbbiak létrehozásához",
-    "reachedFreeLimit": "Elérte az ingyenes korlátot",
-    "freeLimitDesc": "Az ingyenes fiókok 1 aktív projektre vannak korlátozva. Frissítsen Pro-ra a korlátlan projektek és a fejlett AI funkciók feloldásához.",
+    "upgradeToCreateMore": "Frissíts, hogy többet hozhass létre",
+    "reachedFreeLimit": "Elérted az ingyenes korlátot",
+    "freeLimitDesc": "Az ingyenes fiókok 1 aktív projektre korlátozódnak. Frissíts Pro-ra a korlátlan projektek és a speciális AI funkciók feloldásához.",
     "upgradeToPro": "Frissítés Pro-ra",
     "maybeLater": "Talán később",
     "usTrade": "US Trade Paper",
     "digest": "Digest",
     "intlStandard": "Nemzetközi szabvány"
   },
-  "Common": {
-    "delete": "Törlés",
-    "copy": "Másolás",
-    "duplicate": "Duplikálás",
-    "save": "Mentés",
-    "cancel": "Mégse",
-    "on": "Be",
-    "off": "Ki",
-    "backToHome": "Vissza a főoldalra"
+  "Studio": {
+    "title": "Synoptic Studio",
+    "collaborate": "Együttműködés",
+    "export": "Exportálás",
+    "preview": "Előnézet",
+    "saving": "Piszkozat mentése...",
+    "saved": "Minden módosítás mentve a felhőbe",
+    "ready": "Készen állsz a kétnyelvű remekművedre",
+    "addPage": "Új oldal hozzáadása",
+    "pageSettings": "{number}. oldal beállításai",
+    "enteringStudio": "Belépés a stúdióba...",
+    "failedToLoadProject": "A projekt betöltése sikertelen",
+    "retryConnection": "Kapcsolat újrapróbálása",
+    "pageManager": "Oldalkezelő",
+    "globalDesign": "Globális design",
+    "stylePresets": "Stílus előbeállítások",
+    "editorTools": "Szerkesztőeszközök",
+    "canvasActions": "Vászon műveletek",
+    "drafting": "Vázlatkészítés",
+    "chapterStart": "Fejezetkezdés",
+    "manuscript": "Manuskriptum",
+    "chapters": "Fejezetek",
+    "noChapters": "Nincsenek definiált fejezetek",
+    "deletePage": "Oldal törlése",
+    "resetFactory": "Gyári beállítások visszaállítása",
+    "bilingualEditor": "Kétnyelvű szerkesztő",
+    "bookStructure": "Könyv szerkezete",
+    "publishingPipeline": "Publikálási folyamat",
+    "frontMatter": "Előzéklapok",
+    "backMatter": "Utószó",
+    "titlePage": "Címlap",
+    "copyrightPage": "Szerzői jogi oldal",
+    "dedicationPage": "Dedikáció",
+    "tableOfContents": "Tartalomjegyzék",
+    "glossary": "Szójegyzék",
+    "aboutAuthor": "A szerzőről",
+    "endNotes": "Zárójegyzetek",
+    "autoGlossaryActive": "Automatikus szójegyzék aktív",
+    "refreshGlossary": "Szójegyzék frissítése",
+    "glossaryEntries": "{count} bejegyzés gyűjtve",
+    "romanNumeralsInfo": "Az előzéklapok római számokat használnak (i, ii, iii). A föszöveg arab számokat (1, 2, 3).",
+    "playAudio": "Felolvasás",
+    "stopAudio": "Leállítás",
+    "normalSpeed": "Normál sebesség",
+    "slowMode": "Lassú mód (0.7×)",
+    "audioSettings": "Hangbeállítások",
+    "grammarPainter": "Nyelvtani Színező",
+    "exitPaintMode": "Kilépés a színezésből",
+    "subject": "Alany",
+    "verb": "Állítmány",
+    "object": "Tárgy",
+    "adjective": "Melléknév",
+    "adverb": "Határozószó",
+    "paintTip": "Jelöld ki a szöveget a nyelvtani színek alkalmazásához",
+    "clearAllColors": "Összes szín törlése",
+    "syntaxArrows": "Szintaktikai nyilak",
+    "addArrow": "Nyíl hozzáadása",
+    "deleteArrow": "Nyíl törlése",
+    "arrowStyle": "Nyíl stílusa",
+    "curved": "Ívelt",
+    "angular": "Szögletes",
+    "straight": "Egyenes",
+    "arrowDrawer": "Szintaktikai összekötő",
+    "selectSource": "Válaszd ki a forrásszót",
+    "selectTarget": "Válaszd ki a célszót",
+    "arrowCreated": "Összeköttetés létrehozva",
+    "cancelLink": "Mégse"
   },
-  "Dashboard": {
-    "title": "Az Ön projektjei",
-    "subtitle": "Kétnyelvű könyveinek kezelése és szerkesztése.",
-    "emptyState": "Még nem hozott létre projektet.",
-    "noDescription": "Nincs megadva leírás.",
-    "lastUpdated": "Utoljára frissítve"
+  "Editor": {
+    "toolbar": {
+      "bold": "Félkövér",
+      "italic": "Dőlt",
+      "underline": "Aláhúzott",
+      "strikeThrough": "Áthúzott",
+      "alignLeft": "Balra igazítás",
+      "alignCenter": "Középre igazítás",
+      "alignRight": "Jobbra igazítás",
+      "justify": "Sorkizárás",
+      "left": "Bal",
+      "center": "Közép",
+      "right": "Jobb",
+      "link": "Link",
+      "addBlock": "Blokk hozzáadása",
+      "export": "Exportálás",
+      "ai": "AI asszisztens"
+    },
+    "sidebar": {
+      "pages": "Oldalak",
+      "style": "Stílus",
+      "inspector": "Ellenőrző",
+      "chat": "AI Chat"
+    },
+    "inspector": {
+      "layout": "Elrendezés",
+      "spacing": "Térközök",
+      "typography": "Tipográfia",
+      "colors": "Színek",
+      "border": "Szegély",
+      "shadow": "Árnyék",
+      "actions": "Műveletek",
+      "labels": {
+        "color": "Szín",
+        "backgroundColor": "Háttérszín",
+        "fontSize": "Betűméret",
+        "lineHeight": "Sormagasság",
+        "letterSpacing": "Betűköz",
+        "margin": "Margó",
+        "padding": "Belső margó",
+        "width": "Szélesség",
+        "alignment": "Igazítás",
+        "fontFamily": "Betűtípus"
+      }
+    },
+    "messages": {
+      "saved": "Projekt mentve",
+      "error": "Hiba a projekt mentésekor"
+    },
+    "onboarding": {
+      "welcome": "Üdvözlünk a szerkesztőben",
+      "step1": "Ez a te vásznad. Írj mindkét oldalra a kezdéshez.",
+      "step2": "Használd az eszköztárat a szöveg formázásához.",
+      "step3": "Kattints az Exportálásra a könyved letöltéséhez."
+    },
+    "blocks": {
+      "text": "Bekezdés",
+      "image": "Kép",
+      "separator": "Elválasztó",
+      "callout": "Kiemelés",
+      "verse": "Vers / Sor"
+    }
   },
-  "Auth": {
-    "login": "Bejelentkezés",
-    "signup": "Regisztráció",
-    "welcomeBack": "Üdvözöljük újra",
-    "createAccount": "Fiók létrehozása",
-    "signInDesc": "Jelentkezzen be Synoptic fiókjába",
-    "signUpDesc": "Kezdjen el kétnyelvű könyveket készíteni még ma",
-    "email": "Email",
-    "password": "Jelszó",
-    "emailPlaceholder": "nev@pelda.hu",
-    "passwordPlaceholderLogin": "Adja meg jelszavát",
-    "passwordPlaceholderSignup": "Hozzon létre egy jelszót",
-    "signIn": "Bejelentkezés",
-    "signingIn": "Bejelentkezés...",
-    "creatingAccount": "Fiók létrehozása...",
-    "noAccount": "Nincs még fiókja?",
-    "hasAccount": "Van már fiókja?",
-    "termsPrompt": "A folytatással elfogadja a Synoptic szolgáltatási feltételeit és adatvédelmi szabályzatát.",
-    "failed": "A hitelesítés sikertelen",
-    "errorOccurred": "Hiba történt"
+  "Models": {
+    "parallel": "Párhuzamos oszlopok",
+    "interlinear": "Sorközi",
+    "bilingual": "Kétoldalas",
+    "modern": "Modern minimalista"
+  },
+  "Pricing": {
+    "title": "Egyszerű és átlátható árazás",
+    "subtitle": "Válaszd ki a publikálási céljaidnak leginkább megfelelő csomagot.",
+    "mostPopular": "Legnépszerűbb",
+    "month": "/hó",
+    "pageTitle": "Fektess be a könyvedbe.",
+    "pageSubtitle": "Akár egy családi emléket fordítasz, akár kereskedelmi sorozatot adsz ki, nálunk megtalálod a megfelelő eszközöket.",
+    "nonProfitTitle": "Nonprofit szervezet vagy vagy tanár?",
+    "nonProfitDesc": "Különleges kedvezményeket kínálunk oktatási intézményeknek és nonprofit fordításokhoz. Vedd fel velünk a kapcsolatot árajánlatért.",
+    "contactSupport": "Kapcsolatfelvétel az ügyfélszolgálattal",
+    "free": {
+      "name": "Ingyenes",
+      "price": "0 Ft",
+      "desc": "Tökéletes a rendszer kipróbálásához.",
+      "description": "Tökéletes a rendszer kipróbálásához.",
+      "button": "Kezdés ingyen"
+    },
+    "pro": {
+      "name": "Pro",
+      "price": "4 490 Ft",
+      "desc": "Független szerzőknek és nyelvrajongóknak.",
+      "description": "Független szerzőknek és nyelvrajongóknak.",
+      "button": "Frissítés Pro-ra"
+    },
+    "publisher": {
+      "name": "Kiadói",
+      "price": "17 990 Ft",
+      "desc": "Nagy volumenű produkciókhoz.",
+      "description": "Nagy volumenű produkciókhoz.",
+      "button": "Kiadói csomag"
+    },
+    "featuresList": {
+      "activeProject": "1 aktív projekt",
+      "standardLayout": "Standard elrendező motor",
+      "manualTranslation": "Kézi fordítás",
+      "lowDpiPdf": "Alacsony felbontású PDF export",
+      "watermarked": "Vízjeles exportálás",
+      "unlimitedProjects": "Korlátlan projekt",
+      "aiAssistedLayout": "AI-támogatott elrendezés",
+      "aiWordsMonth": "50 000 AI szó / hónap",
+      "highDpiPdf": "300 DPI export (nyomdakész)",
+      "epubMobi": "EPUB és MOBI export",
+      "removeWatermarks": "Vízjelek eltávolítása",
+      "priorityHistory": "Prioritásos felhő-elözmények",
+      "flashcards": "Dinamikus tanulókártya generálás",
+      "tts": "Szöveg-hang felolvasás mód (TTS)",
+      "everythingPro": "Minden a Pro csomagból benne van",
+      "bigAiLimit": "500 000 AI szó / hónap",
+      "unlimitedAi": "Korlátlan AI kredit",
+      "teamCollab": "Csapatmunka",
+      "brandCustom": "Márka testreszabása",
+      "fontUpload": "Saját betűtípusok feltöltése",
+      "apiAccess": "API hozzáférés (hamarosan)",
+      "ttsPremium": "Prémium neuronális hangok",
+      "limitedAi": "Korlátozott AI"
+    },
+    "features": {
+      "unlimited": "Korlátlan projekt",
+      "highDpi": "Kiváló minőségű 300 DPI export",
+      "noWatermark": "Nincs vízjel",
+      "aiUnits": "AI intelligencia egységek",
+      "customFonts": "Saját betűtípusok feltöltése"
+    },
+    "cta": "Csomag kiválasztása",
+    "monthly": "havonta",
+    "yearly": "évente",
+    "popular": "Legnépszerűbb"
+  },
+  "Landing": {
+    "hero": {
+      "title": "A kétnyelvű publikálás motorja.",
+      "subtitle": "Alakítsd a nyers szöveget tökéletes párhuzamos könyvekké a CSS erejével. Nincs InDesign. Nincs deszinkronizáció. A Grid-Lock architektúra definíció szerint garantálja az igazítást.",
+      "cta": "Publikálás indítása ingyen"
+    },
+    "features": {
+      "title": "A Grid-Lock architektúrára építve",
+      "items": {
+        "layout": "Grid-Lock architektúra",
+        "export": "Natív PDF/X",
+        "sync": "Felhő szinkronizálás",
+        "ai": "Lingvisztikai AI",
+        "validation": "300 DPI validáció"
+      }
+    }
   },
   "Marketing": {
     "nav": {
+      "toLearn": "Nyelvtanuláshoz",
+      "toPublish": "Professzionális publikáláshoz",
       "features": "Funkciók",
       "pricing": "Árazás",
       "library": "Könyvtár",
       "logIn": "Bejelentkezés",
-      "joinNow": "Csatlakozzon most",
+      "joinNow": "Csatlakozz most",
       "templates": "Sablonok",
-      "product": "Termék",
-      "company": "Vállalat",
+      "product": "Stúdió",
+      "company": "Cég",
       "about": "Rólunk",
       "privacy": "Adatvédelem",
       "terms": "Feltételek"
     },
     "hero": {
-      "badge": "Synoptic v1.0 Privát Béta",
-      "title": "A <span>végső</span> <br /> kétnyelvű Studio",
-      "subtitle": "Készítsen professzionális egymás melletti nyelvű könyveket AI-segített tördeléssel, valós idejű felhő szinkronizálással és egykattintásos KDP publikálással.",
-      "ctaPrimary": "Írás kezdése ingyen",
-      "ctaSecondary": "Könyvtár böngészése",
-      "aiSuggestion": "AI javaslat"
+      "badge": "Synoptic v1.0 Private Beta",
+      "title": "A <span>legjobb</span> <br /> kétnyelvű stúdió",
+      "subtitle": "Alakítsd a nyers szöveget **tökéletes párhuzamos könyvekké** a CSS segítségével. Nincs InDesign. Nincs deszinkronizáció.",
+      "subtitleShort": "A kétnyelvű publikálás motorja.",
+      "featuresLine": "Grid-Lock architektúra • Natív PDF/X • 300 DPI validáció",
+      "ctaPrimary": "Publikálás indítása ingyen",
+      "ctaSecondary": "Böngészés a könyvtárban",
+      "aiSuggestion": "AI javaslat",
+      "aiTranslation": "AI-optimalizált fordítás",
+      "pauseRotation": "Nyelvi rotáció megállítása",
+      "resumeRotation": "Nyelvi rotáció folytatása",
+      "studioTitle": "Hero Title — Synoptic Studio",
+      "titlePlain": "Hagyd abba a küzdelmet a tördeléssel. Érj el professzionális szimmetriát egy kattintással.",
+      "neuralEngine": "Lingvisztikai intelligencia",
+      "activeLayer": "Aktív réteg",
+      "typographyAssistant": "Tipográfiai asszisztens",
+      "syncingLocales": "{count} nyelv szinkronizálása",
+      "syncing": "Szinkronizálás...",
+      "readyStudio": "Kész — Synoptic Studio v1.2",
+      "canvasA": "A vászon",
+      "canvasB": "B vászon",
+      "output": "Kimenet",
+      "livePreview": "Élő előnézet",
+      "origin": "Eredeti"
     },
     "footer": {
-      "tagline": "Professzionális kétnyelvű kiadói platform szerzőknek, nyelvtanulóknak és kiadóknak. San Franciscóban tervezve, a világnak építve.",
+      "tagline": "A professzionális kétnyelvű stúdió szerzőknek, nyelvrajongóknak és globális kiadóknak. Világosságot teremtünk határok nélkül.",
       "copyright": "© 2025 Synoptic Studio. Minden jog fenntartva."
+    },
+    "carbon": {
+      "label": "Fenntarthatóság",
+      "calculating": "Mérés...",
+      "cleanerThan": "{percentage}%-kal tisztább a többinél",
+      "co2": "{amount} g CO2",
+      "ecoFriendly": "Környezetbarát",
+      "measure": "Hatás mérése"
     }
   },
   "Features": {
-    "title": "Alkotóknak tervezve",
-    "subtitle": "Egy könyvkiadó infrastruktúrája, egy studióba egyszerűsítve.",
+    "title": "Minden léptékre tervezve",
+    "subtitle": "A személyes **tanulókártyáktól**, **munkafüzetektől** és **poszterektől** a globális könyvkiadásig.",
+    "ctaLearn": "Tudd meg, hogyan sajátíts el egy nyelvet",
+    "ctaPublish": "Fedezd fel a professzionális kiadást",
+    "aiInsights": "AI betekintések",
+    "learn": {
+      "title": "Nyelvtanulóknak",
+      "subtitle": "A legjobb eszköz az önálló tanuláshoz.",
+      "items": {
+        "flashcards": {
+          "title": "Dinamikus tanulókártyák",
+          "desc": "Generálj automatikusan kártyákat az olvasott mondatokból."
+        },
+        "annotations": {
+          "title": "Filológiai adnotációk",
+          "desc": "Merülj el a nyelvtanban és a finomságokban a szóról szóra történő AI elemzéssel."
+        },
+        "immersion": {
+          "title": "Szimmetrikus daldítás",
+          "desc": "Az agyad természetes módon rendeli össze a nyelveket, ha azok egymás mellett vannak. A kontextus soha nem vész el."
+        }
+      }
+    },
+    "publish": {
+      "title": "Professzionális kiadóknak",
+      "subtitle": "Ipari minőségű tördelés kétnyelvű kiadásokhoz.",
+      "items": {
+        "typesetting": {
+          "title": "Grid-Lock architektúra",
+          "desc": "Mi nem csak „tippeljük” az igazítást. Egy szigorú CSS Grid motort használunk, amely matematikailag összekapcsolja a forrás- és célbekezdéseket."
+        },
+        "multiformat": {
+          "title": "Natív PDF/X és EPUB 3.0",
+          "desc": "Generálj tükörmargós elrendezéseket. Exportálj Kindle és Apple Books kompatibilis EPUB 3.0 fájlokat."
+        },
+        "distribution": {
+          "title": "Validáció és minőség",
+          "desc": "A 300 DPI kimenet sRGB színprofilokkal biztosítja, hogy az Amazon KDP feltöltéseid simán áthaladjanak."
+        }
+      }
+    },
     "aiTypesetter": {
-      "title": "AI tördelő",
-      "desc": "Automatikusan összehangolja a mondatpárokat több mint 25 nyelven, biztosítva a tökéletes szimmetriát még eltérő mondathosszúság esetén is."
+      "title": "AI Typesetter",
+      "desc": "Automatikusan igazítja a mondatpárokat több mint 25 nyelven, garantálva a szimmetriát az eltérő szöveghosszúság ellenére is."
     },
     "cloudSync": {
-      "title": "Felhő szinkronizációs motor",
-      "desc": "Munkája írás közben azonnal mentődik. Hozzáférhet studiójához bármilyen eszközről állandó és korlátlan visszavonási előzményekkel."
+      "title": "Szinkronizáló motor",
+      "desc": "A munkád azonnal mentésre kerül írás közben. Érd el a stúdiót bármilyen eszközről korlátlan előzménnyel."
     },
     "pdfExport": {
       "title": "Nyomdakész PDF",
-      "desc": "Nagy felbontású exportálás a Puppeteer motoron keresztül. Tökéletes Amazon KDP-hez, IngramSparkhoz és helyi nyomdákhoz."
+      "desc": "Kiváló minőségű export a Puppeteer motor használatával. Tökéletes Amazon KDP, IngramSpark és helyi nyomdák számára."
     },
     "epubSupport": {
       "title": "EPUB 3.0 támogatás",
-      "desc": "Készítsen rugalmas e-könyveket natív kétnyelvű váltó móddal, Kindle-re és Apple Books-ra optimalizálva."
+      "desc": "Hozz létre rugalmas e-könyveket natív kétnyelvű móddal, Kindle-re és Apple Books-ra optimalizálva."
     },
     "deepAnnotation": {
-      "title": "Mély annotáció",
-      "desc": "AI-alapú nyelvi betekintések. Szócsoportosítások, kapcsolatjelző nyilak és kontextuális magyarázatok karnyújtásnyira."
+      "title": "Mély adnotációk",
+      "desc": "Nyelvészeti betekintés AI segítségével. Szócsoportosítások, kapcsolati nyilak és magyarázatok közvetlenül a szövegben."
     },
     "marketplace": {
       "title": "Globális piactér",
-      "desc": "Ossza meg és adja el saját könyvsablonjait, vagy böngésszen válogatott professzionális kétnyelvű dizájnjaink között."
+      "desc": "Oszd meg és add el saját könyvsablonjaidat, vagy böngéssz professzionális kétnyelvű designjaink között."
     }
   },
-  "Pricing": {
-    "title": "Egyszerű és tisztességes árazás",
-    "subtitle": "Válassza ki a kiadói céljainak megfelelő csomagot.",
-    "mostPopular": "Legnépszerűbb",
-    "month": "/hó",
-    "pageTitle": "Fektessen be könyvébe.",
-    "pageSubtitle": "Függetlenül attól, hogy családi memoárt fordít vagy kereskedelmi sorozatot ad ki, nálunk megtalálja a megfelelő eszközöket.",
-    "nonProfitTitle": "Ön nonprofit szervezet vagy oktató?",
-    "nonProfitDesc": "Különleges kedvezményeket kínálunk oktatási intézményeknek és nonprofit fordításokhoz. Egyedi ajánlatért forduljon csapatunkhoz.",
-    "contactSupport": "Kapcsolatfelvétel",
-    "free": {
-      "name": "Ingyenes",
-      "desc": "Tökéletes a studio kipróbálásához.",
-      "button": "Kezdés ingyen"
+  "PricingPage": {
+    "title": "Fizess az intelligenciáért, ne a tárhelyért",
+    "subtitle": "A projektek száma korlátlan. Csak akkor használsz egységeket, amikor az AI-t igénybe veszed.",
+    "yearly": "Spórolj 20%-ot éves fizetéssel",
+    "tiers": {
+      "free": "Alap",
+      "pro": "Standard csomag független szerzőknek és nyelvrajongóknak.",
+      "publisher": "Kiadóknak és nagy volumenű produkciókhoz tervezve."
     },
-    "pro": {
-      "name": "Pro",
-      "desc": "Komoly szerzőknek és poliglotoknak.",
-      "button": "Csatlakozás a Pro-hoz"
-    },
-    "publisher": {
-      "name": "Kiadó",
-      "desc": "Professzionális kiadóknak.",
-      "button": "Váltás Kiadóra"
-    },
-    "featuresList": {
-      "activeProject": "1 aktív projekt",
-      "standardLayout": "Alapértelmezett elrendezési motor",
-      "manualTranslation": "Kézi fordítás",
-      "lowDpiPdf": "Alacsony felbontású PDF export",
-      "watermarked": "Publikálás vízjellel",
-      "unlimitedProjects": "Korlátlan projekt",
-      "aiAssistedLayout": "AI-segített elrendezés",
-      "aiWordsMonth": "50 ezer AI szó / hó",
-      "highDpiPdf": "300 DPI export (nyomdakész)",
-      "epubMobi": "EPUB & MOBI export",
-      "removeWatermarks": "Vízjelek eltávolítása",
-      "priorityHistory": "Prioritási felhő előzmények",
-      "everythingPro": "Minden a Pro-ból benne van",
-      "unlimitedAi": "Korlátlan AI kredit",
-      "teamCollab": "Csapatmunka",
-      "brandCustom": "Márka testreszabás",
-      "fontUpload": "Egyéni betűtípusok feltöltése",
-      "apiAccess": "API hozzáférés (hamarosan)"
+    "unitCalculator": {
+      "title": "1 AI egység = 1 Szellemi művelet",
+      "desc": "A kreditjeid a blokkokkal való interakciókor fogynak:",
+      "p1": "Lefordítasz egy bekezdést? **1 egység.**",
+      "p2": "Generálsz egy nyelvtani jegyzetet? **1 egység.**",
+      "fairUse": "Fair Use: Az exportálások (PDF/EPUB) **mindig ingyenesek**. Soha nem kell fizetned a saját munkád letöltéséért."
     }
   },
   "Export": {
-    "publishingPipeline": "Kiadói folyamat",
+    "publishingPipeline": "Publikálási folyamat",
     "pdfManuscript": "Nyomdakész PDF",
     "epubEbook": "E-könyv (EPUB 3.0)",
-    "generate": "Létrehozás",
+    "generate": "Generálás",
+    "generating": "Generálás...",
     "quality": "Minőség",
-    "bleed": "Kifutó",
-    "preFlightTitle": "Publikálás előtti érvényesség-ellenőrzés",
-    "symmetryCheck": "Kétnyelvű szimmetria ellenőrizve",
-    "largeDocWarning": "A nagy dokumentumok renderelése akár 30 másodpercet is igénybe vehet.",
+    "bleed": "Kifutó (Bleed)",
+    "preFlightTitle": "Automatizált integritás-rendszer",
+    "symmetryCheck": "Grid-Lock szimmetria aktív",
+    "largeDocWarning": "A nagy dokumentumok betöltése akár 30 másodpercet is igénybe vehet.",
     "upgradeToPro": "Frissítés Pro-ra",
-    "watermarkPolicy": "Távolítsa el a vízjeleket, oldja fel a HD nyomtatást, és kapjon havi 50 000 AI szót.",
+    "watermarkPolicy": "Távolítsd el a vízjeleket, oldd fel a nyomdai minőséget és kapj havi 50 000 AI szót.",
     "viewPlans": "Csomagok megtekintése",
-    "proQuality": "Pro minőség (piszkozat)",
-    "freeWarning": "Az ingyenes szinten vízjel kerül erre az exportra.",
-    "pdfDesc": "Nagy hűségű exportálás 300 DPI Puppeteer motoron keresztül. Amazon KDP-re optimalizálva.",
-    "epubDesc": "Rugalmas kétnyelvű szöveg elrendezés. Kindle-re és Apple Books-ra optimalizálva.",
-    "qualityPrint": "Nyomtatás",
-    "qualityWeb": "Web",
-    "qualityDraft": "Piszkozat"
+    "proQuality": "Pro minőség (Piszkozat)",
+    "freeWarning": "Ez az exportálás vízjelet fog tartalmazni az ingyenes csomagban.",
+    "pdfDesc": "Magas minőségű export Puppeteer motorral 300 DPI felbontáson. Amazon KDP-re optimalizálva.",
+    "epubDesc": "Kétnyelvű szövegelrendezés. Kindle-re és Apple Books-ra optimalizálva.",
+    "qualityPrint": "Nyomdai",
+    "qualityWeb": "Webes",
+    "qualityDraft": "Piszkozat",
+    "pdfError": "A PDF exportálás sikertelen",
+    "pdfErrorDesc": "Exportálási hiba. Ellenőrizd a kapcsolatot a nyomdai motorral.",
+    "epubError": "Az EPUB exportálás sikertelen",
+    "epubErrorDesc": "Hiba történt az EPUB fájl generálása közben.",
+    "chapter": "Fejezet",
+    "engineLabel": "KÉTNYELVŰ PUBLIKÁLÁSI MOTOR",
+    "studyDeck": "Tanulópakli (Anki/CSV)",
+    "deckDesc": "Exportáld az AI adnotációidat és a kiemelt szókincset Anki-ba, Quizlet-be vagy Excel-be.",
+    "noCardsFound": "Nem találhatók tanulókártyák. Hozz létre néhányat az „AI Adnotációk” eszközzel!",
+    "systemStatus": "Rendszerállapot",
+    "gridLock": "Grid-Lock architektúra",
+    "engineActive": "Motor aktív",
+    "waitingContent": "Várakozás tartalomra...",
+    "mirrorGutter": "Tükörmargó logika",
+    "profileLoaded": "Profil betöltve",
+    "audiobookEngine": "Neuronális hangoskönyv",
+    "audiobookDesc": "Generálj stúdióminőségű hangoskönyveket a Microsoft Neural TTS segítségével. A fájlok fejezetenként csoportosítva kerülnek egy ZIP archívumba.",
+    "voicePersona": "Narrátor hangja",
+    "selectVoice": "Válassz hangot...",
+    "renderingChapter": "{chapter}. fejezet szintetizálása...",
+    "exportAudioZip": "Hang exportálása (ZIP)",
+    "neuralEngine": "Microsoft Neural TTS motor",
+    "noAudioContent": "Nem található szöveges tartalom a hang generálásához. Előbb adj hozzá szövegblokkokat!",
+    "audioExportError": "A hang exportálása sikertelen. Ellenőrizd a kapcsolatot és próbáld újra.",
+    "socialShare": "Közösségi megosztás",
+    "socialShareDesc": "Exportáld kétnyelvű idézeteidet gyönyörű grafikaként Instagramra, Twitterre vagy Pinterestre.",
+    "socialFormat": "Formátum",
+    "squareFormat": "Négyzetes (Instagram)",
+    "storyFormat": "Story (1080×1920)",
+    "twitterFormat": "Twitter kártya",
+    "pinterestFormat": "Pinterest Pin",
+    "exportImage": "Kép exportálása",
+    "includeBranding": "Synoptic márkajelzés hozzáadása",
+    "selectBlock": "Válaszd ki az exportálandó szövegblokkot"
   },
   "Onboarding": {
-    "tourDashboardContent": "Üdvözöljük a Synoptic-ban! Ez az Ön projektközpontja.",
-    "tourNewProjectContent": "Itt kezdheti el első kétnyelvű remekművének létrehozását.",
-    "tourLibraryContent": "Importáljon klasszikus szövegeket közkincstárunkból.",
-    "tourPageListContent": "Itt navigálhat könyve oldalain.",
-    "tourToolsContent": "Adjon hozzá szövegblokkokat, képeket és AI-alapú annotációkat.",
-    "tourPublishContent": "Készen áll a nyomtatásra? Exportálja PDF vagy EPUB formátumba másodpercek alatt.",
-    "tourWorkspaceContent": "Ez az Ön vászna. A bal oldali oszlop a forrás, a jobb oldali a fordítása."
+    "tourDashboardContent": "Üdvözlünk a Synopticban! Ez a projektvezérlő pultod.",
+    "tourNewProjectContent": "Itt kezdheted el első kétnyelvű remekműved létrehozását.",
+    "tourLibraryContent": "Importálj klasszikus szövegeket a közkincs könyvtárunkból.",
+    "tourPageListContent": "Itt böngészheted a könyved oldalait.",
+    "tourToolsContent": "Adj hozzá szövegblokkokat, képeket és AI adnotációkat.",
+    "tourPublishContent": "Kész a nyomtatásra? Exportáld PDF-be vagy EPUB-ba másodpercek alatt.",
+    "tourWorkspaceContent": "Ez a te vásznad. A bal oldali oszlop az eredeti, a jobb oldali a fordítás."
   },
   "CommandPalette": {
-    "placeholder": "Írjon be egy parancsot vagy keressen...",
+    "esc": "Esc",
+    "placeholder": "Írj be egy parancsot vagy keress...",
     "noResults": "Nincs találat.",
     "actions": "Műveletek",
     "addText": "Szövegblokk hozzáadása",
     "undo": "Visszavonás",
-    "redo": "Mégis",
+    "redo": "Újra",
     "deleteBlock": "Kijelölt blokk törlése",
     "exportPdf": "Exportálás PDF-be",
     "select": "kijelölés",
     "navigate": "navigálás",
     "paletteTitle": "Synoptic parancspaletta",
     "commandMenu": "Parancsmenü"
+  },
+  "AboutPage": {
+    "title": "A fordítás jövője",
+    "subtitle": "A Synoptic egy egyszerű megfigyelésből született: a világ közeledik egymáshoz, de a könyveink még mindig egynyelvűek. Létrehoztuk az első stúdiót, amely a kétnyelvű publikálás művészetének és tudományának szenteli magát.",
+    "sovereignTitle": "Nincs-tanítás garancia",
+    "sovereignDesc": "A legtöbb AI eszköz hozzáférést kér az adataidhoz. Mi nem. A kéziratod nem tanít globális agyat; megmarad a te privát szférádban.",
+    "soulTitle": "Állapotmentes feldolgozás",
+    "soulDesc": "Állapotmentes architektúrát használunk (NextResponse). Amint a fordítás elkészül, az ágens kikapcsol, és a memória azonnal törlődik.",
+    "values": "Értékeink",
+    "privacyTitle": "Adatvédelem mindenekelőtt",
+    "privacyDesc": "A kézirataid a te tulajdonod. Biztonságos infrastruktúrát használunk, hogy szellemi tulajdonod soha ne kerüljön ki az ellenőrzésed alól.",
+    "perfTitle": "Nagy teljesítmény",
+    "perfDesc": "A modern web számára építve. Minden interakció gyors, a felhő szinkronizálástól a 300 DPI-s PDF exportig.",
+    "communityTitle": "A közösség számára készült",
+    "communityDesc": "Folyamatosan fejlődünk szerzőink, poliglottjaink és oktatóink visszajelzései alapján.",
+    "cta": "Csatlakozz a forradalomhoz"
+  },
+  "PrivacyPage": {
+    "title": "Adatvédelem @ Synoptic",
+    "subtitle": "Tudjuk, hogy a kézirataid a lelkedet jelentik. Adatvédelmi irányelveink védik a szellemi tulajdonodat.",
+    "philosophyTitle": "Adatvédelmi filozófiánk",
+    "philosophyDesc": "A Synoptic a „szuverén tudás” elvére épül. Csak azt gyűjtjük, ami feltétlenül szükséges.",
+    "collectTitle": "Az általunk gyűjtött adatok",
+    "collectDesc": "Fiókadatok (e-mail) a hozzáféréshez, projekt metaadatok és felhasználói tartalom kizárólag feldolgozás céljából.",
+    "collectItems": [
+      "Fiókadatok: Név és e-mail cím a számlázáshoz.",
+      "Projekt metaadatok: A katalógus állapotának fenntartásához.",
+      "Felhasználói tartalom: Titkosított és izolált."
+    ],
+    "aiProcessingTitle": "AI feldolgozás és adatszigetelés",
+    "aiProcessingDesc": "Különbözünk a többi AI eszköztől. A kézirataidat NEM használjuk globális modellek tanítására.",
+    "securityTitle": "Tárolás és biztonság",
+    "securityDesc": "Minden adat titkosított szállítás közben (TLS/SSL) és nyugalmi állapotban is. Bármikor törölheted a projektjeidet.",
+    "sharingTitle": "Harmadik féllel való megosztás",
+    "sharingDesc": "Nem adjuk el az adataidat. Csak olyan alapvető szolgáltatókkal osztjuk meg őket, mint a Stripe (fizetés) és az AWS/DigitalOcean (infrastruktúra).",
+    "contactTitle": "Kapcsolat",
+    "contactDesc": "Adatvédelmi kérdésekben: privacy@getsynoptic.com",
+    "lastUpdated": "Utolsó frissítés: 2025. december"
+  },
+  "TermsPage": {
+    "title": "Szolgáltatási feltételek",
+    "subtitle": "Világos szabályok. A munka a tiéd. Az eszköz a miénk.",
+    "introTitle": "1. Bevezetés",
+    "introDesc": "Üdvözlünk a Synopticban! A stúdió használatával elfogadod ezeket a feltételeket. Utolsó frissítés: 2025. december.",
+    "ipTitle": "2. Szellemi tulajdon",
+    "ipDesc": "Határozottan különválasztjuk az Eszközt az Alkotástól.",
+    "ipItems": [
+      "A te szuverenitásod: Az összes kéziratod és exportált fájlod 100%-os tulajdonjoga nálad marad.",
+      "A mi technológiánk: Az interfész, a v4.0-s tördelőmotor és a kód a Synoptic tulajdona."
+    ],
+    "obligationsTitle": "3. Felhasználói kötelezettségek",
+    "obligationsDesc": "Elfogadod, hogy nem fejted vissza a motorunkat, és nem használsz szkripteket a könyvtárunkból történő adatgyűjtéshez.",
+    "paymentTitle": "4. Előfizetések és AI egységek",
+    "paymentDesc": "A csomagok számlázása havonta történik. Az AI egységek „szellemi műveletenként” kerülnek felhasználásra. A fel nem használt egységek nem vihetők át a következő hónapra.",
+    "publishingTitle": "5. Publikálási felelősségkizárás",
+    "publishingDesc": "Bár KDP-re optimalizáltunk, nem garantáljuk a harmadik felek általi elfogadást. A végső ellenőrzés a te felelősséged.",
+    "terminationTitle": "6. Megszüntetés",
+    "terminationDesc": "Fenntartjuk a jogot a Fair Use irányelveinket megsértő fiókok felfüggesztésére."
+  },
+  "ModelsPage": {
+    "title": "Szerkezeti archívum",
+    "subtitle": "Minden történet saját architektúrát igényel. Válassz professzionális kétnyelvű sablonjaink közül.",
+    "pixelPerfect": "Pixel-tökéletes elrendezések",
+    "gutterTitle": "Tükörmargó logika",
+    "gutterDesc": "A belső és külső margók automatikus igazítása a kötési módnak megfelelően.",
+    "symmetryTitle": "Szimmetriaőrző",
+    "symmetryDesc": "Valós idejű értesítések, ha a kétnyelvű blokkok szinkronizációja megsérül az oldalak között.",
+    "templates": {
+      "classic": {
+        "title": "Klasszikus párhuzamos",
+        "desc": "A kétnyelvű olvasás arany standardja. Szigorúan igazított oszlopok kiváló minőségű nyomtatott kiadásokhoz."
+      },
+      "alternating": {
+        "title": "Váltakozó daldítás",
+        "desc": "Digitális eszközökhöz tökéletes. Bekezdésről bekezdésre gördülő szöveg a fókusz fenntartásához."
+      },
+      "academic": {
+        "title": "Filológiai tanulmány",
+        "desc": "Mélyreható tudományos elemzés szóról szóra adnotációkkal közvetlenül a forrásszöveg alatt."
+      },
+      "modern": {
+        "title": "Modern vers",
+        "desc": "Minimalista elrendezés tágas művészi margókkal, költészethez optimalizálva."
+      }
+    },
+    "viewTemplate": "Szerkezet felfedezése",
+    "typesettingTitle": "Kétnyelvű logika",
+    "exampleSource": "The stars were bright above the silent lake.",
+    "exampleTarget": "A csillagok fényesen ragyogtak a csendes tó felett.",
+    "labels": {
+      "source": "Forrás ({lang})",
+      "translation": "Fordítás ({lang})",
+      "engine": "Tördelőmotor v4.0"
+    }
+  },
+  "LearnPage": {
+    "title": "Sajátíts el bármilyen nyelvet daldítással",
+    "subtitle": "Felejtsd el az unalmas tankönyveket. Hozz létre saját anyagokat azokból a történetekből, amiket valóban olvasni akarsz.",
+    "badge": "Poliglottoknak és nyelvtanulóknak",
+    "browseLibrary": "Böngészés a könyvtárban",
+    "features": {
+      "reader": {
+        "title": "Intelligens olvasó",
+        "desc": "Olvass kényelmesen szinkronizált görgetéssel. A szemed soha nem veszti el a fordítást."
+      },
+      "study": {
+        "title": "AI tanulási asszisztens",
+        "desc": "Tegyél fel nyelvtani kérdéseket közvetlenül a szövegben. Olyan, mintha minden oldalon lenne egy magántanárod."
+      },
+      "custom": {
+        "title": "Saját anyagok",
+        "desc": "Importáld saját cikkeidet vagy PDF-fájljaidat. A Synoptic tökéletesen formázza őket a tanuláshoz."
+      }
+    },
+    "immersion": {
+      "title": "Az egymás melletti szöveg tudománya",
+      "p1": "A célnyelven való olvasás a szókincsfejlesztés leghatékonyabb módja. De egy idegen nyelvű könyv elkezdése ijesztő lehet.",
+      "p2": "A Synoptic eltünteti ezt az akadályt. A mondatról mondatra igazított fordítással lehetővé tesszük, hogy az agyad természetes módon térképezze fel az új szavakat.",
+      "tag1": "Természetes elsajátítás",
+      "tag2": "Kétnyelvű leképezés",
+      "verified": "Ellenőrzött AI fordítás",
+      "flashcard": "Tanulókártya generálva!"
+    },
+    "ctaSection": {
+      "title": "Készen állsz a folyékony beszédre?",
+      "subtitle": "Csatlakozz több ezer tanulóhoz, akik a tankönyveket daldítás élményre cserélték.",
+      "button": "Ingyenes fiók létrehozása"
+    },
+    "cta": "Utazásom megkezdése"
+  },
+  "PublishPage": {
+    "title": "Ipari minőségű publikálás",
+    "subtitle": "A Synoptivot nagy volumenre tervezték. Infrastruktúránk támogatja a következetességet igénylő kiadókat.",
+    "infra": "Kiadói infrastruktúra",
+    "cta": "Publikálás megkezdése most",
+    "enterprise": "Kapcsolatfelvétel az üzleti részleggel",
+    "features": {
+      "engine": {
+        "title": "Grid-Lock motor",
+        "desc": "A CSS Grid motorunk matematikailag összekapcsolja a bekezdéseket, megakadályozva a deszinkronizációt."
+      },
+      "exports": {
+        "title": "Professzionális exportálás",
+        "desc": "Generálj 300 DPI-s PDF-eket sRGB színprofilokkal. A KDP feltöltéseid minden ellenőrzésen átmennek."
+      },
+      "distribution": {
+        "title": "Globális terjesztésre kész",
+        "desc": "Exportálj Kindle, Apple Books és minden nagyobb kereskedő számára kompatibilis EPUB 3.0 fájlokat."
+      }
+    },
+    "volumeTitle": "Gyártási folyamat",
+    "volumeSubtitle": "A kézirattól a piacig három lépésben.",
+    "step1": "Importálás vagy létrehozás",
+    "step1Desc": "Illeszd be a kéziratod vagy írj közvetlenül. Az AI-nk elvégzi az alapszintű formázást.",
+    "step2": "Finomítás és validálás",
+    "step2Desc": "Használd a Grid-Lock szerkesztőt a tökéletes elrendezéshez. A szimmetriaőrző megakadályozza a hibákat.",
+    "step3": "Exportálás és publikálás",
+    "step3Desc": "Töltsd le a kész fájlokat. Töltsd fel közvetlenül a KDP-re, IngramSparkra vagy a terjesztődhöz.",
+    "available": "Már elérhető",
+    "epubTitle": "EPUB 3.0 + Fix elrendezés",
+    "epubDesc": "Teljes támogatás mind a folytonos (reflowable), mind a fix elrendezésű EPUB formátumokhoz. Ideális illusztrált könyvekhez.",
+    "compliant": "EPUB 3.0 kompatibilis",
+    "fixed": "Fix elrendezés támogatása",
+    "scaleTitle": "Szeretnéd növelni a termelésed léptékét?",
+    "scaleDesc": "Akár 5, akár 500 címet adsz ki, a Synoptic veled együtt fejlődik.",
+    "sales": "Kapcsolatfelvétel az értékesítési csapattal"
+  },
+  "Library": {
+    "title": "A Felfedezések Könyvtára",
+    "subtitle": "Böngéssz több mint 85 ingyenes tartalomforrás között kétnyelvű könyveidhez.",
+    "searchPlaceholder": "Keresés cím, szerző vagy kulcsszó alapján...",
+    "badge": "60+ ingyenes tartalomforrás",
+    "heroTitle": "A Felfedezések Könyvtára",
+    "heroSubtitle": "Találj gondosan válogatott tartalmakat kétnyelvű könyveidhez. Szent szövegek, klasszikus irodalom és még sok más, ellenőrzött licenccel.",
+    "browseLibrary": "Böngészés a könyvtárban",
+    "commercialSafe": "Kereskedelmi használatra biztonságos",
+    "attributionRequired": "Forrásmegjelölés szükséges",
+    "categories": {
+      "all": "Összes",
+      "sacred": "Szent és bölcsesség",
+      "literature": "Irodalom",
+      "visual": "Vizuális és művészet",
+      "knowledge": "Tudás és tények",
+      "news": "Hírek és média",
+      "history": "Történelem",
+      "language": "Nyelvtanulás",
+      "academic": "Akadémiai és kutatás",
+      "popculture": "Popkultúra"
+    },
+    "categoryDescriptions": {
+      "sacred": "Szellemi szövegek a világ hagyományaiból",
+      "literature": "Regények, költészet, dráma és népköltészet",
+      "visual": "Műalkotások múzeumokból, NASA fotók és egyebek",
+      "news": "Szalagcímek, cikkek és média",
+      "history": "Történelmi dokumentumok és archívumok",
+      "language": "Mondatok, szókincs és gyakorlatok",
+      "knowledge": "Tények, idézetek, receptek és földrajz",
+      "academic": "Kutatás, formális szövegek és tesztek",
+      "popculture": "Képregények, játékok és szórakozás"
+    },
+    "licenses": {
+      "all": "Minden licenc",
+      "commercialSafe": "Kereskedelmileg biztonságos",
+      "attribution": "Forrásmegjelölés szükséges",
+      "personalOnly": "Csak személyes használatra",
+      "licenseType": "Licenc típusa"
+    },
+    "difficulty": {
+      "all": "Minden szint",
+      "level": "Szint",
+      "difficultyLevel": "Nehézségi szint",
+      "beginner": "Kezdő",
+      "intermediate": "Középhaladó",
+      "expert": "Szakértő"
+    },
+    "tile": {
+      "beginner": "Kezdő",
+      "intermediate": "Közepes",
+      "expert": "Szakértő",
+      "studyOnly": "Csak tanuláshoz"
+    },
+    "search": {
+      "placeholder": "Keresés...",
+      "quickFilters": "Gyorsszűrők:",
+      "showing": "Megjelenítve",
+      "of": "a(z)",
+      "templates": "sablonból",
+      "clearAllFilters": "Szűrők törlése",
+      "noTemplatesFound": "Nem találhatók sablonok",
+      "tryAdjusting": "Próbáld módosítani a keresést vagy a szűrőket."
+    },
+    "quickTags": {
+      "bestsellers": "🏆 Bestsellerek",
+      "dailyPractice": "📅 Napi gyakorlás",
+      "quickSessions": "⚡ Gyors alkalmak",
+      "giftIdeas": "🎁 Ajándékötletek",
+      "posters": "🖼️ Poszterek",
+      "flashcards": "📚 Tanulókártyák",
+      "vocabulary": "📖 Szókincs",
+      "socialMedia": "📱 Közösségi média"
+    },
+    "wizard": {
+      "start": "Kezdés",
+      "back": "Vissza",
+      "import": "Tartalom importálása",
+      "cancel": "Mégse",
+      "search": "Keresés",
+      "preview": "Előnézet",
+      "randomize": "Lepj meg!",
+      "loading": "Tartalom letöltése...",
+      "error": "Valami hiba történt",
+      "whatYouCanDo": "Mit tehetsz",
+      "searchContent": "Keresés a tartalomban",
+      "pickByReference": "Választás hivatkozás alapján",
+      "randomSelection": "Véletlenszerű választás",
+      "imagesIncluded": "Képekkel",
+      "audioIncluded": "Hanggal",
+      "selectedChapters": "Kiválasztott fejezetek",
+      "fullBook": "Teljes könyv",
+      "customRange": "Egyéni tartomány",
+      "book": "Könyv",
+      "startChapter": "Kezdő fej.",
+      "endChapter": "Záró fej."
+    },
+    "license": {
+      "commercialSafeDesc": "Ez a tartalom vagy közkincs, vagy kereskedelmi licenccel rendelkezik. Eladhatsz rá épülő műveket.",
+      "attributionDesc": "A kereskedelmi felhasználás megengedett a forrás megfelelő megjelölése mellett.",
+      "personalOnlyDesc": "Kizárólag személyes tanuláshoz. Az ezen a tartalmon alapuló művek értékesítése tilos.",
+      "viewFull": "Teljes licenc megtekintése →"
+    },
+    "warning": {
+      "title": "Korlátozott licenc",
+      "personalUseOnly": "Csak személyes használatra",
+      "whyRestricted": "Miért korlátozott?",
+      "youCan": "Használhatod ezekre:",
+      "youCannot": "NEM teheted meg:",
+      "personalStudy": "Személyes tanulás",
+      "languagePractice": "Nyelvgyakorlás",
+      "teachingMaterials": "Oktatási anyagok",
+      "academicResearch": "Akadémiai kutatás",
+      "sellTranslations": "Fordítások eladása",
+      "publishEbook": "Publikálás e-könyvként",
+      "commercialDistribution": "Kereskedelmi terjesztés",
+      "monetizeSocial": "Bevételszerzés közösségi médiából",
+      "acknowledge": "Megértem, hogy ez a tartalom csak személyes tanulásra szolgál, és nem fogom eladni.",
+      "chooseAnother": "Válassz másik forrást",
+      "understand": "Megértem, folytatás"
+    },
+    "credits": {
+      "title": "Közreműködők és források",
+      "intro": "Ez a projekt a következő forrásokból használ tartalmat:",
+      "generated": "A forrásmegjelölést a Synoptic generálta ekkor:",
+      "attributionRequired": "Forrásmegjelölés szükséges"
+    },
+    "cta": {
+      "browseLibrary": "Böngészés a könyvtárban",
+      "getStartedFree": "Kezdés ingyen",
+      "learnMore": "Tudj meg többet",
+      "readyToStart": "Készen állsz a könyvedre?",
+      "importAndStart": "Importálj egy forrást, és kezdd el a fordítást a stúdióban."
+    },
+    "favorites": {
+      "title": "Mentett sablonjaim",
+      "quickAccess": "Gyors hozzáférés kedvenc tartalmaidhoz.",
+      "noSaved": "Még nincsenek mentett sablonjaid",
+      "noSavedDesc": "Böngéssz a könyvtárunkban, és mentsd el kedvenceidet a gyors eléréshez.",
+      "exploreLibrary": "Fedezd fel a könyvtárat",
+      "viewAll": "Összes ({count}) mentett sablon megtekintése",
+      "browseAll": "Böngészés az összes között",
+      "saved": "Mentve",
+      "addToFavorites": "Hozzáadás a kedvencekhez",
+      "removeFromFavorites": "Eltávolítás a kedvencek közül",
+      "readyToCreate": "Készen állsz az alkotáshoz?",
+      "signInToSave": "Bejelentkezés a mentéshez és az alkotáshoz.",
+      "startCreating": "Alkotás megkezdése",
+      "signInAndCreate": "Bejelentkezés és alkotás"
+    }
+  },
+  "Tools": {
+    "aiDraft": {
+      "title": "AI vázlat",
+      "button": "AI vázlat",
+      "original": "Eredeti:",
+      "translation": "Fordítás:",
+      "translating": "Fordítás...",
+      "tryAgain": "Újrapróbálkozás",
+      "copy": "Másolás",
+      "copied": "Másolva!",
+      "applyToL2": "Alkalmazás L2-re",
+      "poweredBy": "LibreTranslate támogatásával"
+    },
+    "grammar": {
+      "title": "Nyelvtani ellenőrzés",
+      "button": "Nyelvtan",
+      "checking": "Ellenőrzés...",
+      "detected": "Észlelve:",
+      "noIssuesFound": "Nem találtunk hibát!",
+      "textLooksGreat": "A szöveged kiválóan néz ki.",
+      "issuesFound": "{count} hiba található",
+      "fixAll": "Minden javítása",
+      "tryAgain": "Újrapróbálkozás",
+      "poweredBy": "LanguageTool támogatásával"
+    },
+    "definition": {
+      "origin": "Eredet",
+      "lookingUp": "Keresés...",
+      "wordNotFound": "Szo nem található",
+      "more": "Több",
+      "poweredBy": "Free Dictionary API"
+    },
+    "synonyms": {
+      "synonymsFor": "Szinonimák:",
+      "findingSynonyms": "Szinonimák keresése...",
+      "noSynonymsFound": "Nem találhatók szinonimák",
+      "synonyms": "Szinonimák",
+      "antonyms": "Antonimák",
+      "related": "Kapcsolódó",
+      "selectWordFirst": "Válassz ki egy szót, és nyomj jobb gombot",
+      "poweredBy": "Datamuse támogatásával"
+    },
+    "polisher": {
+      "title": "Szövegjavítás",
+      "button": "Javítás",
+      "polishing": "Javítás folyamatban...",
+      "suggestedImprovements": "Javasolt javítások"
+    },
+    "assetBank": {
+      "title": "Emoji bank",
+      "noResults": "Nem találhatók emojik"
+    },
+    "socialShare": {
+      "square": "Négyzetes",
+      "story": "Story",
+      "wide": "Széles"
+    }
+  },
+  "Settings": {
+    "title": "Felhasználói beállítások",
+    "displayName": "Megjelenített név",
+    "displayNamePlaceholder": "A neved",
+    "interfaceLanguage": "Felület nyelve",
+    "interfaceLanguageHint": "Beállítja a stúdió alapértelmezett nyelvét.",
+    "saving": "Mentés...",
+    "saveSettings": "Beállítások mentése",
+    "cancel": "Mégse"
+  },
+  "Filters": {
+    "license": "Licenc",
+    "commercial": "Kereskedelmi",
+    "attribution": "Forrásmegjelölés",
+    "personal": "Személyes"
+  },
+  "Errors": {
+    "translationFailed": "A fordítás sikertelen",
+    "grammarCheckFailed": "Az ellenőrzés sikertelen",
+    "lookupFailed": "A keresés sikertelen",
+    "fetchFailed": "A tartalom letöltése sikertelen",
+    "connectionError": "Kapcsolati hiba. Kérjük, próbáld újra.",
+    "unexpectedError": "Váratlan hiba történt"
+  },
+  "Accessibility": {
+    "openMenu": "Menü megnyitása",
+    "closeMenu": "Menü bezárása",
+    "loading": "Betöltés",
+    "searchResults": "Találatok",
+    "noResults": "Nincs találat",
+    "sortBy": "Rendezés",
+    "filterBy": "Szűrés"
   }
 }

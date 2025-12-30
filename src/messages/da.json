@@ -1,77 +1,152 @@
 {
-  "Studio": {
-    "title": "Synoptic Studio",
-    "saving": "Gemmer kladde...",
-    "saved": "Alle ændringer er gemt i skyen",
-    "ready": "Klar til dit tosprogede mesterværk",
-    "addPage": "Tilføj ny side",
-    "pageSettings": "Indstillinger for side {number}",
-    "enteringStudio": "Går ind i Studio...",
-    "failedToLoadProject": "Kunne ikke indlæse projektet",
-    "retryConnection": "Prøv at forbinde igen",
-    "pageManager": "Sidehåndtering",
-    "globalDesign": "Globalt design",
-    "stylePresets": "Stil-forudindstillinger",
-    "editorTools": "Editor-værktøjer",
-    "canvasActions": "Lærred-handlinger",
-    "drafting": "Drafting",
-    "chapterStart": "Kapitelstart",
-    "manuscript": "Manuskript",
-    "chapters": "Kapitler",
-    "noChapters": "Ingen kapitler defineret",
-    "deletePage": "Slet side",
-    "resetFactory": "Nulstil til fabriksindstillinger",
-    "bilingualEditor": "Tosproget editor"
+  "Common": {
+    "save": "Gem",
+    "cancel": "Annuller",
+    "delete": "Slet",
+    "copy": "Kopier",
+    "duplicate": "Dupliker",
+    "edit": "Rediger",
+    "loading": "Indlæser...",
+    "error": "Der opstod en fejl",
+    "success": "Succes",
+    "back": "Tilbage",
+    "next": "Næste",
+    "backToHome": "Tilbage til start",
+    "on": "Til",
+    "off": "Fra",
+    "pdf": "PDF",
+    "epub": "EPUB",
+    "close": "Luk",
+    "original": "Original",
+    "translation": "Oversættelse",
+    "importFailed": "Import mislykkedes"
+  },
+  "Auth": {
+    "login": "Log ind",
+    "signup": "Tilmeld dig",
+    "logout": "Log ud",
+    "email": "E-mail",
+    "password": "Adgangskode",
+    "forgotPassword": "Glemt adgangskode?",
+    "noAccount": "Har du ikke en konto?",
+    "hasAccount": "Har du allerede en konto?",
+    "haveAccount": "Har du allerede en konto?",
+    "verifyEmail": "Bekræft e-mail",
+    "welcomeBack": "Velkommen tilbage",
+    "createAccount": "Opret konto",
+    "signInDesc": "Log ind for at få adgang til dine projekter.",
+    "signUpDesc": "Opret en konto for at begynde at publicere.",
+    "emailPlaceholder": "navn@eksempel.dk",
+    "passwordPlaceholderLogin": "••••••••",
+    "passwordPlaceholderSignup": "Mindst 8 tegn",
+    "failed": "Godkendelse mislykkedes",
+    "errorOccurred": "Der opstod en uventet fejl",
+    "signingIn": "Logger ind...",
+    "creatingAccount": "Opretter konto...",
+    "signIn": "Log ind",
+    "termsPrompt": "Ved at fortsætte accepterer du vores servicevilkår og privatlivspolitik.",
+    "continueWithGoogle": "Fortsæt med Google",
+    "orContinueWithEmail": "eller fortsæt med e-mail",
+    "passwordStrength": "Styrke af adgangskode",
+    "weak": "Svag",
+    "fair": "Middel",
+    "strong": "Stærk",
+    "oauthError": "OAuth-godkendelse mislykkedes. Prøv venligst igen.",
+    "emailNotVerified": "Bekræft venligst din e-mail hos Google først.",
+    "securityNote": "256-bit SSL-kryptering • Overholder GDPR",
+    "recentActivity": "Seneste aktivitet",
+    "lastSession": "Sidste session",
+    "savedSecurely": "Gemt sikkert",
+    "cloudSync": "Skysynkronisering",
+    "active": "Aktiv"
+  },
+  "Dashboard": {
+    "title": "Mine projekter",
+    "subtitle": "Administrer og rediger dine tosprogede bøger.",
+    "newProject": "Nyt projekt",
+    "noProjects": "Ingen projekter fundet. Opret det første!",
+    "emptyState": "Du har ikke oprettet nogen projekter endnu.",
+    "yourProjects": "Dine projekter",
+    "settings": "Indstillinger",
+    "profile": "Profil",
+    "billing": "Fakturering",
+    "noDescription": "Ingen beskrivelse.",
+    "lastUpdated": "Sidst opdateret",
+    "stats": {
+      "projects": "Projekter",
+      "pages": "Sider",
+      "words": "Ord"
+    },
+    "projectCard": {
+      "edited": "Redigeret",
+      "open": "Åbn",
+      "delete": "Slet",
+      "confirmDelete": "Er du sikker på, at du vil slette dette projekt?"
+    }
   },
   "Blocks": {
     "text": "Tekstblok",
     "image": "Billedblok",
-    "separator": "Skillelinje",
-    "callout": "Callout",
+    "separator": "Separator",
+    "callout": "Fremhævet boks",
+    "quiz": "Quiz-øvelse",
     "insertText": "Indsæt tekstblok",
-    "addBlankPage": "Tilføj tom side",
-    "media": "Medier",
+    "addBlankPage": "Tilføj blank side",
+    "media": "Multimedie",
     "ai": "Oversættelses-AI",
-    "settings": "Studio-indstillinger",
+    "settings": "Studieindstillinger",
     "grammar": "Grammatikregel",
-    "culture": "Kulturel indsigt",
+    "culture": "Kulturel note",
     "vocabulary": "Ordforråd",
     "tip": "Læringstip",
-    "warning": "Grammatik-advarsel",
+    "warning": "Grammatisk advarsel",
     "note": "Generel note",
-    "pronunciation": "Udtalevejledning"
+    "pronunciation": "Udtalevejledning",
+    "workbookExercise": "Arbejdsbogsøvelse",
+    "autoHint": "Auto-hint",
+    "regenerateHint": "Regenerer hint",
+    "showAnswer": "Vis svar",
+    "hideAnswer": "Skjul svar",
+    "customHint": "Brugerdefineret hint",
+    "difficulty": "Sværhedsgrad",
+    "difficultyEasy": "Let",
+    "difficultyMedium": "Middel",
+    "difficultyHard": "Svær",
+    "emptyImageBlock": "Tom billedblok"
   },
   "Inspector": {
     "visibility": "Overskriv synlighed",
     "header": "Sidehoved",
+    "headerOverlay": "Sidehoved-overlap",
     "footer": "Sidefod",
+    "footerOverlay": "Sidefod-overlap",
     "pageNumber": "Sidenummer",
     "content": "Overskriv indhold",
     "typography": "Typografi",
-    "layout": "Layout & strategi",
-    "printingFlow": "Print & flow",
+    "layout": "Layout og strategi",
+    "printingFlow": "Print og flow",
     "markChapterStart": "Marker som kapitelstart",
-    "forceBlank": "Gennemtving tom side",
+    "forceBlank": "Gennemtving blank side",
     "pageLocalOnly": "Ændringer her påvirker kun den aktuelle side.",
-    "inspectorTitle": "{type}-inspektør",
+    "inspectorTitle": "Inspektør for {type}",
     "lineHeight": "Linjehøjde",
-    "paraSpacing": "Afsnitsafstand",
+    "paraSpacing": "Paragrafafstand",
     "dimensions": "Dimensioner",
     "width": "Bredde (%)",
     "alignment": "Justering",
-    "styleEffects": "Stil & effekter",
+    "styleEffects": "Stilarter og effekter",
     "shadow": "Skygge",
     "borderRadius": "Hjørneradius",
-    "stylePattern": "Stil & mønster",
+    "stylePattern": "Stil og mønster",
     "thickness": "Tykkelse",
     "contextType": "Konteksttype",
-    "brandingColor": "Brand-farve",
-    "stylePreset": "Stil-forudindstilling",
+    "brandingColor": "Brandingfarve",
+    "stylePreset": "Stilforudindstilling",
     "solidLine": "Massiv linje",
     "doubleLine": "Dobbeltlinje",
-    "dashedLine": "Stribet linje",
-    "dottedLine": "Punkteret linje",
-    "gradientFade": "Gradient fade",
+    "dashedLine": "Stiplet linje",
+    "dottedLine": "Punktlinje",
+    "gradientFade": "Gradient",
     "ornament": "Ornament"
   },
   "Theme": {
@@ -79,16 +154,16 @@
     "layout": "Globalt layout",
     "typography": "Typografi (global)",
     "bodyText": "Brødtekst",
-    "headings": "Hovedoverskrifter",
-    "baseScaling": "Basskalering",
-    "fontSize": "Brødtekst skriftstørrelse",
+    "headings": "Overskrifter",
+    "baseScaling": "Basisskalering",
+    "fontSize": "Skriftstørrelse",
     "lineHeight": "Global linjehøjde",
-    "colorPresets": "Farve-forudindstillinger",
+    "colorPresets": "Farveforudindstillinger",
     "lightMode": "Lys tilstand",
     "darkMode": "Mørk tilstand"
   },
   "Presets": {
-    "title": "Stil-forudindstillinger",
+    "title": "Stilindstillinger",
     "empty": "Vælg en blok for at gemme dens stil som en genanvendelig forudindstilling.",
     "selected": "Valgt kontekst",
     "canCapture": "Du kan gemme stilen for denne {type}-blok.",
@@ -99,7 +174,7 @@
   },
   "Wizard": {
     "createTitle": "Opret nyt projekt",
-    "createMasterpiece": "Skab et nyt mesterværk",
+    "createMasterpiece": "Nyt sikkert projekt",
     "stepInformation": "Information",
     "stepLanguages": "Sprog",
     "stepFormat": "Format",
@@ -108,29 +183,32 @@
     "titlePlaceholder": "f.eks. En verdensomsejling under havet",
     "author": "Forfatter",
     "authorPlaceholder": "Dit navn eller oprindelig forfatter",
-    "category": "Kategori / tag",
+    "category": "Kategori / Tag",
     "categoryPlaceholder": "f.eks. Fiktion, Uddannelse",
     "sourceLang": "Kildesprog (L1)",
     "targetLang": "Målsprog (L2)",
     "langWarning": "Advarsel: Kilde- og målsprog skal være forskellige for et tosproget projekt.",
-    "langTip": "Tip: De fleste brugere vælger deres modersmål som målsprog og det sprog, de lærer, som kildesprog.",
-    "dimensions": "Fysiske dimensioner (mm)",
-    "custom": "Brugerdefineret definition",
+    "langTip": "Tip: De fleste vælger deres modersmål som målsprog og det sprog, de lærer, som kildesprog.",
+    "dimensions": "Fysiske mål (mm)",
+    "custom": "Brugerdefineret indstilling",
     "layoutStyle": "Layoutstil",
     "back": "Tilbage",
-    "next": "Næste skridt",
-    "creating": "Bygger Studio...",
-    "launch": "Start Studio",
+    "next": "Næste trin",
+    "creating": "Initialiserer studie...",
+    "launch": "Start studie",
+    "secureNote": "Krypteret og isoleret projektmiljø",
     "blankTemplate": "Start fra bunden",
-    "blankDesc": "Intet indhold, et rent lærred",
-    "classicTemplate": "Klassisk side om side",
-    "classicDesc": "Balancerede kolonner, serif-skrifttyper",
-    "poetryTemplate": "Poesi / vers",
-    "poetryDesc": "Nummererede linjer, centreret fokus",
+    "blankDesc": "Tom side til brugerdefinerede layouts",
+    "classicTemplate": "Klassisk side-om-side",
+    "classicDesc": "Optimeret til tæt prosa",
+    "poetryTemplate": "Poesi / Vers",
+    "poetryDesc": "Optimeret til vers og sangtekster (Moderne)",
+    "academicTemplate": "Filologisk studie",
+    "academicDesc": "Brede margener, fodnoter",
     "width": "Bredde (mm)",
     "height": "Højde (mm)",
     "upgradeToCreateMore": "Opgrader for at oprette flere",
-    "reachedFreeLimit": "Du har nået gratis-grænsen",
+    "reachedFreeLimit": "Gratis grænse nået",
     "freeLimitDesc": "Gratis konti er begrænset til 1 aktivt projekt. Opgrader til Pro for at låse op for ubegrænsede projekter og avancerede AI-funktioner.",
     "upgradeToPro": "Opgrader til Pro",
     "maybeLater": "Måske senere",
@@ -138,187 +216,853 @@
     "digest": "Digest",
     "intlStandard": "International standard"
   },
-  "Common": {
-    "delete": "Slet",
-    "copy": "Kopier",
-    "duplicate": "Dupliker",
-    "save": "Gem",
-    "cancel": "Annuller",
-    "on": "Til",
-    "off": "Fra",
-    "backToHome": "Tilbage til start"
+  "Studio": {
+    "title": "Synoptic Studio",
+    "collaborate": "Samarbejd",
+    "export": "Eksporter",
+    "preview": "Forhåndsvisning",
+    "saving": "Gemmer kladde...",
+    "saved": "Alle ændringer gemt i skyen",
+    "ready": "Klar til dit tosprogede mesterværk",
+    "addPage": "Tilføj ny side",
+    "pageSettings": "Indstillinger for side {number}",
+    "enteringStudio": "Går ind i studiet...",
+    "failedToLoadProject": "Kunne ikke indlæse projektet",
+    "retryConnection": "Prøv forbindelse igen",
+    "pageManager": "Sidehåndtering",
+    "globalDesign": "Globalt design",
+    "stylePresets": "Stilindstillinger",
+    "editorTools": "Redigeringsværktøjer",
+    "canvasActions": "Lærredshandlinger",
+    "drafting": "Udkast",
+    "chapterStart": "Kapitelstart",
+    "manuscript": "Manuskript",
+    "chapters": "Kapitler",
+    "noChapters": "Ingen kapitler defineret",
+    "deletePage": "Slet side",
+    "resetFactory": "Nulstil til fabriksindstillinger",
+    "bilingualEditor": "Tosproget redigeringsværktøj",
+    "bookStructure": "Bogstruktur",
+    "publishingPipeline": "Publiceringsflow",
+    "frontMatter": "Indledende sider",
+    "backMatter": "Afsluttende sider",
+    "titlePage": "Titelblad",
+    "copyrightPage": "Copyright-side",
+    "dedicationPage": "Dedikation",
+    "tableOfContents": "Indholdsfortegnelse",
+    "glossary": "Ordliste",
+    "aboutAuthor": "Om forfatteren",
+    "endNotes": "Slutnoter",
+    "autoGlossaryActive": "Automatisk ordliste aktiv",
+    "refreshGlossary": "Opdater ordliste",
+    "glossaryEntries": "{count} poster indsamlet",
+    "romanNumeralsInfo": "Indledende sider bruger romertal (i, ii, iii). Brødtekst bruger arabertal (1, 2, 3).",
+    "playAudio": "Læs højt",
+    "stopAudio": "Stop oplæsning",
+    "normalSpeed": "Normal hastighed",
+    "slowMode": "Langsom tilstand (0.7×)",
+    "audioSettings": "Stemmeindstillinger",
+    "grammarPainter": "Grammatik-maler",
+    "exitPaintMode": "Afslut malertilstand",
+    "subject": "Grundled",
+    "verb": "Udsagnsled",
+    "object": "Genstandsled",
+    "adjective": "Tillægsord",
+    "adverb": "Biord",
+    "paintTip": "Vælg tekst for at anvende grammatiske farver",
+    "clearAllColors": "Ryd alle farver",
+    "syntaxArrows": "Syntakspile",
+    "addArrow": "Tilføj pil",
+    "deleteArrow": "Slet pil",
+    "arrowStyle": "Pilstil",
+    "curved": "Buet",
+    "angular": "Vinklet",
+    "straight": "Lige",
+    "arrowDrawer": "Syntaktisk forbinder",
+    "selectSource": "Vælg kildeord",
+    "selectTarget": "Vælg målord",
+    "arrowCreated": "Forbindelse oprettet",
+    "cancelLink": "Annuller"
   },
-  "Dashboard": {
-    "title": "Dine projekter",
-    "subtitle": "Administrer og rediger dine tosprogede bøger.",
-    "emptyState": "Du har ikke oprettet nogen projekter endnu.",
-    "noDescription": "Ingen beskrivelse angivet.",
-    "lastUpdated": "Sidst opdateret"
+  "Editor": {
+    "toolbar": {
+      "bold": "Fed",
+      "italic": "Kursiv",
+      "underline": "Understreget",
+      "strikeThrough": "Gennemstreget",
+      "alignLeft": "Venstrejusteret",
+      "alignCenter": "Centreret",
+      "alignRight": "Højrejusteret",
+      "justify": "Lige margener",
+      "left": "Venstre",
+      "center": "Centrer",
+      "right": "Højre",
+      "link": "Link",
+      "addBlock": "Tilføj blok",
+      "export": "Eksporter",
+      "ai": "AI-assistent"
+    },
+    "sidebar": {
+      "pages": "Sider",
+      "style": "Stil",
+      "inspector": "Inspektør",
+      "chat": "AI-chat"
+    },
+    "inspector": {
+      "layout": "Layout",
+      "spacing": "Afstand",
+      "typography": "Typografi",
+      "colors": "Farver",
+      "border": "Kant",
+      "shadow": "Skygge",
+      "actions": "Handlinger",
+      "labels": {
+        "color": "Farve",
+        "backgroundColor": "Baggrundsfarve",
+        "fontSize": "Skriftstørrelse",
+        "lineHeight": "Linjehøjde",
+        "letterSpacing": "Bogstavsafstand",
+        "margin": "Margin",
+        "padding": "Indvendig afstand",
+        "width": "Bredde",
+        "alignment": "Justering",
+        "fontFamily": "Skrifttypefamilie"
+      }
+    },
+    "messages": {
+      "saved": "Projektet blev gemt",
+      "error": "Fejl ved gemning af projektet"
+    },
+    "onboarding": {
+      "welcome": "Velkommen til redigeringsværktøjet",
+      "step1": "Dette er dit lærred. Skriv på begge sider for at begynde.",
+      "step2": "Brug værktøjslinjen til at formatere tekst.",
+      "step3": "Klik på Eksporter for at downloade din bog."
+    },
+    "blocks": {
+      "text": "Tekststykke",
+      "image": "Billede",
+      "separator": "Separator",
+      "callout": "Fremhævet boks",
+      "verse": "Vers / Digt"
+    }
   },
-  "Auth": {
-    "login": "Log ind",
-    "signup": "Tilmeld dig",
-    "welcomeBack": "Velkommen tilbage",
-    "createAccount": "Opret konto",
-    "signInDesc": "Log ind på din Synoptic-konto",
-    "signUpDesc": "Begynd at skabe tosprogede bøger i dag",
-    "email": "E-mail",
-    "password": "Adgangskode",
-    "emailPlaceholder": "navn@eksempel.dk",
-    "passwordPlaceholderLogin": "Indtast din adgangskode",
-    "passwordPlaceholderSignup": "Opret en adgangskode",
-    "signIn": "Log ind",
-    "signingIn": "Logger ind...",
-    "creatingAccount": "Opretter konto...",
-    "noAccount": "Har du ikke en konto?",
-    "hasAccount": "Har du allerede en konto?",
-    "termsPrompt": "Ved at fortsætte accepterer du Synoptics servicevilkår og privatlivspolitik.",
-    "failed": "Godkendelse mislykkedes",
-    "errorOccurred": "Der opstod en fejl"
+  "Models": {
+    "parallel": "Parallelle kolonner",
+    "interlinear": "Interlineær",
+    "bilingual": "Dobbeltsidet",
+    "modern": "Moderne minimalistisk"
+  },
+  "Pricing": {
+    "title": "Enkel og gennemsigtig prissætning",
+    "subtitle": "Vælg den plan, der passer bedst til dine publiceringsmål.",
+    "mostPopular": "Mest populær",
+    "month": "/måned",
+    "pageTitle": "Invester i din bog.",
+    "pageSubtitle": "Uanset om du oversætter et familieminde eller udgiver en kommerciel serie, har vi de rette værktøjer.",
+    "nonProfitTitle": "Er du en non-profit eller underviser?",
+    "nonProfitDesc": "Vi tilbyder særlige rabatter til uddannelsesinstitutioner og non-profit oversættelser. Kontakt os for et tilbud.",
+    "contactSupport": "Kontakt support",
+    "free": {
+      "name": "Gratis",
+      "price": "0 kr.",
+      "desc": "Perfekt til at teste motoren.",
+      "description": "Perfekt til at teste motoren.",
+      "button": "Start gratis"
+    },
+    "pro": {
+      "name": "Pro",
+      "price": "89 kr.",
+      "desc": "For uafhængige forfattere og polyglotter.",
+      "description": "For uafhængige forfattere og polyglotter.",
+      "button": "Opgrader til Pro"
+    },
+    "publisher": {
+      "name": "Forlag",
+      "price": "349 kr.",
+      "desc": "For produktion i store mængder.",
+      "description": "For produktion i store mængder.",
+      "button": "Gå til Forlag"
+    },
+    "featuresList": {
+      "activeProject": "1 aktivt projekt",
+      "standardLayout": "Standard layoutmotor",
+      "manualTranslation": "Manuel oversættelse",
+      "lowDpiPdf": "Lavopløst PDF-eksport",
+      "watermarked": "Eksport med vandmærke",
+      "unlimitedProjects": "Ubegrænsede projekter",
+      "aiAssistedLayout": "AI-assisteret layout",
+      "aiWordsMonth": "50.000 AI-ord / måned",
+      "highDpiPdf": "300 DPI eksport (printklar)",
+      "epubMobi": "EPUB & MOBI eksport",
+      "removeWatermarks": "Fjernelse af vandmærker",
+      "priorityHistory": "Prioriteret historik i skyen",
+      "flashcards": "Dynamisk generering af flashcards",
+      "tts": "Tekst-til-tale-fortælling (TTS)",
+      "everythingPro": "Alt inkluderet i Pro",
+      "bigAiLimit": "500.000 AI-ord / måned",
+      "unlimitedAi": "Ubegrænsede AI-kreditter",
+      "teamCollab": "Teamsamarbejde",
+      "brandCustom": "Branding-tilpasning",
+      "fontUpload": "Upload af egne skrifttyper",
+      "apiAccess": "API-adgang (snart)",
+      "ttsPremium": "Premium neurale stemmer",
+      "limitedAi": "Begrænset AI"
+    },
+    "features": {
+      "unlimited": "Ubegrænsede projekter",
+      "highDpi": "Højdefinitions-eksport (300 DPI)",
+      "noWatermark": "Ingen vandmærker",
+      "aiUnits": "AI-intelligensenheder",
+      "customFonts": "Upload egne skrifttyper"
+    },
+    "cta": "Vælg plan",
+    "monthly": "månedligt",
+    "yearly": "årligt",
+    "popular": "Mest populær"
+  },
+  "Landing": {
+    "hero": {
+      "title": "Publiceringsmotoren til tosprogede bøger.",
+      "subtitle": "Forvandl rå tekst til perfekte parallelle bøger med CSS. Intet InDesign. Ingen desynkronisering. Grid-Lock-arkitekturen sikrer justering ved design.",
+      "cta": "Begynd at publicere gratis"
+    },
+    "features": {
+      "title": "Baseret på Grid-Lock-arkitekturen",
+      "items": {
+        "layout": "Grid-Lock-arkitektur",
+        "export": "Nativ PDF/X",
+        "sync": "Skysynkronisering",
+        "ai": "Lingvistisk AI",
+        "validation": "300 DPI validering"
+      }
+    }
   },
   "Marketing": {
     "nav": {
+      "toLearn": "Til sprogindlæring",
+      "toPublish": "Til professionel publicering",
       "features": "Funktioner",
       "pricing": "Priser",
       "library": "Bibliotek",
       "logIn": "Log ind",
       "joinNow": "Tilmeld dig nu",
       "templates": "Skabeloner",
-      "product": "Produkt",
-      "company": "Virksomhed",
+      "product": "Studiet",
+      "company": "Om os",
       "about": "Om os",
       "privacy": "Privatliv",
       "terms": "Vilkår"
     },
     "hero": {
-      "badge": "Synoptic v1.0 Privat Beta",
-      "title": "Det <span>Ultimative</span> <br /> Tosprogede Studio",
-      "subtitle": "Skab professionelle side-om-side bøger med AI-assisteret sats, realtids-cloundsynkronisering og KDP-udgivelse med ét klik.",
-      "ctaPrimary": "Begynd at skrive gratis",
+      "badge": "Synoptic v1.0 privat beta",
+      "title": "Det <span>ultimative</span> <br /> tosprogede studie",
+      "subtitle": "Forvandl rå tekst til **perfekte parallelle bøger** med CSS. Intet InDesign. Ingen desynkronisering.",
+      "subtitleShort": "Publiceringsmotoren til tosprogede bøger.",
+      "featuresLine": "Grid-Lock-arkitektur • Nativ PDF/X • 300 DPI validering",
+      "ctaPrimary": "Begynd at publicere gratis",
       "ctaSecondary": "Udforsk biblioteket",
-      "aiSuggestion": "AI-forslag"
+      "aiSuggestion": "AI-forslag",
+      "aiTranslation": "AI-optimeret oversættelse",
+      "pauseRotation": "Sæt sprogrotation på pause",
+      "resumeRotation": "Genoptag sprogrotation",
+      "studioTitle": "Hero-titel — Synoptic Studio",
+      "titlePlain": "Stop med at kæmpe med formateringen. Få professionel symmetri med ét klik.",
+      "neuralEngine": "Lingvistisk intelligens",
+      "activeLayer": "Aktivt lag",
+      "typographyAssistant": "Typografiassistent",
+      "syncingLocales": "Synkroniserer {count} sprog",
+      "syncing": "Synkroniserer...",
+      "readyStudio": "Klar — Synoptic Studio v1.2",
+      "canvasA": "Lærred A",
+      "canvasB": "Lærred B",
+      "output": "Output",
+      "livePreview": "Forhåndsvisning",
+      "origin": "Oprindelse"
     },
     "footer": {
-      "tagline": "Den professionelle tosprogede udgiver for forfattere, sprogstuderende og forlag. Designet i SF, bygget til verden.",
+      "tagline": "Det professionelle tosprogede studie for forfattere, polyglotter og globale forlag. Skaber klarhed på tværs af grænser.",
       "copyright": "© 2025 Synoptic Studio. Alle rettigheder forbeholdes."
+    },
+    "carbon": {
+      "label": "Bæredygtighed",
+      "calculating": "Måler...",
+      "cleanerThan": "Renere end {percentage} %",
+      "co2": "{amount} g CO2",
+      "ecoFriendly": "Miljøvenlig",
+      "measure": "Mål påvirkning"
     }
   },
   "Features": {
-    "title": "Bygget til skabere",
-    "subtitle": "Et forlags infrastruktur, forenklet i et studio.",
+    "title": "Designet til alle skalaer",
+    "subtitle": "Fra personlige **flashcards**, **studieark** og **plakater** til globale bogudgivelser i voksende nichemarkeder.",
+    "ctaLearn": "Lær hvordan du mestrer et sprog",
+    "ctaPublish": "Udforsk professionel publicering",
+    "aiInsights": "AI-indsigt",
+    "learn": {
+      "title": "For sprogstuderende",
+      "subtitle": "Det ultimative værktøj til selvstudie.",
+      "items": {
+        "flashcards": {
+          "title": "Dynamiske flashcards",
+          "desc": "Generer automatisk huskekort fra de sætninger, du læser."
+        },
+        "annotations": {
+          "title": "Filologiske annotationer",
+          "desc": "Dyk ned i grammatik og nuancer med ord-for-ord AI-analyse."
+        },
+        "immersion": {
+          "title": "Symmetrisk fordybelse",
+          "desc": "Din hjerne kortlægger sprog naturligt, når de er side om side. Mist aldrig konteksten."
+        }
+      }
+    },
+    "publish": {
+      "title": "For forlagsprofessionelle",
+      "subtitle": "Opsætning i industriel kvalitet til tosprogede udgaver.",
+      "items": {
+        "typesetting": {
+          "title": "Grid-Lock-arkitektur",
+          "desc": "Vi 'gætter' ikke bare på justeringen. Vi bruger en streng CSS Grid-motor, der matematisk låser kilde- og målparagraffer."
+        },
+        "multiformat": {
+          "title": "Nativ PDF/X og EPUB 3.0",
+          "desc": "Generer layouts med spejlvendte margener. Eksporter valide EPUB 3.0-filer til Kindle og Apple Books."
+        },
+        "distribution": {
+          "title": "Validering og kvalitet",
+          "desc": "300 DPI output med sRGB farveprofiler, der sikrer, at din upload til KDP går glat igennem."
+        }
+      }
+    },
     "aiTypesetter": {
-      "title": "AI-satsbehandler",
-      "desc": "Justerer automatisk sætningspar på over 25 sprog og sikrer perfekt symmetri, selv med varierende sætningslængder."
+      "title": "AI-tekstforfatter",
+      "desc": "Justerer automatisk sætningspar på over 25 sprog og sikrer perfekt symmetri, selv ved forskellige længder."
     },
     "cloudSync": {
-      "title": "Cloud-synkroniseringsmotor",
-      "desc": "Dit arbejde gemmes øjeblikkeligt, mens du skriver. Få adgang til dit studio fra enhver enhed med en permanent og ubegrænset fortrydelseshistorik."
+      "title": "Synkroniseringsmotor",
+      "desc": "Dit arbejde gemmes øjeblikkeligt, mens du skriver. Få adgang til dit studie fra enhver enhed med ubegrænset historik."
     },
     "pdfExport": {
-      "title": "Print-klar PDF",
-      "desc": "Højopløselig eksport via Puppeteer-motor. Perfekt til Amazon KDP, IngramSpark og lokale trykkerier."
+      "title": "Printklar PDF",
+      "desc": "Højopløst eksport via Puppeteer-motor. Perfekt til Amazon KDP, IngramSpark og lokale trykkerier."
     },
     "epubSupport": {
       "title": "EPUB 3.0-understøttelse",
-      "desc": "Generer fleksible e-bøger med en indfødt tosproget skiftetilstand, optimeret til Kindle og Apple Books."
+      "desc": "Generer fleksible e-bøger med nativ tosproget tilstand, optimeret til Kindle og Apple Books."
     },
     "deepAnnotation": {
-      "title": "Dyb annotation",
-      "desc": "AI-drevet sproglig indsigt. Ordgruppering, relationspile og kontekstuelle forklaringer lige ved hånden."
+      "title": "Dybdegående annotationer",
+      "desc": "Lingvistisk indsigt via AI. Ordgrupperinger, pilerelationer og kontekstuelle forklaringer lige ved hånden."
     },
     "marketplace": {
       "title": "Global markedsplads",
-      "desc": "Del og sælg dine egne bogskabeloner, eller gennemse vores bibliotek med kuraterede professionelle tosprogede designs."
+      "desc": "Del og sælg dine egne bogskabeloner, eller udforsk vores bibliotek af professionelle tosprogede designs."
     }
   },
-  "Pricing": {
-    "title": "Enkel og fair prissætning",
-    "subtitle": "Vælg den plan, der passer til dine udgivelsesmål.",
-    "mostPopular": "Mest populær",
-    "month": "/md",
-    "pageTitle": "Invester i din bog.",
-    "pageSubtitle": "Uanset om du oversætter et familiememoir eller udgiver en kommerciel serie, har vi de rigtige værktøjer til dig.",
-    "nonProfitTitle": "Er du en non-profit organisation eller underviser?",
-    "nonProfitDesc": "Vi tilbyder specialrabatter til uddannelsesinstitutioner og non-profit oversættelser. Kontakt vores team for et skræddersyet tilbud.",
-    "contactSupport": "Kontakt support",
-    "free": {
-      "name": "Gratis",
-      "desc": "Perfekt til test af studiet.",
-      "button": "Start gratis"
+  "PricingPage": {
+    "title": "Betal for intelligens, ikke lagerplads",
+    "subtitle": "Ubegrænsede projekter. Du bruger kun kreditter, når du bruger AI.",
+    "yearly": "Spar 20 % ved årlig betaling",
+    "tiers": {
+      "free": "Basis",
+      "pro": "Standard for uafhængige forfattere og polyglotter.",
+      "publisher": "Designet til forlag og storproduktion."
     },
-    "pro": {
-      "name": "Pro",
-      "desc": "For seriøse forfattere og polyglotter.",
-      "button": "Deltag i Pro"
-    },
-    "publisher": {
-      "name": "Udgiver",
-      "desc": "Til professionelle forlag.",
-      "button": "Skift til Udgiver"
-    },
-    "featuresList": {
-      "activeProject": "1 aktivt projekt",
-      "standardLayout": "Standard layout-motor",
-      "manualTranslation": "Manuel oversættelse",
-      "lowDpiPdf": "Lav DPI PDF-eksport",
-      "watermarked": "Udgivelse med vandmærke",
-      "unlimitedProjects": "Ubegrænsede projekter",
-      "aiAssistedLayout": "AI-assisteret layout",
-      "aiWordsMonth": "50k AI-ord / md",
-      "highDpiPdf": "300 DPI eksport (print-klar)",
-      "epubMobi": "EPUB & MOBI eksport",
-      "removeWatermarks": "Fjernelse af vandmærker",
-      "priorityHistory": "Prioriteret cloud-historik",
-      "everythingPro": "Alt i Pro inkluderet",
-      "unlimitedAi": "Ubegrænsede AI-kreditter",
-      "teamCollab": "Teamsamarbejde",
-      "brandCustom": "Brand-tilpasning",
-      "fontUpload": "Upload af egne skrifttyper",
-      "apiAccess": "API-adgang (kommer snart)"
+    "unitCalculator": {
+      "title": "1 AI-enhed = 1 intellektuel handling",
+      "desc": "Dine kreditter trækkes baseret på interaktion med blokke:",
+      "p1": "Oversætte en paragraf? **1 enhed.**",
+      "p2": "Generere en grammatisk note? **1 enhed.**",
+      "fairUse": "Fair Use: Eksport (PDF/EPUB) er **altid gratis**. Du betaler aldrig for at downloade dit eget arbejde."
     }
   },
   "Export": {
-    "publishingPipeline": "Udgivelsesproces",
-    "pdfManuscript": "Print-klar PDF",
+    "publishingPipeline": "Publiceringsflow",
+    "pdfManuscript": "Printklar PDF",
     "epubEbook": "E-bog (EPUB 3.0)",
     "generate": "Generer",
+    "generating": "Genererer...",
     "quality": "Kvalitet",
-    "bleed": "Til beskæring",
-    "preFlightTitle": "Pre-flight kvalitetskontrol",
-    "symmetryCheck": "Tosproget symmetri verificeret",
-    "largeDocWarning": "Store dokumenter kan tage op til 30 sekunder at rendere.",
+    "bleed": "Beskæring (Bleed)",
+    "preFlightTitle": "Automatiseret integritetssystem",
+    "symmetryCheck": "Grid-Lock symmetri aktiv",
+    "largeDocWarning": "Store dokumenter kan tage op til 30 sekunder at indlæse.",
     "upgradeToPro": "Opgrader til Pro",
-    "watermarkPolicy": "Fjern vandmærker, lås op for HD-print og få 50.000 AI-ord om måneden.",
+    "watermarkPolicy": "Fjern vandmærker, lås op for højopløst print og få 50.000 AI-ord om måneden.",
     "viewPlans": "Se planer",
-    "proQuality": "Pro kvalitiet (kladde)",
-    "freeWarning": "På gratis-niveauet vil et vandmærke blive påført denne eksport.",
-    "pdfDesc": "High-fidelity-eksport via 300 DPI Puppeteer-motor. Optimeret til Amazon KDP.",
-    "epubDesc": "Fleksibelt tosproget tekstlayout. Optimeret til Kindle og Apple Books.",
+    "proQuality": "Pro-kvalitet (kladde)",
+    "freeWarning": "Denne eksport vil have et vandmærke på den gratis plan.",
+    "pdfDesc": "Højkvalitets eksport via 300 DPI Puppeteer-motor. Optimeret til Amazon KDP.",
+    "epubDesc": "Tosproget tekst-layout. Optimeret til Kindle og Apple Books.",
     "qualityPrint": "Print",
     "qualityWeb": "Web",
-    "qualityDraft": "Kladde"
+    "qualityDraft": "Kladde",
+    "pdfError": "PDF-eksport mislykkedes",
+    "pdfErrorDesc": "Eksporten fejlede. Tjek din forbindelse til printmotoren.",
+    "epubError": "EPUB-eksport mislykkedes",
+    "epubErrorDesc": "Der opstod en fejl under generering af EPUB-filen.",
+    "chapter": "Kapitel",
+    "engineLabel": "PUBLICERINGSMOTOR TIL TOSPROGEDE BØGER",
+    "studyDeck": "Studiesæt (Anki/CSV)",
+    "deckDesc": "Eksporter dine AI-grammatiknoter og fremhævet ordforråd til Anki, Quizlet eller Excel.",
+    "noCardsFound": "Ingen flashcards fundet. Brug værktøjet 'AI-annotation' til at oprette nogle først!",
+    "systemStatus": "Systemstatus",
+    "gridLock": "Grid-Lock-arkitektur",
+    "engineActive": "Motor aktiv",
+    "waitingContent": "Venter på indhold...",
+    "mirrorGutter": "Logik for spejlvendte margener",
+    "profileLoaded": "Profil indlæst",
+    "audiobookEngine": "Neural lydbog",
+    "audiobookDesc": "Generer lydbøger i studiekvalitet med Microsoft Neural TTS. Filerne organiseres efter kapitel i en ZIP-fil.",
+    "voicePersona": "Fortællerstemme",
+    "selectVoice": "Vælg en stemme...",
+    "renderingChapter": "Syntetiserer kapitel {chapter}...",
+    "exportAudioZip": "Eksporter lyd (ZIP)",
+    "neuralEngine": "Microsoft Neural TTS-motor",
+    "noAudioContent": "Ingen tekst fundet til at generere lyd. Tilføj tekstblokke først!",
+    "audioExportError": "Lyd-eksport fejlede. Tjek din forbindelse og prøv igen.",
+    "socialShare": "Social deling",
+    "socialShareDesc": "Eksporter dine tosprogede citater som smukke billeder til Instagram, Twitter eller Pinterest.",
+    "socialFormat": "Format",
+    "squareFormat": "Kvadrat (Instagram)",
+    "storyFormat": "Story (1080×1920)",
+    "twitterFormat": "Twitter-kort",
+    "pinterestFormat": "Pinterest-pin",
+    "exportImage": "Eksporter billede",
+    "includeBranding": "Inkluder Synoptic-branding",
+    "selectBlock": "Vælg en tekstblok, der skal eksporteres"
   },
   "Onboarding": {
-    "tourDashboardContent": "Velkommen til Synoptic! Dette er din projekthub.",
-    "tourNewProjectContent": "Start her for at skabe dit første tosprogede mesterværk.",
-    "tourLibraryContent": "Importer klassiske tekster fra vores public domain-bibliotek.",
+    "tourDashboardContent": "Velkommen til Synoptic! Dette er din projektoversigt.",
+    "tourNewProjectContent": "Start her for at oprette dit første tosprogede mesterværk.",
+    "tourLibraryContent": "Importer klassiske tekster fra vores bibliotek af værker, der er i frit eje.",
     "tourPageListContent": "Naviger gennem bogens sider her.",
-    "tourToolsContent": "Tilføj tekstblokke, billeder og AI-drevet annotation.",
-    "tourPublishContent": "Klar til print? Eksporter til PDF eller EPUB på få sekunder.",
-    "tourWorkspaceContent": "Dette er dit lærred. Venstre kolonne er kilden, højre er din oversættelse."
+    "tourToolsContent": "Tilføj tekstblokke, billeder og AI-annotationer.",
+    "tourPublishContent": "Klar til tryk? Eksporter til PDF eller EPUB på få sekunder.",
+    "tourWorkspaceContent": "Dette er dit lærred. Venstre kolonne er originalen, højre kolonne er oversættelsen."
   },
   "CommandPalette": {
+    "esc": "Esc",
     "placeholder": "Skriv en kommando eller søg...",
     "noResults": "Ingen resultater fundet.",
     "actions": "Handlinger",
     "addText": "Tilføj tekstblok",
     "undo": "Fortryd handling",
-    "redo": "Gendan handling",
+    "redo": "Gentag handling",
     "deleteBlock": "Slet valgt blok",
     "exportPdf": "Eksporter til PDF",
-    "select": "Vælg",
-    "navigate": "Naviger",
-    "paletteTitle": "Synoptic kommandopalette",
+    "select": "vælg",
+    "navigate": "naviger",
+    "paletteTitle": "Synoptic kommandopalet",
     "commandMenu": "Kommandomenu"
+  },
+  "AboutPage": {
+    "title": "Fremtidens oversættelse",
+    "subtitle": "Synoptic blev født af en enkel erkendelse: Verden rykker tættere sammen, men vores bøger er stadig etsprogede. Vi har bygget det første studie dedikeret til kunsten og videnskaben bag tosproget publicering.",
+    "sovereignTitle": "Ingen trænings-garanti",
+    "sovereignDesc": "De fleste AI-værktøjer kræver ejerskab over dine data. Det gør vi ikke. Dit manuskript træner ikke en global hjerne; det bliver i dit private kammer.",
+    "soulTitle": "Tilstandsløs behandling",
+    "soulDesc": "Vi bruger en tilstandsløs arkitektur (NextResponse). Så snart oversættelsen er leveret, lukker agenten ned, og hukommelsen slettes øjeblikkeligt.",
+    "values": "Vores værdier",
+    "privacyTitle": "Privatliv først",
+    "privacyDesc": "Dine manuskripter er din ejendom. Vi bruger sikker infrastruktur for at sikre, at din intellektuelle ejendomsret aldrig forlader din kontrol.",
+    "perfTitle": "Høj ydeevne",
+    "perfDesc": "Bygget til det moderne web. Hver interaktion er hurtig, fra skysynkronisering til 300 DPI PDF-eksport.",
+    "communityTitle": "Skabt til fællesskabet",
+    "communityDesc": "Vi udvikler os konstant takket være feedback fra vores fællesskab af forfattere, polyglotter og undervisere.",
+    "cta": "Deltag i revolutionen"
+  },
+  "PrivacyPage": {
+    "title": "Privatliv @ Synoptic",
+    "subtitle": "Vi ved, at dine manuskripter er din sjæl. Vores privatlivspolitik beskytter din intellektuelle ejendom.",
+    "philosophyTitle": "Vores privatlivsfilosofi",
+    "philosophyDesc": "Synoptic er bygget på princippet om 'Suveræn viden'. Vi indsamler kun det, der er strengt nødvendigt.",
+    "collectTitle": "Informationer vi indsamler",
+    "collectDesc": "Kontodata (e-mail) til adgang, projekt-metadata og brugerindhold kun til behandling.",
+    "collectItems": [
+      "Kontodata: Navn og e-mail til fakturering.",
+      "Projekt-metadata: For at vedligeholde katalogtilstanden.",
+      "Brugerindhold: Krypteret og isoleret."
+    ],
+    "aiProcessingTitle": "AI-behandling og dataisolering",
+    "aiProcessingDesc": "Vi adskiller os fra standard AI-værktøjer. Dine manuskripter bruges IKKE til at træne globale modeller.",
+    "securityTitle": "Lagring og sikkerhed",
+    "securityDesc": "Alle data er krypteret under transport (TLS/SSL) og ved hvile. Du kan slette dine projekter når som helst.",
+    "sharingTitle": "Deling med tredjepart",
+    "sharingDesc": "Vi sælger ikke dine data. Vi deler kun med nødvendige tjenester som Stripe (betaling) og AWS/DigitalOcean (infrastruktur).",
+    "contactTitle": "Kontakt",
+    "contactDesc": "Ved spørgsmål om privatliv: privacy@getsynoptic.com",
+    "lastUpdated": "Sidst opdateret: december 2025"
+  },
+  "TermsPage": {
+    "title": "Servicevilkår",
+    "subtitle": "Klare regler. Du ejer arbejdet. Vi ejer værktøjet.",
+    "introTitle": "1. Introduktion",
+    "introDesc": "Velkommen til Synoptic. Ved at bruge vores studie accepterer du disse vilkår. Sidst opdateret: december 2025.",
+    "ipTitle": "2. Intellektuel ejendomsret",
+    "ipDesc": "Vi skelner tydeligt mellem værktøjet og skabelsen.",
+    "ipItems": [
+      "Din suverænitet: Du beholder 100 % ejerskab over dine manuskripter og eksportfiler.",
+      "Vores teknologi: Interfacet og kompositionsmotoren v4.0 tilhører Synoptic."
+    ],
+    "obligationsTitle": "3. Brugerforpligtelser",
+    "obligationsDesc": "Du accepterer ikke at foretage reverse-engineering af vores motor eller bruge scripts til at skrabe data fra vores bibliotek.",
+    "paymentTitle": "4. Abonnementer og AI-enheder",
+    "paymentDesc": "Planer faktureres månedligt. AI-enheder forbruges pr. 'intellektuel handling'. Ubrugte enheder overføres ikke.",
+    "publishingTitle": "5. Ansvarsfraskrivelse",
+    "publishingDesc": "Selvom vi er optimeret til KDP, garanterer vi ikke godkendelse hos tredjeparter. Du er ansvarlig for den endelige korrekturlæsning.",
+    "terminationTitle": "6. Opsigelse",
+    "terminationDesc": "Vi forbeholder os retten til at suspendere konti, der overtræder vores politik for rimelig brug (Fair Use)."
+  },
+  "ModelsPage": {
+    "title": "Strukturbibliotek",
+    "subtitle": "Hver historie kræver sin egen arkitektur. Vælg fra vores samling af professionelle tosprogede skabeloner.",
+    "pixelPerfect": "Pixelperfekte layouts",
+    "gutterTitle": "Logik for spejlvendte margener",
+    "gutterDesc": "Automatisk justering af indvendige og udvendige margener baseret på indbindingstypen.",
+    "symmetryTitle": "Symmetri-beskyttelse",
+    "symmetryDesc": "Realtidsadvarsler, hvis tosprogede blokke kommer ud af synkronisering på tværs af sider.",
+    "templates": {
+      "classic": {
+        "title": "Klassisk parallel",
+        "desc": "Guldstandarden for tosproget læsning. Strengt justerede kolonner til eksklusive trykte udgaver."
+      },
+      "alternating": {
+        "title": "Alternerende fordybelse",
+        "desc": "Perfekt til digitale enheder. Flow paragraf for paragraf for at bevare fokus."
+      },
+      "academic": {
+        "title": "Filologisk studie",
+        "desc": "Dybdegående akademisk analyse med ord-for-ord annotationer direkte under kilden."
+      },
+      "modern": {
+        "title": "Moderne vers",
+        "desc": "Minimalistisk layout optimeret til poesi med brede kunstneriske margener."
+      }
+    },
+    "viewTemplate": "Udforsk struktur",
+    "typesettingTitle": "Tosproget logik",
+    "exampleSource": "The stars were bright above the silent lake.",
+    "exampleTarget": "Stjernerne lyste klart over den stille sø.",
+    "labels": {
+      "source": "Kilde ({lang})",
+      "translation": "Oversættelse ({lang})",
+      "engine": "Kompositionsmotor v4.0"
+    }
+  },
+  "LearnPage": {
+    "title": "Mestrer ethvert sprog gennem fordybelse",
+    "subtitle": "Glem kedelige lærebøger. Skab dine egne materialer ud fra de historier, du faktisk har lyst til at læse.",
+    "badge": "For polyglotter og studerende",
+    "browseLibrary": "Udforsk bibliotek",
+    "features": {
+      "reader": {
+        "title": "Den smarte læser",
+        "desc": "Læs behageligt med vores synkroniserede rulning. Dine øjne mister aldrig oversættelsen af syne."
+      },
+      "study": {
+        "title": "AI-studieassistent",
+        "desc": "Stil grammatiske spørgsmål direkte i teksten. Det er som at have en privatlærer på hver side."
+      },
+      "custom": {
+        "title": "Egne materialer",
+        "desc": "Importer dine egne artikler eller PDF-filer. Synoptic formaterer dem perfekt til studie."
+      }
+    },
+    "immersion": {
+      "title": "Videnskaben bag side-om-side",
+      "p1": "At læse på dit målsprog er den mest effektive måde at tilegne sig ordforråd på. Men at kaste sig over en fremmed bog kan være skræmmende.",
+      "p2": "Synoptic fjerner denne barriere. Ved at tilbyde en oversættelse, der er justeret sætning for sætning, lader vi din hjerne kortlægge nye ord naturligt.",
+      "tag1": "Naturlig tilegnelse",
+      "tag2": "Tosproget kortlægning",
+      "verified": "Verificeret AI-oversættelse",
+      "flashcard": "Flashcard genereret!"
+    },
+    "ctaSection": {
+      "title": "Klar til at blive flydende?",
+      "subtitle": "Slut dig til tusindvis af studerende, der har byttet manualerne ud med en fordybende oplevelse.",
+      "button": "Opret en gratis konto"
+    },
+    "cta": "Start min rejse"
+  },
+  "PublishPage": {
+    "title": "Publicering i industriel kvalitet",
+    "subtitle": "Synoptic er designet til store volumener. Vores infrastruktur understøtter forlag, der kræver konsistens.",
+    "infra": "Infrastruktur til forlag",
+    "cta": "Start publicering nu",
+    "enterprise": "Kontakt Erhverv",
+    "features": {
+      "engine": {
+        "title": "Grid-Lock-motor",
+        "desc": "Vores CSS Grid-motor låser matematisk paragrafferne sammen, hvilket forhindrer desynkronisering."
+      },
+      "exports": {
+        "title": "Professionel eksport",
+        "desc": "Generer 300 DPI PDF-filer med sRGB-farveprofiler. Dine uploads til KDP vil bestå alle kontroller."
+      },
+      "distribution": {
+        "title": "Klar til global distribution",
+        "desc": "Eksporter valide EPUB 3.0-filer til Kindle, Apple Books og alle førende forhandlere."
+      }
+    },
+    "volumeTitle": "Produktionsflow",
+    "volumeSubtitle": "Fra manuskript til marked i tre trin.",
+    "step1": "Importer eller opret",
+    "step1Desc": "Indsæt dit manuskript eller skriv direkte. Vores AI tager sig af den indledende formatering.",
+    "step2": "Forfin og valider",
+    "step2Desc": "Brug Grid-Lock-editoren til det perfekte layout. Symmetri-beskyttelsen forhindrer fejl.",
+    "step3": "Eksporter og publicer",
+    "step3Desc": "Download dine færdige filer. Upload direkte til KDP, IngramSpark eller din distributør.",
+    "available": "Tilgængelig nu",
+    "epubTitle": "EPUB 3.0 + Fixed Layout",
+    "epubDesc": "Fuld understøttelse af både reflowable og fixed-layout EPUB-formater. Ideelt til børnebøger.",
+    "compliant": "EPUB 3.0 kompatibel",
+    "fixed": "Fixed-layout support",
+    "scaleTitle": "Vil du opskalere dit katalog?",
+    "scaleDesc": "Uanset om du udgiver 5 eller 500 titler, vokser Synoptic med dig.",
+    "sales": "Kontakt salgsafdelingen"
+  },
+  "Library": {
+    "title": "Bibliotek for opdagelser",
+    "subtitle": "Gennemse over 85 kilder til gratis indhold til dine tosprogede bøger.",
+    "searchPlaceholder": "Søg efter titel, forfatter eller nøgleord...",
+    "badge": "60+ kilder til gratis indhold",
+    "heroTitle": "Bibliotek for opdagelser",
+    "heroSubtitle": "Find håndplukket indhold til dine tosprogede bøger. Hellige tekster, klassisk litteratur og mere, alt sammen med verificeret licens.",
+    "browseLibrary": "Udforsk biblioteket",
+    "commercialSafe": "Sikker til kommerciel brug",
+    "attributionRequired": "Kildeangivelse påkrævet",
+    "categories": {
+      "all": "Alle",
+      "sacred": "Hellig og visdom",
+      "literature": "Litteratur",
+      "visual": "Visuelt og kunst",
+      "knowledge": "Viden og fakta",
+      "news": "Nyheder og medier",
+      "history": "Historie",
+      "language": "Sprogindlæring",
+      "academic": "Akademisk og forskning",
+      "popculture": "Popkultur"
+    },
+    "categoryDescriptions": {
+      "sacred": "Spirituelle tekster fra verdens traditioner",
+      "literature": "Romaner, poesi, teater og folketro",
+      "visual": "Kunst fra museer, NASA-fotos og mere",
+      "news": "Overskrifter, artikler og medier",
+      "history": "Historiske dokumenter og arkiver",
+      "language": "Sætninger, ordforråd og øvelser",
+      "knowledge": "Fakta, citater, opskrifter og geografi",
+      "academic": "Forskning, formel skrivning og prøver",
+      "popculture": "Tegneserier, spil og underholdning"
+    },
+    "licenses": {
+      "all": "Alle licenser",
+      "commercialSafe": "Sikker til kommerciel brug",
+      "attribution": "Kildeangivelse påkrævet",
+      "personalOnly": "Kun til personlig brug",
+      "licenseType": "Licenstype"
+    },
+    "difficulty": {
+      "all": "Alle niveauer",
+      "level": "Niveau",
+      "difficultyLevel": "Sværhedsgrad",
+      "beginner": "Begynder",
+      "intermediate": "Mellemniveau",
+      "expert": "Ekspert"
+    },
+    "tile": {
+      "beginner": "Begynder",
+      "intermediate": "Mellemniveau",
+      "expert": "Ekspert",
+      "studyOnly": "Kun til studie"
+    },
+    "search": {
+      "placeholder": "Søg...",
+      "quickFilters": "Hurtige filtre:",
+      "showing": "Viser",
+      "of": "af",
+      "templates": "skabeloner",
+      "clearAllFilters": "Ryd alle filtre",
+      "noTemplatesFound": "Ingen skabeloner fundet",
+      "tryAdjusting": "Prøv at justere din søgning eller dine filtre."
+    },
+    "quickTags": {
+      "bestsellers": "🏆 Bestsellere",
+      "dailyPractice": "📅 Daglig træning",
+      "quickSessions": "⚡ Hurtige sessioner",
+      "giftIdeas": "🎁 Gaveideer",
+      "posters": "🖼️ Plakater",
+      "flashcards": "📚 Flashcards",
+      "vocabulary": "📖 Ordforråd",
+      "socialMedia": "📱 Sociale medier"
+    },
+    "wizard": {
+      "start": "Start",
+      "back": "Tilbage",
+      "import": "Importer indhold",
+      "cancel": "Annuller",
+      "search": "Søg",
+      "preview": "Forhåndsvisning",
+      "randomize": "Overrask mig!",
+      "loading": "Henter indhold...",
+      "error": "Noget gik galt",
+      "whatYouCanDo": "Hvad du kan gøre",
+      "searchContent": "Søg efter indhold",
+      "pickByReference": "Vælg efter reference",
+      "randomSelection": "Tilfældig udvælgelse",
+      "imagesIncluded": "Inkl. billeder",
+      "audioIncluded": "Inkl. lyd",
+      "selectedChapters": "Valgte kapitler",
+      "fullBook": "Hele bogen",
+      "customRange": "Brugerdefineret interval",
+      "book": "Bog",
+      "startChapter": "Startkapitel",
+      "endChapter": "Slutkapitel"
+    },
+    "license": {
+      "commercialSafeDesc": "Dette indhold er enten i frit eje eller har en kommerciel licens. Du må sælge værker baseret på det.",
+      "attributionDesc": "Kommerciel brug er tilladt, hvis kilden angives korrekt.",
+      "personalOnlyDesc": "Kun til personligt studie. Det er ikke tilladt at sælge værker baseret på dette indhold.",
+      "viewFull": "Se fuld licens →"
+    },
+    "warning": {
+      "title": "Begrænset licens",
+      "personalUseOnly": "Kun til personlig brug",
+      "whyRestricted": "Hvorfor er det begrænset?",
+      "youCan": "Du MÅ bruge det til:",
+      "youCannot": "Du MÅ IKKE:",
+      "personalStudy": "Personligt studie",
+      "languagePractice": "Sprogtræning",
+      "teachingMaterials": "Undervisningsmateriale",
+      "academicResearch": "Akademisk forskning",
+      "sellTranslations": "Sælge oversættelser",
+      "publishEbook": "Udgive som e-bog",
+      "commercialDistribution": "Kommerciel distribution",
+      "monetizeSocial": "Tjene penge på det på sociale medier",
+      "acknowledge": "Jeg forstår, at dette indhold kun er til personligt studie, og at jeg ikke må sælge det.",
+      "chooseAnother": "Vælg en anden kilde",
+      "understand": "Jeg forstår, fortsæt"
+    },
+    "credits": {
+      "title": "Kreditering og kildeangivelse",
+      "intro": "Dette projekt bruger indhold fra følgende kilder:",
+      "generated": "Kreditering genereret af Synoptic den",
+      "attributionRequired": "Kildeangivelse påkrævet"
+    },
+    "cta": {
+      "browseLibrary": "Udforsk biblioteket",
+      "getStartedFree": "Start gratis",
+      "learnMore": "Lær mere",
+      "readyToStart": "Klar til din bog?",
+      "importAndStart": "Importer en kilde og begynd at oversætte i studiet."
+    },
+    "favorites": {
+      "title": "Mine gemte skabeloner",
+      "quickAccess": "Hurtig adgang til dit yndlingsindhold.",
+      "noSaved": "Ingen skabeloner gemt endnu",
+      "noSavedDesc": "Udforsk vores bibliotek og gem dine favoritter for hurtig adgang.",
+      "exploreLibrary": "Udforsk biblioteket",
+      "viewAll": "Se alle {count} gemte skabeloner",
+      "browseAll": "Se alle",
+      "saved": "Gemt",
+      "addToFavorites": "Føj til favoritter",
+      "removeFromFavorites": "Fjern fra favoritter",
+      "readyToCreate": "Klar til at skabe?",
+      "signInToSave": "Log ind for at gemme og oprette.",
+      "startCreating": "Begynd at skabe",
+      "signInAndCreate": "Log ind og opret"
+    }
+  },
+  "Tools": {
+    "aiDraft": {
+      "title": "AI-kladde",
+      "button": "AI-kladde",
+      "original": "Original:",
+      "translation": "Oversættelse:",
+      "translating": "Oversætter...",
+      "tryAgain": "Prøv igen",
+      "copy": "Kopier",
+      "copied": "Kopieret!",
+      "applyToL2": "Anvend på L2",
+      "poweredBy": "Leveret af LibreTranslate"
+    },
+    "grammar": {
+      "title": "Grammatiktjek",
+      "button": "Grammatik",
+      "checking": "Tjekker...",
+      "detected": "Fundet:",
+      "noIssuesFound": "Ingen problemer fundet!",
+      "textLooksGreat": "Din tekst ser fremragende ud.",
+      "issuesFound": "{count} problem(er) fundet",
+      "fixAll": "Ret alt",
+      "tryAgain": "Prøv igen",
+      "poweredBy": "Leveret af LanguageTool"
+    },
+    "definition": {
+      "origin": "Oprindelse",
+      "lookingUp": "Slår op...",
+      "wordNotFound": "Ord ikke fundet",
+      "more": "Mere",
+      "poweredBy": "Free Dictionary API"
+    },
+    "synonyms": {
+      "synonymsFor": "Synonymer for:",
+      "findingSynonyms": "Finder synonymer...",
+      "noSynonymsFound": "Ingen synonymer fundet",
+      "synonyms": "Synonymer",
+      "antonyms": "Antonymer",
+      "related": "Relateret",
+      "selectWordFirst": "Vælg et ord og højreklik",
+      "poweredBy": "Leveret af Datamuse"
+    },
+    "polisher": {
+      "title": "Tekstforbedring",
+      "button": "Forbedr",
+      "polishing": "Forbedrer...",
+      "suggestedImprovements": "Foreslåede forbedringer"
+    },
+    "assetBank": {
+      "title": "Emojibank",
+      "noResults": "Ingen emojis fundet"
+    },
+    "socialShare": {
+      "square": "Kvadrat",
+      "story": "Story",
+      "wide": "Bred"
+    }
+  },
+  "Settings": {
+    "title": "Brugerindstillinger",
+    "displayName": "Visningsnavn",
+    "displayNamePlaceholder": "Dit navn",
+    "interfaceLanguage": "Sproget i brugerfladen",
+    "interfaceLanguageHint": "Indstiller standardsproget for studiet.",
+    "saving": "Gemmer...",
+    "saveSettings": "Gem indstillinger",
+    "cancel": "Annuller"
+  },
+  "Filters": {
+    "license": "Licens",
+    "commercial": "Kommerciel",
+    "attribution": "Kildeangivelse",
+    "personal": "Personlig"
+  },
+  "Errors": {
+    "translationFailed": "Oversættelse mislykkedes",
+    "grammarCheckFailed": "Grammatiktjek mislykkedes",
+    "lookupFailed": "Opslag mislykkedes",
+    "fetchFailed": "Kunne ikke hente indhold",
+    "connectionError": "Forbindelsesfejl. Prøv venligst igen.",
+    "unexpectedError": "Der opstod en uventet fejl"
+  },
+  "Accessibility": {
+    "openMenu": "Åbn menu",
+    "closeMenu": "Luk menu",
+    "loading": "Indlæser",
+    "searchResults": "Søgeresultater",
+    "noResults": "Ingen resultater fundet",
+    "sortBy": "Sorter efter",
+    "filterBy": "Filtrer efter"
   }
 }

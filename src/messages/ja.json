@@ -1,324 +1,1068 @@
 {
-  "Studio": {
-    "title": "Synoptic Studio",
-    "saving": "下書きを保存中...",
-    "saved": "すべての変更をクラウドに保存しました",
-    "ready": "バイリンガルの傑作を作成する準備ができました",
-    "addPage": "新しいページを追加",
-    "pageSettings": "ページ {number} の設定",
-    "enteringStudio": "Studio に入っています...",
-    "failedToLoadProject": "プロジェクトの読み込みに失敗しました",
-    "retryConnection": "接続を再試行",
-    "pageManager": "ページマネージャー",
-    "globalDesign": "グローバルデザイン",
-    "stylePresets": "スタイルプリセット",
-    "editorTools": "エディターツール",
-    "canvasActions": "キャンバスアクション",
-    "drafting": "ドラフト",
-    "chapterStart": "章の開始",
-    "manuscript": "原稿",
-    "chapters": "章",
-    "noChapters": "章が定義されていません",
-    "deletePage": "ページを削除",
-    "resetFactory": "初期設定に戻す",
-    "bilingualEditor": "バイリンガルエディター"
+  "Common": {
+    "save": "保存",
+    "cancel": "キャンセル",
+    "delete": "削除",
+    "copy": "コピー",
+    "duplicate": "複製",
+    "edit": "編集",
+    "loading": "読み込み中...",
+    "error": "エラーが発生しました",
+    "success": "成功",
+    "back": "戻る",
+    "next": "次へ",
+    "backToHome": "ホームに戻る",
+    "on": "オン",
+    "off": "オフ",
+    "pdf": "PDF",
+    "epub": "EPUB",
+    "close": "閉じる",
+    "original": "原文",
+    "translation": "翻訳",
+    "importFailed": "インポートに失敗しました"
+  },
+  "Auth": {
+    "login": "ログイン",
+    "signup": "サインアップ",
+    "logout": "ログアウト",
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "forgotPassword": "パスワードを忘れた場合",
+    "noAccount": "アカウントをお持ちでない方",
+    "hasAccount": "すでにアカウントをお持ちの方",
+    "haveAccount": "すでにアカウントをお持ちの方",
+    "verifyEmail": "メールアドレスを確認",
+    "welcomeBack": "おかえりなさい",
+    "createAccount": "アカウントを作成",
+    "signInDesc": "ログインしてプロジェクトにアクセス。",
+    "signUpDesc": "アカウントを作成して、今日から出版を始めましょう。",
+    "emailPlaceholder": "name@example.com",
+    "passwordPlaceholderLogin": "パスワードを入力してください",
+    "passwordPlaceholderSignup": "強力なパスワードを作成",
+    "failed": "ログインに失敗しました",
+    "errorOccurred": "エラーが発生しました",
+    "signingIn": "ログイン中...",
+    "creatingAccount": "アカウント作成中...",
+    "signIn": "サインイン",
+    "termsPrompt": "続行することで、利用規約とポリシーに同意したものとみなされます。",
+    "continueWithGoogle": "Googleで続行",
+    "orContinueWithEmail": "またはメールアドレスで続行",
+    "passwordStrength": "パスワードの強度",
+    "weak": "弱い",
+    "fair": "普通",
+    "strong": "強い",
+    "oauthError": "Google認証に失敗しました。もう一度お試しください。",
+    "emailNotVerified": "まずGoogleでメールアドレスを確認してください。",
+    "securityNote": "256ビットSSL暗号化 • GDPR準拠",
+    "recentActivity": "最近のアクティビティ",
+    "lastSession": "最後のセッション",
+    "savedSecurely": "安全に保存済み",
+    "cloudSync": "クラウド同期",
+    "active": "アクティブ"
+  },
+  "Dashboard": {
+    "title": "マイプロジェクト",
+    "subtitle": "バイリンガル本の管理と編集。",
+    "newProject": "新規プロジェクト",
+    "noProjects": "プロジェクトが見つかりません。最初のプロジェクトを作成しましょう！",
+    "emptyState": "プロジェクトは見つかりませんでした。",
+    "yourProjects": "あなたのプロジェクト",
+    "settings": "設定",
+    "profile": "プロフィール",
+    "billing": "お支払い",
+    "noDescription": "説明なし",
+    "lastUpdated": "最終更新日",
+    "stats": {
+      "projects": "プロジェクト",
+      "pages": "ページ",
+      "words": "単語"
+    },
+    "projectCard": {
+      "edited": "編集済み",
+      "open": "開く",
+      "delete": "削除",
+      "confirmDelete": "このプロジェクトを削除してもよろしいですか？"
+    }
   },
   "Blocks": {
     "text": "テキストブロック",
     "image": "画像ブロック",
     "separator": "区切り線",
-    "callout": "コールアウト",
+    "callout": "コールアウトボックス",
+    "quiz": "クイズ演習",
     "insertText": "テキストブロックを挿入",
-    "addBlankPage": "空白のページを追加",
+    "addBlankPage": "白紙ページを追加",
     "media": "メディア",
-    "ai": "翻訳 AI",
-    "settings": "Studio 設定",
-    "grammar": "文法ルール",
-    "culture": "文化的洞察",
-    "vocabulary": "語彙のヒント",
-    "tip": "学習のコツ",
-    "warning": "文法警告",
-    "note": "一般的なメモ",
-    "pronunciation": "発音ガイド"
+    "ai": "AI 翻訳",
+    "settings": "スタジオ設定",
+    "grammar": "文法",
+    "culture": "文化",
+    "vocabulary": "語彙",
+    "tip": "ヒント",
+    "warning": "警告",
+    "note": "ノート",
+    "pronunciation": "発音",
+    "workbookExercise": "ワークブック演習",
+    "autoHint": "自動ヒント",
+    "regenerateHint": "ヒントを再生成",
+    "showAnswer": "答えを表示",
+    "hideAnswer": "答えを隠す",
+    "customHint": "カスタムヒント",
+    "difficulty": "難易度",
+    "difficultyEasy": "簡単",
+    "difficultyMedium": "普通",
+    "difficultyHard": "難しい",
+    "emptyImageBlock": "空の画像ブロック"
   },
   "Inspector": {
-    "visibility": "表示設定の上書き",
+    "visibility": "表示設定を上書き",
     "header": "ヘッダー",
+    "headerOverlay": "ヘッダーオーバーレイ",
     "footer": "フッター",
+    "footerOverlay": "フッターオーバーレイ",
     "pageNumber": "ページ番号",
-    "content": "コンテンツの上書き",
+    "content": "内容を上書き",
     "typography": "タイポグラフィ",
     "layout": "レイアウトと戦略",
-    "printingFlow": "印刷とフロー",
+    "printingFlow": "印刷フロー",
     "markChapterStart": "章の開始としてマーク",
-    "forceBlank": "強制的な空白ページ",
-    "pageLocalOnly": "ここでの変更は現在のページのみに影響します。",
+    "forceBlank": "強制的に白紙ページ",
+    "pageLocalOnly": "ここでの変更はこのページにのみ適用されます。",
     "inspectorTitle": "{type} インスペクター",
     "lineHeight": "行の高さ",
     "paraSpacing": "段落の間隔",
     "dimensions": "寸法",
     "width": "幅 (%)",
-    "alignment": "配置",
-    "styleEffects": "スタイルと効果",
+    "alignment": "揃え",
+    "styleEffects": "スタイル効果",
     "shadow": "シャドウ",
-    "borderRadius": "角の丸み",
-    "stylePattern": "スタイルとパターン",
+    "borderRadius": "角丸",
+    "stylePattern": "スタイルパターン",
     "thickness": "太さ",
     "contextType": "コンテキストタイプ",
-    "brandingColor": "ブランディングカラー",
+    "brandingColor": "ブランドカラー",
     "stylePreset": "スタイルプリセット",
     "solidLine": "実線",
     "doubleLine": "二重線",
     "dashedLine": "破線",
     "dottedLine": "点線",
     "gradientFade": "グラデーションフェード",
-    "ornament": "装飾線"
+    "ornament": "オーナメント"
   },
   "Theme": {
     "title": "グローバルデザイン",
     "layout": "グローバルレイアウト",
-    "typography": "タイポグラフィ (グローバル)",
-    "bodyText": "本文テキスト",
-    "headings": "メインの見出し",
+    "typography": "タイポグラフィ（グローバル）",
+    "bodyText": "本文",
+    "headings": "見出し",
     "baseScaling": "基本スケーリング",
-    "fontSize": "本文のフォントサイズ",
-    "lineHeight": "グローバルな行の高さ",
+    "fontSize": "本文フォントサイズ",
+    "lineHeight": "グローバル行高",
     "colorPresets": "カラープリセット",
     "lightMode": "ライトモード",
     "darkMode": "ダークモード"
   },
   "Presets": {
-    "title": "スタイルプリセット",
-    "empty": "ブロックを選択して、そのスタイルを再利用可能なプリセットとして保存します。",
+    "title": "プリセット",
+    "empty": "スタイルを取得するブロックを選択してください。",
     "selected": "選択されたコンテキスト",
-    "canCapture": "この {type} ブロックのスタイリングを保存できます。",
+    "canCapture": "この {type} ブロックのスタイルを保存できます。",
     "saveCurrent": "現在のスタイルを保存",
     "library": "グローバルライブラリ",
     "typeStyle": "{type} スタイル",
-    "synced": "ライブラリを同期しました"
+    "synced": "ライブラリ同期済み"
   },
   "Wizard": {
-    "createTitle": "新しいプロジェクトを作成",
-    "createMasterpiece": "新しい傑作を作成",
+    "createTitle": "新規プロジェクト作成",
+    "createMasterpiece": "新規セキュアプロジェクト",
     "stepInformation": "情報",
     "stepLanguages": "言語",
     "stepFormat": "フォーマット",
     "stepTemplate": "テンプレート",
-    "projectTitle": "プロジェクトタイトル *",
-    "titlePlaceholder": "例：海底二万哩",
+    "projectTitle": "プロジェクト名 *",
+    "titlePlaceholder": "例：羅生門",
     "author": "著者",
-    "authorPlaceholder": "あなたの名前または原作者",
-    "category": "カテゴリ / タグ",
-    "categoryPlaceholder": "例：フィクション、教育",
-    "sourceLang": "原文の言語 (L1)",
-    "targetLang": "翻訳後の言語 (L2)",
-    "langWarning": "警告：バイリンガルプロジェクトでは、原文と翻訳後の言語は異なっている必要があります。",
-    "langTip": "ヒント：ほとんどのユーザーは、学習中の言語を原文に、母国語を翻訳後の言語に選択します。",
-    "dimensions": "物理的な寸法 (mm)",
-    "custom": "カスタム設定",
+    "authorPlaceholder": "お名前",
+    "category": "カテゴリー / タグ",
+    "categoryPlaceholder": "例：古典、小説",
+    "sourceLang": "原文言語 (L1)",
+    "targetLang": "学習言語 (L2)",
+    "langWarning": "注意：原文と言語は異なる必要があります。",
+    "langTip": "ヒント：多くのユーザーは母国語を L2 に設定します。",
+    "dimensions": "実際の寸法 (mm)",
+    "custom": "カスタム",
     "layoutStyle": "レイアウトスタイル",
     "back": "戻る",
     "next": "次へ",
-    "creating": "Studio を作成中...",
-    "launch": "Studio を起動",
-    "blankTemplate": "白紙から開始",
-    "blankDesc": "コンテンツなし、クリーンな状態",
-    "classicTemplate": "クラシック左右対称",
-    "classicDesc": "バランスの取れたカラム、セリフ体",
-    "poetryTemplate": "詩 / 韻文",
-    "poetryDesc": "番号付きの行、中央配置",
+    "creating": "スタジオを準備中...",
+    "launch": "ラボを起動",
+    "secureNote": "安全で暗号化されたワークスペース",
+    "blankTemplate": "完全な白紙ページ",
+    "blankDesc": "あなたのデザインのためのキャンバス",
+    "classicTemplate": "クラシック・サイドバイサイド",
+    "classicDesc": "密度の高い散文に最適化",
+    "poetryTemplate": "詩歌 / 韻文",
+    "poetryDesc": "詩や歌詞に最適化（モダン）",
+    "academicTemplate": "言語学研究",
+    "academicDesc": "広い余白、フッター注釈",
     "width": "幅 (mm)",
     "height": "高さ (mm)",
-    "upgradeToCreateMore": "アップグレードしてさらに作成",
+    "upgradeToCreateMore": "さらに作成するにはアップグレード",
     "reachedFreeLimit": "無料枠の上限に達しました",
-    "freeLimitDesc": "無料アカウントは 1 つのアクティブなプロジェクトに制限されています。Pro にアップグレードして、無制限のプロジェクトと高度な AI 機能を解放しましょう。",
-    "upgradeToPro": "Pro にアップグレード",
+    "freeLimitDesc": "無料アカウントはアクティブなプロジェクトが1つに制限されています。Proにアップグレードして無制限に作成しましょう。",
+    "upgradeToPro": "Proにアップグレード",
     "maybeLater": "後で",
     "usTrade": "US Trade Paper",
     "digest": "Digest",
     "intlStandard": "国際標準"
   },
-  "Common": {
-    "delete": "削除",
-    "copy": "コピー",
-    "duplicate": "複製",
-    "save": "保存",
-    "cancel": "キャンセル",
-    "on": "オン",
-    "off": "オフ",
-    "backToHome": "ホームに戻る"
+  "Studio": {
+    "title": "Synoptic Studio",
+    "collaborate": "共同編集",
+    "export": "書き出し",
+    "preview": "プレビュー",
+    "saving": "下書きを保存中...",
+    "saved": "すべての変更がクラウドに保存されました",
+    "ready": "バイリンガル出版の準備完了",
+    "addPage": "ページ追加",
+    "pageSettings": "ページ {number} 設定",
+    "enteringStudio": "スタジオに入ります...",
+    "failedToLoadProject": "プロジェクトの読み込みに失敗しました",
+    "retryConnection": "接続を再試行",
+    "pageManager": "ページ管理",
+    "globalDesign": "グローバルデザイン",
+    "stylePresets": "スタイルプリセット",
+    "editorTools": "エディタツール",
+    "canvasActions": "キャンバス操作",
+    "drafting": "ドラフト中",
+    "chapterStart": "章の開始",
+    "manuscript": "原稿",
+    "chapters": "章",
+    "noChapters": "章が定義されていません",
+    "deletePage": "ページ削除",
+    "resetFactory": "初期設定に戻す",
+    "bilingualEditor": "バイリンガルエディタ",
+    "bookStructure": "本の構成",
+    "publishingPipeline": "出版パイプライン",
+    "frontMatter": "前付（Front Matter）",
+    "backMatter": "後付（Back Matter）",
+    "titlePage": "扉（Title Page）",
+    "copyrightPage": "コピーライトページ",
+    "dedicationPage": "献辞",
+    "tableOfContents": "目次",
+    "glossary": "用語集",
+    "aboutAuthor": "著者紹介",
+    "endNotes": "後注",
+    "autoGlossaryActive": "自動用語集が有効",
+    "refreshGlossary": "用語集を更新",
+    "glossaryEntries": "{count} 件のエントリがコンパイルされました",
+    "romanNumeralsInfo": "前付はローマ数字（i, ii, iii）、本文はアラビア数字（1, 2, 3）を使用します。",
+    "playAudio": "読み上げ",
+    "stopAudio": "停止",
+    "normalSpeed": "通常速度",
+    "slowMode": "スローモード (0.7x)",
+    "audioSettings": "音声設定",
+    "grammarPainter": "文法ペインター",
+    "exitPaintMode": "ペイントモード終了",
+    "subject": "主語",
+    "verb": "動詞",
+    "object": "目的語",
+    "adjective": "形容詞",
+    "adverb": "副詞",
+    "paintTip": "単語をクリックして文法カラーを割り当てます",
+    "clearAllColors": "すべての色をクリア",
+    "syntaxArrows": "構文矢印",
+    "addArrow": "矢印を追加",
+    "deleteArrow": "矢印を削除",
+    "arrowStyle": "矢印スタイル",
+    "curved": "曲線",
+    "angular": "角度",
+    "straight": "直線",
+    "arrowDrawer": "構文リンカー",
+    "selectSource": "ソース単語を選択",
+    "selectTarget": "ターゲット単語を選択",
+    "arrowCreated": "リンクを作成しました",
+    "cancelLink": "キャンセル"
   },
-  "Dashboard": {
-    "title": "プロジェクト",
-    "subtitle": "バイリンガル書籍の管理と編集。",
-    "emptyState": "まだプロジェクトが作成されていません。",
-    "noDescription": "説明がありません。",
-    "lastUpdated": "最終更新"
-  },
-  "Auth": {
-    "login": "ログイン",
-    "signup": "サインアップ",
-    "welcomeBack": "おかえりなさい",
-    "createAccount": "アカウントを作成",
-    "signInDesc": "Synoptic アカウントにサインイン",
-    "signUpDesc": "今日からバイリンガルブックの作成を始めましょう",
-    "email": "メールアドレス",
-    "password": "パスワード",
-    "emailPlaceholder": "name@example.com",
-    "passwordPlaceholderLogin": "パスワードを入力",
-    "passwordPlaceholderSignup": "パスワードを作成",
-    "signIn": "サインイン",
-    "signingIn": "サインインしています...",
-    "creatingAccount": "アカウントを作成しています...",
-    "noAccount": "アカウントをお持ちでないですか？",
-    "hasAccount": "既にアカウントをお持ちですか？",
-    "termsPrompt": "続行することで、Synoptic の利用規約とプライバシーポリシーに同意したことになります。",
-    "failed": "認証に失敗しました",
-    "errorOccurred": "不具合が発生しました"
-  },
-  "Marketing": {
-    "nav": {
-      "features": "特徴",
-      "pricing": "料金",
-      "library": "ライブラリ",
-      "logIn": "ログイン",
-      "joinNow": "今すぐ参加",
-      "templates": "テンプレート",
-      "product": "製品",
-      "company": "会社情報",
-      "about": "Synoptic について",
-      "privacy": "プライバシー",
-      "terms": "利用規約"
+  "Editor": {
+    "toolbar": {
+      "bold": "太字",
+      "italic": "斜体",
+      "underline": "下線",
+      "strikeThrough": "打ち消し線",
+      "alignLeft": "左揃え",
+      "alignCenter": "中央揃え",
+      "alignRight": "右揃え",
+      "justify": "両端揃え",
+      "left": "左",
+      "center": "中央",
+      "right": "右",
+      "link": "リンク",
+      "addBlock": "ブロック追加",
+      "export": "書き出し",
+      "ai": "AI アシスタント"
     },
-    "hero": {
-      "badge": "Synoptic v1.0 プライベートベータ",
-      "title": "<span>究極の</span> <br /> バイリンガル Studio",
-      "subtitle": "AI アシストによる組版、リアルタイムのクラウド同期、ワンクリックでの KDP 出版により、プロフェッショナルな見開き本を作成できます。",
-      "ctaPrimary": "無料で執筆を始める",
-      "ctaSecondary": "ライブラリを探索",
-      "aiSuggestion": "AI の提案"
+    "sidebar": {
+      "pages": "ページ",
+      "style": "スタイル",
+      "inspector": "インスペクター",
+      "chat": "AI チャット"
     },
-    "footer": {
-      "tagline": "著者、語学学習者、出版社のためのプロフェッショナルなバイリンガル出版プラットフォーム。旧金山で設計、世界のために構築。",
-      "copyright": "© 2025 Synoptic Studio. All rights reserved."
+    "inspector": {
+      "layout": "レイアウト",
+      "spacing": "間隔",
+      "typography": "タイポグラフィ",
+      "colors": "カラー",
+      "border": "ボーダー",
+      "shadow": "シャドウ",
+      "actions": "アクション",
+      "labels": {
+        "color": "文字色",
+        "backgroundColor": "背景色",
+        "fontSize": "サイズ",
+        "lineHeight": "行高",
+        "letterSpacing": "字間",
+        "margin": "外余白",
+        "padding": "内余白",
+        "width": "幅",
+        "alignment": "揃え",
+        "fontFamily": "フォント家族"
+      }
+    },
+    "messages": {
+      "saved": "プロジェクトを保存しました",
+      "error": "プロジェクトの保存に失敗しました"
+    },
+    "onboarding": {
+      "welcome": "エディタへようこそ",
+      "step1": "これがあなたのキャンバスです。左右どちらかに入力して開始してください。",
+      "step2": "ツールバーを使用してテキストをフォーマットします。",
+      "step3": "書き出しをクリックして本をダウンロードします。"
+    },
+    "blocks": {
+      "text": "テキスト段落",
+      "image": "画像",
+      "separator": "セパレーター",
+      "callout": "コールアウト",
+      "verse": "詩歌 / 韻文"
     }
   },
-  "Features": {
-    "title": "クリエイターのために構築",
-    "subtitle": "出版社向けのインフラを Studio でシンプルに提供します。",
-    "aiTypesetter": {
-      "title": "AI タイプセッター",
-      "desc": "25 以上の言語間で文のペアを自動的に整列させ、文の長さが異なる場合でも完璧な対称性を保証します。"
-    },
-    "cloudSync": {
-      "title": "クラウド同期エンジン",
-      "desc": "入力と同時に作業が即座に保存されます。永続的で無限の履歴により、どのデバイスからでもスタジオにアクセスできます。"
-    },
-    "pdfExport": {
-      "title": "印刷用 PDF",
-      "desc": "Puppeteer エンジンによる高解像度エクスポート。Amazon KDP、IngramSpark、地域の印刷所に最適です。"
-    },
-    "epubSupport": {
-      "title": "EPUB 3.0 サポート",
-      "desc": "Kindle や Apple Books に最適化された、ネイティブなバイリンガル交互モードを備えたリフロー可能な電子書籍を生成します。"
-    },
-    "deepAnnotation": {
-      "title": "ディープアノテーション",
-      "desc": "AI を活用した言語的洞察。単語のグループ化、関係を示す矢印、コンテキストに応じた説明を指先一つで利用できます。"
-    },
-    "marketplace": {
-      "title": "グローバルマーケットプレイス",
-      "desc": "カスタムブックテンプレートを共有して販売したり、厳選されたプロフェッショナルなバイリンガルデザインのライブラリを閲覧したりできます。"
-    }
+  "Models": {
+    "parallel": "パラレルカラム",
+    "interlinear": "インターリニア",
+    "bilingual": "バイリンガル見開き",
+    "modern": "現代ミニマリズム"
   },
   "Pricing": {
-    "title": "シンプルで公平な料金体系",
-    "subtitle": "出版の目標に合ったプランを選択してください。",
+    "title": "シンプルで透明な価格設定",
+    "subtitle": "あなたの出版の目標に合わせたプランをお選びください。",
     "mostPopular": "最も人気",
     "month": "/月",
-    "pageTitle": "本に投資しましょう。",
-    "pageSubtitle": "家族の回想録の翻訳から、商業シリーズの出版まで、最適なツールをご用意しています。",
+    "pageTitle": "あなたの一冊への投資。",
+    "pageSubtitle": "家族の回想録の翻訳でも、商用シリーズの出版でも、最適なツールをご用意しています。",
     "nonProfitTitle": "非営利団体または教育関係者ですか？",
-    "nonProfitDesc": "教育機関や非営利団体向けに特別割引を提供しています。カスタム見積もりについては、チームまでお問い合わせください。",
+    "nonProfitDesc": "教育機関や非営利の翻訳活動には特別割引を提供しています。チームにお問い合わせください。",
     "contactSupport": "サポートに連絡",
     "free": {
       "name": "無料",
-      "desc": "Studio のテストに最適です。",
+      "price": "¥0",
+      "desc": "エンジンのテストに最適。",
+      "description": "エンジンのテストに最適。",
       "button": "無料で開始"
     },
     "pro": {
       "name": "Pro",
-      "desc": "本格的な著者やポリグロットの方に。",
-      "button": "Pro に参加"
+      "price": "¥1,500",
+      "desc": "個人著者および学習者向け。",
+      "description": "個人著者および学習者向け。",
+      "button": "Proに参加"
     },
     "publisher": {
-      "name": "パブリッシャー",
-      "desc": "プロの出版社の方に。",
-      "button": "パブリッシャーに変更"
+      "name": "出版社",
+      "price": "¥7,500",
+      "desc": "大量生産向け。",
+      "description": "大量生産向け。",
+      "button": "パブリッシャーに切り替え"
     },
     "featuresList": {
-      "activeProject": "1 つのアクティブなプロジェクト",
+      "activeProject": "アクティブプロジェクト1件",
       "standardLayout": "標準レイアウトエンジン",
       "manualTranslation": "手動翻訳",
-      "lowDpiPdf": "低 DPI PDF エクスポート",
-      "watermarked": "透かし入り出版",
+      "lowDpiPdf": "低解像度PDF書き出し",
+      "watermarked": "透かし入り出力",
       "unlimitedProjects": "無制限のプロジェクト",
-      "aiAssistedLayout": "AI アシストによるレイアウト",
-      "aiWordsMonth": "月間 5万 AI ワード",
-      "highDpiPdf": "300 DPI エクスポート (印刷用)",
-      "epubMobi": "EPUB & MOBI エクスポート",
+      "aiAssistedLayout": "AI支援レイアウト",
+      "aiWordsMonth": "月間 50,000 AI語",
+      "highDpiPdf": "300 DPI 書き出し（印刷対応）",
+      "epubMobi": "EPUB & MOBI 書き出し",
       "removeWatermarks": "透かしを削除",
       "priorityHistory": "優先クラウド履歴",
-      "everythingPro": "Pro のすべての機能",
-      "unlimitedAi": "無制限の AI クレジット",
-      "teamCollab": "チームコラボレーション",
-      "brandCustom": "ブランドのカスタマイズ",
+      "flashcards": "動的フラッシュカード生成",
+      "tts": "テキスト読み上げナレーション",
+      "everythingPro": "Proの全機能を含む",
+      "bigAiLimit": "月間 500,000 AI語",
+      "unlimitedAi": "無制限のAIクレジット",
+      "teamCollab": "チーム共同編集",
+      "brandCustom": "ブランドカスタマイズ",
       "fontUpload": "カスタムフォントのアップロード",
-      "apiAccess": "API アクセス (近日公開)"
+      "apiAccess": "APIアクセス（近日公開）",
+      "ttsPremium": "プレミアム・ニューラルボイス",
+      "limitedAi": "制限付きAI機能"
+    },
+    "features": {
+      "unlimited": "無制限のプロジェクト",
+      "highDpi": "高解像度 300 DPI 書き出し",
+      "noWatermark": "透かしの削除",
+      "aiUnits": "AI インテリジェンス・ユニット",
+      "customFonts": "フォントのアップロード"
+    },
+    "cta": "プランを選択",
+    "monthly": "月払い",
+    "yearly": "年払い",
+    "popular": "最も人気"
+  },
+  "Landing": {
+    "hero": {
+      "title": "バイリンガル出版エンジン",
+      "subtitle": "テキスト原稿を、CSSで完璧にデザインされたバイリンガル本へ。InDesign不要。同期のズレもありません。Grid-Lockアーキテクチャが正確な配置を保証します。",
+      "cta": "無料で出版を始める"
+    },
+    "features": {
+      "title": "Grid-Lockアーキテクチャの上に構築",
+      "items": {
+        "layout": "Grid-Lockアーキテクチャ",
+        "export": "ネイティブ PDF/X",
+        "sync": "クラウド同期",
+        "ai": "言語 AI",
+        "validation": "300 DPI 検証"
+      }
+    }
+  },
+  "Marketing": {
+    "nav": {
+      "toLearn": "言語学習向け",
+      "toPublish": "プロの出版向け",
+      "features": "機能",
+      "pricing": "価格",
+      "library": "ライブラリ",
+      "logIn": "ログイン",
+      "joinNow": "今すぐ参加",
+      "templates": "テンプレート",
+      "product": "スタジオ",
+      "company": "会社",
+      "about": "Synopticについて",
+      "privacy": "プライバシー",
+      "terms": "規約"
+    },
+    "hero": {
+      "badge": "Synoptic v1.0 プライベートベータ",
+      "title": "<span>究極の</span> <br /> バイリンガル Studio",
+      "subtitle": "テキスト原稿を、**CSSで完璧に** デザインされたバイリンガル本へ。InDesign不要。ズレもありません。",
+      "subtitleShort": "バイリンガル出版エンジン",
+      "featuresLine": "Grid-Lockアーキテクチャ • ネイティブ PDF/X • 300 DPI 検証",
+      "ctaPrimary": "無料で出版を始める",
+      "ctaSecondary": "ライブラリを探索",
+      "aiSuggestion": "AI 提案",
+      "aiTranslation": "AI 駆動の翻訳",
+      "pauseRotation": "言語の回転を停止",
+      "resumeRotation": "言語の回転を再開",
+      "studioTitle": "ヒーロータイトル — Synoptic Studio",
+      "titlePlain": "レイアウトの苦労はもう終わり。ワンクリックでプロフェッショナルな対称性を手に入れましょう。",
+      "neuralEngine": "言語インテリジェンス",
+      "activeLayer": "アクティブレイヤー",
+      "typographyAssistant": "タイポグラフィ・アシスタント",
+      "syncingLocales": "{count} 個のローカル設定を同期中",
+      "syncing": "同期中...",
+      "readyStudio": "準備完了 — Synoptic Studio v1.2",
+      "canvasA": "キャンバス A",
+      "canvasB": "キャンバス B",
+      "output": "出力",
+      "livePreview": "ライブプレビュー",
+      "origin": "ソース"
+    },
+    "footer": {
+      "tagline": "著者、学習者、そして世界の出版社向けのプロフェッショナルなバイリンガル Studio。境界を超えた明快さを。",
+      "copyright": "© 2025 Synoptic Studio. All rights reserved."
+    },
+    "carbon": {
+      "label": "持続可能性",
+      "calculating": "計算中...",
+      "cleanerThan": "ウェブサイトの {percentage}% よりクリーン",
+      "co2": "{amount}g CO2",
+      "ecoFriendly": "エコフレンドリー",
+      "measure": "影響を測定"
+    }
+  },
+  "Features": {
+    "title": "あらゆる規模に対応",
+    "subtitle": "個人の **フラッシュカード** や **学習シート** から、成長するニッチ市場でのプロの書籍出版まで。",
+    "ctaLearn": "言語をマスターする方法を学ぶ",
+    "ctaPublish": "プロの出版を探索",
+    "aiInsights": "AI インサイト",
+    "learn": {
+      "title": "学習者向け",
+      "subtitle": "独学のための究極のツール。",
+      "items": {
+        "flashcards": {
+          "title": "動的フラッシュカード",
+          "desc": "読んでいる文章から自動的にフラッシュカードを生成。"
+        },
+        "annotations": {
+          "title": "文献学的注釈",
+          "desc": "AI 駆動の逐語分析で、文法やニュアンスを深く掘り下げる。"
+        },
+        "immersion": {
+          "title": "対称的な没入感",
+          "desc": "サイドバイサイドの配置により、脳が自然に言語をマッピング。文脈を見失いません。"
+        }
+      }
+    },
+    "publish": {
+      "title": "出版社向け",
+      "subtitle": "バイリンガル版のための工業グレードの組版。",
+      "items": {
+        "typesetting": {
+          "title": "Grid-Lockアーキテクチャ",
+          "desc": "単なる「推測」での配置ではありません。厳密な CSS Grid レンダリングエンジンを使用し、ソースとターゲットの段落を数学的に固定して同期のズレを防ぎます。"
+        },
+        "multiformat": {
+          "title": "ネイティブ PDF/X & EPUB 3.0",
+          "desc": "正確なノド側の余白を持つ左右のページレイアウトを生成。Kindle や Apple Books 用に正しいメタデータを含む有効な EPUB 3.0 を書き出します。"
+        },
+        "distribution": {
+          "title": "検証と品質",
+          "desc": "sRGB カラープロファイルを持つ 300 DPI 出力により、KDP アップロード時のプリフライトチェック通過を保証。無料版では透かしが入ります。"
+        }
+      }
+    },
+    "aiTypesetter": {
+      "title": "AI 組版",
+      "desc": "25以上の言語で文章のペアを自動調整し、文章の長さが異なる場合でも完璧な対称性を確保します。"
+    },
+    "cloudSync": {
+      "title": "クラウド同期エンジン",
+      "desc": "書いた瞬間に保存されます。どのデバイスからでもスタジオにアクセスでき、無制限の取り消し履歴が残ります。"
+    },
+    "pdfExport": {
+      "title": "印刷対応 PDF",
+      "desc": "Puppeteer エンジンによる高解像度書き出し。Amazon KDP、IngramSpark、地元の印刷所に最適です。"
+    },
+    "epubSupport": {
+      "title": "EPUB 3.0 サポート",
+      "desc": "Kindle や Apple Books に最適化された、ネイティブなバイリンガル切り替えモードを持つリフラワブルな電子書を作成。"
+    },
+    "deepAnnotation": {
+      "title": "深い注釈",
+      "desc": "AI による言語学的洞察を提供。単語のグルーピング、関係矢印、文脈説明がすぐに利用できます。"
+    },
+    "marketplace": {
+      "title": "グローバルマーケットプレイス",
+      "desc": "独自の書籍テンプレートを共有・販売したり、厳選されたプロフェッショナルなバイリンガルデザインを閲覧したりできます。"
+    }
+  },
+  "PricingPage": {
+    "title": "ストレージではなく、インテリジェンスに支払う",
+    "subtitle": "プロジェクト数は無制限。AI機能を使用する際にのみクレジットを消費します。",
+    "yearly": "年払いで20%お得",
+    "tiers": {
+      "free": "ベーシック",
+      "pro": "個人の著者や学習者向けの標準的な構成。",
+      "publisher": "大量生産やプロの出版社向けに設計。"
+    },
+    "unitCalculator": {
+      "title": "1 AI ユニット = 1 インテリジェント・アクション",
+      "desc": "クレジットはブロック単位のインタラクションに基づいて差し引かれます：",
+      "p1": "段落を翻訳する？ **1 ユニット。**",
+      "p2": "文法ノートを生成する？ **1 ユニット。**",
+      "fairUse": "フェアユースポリシー：書き出し（PDF/EPUB）は **常に無料** です。自分の作品のダウンロードに料金がかかることはありません。"
     }
   },
   "Export": {
-    "publishingPipeline": "パブリッシング・パイプライン",
-    "pdfManuscript": "印刷用 PDF",
-    "epubEbook": "電子書籍 (EPUB 3.0)",
+    "publishingPipeline": "出版パイプライン",
+    "pdfManuscript": "印刷用 PDF 原稿",
+    "epubEbook": "電子書籍（EPUB 3.0）",
     "generate": "生成",
+    "generating": "生成中...",
     "quality": "品質",
-    "bleed": "塗り足し",
-    "preFlightTitle": "プリフライト整合性チェック",
-    "symmetryCheck": "バイリンガルの対称性が確認されました",
-    "largeDocWarning": "大きなドキュメントのレンダリングには最大 30 秒かかる場合があります。",
+    "bleed": "塗り足し（Bleed）",
+    "preFlightTitle": "自動保全システム",
+    "symmetryCheck": "Grid-Lock 対称性が有効",
+    "largeDocWarning": "大きなドキュメントのレンダリングには最大30秒かかる場合があります。",
     "upgradeToPro": "Pro にアップグレード",
-    "watermarkPolicy": "透かしを削除し、高 DPI 印刷を解放し、月間 50,000 AI ワードを入手しましょう。",
+    "watermarkPolicy": "透かしを削除し、高 DPI 印刷をアンロックして、月間 50,000 AI 語を利用可能にします。",
     "viewPlans": "プランを表示",
-    "proQuality": "Pro 品質 (下書き)",
-    "freeWarning": "無料枠では、このエクスポートに透かしが適用されます。",
-    "pdfDesc": "300 DPI の Puppeteer エンジンによる高忠実度エクスポート。Amazon KDP に最適化されています。",
-    "epubDesc": "リフロー可能なバイリンガルテキストレイアウト。Kindle および Apple Books に最適化されています。",
-    "qualityPrint": "印刷",
-    "qualityWeb": "Web",
-    "qualityDraft": "下書き"
+    "proQuality": "Pro 品質 (ドラフト)",
+    "freeWarning": "無料プランでは、書き出しに透かしが入ります。",
+    "pdfDesc": "300 DPI Puppeteer エンジンによる高品質書き出し。Amazon KDP に最適化されています。",
+    "epubDesc": "バイリンガル対応リフラワブルレイアウト。Kindle や Apple Books に最適化されています。",
+    "qualityPrint": "印刷用",
+    "qualityWeb": "ウェブ用",
+    "qualityDraft": "ドラフト",
+    "pdfError": "PDF 書き出しに失敗しました",
+    "pdfErrorDesc": "書き出しに失敗しました。印刷エンジンへの接続を確認してください。",
+    "epubError": "EPUB 書き出しに失敗しました",
+    "epubErrorDesc": "EPUB の生成に失敗しました。",
+    "chapter": "章",
+    "engineLabel": "バイリンガル出版エンジン",
+    "studyDeck": "学習用デッキ (Anki/CSV)",
+    "deckDesc": "AI で生成した文法ノートやハイライトした語彙を Anki、Quizlet、Excel に書き出します。",
+    "noCardsFound": "フラッシュカードが見つかりません。まず 'AI 注釈' ツールを使用して作成してください！",
+    "systemStatus": "システムステータス",
+    "gridLock": "Grid-Lockアーキテクチャ",
+    "engineActive": "エンジン稼働中",
+    "waitingContent": "コンテンツ待機中...",
+    "mirrorGutter": "ミラー・ガーター・ロジック",
+    "profileLoaded": "プロファイル読み込み済み",
+    "audiobookEngine": "ニューラル・オーディオブック",
+    "audiobookDesc": "Microsoft Neural TTS を使用して、スタジオ品質のオーディオブックを生成。ファイルは章ごとに整理され、ZIP で書き出されます。",
+    "voicePersona": "ナレーター",
+    "selectVoice": "声を選択...",
+    "renderingChapter": "章 {chapter} を合成中...",
+    "exportAudioZip": "音声を書き出し (ZIP)",
+    "neuralEngine": "Microsoft Neural TTS エンジン",
+    "noAudioContent": "音声生成用のテキストが見つかりません。まずテキストブロックを追加してください！",
+    "audioExportError": "音声の書き出しに失敗しました。接続を確認して再試行してください。",
+    "socialShare": "SNS 共有",
+    "socialShareDesc": "バイリンガルの引用を、Instagram、Twitter、Pinterest 用の美しい画像として書き出します。",
+    "socialFormat": "フォーマット",
+    "squareFormat": "正方形 (Instagram)",
+    "storyFormat": "ストーリー (1080×1920)",
+    "twitterFormat": "Twitter カード",
+    "pinterestFormat": "Pinterest ピン",
+    "exportImage": "画像を書き出し",
+    "includeBranding": "Synoptic のブランディングを含める",
+    "selectBlock": "書き出すテキストブロックを選択してください"
   },
   "Onboarding": {
-    "tourDashboardContent": "Synoptic へようこそ！ここがプロジェクトのハブです。",
-    "tourNewProjectContent": "最初のバイリンガルの傑作を作成するには、ここから始めてください。",
-    "tourLibraryContent": "パブリックドメインライブラリから古典的なテキストをインポートします。",
-    "tourPageListContent": "ここで本のページを移動できます。",
-    "tourToolsContent": "テキストブロック、画像、AI を活用したアノテーションを追加します。",
-    "tourPublishContent": "印刷の準備はできましたか？数秒で PDF または EPUB にエクスポートできます。",
-    "tourWorkspaceContent": "これがあなたのキャンバスです。左側の列がソース、右側が翻訳です。"
+    "tourDashboardContent": "Synoptic へようこそ！ここがあなたのプロジェクトの中心地です。",
+    "tourNewProjectContent": "ここから、最初のバイリンガル傑作の作成を始めましょう。",
+    "tourLibraryContent": "パブリックドメインのライブラリから古典テキストをインポートできます。",
+    "tourPageListContent": "ここから本のページをナビゲートします。",
+    "tourToolsContent": "テキストブロック、画像、AI 駆動の注釈を追加します。",
+    "tourPublishContent": "印刷の準備ができたら、数秒で PDF または EPUB に書き出せます。",
+    "tourWorkspaceContent": "これがあなたのキャンバスです。左側が原文、右側が翻訳です。"
   },
   "CommandPalette": {
+    "esc": "Esc",
     "placeholder": "コマンドを入力または検索...",
     "noResults": "結果が見つかりません。",
     "actions": "アクション",
     "addText": "テキストブロックを追加",
-    "undo": "アクションを元に戻す",
-    "redo": "アクションをやり直す",
-    "deleteBlock": "選択中のブロックを削除",
-    "exportPdf": "PDF にエクスポート",
+    "undo": "元に戻す",
+    "redo": "やり直し",
+    "deleteBlock": "選択したブロックを削除",
+    "exportPdf": "PDFに書き出し",
     "select": "選択",
-    "navigate": "移動",
+    "navigate": "ナビゲート",
     "paletteTitle": "Synoptic コマンドパレット",
     "commandMenu": "コマンドメニュー"
+  },
+  "AboutPage": {
+    "title": "翻訳の未来",
+    "subtitle": "Synoptic は、世界は狭くなっているのに、本はまだ単一言語のままであるという単純な気づきから生まれました。私たちは、バイリンガル出版の芸術（と科学）に特化した最初のクラウドネイティブなスタジオを構築しました。",
+    "sovereignTitle": "学習不使用の保証",
+    "sovereignDesc": "多くの AI ツールは、あなたのデータを独自のものだと主張します。私たちは何も要求しません。あなたの原稿がグローバルな AI の学習に使われることはありません。それはあなたのプライベートな保管庫にあります。",
+    "soulTitle": "ステートレスな処理",
+    "soulDesc": "ステートレス・アーキテクチャ（NextResponse）を使用しています。翻訳が返されると、推論エージェントは終了します。メモリバッファは即座に消去されます。",
+    "values": "私たちの価値観",
+    "privacyTitle": "プライバシー第一",
+    "privacyDesc": "原稿はあなたのものです。安全で隔離されたインフラを使用し、あなたの知的財産があなたの管理下から離れることがないようにしています。",
+    "perfTitle": "ハイパフォーマンス",
+    "perfDesc": "モダンなウェブのために構築されました。リアルタイムのクラウド同期からプロフェッショナルな 300 DPI PDF 書き出しまで、Synoptic のすべてのインタラクションは速度のために設計されています。",
+    "communityTitle": "コミュニティのために",
+    "communityDesc": "著者、多言語使用者、教育者のコミュニティからのフィードバックに基づいて、常に進化し続けています。",
+    "cta": "革命に参加する"
+  },
+  "PrivacyPage": {
+    "title": "Synoptic プライバシー",
+    "subtitle": "私たちは、原稿があなたの魂であることを理解しています。私たちのプライバシーポリシーは、一つの目標、つまりあなたの知的財産を保護するために設計されています。",
+    "philosophyTitle": "プライバシーの理念",
+    "philosophyDesc": "Synoptic は「知識の主権」という原則の上に構築されています。私たちは、原稿は私有財産であると信じています。私たちは厳密に必要なものだけを収集します。",
+    "collectTitle": "収集する情報",
+    "collectDesc": "ログインのためのアカウントデータ（メール、名前）、プロジェクトのメタデータ（タイトル、構成）、および処理のみを目的としたユーザーコンテンツ（テキストファイル）を収集します。",
+    "collectItems": [
+      "アカウントデータ：請求用の名前とメールアドレス。",
+      "プロジェクトのメタデータ：ライブラリの状態を維持するため。",
+      "ユーザーコンテンツ：暗号化され、隔離されています。"
+    ],
+    "aiProcessingTitle": "AI 処理とデータの隔離",
+    "aiProcessingDesc": "私たちは一般的な AI ツールとは異なります。あなたの原稿が当社のグローバル AI モデルの学習に使用されることはありません。専任の隔離されたエージェントを使用し、タスク終了後に終了させます。",
+    "securityTitle": "データストレージとセキュリティ",
+    "securityDesc": "すべてのデータは、転送中 (TLS/SSL) および保管中に暗号化されます。いつでもプロジェクトを削除して、当社のサーバーから永久に削除できます。",
+    "sharingTitle": "第三者との共有",
+    "sharingDesc": "私たちはあなたのデータを販売しません。Stripe (決済) や AWS/DigitalOcean (インフラ) などの基幹ベンダーとのみ共有します。",
+    "contactTitle": "お問い合わせ",
+    "contactDesc": "プライバシーに関する懸念については、privacy@getsynoptic.com までご連絡ください。",
+    "lastUpdated": "最終更新：2025年12月"
+  },
+  "TermsPage": {
+    "title": "利用規約",
+    "subtitle": "明確なルール。あなたの作品はあなたのもの。ツールは私たちのもの。",
+    "introTitle": "1. はじめに",
+    "introDesc": "Synoptic へようこそ。当社のクラウドスタジオおよびバイリンガル組版エンジンを使用することで、これらの規約に同意したものとみなされます。最終更新：2025年12月。",
+    "ipTitle": "2. 知的財産と内容の所有権",
+    "ipDesc": "私たちは「ツール」と「創作物」を明確に区別しています。",
+    "ipItems": [
+      "あなたの主権：原稿、翻訳、および書き出しファイルの 100% の所有権を保持します。",
+      "私たちのテクノロジー：インターフェース、組版エンジン v4.0、およびコードは Synoptic に帰属します。"
+    ],
+    "obligationsTitle": "3. ユーザーの義務",
+    "obligationsDesc": "当社のエンジンをリバースエンジニアリングしたり、自動スクリプトを使用してライブラリをスクレイピングしたりしないことに厳格に同意するものとします。",
+    "paymentTitle": "4. サブスクリプションと AI ユニット",
+    "paymentDesc": "プランは月単位で請求されます。AI ユニットは、「インテリジェント・アクション」（例：1段落の翻訳 = 1ユニット）ごとに消費されます。特に明記されていない限り、未使用のユニットは翌月に繰り越されません。",
+    "publishingTitle": "5. 出版に関する免責事項",
+    "publishingDesc": "当社の機能は KDP 向けに最適化されていますが、第三者プラットフォームによる受理を保証するものではありません。最終的な校正はあなたの責任です。",
+    "terminationTitle": "6. 契約終了",
+    "terminationDesc": "フェアユースポリシーに違反した場合や、不正使用があったプロジェクトのアカウントを停止する権利を留保します。"
+  },
+  "ModelsPage": {
+    "title": "構成ライブラリ",
+    "subtitle": "すべての物語には独自のアーキテクチャが必要です。厳選されたプロフェッショナルなバイリンガルテンプレートからお選びください。",
+    "pixelPerfect": "ピクセルパーフェクトなレイアウト",
+    "gutterTitle": "ミラー・ガーター・ロジック",
+    "gutterDesc": "製本のスタイルに合わせて、内側と外側の余白を自動的に調整します。",
+    "symmetryTitle": "対称性の保護",
+    "symmetryDesc": "バイリンガルのブロックがページをまたいでズレた場合、リアルタイムで警告します。",
+    "templates": {
+      "classic": {
+        "title": "クラシック・サイドバイサイド",
+        "desc": "バイリンガル読書のゴールドスタンダード。高級な印刷版のために、左右のカラムが厳格に揃っています。"
+      },
+      "alternating": {
+        "title": "交互の流れ",
+        "desc": "デジタルデバイスに最適。段落ごとに流れる形式で、文脈を見失うことなく没入できます。"
+      },
+      "academic": {
+        "title": "言語学研究",
+        "desc": "深い学術分析。ソーステキストのすぐ下に逐語的な注釈とクロスリファレンスを配置できます。"
+      },
+      "modern": {
+        "title": "モダン・ヴァース",
+        "desc": "詩や行番号のあるテキストのために最適化されたミニマルなレイアウト。芸術的な余白を設定できます。"
+      }
+    },
+    "viewTemplate": "構成を見る",
+    "typesettingTitle": "バイリンガル・ロジック",
+    "exampleSource": "静かな湖の上で、星が明るく輝いていました。",
+    "exampleTarget": "The stars were bright above the silent lake.",
+    "labels": {
+      "source": "ソース（{lang}）",
+      "translation": "翻訳（{lang}）",
+      "engine": "組版エンジン v4.0"
+    }
+  },
+  "LearnPage": {
+    "title": "没入を通じて、あらゆる言語をマスターする",
+    "subtitle": "退屈な教科書は忘れましょう。あなたが本当に読みたい本から、あなた自身のための学習教材を作りましょう。",
+    "badge": "ポリグロットと学生のために",
+    "browseLibrary": "ライブラリを閲覧",
+    "features": {
+      "reader": {
+        "title": "スマートリーダー",
+        "desc": "同期スクロールで快適に読書。翻訳を見失うことはありません。"
+      },
+      "study": {
+        "title": "AI 学習アシスタント",
+        "desc": "テキスト内で直接、文法的な質問を。すべてのページに家庭教師がいるような感覚です。"
+      },
+      "custom": {
+        "title": "パーソナル教材",
+        "desc": "自分の記事、PDF、またはウェブの抜粋をインポート。Synoptic が学習に最適な形にフォーマットします。"
+      }
+    },
+    "immersion": {
+      "title": "「左右対照」読書の科学",
+      "p1": "対象言語で読むことは、語彙を自然に習得するための最も効果的な方法です。しかし、外国語の本をいきなり読み始めるのは、時に圧倒されてしまうものです。",
+      "p2": "Synoptic はその壁を取り除きます。原文のすぐ横に完璧に揃った文章ごとの翻訳を提供することで、脳が物語に集中しながら、新しい単語や構造を楽に吸収できるようにします。",
+      "tag1": "自然な習得",
+      "tag2": "バイリンガル・マッピング",
+      "verified": "AI 検証済み翻訳",
+      "flashcard": "フラッシュカード生成済み！"
+    },
+    "ctaSection": {
+      "title": "流暢になる準備はできましたか？",
+      "subtitle": "教科書を捨てて、より没入感のある体験を選んだ数千人の学習者の仲間に加わりましょう。",
+      "button": "無料アカウントを作成"
+    },
+    "cta": "学習の旅を始める"
+  },
+  "PublishPage": {
+    "title": "工業グレードの出版",
+    "subtitle": "Synoptic は大量生産向けに設計されています。当社の一貫性、スピード、そして品質を求める出版社をサポートします。",
+    "infra": "出版社レベルのインフラ",
+    "cta": "今すぐ出版を始める",
+    "enterprise": "法人向けお問い合わせ",
+    "features": {
+      "engine": {
+        "title": "Grid-Lock組版エンジン",
+        "desc": "独自の CSS Grid レンダリングエンジンが、ソースとターゲットの段落を数学的に固定。何ページあっても同期のズレを防ぎます。"
+      },
+      "exports": {
+        "title": "プロフェッショナルな書き出し",
+        "desc": "sRGB カラープロファイルを持つ 300 DPI 印刷対応 PDF を生成。KDP アップロードは常にプリフライトチェックを通過します。"
+      },
+      "distribution": {
+        "title": "グローバル配信対応",
+        "desc": "Kindle、Apple Books、Kobo、その他主要な電子書籍販売店向けに、正しいメタデータを含む有効な EPUB 3.0 を書き出します。"
+      }
+    },
+    "volumeTitle": "制作ワークフロー",
+    "volumeSubtitle": "原稿から市場まで、シンプルな3ステップ。",
+    "step1": "インポートまたは作成",
+    "step1Desc": "原稿を貼り付けるか、直接入力します。AI が初期フォーマットを処理します。",
+    "step2": "洗練と検証",
+    "step2Desc": "Grid-Lock エディタを使用してレイアウトを完成させます。リアルタイムの対称性保護が問題を防ぎます。",
+    "step3": "書き出しと出版",
+    "step3Desc": "印刷対応の PDF または EPUB ファイルをダウンロード。KDP、IngramSpark、または販売会社に直接アップロードします。",
+    "available": "利用可能",
+    "epubTitle": "EPUB 3.0 + 固定レイアウト",
+    "epubDesc": "リフラワブルと固定レイアウトの両方の EPUB フォーマットをフルサポート。挿絵入りのバイリンガル児童書に最適です。",
+    "compliant": "EPUB 3.0 準拠",
+    "fixed": "固定レイアウト対応",
+    "scaleTitle": "カタログを拡大する準備はできましたか？",
+    "scaleDesc": "出版するのが5冊でも500冊でも、Synoptic は規模に合わせて成長します。",
+    "sales": "セールスに相談"
+  },
+  "Library": {
+    "title": "ディスカバリー・ライブラリ",
+    "subtitle": "バイリンガル本プロジェクトのために、85以上の無料コンテンツソースを閲覧できます。",
+    "searchPlaceholder": "タイトル、テーマ、著者、キーワードで検索...",
+    "badge": "60以上の無料コンテンツソース",
+    "heroTitle": "ディスカバリー・ライブラリ",
+    "heroSubtitle": "バイリンガルプロジェクトのために厳選された無料コンテンツを探索しましょう。聖典、古典文学、美術館の芸術など、すべてライセンス確認済みです。",
+    "browseLibrary": "ライブラリを閲覧",
+    "commercialSafe": "商用利用可能",
+    "attributionRequired": "帰属が必要",
+    "categories": {
+      "all": "すべて",
+      "sacred": "聖典と知恵",
+      "literature": "文学",
+      "visual": "ビジュアルと芸術",
+      "knowledge": "知識と事実",
+      "news": "ニュースとメディア",
+      "history": "歴史",
+      "language": "言語学習",
+      "academic": "学術と研究",
+      "popculture": "ポップカルチャー"
+    },
+    "categoryDescriptions": {
+      "sacred": "世界の伝統的なスピリチュアル・テキスト",
+      "literature": "小説、詩、劇、民話",
+      "visual": "美術館の芸術、NASA の写真など",
+      "news": "ニュースの見出し、記事、メディア",
+      "history": "歴史的文書とアーカイブ",
+      "language": "例文、語彙、トレーニング",
+      "knowledge": "事実、名言、レシピ、地理",
+      "academic": "研究、公式文書、試験対策",
+      "popculture": "コミック、ゲーム、エンターテインメント"
+    },
+    "licenses": {
+      "all": "すべてのライセンス",
+      "commercialSafe": "商用利用可能",
+      "attribution": "帰属が必要",
+      "personalOnly": "個人利用のみ",
+      "licenseType": "ライセンスの種類"
+    },
+    "difficulty": {
+      "all": "すべての難易度",
+      "level": "レベル",
+      "difficultyLevel": "難易度レベル",
+      "beginner": "初級",
+      "intermediate": "中級",
+      "expert": "上級"
+    },
+    "tile": {
+      "beginner": "初級",
+      "intermediate": "中級",
+      "expert": "上級",
+      "studyOnly": "学習のみ"
+    },
+    "search": {
+      "placeholder": "タイトル、テーマ、著者、キーワードで検索...",
+      "quickFilters": "クイックフィルタ：",
+      "showing": "表示中",
+      "of": "合計",
+      "templates": "テンプレート",
+      "clearAllFilters": "すべてのフィルタをクリア",
+      "noTemplatesFound": "テンプレートが見つかりません",
+      "tryAdjusting": "キーワードやフィルタを調整してみてください。"
+    },
+    "quickTags": {
+      "bestsellers": "🏆 ベストセラー",
+      "dailyPractice": "📅 日課",
+      "quickSessions": "⚡ 短時間",
+      "giftIdeas": "🎁 ギフト・アイデア",
+      "posters": "🖼️ ポスター",
+      "flashcards": "📚 フラッシュカード",
+      "vocabulary": "📖 語彙",
+      "socialMedia": "📱 SNS"
+    },
+    "wizard": {
+      "start": "開始",
+      "back": "戻る",
+      "import": "インポート",
+      "cancel": "キャンセル",
+      "search": "検索",
+      "preview": "プレビュー",
+      "randomize": "おまかせ！",
+      "loading": "読み込み中...",
+      "error": "エラーが発生しました",
+      "whatYouCanDo": "できること",
+      "searchContent": "コンテンツを検索",
+      "pickByReference": "参考文献から選択",
+      "randomSelection": "ランダム選択",
+      "imagesIncluded": "画像あり",
+      "audioIncluded": "音声あり",
+      "selectedChapters": "選択された章",
+      "fullBook": "本全体",
+      "customRange": "範囲指定",
+      "book": "書籍",
+      "startChapter": "開始章",
+      "endChapter": "終了章"
+    },
+    "license": {
+      "commercialSafeDesc": "このコンテンツはパブリックドメインであるか、商用利用が明示的に許可されています。このコンテンツを使用した作品を出版・販売できます。",
+      "attributionDesc": "商用利用可能ですが、帰属表示（クレジット）が必要です。",
+      "personalOnlyDesc": "個人学習用のみ。このコンテンツを使用した作品を販売・商用配布することはできません。",
+      "viewFull": "ライセンスの詳細を表示 →"
+    },
+    "warning": {
+      "title": "制限付きライセンス",
+      "personalUseOnly": "個人利用のみ",
+      "whyRestricted": "なぜ制限されているのですか？",
+      "youCan": "できること：",
+      "youCannot": "できないこと：",
+      "personalStudy": "個人学習",
+      "languagePractice": "言語トレーニング",
+      "teachingMaterials": "教材としての利用",
+      "academicResearch": "学術研究",
+      "sellTranslations": "翻訳版の販売",
+      "publishEbook": "電子書籍の出版",
+      "commercialDistribution": "商用配布",
+      "monetizeSocial": "SNSでの収益化",
+      "acknowledge": "このコンテンツが個人学習用のみであることを理解し、これで作成した作品を出版・販売しません。",
+      "chooseAnother": "別のソースを選択",
+      "understand": "理解しました、続行します"
+    },
+    "credits": {
+      "title": "クレジットと出典",
+      "intro": "このプロジェクトでは、以下の帰属が必要なソースを使用しています：",
+      "generated": "Synoptic 生成日：",
+      "attributionRequired": "帰属が必要"
+    },
+    "cta": {
+      "browseLibrary": "ライブラリを閲覧",
+      "getStartedFree": "無料で始める",
+      "learnMore": "詳細を見る",
+      "readyToStart": "バイリンガル本の準備はできましたか？",
+      "importAndStart": "上記のソースをインポートして、Synoptic Studio で翻訳を始めましょう。"
+    },
+    "favorites": {
+      "title": "保存したテンプレート",
+      "quickAccess": "お気に入りのソースに素早くアクセス。",
+      "noSaved": "保存されたテンプレートはまだありません",
+      "noSavedDesc": "ライブラリを閲覧してお気に入りのソースを保存し、素早くアクセスできるようにしましょう。",
+      "exploreLibrary": "ライブラリを探索",
+      "viewAll": "{count} 個の保存したアイテムをすべて表示",
+      "browseAll": "すべて閲覧",
+      "saved": "保存済み",
+      "addToFavorites": "お気に入りに追加",
+      "removeFromFavorites": "お気に入りから削除",
+      "readyToCreate": "作成準備はいいですか？",
+      "signInToSave": "ログインして保存・作成を開始。",
+      "startCreating": "作成を開始",
+      "signInAndCreate": "サインインして作成"
+    }
+  },
+  "Tools": {
+    "aiDraft": {
+      "title": "AI 翻訳下書き",
+      "button": "AI 下書き",
+      "original": "原文：",
+      "translation": "翻訳：",
+      "translating": "翻訳中...",
+      "tryAgain": "再試行",
+      "copy": "コピー",
+      "copied": "コピーしました！",
+      "applyToL2": "L2 に適用",
+      "poweredBy": "Powered by LibreTranslate"
+    },
+    "grammar": {
+      "title": "文法チェック",
+      "button": "文法",
+      "checking": "文法をチェック中...",
+      "detected": "検出：",
+      "noIssuesFound": "問題は見つかりませんでした！",
+      "textLooksGreat": "テキストは良好です。",
+      "issuesFound": "{count} 個の問題が見つかりました",
+      "fixAll": "すべて修正",
+      "tryAgain": "再試行",
+      "poweredBy": "Powered by LanguageTool"
+    },
+    "definition": {
+      "origin": "語源",
+      "lookingUp": "検索中...",
+      "wordNotFound": "単語が見つかりません",
+      "more": "詳細",
+      "poweredBy": "Powered by Free Dictionary API"
+    },
+    "synonyms": {
+      "synonymsFor": "類義語：",
+      "findingSynonyms": "類義語を検索中...",
+      "noSynonymsFound": "類義語は見つかりませんでした",
+      "synonyms": "類義語",
+      "antonyms": "対義語",
+      "related": "関連語",
+      "selectWordFirst": "単語を選択してから右クリックしてください",
+      "poweredBy": "Powered by Datamuse"
+    },
+    "polisher": {
+      "title": "推敲ツール",
+      "button": "洗練",
+      "polishing": "推敲中...",
+      "suggestedImprovements": "提案された改善点"
+    },
+    "assetBank": {
+      "title": "アセットバンク",
+      "noResults": "絵文字が見つかりません"
+    },
+    "socialShare": {
+      "square": "正方形",
+      "story": "ストーリー",
+      "wide": "ワイド"
+    }
+  },
+  "Settings": {
+    "title": "ユーザー設定",
+    "displayName": "表示名",
+    "displayNamePlaceholder": "お名前",
+    "interfaceLanguage": "インターフェース言語",
+    "interfaceLanguageHint": "すべてのデバイスでのデフォルトの UI 言語を設定します。",
+    "saving": "保存中...",
+    "saveSettings": "設定を保存",
+    "cancel": "キャンセル"
+  },
+  "Filters": {
+    "license": "ライセンス",
+    "commercial": "商用",
+    "attribution": "帰属",
+    "personal": "個人"
+  },
+  "Errors": {
+    "translationFailed": "翻訳に失敗しました",
+    "grammarCheckFailed": "文法チェックに失敗しました",
+    "lookupFailed": "検索に失敗しました",
+    "fetchFailed": "読み込みに失敗しました",
+    "connectionError": "接続エラー。もう一度お試しください。",
+    "unexpectedError": "予期しないエラーが発生しました"
+  },
+  "Accessibility": {
+    "openMenu": "メニューを開く",
+    "closeMenu": "メニューを閉じる",
+    "loading": "読み込み中",
+    "searchResults": "検索結果",
+    "noResults": "結果なし",
+    "sortBy": "並び替え",
+    "filterBy": "フィルタ"
   }
 }

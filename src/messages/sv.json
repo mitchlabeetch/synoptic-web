@@ -1,97 +1,172 @@
 {
-  "Studio": {
-    "title": "Synoptic Studio",
-    "saving": "Sparar utkast...",
-    "saved": "Alla ändringar sparade i molnet",
-    "ready": "Redo för ditt tvåspråkiga mästerverk",
-    "addPage": "Lägg till ny sida",
-    "pageSettings": "Inställningar för sida {number}",
-    "enteringStudio": "Går in i Studio...",
-    "failedToLoadProject": "Misslyckades med att ladda projektet",
-    "retryConnection": "Försök ansluta igen",
-    "pageManager": "Sidhanterare",
-    "globalDesign": "Global design",
-    "stylePresets": "Stilmallar",
-    "editorTools": "Redigeringsverktyg",
-    "canvasActions": "Kanvasåtgärder",
-    "drafting": "Utkast",
-    "chapterStart": "Kapitelstart",
-    "manuscript": "Manuskript",
-    "chapters": "Kapitel",
-    "noChapters": "Inga kapitel definierade",
-    "deletePage": "Ta bort sida",
-    "resetFactory": "Återställ fabriksinställningar",
-    "bilingualEditor": "Tvåspråkig redigerare"
+  "Common": {
+    "save": "Spara",
+    "cancel": "Avbryt",
+    "delete": "Ta bort",
+    "copy": "Kopiera",
+    "duplicate": "Duplicera",
+    "edit": "Redigera",
+    "loading": "Laddar...",
+    "error": "Ett fel uppstod",
+    "success": "Klart",
+    "back": "Tillbaka",
+    "next": "Nästa",
+    "backToHome": "Tillbaka till start",
+    "on": "På",
+    "off": "Av",
+    "pdf": "PDF",
+    "epub": "EPUB",
+    "close": "Stäng",
+    "original": "Original",
+    "translation": "Översättning",
+    "importFailed": "Importen misslyckades"
+  },
+  "Auth": {
+    "login": "Logga in",
+    "signup": "Skapa konto",
+    "logout": "Logga ut",
+    "email": "E-post",
+    "password": "Lösenord",
+    "forgotPassword": "Glömt lösenordet?",
+    "noAccount": "Saknar du konto?",
+    "hasAccount": "Har du redan ett konto?",
+    "haveAccount": "Har du redan ett konto?",
+    "verifyEmail": "Verifiera e-post",
+    "welcomeBack": "Välkommen tillbaka",
+    "createAccount": "Skapa konto",
+    "signInDesc": "Logga in för att komma åt dina projekt.",
+    "signUpDesc": "Skapa ett konto för att börja publicera.",
+    "emailPlaceholder": "namn@exempel.se",
+    "passwordPlaceholderLogin": "••••••••",
+    "passwordPlaceholderSignup": "Minst 8 tecken",
+    "failed": "Autentiseringen misslyckades",
+    "errorOccurred": "Ett oväntat fel uppstod",
+    "signingIn": "Loggar in...",
+    "creatingAccount": "Skapar konto...",
+    "signIn": "Logga in",
+    "termsPrompt": "Genom att fortsätta godkänner du våra användarvillkor och integritetspolicy.",
+    "continueWithGoogle": "Fortsätt med Google",
+    "orContinueWithEmail": "eller fortsätt med e-post",
+    "passwordStrength": "Lösenordsstyrka",
+    "weak": "Svag",
+    "fair": "Ok",
+    "strong": "Stark",
+    "oauthError": "OAuth-autentiseringen misslyckades. Försök igen.",
+    "emailNotVerified": "Verifiera först din e-post hos Google.",
+    "securityNote": "256-bitars SSL-kryptering • GDPR-kompatibel",
+    "recentActivity": "Senaste aktivitet",
+    "lastSession": "Senaste sessionen",
+    "savedSecurely": "Sparat säkert",
+    "cloudSync": "Molnsynkronisering",
+    "active": "Aktiv"
+  },
+  "Dashboard": {
+    "title": "Mina projekt",
+    "subtitle": "Hantera och redigera dina tvåspråkiga böcker.",
+    "newProject": "Nytt projekt",
+    "noProjects": "Inga projekt hittades. Skapa det första!",
+    "emptyState": "Du har inte skapat några projekt än.",
+    "yourProjects": "Dina projekt",
+    "settings": "Inställningar",
+    "profile": "Profil",
+    "billing": "Fakturering",
+    "noDescription": "Ingen beskrivning.",
+    "lastUpdated": "Senast uppdaterad",
+    "stats": {
+      "projects": "Projekt",
+      "pages": "Sidor",
+      "words": "Ord"
+    },
+    "projectCard": {
+      "edited": "Redigerad",
+      "open": "Öppna",
+      "delete": "Ta bort",
+      "confirmDelete": "Är du säker på att du vill ta bort det här projektet?"
+    }
   },
   "Blocks": {
     "text": "Textblock",
     "image": "Bildblock",
     "separator": "Avskiljare",
-    "callout": "Faktaruta",
+    "callout": "Inforuta",
+    "quiz": "Quiz-övning",
     "insertText": "Infoga textblock",
     "addBlankPage": "Lägg till tom sida",
-    "media": "Media",
+    "media": "Multimedia",
     "ai": "Översättnings-AI",
     "settings": "Studioinställningar",
     "grammar": "Grammatikregel",
-    "culture": "Kulturell insikt",
+    "culture": "Kulturell notis",
     "vocabulary": "Ordförråd",
     "tip": "Inlärningstips",
-    "warning": "Grammatikvarning",
-    "note": "Allmän notering",
-    "pronunciation": "Uttalsguide"
+    "warning": "Grammatisk varning",
+    "note": "Allmän notis",
+    "pronunciation": "Uttalsguide",
+    "workbookExercise": "Arbetsboksövning",
+    "autoHint": "Auto-ledtråd",
+    "regenerateHint": "Regenerera ledtråd",
+    "showAnswer": "Visa svar",
+    "hideAnswer": "Dölj svar",
+    "customHint": "Egen ledtråd",
+    "difficulty": "Svårighetsgrad",
+    "difficultyEasy": "Lätt",
+    "difficultyMedium": "Medel",
+    "difficultyHard": "Svår",
+    "emptyImageBlock": "Tomt bildblock"
   },
   "Inspector": {
-    "visibility": "Åsidosättning av synlighet",
+    "visibility": "Överskriv synlighet",
     "header": "Sidhuvud",
+    "headerOverlay": "Sidhuvudsöverlägg",
     "footer": "Sidfot",
+    "footerOverlay": "Sidfotsöverlägg",
     "pageNumber": "Sidnummer",
-    "content": "Åsidosättning av innehåll",
+    "content": "Överskriv innehåll",
     "typography": "Typografi",
-    "layout": "Layout & strategi",
-    "printingFlow": "Utskrift & flöde",
+    "layout": "Layout och strategi",
+    "printingFlow": "Utskrift och flöde",
     "markChapterStart": "Markera som kapitelstart",
-    "forceBlank": "Tvinga tom sida",
+    "forceBlank": "Framtvinga tom sida",
     "pageLocalOnly": "Ändringar här påverkar endast den aktuella sidan.",
-    "inspectorTitle": "{type}-inspektör",
+    "inspectorTitle": "Inspektör för {type}",
     "lineHeight": "Radavstånd",
     "paraSpacing": "Styckeavstånd",
     "dimensions": "Dimensioner",
     "width": "Bredd (%)",
     "alignment": "Justering",
-    "styleEffects": "Stil & effekter",
+    "styleEffects": "Stilar och effekter",
     "shadow": "Skugga",
     "borderRadius": "Hörnradie",
-    "stylePattern": "Stil & mönster",
+    "stylePattern": "Stil och mönster",
     "thickness": "Tjocklek",
     "contextType": "Kontexttyp",
-    "brandingColor": "Varumärkesfärg",
-    "stylePreset": "Stilmall",
+    "brandingColor": "Profilfärg",
+    "stylePreset": "Stilinställning",
     "solidLine": "Solid linje",
-    "doubleLine": "Dubbellinje",
+    "doubleLine": "Dubbel linje",
     "dashedLine": "Streckad linje",
     "dottedLine": "Punktad linje",
-    "gradientFade": "Gradient toning",
+    "gradientFade": "Gradient",
     "ornament": "Ornament"
   },
   "Theme": {
     "title": "Global design",
     "layout": "Global layout",
-    "typography": "Typografi (Global)",
+    "typography": "Typografi (global)",
     "bodyText": "Brödtext",
-    "headings": "Huvudrubriker",
-    "baseScaling": "Basskalning",
-    "fontSize": "Teckenstorlek brödtext",
+    "headings": "Rubriker",
+    "baseScaling": "Bas-skalning",
+    "fontSize": "Teckenstorlek",
     "lineHeight": "Globalt radavstånd",
-    "colorPresets": "Färgpaletter",
+    "colorPresets": "Färginställningar",
     "lightMode": "Ljust läge",
     "darkMode": "Mörkt läge"
   },
   "Presets": {
-    "title": "Stilmallar",
-    "empty": "Välj ett block för att spara dess stil som en återanvändbar mall.",
+    "title": "Stilinställningar",
+    "empty": "Välj ett block för att spara dess stil som en återanvändbar inställning.",
     "selected": "Vald kontext",
-    "canCapture": "Du kan spara stilen för detta {type}-block.",
+    "canCapture": "Du kan spara stilen för det här {type}-blocket.",
     "saveCurrent": "Spara aktuell stil",
     "library": "Globalt bibliotek",
     "typeStyle": "{type}-stil",
@@ -99,7 +174,7 @@
   },
   "Wizard": {
     "createTitle": "Skapa nytt projekt",
-    "createMasterpiece": "Skapa ett nytt mästerverk",
+    "createMasterpiece": "Nytt säkert projekt",
     "stepInformation": "Information",
     "stepLanguages": "Språk",
     "stepFormat": "Format",
@@ -107,207 +182,468 @@
     "projectTitle": "Projekttitel *",
     "titlePlaceholder": "t.ex. En världsomsegling under havet",
     "author": "Författare",
-    "authorPlaceholder": "Ditt namn eller originalförfattare",
+    "authorPlaceholder": "Ditt namn eller originalförfattaren",
     "category": "Kategori / Tagg",
-    "categoryPlaceholder": "t.ex. Skönlitteratur, Utbildning",
+    "categoryPlaceholder": "t.ex. Fiktion, Utbildning",
     "sourceLang": "Källspråk (L1)",
     "targetLang": "Målspråk (L2)",
-    "langWarning": "Varning: Käll- och målspråk måste vara olika för tvåspråkiga projekt.",
-    "langTip": "Tips: De flesta användare väljer sitt modersmål som målspråk och språket de lär sig som källspråk.",
-    "dimensions": "Fysiska dimensioner (mm)",
-    "custom": "Anpassad definition",
+    "langWarning": "Varning: Käll- och målspråk måste vara olika för ett tvåspråkigt projekt.",
+    "langTip": "Tips: De flesta väljer sitt modersmål som målspråk och det språk de lär sig som källspråk.",
+    "dimensions": "Fysiska mått (mm)",
+    "custom": "Egen inställning",
     "layoutStyle": "Layoutstil",
-    "back": "Bakåt",
+    "back": "Tillbaka",
     "next": "Nästa steg",
-    "creating": "Bygger Studio...",
-    "launch": "Starta Studio",
-    "blankTemplate": "Börja från början",
-    "blankDesc": "Inget innehåll, en tom duk",
-    "classicTemplate": "Klassisk sida vid sida",
-    "classicDesc": "Balanserade kolumner, seriffer",
+    "creating": "Initialiserar studion...",
+    "launch": "Starta studio",
+    "secureNote": "Krypterad och isolerad projektmiljö",
+    "blankTemplate": "Starta från början",
+    "blankDesc": "Tom sida för egna layouter",
+    "classicTemplate": "Klassisk sida-vid-sida",
+    "classicDesc": "Optimerad för tät prosa",
     "poetryTemplate": "Poesi / Vers",
-    "poetryDesc": "Numrerade rader, centrerat fokus",
+    "poetryDesc": "Optimerad för vers och sångtexter (Moderna)",
+    "academicTemplate": "Filologiskt studie",
+    "academicDesc": "Breda marginaler, fotnoter",
     "width": "Bredd (mm)",
     "height": "Höjd (mm)",
     "upgradeToCreateMore": "Uppgradera för att skapa fler",
-    "reachedFreeLimit": "Du har nått gratisgränsen",
-    "freeLimitDesc": "Gratiskonton är begränsade till 1 aktivt projekt. Uppgradera till Pro för att låsa upp obegränsade projekt och avancerade AI-funktioner.",
+    "reachedFreeLimit": "Gratisgränsen nådd",
+    "freeLimitDesc": "Gratiskonton är begränsade till 1 aktivt projekt. Uppgradera till Pro för att låsa upp obegränsat antal projekt och avancerade AI-funktioner.",
     "upgradeToPro": "Uppgradera till Pro",
     "maybeLater": "Kanske senare",
     "usTrade": "US Trade Paper",
     "digest": "Digest",
     "intlStandard": "Internationell standard"
   },
-  "Common": {
-    "delete": "Ta bort",
-    "copy": "Kopera",
-    "duplicate": "Duplicera",
-    "save": "Spara",
-    "cancel": "Avbryt",
-    "on": "På",
-    "off": "Av",
-    "backToHome": "Tillbaka till hem"
+  "Studio": {
+    "title": "Synoptic Studio",
+    "collaborate": "Samarbeta",
+    "export": "Exportera",
+    "preview": "Förhandsgranska",
+    "saving": "Sparar utkast...",
+    "saved": "Alla ändringar sparade i molnet",
+    "ready": "Klar för ditt tvåspråkiga mästerverk",
+    "addPage": "Lägg till ny sida",
+    "pageSettings": "Inställningar för sida {number}",
+    "enteringStudio": "Går in i studion...",
+    "failedToLoadProject": "Kunde inte ladda projektet",
+    "retryConnection": "Försök ansluta igen",
+    "pageManager": "Sidhanterare",
+    "globalDesign": "Global design",
+    "stylePresets": "Stilinställningar",
+    "editorTools": "Redigeringsverktyg",
+    "canvasActions": "Lärredsåtgärder",
+    "drafting": "Skissar",
+    "chapterStart": "Kapitelstart",
+    "manuscript": "Manuskript",
+    "chapters": "Kapitel",
+    "noChapters": "Inga kapitel definierade",
+    "deletePage": "Ta bort sida",
+    "resetFactory": "Återställ till fabriksinställningar",
+    "bilingualEditor": "Tvåspråkig editor",
+    "bookStructure": "Bokstruktur",
+    "publishingPipeline": "Publiceringsflöde",
+    "frontMatter": "Inledande sidor",
+    "backMatter": "Slutsidor",
+    "titlePage": "Titelsida",
+    "copyrightPage": "Copyright-sida",
+    "dedicationPage": "Dedikation",
+    "tableOfContents": "Innehållsförteckning",
+    "glossary": "Ordlista",
+    "aboutAuthor": "Om författaren",
+    "endNotes": "Slutnoter",
+    "autoGlossaryActive": "Automatisk ordlista aktiv",
+    "refreshGlossary": "Uppdatera ordlista",
+    "glossaryEntries": "{count} poster insamlade",
+    "romanNumeralsInfo": "Inledande sidor använder romerska siffror (i, ii, iii). Brödtext använder arabiska siffror (1, 2, 3).",
+    "playAudio": "Läs upp",
+    "stopAudio": "Stoppa uppläsning",
+    "normalSpeed": "Normal fart",
+    "slowMode": "Långsamt läge (0.7×)",
+    "audioSettings": "Röstinställningar",
+    "grammarPainter": "Grammatik-målare",
+    "exitPaintMode": "Avsluta målarläge",
+    "subject": "Subjekt",
+    "verb": "Predikat",
+    "object": "Objekt",
+    "adjective": "Adjektiv",
+    "adverb": "Adverb",
+    "paintTip": "Markera text för att applicera grammatikfärger",
+    "clearAllColors": "Rensa alla färger",
+    "syntaxArrows": "Syntaxpilar",
+    "addArrow": "Lägg till pil",
+    "deleteArrow": "Ta bort pil",
+    "arrowStyle": "Pilstil",
+    "curved": "Böjd",
+    "angular": "Vinklad",
+    "straight": "Rak",
+    "arrowDrawer": "Syntaktisk länkare",
+    "selectSource": "Välj källord",
+    "selectTarget": "Välj målord",
+    "arrowCreated": "Länk skapad",
+    "cancelLink": "Avbryt"
   },
-  "Dashboard": {
-    "title": "Dina projekt",
-    "subtitle": "Hantera och redigera dina tvåspråkiga böcker.",
-    "emptyState": "Du har inte skapat några projekt än.",
-    "noDescription": "Ingen beskrivning angiven.",
-    "lastUpdated": "Senast uppdaterad"
-  },
-  "Auth": {
-    "login": "Logga in",
-    "signup": "Registrera dig",
-    "welcomeBack": "Välkommen tillbaka",
-    "createAccount": "Skapa konto",
-    "signInDesc": "Logga in på ditt Synoptic-konto",
-    "signUpDesc": "Börja skapa tvåspråkiga böcker idag",
-    "email": "E-post",
-    "password": "Lösenord",
-    "emailPlaceholder": "namn@exempel.se",
-    "passwordPlaceholderLogin": "Ange ditt lösenord",
-    "passwordPlaceholderSignup": "Skapa ett lösenord",
-    "signIn": "Logga in",
-    "signingIn": "Loggar in...",
-    "creatingAccount": "Skapar konto...",
-    "noAccount": "Saknar du konto?",
-    "hasAccount": "Har du redan ett konto?",
-    "termsPrompt": "Genom att fortsätta godkänner du Synoptics användarvillkor och integritetspolicy.",
-    "failed": "Autentisering misslyckades",
-    "errorOccurred": "Ett fel uppstod"
-  },
-  "Marketing": {
-    "nav": {
-      "features": "Funktioner",
-      "pricing": "Prissättning",
-      "library": "Bibliotek",
-      "logIn": "Logga in",
-      "joinNow": "Gå med nu",
-      "templates": "Mallar",
-      "product": "Produkt",
-      "company": "Företag",
-      "about": "Om oss",
-      "privacy": "Integritet",
-      "terms": "Villkor"
+  "Editor": {
+    "toolbar": {
+      "bold": "Fet",
+      "italic": "Kursiv",
+      "underline": "Understruken",
+      "strikeThrough": "Genomstruken",
+      "alignLeft": "Vänsterjustera",
+      "alignCenter": "Centrera",
+      "alignRight": "Högerjustera",
+      "justify": "Marginaljustera",
+      "left": "Vänster",
+      "center": "Centrera",
+      "right": "Höger",
+      "link": "Länk",
+      "addBlock": "Lägg till block",
+      "export": "Exportera",
+      "ai": "AI-assistent"
     },
-    "hero": {
-      "badge": "Synoptic v1.0 Privat Beta",
-      "title": "Den <span>Ultimata</span> <br /> Tvåspråkiga Studion",
-      "subtitle": "Skapa professionella sida-vid-sida-böcker med AI-assisterad typsättning, realtidssynkronisering i molnet och KDP-publicering med ett klick.",
-      "ctaPrimary": "Börja skriva gratis",
-      "ctaSecondary": "Utforska biblioteket",
-      "aiSuggestion": "AI-förslag"
+    "sidebar": {
+      "pages": "Sidor",
+      "style": "Stil",
+      "inspector": "Inspektör",
+      "chat": "AI-chatt"
     },
-    "footer": {
-      "tagline": "Den professionella tvåspråkiga förläggaren för författare, språkinlärare och förlag. Designad i SF, byggd för världen.",
-      "copyright": "© 2025 Synoptic Studio. Med ensamrätt."
+    "inspector": {
+      "layout": "Layout",
+      "spacing": "Avstånd",
+      "typography": "Typografi",
+      "colors": "Färger",
+      "border": "Kant",
+      "shadow": "Skugga",
+      "actions": "Åtgärder",
+      "labels": {
+        "color": "Färg",
+        "backgroundColor": "Bakgrundsfärg",
+        "fontSize": "Teckenstorlek",
+        "lineHeight": "Radavstånd",
+        "letterSpacing": "Teckenavstånd",
+        "margin": "Marginal",
+        "padding": "Utfyllnad",
+        "width": "Bredd",
+        "alignment": "Justering",
+        "fontFamily": "Typsnittsfamilj"
+      }
+    },
+    "messages": {
+      "saved": "Projektet sparades",
+      "error": "Fel vid sparande av projektet"
+    },
+    "onboarding": {
+      "welcome": "Välkommen till editorn",
+      "step1": "Detta är din lärred. Skriv på båda sidor för att börja.",
+      "step2": "Använd verktygsfältet för att formatera text.",
+      "step3": "Klicka på Exportera för att ladda ner din bok."
+    },
+    "blocks": {
+      "text": "Textstycke",
+      "image": "Bild",
+      "separator": "Avskiljare",
+      "callout": "Inforuta",
+      "verse": "Vers / Dikt"
     }
   },
-  "Features": {
-    "title": "Byggd för kreatörer",
-    "subtitle": "Ett förlags infrastruktur, förenklad i en studio.",
-    "aiTypesetter": {
-      "title": "AI-typsättare",
-      "desc": "Justerar automatiskt meningspar på över 25 språk, vilket garanterar perfekt symmetri även vid varierande meningslängder."
-    },
-    "cloudSync": {
-      "title": "Molnsynkroniseringsmotor",
-      "desc": "Ditt arbete sparas omedelbart medan du skriver. Få tillgång till din studio från vilken enhet som helst med en permanent och obegränsad ångringshistorik."
-    },
-    "pdfExport": {
-      "title": "Utskriftsfärdig PDF",
-      "desc": "Högupplöst export via Puppeteer-motor. Perfekt för Amazon KDP, IngramSpark och lokala tryckerier."
-    },
-    "epubSupport": {
-      "title": "EPUB 3.0-stöd",
-      "desc": "Generera flödande e-böcker med ett inbyggt tvåspråkigt växlingsläge, optimerat för Kindle och Apple Books."
-    },
-    "deepAnnotation": {
-      "title": "Djup annotering",
-      "desc": "AI-drivna språkliga insikter. Ordgruppering, relationspilar och kontextuella förklaringar direkt till hands."
-    },
-    "marketplace": {
-      "title": "Global marknadsplats",
-      "desc": "Dela och sälj dina anpassade bokmallar, eller bläddra i vårt bibliotek med handplockade professionella tvåspråkiga designer."
-    }
+  "Models": {
+    "parallel": "Parallella kolumner",
+    "interlinear": "Interlinjär",
+    "bilingual": "Dubbelsidig",
+    "modern": "Modern minimalistisk"
   },
   "Pricing": {
-    "title": "Enkel och rättvis prissättning",
-    "subtitle": "Välj den plan som passar dina publiceringsmål.",
+    "title": "Enkla och transparenta priser",
+    "subtitle": "Välj det plan som passar dina publiceringsmål bäst.",
     "mostPopular": "Mest populär",
     "month": "/mån",
     "pageTitle": "Investera i din bok.",
-    "pageSubtitle": "Oavsett om du översätter ett familjememoir eller publicerar en kommersiell serie, har vi rätt verktyg för dig.",
-    "nonProfitTitle": "Är du en ideell organisation eller utbildare?",
-    "nonProfitDesc": "Vi erbjuder specialrabatter för utbildningsinstitutioner och ideella översättningar. Kontakta vårt team för en anpassad offert.",
+    "pageSubtitle": "Oavsett om du översätter ett familjeminne eller publicerar en kommersiell serie har vi rätt verktyg.",
+    "nonProfitTitle": "Är du en ideell organisation eller lärare?",
+    "nonProfitDesc": "Vi erbjuder specialrabatter för utbildningsinstitutioner och ideella översättningar. Kontakta oss för en offert.",
     "contactSupport": "Kontakta support",
     "free": {
       "name": "Gratis",
-      "desc": "Perfekt för att testa studion.",
-      "button": "Börja gratis"
+      "price": "0 kr",
+      "desc": "Perfekt för att testa motorn.",
+      "description": "Perfekt för att testa motorn.",
+      "button": "Starta gratis"
     },
     "pro": {
       "name": "Pro",
-      "desc": "För seriösa författare och polyglotter.",
-      "button": "Gå med i Pro"
+      "price": "129 kr",
+      "desc": "För oberoende författare och polyglotter.",
+      "description": "För oberoende författare och polyglotter.",
+      "button": "Uppgradera till Pro"
     },
     "publisher": {
-      "name": "Förläggare",
-      "desc": "För professionella bokförlag.",
-      "button": "Växla till Förläggare"
+      "name": "Förlag",
+      "price": "499 kr",
+      "desc": "För storskalig produktion.",
+      "description": "För storskalig produktion.",
+      "button": "Gå till Förlag"
     },
     "featuresList": {
       "activeProject": "1 aktivt projekt",
       "standardLayout": "Standard layoutmotor",
       "manualTranslation": "Manuell översättning",
       "lowDpiPdf": "Lågupplöst PDF-export",
-      "watermarked": "Publicering med vattenstämpel",
-      "unlimitedProjects": "Obegränsade projekt",
+      "watermarked": "Export med vattenstämpel",
+      "unlimitedProjects": "Obegränsat antal projekt",
       "aiAssistedLayout": "AI-assisterad layout",
-      "aiWordsMonth": "50k AI-ord / månad",
-      "highDpiPdf": "300 DPI-export (Utskriftsfärdig)",
-      "epubMobi": "EPUB & MOBI-export",
-      "removeWatermarks": "Ta bort vattenstämplar",
+      "aiWordsMonth": "50 000 AI-ord / mån",
+      "highDpiPdf": "300 DPI-export (tryckfärdig)",
+      "epubMobi": "EPUB- och MOBI-export",
+      "removeWatermarks": "Inga vattenstämplar",
       "priorityHistory": "Prioriterad molnhistorik",
-      "everythingPro": "Allt i Pro ingår",
+      "flashcards": "Dynamisk generering av flashcards",
+      "tts": "Text-till-tal-uppläsning (TTS)",
+      "everythingPro": "Allt i Pro-planen ingår",
+      "bigAiLimit": "500 000 AI-ord / mån",
       "unlimitedAi": "Obegränsade AI-krediter",
-      "teamCollab": "Team-samarbete",
-      "brandCustom": "Varumärkesanpassning",
-      "fontUpload": "Uppladdning av egna typsnitt",
-      "apiAccess": "API-åtkomst (Kommer snart)"
+      "teamCollab": "Teamsamarbete",
+      "brandCustom": "Varumärkestillsassning",
+      "fontUpload": "Ladda upp egna typsnitt",
+      "apiAccess": "API-åtkomst (snart)",
+      "ttsPremium": "Neurala röster (Premium)",
+      "limitedAi": "Begränsad AI"
+    },
+    "features": {
+      "unlimited": "Obegränsade projekt",
+      "highDpi": "Högupplöst export (300 DPI)",
+      "noWatermark": "Inga vattenstämplar",
+      "aiUnits": "AI-intelligensenheter",
+      "customFonts": "Ladda upp egna typsnitt"
+    },
+    "cta": "Välj plan",
+    "monthly": "månadsvis",
+    "yearly": "årsvis",
+    "popular": "Mest populär"
+  },
+  "Landing": {
+    "hero": {
+      "title": "Publiceringsmotorn för tvåspråkiga böcker.",
+      "subtitle": "Förvandla råtext till perfekta parallella böcker med CSS. Inget InDesign. Ingen desynkronisering. Grid-Lock-arkitekturen garanterar justering genom design.",
+      "cta": "Börja publicera gratis"
+    },
+    "features": {
+      "title": "Baserad på Grid-Lock-arkitekturen",
+      "items": {
+        "layout": "Grid-Lock-arkitektur",
+        "export": "Nativ PDF/X",
+        "sync": "Molnsynkronisering",
+        "ai": "Lingvistisk AI",
+        "validation": "300 DPI-validering"
+      }
+    }
+  },
+  "Marketing": {
+    "nav": {
+      "toLearn": "För språkinlärning",
+      "toPublish": "För proffspublicering",
+      "features": "Funktioner",
+      "pricing": "Priser",
+      "library": "Bibliotek",
+      "logIn": "Logga in",
+      "joinNow": "Börja nu",
+      "templates": "Mallar",
+      "product": "Studion",
+      "company": "Om oss",
+      "about": "Om oss",
+      "privacy": "Integritet",
+      "terms": "Villkor"
+    },
+    "hero": {
+      "badge": "Synoptic v1.0 privat beta",
+      "title": "Den <span>ultimata</span> <br /> tvåspråkiga studion",
+      "subtitle": "Förvandla råtext till **perfekta parallella böcker** med CSS. Inget InDesign. Ingen desynkronisering.",
+      "subtitleShort": "Publiceringsmotoren för tvåspråkiga böcker.",
+      "featuresLine": "Grid-Lock-arkitektur • Nativ PDF/X • 300 DPI-validering",
+      "ctaPrimary": "Börja publicera gratis",
+      "ctaSecondary": "Utforska biblioteket",
+      "aiSuggestion": "AI-förslag",
+      "aiTranslation": "AI-optimerad översättning",
+      "pauseRotation": "Pausa språkrotation",
+      "resumeRotation": "Återuppta språkrotation",
+      "studioTitle": "Hero-titel — Synoptic Studio",
+      "titlePlain": "Sluta kämpa med formateringen. Få professionell symmetri med ett klick.",
+      "neuralEngine": "Lingvistisk intelligens",
+      "activeLayer": "Aktivt lager",
+      "typographyAssistant": "Typografiassistent",
+      "syncingLocales": "Synkroniserar {count} språk",
+      "syncing": "Synkroniserar...",
+      "readyStudio": "Klar — Synoptic Studio v1.2",
+      "canvasA": "Lärred A",
+      "canvasB": "Lärred B",
+      "output": "Utmatning",
+      "livePreview": "Förhandsgranskning",
+      "origin": "Ursprung"
+    },
+    "footer": {
+      "tagline": "Den professionella tvåspråkiga studion för författare, polyglotter och globala förlag. Skapar klarhet över gränserna.",
+      "copyright": "© 2025 Synoptic Studio. Med ensamrätt."
+    },
+    "carbon": {
+      "label": "Hållbarhet",
+      "calculating": "Mäter...",
+      "cleanerThan": "Renare än {percentage} %",
+      "co2": "{amount} g CO2",
+      "ecoFriendly": "Miljövänlig",
+      "measure": "Mät påverkan"
+    }
+  },
+  "Features": {
+    "title": "Designad för alla skalor",
+    "subtitle": "Från personliga **flashcards**, **studieblad** och **affischer** till globala boklanseringar i växande nischer.",
+    "ctaLearn": "Lär dig bemästra ett språk",
+    "ctaPublish": "Utforska proffspublicering",
+    "aiInsights": "AI-insikter",
+    "learn": {
+      "title": "För språkstuderande",
+      "subtitle": "Det ultimata verktyget för självstudier.",
+      "items": {
+        "flashcards": {
+          "title": "Dynamiska flashcards",
+          "desc": "Generera automatiskt minneskort från de meningar du läser."
+        },
+        "annotations": {
+          "title": "Filologiska annotationer",
+          "desc": "Dyk ner i grammatik och nyanser med ord-för-ord-analys av AI."
+        },
+        "immersion": {
+          "title": "Symmetrisk fördjupning",
+          "desc": "Din hjärna mappar språk naturligt när de står sida vid sida. Tappa aldrig kontexten."
+        }
+      }
+    },
+    "publish": {
+      "title": "För förlagsproffs",
+      "subtitle": "Sättning av industriell kvalitet för tvåspråkiga utgåvor.",
+      "items": {
+        "typesetting": {
+          "title": "Grid-Lock-arkitektur",
+          "desc": "Vi 'gissar' inte justeringen. Vi använder en strikt CSS Grid-motor som matematiskt låser käll- och målstycken."
+        },
+        "multiformat": {
+          "title": "Nativ PDF/X och EPUB 3.0",
+          "desc": "Generera layouter med korrekta spegelmarginaler. Exportera valida EPUB 3.0-filer för Kindle och Apple Books."
+        },
+        "distribution": {
+          "title": "Validering och kvalitet",
+          "desc": "300 DPI-utmatning med sRGB-färgprofiler, vilket garanterar att din uppladdning till KDP godkänns."
+        }
+      }
+    },
+    "aiTypesetter": {
+      "title": "AI-sättare",
+      "desc": "Justerar automatiskt meningspar på över 25 språk och garanterar perfekt symmetri även vid olika längder."
+    },
+    "cloudSync": {
+      "title": "Synkroniseringsmotor",
+      "desc": "Ditt arbete sparas direkt medan du skriver. Få tillgång till studion från valfri enhet med obegränsad historik."
+    },
+    "pdfExport": {
+      "title": "Tryckfärdig PDF",
+      "desc": "Högupplöst export via Puppeteer-motor. Perfekt för Amazon KDP, IngramSpark och lokala tryckerier."
+    },
+    "epubSupport": {
+      "title": "EPUB 3.0-stöd",
+      "desc": "Generera flexibla e-böcker med nativt tvåspråkigt läge, optimerade för Kindle och Apple Books."
+    },
+    "deepAnnotation": {
+      "title": "Djupnoteringar",
+      "desc": "Lingvistiska insikter via AI. Ordgrupperingar, relationspilar och kontextuella förklaringar direkt i editorn."
+    },
+    "marketplace": {
+      "title": "Global marknad",
+      "desc": "Dela och sälj dina egna bokmallar, eller utforska vårt bibliotek med professionella tvåspråkiga designer."
+    }
+  },
+  "PricingPage": {
+    "title": "Betala för intelligens, inte lagring",
+    "subtitle": "Projekt är obegränsade. Du förbrukar bara krediter när du använder AI.",
+    "yearly": "Spara 20 % med årsbetalning",
+    "tiers": {
+      "free": "Bas",
+      "pro": "Standard för oberoende författare och polyglotter.",
+      "publisher": "Designad för förlag och storproduktion."
+    },
+    "unitCalculator": {
+      "title": "1 AI-enhet = 1 intellektuell åtgärd",
+      "desc": "Dina krediter dras per interaktion med blocken:",
+      "p1": "Översätta ett stycke? **1 enhet.**",
+      "p2": "Generera en grammatiknotis? **1 enhet.**",
+      "fairUse": "Fair Use: Export (PDF/EPUB) är **alltid gratis**. Du betalar aldrig för att ladda ner ditt eget arbete."
     }
   },
   "Export": {
     "publishingPipeline": "Publiceringsflöde",
-    "pdfManuscript": "Utskriftsfärdig PDF",
-    "epubEbook": "E-bok (EPUB 3.0)",
+    "pdfManuscript": "Tryckfärdig PDF",
+    "epubEbook": "e-bok (EPUB 3.0)",
     "generate": "Generera",
+    "generating": "Genererar...",
     "quality": "Kvalitet",
-    "bleed": "Utfall",
-    "preFlightTitle": "Kontroll före publicering",
-    "symmetryCheck": "Tvåspråkig symmetri verifierad",
-    "largeDocWarning": "Stora dokument kan ta upp till 30 sekunder att rendera.",
+    "bleed": "Utfall (Bleed)",
+    "preFlightTitle": "Automatiserat integritetssystem",
+    "symmetryCheck": "Grid-Lock-symmetri aktiv",
+    "largeDocWarning": "Stora dokument kan ta upp till 30 sekunder att ladda.",
     "upgradeToPro": "Uppgradera till Pro",
-    "watermarkPolicy": "Ta bort vattenstämplar, lås upp HD-utskrift och få 50 000 AI-ord per månad.",
+    "watermarkPolicy": "Ta bort vattenstämplar, lås upp högupplöst tryck och få 50 000 AI-ord per månad.",
     "viewPlans": "Visa planer",
-    "proQuality": "Pro-kvalitet (Utkast)",
-    "freeWarning": "I gratisnivån kommer en vattenstämpel att appliceras på denna export.",
-    "pdfDesc": "High-fidelity-export via 300 DPI Puppeteer-motor. Optimerad för Amazon KDP.",
-    "epubDesc": "Flödande tvåspråkig textlayout. Optimerad för Kindle och Apple Books.",
-    "qualityPrint": "Utskrift",
+    "proQuality": "Pro-kvalitet (utkast)",
+    "freeWarning": "Ett vattenstämpel kommer att appliceras på denna export i gratisplanen.",
+    "pdfDesc": "Högkvalitativ export via 300 DPI Puppeteer-motor. Optimerad för Amazon KDP.",
+    "epubDesc": "Tosproget text-layout. Optimerad för Kindle och Apple Books.",
+    "qualityPrint": "Tryck",
     "qualityWeb": "Webb",
-    "qualityDraft": "Utkast"
+    "qualityDraft": "Utkast",
+    "pdfError": "PDF-export misslyckades",
+    "pdfErrorDesc": "Exporten misslyckades. Kontrollera din anslutning till utskriftsmotorn.",
+    "epubError": "EPUB-export misslyckades",
+    "epubErrorDesc": "Ett fel uppstod vid generering av EPUB-filen.",
+    "chapter": "Kapitel",
+    "engineLabel": "PUBLICERINGSMOTOR FÖR TVÅSPRÅKIGA BÖCKER",
+    "studyDeck": "Studieset (Anki/CSV)",
+    "deckDesc": "Exportera dina AI-grammatiknoter och markerat ordförråd till Anki, Quizlet eller Excel.",
+    "noCardsFound": "Inga flashcards hittades. Använd verktyget 'AI-noteringar' för att skapa några först!",
+    "systemStatus": "Systemstatus",
+    "gridLock": "Grid-Lock-arkitektur",
+    "engineActive": "Motor aktiv",
+    "waitingContent": "Väntar på innehåll...",
+    "mirrorGutter": "Logik för spegelmarginaler",
+    "profileLoaded": "Profil laddad",
+    "audiobookEngine": "Neural ljudbok",
+    "audiobookDesc": "Generera ljudböcker i studiokvalitet med Microsoft Neural TTS. Filerna organiseras efter kapitel i en ZIP-fil.",
+    "voicePersona": "Berättarröst",
+    "selectVoice": "Välj en röst...",
+    "renderingChapter": "Syntetiserar kapitel {chapter}...",
+    "exportAudioZip": "Exportera ljud (ZIP)",
+    "neuralEngine": "Microsoft Neural TTS-motor",
+    "noAudioContent": "Inget textinnehåll hittades för att generera ljud. Lägg till textblock först!",
+    "audioExportError": "Ljudexport misslyckades. Kontrollera din anslutning och försök igen.",
+    "socialShare": "Social delning",
+    "socialShareDesc": "Exportera dina tvåspråkiga citat som vackra bilder för Instagram, Twitter eller Pinterest.",
+    "socialFormat": "Format",
+    "squareFormat": "Kvadrat (Instagram)",
+    "storyFormat": "Story (1080×1920)",
+    "twitterFormat": "Twitter-kort",
+    "pinterestFormat": "Pinterest-pin",
+    "exportImage": "Exportera bild",
+    "includeBranding": "Inkludera Synoptic-varumärke",
+    "selectBlock": "Välj ett textblock att exportera"
   },
   "Onboarding": {
-    "tourDashboardContent": "Välkommen till Synoptic! Detta är din projekthub.",
+    "tourDashboardContent": "Välkommen till Synoptic! Detta är din projektöversikt.",
     "tourNewProjectContent": "Börja här för att skapa ditt första tvåspråkiga mästerverk.",
-    "tourLibraryContent": "Importera klassiska texter från vårt bibliotek med publika verk.",
+    "tourLibraryContent": "Importera klassiska texter från vårt bibliotek med verk i det fria.",
     "tourPageListContent": "Navigera genom bokens sidor här.",
-    "tourToolsContent": "Lägg till textblock, bilder och AI-drivna annoteringar.",
-    "tourPublishContent": "Redo för utskrift? Exportera till PDF eller EPUB på några sekunder.",
-    "tourWorkspaceContent": "Detta är din kanvas. Vänster kolumn är källan, höger kolumn är din översättning."
+    "tourToolsContent": "Lägg till textblock, bilder och AI-noteringar.",
+    "tourPublishContent": "Klar för tryck? Exportera till PDF eller EPUB på några sekunder.",
+    "tourWorkspaceContent": "Detta är din lärred. Vänstra kolumnen är originalet, högra är översättningen."
   },
   "CommandPalette": {
+    "esc": "Esc",
     "placeholder": "Skriv ett kommando eller sök...",
     "noResults": "Inga resultat hittades.",
     "actions": "Åtgärder",
@@ -316,9 +652,417 @@
     "redo": "Gör om åtgärd",
     "deleteBlock": "Ta bort markerat block",
     "exportPdf": "Exportera till PDF",
-    "select": "Välj",
-    "navigate": "Navigera",
+    "select": "välj",
+    "navigate": "navigera",
     "paletteTitle": "Synoptic kommandopalett",
     "commandMenu": "Kommandomeny"
+  },
+  "AboutPage": {
+    "title": "Framtidens översättning",
+    "subtitle": "Synoptic föddes ur en enkel insikt: Världen kommer närmare, men våra böcker är fortfarande enspråkiga. Vi byggde den första studion dedikerad till konsten (och vetenskapen) bakom tvåspråkig publicering.",
+    "sovereignTitle": "Ingen träningsgaranti",
+    "sovereignDesc": "De flesta AI-verktyg gör anspråk på dina data. Det gör inte vi. Ditt manuskript tränar inte en global hjärna; det stannar i din privata kammare.",
+    "soulTitle": "Tillståndslös behandling",
+    "soulDesc": "Vi använder en tillståndslös arkitektur (NextResponse). Så snart översättningen levererats stängs agenten ner och minnet rensas direkt.",
+    "values": "Våra värderingar",
+    "privacyTitle": "Integritet först",
+    "privacyDesc": "Dina manuskript är din egendom. Vi använder säker infrastruktur för att säkerställa att din intellektuella egendom aldrig lämnar din kontroll.",
+    "perfTitle": "Hög prestanda",
+    "perfDesc": "Byggd för den moderna webben. Varje interaktion är snabb, från molnsynkronisering till 300 DPI PDF-export.",
+    "communityTitle": "Skapt för communityn",
+    "communityDesc": "Vi utvecklas ständigt tack vare feedback från vår community av författare, polyglotter och utbildare.",
+    "cta": "Gå med i revolutionen"
+  },
+  "PrivacyPage": {
+    "title": "Integritet @ Synoptic",
+    "subtitle": "Vi vet att dina manuskript är din själ. Vår policy skyddar din intellektuella egendom.",
+    "philosophyTitle": "Vår integritetsfilosofi",
+    "philosophyDesc": "Synoptic bygger på principen om 'Suverän kunskap'. Vi samlar bara in det som är absolut nödvändigt.",
+    "collectTitle": "Information vi samlar in",
+    "collectDesc": "Kontodata (e-post) för åtkomst, projekt-metadata och användarinnehåll endast för behandling.",
+    "collectItems": [
+      "Kontodata: Namn och e-post för fakturering.",
+      "Projekt-metadata: För att underhålla katalogtillståndet.",
+      "Användarinnehåll: Krypterat och isolerat."
+    ],
+    "aiProcessingTitle": "AI-behandling och dataisolering",
+    "aiProcessingDesc": "Vi skiljer oss från vanliga AI-verktyg. Dina manuskript används INTE för att träna globala modeller.",
+    "securityTitle": "Lagring och säkerhet",
+    "securityDesc": "Alla data krypteras vid transport (TLS/SSL) och vid vila. Du kan radera dina projekt när som helst.",
+    "sharingTitle": "Delning med tredje part",
+    "sharingDesc": "Vi säljer inte dina data. Vi delar bara med nödvändiga tjänster som Stripe (betalning) och AWS/DigitalOcean (infrastruktur).",
+    "contactTitle": "Kontakt",
+    "contactDesc": "Vid frågor om integritet: privacy@getsynoptic.com",
+    "lastUpdated": "Senast uppdaterad: december 2025"
+  },
+  "TermsPage": {
+    "title": "Användarvillkor",
+    "subtitle": "Klara regler. Du äger arbetet. Vi äger verktyget.",
+    "introTitle": "1. Introduktion",
+    "introDesc": "Välkommen till Synoptic. Genom att använda vår studio godkänner du dessa villkor. Senast uppdaterad: december 2025.",
+    "ipTitle": "2. Immateriella rättigheter",
+    "ipDesc": "Vi skiljer tydligt på verktyget och skapelsen.",
+    "ipItems": [
+      "Din suveränitet: Du har 100 % äganderätt till dina manuskript och exportfiler.",
+      "Vår teknologi: Interfacet och kompositionsmotorn v4.0 tillhör Synoptic."
+    ],
+    "obligationsTitle": "3. Användarförpliktelser",
+    "obligationsDesc": "Du förbinder dig att inte dekompilera vår motor eller använda skript för att extrahera data från vårt bibliotek.",
+    "paymentTitle": "4. Prenumerationer och AI-enheter",
+    "paymentDesc": "Planer faktureras månadsvis. AI-enheter förbrukas per 'intellektuell åtgärd'. Outnyttjade enheter sparas inte.",
+    "publishingTitle": "5. Friskrivningsklausul",
+    "publishingDesc": "Trots att vi är optimerade för KDP garanterar vi inte godkännande hos tredje part. Du ansvarar för den slutliga korrekturläsningen.",
+    "terminationTitle": "6. Uppsägning",
+    "terminationDesc": "Vi förbehåller oss rätten att stänga av konton som bryter mot vår policy för rimlig användning (Fair Use)."
+  },
+  "ModelsPage": {
+    "title": "Strukturbibliotek",
+    "subtitle": "Varje berättelse kräver sin egen arkitektur. Välj från vår samling av professionella tvåspråkiga mallar.",
+    "pixelPerfect": "Pixelperfekta layouter",
+    "gutterTitle": "Logik för spegelmarginaler",
+    "gutterDesc": "Automatisk justering av inre och yttre marginaler baserat på bindningstyp.",
+    "symmetryTitle": "Symmetriskydd",
+    "symmetryDesc": "Varningar i realtid om tvåspråkiga block hamnar ur synk mellan sidor.",
+    "templates": {
+      "classic": {
+        "title": "Klassisk parallell",
+        "desc": "Guldstandarden för tvåspråkig läsning. Strikt justerade kolumner för tryckta utgåvor av hög kvalitet."
+      },
+      "alternating": {
+        "title": "Alternerande fördjupning",
+        "desc": "Perfekt för digitala enheter. Flöde stycke för stycke för att bibehålla fokus."
+      },
+      "academic": {
+        "title": "Filologiskt studie",
+        "desc": "Djupgående akademisk analys med ord-för-ord-annotationer direkt under källan."
+      },
+      "modern": {
+        "title": "Moderna vers",
+        "desc": "Minimalistisk layout optimerad för poesi med breda konstnärliga marginaler."
+      }
+    },
+    "viewTemplate": "Utforska struktur",
+    "typesettingTitle": "Tvåspråkig logik",
+    "exampleSource": "The stars were bright above the silent lake.",
+    "exampleTarget": "Stjärnorna lyste klart över den tysta sjön.",
+    "labels": {
+      "source": "Källa ({lang})",
+      "translation": "Översättning ({lang})",
+      "engine": "Kompositionsmotor v4.0"
+    }
+  },
+  "LearnPage": {
+    "title": "Bemästra vilket språk som helst genom fördjupning",
+    "subtitle": "Glöm tråkiga läroböcker. Skapa dina egna material från berättelserna du faktiskt vill läsa.",
+    "badge": "För polyglotter och studenter",
+    "browseLibrary": "Utforska biblioteket",
+    "features": {
+      "reader": {
+        "title": "Den smarta läsaren",
+        "desc": "Läs bekvämt med vår synkroniserade rullning. Dina ögon tappar aldrig översättningen ur sikte."
+      },
+      "study": {
+        "title": "AI-studieassistent",
+        "desc": "Ställ grammatikfrågor direkt i texten. Det är som att ha en privatlärare på varje sida."
+      },
+      "custom": {
+        "title": "Egna material",
+        "desc": "Importera egna artiklar eller PDF-filer. Synoptic formaterar dem perfekt för studier."
+      }
+    },
+    "immersion": {
+      "title": "Vetenskapen bakom sida-vid-sida",
+      "p1": "Att läsa på ditt målspråk är det mest effektiva sättet att lära sig ordförråd. Men att ge sig på en utländsk bok kan kännas skrämmande.",
+      "p2": "Synoptic tar bort det hindret. Genom att erbjuda en översättning som justeras mening för mening låter vi din hjärna mappa nya ord naturligt.",
+      "tag1": "Naturlig inlärning",
+      "tag2": "Tvåspråkig mappning",
+      "verified": "Verifierad AI-översättning",
+      "flashcard": "Flashcard genererat!"
+    },
+    "ctaSection": {
+      "title": "Redo för flytande språk?",
+      "subtitle": "Gå med de tusentals studenter som har bytt ut manualerna mot en fördjupande upplevelse.",
+      "button": "Skapa ett gratiskonto"
+    },
+    "cta": "Starta min resa"
+  },
+  "PublishPage": {
+    "title": "Publicering i industriell kvalitet",
+    "subtitle": "Synoptic är byggt för stora volymer. Vår infrastruktur stödjer förlag som kräver konsekvens.",
+    "infra": "Infrastruktur för förlag",
+    "cta": "Börja publicera nu",
+    "enterprise": "Kontakt företag",
+    "features": {
+      "engine": {
+        "title": "Grid-Lock-motor",
+        "desc": "Vår CSS Grid-motor låser styckena matematiskt, vilket förhindrar desynkronisering."
+      },
+      "exports": {
+        "title": "Proffs-export",
+        "desc": "Generera 300 DPI PDF-filer med sRGB-färgprofiler. Dina uppladdningar till KDP blir godkända."
+      },
+      "distribution": {
+        "title": "Redo för global distribution",
+        "desc": "Exportera valida EPUB 3.0-filer för Kindle, Apple Books och ledande återförsäljare."
+      }
+    },
+    "volumeTitle": "Produktionsflöde",
+    "volumeSubtitle": "Från manuskript till marknad i tre steg.",
+    "step1": "Importera eller skapa",
+    "step1Desc": "Klistra in ditt manus eller skriv direkt. Vår AI sköter den inledande formateringen.",
+    "step2": "Förfina och validera",
+    "step2Desc": "Använd Grid-Lock-editorn för den perfekta layouten. Symmetriskyddet förhindrar fel.",
+    "step3": "Exportera och publicera",
+    "step3Desc": "Ladda ner dina färdiga filer. Ladda upp direkt till KDP, IngramSpark eller din distributör.",
+    "available": "Tillgänglig nu",
+    "epubTitle": "EPUB 3.0 + Fixed Layout",
+    "epubDesc": "Fullt stöd för reflowable och fixed-layout EPUB-format. Perfekt för barnböcker.",
+    "compliant": "EPUB 3.0-kompatibel",
+    "fixed": "Fixed-layout support",
+    "scaleTitle": "Vill du skala upp din produktion?",
+    "scaleDesc": "Oavsett om du ger ut 5 eller 500 titlar växer Synoptic med dig.",
+    "sales": "Kontakta sälj"
+  },
+  "Library": {
+    "title": "Bibliotek för upptäckter",
+    "subtitle": "Bläddra bland över 85 källor till gratis innehåll för dina tvåspråkiga böcker.",
+    "searchPlaceholder": "Sök efter titel, författare eller nyckelord...",
+    "badge": "60+ källor till gratis innehåll",
+    "heroTitle": "Bibliotek för upptäckter",
+    "heroSubtitle": "Hitta handplockat innehåll för dina tvåspråkiga böcker. Heliga texter, klassisk litteratur och mer, allt med verifierad licens.",
+    "browseLibrary": "Utforska biblioteket",
+    "commercialSafe": "Säker för kommersiellt bruk",
+    "attributionRequired": "Källhänvisning krävs",
+    "categories": {
+      "all": "Alla",
+      "sacred": "Heligt och visdom",
+      "literature": "Litteratur",
+      "visual": "Visuellt och konst",
+      "knowledge": "Kunskap och fakta",
+      "news": "Nyheter och media",
+      "history": "Historia",
+      "language": "Språkinlärning",
+      "academic": "Akademiskt och forskning",
+      "popculture": "Popkultur"
+    },
+    "categoryDescriptions": {
+      "sacred": "Spirituella texter från världens traditioner",
+      "literature": "Romaner, poesi, teater och folktro",
+      "visual": "Konst från museer, NASA-foton och mer",
+      "news": "Rubriker, artiklar och media",
+      "history": "Historiska dokument och arkiv",
+      "language": "Meningar, ordförråd och övningar",
+      "knowledge": "Fakta, citat, recept och geografi",
+      "academic": "Forskning, formellt skrivande och prover",
+      "popculture": "Serier, spel och underhållning"
+    },
+    "licenses": {
+      "all": "Alla licenser",
+      "commercialSafe": "Säker för kommersiellt bruk",
+      "attribution": "Källhänvisning krävs",
+      "personalOnly": "Endast för personligt bruk",
+      "licenseType": "Licenstyp"
+    },
+    "difficulty": {
+      "all": "Alla nivåer",
+      "level": "Nivå",
+      "difficultyLevel": "Svårighetsgrad",
+      "beginner": "Nybörjare",
+      "intermediate": "Mellanliggande",
+      "expert": "Expert"
+    },
+    "tile": {
+      "beginner": "Nybörjare",
+      "intermediate": "Mellanliggande",
+      "expert": "Expert",
+      "studyOnly": "Endast studie"
+    },
+    "search": {
+      "placeholder": "Sök...",
+      "quickFilters": "Snabbfilter:",
+      "showing": "Visar",
+      "of": "av",
+      "templates": "mallar",
+      "clearAllFilters": "Rensa alla filter",
+      "noTemplatesFound": "Inga mallar hittades",
+      "tryAdjusting": "Testa att justera din sökning eller dina filter."
+    },
+    "quickTags": {
+      "bestsellers": "🏆 Bestsellers",
+      "dailyPractice": "📅 Daglig träning",
+      "quickSessions": "⚡ Snabba sessioner",
+      "giftIdeas": "🎁 Presenttips",
+      "posters": "🖼️ Affischer",
+      "flashcards": "📚 Flashcards",
+      "vocabulary": "📖 Ordförråd",
+      "socialMedia": "📱 Sociala medier"
+    },
+    "wizard": {
+      "start": "Starta",
+      "back": "Tillbaka",
+      "import": "Importera innehåll",
+      "cancel": "Avbryt",
+      "search": "Sök",
+      "preview": "Förhandsgranskning",
+      "randomize": "Överraska mig!",
+      "loading": "Hämtar innehåll...",
+      "error": "Något gick fel",
+      "whatYouCanDo": "Vad du kan göra",
+      "searchContent": "Sök efter innehåll",
+      "pickByReference": "Välj efter referens",
+      "randomSelection": "Slumpmässigt urval",
+      "imagesIncluded": "Inkl. bilder",
+      "audioIncluded": "Inkl. ljud",
+      "selectedChapters": "Valda kapitel",
+      "fullBook": "Hela boken",
+      "customRange": "Eget intervall",
+      "book": "Bok",
+      "startChapter": "Startkapitel",
+      "endChapter": "Slutkapitel"
+    },
+    "license": {
+      "commercialSafeDesc": "Detta innehåll är antingen i det fria eller har en kommersiell licens. Du får sälja verk baserade på det.",
+      "attributionDesc": "Kommersiellt bruk tillåtet om källan anges korrekt.",
+      "personalOnlyDesc": "Endast för personliga studier. Det är inte tillåtet att sälja verk baserade på detta innehåll.",
+      "viewFull": "Se fullständig licens →"
+    },
+    "warning": {
+      "title": "Begränsad licens",
+      "personalUseOnly": "Endast för personligt bruk",
+      "whyRestricted": "Varför är det begränsat?",
+      "youCan": "Du FÅR använda det för:",
+      "youCannot": "Du FÅR INTE:",
+      "personalStudy": "Personliga studier",
+      "languagePractice": "Språkträning",
+      "teachingMaterials": "Undervisningsmaterial",
+      "academicResearch": "Akademisk forskning",
+      "sellTranslations": "Sälja översättningar",
+      "publishEbook": "Ge ut som e-bok",
+      "commercialDistribution": "Kommersiell distribution",
+      "monetizeSocial": "Tjäna pengar på det på sociala medier",
+      "acknowledge": "Jag förstår att detta innehåll endast är för personliga studier och att jag inte ska sälja det.",
+      "chooseAnother": "Välj en annan källa",
+      "understand": "Jag förstår, fortsätt"
+    },
+    "credits": {
+      "title": "Kreditering och källhänvisning",
+      "intro": "Detta projekt använder innehåll från följande källor:",
+      "generated": "Kreditering genererad av Synoptic den",
+      "attributionRequired": "Källhänvisning krävs"
+    },
+    "cta": {
+      "browseLibrary": "Utforska biblioteket",
+      "getStartedFree": "Börja gratis",
+      "learnMore": "Läs mer",
+      "readyToStart": "Redo för din bok?",
+      "importAndStart": "Importera en källa och börja översätta i studion."
+    },
+    "favorites": {
+      "title": "Mina sparade mallar",
+      "quickAccess": "Snabb åtkomst till dina favorit-innehåll.",
+      "noSaved": "Inga mallar sparade än",
+      "noSavedDesc": "Utforska vårt bibliotek och spara dina favoriter för snabb åtkomst.",
+      "exploreLibrary": "Utforska biblioteket",
+      "viewAll": "Visa alla {count} sparade mallar",
+      "browseAll": "Visa alla",
+      "saved": "Sparat",
+      "addToFavorites": "Lägg till i favoriter",
+      "removeFromFavorites": "Ta bort från favoriter",
+      "readyToCreate": "Redo att skapa?",
+      "signInToSave": "Logga in för att spara och skapa.",
+      "startCreating": "Börja skapa",
+      "signInAndCreate": "Logga in och skapa"
+    }
+  },
+  "Tools": {
+    "aiDraft": {
+      "title": "AI-utkast",
+      "button": "AI-utkast",
+      "original": "Original:",
+      "translation": "Översättning:",
+      "translating": "Översätter...",
+      "tryAgain": "Försök igen",
+      "copy": "Kopera",
+      "copied": "Kopierat!",
+      "applyToL2": "Applicera på L2",
+      "poweredBy": "Levereras av LibreTranslate"
+    },
+    "grammar": {
+      "title": "Grammatikkontroll",
+      "button": "Grammatik",
+      "checking": "Kontrollerar...",
+      "detected": "Hittade:",
+      "noIssuesFound": "Inga problem hittades!",
+      "textLooksGreat": "Din text ser fantastisk ut.",
+      "issuesFound": "{count} problem hittades",
+      "fixAll": "Åtgärda alla",
+      "tryAgain": "Försök igen",
+      "poweredBy": "Levereras av LanguageTool"
+    },
+    "definition": {
+      "origin": "Ursprung",
+      "lookingUp": "Slår upp...",
+      "wordNotFound": "Ord hittades inte",
+      "more": "Mer",
+      "poweredBy": "Free Dictionary API"
+    },
+    "synonyms": {
+      "synonymsFor": "Synonymer för:",
+      "findingSynonyms": "Hittar synonymer...",
+      "noSynonymsFound": "Inga synonymer hittades",
+      "synonyms": "Synonymer",
+      "antonyms": "Antonymer",
+      "related": "Relaterade",
+      "selectWordFirst": "Välj ett ord och högerklicka",
+      "poweredBy": "Levereras av Datamuse"
+    },
+    "polisher": {
+      "title": "Textförbättring",
+      "button": "Förbättra",
+      "polishing": "Förbättrar...",
+      "suggestedImprovements": "Föreslagna förbättringar"
+    },
+    "assetBank": {
+      "title": "Emojibank",
+      "noResults": "Inga emojis hittades"
+    },
+    "socialShare": {
+      "square": "Kvadrat",
+      "story": "Story",
+      "wide": "Bred"
+    }
+  },
+  "Settings": {
+    "title": "Användarinställningar",
+    "displayName": "Visningsnamn",
+    "displayNamePlaceholder": "Ditt namn",
+    "interfaceLanguage": "Gränssnittsspråk",
+    "interfaceLanguageHint": "Ställer in standardspråket för studion.",
+    "saving": "Sparar...",
+    "saveSettings": "Spara inställningar",
+    "cancel": "Avbryt"
+  },
+  "Filters": {
+    "license": "Licens",
+    "commercial": "Kommersiell",
+    "attribution": "Källhänvisning",
+    "personal": "Personlig"
+  },
+  "Errors": {
+    "translationFailed": "Översättningen misslyckades",
+    "grammarCheckFailed": "Kontrollen misslyckades",
+    "lookupFailed": "Sökningen misslyckades",
+    "fetchFailed": "Kunde inte hämta innehåll",
+    "connectionError": "Anslutningsfel. Försök igen.",
+    "unexpectedError": "Ett oväntat fel uppstod"
+  },
+  "Accessibility": {
+    "openMenu": "Öppna menyn",
+    "closeMenu": "Stäng menyn",
+    "loading": "Laddar",
+    "searchResults": "Sökresultat",
+    "noResults": "Inga resultat hittades",
+    "sortBy": "Sortera efter",
+    "filterBy": "Filtrera efter"
   }
 }

@@ -1,324 +1,1068 @@
 {
-  "Studio": {
-    "title": "Synoptic Studio",
-    "saving": "Concept opslaan...",
-    "saved": "Alle wijzigingen opgeslagen in de cloud",
-    "ready": "Klaar voor je tweetalige meesterwerk",
-    "addPage": "Nieuwe pagina toevoegen",
-    "pageSettings": "Pagina {number} instellingen",
-    "enteringStudio": "Studio binnengaan...",
-    "failedToLoadProject": "Laden van project mislukt",
-    "retryConnection": "Opnieuw verbinding maken",
-    "pageManager": "Paginabeheer",
-    "globalDesign": "Globaal ontwerp",
-    "stylePresets": "Stijlvoorinstellingen",
-    "editorTools": "Editor-tools",
-    "canvasActions": "Canvas-acties",
-    "drafting": "Ontwerpen",
-    "chapterStart": "Begin van hoofdstuk",
-    "manuscript": "Manuscript",
-    "chapters": "Hoofdstukken",
-    "noChapters": "Geen hoofdstukken gedefinieerd",
-    "deletePage": "Pagina verwijderen",
-    "resetFactory": "Herstellen naar fabrieksinstellingen",
-    "bilingualEditor": "Tweetalige editor"
+  "Common": {
+    "save": "Opslaan",
+    "cancel": "Annuleren",
+    "delete": "Verwijderen",
+    "copy": "Kopiëren",
+    "duplicate": "Dupliceren",
+    "edit": "Bewerken",
+    "loading": "Laden...",
+    "error": "Er is een fout opgetreden",
+    "success": "Succes",
+    "back": "Vorige",
+    "next": "Volgende",
+    "backToHome": "Terug naar Home",
+    "on": "Aan",
+    "off": "Uit",
+    "pdf": "PDF",
+    "epub": "EPUB",
+    "close": "Sluiten",
+    "original": "Origineel",
+    "translation": "Vertaling",
+    "importFailed": "Importeren mislukt"
+  },
+  "Auth": {
+    "login": "Inloggen",
+    "signup": "Registreren",
+    "logout": "Uitloggen",
+    "email": "E-mail",
+    "password": "Wachtwoord",
+    "forgotPassword": "Wachtwoord vergeten?",
+    "noAccount": "Nog geen account?",
+    "hasAccount": "Heb je al een account?",
+    "haveAccount": "Heb je al een account?",
+    "verifyEmail": "E-mail verifiëren",
+    "welcomeBack": "Welkom terug",
+    "createAccount": "Account aanmaken",
+    "signInDesc": "Log in om toegang te krijgen tot je projecten.",
+    "signUpDesc": "Maak een account aan om te beginnen met publiceren.",
+    "emailPlaceholder": "naam@voorbeeld.nl",
+    "passwordPlaceholderLogin": "••••••••",
+    "passwordPlaceholderSignup": "Minimaal 8 tekens",
+    "failed": "Authenticatie mislukt",
+    "errorOccurred": "Er is een onverwachte fout opgetreden",
+    "signingIn": "Inloggen...",
+    "creatingAccount": "Account aanmaken...",
+    "signIn": "Log in",
+    "termsPrompt": "Door door te gaan, ga je akkoord met onze Servicevoorwaarden en Privacybeleid.",
+    "continueWithGoogle": "Doorgaan met Google",
+    "orContinueWithEmail": "of ga door met e-mail",
+    "passwordStrength": "Wachtwoordsterkte",
+    "weak": "Zwak",
+    "fair": "Gemiddeld",
+    "strong": "Sterk",
+    "oauthError": "OAuth-authenticatie mislukt. Probeer het opnieuw.",
+    "emailNotVerified": "Verifieer eerst je e-mail via Google.",
+    "securityNote": "256-bit SSL-versleuteling • AVG-conform",
+    "recentActivity": "Recente activiteit",
+    "lastSession": "Laatste sessie",
+    "savedSecurely": "Veilig opgeslagen",
+    "cloudSync": "Cloudsynchronisatie",
+    "active": "Actief"
+  },
+  "Dashboard": {
+    "title": "Mijn Projecten",
+    "subtitle": "Beheer en bewerk je tweetalige boeken.",
+    "newProject": "Nieuw Project",
+    "noProjects": "Geen projecten gevonden. Maak je eerste aan!",
+    "emptyState": "Je hebt nog geen projecten aangemaakt.",
+    "yourProjects": "Jouw Projecten",
+    "settings": "Instellingen",
+    "profile": "Profiel",
+    "billing": "Facturering",
+    "noDescription": "Geen beschrijving.",
+    "lastUpdated": "Laatst bijgewerkt",
+    "stats": {
+      "projects": "Projecten",
+      "pages": "Pagina's",
+      "words": "Woorden"
+    },
+    "projectCard": {
+      "edited": "Bewerkt",
+      "open": "Open",
+      "delete": "Verwijderen",
+      "confirmDelete": "Weet je zeker dat je dit project wilt verwijderen?"
+    }
   },
   "Blocks": {
     "text": "Tekstblok",
     "image": "Afbeeldingsblok",
     "separator": "Scheidingslijn",
-    "callout": "Callout",
+    "callout": "Infoblok",
+    "quiz": "Quiz-oefening",
     "insertText": "Tekstblok invoegen",
-    "addBlankPage": "Blanke pagina toevoegen",
+    "addBlankPage": "Lege pagina toevoegen",
     "media": "Media",
     "ai": "Vertaal-AI",
     "settings": "Studio-instellingen",
     "grammar": "Grammaticaregel",
-    "culture": "Cultureel inzicht",
-    "vocabulary": "Woordenschat-vonk",
+    "culture": "Culturele noot",
+    "vocabulary": "Vocabulaire",
     "tip": "Leertip",
-    "warning": "Grammaticawaarschuwing",
+    "warning": "Grammatica-waarschuwing",
     "note": "Algemene notitie",
-    "pronunciation": "Uitspraakgids"
+    "pronunciation": "Uitspraakgids",
+    "workbookExercise": "Werkboek-oefening",
+    "autoHint": "Auto-hint",
+    "regenerateHint": "Hint regenereren",
+    "showAnswer": "Antwoord tonen",
+    "hideAnswer": "Antwoord verbergen",
+    "customHint": "Aangepaste hint",
+    "difficulty": "Moeilijkheid",
+    "difficultyEasy": "Eenvoudig",
+    "difficultyMedium": "Gemiddeld",
+    "difficultyHard": "Moeilijk",
+    "emptyImageBlock": "Leeg afbeeldingsblok"
   },
   "Inspector": {
-    "visibility": "Zichtbaarheid overschrijven",
+    "visibility": "Zichtbaarheid Overschrijven",
     "header": "Koptekst",
+    "headerOverlay": "Koptekst Overlay",
     "footer": "Voettekst",
+    "footerOverlay": "Voettekst Overlay",
     "pageNumber": "Paginanummer",
-    "content": "Inhoud overschrijven",
+    "content": "Inhoud Overschrijven",
     "typography": "Typografie",
     "layout": "Layout & Strategie",
-    "printingFlow": "Printen & Flow",
-    "markChapterStart": "Markeren als begin van hoofdstuk",
-    "forceBlank": "Gedwongen blanke pagina",
-    "pageLocalOnly": "Wijzigingen hier hebben alleen invloed op de huidige pagina.",
-    "inspectorTitle": "{type} inspecteur",
+    "printingFlow": "Printen & Doorloop",
+    "markChapterStart": "Markeer als Hoofdstukstart",
+    "forceBlank": "Forceer Lege Pagina",
+    "pageLocalOnly": "Wijzigingen hier zijn alleen van toepassing op de huidige pagina.",
+    "inspectorTitle": "{type}-inspector",
     "lineHeight": "Regelhoogte",
     "paraSpacing": "Alinea-afstand",
     "dimensions": "Afmetingen",
     "width": "Breedte (%)",
     "alignment": "Uitlijning",
-    "styleEffects": "Stijl & Effecten",
+    "styleEffects": "Stijlen & Effecten",
     "shadow": "Schaduw",
     "borderRadius": "Hoekradius",
     "stylePattern": "Stijl & Patroon",
     "thickness": "Dikte",
-    "contextType": "Contexttype",
+    "contextType": "Context-type",
     "brandingColor": "Merkkleur",
-    "stylePreset": "Stijlvoorinstelling",
-    "solidLine": "Doorgetrokken lijn",
+    "stylePreset": "Stijl-preset",
+    "solidLine": "Ononderbroken lijn",
     "doubleLine": "Dubbele lijn",
-    "dashedLine": "Stippellijn",
-    "dottedLine": "Gepunteerde lijn",
-    "gradientFade": "Gradiëntvervaging",
-    "ornament": "Bloemornament"
+    "dashedLine": "Gestippelde lijn",
+    "dottedLine": "Gepunte lijn",
+    "gradientFade": "Gradiënt",
+    "ornament": "Ornament"
   },
   "Theme": {
-    "title": "Globaal ontwerp",
-    "layout": "Globale layout",
+    "title": "Globaal Ontwerp",
+    "layout": "Globale Layout",
     "typography": "Typografie (Globaal)",
-    "bodyText": "Bodytekst",
-    "headings": "Hoofdkopteksten",
+    "bodyText": "Lopende tekst",
+    "headings": "Koppen",
     "baseScaling": "Basisschaling",
-    "fontSize": "Body lettergrootte",
+    "fontSize": "Lettergrootte",
     "lineHeight": "Globale regelhoogte",
-    "colorPresets": "Kleurvoorinstellingen",
+    "colorPresets": "Kleur-presets",
     "lightMode": "Lichte modus",
     "darkMode": "Donkere modus"
   },
   "Presets": {
-    "title": "Stijlvoorinstellingen",
-    "empty": "Selecteer een blok om de stijl vast te leggen als een herbruikbare voorinstelling.",
-    "selected": "Geselecteerde context",
-    "canCapture": "Je kunt de styling van dit {type}-blok vastleggen.",
+    "title": "Stijl-presets",
+    "empty": "Selecteer een blok om de stijl op te slaan als een herbruikbare preset.",
+    "selected": "Geselecteerde Context",
+    "canCapture": "Je kunt de stijl opslaan voor dit {type}-blok.",
     "saveCurrent": "Huidige stijl opslaan",
     "library": "Globale bibliotheek",
     "typeStyle": "{type}-stijl",
     "synced": "Bibliotheek gesynchroniseerd"
   },
   "Wizard": {
-    "createTitle": "Nieuw project maken",
-    "createMasterpiece": "Nieuw meesterwerk maken",
+    "createTitle": "Nieuw Project Maken",
+    "createMasterpiece": "Nieuw Veilig Project",
     "stepInformation": "Informatie",
     "stepLanguages": "Talen",
     "stepFormat": "Formaat",
-    "stepTemplate": "Sjabloon",
+    "stepTemplate": "Template",
     "projectTitle": "Projecttitel *",
     "titlePlaceholder": "bijv. Twintigduizend mijlen onder zee",
     "author": "Auteur",
-    "authorPlaceholder": "Jouw naam of oorspronkelijke auteur",
+    "authorPlaceholder": "Jouw naam of originele auteur",
     "category": "Categorie / Tag",
     "categoryPlaceholder": "bijv. Fictie, Educatie",
     "sourceLang": "Brontaal (L1)",
     "targetLang": "Doeltaal (L2)",
-    "langWarning": "Waarschuwing: Bron- en doeltalen moeten verschillend zijn voor een tweetalig project.",
-    "langTip": "Tip: De meeste gebruikers kiezen hun moedertaal als doeltaal en de taal die ze leren als brontaal.",
+    "langWarning": "Waarschuwing: Bron- en doeltaal moeten verschillend zijn voor een tweetalig project.",
+    "langTip": "Tip: De meeste mensen kiezen hun moedertaal als doeltaal en de taal die ze leren als brontaal.",
     "dimensions": "Fysieke afmetingen (mm)",
-    "custom": "Zelf definiëren",
-    "layoutStyle": "Layoutstijl",
-    "back": "Terug",
+    "custom": "Aangepaste definitie",
+    "layoutStyle": "Layout-stijl",
+    "back": "Vorige",
     "next": "Volgende stap",
-    "creating": "Studio smeden...",
-    "launch": "Studio lanceren",
-    "blankTemplate": "Blanco beginnen",
-    "blankDesc": "Geen inhoud, een schone lei",
-    "classicTemplate": "Klassiek zij-aan-zij",
-    "classicDesc": "Gebalanceerde kolommen, schreefletters",
+    "creating": "Studio initialiseren...",
+    "launch": "Studio openen",
+    "secureNote": "Versleutelde & Geïsoleerde Projectomgeving",
+    "blankTemplate": "Vanaf nul beginnen",
+    "blankDesc": "Lege pagina voor eigen layouts",
+    "classicTemplate": "Klassiek Naast Elkaar",
+    "classicDesc": "Geoptimaliseerd voor dichtbevolkte tekst",
     "poetryTemplate": "Poëzie / Verzen",
-    "poetryDesc": "Genummerde regels, gecentreerde focus",
+    "poetryDesc": "Geoptimaliseerd voor verzen en liedteksten (Modern)",
+    "academicTemplate": "Filologische Studie",
+    "academicDesc": "Brede marges, voetnoten",
     "width": "Breedte (mm)",
     "height": "Hoogte (mm)",
-    "upgradeToCreateMore": "Upgrade om meer te maken",
-    "reachedFreeLimit": "Je hebt de gratis limiet bereikt",
-    "freeLimitDesc": "Gratis accounts zijn beperkt tot 1 actief project. Upgrade naar Pro om onbeperkte projecten en geavanceerde AI-functies te ontgrendelen.",
-    "upgradeToPro": "Upgraden naar Pro",
+    "upgradeToCreateMore": "Upgrade om er meer te maken",
+    "reachedFreeLimit": "Gratis limiet bereikt",
+    "freeLimitDesc": "Gratis accounts zijn beperkt tot 1 actief project. Upgrade naar Pro voor onbeperkte projecten en geavanceerde AI-functies.",
+    "upgradeToPro": "Upgrade naar Pro",
     "maybeLater": "Misschien later",
     "usTrade": "US Trade Paper",
     "digest": "Digest",
     "intlStandard": "Internationale standaard"
   },
-  "Common": {
-    "delete": "Verwijderen",
-    "copy": "Kopiëren",
-    "duplicate": "Dupliceren",
-    "save": "Opslaan",
-    "cancel": "Annuleren",
-    "on": "Aan",
-    "off": "Uit",
-    "backToHome": "Terug naar Home"
+  "Studio": {
+    "title": "Synoptic Studio",
+    "collaborate": "Samenwerken",
+    "export": "Exporteren",
+    "preview": "Voorvertoning",
+    "saving": "Concept opslaan...",
+    "saved": "Alle wijzigingen opgeslagen in de cloud",
+    "ready": "Klaar voor je tweetalige meesterwerk",
+    "addPage": "Nieuwe pagina toevoegen",
+    "pageSettings": "Instellingen pagina {number}",
+    "enteringStudio": "Studio openen...",
+    "failedToLoadProject": "Project laden mislukt",
+    "retryConnection": "Opnieuw proberen",
+    "pageManager": "Pagina-beheer",
+    "globalDesign": "Globaal ontwerp",
+    "stylePresets": "Stijl-presets",
+    "editorTools": "Editor-tools",
+    "canvasActions": "Project-acties",
+    "drafting": "Ontwerpen",
+    "chapterStart": "Hoofdstukstart",
+    "manuscript": "Manuscript",
+    "chapters": "Hoofdstukken",
+    "noChapters": "Geen hoofdstukken gedefinieerd",
+    "deletePage": "Pagina verwijderen",
+    "resetFactory": "Fabrieksinstellingen herstellen",
+    "bilingualEditor": "Tweetalige Editor",
+    "bookStructure": "Boekstructuur",
+    "publishingPipeline": "Publicatie-pijplijn",
+    "frontMatter": "Voorwerk",
+    "backMatter": "Navolg",
+    "titlePage": "Titelpagina",
+    "copyrightPage": "Copyrightpagina",
+    "dedicationPage": "Opdracht",
+    "tableOfContents": "Inhoudsopgave",
+    "glossary": "Glossarium",
+    "aboutAuthor": "Over de auteur",
+    "endNotes": "Eindnoten",
+    "autoGlossaryActive": "Auto-glossarium actief",
+    "refreshGlossary": "Glossarium vernieuwen",
+    "glossaryEntries": "{count} items samengesteld",
+    "romanNumeralsInfo": "Voorwerk gebruikt Romeinse cijfers (i, ii, iii). Het boek zelf gebruikt Arabische cijfers (1, 2, 3).",
+    "playAudio": "Voorlezen",
+    "stopAudio": "Stoppen met lezen",
+    "normalSpeed": "Normale snelheid",
+    "slowMode": "Langzame modus (0.7×)",
+    "audioSettings": "Steminstellingen",
+    "grammarPainter": "Grammatica-schilder",
+    "exitPaintMode": "Schildermodus verlaten",
+    "subject": "Onderwerp",
+    "verb": "Werkwoord",
+    "object": "Voorwerp",
+    "adjective": "Bijvoeglijk naamwoord",
+    "adverb": "Bijwoord",
+    "paintTip": "Selecteer tekst om grammaticakleuren toe te passen",
+    "clearAllColors": "Alle kleuren wissen",
+    "syntaxArrows": "Syntaxispijlen",
+    "addArrow": "Pijl toevoegen",
+    "deleteArrow": "Pijl verwijderen",
+    "arrowStyle": "Pijlstijl",
+    "curved": "Gebogen",
+    "angular": "Hoekig",
+    "straight": "Recht",
+    "arrowDrawer": "Syntaxis-linker",
+    "selectSource": "Selecteer bronwoord",
+    "selectTarget": "Selecteer doelwoord",
+    "arrowCreated": "Link aangemaakt",
+    "cancelLink": "Annuleren"
   },
-  "Dashboard": {
-    "title": "Je projecten",
-    "subtitle": "Beheer en bewerk je tweetalige boeken.",
-    "emptyState": "Je hebt nog geen projecten gemaakt.",
-    "noDescription": "Geen beschrijving opgegeven.",
-    "lastUpdated": "Laatst bijgewerkt"
-  },
-  "Auth": {
-    "login": "Inloggen",
-    "signup": "Aanmelden",
-    "welcomeBack": "Welkom terug",
-    "createAccount": "Account aanmaken",
-    "signInDesc": "Log in op je Synoptic-account",
-    "signUpDesc": "Begin vandaag nog met het maken van tweetalige boeken",
-    "email": "E-mail",
-    "password": "Wachtwoord",
-    "emailPlaceholder": "naam@voorbeeld.nl",
-    "passwordPlaceholderLogin": "Voer je wachtwoord in",
-    "passwordPlaceholderSignup": "Maak een wachtwoord aan",
-    "signIn": "Inloggen",
-    "signingIn": "Inloggen...",
-    "creatingAccount": "Account aanmaken...",
-    "noAccount": "Nog geen account?",
-    "hasAccount": "Heb je al een account?",
-    "termsPrompt": "Door door te gaan, ga je akkoord met de servicevoorwaarden en het privacybeleid van Synoptic.",
-    "failed": "Authenticatie mislukt",
-    "errorOccurred": "Er is iets misgegaan"
-  },
-  "Marketing": {
-    "nav": {
-      "features": "Functies",
-      "pricing": "Prijzen",
-      "library": "Bibliotheek",
-      "logIn": "Inloggen",
-      "joinNow": "Nu lid worden",
-      "templates": "Sjablonen",
-      "product": "Product",
-      "company": "Bedrijf",
-      "about": "Over ons",
-      "privacy": "Privacy",
-      "terms": "Voorwaarden"
+  "Editor": {
+    "toolbar": {
+      "bold": "VET",
+      "italic": "Cursief",
+      "underline": "Onderstreept",
+      "strikeThrough": "Doorgehaald",
+      "alignLeft": "Links uitlijnen",
+      "alignCenter": "Centreren",
+      "alignRight": "Rechts uitlijnen",
+      "justify": "Uitvullen",
+      "left": "Links",
+      "center": "Midden",
+      "right": "Rechts",
+      "link": "Link",
+      "addBlock": "Blok toevoegen",
+      "export": "Exporteren",
+      "ai": "AI-Assistent"
     },
-    "hero": {
-      "badge": "Synoptic v1.0 Private Beta",
-      "title": "De <span>Ultieme</span> <br /> Tweetalige Studio",
-      "subtitle": "Maak professionele zij-aan-zij boeken met AI-ondersteunde typesetting, real-time cloud-synchronisatie en KDP-publicatie met één klik.",
-      "ctaPrimary": "Begin gratis met schrijven",
-      "ctaSecondary": "Ontdek bibliotheek",
-      "aiSuggestion": "AI-suggestie"
+    "sidebar": {
+      "pages": "Pagina's",
+      "style": "Stijl",
+      "inspector": "Inspector",
+      "chat": "AI-Chat"
     },
-    "footer": {
-      "tagline": "De professionele tweetalige uitgever voor auteurs, taalstudenten en uitgeverijen. Ontworpen in SF, gebouwd voor de wereld.",
-      "copyright": "© 2025 Synoptic Studio. Alle rechten voorbehouden."
+    "inspector": {
+      "layout": "Layout",
+      "spacing": "Afstand",
+      "typography": "Typografie",
+      "colors": "Kleuren",
+      "border": "Rand",
+      "shadow": "Schaduw",
+      "actions": "Acties",
+      "labels": {
+        "color": "Kleur",
+        "backgroundColor": "Achtergrondkleur",
+        "fontSize": "Lettergrootte",
+        "lineHeight": "Regelhoogte",
+        "letterSpacing": "Letterafstand",
+        "margin": "Marge",
+        "padding": "Opvulling",
+        "width": "Breedte",
+        "alignment": "Uitlijning",
+        "fontFamily": "Lettertype"
+      }
+    },
+    "messages": {
+      "saved": "Project succesvol opgeslagen",
+      "error": "Fout bij opslaan project"
+    },
+    "onboarding": {
+      "welcome": "Welkom bij de Editor",
+      "step1": "Dit is je canvas. Schrijf aan beide kanten om te beginnen.",
+      "step2": "Gebruik de werkbalk om tekst op te maken.",
+      "step3": "Klik op Exporteren om je boek te downloaden."
+    },
+    "blocks": {
+      "text": "Tekstalinea",
+      "image": "Afbeelding",
+      "separator": "Scheidingslijn",
+      "callout": "Infoblok",
+      "verse": "Vers / Gedicht"
     }
   },
-  "Features": {
-    "title": "Gebouwd voor makers",
-    "subtitle": "De infrastructuur van een uitgeverij, vereenvoudigd tot een studio.",
-    "aiTypesetter": {
-      "title": "AI Typesetter",
-      "desc": "Lijnt automatisch zinsparen uit in meer dan 25 talen, waardoor een onberispelijke symmetrie wordt gegarandeerd, zelfs bij variërende zinslengtes."
-    },
-    "cloudSync": {
-      "title": "Cloud-synchronisatie-engine",
-      "desc": "Je werk wordt direct opgeslagen terwijl je typt. Krijg toegang tot je studio vanaf elk apparaat met een persistente, oneindige ongedaan-geschiedenis."
-    },
-    "pdfExport": {
-      "title": "Printklare PDF",
-      "desc": "Export in hoge resolutie via de Puppeteer-engine. Perfect voor Amazon KDP, IngramSpark en lokale drukkerijen."
-    },
-    "epubSupport": {
-      "title": "EPUB 3.0-ondersteuning",
-      "desc": "Genereer aanpasbare e-books met een native tweetalige afwisselende modus, geoptimaliseerd voor Kindle en Apple Books."
-    },
-    "deepAnnotation": {
-      "title": "Diepe annotatie",
-      "desc": "AI-gestuurde taalkundige inzichten. Woordgroepering, relatiepijlen en contextuele uitleg binnen handbereik."
-    },
-    "marketplace": {
-      "title": "Wereldwijde marktplaats",
-      "desc": "Deel en verkoop je eigen boeksjablonen of blader door onze bibliotheek van gecureerde, professionele tweetalige ontwerpen."
-    }
+  "Models": {
+    "parallel": "Parallelle kolommen",
+    "interlinear": "Interlineair",
+    "bilingual": "Dubbele pagina",
+    "modern": "Modern minimalistisch"
   },
   "Pricing": {
-    "title": "Eenvoudige, eerlijke prijzen",
+    "title": "Simpele en transparante prijzen",
     "subtitle": "Kies het plan dat past bij jouw publicatiedoelen.",
     "mostPopular": "Meest populair",
     "month": "/mnd",
-    "pageTitle": "Investeer in je boeken.",
-    "pageSubtitle": "Of je nu een familiememoire vertaalt of een commerciële serie publiceert, we hebben de juiste tools voor jou.",
-    "nonProfitTitle": "Ben je een non-profitorganisatie of docent?",
-    "nonProfitDesc": "We bieden speciale kortingen voor onderwijsinstellingen en non-profit vertalingen. Neem contact op met ons team voor een offerte op maat.",
-    "contactSupport": "Neem contact op met support",
+    "pageTitle": "Investeer in je boek.",
+    "pageSubtitle": "Of je nu een familie-herinnering vertaalt of een commerciële serie publiceert, wij hebben de juiste tools.",
+    "nonProfitTitle": "Ben je een non-profit of werk je in het onderwijs?",
+    "nonProfitDesc": "We bieden speciale kortingen voor onderwijsinstellingen en non-profit vertalingen. Neem contact op voor een offerte.",
+    "contactSupport": "Contact opnemen",
     "free": {
       "name": "Gratis",
-      "desc": "Perfect om de studio te testen.",
-      "button": "Begin gratis"
+      "price": "€ 0",
+      "desc": "Perfect om het systeem te testen.",
+      "description": "Perfect om het systeem te testen.",
+      "button": "Gratis beginnen"
     },
     "pro": {
       "name": "Pro",
-      "desc": "Voor serieuze auteurs en polyglotten.",
-      "button": "Word Pro"
+      "price": "€ 12",
+      "desc": "Voor onafhankelijke auteurs en polylotten.",
+      "description": "Voor onafhankelijke auteurs en polylotten.",
+      "button": "Pro worden"
     },
     "publisher": {
       "name": "Uitgever",
-      "desc": "Voor professionele uitgeverijen.",
-      "button": "Ga naar Uitgever"
+      "price": "€ 49",
+      "desc": "Voor hoge productievolumes.",
+      "description": "Voor hoge productievolumes.",
+      "button": "Switch naar Uitgever"
     },
     "featuresList": {
       "activeProject": "1 actief project",
       "standardLayout": "Standaard layout-engine",
       "manualTranslation": "Handmatige vertaling",
-      "lowDpiPdf": "Lage DPI PDF-export",
-      "watermarked": "Publiceren met watermerk",
-      "unlimitedProjects": "Onbeperkt aantal projecten",
+      "lowDpiPdf": "Lage resolutie PDF-export",
+      "watermarked": "Output met watermerk",
+      "unlimitedProjects": "Onbeperkte projecten",
       "aiAssistedLayout": "AI-ondersteunde layout",
-      "aiWordsMonth": "50k AI-woorden / Maand",
-      "highDpiPdf": "300 DPI export (Printklaar)",
+      "aiWordsMonth": "50k AI-woorden / maand",
+      "highDpiPdf": "300 DPI Export (drukklaar)",
       "epubMobi": "EPUB & MOBI export",
-      "removeWatermarks": "Verwijderen van watermerken",
-      "priorityHistory": "Prioriteit cloudgeschiedenis",
-      "everythingPro": "Alles in Pro",
+      "removeWatermarks": "Watermerk verwijderen",
+      "priorityHistory": "Priority cloud-historie",
+      "flashcards": "Dynamische flashcard-generatie",
+      "tts": "Text-to-Speech vertelling",
+      "everythingPro": "Alles in Pro inbegrepen",
+      "bigAiLimit": "500k AI-woorden / maand",
       "unlimitedAi": "Onbeperkt AI-credits",
       "teamCollab": "Team-samenwerking",
-      "brandCustom": "Merkaanpassing",
-      "fontUpload": "Eigen lettertype-upload",
-      "apiAccess": "API-toegang (Binnenkort)"
+      "brandCustom": "Merk-aanpassingen",
+      "fontUpload": "Eigen lettertypes uploaden",
+      "apiAccess": "API-toegang (binnenkort)",
+      "ttsPremium": "Premium neural voices",
+      "limitedAi": "Beperkte AI"
+    },
+    "features": {
+      "unlimited": "Onbeperkte Projecten",
+      "highDpi": "High-Def 300 DPI Exports",
+      "noWatermark": "Geen Watermerken",
+      "aiUnits": "AI-intelligentie eenheden",
+      "customFonts": "Upload Je Eigen Fonts"
+    },
+    "cta": "Kies Plan",
+    "monthly": "maandelijks",
+    "yearly": "jaarlijks",
+    "popular": "Meest populair"
+  },
+  "Landing": {
+    "hero": {
+      "title": "Het Bilinguale Publicatiesysteem.",
+      "subtitle": "Verander ruwe tekst in perfecte parallele boeken met CSS. Geen InDesign. Geen desynchronisatie. De Grid-Lock architectuur garandeert uitlijning door ontwerp.",
+      "cta": "Start Gratis met Publiceren"
+    },
+    "features": {
+      "title": "Gebouwd op Grid-Lock Architectuur",
+      "items": {
+        "layout": "Grid-Lock Architectuur",
+        "export": "Native PDF/X",
+        "sync": "Cloud-synchronisatie",
+        "ai": "Linguïstische AI",
+        "validation": "300 DPI Validatie"
+      }
+    }
+  },
+  "Marketing": {
+    "nav": {
+      "toLearn": "Voor Taalleerders",
+      "toPublish": "Voor Pro Publicatie",
+      "features": "Functies",
+      "pricing": "Prijzen",
+      "library": "Bibliotheek",
+      "logIn": "Inloggen",
+      "joinNow": "Nu beginnen",
+      "templates": "Templates",
+      "product": "De Studio",
+      "company": "Over ons",
+      "about": "Over",
+      "privacy": "Privacy",
+      "terms": "Voorwaarden"
+    },
+    "hero": {
+      "badge": "Synoptic v1.0 Private Beta",
+      "title": "De <span>Ultieme</span> <br /> Bilinguale Studio",
+      "subtitle": "Verander ruwe tekst in **CSS-perfecte** parallelle boeken. Geen InDesign. Geen desynchronisatie.",
+      "subtitleShort": "Het Bilinguale Publicatiesysteem.",
+      "featuresLine": "Grid-Lock Architectuur • Native PDF/X • 300 DPI Validatie",
+      "ctaPrimary": "Start Gratis met Publiceren",
+      "ctaSecondary": "Verken Bibliotheek",
+      "aiSuggestion": "AI-suggestie",
+      "aiTranslation": "AI-geoptimaliseerde vertaling",
+      "pauseRotation": "Pauzeer taalrotatie",
+      "resumeRotation": "Hervat taalrotatie",
+      "studioTitle": "Hero Titel — Synoptic Studio",
+      "titlePlain": "Stop met worstelen met formattering. Krijg professionele symmetrie met één klik.",
+      "neuralEngine": "Linguïstische Intelligentie",
+      "activeLayer": "Actieve Laag",
+      "typographyAssistant": "Typografie-assistent",
+      "syncingLocales": "{count} talen synchroniseren",
+      "syncing": "Synchroniseren...",
+      "readyStudio": "Gereed — Synoptic Studio v1.2",
+      "canvasA": "Canvas A",
+      "canvasB": "Canvas B",
+      "output": "Output",
+      "livePreview": "Live-voorvertoning",
+      "origin": "Bron"
+    },
+    "footer": {
+      "tagline": "De professionele bilinguale studio voor auteurs, polylotten en globale uitgevers. Helderheid creëren over grenzen heen.",
+      "copyright": "© 2025 Synoptic Studio. Alle rechten voorbehouden."
+    },
+    "carbon": {
+      "label": "Duurzaamheid",
+      "calculating": "Meten...",
+      "cleanerThan": "Schoner dan {percentage}%",
+      "co2": "{amount}g CO2",
+      "ecoFriendly": "Eco-Friendly",
+      "measure": "Meet Impact"
+    }
+  },
+  "Features": {
+    "title": "Gebouwd voor elke schaal",
+    "subtitle": "Van persoonlijke **flashcards**, **studiebladen** en **posters** tot globale boeklanceringen in nichemarkten.",
+    "ctaLearn": "Leer hoe je een taal meester wordt",
+    "ctaPublish": "Verken professionele publicatie",
+    "aiInsights": "AI-inzichten",
+    "learn": {
+      "title": "Voor Taalleerders",
+      "subtitle": "De ultieme tool voor zelfstudie.",
+      "items": {
+        "flashcards": {
+          "title": "Dynamische Flashcards",
+          "desc": "Genereer automatisch flashcards van de zinnen die je op dat moment leest."
+        },
+        "annotations": {
+          "title": "Filologische Annotaties",
+          "desc": "Duik diep in de grammatica en nuances met AI-gestuurde woord-voor-woord analyse."
+        },
+        "immersion": {
+          "title": "Symmetrische Immersie",
+          "desc": "Je hersenen koppelen talen op natuurlijke wijze wanneer ze naast elkaar staan. Geen contextverlies meer."
+        }
+      }
+    },
+    "publish": {
+      "title": "Voor Professionele Uitgevers",
+      "subtitle": "Zetwerk op industrieel niveau voor tweetalige edities.",
+      "items": {
+        "typesetting": {
+          "title": "Grid-Lock Architectuur",
+          "desc": "We doen niet aan 'raden' bij het uitlijnen. We gebruiken een strikte CSS Grid-engine die bron- en doelparagrafen wiskundig vergrendelt."
+        },
+        "multiformat": {
+          "title": "Native PDF/X & EPUB 3.0",
+          "desc": "Genereert correcte layout voor even/oneven pagina's met de juiste bindmarges. Exporteert geldige EPUB 3.0-bestanden voor Kindle en Apple Books."
+        },
+        "distribution": {
+          "title": "Validatie & Kwaliteit",
+          "desc": "300 DPI output met sRGB-kleurprofielen, zodat je KDP-upload gegarandeerd door de pre-flight komt."
+        }
+      }
+    },
+    "aiTypesetter": {
+      "title": "AI-zetter",
+      "desc": "Past automatisch zinnen aan in meer dan 25 talen en garandeert perfecte symmetrie, zelfs bij verschillende tekstlengtes."
+    },
+    "cloudSync": {
+      "title": "Synchronisatie-engine",
+      "desc": "Je werk wordt direct opgeslagen terwijl je schrijft. Krijg toegang vanaf elk apparaat met onbeperkte ongedaan-maken historie."
+    },
+    "pdfExport": {
+      "title": "Drukklaar PDF",
+      "desc": "Exporteren in hoge resolutie via de Puppeteer-engine. Perfect voor Amazon KDP, IngramSpark en lokale drukkerijen."
+    },
+    "epubSupport": {
+      "title": "EPUB 3.0 Ondersteuning",
+      "desc": "Genereer flexibele e-books met native tweetalige modus, geoptimaliseerd voor Kindle en Apple Books."
+    },
+    "deepAnnotation": {
+      "title": "Deep Annotation",
+      "desc": "Linguïstische inzichten via AI. Woordgroeperingen, relatiediagrammen en contextuele uitleg binnen handbereik."
+    },
+    "marketplace": {
+      "title": "Globale Marktplaats",
+      "desc": "Deel en verkoop je eigen boek-templates, of blader door onze bibliotheek van professionele bilinguale ontwerpen."
+    }
+  },
+  "PricingPage": {
+    "title": "Betaal voor Intelligentie, niet voor opslag",
+    "subtitle": "Projecten zijn onbeperkt. Je verbruikt alleen credits wanneer je AI gebruikt.",
+    "yearly": "Bespaar 20% met een jaarabonnement",
+    "tiers": {
+      "free": "Basis",
+      "pro": "Standaard voor onafhankelijke auteurs en polylotten.",
+      "publisher": "Ontworpen voor uitgevers en zware productie."
+    },
+    "unitCalculator": {
+      "title": "1 AI Unit = 1 Intellectuele Actie",
+      "desc": "Je credits worden afgetrokken per blok-interactie:",
+      "p1": "Een alinea vertalen? **1 Unit.**",
+      "p2": "Een grammaticatoelichting genereren? **1 Unit.**",
+      "fairUse": "Fair Use: Exporte (PDF/EPUB) zijn **altijd gratis**. Je betaalt nooit voor het downloaden van je eigen werk."
     }
   },
   "Export": {
     "publishingPipeline": "Publicatie-pijplijn",
-    "pdfManuscript": "Printklare PDF",
-    "epubEbook": "E-book (EPUB 3.0)",
+    "pdfManuscript": "Drukklaar PDF",
+    "epubEbook": "e-book (EPUB 3.0)",
     "generate": "Genereren",
+    "generating": "Genereren...",
     "quality": "Kwaliteit",
-    "bleed": "Afloop",
-    "preFlightTitle": "Pre-flight integriteitscontrole",
-    "symmetryCheck": "Tweetalige symmetrie geverifieerd",
+    "bleed": "Afloop (Bleed)",
+    "preFlightTitle": "Geautomatiseerd Integriteitssysteem",
+    "symmetryCheck": "Grid-Lock Symmetrie Actief",
     "largeDocWarning": "Grote documenten kunnen tot 30 seconden duren om te renderen.",
     "upgradeToPro": "Upgrade naar Pro",
-    "watermarkPolicy": "Verwijder watermerken, ontgrendel printen in hoge resolutie en krijg 50.000 AI-woorden per maand.",
-    "viewPlans": "Bekijk plannen",
-    "proQuality": "Pro-kwaliteit (Concept)",
-    "freeWarning": "In het gratis niveau wordt een watermerk toegepast op deze export.",
-    "pdfDesc": "High-fidelity export via 300 DPI Puppeteer-engine. Geoptimaliseerd voor Amazon KDP.",
-    "epubDesc": "Aanpasbare tweetalige tekstlayout. Geoptimaliseerd voor Kindle en Apple Books.",
-    "qualityPrint": "Printen",
+    "watermarkPolicy": "Verwijder watermerken, ontgrendel printen in hogere resolutie en ontvang 50.000 AI-woorden per maand.",
+    "viewPlans": "Bekijk Plannen",
+    "proQuality": "Pro Kwaliteit (Concept)",
+    "freeWarning": "Er wordt een watermerk toegepast op deze export in het gratis plan.",
+    "pdfDesc": "Hoge kwaliteit export via de 300 DPI Puppeteer-engine. Geoptimaliseerd voor Amazon KDP.",
+    "epubDesc": "Hervloeibare tweetalige tekstlayout. Geoptimaliseerd voor Kindle en Apple Books.",
+    "qualityPrint": "Print",
     "qualityWeb": "Web",
-    "qualityDraft": "Concept"
+    "qualityDraft": "Concept",
+    "pdfError": "PDF-export mislukt",
+    "pdfErrorDesc": "Export mislukt. Controleer je verbinding met de print-engine.",
+    "epubError": "EPUB-export mislukt",
+    "epubErrorDesc": "Fout opgetreden bij genereren EPUB.",
+    "chapter": "Hoofdstuk",
+    "engineLabel": "BILINGUAL PUBLISHING ENGINE",
+    "studyDeck": "Study Deck (Anki/CSV)",
+    "deckDesc": "Exporteer je AI-grammaticanotities en gemarkeerde vocabulaire naar Anki, Quizlet of Excel.",
+    "noCardsFound": "Geen flashcards gevonden. Gebruik de 'AI Annotatie' tool om er eerst wat te maken!",
+    "systemStatus": "Systeemstatus",
+    "gridLock": "Grid-Lock Architectuur",
+    "engineActive": "Engine actief",
+    "waitingContent": "Wachten op inhoud...",
+    "mirrorGutter": "Spiegelmarge-logica",
+    "profileLoaded": "Profiel geladen",
+    "audiobookEngine": "Neuraal Luisterboek",
+    "audiobookDesc": "Genereer luisterboeken van studiokwaliteit met Microsoft Neural TTS. Bestanden worden per hoofdstuk geëxporteerd in een ZIP.",
+    "voicePersona": "Stem verteller",
+    "selectVoice": "Selecteer een stem...",
+    "renderingChapter": "Hoofdstuk {chapter} synthetiseren...",
+    "exportAudioZip": "Audio Exporteren (ZIP)",
+    "neuralEngine": "Microsoft Neural TTS Engine",
+    "noAudioContent": "Geen tekst gevonden voor audio-generatie. Voeg eerst tekstblokken toe!",
+    "audioExportError": "Audio-export mislukt. Controleer je verbinding.",
+    "socialShare": "Social Share",
+    "socialShareDesc": "Exporteer je tweetalige quotes als prachtige afbeeldingen voor Instagram, Twitter of Pinterest.",
+    "socialFormat": "Formaat",
+    "squareFormat": "Vierkant (Instagram)",
+    "storyFormat": "Story (1080×1920)",
+    "twitterFormat": "Twitter Card",
+    "pinterestFormat": "Pinterest Pin",
+    "exportImage": "Afbeelding Exporteren",
+    "includeBranding": "Inclusief Synoptic Branding",
+    "selectBlock": "Selecteer een tekstblok om te exporteren"
   },
   "Onboarding": {
-    "tourDashboardContent": "Welkom bij Synoptic! Dit is je projecthub.",
+    "tourDashboardContent": "Welkom bij Synoptic! Dit is je projectoverzicht.",
     "tourNewProjectContent": "Begin hier om je eerste tweetalige meesterwerk te maken.",
-    "tourLibraryContent": "Importeer klassieke teksten uit onze bibliotheek in het publieke domein.",
+    "tourLibraryContent": "Importeer klassieke teksten uit onze bibliotheek van het publieke domein.",
     "tourPageListContent": "Navigeer hier door de pagina's van je boek.",
-    "tourToolsContent": "Voeg tekstblokken, afbeeldingen en AI-gestuurde annotaties toe.",
-    "tourPublishContent": "Klaar om te printen? Exporteer binnen enkele seconden naar PDF of EPUB.",
-    "tourWorkspaceContent": "Dit is je canvas. De linkerkolom is de bron, de rechterkolom is je vertaling."
+    "tourToolsContent": "Voeg tekstblokken, afbeeldingen en AI-annotaties toe.",
+    "tourPublishContent": "Klaar voor de pers? Exporteer naar PDF of EPUB in seconden.",
+    "tourWorkspaceContent": "Dit is je canvas. De linker kolom is het origineel, rechts is je vertaling."
   },
   "CommandPalette": {
+    "esc": "Esc",
     "placeholder": "Typ een commando of zoek...",
     "noResults": "Geen resultaten gevonden.",
     "actions": "Acties",
     "addText": "Tekstblok toevoegen",
     "undo": "Actie ongedaan maken",
-    "redo": "Actie opnieuw uitvoeren",
+    "redo": "Actie herhalen",
     "deleteBlock": "Geselecteerd blok verwijderen",
     "exportPdf": "Exporteren naar PDF",
-    "select": "selecteren",
-    "navigate": "navigeren",
-    "paletteTitle": "Synoptic-commandopalet",
-    "commandMenu": "Commandmenu"
+    "select": "selecteer",
+    "navigate": "navigeer",
+    "paletteTitle": "Synoptic Command Palette",
+    "commandMenu": "Commando-menu"
+  },
+  "AboutPage": {
+    "title": "De toekomst van vertalen",
+    "subtitle": "Synoptic werd geboren uit een simpel besef: de wereld komt dichterbij, maar onze boeken zijn nog steeds eentalig. Wij bouwden de eerste cloud-studio gewijd aan de kunst van het tweetalig publiceren.",
+    "sovereignTitle": "Geen-AI-training Garantie",
+    "sovereignDesc": "De meeste AI-tools eisen je data op. Wij niet. Je manuscript voedt geen globaal brein; het blijft in jouw privé-omgeving.",
+    "soulTitle": "Stateless Processing",
+    "soulDesc": "We gebruiken een 'stateless' architectuur (NextResponse). Zodra de vertaling is geleverd, stopt de agent en wordt het geheugen gewist.",
+    "values": "Onze waarden",
+    "privacyTitle": "Privacy Eerst",
+    "privacyDesc": "Jouw manuscripten zijn jouw eigendom. We gebruiken veilige, geïsoleerde infrastructuur om je intellectuele eigendom te beschermen.",
+    "perfTitle": "Hoge Prestaties",
+    "perfDesc": "Gebouwd voor het moderne web. Elke interactie is razendsnel, van cloud-synchronisatie tot 300 DPI PDF's.",
+    "communityTitle": "Gebouwd voor de Community",
+    "communityDesc": "We evolueren constant dankzij feedback van onze community van auteurs, polylotten en taalkundigen.",
+    "cta": "Word onderdeel van de revolutie"
+  },
+  "PrivacyPage": {
+    "title": "Privacy @ Synoptic",
+    "subtitle": "Wij begrijpen dat je manuscripten je ziel zijn. Ons privacybeleid beschermt je intellectuele eigendom.",
+    "philosophyTitle": "Onze Privacyfilosofie",
+    "philosophyDesc": "Synoptic is gebouwd op het principe van 'Soevereine Kennis'. We verzamelen alleen wat strikt noodzakelijk is.",
+    "collectTitle": "Informatie die we verzamelen",
+    "collectDesc": "Accountgegevens (e-mail) voor toegang, project-metadata en gebruikersinhoud alleen voor verwerking.",
+    "collectItems": [
+      "Accountgegevens: Naam en e-mail voor facturatie.",
+      "Metadata: Om de status van de bibliotheek bij te houden.",
+      "Gebruikersinhoud: Versleuteld en geïsoleerd."
+    ],
+    "aiProcessingTitle": "AI-verwerking & Data-isolatie",
+    "aiProcessingDesc": "Wij verschillen van standaard AI-tools. Jouw manuscripten worden NIET gebruikt om globale modellen te trainen.",
+    "securityTitle": "Data-opslag & Beveiliging",
+    "securityDesc": "Alle gegevens zijn versleuteld tijdens transport (TLS/SSL) en in rust. Je kunt je projecten op elk moment verwijderen.",
+    "sharingTitle": "Samenwerking met derden",
+    "sharingDesc": "Wij verkopen je gegevens niet. We delen ze alleen met essentiële partners zoals Stripe (Betalingen) en AWS/DigitalOcean (Infrastructuur).",
+    "contactTitle": "Contact",
+    "contactDesc": "Voor privacyvraagstukken: privacy@getsynoptic.com",
+    "lastUpdated": "Laatst bijgewerkt: December 2025"
+  },
+  "TermsPage": {
+    "title": "Servicevoorwaarden",
+    "subtitle": "Duidelijke regels. Jij bezit het werk, wij bezitten de tool.",
+    "introTitle": "1. Inleiding",
+    "introDesc": "Welkom bij Synoptic. Door onze cloud-studio te gebruiken, ga je akkoord met deze voorwaarden. Laatste update: December 2025.",
+    "ipTitle": "2. Intellectueel Eigendom & Eigendom van Inhoud",
+    "ipDesc": "We maken een duidelijk onderscheid tussen de Tool en de Creatie.",
+    "ipItems": [
+      "Jouw Soevereiniteit: Jij behoudt 100% eigendom over je manuscripten, vertalingen en exports.",
+      "Onze Technologie: De interface, de zetwerk-engine v4.0 en de code zijn eigendom van Synoptic."
+    ],
+    "obligationsTitle": "3. Gebruikersverplichtingen",
+    "obligationsDesc": "Je stemt er strikt mee in om onze engine niet te reverse-engineeren of scripts te gebruiken om de bibliotheek leeg te trekken.",
+    "paymentTitle": "4. Abonnementen & AI Units",
+    "paymentDesc": "Plannen worden maandelijks gefactureerd. AI Units worden verbruikt per 'intellectuele actie'. Ongebruikte units vervallen aan het eind van de maand.",
+    "publishingTitle": "5. Disclaimers bij Publicatie",
+    "publishingDesc": "Hoewel geoptimaliseerd voor KDP, bieden we geen garantie op acceptatie door derden. Je bent zelf verantwoordelijk voor de eindcontrole.",
+    "terminationTitle": "6. Beëindiging",
+    "terminationDesc": "Wij behouden ons het recht voor om accounts op te schorten die ons Fair Use beleid schenden."
+  },
+  "ModelsPage": {
+    "title": "Bibliotheek van structuren",
+    "subtitle": "Elk verhaal vraagt om zijn eigen architectuur. Kies uit onze collectie van professionele bilinguale templates.",
+    "pixelPerfect": "Pixel-perfecte layouts",
+    "gutterTitle": "Spiegelmarge-logica",
+    "gutterDesc": "Automatische aanpassing voor binnen- en buitenmarges op basis van het type binding.",
+    "symmetryTitle": "Symmetrie-bewaking",
+    "symmetryDesc": "Realtime waarschuwingen als tweetalige blokken uit de pas lopen over pagina's heen.",
+    "templates": {
+      "classic": {
+        "title": "Klassiek Parallel",
+        "desc": "De gouden standaard voor tweetalig lezen. Strak uitgelijnde kolommen voor premium drukwerk."
+      },
+      "alternating": {
+        "title": "Wisselende Immersie",
+        "desc": "Perfect voor digitale apparaten. Alinea-voor-alinea flow om focus te behouden."
+      },
+      "academic": {
+        "title": "Filologische Studie",
+        "desc": "Diepgaande academische analyse met woord-voor-woord annotaties direct onder het origineel."
+      },
+      "modern": {
+        "title": "Modern Vers",
+        "desc": "Minimalistische layout geoptimaliseerd voor poëzie en verzen met brede artistieke marges."
+      }
+    },
+    "viewTemplate": "Ontdek structuur",
+    "typesettingTitle": "Bilinguale logica",
+    "exampleSource": "The stars were bright above the silent lake.",
+    "exampleTarget": "De sterren stonden helder boven het stille meer.",
+    "labels": {
+      "source": "Bron ({lang})",
+      "translation": "Vertaling ({lang})",
+      "engine": "Zetwerk-engine v4.0"
+    }
+  },
+  "LearnPage": {
+    "title": "Taalbeheersing door immersie",
+    "subtitle": "Vergeet saaie studieboeken. Maak je eigen leermateriaal van de boeken die je echt wilt lezen.",
+    "badge": "Voor Polylotten & Studenten",
+    "browseLibrary": "Blader door Bibliotheek",
+    "features": {
+      "reader": {
+        "title": "De Slimme Reader",
+        "desc": "Lees comfortabel met onze gesynchroniseerde scroll. Je verliest de vertaling nooit uit het oog."
+      },
+      "study": {
+        "title": "AI Studie-assistente",
+        "desc": "Stel grammaticale vragen direct in de tekst. Het is alsof je een leraar bij je hebt op elke pagina."
+      },
+      "custom": {
+        "title": "Eigen Materiaal",
+        "desc": "Importeer je eigen artikelen, PDF's of webclips. Synoptic formatteert ze voor studie."
+      }
+    },
+    "immersion": {
+      "title": "De Wetenschap van Naast Elkaar",
+      "p1": "Lezen in je doeltaal is de meest effectieve manier om vocabulaire te verwerven. Maar een boek in een vreemde taal kan ontmoedigend zijn.",
+      "p2": "Synoptic neemt die barrière weg. Door een perfecte vertaling per zin aan te bieden, kan je brein zich focussen op het verhaal terwijl je nieuwe woorden leert.",
+      "tag1": "Natuurlijke Acquisitie",
+      "tag2": "Bilingual Mapping",
+      "verified": "AI-Vertaling Geverifieerd",
+      "flashcard": "Flashcard Gegenereerd!"
+    },
+    "ctaSection": {
+      "title": "Klaar voor vloeiendheid?",
+      "subtitle": "Sluit je aan bij duizenden studenten die de handleidingen hebben ingeruild voor een immersieve ervaring.",
+      "button": "Maak een Gratis Account"
+    },
+    "cta": "Begin mijn leerreis"
+  },
+  "PublishPage": {
+    "title": "Publiceren op industrieel niveau",
+    "subtitle": "Synoptic is ontworpen voor hoge volumes. Onze infrastructuur ondersteunt uitgevers die consistentie en kwaliteit eisen.",
+    "infra": "Infrastructuur voor Uitgevers",
+    "cta": "Start Nu met Publiceren",
+    "enterprise": "Contact voor Bedrijven",
+    "features": {
+      "engine": {
+        "title": "Grid-Lock Engine",
+        "desc": "Onze CSS Grid engine vergrendelt alinea's wiskundig, waardoor desynchronisatie op elke paginalengte wordt voorkomen."
+      },
+      "exports": {
+        "title": "Pro Exports",
+        "desc": "Genereer 300 DPI PDF's met sRGB kleurprofielen. Je KDP uploads slagen voor elke controle."
+      },
+      "distribution": {
+        "title": "Klaar voor Globale Distributie",
+        "desc": "Exporteer EPUB 3.0 bestanden die voldoen voor Kindle, Apple Books, Kobo en andere retailers."
+      }
+    },
+    "volumeTitle": "Productie-flow",
+    "volumeSubtitle": "Van manuscript naar markt in drie stappen.",
+    "step1": "Importeren of Maken",
+    "step1Desc": "Plak je manuscript of schrijf direct. Onze AI regelt het basisformaat.",
+    "step2": "Verfijnen & Valideren",
+    "step2Desc": "Gebruik de Grid-Lock editor voor de perfecte layout. Symmetriebewaking voorkomt fouten.",
+    "step3": "Exporteren & Publiceren",
+    "step3Desc": "Download drukklaar PDF of EPUB. Upload direct naar KDP, IngramSpark of je distributeur.",
+    "available": "Nu Beschikbaar",
+    "epubTitle": "EPUB 3.0 + Fixed Layout",
+    "epubDesc": "Volledige ondersteuning voor zowel reflowable als fixed-layout formaten. Ideaal voor bilinguale kinderboeken.",
+    "compliant": "EPUB 3.0 Conform",
+    "fixed": "Fixed-Layout Ondersteuning",
+    "scaleTitle": "Wil je je catalogus opschalen?",
+    "scaleDesc": "Of je nu 5 of 500 titels publiceert, Synoptic groeit met je mee.",
+    "sales": "Praat met Sales"
+  },
+  "Library": {
+    "title": "Bibliotheek van Scoperte",
+    "subtitle": "Blader door meer dan 85 bronnen van gratis inhoud voor je tweetalige boeken.",
+    "searchPlaceholder": "Zoek op titel, auteur of trefwoord...",
+    "badge": "60+ Bronnen van Vrije Content",
+    "heroTitle": "Bibliotheek van Scoperte",
+    "heroSubtitle": "Ontdek gecureerde content voor je tweetalige boeken. Heilige teksten, klassieke literatuur en meer, allemaal met geverifieerde licenties.",
+    "browseLibrary": "Verken Bibliotheek",
+    "commercialSafe": "Veilig voor Commercieel Gebruik",
+    "attributionRequired": "Naamsvermelding Vereist",
+    "categories": {
+      "all": "Alle",
+      "sacred": "Heilig & Wijsheid",
+      "literature": "Literatuur",
+      "visual": "Visueel & Kunst",
+      "knowledge": "Kennis & Feiten",
+      "news": "Nieuws & Media",
+      "history": "Geschiedenis",
+      "language": "Taal Leren",
+      "academic": "Academisch & Onderzoek",
+      "popculture": "Popcultuur"
+    },
+    "categoryDescriptions": {
+      "sacred": "Spirituele teksten uit wereldtradities",
+      "literature": "Romans, poëzie, theater en folklore",
+      "visual": "Kunst uit musea, NASA-fotografie en meer",
+      "news": "Koppen, artikelen en media",
+      "history": "Historische documenten en archieven",
+      "language": "Zinnen, vocabulaire en oefeningen",
+      "knowledge": "Feiten, quotes, recepten en geografie",
+      "academic": "Onderzoek, formele teksten en tests",
+      "popculture": "Strips, games en entertainment"
+    },
+    "licenses": {
+      "all": "Alle Licenties",
+      "commercialSafe": "Veilig voor Commercieel Gebruik",
+      "attribution": "Naamsvermelding Vereist",
+      "personalOnly": "Alleen Persoonlijk Gebruik",
+      "licenseType": "Licentietype"
+    },
+    "difficulty": {
+      "all": "Alle Niveaus",
+      "level": "Niveau",
+      "difficultyLevel": "Moeilijkheidsgraad",
+      "beginner": "Beginner",
+      "intermediate": "Gemiddeld",
+      "expert": "Expert"
+    },
+    "tile": {
+      "beginner": "Beginner",
+      "intermediate": "Gemiddeld",
+      "expert": "Expert",
+      "studyOnly": "Alleen Studie"
+    },
+    "search": {
+      "placeholder": "Zoeken...",
+      "quickFilters": "Snel-filters:",
+      "showing": "Toont",
+      "of": "van de",
+      "templates": "templates",
+      "clearAllFilters": "Alle filters wissen",
+      "noTemplatesFound": "Geen templates gevonden",
+      "tryAdjusting": "Probeer je zoekterm of filters aan te passen."
+    },
+    "quickTags": {
+      "bestsellers": "🏆 Bestsellers",
+      "dailyPractice": "📅 Dagelijkse Oefening",
+      "quickSessions": "⚡ Korte Sessies",
+      "giftIdeas": "🎁 Cadeau-ideeën",
+      "posters": "🖼️ Posters",
+      "flashcards": "📚 Flashcards",
+      "vocabulary": "📖 Vocabulaire",
+      "socialMedia": "📱 Social Media"
+    },
+    "wizard": {
+      "start": "Begin",
+      "back": "Vorige",
+      "import": "Inhoud Importeren",
+      "cancel": "Annuleren",
+      "search": "Zoeken",
+      "preview": "Voorbeeld",
+      "randomize": "Verras mij!",
+      "loading": "Inhoud ophalen...",
+      "error": "Er ging iets mis",
+      "whatYouCanDo": "Wat je kunt doen",
+      "searchContent": "Zoek inhoud",
+      "pickByReference": "Kies op referentie",
+      "randomSelection": "Willekeurige selectie",
+      "imagesIncluded": "Img inbegrepen",
+      "audioIncluded": "Audio inbegrepen",
+      "selectedChapters": "Gekozen hoofdstukken",
+      "fullBook": "Volledig boek",
+      "customRange": "Eigen bereik",
+      "book": "Boek",
+      "startChapter": "Start Hoofdstuk",
+      "endChapter": "Eind Hoofdstuk"
+    },
+    "license": {
+      "commercialSafeDesc": "Deze inhoud is publiek domein of commercieel gelicentieerd. Je mag werk verkopen gebaseerd op deze inhoud.",
+      "attributionDesc": "Commercieel gebruik toegestaan met vereiste naamsvermelding.",
+      "personalOnlyDesc": "Alleen voor persoonlijke studie. Je mag geen werk verkopen gebaseerd op deze inhoud.",
+      "viewFull": "Bekijk volledige licentie →"
+    },
+    "warning": {
+      "title": "Beperkte Licentie",
+      "personalUseOnly": "Alleen Persoonlijk Gebruik",
+      "whyRestricted": "Waarom is dit beperkt?",
+      "youCan": "Je MAG dit gebruiken voor:",
+      "youCannot": "Je mag NIET:",
+      "personalStudy": "Persoonlijke studie",
+      "languagePractice": "Taaloefening",
+      "teachingMaterials": "Lesmateriaal",
+      "academicResearch": "Academisch onderzoek",
+      "sellTranslations": "Vertalingen verkopen",
+      "publishEbook": "Publiceren als e-book",
+      "commercialDistribution": "Commerciële distributie",
+      "monetizeSocial": "Monetariseren op social media",
+      "acknowledge": "Ik begrijp dat deze inhoud alleen voor persoonlijke studie is en ik zal het niet publiceren of verkopen.",
+      "chooseAnother": "Kies andere bron",
+      "understand": "Begrepen, ga door"
+    },
+    "credits": {
+      "title": "Credits & Naamsvermelding",
+      "intro": "Dit project maakt gebruik van inhoud van de volgende bronnen:",
+      "generated": "Credits gegenereerd door Synoptic op",
+      "attributionRequired": "Naamsvermelding Vereist"
+    },
+    "cta": {
+      "browseLibrary": "Verken Bibliotheek",
+      "getStartedFree": "Begin Gratis",
+      "learnMore": "Lees meer",
+      "readyToStart": "Klaar voor je boek?",
+      "importAndStart": "Importeer een bron en begin direct met vertalen in de Studio."
+    },
+    "favorites": {
+      "title": "Mijn Opgeslagen Templates",
+      "quickAccess": "Snelle toegang tot je favoriete content.",
+      "noSaved": "Nog geen templates opgeslagen",
+      "noSavedDesc": "Verken de bibliotheek en sla je favorieten op voor snelle toegang.",
+      "exploreLibrary": "Bibliotheek Verkenner",
+      "viewAll": "Bekijk alle {count} opgeslagen templates",
+      "browseAll": "Alles bekijken",
+      "saved": "Opgeslagen",
+      "addToFavorites": "Toevoegen aan favorieten",
+      "removeFromFavorites": "Verwijderen uit favorieten",
+      "readyToCreate": "Klaar om te maken?",
+      "signInToSave": "Log in om op te slaan en te maken.",
+      "startCreating": "Begin met maken",
+      "signInAndCreate": "Inloggen & Maken"
+    }
+  },
+  "Tools": {
+    "aiDraft": {
+      "title": "AI Vertaal-concept",
+      "button": "AI Concept",
+      "original": "Origineel:",
+      "translation": "Vertaling:",
+      "translating": "Vertalen...",
+      "tryAgain": "Opnieuw proberen",
+      "copy": "Kopiëren",
+      "copied": "Gekopieerd!",
+      "applyToL2": "Toepassen op L2",
+      "poweredBy": "Mogelijk gemaakt door LibreTranslate"
+    },
+    "grammar": {
+      "title": "Grammaticacontrole",
+      "button": "Grammatica",
+      "checking": "Controleert...",
+      "detected": "Gedetecteerd:",
+      "noIssuesFound": "Geen problemen gevonden!",
+      "textLooksGreat": "Je tekst ziet er goed uit.",
+      "issuesFound": "{count} issue(s) gevonden",
+      "fixAll": "Alles herstellen",
+      "tryAgain": "Opnieuw proberen",
+      "poweredBy": "Mogelijk gemaakt door LanguageTool"
+    },
+    "definition": {
+      "origin": "Bron",
+      "lookingUp": "Opzoeken...",
+      "wordNotFound": "Woord niet gevonden",
+      "more": "Meer",
+      "poweredBy": "Free Dictionary API"
+    },
+    "synonyms": {
+      "synonymsFor": "Synoniemen voor:",
+      "findingSynonyms": "Synoniemen zoeken...",
+      "noSynonymsFound": "Geen synoniemen gevonden",
+      "synonyms": "Synoniemen",
+      "antonyms": "Antoniemen",
+      "related": "Gerelateerd",
+      "selectWordFirst": "Selecteer eerst een woord, klik dan rechts",
+      "poweredBy": "Mogelijk gemaakt door Datamuse"
+    },
+    "polisher": {
+      "title": "Woord-polijster",
+      "button": "Verbeteren",
+      "polishing": "Polijsten...",
+      "suggestedImprovements": "Verbetersuggesties"
+    },
+    "assetBank": {
+      "title": "Emoji-bank",
+      "noResults": "Geen emoji's gevonden"
+    },
+    "socialShare": {
+      "square": "Vierkant",
+      "story": "Story",
+      "wide": "Breed"
+    }
+  },
+  "Settings": {
+    "title": "Gebruikersinstellingen",
+    "displayName": "Weergavenaam",
+    "displayNamePlaceholder": "Jouw naam",
+    "interfaceLanguage": "Taal van de interface",
+    "interfaceLanguageHint": "Stel de standaardtaal voor de interface in op al je apparaten.",
+    "saving": "Opslaan...",
+    "saveSettings": "Instellingen opslaan",
+    "cancel": "Annuleren"
+  },
+  "Filters": {
+    "license": "Licentie",
+    "commercial": "Commercieel",
+    "attribution": "Naamsvermelding",
+    "personal": "Persoonlijk"
+  },
+  "Errors": {
+    "translationFailed": "Vertaling mislukt",
+    "grammarCheckFailed": "Grammaticacontrole mislukt",
+    "lookupFailed": "Opzoeken mislukt",
+    "fetchFailed": "Ophalen inhoud mislukt",
+    "connectionError": "Verbindingsfout. Probeer het opnieuw.",
+    "unexpectedError": "Er is een onverwachte fout opgetreden"
+  },
+  "Accessibility": {
+    "openMenu": "Menu openen",
+    "closeMenu": "Menu sluiten",
+    "loading": "Laden",
+    "searchResults": "Zoekresultaten",
+    "noResults": "Geen resultaten gevonden",
+    "sortBy": "Sorteren op",
+    "filterBy": "Filteren op"
   }
 }

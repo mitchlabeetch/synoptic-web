@@ -1,72 +1,147 @@
 {
-  "Studio": {
-    "title": "Synoptic Studio",
-    "saving": "Ukládání konceptu...",
-    "saved": "Všechny změny uloženy v cloudu",
-    "ready": "Připraveno pro vaše bilingvní mistrovské dílo",
-    "addPage": "Přidat novou stránku",
-    "pageSettings": "Nastavení stránky {number}",
-    "enteringStudio": "Vstup do Studia...",
-    "failedToLoadProject": "Nepodařilo se načíst projekt",
-    "retryConnection": "Zkusit připojení znovu",
-    "pageManager": "Správce stránek",
-    "globalDesign": "Globální design",
-    "stylePresets": "Stylové předvolby",
-    "editorTools": "Nástroje editoru",
-    "canvasActions": "Akce na plátně",
-    "drafting": "Draftování",
-    "chapterStart": "Začátek kapitoly",
-    "manuscript": "Rukopis",
-    "chapters": "Kapitoly",
-    "noChapters": "Žádné kapitoly nejsou definovány",
-    "deletePage": "Smazat stránku",
-    "resetFactory": "Tovární nastavení",
-    "bilingualEditor": "Bilingvní editor"
+  "Common": {
+    "save": "Uložit",
+    "cancel": "Zrušit",
+    "delete": "Smazat",
+    "copy": "Kopírovat",
+    "duplicate": "Duplikovat",
+    "edit": "Upravit",
+    "loading": "Načítání...",
+    "error": "Nastala chyba",
+    "success": "Úspěch",
+    "back": "Zpět",
+    "next": "Další",
+    "backToHome": "Zpět na domovskou stránku",
+    "on": "Zapnuto",
+    "off": "Vypnuto",
+    "pdf": "PDF",
+    "epub": "EPUB",
+    "close": "Zavřít",
+    "original": "Originál",
+    "translation": "Překlad",
+    "importFailed": "Import se nezdařil"
+  },
+  "Auth": {
+    "login": "Přihlásit se",
+    "signup": "Zaregistrovat se",
+    "logout": "Odhlásit se",
+    "email": "E-mail",
+    "password": "Heslo",
+    "forgotPassword": "Zapomněl jsi heslo?",
+    "noAccount": "Nemáš účet?",
+    "hasAccount": "Máš už účet?",
+    "haveAccount": "Máš už účet?",
+    "verifyEmail": "Ověřit e-mail",
+    "welcomeBack": "Vítej zpět",
+    "createAccount": "Vytvořit účet",
+    "signInDesc": "Přihlas se pro přístup ke svým projektům.",
+    "signUpDesc": "Vytvoř si účet a začni publikovat.",
+    "emailPlaceholder": "jmeno@priklad.cz",
+    "passwordPlaceholderLogin": "••••••••",
+    "passwordPlaceholderSignup": "Minimálně 8 znaků",
+    "failed": "Autentizace se nezdařila",
+    "errorOccurred": "Nastala neočekávaná chyba",
+    "signingIn": "Přihlašování...",
+    "creatingAccount": "Vytváření účtu...",
+    "signIn": "Přihlásit se",
+    "termsPrompt": "Pokračováním souhlasíš s našimi Obchodními podmínkami a Zásadami ochrany osobních údajů.",
+    "continueWithGoogle": "Pokračovat přes Google",
+    "orContinueWithEmail": "nebo pokračovat přes e-mail",
+    "passwordStrength": "Síla hesla",
+    "weak": "Slabé",
+    "fair": "Průměrné",
+    "strong": "Silné",
+    "oauthError": "Autentizace přes OAuth se nezdařila. Zkus to prosím znovu.",
+    "emailNotVerified": "Nejprve prosím ověř svou e-mailovou adresu u Google.",
+    "securityNote": "256bitové SSL šifrování • Soulad s GDPR",
+    "recentActivity": "Nedávná aktivita",
+    "lastSession": "Poslední relace",
+    "savedSecurely": "Bezpečně uloženo",
+    "cloudSync": "Cloudová synchronizace",
+    "active": "Aktivní"
+  },
+  "Dashboard": {
+    "title": "Moje projekty",
+    "subtitle": "Spravuj a upravuj své dvojjazyčné knihy.",
+    "newProject": "Nový projekt",
+    "noProjects": "Nenalezeny žádné projekty. Vytvoř svůj první!",
+    "emptyState": "Zatím jsi nevytvořil žádné projekty.",
+    "yourProjects": "Tvé projekty",
+    "settings": "Nastavení",
+    "profile": "Profil",
+    "billing": "Fakturace",
+    "noDescription": "Bez popisu.",
+    "lastUpdated": "Poslední aktualizace",
+    "stats": {
+      "projects": "Projekty",
+      "pages": "Stránky",
+      "words": "Slova"
+    },
+    "projectCard": {
+      "edited": "Upraveno",
+      "open": "Otevřít",
+      "delete": "Smazat",
+      "confirmDelete": "Opravdu chceš smazat tento projekt?"
+    }
   },
   "Blocks": {
     "text": "Textový blok",
-    "image": "Obrázkový blok",
+    "image": "Obrazový blok",
     "separator": "Oddělovač",
-    "callout": "Popisek",
+    "callout": "Zvýraznění",
+    "quiz": "Kvíz",
     "insertText": "Vložit textový blok",
     "addBlankPage": "Přidat prázdnou stránku",
     "media": "Média",
     "ai": "Překladová AI",
-    "settings": "Nastavení Studia",
+    "settings": "Nastavení studia",
     "grammar": "Gramatické pravidlo",
-    "culture": "Kulturní postřeh",
+    "culture": "Kulturní poznámka",
     "vocabulary": "Slovní zásoba",
-    "tip": "Tip na učení",
+    "tip": "Tip k učení",
     "warning": "Gramatické varování",
     "note": "Obecná poznámka",
-    "pronunciation": "Průvodce výslovností"
+    "pronunciation": "Průvodce výslovností",
+    "workbookExercise": "Cvičení",
+    "autoHint": "Automatická nápověda",
+    "regenerateHint": "Znovu vygenerovat",
+    "showAnswer": "Zobrazit odpověď",
+    "hideAnswer": "Skrýt odpověď",
+    "customHint": "Vlastní nápověda",
+    "difficulty": "Náročnost",
+    "difficultyEasy": "Snadná",
+    "difficultyMedium": "Střední",
+    "difficultyHard": "Těžká",
+    "emptyImageBlock": "Prázdný obrazový blok"
   },
   "Inspector": {
     "visibility": "Přepsat viditelnost",
     "header": "Záhlaví",
+    "headerOverlay": "Překrytí záhlaví",
     "footer": "Zápatí",
+    "footerOverlay": "Překrytí zápatí",
     "pageNumber": "Číslo stránky",
     "content": "Přepsat obsah",
     "typography": "Typografie",
-    "layout": "Rozložení a strategie",
+    "layout": "Rozvržení a strategie",
     "printingFlow": "Tisk a tok",
     "markChapterStart": "Označit jako začátek kapitoly",
     "forceBlank": "Vynutit prázdnou stránku",
-    "pageLocalOnly": "Změny zde ovlivňují pouze aktuální stránku.",
-    "inspectorTitle": "Inspektor {type}",
+    "pageLocalOnly": "Změny zde ovlivní pouze aktuální stránku.",
+    "inspectorTitle": "Inspektor: {type}",
     "lineHeight": "Výška řádku",
-    "paraSpacing": "Mezery mezi odstavci",
+    "paraSpacing": "Mezera mezi odstavci",
     "dimensions": "Rozměry",
     "width": "Šířka (%)",
     "alignment": "Zarovnání",
-    "styleEffects": "Styl a efekty",
+    "styleEffects": "Styly a efekty",
     "shadow": "Stín",
-    "borderRadius": "Zaoblení rohů",
+    "borderRadius": "Poloměr rohu",
     "stylePattern": "Styl a vzor",
     "thickness": "Tloušťka",
     "contextType": "Typ kontextu",
     "brandingColor": "Barva značky",
-    "stylePreset": "Stylová předvolba",
+    "stylePreset": "Předvolba stylu",
     "solidLine": "Plná čára",
     "doubleLine": "Dvojitá čára",
     "dashedLine": "Čárkovaná čára",
@@ -76,22 +151,22 @@
   },
   "Theme": {
     "title": "Globální design",
-    "layout": "Globální rozložení",
+    "layout": "Globální rozvržení",
     "typography": "Typografie (globální)",
     "bodyText": "Hlavní text",
-    "headings": "Hlavní nadpisy",
+    "headings": "Nadpisy",
     "baseScaling": "Základní měřítko",
-    "fontSize": "Velikost písma textu",
+    "fontSize": "Velikost písma",
     "lineHeight": "Globální výška řádku",
-    "colorPresets": "Barevné předvolby",
+    "colorPresets": "Předvolby barev",
     "lightMode": "Světlý režim",
     "darkMode": "Tmavý režim"
   },
   "Presets": {
-    "title": "Stylové předvolby",
-    "empty": "Vyberte blok pro uložení jeho stylu jako opakovaně použitelnou předvolbu.",
+    "title": "Předvolby stylů",
+    "empty": "Vyber blok pro uložení jeho stylu jako znovupoužitelné předvolby.",
     "selected": "Vybraný kontext",
-    "canCapture": "Můžete uložit stylování tohoto bloku {type}.",
+    "canCapture": "Můžeš uložit styl pro tento blok typu {type}.",
     "saveCurrent": "Uložit aktuální styl",
     "library": "Globální knihovna",
     "typeStyle": "Styl {type}",
@@ -99,7 +174,7 @@
   },
   "Wizard": {
     "createTitle": "Vytvořit nový projekt",
-    "createMasterpiece": "Vytvořte nové mistrovské dílo",
+    "createMasterpiece": "Nový zabezpečený projekt",
     "stepInformation": "Informace",
     "stepLanguages": "Jazyky",
     "stepFormat": "Formát",
@@ -107,218 +182,887 @@
     "projectTitle": "Název projektu *",
     "titlePlaceholder": "např. Dvacet tisíc mil pod mořem",
     "author": "Autor",
-    "authorPlaceholder": "Vaše jméno nebo původní autor",
-    "category": "Kategorie / Štítek",
+    "authorPlaceholder": "Tvé jméno nebo původní autor",
+    "category": "Kategorie / Štítky",
     "categoryPlaceholder": "např. Beletrie, Vzdělávání",
     "sourceLang": "Zdrojový jazyk (L1)",
     "targetLang": "Cílový jazyk (L2)",
-    "langWarning": "Varování: Zdrojový a cílový jazyk musí být u bilingvního projektu odlišné.",
-    "langTip": "Tip: Většina uživatelů volí svůj rodný jazyk jako cílový a jazyk, který se učí, jako zdrojový.",
+    "langWarning": "Varování: Zdrojový a cílový jazyk se musí v dvojjazyčném projektu lišit.",
+    "langTip": "Tip: Většina lidí si volí mateřský jazyk jako cílový a jazyk, který se učí, jako zdrojový.",
     "dimensions": "Fyzické rozměry (mm)",
-    "custom": "Vlastní definice",
-    "layoutStyle": "Styl rozložení",
+    "custom": "Vlastní nastavení",
+    "layoutStyle": "Styl rozvržení",
     "back": "Zpět",
     "next": "Další krok",
-    "creating": "Budování Studia...",
-    "launch": "Spustit Studio",
+    "creating": "Inicializace studia...",
+    "launch": "Spustit studio",
+    "secureNote": "Šifrované a izolované projektové prostředí",
     "blankTemplate": "Začít od nuly",
-    "blankDesc": "Žádný obsah, čisté plátno",
+    "blankDesc": "Prázdná stránka pro vlastní rozvržení",
     "classicTemplate": "Klasické vedle sebe",
-    "classicDesc": "Vyvážené sloupce, patkové písmo",
-    "poetryTemplate": "Poezie / Verš",
-    "poetryDesc": "Číslované řádky, centrální zaměření",
+    "classicDesc": "Optimalizováno pro hustou prózu",
+    "poetryTemplate": "Poezie / Verše",
+    "poetryDesc": "Optimalizováno pro verše a texty písní (Moderní)",
+    "academicTemplate": "Filologická studie",
+    "academicDesc": "Široké okraje, poznámky pod čarou",
     "width": "Šířka (mm)",
     "height": "Výška (mm)",
-    "upgradeToCreateMore": "Upgradujte pro vytvoření více projektů",
-    "reachedFreeLimit": "Dosáhli jste bezplatného limitu",
-    "freeLimitDesc": "Bezplatné účty jsou omezeny na 1 aktivní projekt. Upgradujte na Pro pro odemknutí neomezených projektů a pokročilých AI funkcí.",
-    "upgradeToPro": "Upgradovat na Pro",
+    "upgradeToCreateMore": "Upgraduj pro vytvoření dalších",
+    "reachedFreeLimit": "Dosažen bezplatný limit",
+    "freeLimitDesc": "Bezplatné účty jsou omezeny na 1 aktivní projekt. Upgraduj na Pro pro odemknutí neomezených projektů a pokročilých AI funkcí.",
+    "upgradeToPro": "Přejít na Pro",
     "maybeLater": "Možná později",
     "usTrade": "US Trade Paper",
     "digest": "Digest",
     "intlStandard": "Mezinárodní standard"
   },
-  "Common": {
-    "delete": "Smazat",
-    "copy": "Kopírovat",
-    "duplicate": "Duplikovat",
-    "save": "Uložit",
-    "cancel": "Zrušit",
-    "on": "Zapnuto",
-    "off": "Vypnuto",
-    "backToHome": "Zpět na domovskou stránku"
+  "Studio": {
+    "title": "Synoptic Studio",
+    "collaborate": "Spolupracovat",
+    "export": "Exportovat",
+    "preview": "Náhled",
+    "saving": "Ukládání konceptu...",
+    "saved": "Všechny změny uloženy v cloudu",
+    "ready": "Připraveno na tvé dvojjazyčné dílo",
+    "addPage": "Přidat novou stránku",
+    "pageSettings": "Nastavení stránky {number}",
+    "enteringStudio": "Vstup do studia...",
+    "failedToLoadProject": "Nepodařilo se načíst projekt",
+    "retryConnection": "Zkusit znovu připojit",
+    "pageManager": "Správce stránek",
+    "globalDesign": "Globální design",
+    "stylePresets": "Předvolby stylů",
+    "editorTools": "Nástroje editoru",
+    "canvasActions": "Akce na plátně",
+    "drafting": "Redigování",
+    "chapterStart": "Začátek kapitoly",
+    "manuscript": "Manuskript",
+    "chapters": "Kapitoly",
+    "noChapters": "Nejsou definovány žádné kapitoly",
+    "deletePage": "Smazat stránku",
+    "resetFactory": "Obnovit tovární nastavení",
+    "bilingualEditor": "Dvojjazyčný editor",
+    "bookStructure": "Struktura knihy",
+    "publishingPipeline": "Publikační proces",
+    "frontMatter": "Úvodní strany",
+    "backMatter": "Závěrečné strany",
+    "titlePage": "Titulní strana",
+    "copyrightPage": "Strana s autorskými právy",
+    "dedicationPage": "Věnování",
+    "tableOfContents": "Obsah",
+    "glossary": "Glosář",
+    "aboutAuthor": "O autorovi",
+    "endNotes": "Koncové poznámky",
+    "autoGlossaryActive": "Automatický glosář aktivní",
+    "refreshGlossary": "Obnovit glosář",
+    "glossaryEntries": "Nasbíráno {count} položek",
+    "romanNumeralsInfo": "Úvodní strany používají římské číslice (i, ii, iii). Hlavní text používá arabské číslice (1, 2, 3).",
+    "playAudio": "Číst nahlas",
+    "stopAudio": "Zastavit",
+    "normalSpeed": "Normální rychlost",
+    "slowMode": "Pomalý režim (0,7×)",
+    "audioSettings": "Nastavení hlasu",
+    "grammarPainter": "Malíř gramatiky",
+    "exitPaintMode": "Ukončit režim malování",
+    "subject": "Podmět",
+    "verb": "Přísudek",
+    "object": "Předmět",
+    "adjective": "Přídavné jméno",
+    "adverb": "Příslovce",
+    "paintTip": "Vyber text pro aplikaci gramatických barev",
+    "clearAllColors": "Vymazat všechny barvy",
+    "syntaxArrows": "Syntaktické šipky",
+    "addArrow": "Přidat šipku",
+    "deleteArrow": "Smazat šipku",
+    "arrowStyle": "Styl šipky",
+    "curved": "Zakřivená",
+    "angular": "Zalomená",
+    "straight": "Rovná",
+    "arrowDrawer": "Syntaktický spojovník",
+    "selectSource": "Vyber zdrojové slovo",
+    "selectTarget": "Vyber cílové slovo",
+    "arrowCreated": "Spojení vytvořeno",
+    "cancelLink": "Zrušit"
   },
-  "Dashboard": {
-    "title": "Vaše projekty",
-    "subtitle": "Spravujte a upravujte své bilingvní knihy.",
-    "emptyState": "Zatím jste nevytvořili žádné projekty.",
-    "noDescription": "Popis nebyl zadán.",
-    "lastUpdated": "Poslední aktualizace"
+  "Editor": {
+    "toolbar": {
+      "bold": "Tučné",
+      "italic": "Kurzíva",
+      "underline": "Podtržené",
+      "strikeThrough": "Přeškrtnuté",
+      "alignLeft": "Zarovnat doleva",
+      "alignCenter": "Zarovnat na střed",
+      "alignRight": "Zarovnat doprava",
+      "justify": "Zarovnat do bloku",
+      "left": "Vlevo",
+      "center": "Na střed",
+      "right": "Vpravo",
+      "link": "Odkaz",
+      "addBlock": "Přidat blok",
+      "export": "Exportovat",
+      "ai": "AI asistent"
+    },
+    "sidebar": {
+      "pages": "Stránky",
+      "style": "Styl",
+      "inspector": "Inspektor",
+      "chat": "AI Chat"
+    },
+    "inspector": {
+      "layout": "Rozvržení",
+      "spacing": "Mezery",
+      "typography": "Typografie",
+      "colors": "Barvy",
+      "border": "Ohraničení",
+      "shadow": "Stín",
+      "actions": "Akce",
+      "labels": {
+        "color": "Barva",
+        "backgroundColor": "Barva pozadí",
+        "fontSize": "Velikost písma",
+        "lineHeight": "Výška řádku",
+        "letterSpacing": "Prostrkání",
+        "margin": "Okraj",
+        "padding": "Výplň",
+        "width": "Šířka",
+        "alignment": "Zarovnání",
+        "fontFamily": "Rodina písma"
+      }
+    },
+    "messages": {
+      "saved": "Projekt uložen",
+      "error": "Chyba při ukládání projektu"
+    },
+    "onboarding": {
+      "welcome": "Vítej v editoru",
+      "step1": "Toto je tvé plátno. Začni psát na obou stranách.",
+      "step2": "Používej panel nástrojů k formátování textu.",
+      "step3": "Klikni na Exportovat pro stažení své knihy."
+    },
+    "blocks": {
+      "text": "Odstavec textu",
+      "image": "Obrázek",
+      "separator": "Oddělovač",
+      "callout": "Zvýraznění",
+      "verse": "Verš / Báseň"
+    }
   },
-  "Auth": {
-    "login": "Přihlásit se",
-    "signup": "Registrovat se",
-    "welcomeBack": "Vítejte zpět",
-    "createAccount": "Vytvořit účet",
-    "signInDesc": "Přihlaste se ke svému účtu Synoptic",
-    "signUpDesc": "Začněte vytvářet bilingvní knihy ještě dnes",
-    "email": "E-mail",
-    "password": "Heslo",
-    "emailPlaceholder": "jmeno@priklad.cz",
-    "passwordPlaceholderLogin": "Zadejte své heslo",
-    "passwordPlaceholderSignup": "Vytvořte si heslo",
-    "signIn": "Přihlásit se",
-    "signingIn": "Přihlašování...",
-    "creatingAccount": "Vytváření účtu...",
-    "noAccount": "Nemáte účet?",
-    "hasAccount": "Již máte účet?",
-    "termsPrompt": "Pokračováním souhlasíte s Podmínkami služby a Zásadami ochrany osobních údajů Synoptic.",
-    "failed": "Autentizace selhala",
-    "errorOccurred": "Došlo k chybě"
+  "Models": {
+    "parallel": "Paralelní sloupce",
+    "interlinear": "Meziřádkový",
+    "bilingual": "Oboustranný",
+    "modern": "Moderní minimalistický"
+  },
+  "Pricing": {
+    "title": "Jednoduché a transparentní ceny",
+    "subtitle": "Vyber si plán, který nejlépe vyhovuje tvým vydavatelským cílům.",
+    "mostPopular": "Nejoblíbenější",
+    "month": "/měsíc",
+    "pageTitle": "Investuj do své knihy.",
+    "pageSubtitle": "Ať už překládáš rodinnou vzpomínku nebo vydáváš komerční sérii, máme pro tebe ty správné nástroje.",
+    "nonProfitTitle": "Jsi nezisková organizace nebo učitel?",
+    "nonProfitDesc": "Nabízíme speciální slevy pro vzdělávací instituce a neziskové překlady. Kontaktuj nás pro cenovou nabídku.",
+    "contactSupport": "Kontaktovat podporu",
+    "free": {
+      "name": "Zdarma",
+      "price": "0 Kč",
+      "desc": "Ideální pro vyzkoušení systému.",
+      "description": "Ideální pro vyzkoušení systému.",
+      "button": "Začít zdarma"
+    },
+    "pro": {
+      "name": "Pro",
+      "price": "299 Kč",
+      "desc": "Pro nezávislé autory a nadšence do jazyků.",
+      "description": "Pro nezávislé autory a nadšence do jazyků.",
+      "button": "Přejít na Pro"
+    },
+    "publisher": {
+      "name": "Vydavatel",
+      "price": "1 199 Kč",
+      "desc": "Pro velkoobjemovou produkci.",
+      "description": "Pro velkoobjemovou produkci.",
+      "button": "Plán Vydavatel"
+    },
+    "featuresList": {
+      "activeProject": "1 aktivní projekt",
+      "standardLayout": "Standardní sázecí systém",
+      "manualTranslation": "Ruční překlad",
+      "lowDpiPdf": "Export PDF v nízké kvalitě",
+      "watermarked": "Export s vodoznakem",
+      "unlimitedProjects": "Neomezené projekty",
+      "aiAssistedLayout": "Sázka s pomocí AI",
+      "aiWordsMonth": "50 000 AI slov / měsíc",
+      "highDpiPdf": "Export 300 DPI (připraveno pro tisk)",
+      "epubMobi": "Export EPUB a MOBI",
+      "removeWatermarks": "Odstranění vodoznaků",
+      "priorityHistory": "Prioritní historie v cloudu",
+      "flashcards": "Dynamická tvorba kartiček",
+      "tts": "Režim čtení textu (TTS)",
+      "everythingPro": "Vše z plánu Pro",
+      "bigAiLimit": "500 000 AI slov / měsíc",
+      "unlimitedAi": "Neomezené AI kredity",
+      "teamCollab": "Týmová spolupráce",
+      "brandCustom": "Přizpůsobení značky",
+      "fontUpload": "Nahrání vlastních písem",
+      "apiAccess": "Přístup k API (již brzy)",
+      "ttsPremium": "Prémiové neuronální hlasy",
+      "limitedAi": "Omezená AI"
+    },
+    "features": {
+      "unlimited": "Neomezené projekty",
+      "highDpi": "Vysoce kvalitní export 300 DPI",
+      "noWatermark": "Bez vodoznaku",
+      "aiUnits": "Jednotky AI inteligence",
+      "customFonts": "Nahrání vlastních písem"
+    },
+    "cta": "Vybrat plán",
+    "monthly": "měsíčně",
+    "yearly": "ročně",
+    "popular": "Nejoblíbenější"
+  },
+  "Landing": {
+    "hero": {
+      "title": "Systém pro dvojjazyčné publikování.",
+      "subtitle": "Proměň hrubý text v dokonalé paralelní knihy pomocí CSS. Žádný InDesign. Žádná desynchronizace. Architektura Grid-Lock zaručuje zarovnání přímo v návrhu.",
+      "cta": "Začít publikovat zdarma"
+    },
+    "features": {
+      "title": "Postaveno na architektuře Grid-Lock",
+      "items": {
+        "layout": "Architektura Grid-Lock",
+        "export": "Nativní PDF/X",
+        "sync": "Cloudová synchronizace",
+        "ai": "Lingvistická AI",
+        "validation": "Validace 300 DPI"
+      }
+    }
   },
   "Marketing": {
     "nav": {
+      "toLearn": "Pro studium jazyků",
+      "toPublish": "Pro profesionální vydavatele",
       "features": "Funkce",
       "pricing": "Ceny",
       "library": "Knihovna",
       "logIn": "Přihlásit se",
       "joinNow": "Přidat se",
       "templates": "Šablony",
-      "product": "Produkt",
+      "product": "Studio",
       "company": "Firma",
       "about": "O nás",
       "privacy": "Soukromí",
       "terms": "Podmínky"
     },
     "hero": {
-      "badge": "Synoptic v1.0 Private Beta",
-      "title": "<span>Ultimátní</span> <br /> bilingvní Studio",
-      "subtitle": "Vytvářejte profesionální knihy s bilingvním uspořádáním pomocí AI-asistované sazby, real-time cloud synchronizace a publikování na KDP jedním kliknutím.",
-      "ctaPrimary": "Začít psát zdarma",
-      "ctaSecondary": "Prozkoumat knihovnu",
-      "aiSuggestion": "NÁVRH AI"
+      "badge": "Soukromá beta v1.0 Synoptic",
+      "title": "<span>Nejlepší</span> <br /> dvojjazyčné studio",
+      "subtitle": "Proměň hrubý text v **dokonalé paralelní knihy** pomocí CSS. Žádný InDesign. Žádná desynchronizace.",
+      "subtitleShort": "Systém pro dvojjazyčné publikování.",
+      "featuresLine": "Architektura Grid-Lock • Nativní PDF/X • Validace 300 DPI",
+      "ctaPrimary": "Začít publikovat zdarma",
+      "ctaSecondary": "Prohlížet knihovnu",
+      "aiSuggestion": "Návrh AI",
+      "aiTranslation": "AI optimalizovaný překlad",
+      "pauseRotation": "Pozastavit rotaci jazyků",
+      "resumeRotation": "Obnovit rotaci jazyků",
+      "studioTitle": "Hero nadpis — Synoptic Studio",
+      "titlePlain": "Přestaň bojovat se sazbou. Dosáhni profesionální symetrie jedním kliknutím.",
+      "neuralEngine": "Lingvistická inteligence",
+      "activeLayer": "Aktivní vrstva",
+      "typographyAssistant": "Asistent typografie",
+      "syncingLocales": "Synchronizace {count} jazyků",
+      "syncing": "Synchronizace...",
+      "readyStudio": "Připraveno — Synoptic Studio v1.2",
+      "canvasA": "Plátno A",
+      "canvasB": "Plátno B",
+      "output": "Výstup",
+      "livePreview": "Živý náhled",
+      "origin": "Původ"
     },
     "footer": {
-      "tagline": "Profesionální bilingvní nakladatelská platforma pro autory, studenty jazyků a nakladatelství. Navrženo v SF, postaveno pro svět.",
+      "tagline": "Profesionální dvojjazyčné studio pro autory, polylingvy a globální vydavatele. Vytváříme srozumitelnost bez hranic.",
       "copyright": "© 2025 Synoptic Studio. Všechna práva vyhrazena."
+    },
+    "carbon": {
+      "label": "Udržitelnost",
+      "calculating": "Měření...",
+      "cleanerThan": "{percentage} % čistší než ostatní",
+      "co2": "{amount} g CO2",
+      "ecoFriendly": "Eco-friendly",
+      "measure": "Měřit dopad"
     }
   },
   "Features": {
-    "title": "Postaveno pro tvůrce",
-    "subtitle": "Infrastruktura nakladatelství zjednodušená do jednoho studia.",
+    "title": "Navrženo pro každé měřítko",
+    "subtitle": "Od osobních **kartiček**, **učebních listů** a **plakátů** až po globální vydávání knih.",
+    "ctaLearn": "Zjisti, jak ovládnout jazyk",
+    "ctaPublish": "Poznej profesionální publikování",
+    "aiInsights": "AI postřehy",
+    "learn": {
+      "title": "Pro studenty jazyků",
+      "subtitle": "Nejlepší nástroj pro samostudium.",
+      "items": {
+        "flashcards": {
+          "title": "Dynamické kartičky",
+          "desc": "Automaticky generuj paměťové karty z vět, které čteš."
+        },
+        "annotations": {
+          "title": "Filologické anotace",
+          "desc": "Pronikni hluboko do gramatiky a nuancí díky AI analýze slovo po slovu."
+        },
+        "immersion": {
+          "title": "Symetrická imerze",
+          "desc": "Tvůj mozek přirozeně mapuje jazyky, když jsou vedle sebe. Kontext se nikdy neztratí."
+        }
+      }
+    },
+    "publish": {
+      "title": "Pro profesionální vydavatele",
+      "subtitle": "Průmyslová sázka pro dvojjazyčná vydání.",
+      "items": {
+        "typesetting": {
+          "title": "Architektura Grid-Lock",
+          "desc": "Zarovnání jen „neodhadujeme“. Používáme přísný sázecí engine CSS Grid, který matematicky uzamkne zdrojový a cílový odstavec."
+        },
+        "multiformat": {
+          "title": "Nativní PDF/X a EPUB 3.0",
+          "desc": "Generuj rozvržení se zrcadlovými okraji. Exportuj soubory EPUB 3.0 kompatibilní s Kindle a Apple Books."
+        },
+        "distribution": {
+          "title": "Validace a kvalita",
+          "desc": "Výstup 300 DPI s barevnými profily sRGB zajišťuje, že tvé nahrávky na Amazon KDP projdou hladce."
+        }
+      }
+    },
     "aiTypesetter": {
       "title": "AI Sazeč",
-      "desc": "Automaticky zarovnává dvojice vět ve více než 25 jazycích a zajišťuje dokonalou symetrii i při různé délce vět."
+      "desc": "Automaticky vylaďuje větné páry ve více než 25 jazycích, čímž garantuje symetrii i při rozdílné délce textu."
     },
     "cloudSync": {
-      "title": "Cloud synchronizace",
-      "desc": "Vaše práce se ukládá okamžitě během psaní. Přistupujte ke svému studiu z libovolného zařízení s trvalou a neomezenou historií změn."
+      "title": "Synchronizační systém",
+      "desc": "Tvá práce se ukládá okamžitě během psaní. Přistupuj ke studiu z jakéhokoli zařízení s neomezenou historií."
     },
     "pdfExport": {
       "title": "PDF připravené k tisku",
-      "desc": "Export ve vysokém rozlišení přes Puppeteer engine. Ideální pro Amazon KDP, IngramSpark a místní tiskárny."
+      "desc": "Vysoce kvalitní export pomocí Puppeteer engine. Ideální pro Amazon KDP, IngramSpark a lokální tiskárny."
     },
     "epubSupport": {
       "title": "Podpora EPUB 3.0",
-      "desc": "Generujte responzivní e-knihy s nativním bilingvním střídavým módem, optimalizované pro Kindle a Apple Books."
+      "desc": "Vytvářej flexibilní e-knihy s nativním dvojjazyčným režimem, optimalizované pro Kindle a Apple Books."
     },
     "deepAnnotation": {
-      "title": "Hluboká anotace",
-      "desc": "Jazykové postřehy poháněné AI. Seskupování slov, šipky vztahů a kontextové vysvětlivky na dosah ruky."
+      "title": "Hloubkové anotace",
+      "desc": "Lingvistické vhledy skrze AI. Seskupování slov, vztahové šipky a vysvětlení přímo v textu."
     },
     "marketplace": {
       "title": "Globální tržiště",
-      "desc": "Sdílejte a prodávejte své vlastní šablony knih nebo procházejte naši knihovnu kurátorských profesionálních bilingvních designů."
+      "desc": "Sdílej a prodávej vlastní knižní šablony nebo procházej naše profesionální dvojjazyčné návrhy."
     }
   },
-  "Pricing": {
-    "title": "Jednoduché a férové ceny",
-    "subtitle": "Vyberte si plán, který vyhovuje vašim publikačním cílům.",
-    "mostPopular": "Nejpopulárnější",
-    "month": "/měsíc",
-    "pageTitle": "Investujte do své knihy.",
-    "pageSubtitle": "Ať už překládáte rodinné paměti nebo vydáváte komerční sérii, máme pro vás ty správné nástroje.",
-    "nonProfitTitle": "Jste nezisková organizace nebo vzdělavatel?",
-    "nonProfitDesc": "Nabízíme speciální slevy pro vzdělávací instituce a neziskové překlady. Kontaktujte náš tým pro individuální nabídku.",
-    "contactSupport": "Kontaktovat podporu",
-    "free": {
-      "name": "Zdarma",
-      "desc": "Ideální pro testování Studia.",
-      "button": "Začít zdarma"
+  "PricingPage": {
+    "title": "Plať za inteligenci, ne za místo",
+    "subtitle": "Počet projektů je neomezený. Jednotky spotřebováváš pouze při používání AI.",
+    "yearly": "Ušetři 20 % při roční platbě",
+    "tiers": {
+      "free": "Základ",
+      "pro": "Standard pro nezávislé autory a nadšence do jazyků.",
+      "publisher": "Navrženo pro vydavatele a velkoobjemovou produkci."
     },
-    "pro": {
-      "name": "Pro",
-      "desc": "Pro vážné autory a polygloty.",
-      "button": "Stát se Pro"
-    },
-    "publisher": {
-      "name": "Vydavatel",
-      "desc": "Pro profesionální nakladatelství.",
-      "button": "Přejít na Vydavatele"
-    },
-    "featuresList": {
-      "activeProject": "1 aktivní projekt",
-      "standardLayout": "Standardní publikační engine",
-      "manualTranslation": "Manuální překlad",
-      "lowDpiPdf": "Export PDF v nízkém rozlišení",
-      "watermarked": "Publikování s vodoznakem",
-      "unlimitedProjects": "Neomezené projekty",
-      "aiAssistedLayout": "Sazba s asistencí AI",
-      "aiWordsMonth": "50 tisíc AI slov měsíčně",
-      "highDpiPdf": "Export 300 DPI (tisková kvalita)",
-      "epubMobi": "Export EPUB & MOBI",
-      "removeWatermarks": "Odstranění vodoznaků",
-      "priorityHistory": "Prioritní cloudová historie",
-      "everythingPro": "Zahrnuje vše z plánu Pro",
-      "unlimitedAi": "Neomezené AI kredity",
-      "teamCollab": "Týmová spolupráce",
-      "brandCustom": "Custom branding",
-      "fontUpload": "Upload vlastních písem",
-      "apiAccess": "API přístup (již brzy)"
+    "unitCalculator": {
+      "title": "1 jednotka AI = 1 intelektuální úkon",
+      "desc": "Kredity jsou odečítány při interakci s bloky:",
+      "p1": "Překládáš odstavec? **1 jednotka.**",
+      "p2": "Generuješ gramatickou poznámku? **1 jednotka.**",
+      "fairUse": "Zásady fair use: Exporty (PDF/EPUB) jsou **vždy zdarma**. Za stažení vlastní práce nikdy neplatíš."
     }
   },
   "Export": {
     "publishingPipeline": "Publikační proces",
-    "pdfManuscript": "Rukopis v PDF (tisk)",
+    "pdfManuscript": "PDF připravené k tisku",
     "epubEbook": "E-kniha (EPUB 3.0)",
     "generate": "Generovat",
+    "generating": "Generování...",
     "quality": "Kvalita",
-    "bleed": "Spadávka",
-    "preFlightTitle": "Předtisková kontrola validity",
-    "symmetryCheck": "Bilingvní symetrie ověřena",
-    "largeDocWarning": "Vykreslování velkých dokumentů může trvat až 30 sekund.",
-    "upgradeToPro": "Upgradovat na Pro",
-    "watermarkPolicy": "Odstraňte vodoznaky, odemkněte HD tisk a získejte 50 000 AI slov měsíčně.",
+    "bleed": "Spadávka (Bleed)",
+    "preFlightTitle": "Automatizovaný systém integrity",
+    "symmetryCheck": "Symetrie Grid-Lock aktivní",
+    "largeDocWarning": "Načítání velkých dokumentů může trvat až 30 sekund.",
+    "upgradeToPro": "Přejít na Pro",
+    "watermarkPolicy": "Odstraň vodoznaky, odemkni tiskovou kvalitu a získej 50 000 AI slov měsíčně.",
     "viewPlans": "Zobrazit plány",
-    "proQuality": "Pro kvalita (koncept)",
-    "freeWarning": "V bezplatné úrovni bude na tento export aplikován vodoznak.",
-    "pdfDesc": "Vysoce věrný export přes 300 DPI Puppeteer engine. Optimalizováno pro Amazon KDP.",
-    "epubDesc": "Flexibilní bilingvní textové rozvržení. Optimalizováno pro Kindle a Apple Books.",
+    "proQuality": "Pro kvalita (Koncept)",
+    "freeWarning": "Tento export bude v bezplatném plánu obsahovat vodoznak.",
+    "pdfDesc": "Vysoce kvalitní export engine Puppeteer při 300 DPI. Optimalizováno pro Amazon KDP.",
+    "epubDesc": "Dvojjazyčné rozvržení textu. Optimalizováno pro Kindle a Apple Books.",
     "qualityPrint": "Tisk",
     "qualityWeb": "Web",
-    "qualityDraft": "Koncept"
+    "qualityDraft": "Koncept",
+    "pdfError": "Export PDF se nezdařil",
+    "pdfErrorDesc": "Chyba exportu. Zkontroluj spojení s tiskovým serverem.",
+    "epubError": "Export EPUB se nezdařil",
+    "epubErrorDesc": "Chyba při generování souboru EPUB.",
+    "chapter": "Kapitola",
+    "engineLabel": "SYSTÉM PRO DVOJJAZYČNÉ PUBLIKOVÁNÍ",
+    "studyDeck": "Studijní balíček (Anki/CSV)",
+    "deckDesc": "Exportuj své AI anotace a zvýrazněnou slovní zásobu do Anki, Quizletu nebo Excelu.",
+    "noCardsFound": "Nenalezeny žádné kartičky. Nejdříve je vytvoř pomocí nástroje „AI Anotace“!",
+    "systemStatus": "Status systému",
+    "gridLock": "Architektura Grid-Lock",
+    "engineActive": "Systém aktivní",
+    "waitingContent": "Čekání na obsah...",
+    "mirrorGutter": "Logika zrcadlových okrajů",
+    "profileLoaded": "Profil načten",
+    "audiobookEngine": "Neuronová audiokniha",
+    "audiobookDesc": "Generuj audioknihy ve studiové kvalitě díky Microsoft Neural TTS. Soubory jsou organizovány podle kapitol v ZIP archivu.",
+    "voicePersona": "Hlas vypravěče",
+    "selectVoice": "Vybrat hlas...",
+    "renderingChapter": "Syntetizování kapitoly {chapter}...",
+    "exportAudioZip": "Exportovat zvuk (ZIP)",
+    "neuralEngine": "Microsoft Neural TTS engine",
+    "noAudioContent": "Nenalezen žádný textový obsah pro generování zvuku. Nejdříve přidej textové bloky!",
+    "audioExportError": "Export zvuku se nezdařil. Zkontroluj připojení a zkus to znovu.",
+    "socialShare": "Sdílení na sítě",
+    "socialShareDesc": "Exportuj své dvojjazyčné citáty jako krásnou grafiku pro Instagram, Twitter nebo Pinterest.",
+    "socialFormat": "Formát",
+    "squareFormat": "Čtverec (Instagram)",
+    "storyFormat": "Příběh (1080×1920)",
+    "twitterFormat": "Twitter karta",
+    "pinterestFormat": "Pinterest Pin",
+    "exportImage": "Exportovat obrázek",
+    "includeBranding": "Zahrnout branding Synoptic",
+    "selectBlock": "Vyber textový blok k exportu"
   },
   "Onboarding": {
-    "tourDashboardContent": "Vítejte v Synoptic! Toto je vaše centrum projektů.",
-    "tourNewProjectContent": "Zde začněte vytvářet své první bilingvní mistrovské dílo.",
-    "tourLibraryContent": "Importujte klasické texty z naší veřejné knihovny.",
-    "tourPageListContent": "Zde procházejte stránky své knihy.",
-    "tourToolsContent": "Přidávejte textové bloky, obrázky a AI anotace.",
-    "tourPublishContent": "Připraveni k tisku? Exportujte do PDF nebo EPUB během několika sekund.",
-    "tourWorkspaceContent": "Toto je vaše plátno. Levý sloupec je zdroj, pravý je váš překlad."
+    "tourDashboardContent": "Vítej v Synoptic! Toto je tvůj přehled projektů.",
+    "tourNewProjectContent": "Zde začni vytvářet své první dvojjazyčné dílo.",
+    "tourLibraryContent": "Importuj klasické texty z naší knihovny volných děl.",
+    "tourPageListContent": "Zde můžeš procházet stránky své knihy.",
+    "tourToolsContent": "Přidávej textové bloky, obrázky a AI anotace.",
+    "tourPublishContent": "Připraveno k tisku? Exportuj do PDF nebo EPUB během několika sekund.",
+    "tourWorkspaceContent": "Toto je tvé plátno. Levý sloupec je originál, pravý je překlad."
   },
   "CommandPalette": {
-    "placeholder": "Napište příkaz nebo hledejte...",
+    "esc": "Esc",
+    "placeholder": "Napiš příkaz nebo hledej...",
     "noResults": "Nenalezeny žádné výsledky.",
     "actions": "Akce",
     "addText": "Přidat textový blok",
     "undo": "Zpět",
     "redo": "Znovu",
     "deleteBlock": "Smazat vybraný blok",
-    "exportPdf": "Export do PDF",
+    "exportPdf": "Exportovat do PDF",
     "select": "vybrat",
     "navigate": "navigovat",
     "paletteTitle": "Příkazová paleta Synoptic",
     "commandMenu": "Menu příkazů"
+  },
+  "AboutPage": {
+    "title": "Budoucnost překladu",
+    "subtitle": "Synoptic se zrodil z jednoduchého pozorování: svět se sbližuje, ale naše knihy jsou stále monolingvní. Postavili jsme první studio věnované umění a vědě dvojjazyčného publikování.",
+    "sovereignTitle": "Záruka bez trénování",
+    "sovereignDesc": "Většina AI nástrojů žádá přístup k tvým datům. My ne. Tvůj rukopis netrénuje globální mozek AI; zůstává v tvém soukromém prostoru.",
+    "soulTitle": "Bezstavové zpracování",
+    "soulDesc": "Používáme bezstavovou architekturu (NextResponse). Jakmile je překlad doručen, agent se vypne a paměť je okamžitě smazána.",
+    "values": "Naše hodnoty",
+    "privacyTitle": "Soukromí na prvním místě",
+    "privacyDesc": "Tvé rukopisy jsou tvým vlastnictvím. Používáme bezpečnou infrastrukturu, abychom zajistili, že tvé duševní vlastnictví nikdy neopustí tvou kontrolu.",
+    "perfTitle": "Vysoký výkon",
+    "perfDesc": "Postaveno pro moderní web. Každá interakce je rychlá, od cloudové synchronizace až po 300 DPI PDF export.",
+    "communityTitle": "Vytvořeno pro komunitu",
+    "communityDesc": "Neustále se vyvíjíme díky zpětné vazbě od naší komunity autorů, polyglotů a pedagogů.",
+    "cta": "Přidej se k revoluci"
+  },
+  "PrivacyPage": {
+    "title": "Soukromí @ Synoptic",
+    "subtitle": "Víme, že tvé rukopisy jsou tvou duší. Naše zásady chrání tvé duševní vlastnictví.",
+    "philosophyTitle": "Naše filozofie soukromí",
+    "philosophyDesc": "Synoptic je postaven na principu „suverénního vědění“. Sbíráme pouze to, co je nezbytně nutné.",
+    "collectTitle": "Data, která sbíráme",
+    "collectDesc": "Údaje o účtu (e-mail) pro přístup, metadata projektu a uživatelský obsah výhradně pro účely zpracování.",
+    "collectItems": [
+      "Údaje o účtu: Jméno a e-mail pro fakturaci.",
+      "Metadata projektu: Pro udržení stavu katalogu.",
+      "Uživatelský obsah: Šifrovaný a izolovaný."
+    ],
+    "aiProcessingTitle": "AI zpracování a izolace dat",
+    "aiProcessingDesc": "Lišíme se od standardních AI nástrojů. Tvé rukopisy NEJSOU používány k trénování globálních modelů.",
+    "securityTitle": "Ukládání a zabezpečení",
+    "securityDesc": "Všechna data jsou šifrována při přenosu (TLS/SSL) i v klidu. Své projekty můžeš kdykoli smazat.",
+    "sharingTitle": "Sdílení s třetími stranami",
+    "sharingDesc": "Tvá data neprodáváme. Sdílíme je pouze s nezbytnými poskytovateli služeb, jako je Stripe (platby) a AWS/DigitalOcean (infrastruktura).",
+    "contactTitle": "Kontakt",
+    "contactDesc": "V případě dotazů ohledně soukromí: privacy@getsynoptic.com",
+    "lastUpdated": "Poslední aktualizace: Prosinec 2025"
+  },
+  "TermsPage": {
+    "title": "Podmínky služby",
+    "subtitle": "Jasná pravidla. Práce patří tobě. Nástroj patří nám.",
+    "introTitle": "1. Úvod",
+    "introDesc": "Vítej v Synoptic. Používáním našeho studia souhlasíš s těmito podmínkami. Poslední aktualizace: Prosinec 2025.",
+    "ipTitle": "2. Duševní vlastnictví",
+    "ipDesc": "Jasně oddělujeme Nástroj od Tvorby.",
+    "ipItems": [
+      "Tvá suverenita: Ponecháváš si 100% vlastnictví svých rukopisů a exportů.",
+      "Naše technologie: Rozhraní, sázecí engine v4.0 a kód jsou vlastnictvím Synoptic."
+    ],
+    "obligationsTitle": "3. Povinnosti uživatele",
+    "obligationsDesc": "Souhlasíš s tím, že nebudeš provádět zpětné inženýrství našeho systému ani používat skripty k vytěžování dat z naší knihovny.",
+    "paymentTitle": "4. Předplatné a AI jednotky",
+    "paymentDesc": "Plány jsou fakturovány měsíčně. Jednotky AI jsou spotřebovávány za „intelektuální úkon“. Nevyužité jednotky se nepřevádějí.",
+    "publishingTitle": "5. Prohlášení o vyloučení odpovědnosti za publikování",
+    "publishingDesc": "I přes optimalizaci pro KDP nezaručujeme přijetí třetími stranami. Za finální korekturu neseš odpovědnost ty.",
+    "terminationTitle": "6. Ukončení",
+    "terminationDesc": "Vyhrazujeme si právo pozastavit účty porušující naše zásady fair use (zneužití systému/odmítnutí plateb)."
+  },
+  "ModelsPage": {
+    "title": "Archiv struktur",
+    "subtitle": "Každý příběh vyžaduje vlastní architekturu. Vyber si z naší kolekce profesionálních dvojjazyčných šablon.",
+    "pixelPerfect": "Pixelově přesná rozvržení",
+    "gutterTitle": "Logika zrcadlových okrajů",
+    "gutterDesc": "Automatické nastavení vnitřních a vnějších okrajů podle typu vazby.",
+    "symmetryTitle": "Strážce symetrie",
+    "symmetryDesc": "Upozornění v reálném čase, pokud dvojjazyčné bloky ztratí synchronizaci mezi stránkami.",
+    "templates": {
+      "classic": {
+        "title": "Klasický paralelní",
+        "desc": "Zlatý standard dvojjazyčného čtení. Přesně zarovnané sloupce pro kvalitní tištěná vydání."
+      },
+      "alternating": {
+        "title": "Střídavá imerze",
+        "desc": "Perfektní pro digitální zařízení. Text plyne odstavec po odstavci pro udržení soustředění."
+      },
+      "academic": {
+        "title": "Filologická studie",
+        "desc": "Hloubková akademická analýza s anotacemi slovo po slovu přímo pod zdrojem."
+      },
+      "modern": {
+        "title": "Moderní verš",
+        "desc": "Minimalistické rozvržení s širokými uměleckými okraji, optimalizované pro poezii."
+      }
+    },
+    "viewTemplate": "Prozkoumat strukturu",
+    "typesettingTitle": "Dvojjazyčná logika",
+    "exampleSource": "The stars were bright above the silent lake.",
+    "exampleTarget": "Hvězdy jasně zářily nad tichým jezerem.",
+    "labels": {
+      "source": "Zdroj ({lang})",
+      "translation": "Překlad ({lang})",
+      "engine": "Sázecí engine v4.0"
+    }
+  },
+  "LearnPage": {
+    "title": "Ovládni jakýkoli jazyk skrze imerzi",
+    "subtitle": "Zapomeň na nudné učebnice. Vytvářej si vlastní materiály z příběhů, které tě opravdu baví číst.",
+    "badge": "Pro polygloty a studenty",
+    "browseLibrary": "Procházet knihovnu",
+    "features": {
+      "reader": {
+        "title": "Inteligentní čtečka",
+        "desc": "Čti pohodlně se synchronizovaným posuvem. Tvůj zrak nikdy neztratí překlad."
+      },
+      "study": {
+        "title": "AI asistent studia",
+        "desc": "Pokládej gramatické dotazy přímo v textu. Je to jako mít soukromého učitele na každé stránce."
+      },
+      "custom": {
+        "title": "Vlastní materiály",
+        "desc": "Importuj vlastní články nebo PDF soubory. Synoptic je zformátuje ideálně pro studium."
+      }
+    },
+    "immersion": {
+      "title": "Věda za metodou side-by-side",
+      "p1": "Čtení v cílovém jazyce je nejefektivnější způsob, jak si osvojit slovní zásobu. Ale začít číst cizojazyčnou knihu může být odrazující.",
+      "p2": "Synoptic tuto bariéru odstraňuje. Díky překladu zarovnanému větu po větě umožňujeme tvému mozku přirozeně mapovat nová slova.",
+      "tag1": "Přirozené osvojování",
+      "tag2": "Dvojjazyčné mapování",
+      "verified": "Ověřený AI překlad",
+      "flashcard": "Kartička vygenerována!"
+    },
+    "ctaSection": {
+      "title": "Připraven na plynulost?",
+      "subtitle": "Přidej se k tisícům studentů, kteří vyměnili příručky za imerzivní zážitek.",
+      "button": "Vytvořit bezplatný účet"
+    },
+    "cta": "Začít mou cestu"
+  },
+  "PublishPage": {
+    "title": "Publikování na průmyslové úrovni",
+    "subtitle": "Synoptic je navržen pro velké objemy. Naše infrastruktura podporuje vydavatele vyžadující konzistenci.",
+    "infra": "Infra pro vydavatele",
+    "cta": "Začít publikovat nyní",
+    "enterprise": "Kontaktovat prodej",
+    "features": {
+      "engine": {
+        "title": "Engine Grid-Lock",
+        "desc": "Náš systém CSS Grid matematicky uzamyká odstavce, čímž zabraňuje desynchronizaci."
+      },
+      "exports": {
+        "title": "Profesionální exporty",
+        "desc": "Generuj 300 DPI PDF soubory s barevnými profily sRGB. Tvé soubory pro KDP projdou všemi kontrolami."
+      },
+      "distribution": {
+        "title": "Připraveno pro globální distribuci",
+        "desc": "Exportuj EPUB 3.0 soubory kompatibilní s Kindle, Apple Books a všemi velkými prodejci."
+      }
+    },
+    "volumeTitle": "Produkční postup",
+    "volumeSubtitle": "Od rukopisu na trh ve třech krocích.",
+    "step1": "Importovat nebo vytvořit",
+    "step1Desc": "Vlož svůj rukopis nebo piš přímo. Naše AI se postará o základní formátování.",
+    "step2": "Vyladit a validovat",
+    "step2Desc": "Použij editor Grid-Lock pro dokonalou sazbu. Strážce symetrie zabrání chybám.",
+    "step3": "Exportovat a publikovat",
+    "step3Desc": "Stáhni hotové soubory. Nahraj je přímo na KDP, IngramSpark nebo ke svému distributorovi.",
+    "available": "Dostupné již nyní",
+    "epubTitle": "EPUB 3.0 + Pevné rozvržení",
+    "epubDesc": "Plná podpora pro oba formáty EPUB: s přetékajícím i pevným rozvržením (fixed-layout). Ideální pro ilustrované knihy.",
+    "compliant": "Soulad s EPUB 3.0",
+    "fixed": "Podpora Fixed-layout",
+    "scaleTitle": "Chceš škálovat svou produkci?",
+    "scaleDesc": "Ať už vydáváš 5 nebo 500 titulů, Synoptic roste s tebou.",
+    "sales": "Kontaktovat obchodní tým"
+  },
+  "Library": {
+    "title": "Knihovna objevů",
+    "subtitle": "Procházej přes 85 zdrojů bezplatného obsahu pro své dvojjazyčné knihy.",
+    "searchPlaceholder": "Hledat podle názvu, autora nebo klíčového slova...",
+    "badge": "60+ zdrojů volného obsahu",
+    "heroTitle": "Knihovna objevů",
+    "heroSubtitle": "Najdi pečlivě vybraný obsah pro své dvojjazyčné knihy. Duchovní texty, klasická literatura a další, vše s ověřenou licencí.",
+    "browseLibrary": "Procházet knihovnu",
+    "commercialSafe": "Bezpečné pro komerční využití",
+    "attributionRequired": "Vyžadována atribute",
+    "categories": {
+      "all": "Vše",
+      "sacred": "Duchovní a moudrost",
+      "literature": "Literatura",
+      "visual": "Vizuální a umění",
+      "knowledge": "Poznání a fakta",
+      "news": "Zprávy a média",
+      "history": "Historie",
+      "language": "Studium jazyků",
+      "academic": "Akademické a výzkum",
+      "popculture": "Popkultura"
+    },
+    "categoryDescriptions": {
+      "sacred": "Duchovní texty ze světových tradic",
+      "literature": "Romány, poezie, drama a folklor",
+      "visual": "Umění z muzeí, fotografie NASA a další",
+      "news": "Titulky, články a média",
+      "history": "Historické dokumenty a archivy",
+      "language": "Věty, slovní zásoba a cvičení",
+      "knowledge": "Fakta, citáty, recepty a geografie",
+      "academic": "Výzkum, formální texty a testy",
+      "popculture": "Komiksy, hry a zábava"
+    },
+    "licenses": {
+      "all": "Všechny licence",
+      "commercialSafe": "Komerčně bezpečné",
+      "attribution": "Vyžadována atribute",
+      "personalOnly": "Pouze pro osobní užití",
+      "licenseType": "Typ licence"
+    },
+    "difficulty": {
+      "all": "Všechny úrovně",
+      "level": "Úroveň",
+      "difficultyLevel": "Úroveň náročnosti",
+      "beginner": "Začátečník",
+      "intermediate": "Středně pokročilý",
+      "expert": "Expert"
+    },
+    "tile": {
+      "beginner": "Začátečník",
+      "intermediate": "Středně",
+      "expert": "Expert",
+      "studyOnly": "Pouze ke studiu"
+    },
+    "search": {
+      "placeholder": "Hledat...",
+      "quickFilters": "Rychlé filtry:",
+      "showing": "Zobrazeno",
+      "of": "z",
+      "templates": "šablon",
+      "clearAllFilters": "Vymazat filtry",
+      "noTemplatesFound": "Nenalezeny žádné šablony",
+      "tryAdjusting": "Zkus upravit hledání nebo filtry."
+    },
+    "quickTags": {
+      "bestsellers": "🏆 Bestsellery",
+      "dailyPractice": "📅 Denní praxe",
+      "quickSessions": "⚡ Krátké relace",
+      "giftIdeas": "🎁 Tipy na dárky",
+      "posters": "🖼️ Plakáty",
+      "flashcards": "📚 Kartičky",
+      "vocabulary": "📖 Slovní zásoba",
+      "socialMedia": "📱 Sociální sítě"
+    },
+    "wizard": {
+      "start": "Začít",
+      "back": "Zpět",
+      "import": "Importovat obsah",
+      "cancel": "Zrušit",
+      "search": "Hledat",
+      "preview": "Náhled",
+      "randomize": "Překvap mě!",
+      "loading": "Načítání obsahu...",
+      "error": "Něco se nepovedlo",
+      "whatYouCanDo": "Co můžeš dělat",
+      "searchContent": "Hledat obsah",
+      "pickByReference": "Vybrat podle reference",
+      "randomSelection": "Náhodný výběr",
+      "imagesIncluded": "Včetně obr.",
+      "audioIncluded": "Včetně zvuku",
+      "selectedChapters": "Vybrané kapitoly",
+      "fullBook": "Celá kniha",
+      "customRange": "Vlastní rozsah",
+      "book": "Kniha",
+      "startChapter": "Počáteční kap.",
+      "endChapter": "Koncová kap."
+    },
+    "license": {
+      "commercialSafeDesc": "Tento obsah je buď volným dílem, nebo má komerční licenci. Můžeš prodávat díla na něm založená.",
+      "attributionDesc": "Komerční využití povoleno za podmínky správného uvedení zdroje.",
+      "personalOnlyDesc": "Pouze pro osobní studium. Prodej děl založených na tomto obsahu je zakázán.",
+      "viewFull": "Zobrazit plnou licenci →"
+    },
+    "warning": {
+      "title": "Omezená licence",
+      "personalUseOnly": "Pouze pro osobní užití",
+      "whyRestricted": "Proč je omezená?",
+      "youCan": "MŮŽEŠ to použít pro:",
+      "youCannot": "NEMŮŽEŠ:",
+      "personalStudy": "Osobní studium",
+      "languagePractice": "Jazyková praxe",
+      "teachingMaterials": "Výukové materiály",
+      "academicResearch": "Akademický výzkum",
+      "sellTranslations": "Prodávat překlady",
+      "publishEbook": "Publikovat jako e-knihu",
+      "commercialDistribution": "Komerční distribuci",
+      "monetizeSocial": "Monetizovat na sítích",
+      "acknowledge": "Rozumím, že tento obsah slouží pouze pro osobní studium a nebudu jej prodávat.",
+      "chooseAnother": "Vybrat jiný zdroj",
+      "understand": "Rozumím, pokračovat"
+    },
+    "credits": {
+      "title": "Kredity a zdroje",
+      "intro": "Tento projekt využívá obsah z následujících zdrojů:",
+      "generated": "Atribuci generoval Synoptic dne",
+      "attributionRequired": "Vyžadována atribute"
+    },
+    "cta": {
+      "browseLibrary": "Prohlížet knihovnu",
+      "getStartedFree": "Začít zdarma",
+      "learnMore": "Dozvědět se více",
+      "readyToStart": "Připraven na svou knihu?",
+      "importAndStart": "Importuj zdroj a začni překládat ve studiu."
+    },
+    "favorites": {
+      "title": "Moje uložené šablony",
+      "quickAccess": "Rychlý přístup k tvému oblíbenému obsahu.",
+      "noSaved": "Zatím žádné uložené šablony",
+      "noSavedDesc": "Prohlédni si naši knihovnu a ulož si favority pro rychlý přístup.",
+      "exploreLibrary": "Prozkoumat knihovnu",
+      "viewAll": "Zobrazit všech {count} uložených šablon",
+      "browseAll": "Procházet vše",
+      "saved": "Uloženo",
+      "addToFavorites": "Přidat k oblíbeným",
+      "removeFromFavorites": "Odebrat z oblíbených",
+      "readyToCreate": "Připraven k tvorbě?",
+      "signInToSave": "Přihlas se pro ukládání a tvorbu.",
+      "startCreating": "Začít tvořit",
+      "signInAndCreate": "Přihlásit se a tvořit"
+    }
+  },
+  "Tools": {
+    "aiDraft": {
+      "title": "AI Koncept",
+      "button": "AI Koncept",
+      "original": "Originál:",
+      "translation": "Překlad:",
+      "translating": "Překládání...",
+      "tryAgain": "Zkusit znovu",
+      "copy": "Kopírovat",
+      "copied": "Zkopírováno!",
+      "applyToL2": "Použít na L2",
+      "poweredBy": "Běží na LibreTranslate"
+    },
+    "grammar": {
+      "title": "Kontrola gramatiky",
+      "button": "Gramatika",
+      "checking": "Kontrola...",
+      "detected": "Zjištěno:",
+      "noIssuesFound": "Nenalezeny žádné chyby!",
+      "textLooksGreat": "Tvůj text vypadá skvěle.",
+      "issuesFound": "Nalezeno {count} chyb",
+      "fixAll": "Opravit vše",
+      "tryAgain": "Zkusit znovu",
+      "poweredBy": "Běží na LanguageTool"
+    },
+    "definition": {
+      "origin": "Původ",
+      "lookingUp": "Vyhledávání...",
+      "wordNotFound": "Slovo nenalezeno",
+      "more": "Více",
+      "poweredBy": "Free Dictionary API"
+    },
+    "synonyms": {
+      "synonymsFor": "Synonyma pro:",
+      "findingSynonyms": "Hledání synonym...",
+      "noSynonymsFound": "Nenalezena žádná synonyma",
+      "synonyms": "Synonyma",
+      "antonyms": "Antonyma",
+      "related": "Související",
+      "selectWordFirst": "Vyber slovo a klikni pravým tlačítkem",
+      "poweredBy": "Běží na Datamuse"
+    },
+    "polisher": {
+      "title": "Vylepšení textu",
+      "button": "Vylepšit",
+      "polishing": "Vylepšování...",
+      "suggestedImprovements": "Navrhovaná vylepšení"
+    },
+    "assetBank": {
+      "title": "Banka emoji",
+      "noResults": "Nenalezena žádná emoji"
+    },
+    "socialShare": {
+      "square": "Čtverec",
+      "story": "Příběh",
+      "wide": "Široký"
+    }
+  },
+  "Settings": {
+    "title": "Uživatelská nastavení",
+    "displayName": "Zobrazované jméno",
+    "displayNamePlaceholder": "Tvé jméno",
+    "interfaceLanguage": "Jazyk rozhraní",
+    "interfaceLanguageHint": "Nastavuje výchozí jazyk studia.",
+    "saving": "Ukládání...",
+    "saveSettings": "Uložit nastavení",
+    "cancel": "Zrušit"
+  },
+  "Filters": {
+    "license": "Licence",
+    "commercial": "Komerční",
+    "attribution": "Atribuci",
+    "personal": "Osobní"
+  },
+  "Errors": {
+    "translationFailed": "Překlad se nezdařil",
+    "grammarCheckFailed": "Kontrola se nezdařila",
+    "lookupFailed": "Vyhledávání se nezdařilo",
+    "fetchFailed": "Nepodařilo se stáhnout obsah",
+    "connectionError": "Chyba připojení. Zkus to prosím znovu.",
+    "unexpectedError": "Nastala neočekávaná chyba"
+  },
+  "Accessibility": {
+    "openMenu": "Otevřít menu",
+    "closeMenu": "Zavřít menu",
+    "loading": "Načítání",
+    "searchResults": "Výsledky hledání",
+    "noResults": "Žádné výsledky",
+    "sortBy": "Seřadit podle",
+    "filterBy": "Filtrovat podle"
   }
 }

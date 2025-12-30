@@ -1,77 +1,152 @@
 {
-  "Studio": {
-    "title": "Synoptic Studio",
-    "saving": "Taslak kaydediliyor...",
-    "saved": "Tüm değişiklikler buluta kaydedildi",
-    "ready": "İki dilli şaheseriniz için hazır",
-    "addPage": "Yeni sayfa ekle",
-    "pageSettings": "{number}. sayfa ayarları",
-    "enteringStudio": "Stüdyoya giriliyor...",
-    "failedToLoadProject": "Proje yüklenemedi",
-    "retryConnection": "Bağlantıyı tekrar dene",
-    "pageManager": "Sayfa Yöneticisi",
-    "globalDesign": "Genel Tasarım",
-    "stylePresets": "Stil Hazır Ayarları",
-    "editorTools": "Düzenleyici Araçları",
-    "canvasActions": "Tuval İşlemleri",
-    "drafting": "Taslak Oluşturma",
-    "chapterStart": "Bölüm Başlangıcı",
-    "manuscript": "El Yazması",
-    "chapters": "Bölümler",
-    "noChapters": "Tanımlanmış bölüm yok",
-    "deletePage": "Sayfayı sil",
-    "resetFactory": "Fabrika ayarlarına dön",
-    "bilingualEditor": "İki Dilli Düzenleyici"
+  "Common": {
+    "save": "Kaydet",
+    "cancel": "İptal",
+    "delete": "Sil",
+    "copy": "Kopyala",
+    "duplicate": "Çoğalt",
+    "edit": "Düzenle",
+    "loading": "Yükleniyor...",
+    "error": "Bir hata oluştu",
+    "success": "Başarılı",
+    "back": "Geri",
+    "next": "İleri",
+    "backToHome": "Ana Sayfaya Dön",
+    "on": "Açık",
+    "off": "Kapalı",
+    "pdf": "PDF",
+    "epub": "EPUB",
+    "close": "Kapat",
+    "original": "Orijinal",
+    "translation": "Çeviri",
+    "importFailed": "İçe aktarma başarısız"
+  },
+  "Auth": {
+    "login": "Giriş Yap",
+    "signup": "Kaydol",
+    "logout": "Çıkış Yap",
+    "email": "E-posta",
+    "password": "Şifre",
+    "forgotPassword": "Şifrenizi mi unuttunuz?",
+    "noAccount": "Hesabınız yok mu?",
+    "hasAccount": "Zaten hesabınız var mı?",
+    "haveAccount": "Zaten hesabınız var mı?",
+    "verifyEmail": "E-postayı Doğrula",
+    "welcomeBack": "Tekrar hoş geldiniz",
+    "createAccount": "Hesap Oluştur",
+    "signInDesc": "Projelerinize erişmek için giriş yapın.",
+    "signUpDesc": "Yayınlamaya başlamak için bir hesap oluşturun.",
+    "emailPlaceholder": "ad@ornek.com",
+    "passwordPlaceholderLogin": "••••••••",
+    "passwordPlaceholderSignup": "En az 8 karakter",
+    "failed": "Kimlik doğrulama başarısız",
+    "errorOccurred": "Beklenmedik bir hata oluştu",
+    "signingIn": "Giriş yapılıyor...",
+    "creatingAccount": "Hesap oluşturuluyor...",
+    "signIn": "Giriş Yap",
+    "termsPrompt": "Devam ederek Hizmet Şartlarımızı ve Gizlilik Politikamızı kabul etmiş olursunuz.",
+    "continueWithGoogle": "Google ile Devam Et",
+    "orContinueWithEmail": "veya e-posta ile devam et",
+    "passwordStrength": "Şifre Gücü",
+    "weak": "Zayıf",
+    "fair": "Orta",
+    "strong": "Güçlü",
+    "oauthError": "OAuth doğrulaması başarısız oldu. Lütfen tekrar deneyin.",
+    "emailNotVerified": "Lütfen önce Google üzerinden e-posta adresinizi doğrulayın.",
+    "securityNote": "256-bit SSL Şifreleme • KVKK/GDPR Uyumlu",
+    "recentActivity": "Son Etkinlik",
+    "lastSession": "Son Oturum",
+    "savedSecurely": "Güvenle Kaydedildi",
+    "cloudSync": "Bulut Senkronizasyonu",
+    "active": "Aktif"
+  },
+  "Dashboard": {
+    "title": "Projelerim",
+    "subtitle": "İki dilli kitaplarınızı yönetin ve düzenleyin.",
+    "newProject": "Yeni Proje",
+    "noProjects": "Proje bulunamadı. İlk projenizi oluşturun!",
+    "emptyState": "Henüz bir proje oluşturmadınız.",
+    "yourProjects": "Projeleriniz",
+    "settings": "Ayarlar",
+    "profile": "Profil",
+    "billing": "Abonelik ve Ödeme",
+    "noDescription": "Açıklama yok.",
+    "lastUpdated": "Son Güncelleme",
+    "stats": {
+      "projects": "Projeler",
+      "pages": "Sayfalar",
+      "words": "Kelimeler"
+    },
+    "projectCard": {
+      "edited": "Düzenlendi",
+      "open": "Aç",
+      "delete": "Sil",
+      "confirmDelete": "Bu projeyi silmek istediğinizden emin misiniz?"
+    }
   },
   "Blocks": {
     "text": "Metin Bloğu",
-    "image": "Resim Bloğu",
+    "image": "Görüntü Bloğu",
     "separator": "Ayırıcı",
     "callout": "Bilgi Kutusu",
-    "insertText": "Metin bloğu ekle",
-    "addBlankPage": "Boş sayfa ekle",
-    "media": "Medya",
+    "quiz": "Sınav Bloğu",
+    "insertText": "Metin Bloğu Ekle",
+    "addBlankPage": "Boş Sayfa Ekle",
+    "media": "Multimedya",
     "ai": "Çeviri Yapay Zekası",
-    "settings": "Studio Ayarları",
-    "grammar": "Dil Bilgisi Kuralı",
-    "culture": "Kültürel Bilgi",
+    "settings": "Stüdyo Ayarları",
+    "grammar": "Dilbilgisi Kuralı",
+    "culture": "Kültürel Not",
     "vocabulary": "Kelime Bilgisi",
     "tip": "Öğrenme İpucu",
-    "warning": "Dil Bilgisi Uyarısı",
+    "warning": "Dilbilgisi Uyarısı",
     "note": "Genel Not",
-    "pronunciation": "Telaffuz Kılavuzu"
+    "pronunciation": "Telaffuz Kılavuzu",
+    "workbookExercise": "Çalışma Egzersizi",
+    "autoHint": "Otomatik İpucu",
+    "regenerateHint": "İpucunu Yenile",
+    "showAnswer": "Cevabı Göster",
+    "hideAnswer": "Cevabı Gizle",
+    "customHint": "Özel İpucu",
+    "difficulty": "Zorluk Seviyesi",
+    "difficultyEasy": "Kolay",
+    "difficultyMedium": "Orta",
+    "difficultyHard": "Zor",
+    "emptyImageBlock": "Boş Görüntü Bloğu"
   },
   "Inspector": {
     "visibility": "Görünürlüğü Geçersiz Kıl",
-    "header": "Üst Bilgi",
-    "footer": "Alt Bilgi",
+    "header": "Üstbilgi",
+    "headerOverlay": "Üstbilgi Katmanı",
+    "footer": "Altbilgi",
+    "footerOverlay": "Altbilgi Katmanı",
     "pageNumber": "Sayfa Numarası",
     "content": "İçeriği Geçersiz Kıl",
     "typography": "Tipografi",
     "layout": "Düzen ve Strateji",
     "printingFlow": "Baskı ve Akış",
-    "markChapterStart": "Bölüm başlangıcı olarak işaretle",
-    "forceBlank": "Zorunlu boş sayfa",
+    "markChapterStart": "Bölüm Başlangıcı Olarak İşaretle",
+    "forceBlank": "Boş Sayfaya Zorla",
     "pageLocalOnly": "Buradaki değişiklikler yalnızca mevcut sayfayı etkiler.",
-    "inspectorTitle": "{type} Denetçisi",
+    "inspectorTitle": "Stüdyo Denetçisi: {type}",
     "lineHeight": "Satır Yüksekliği",
-    "paraSpacing": "Paragraf Boşluğu",
+    "paraSpacing": "Paragraf Aralığı",
     "dimensions": "Boyutlar",
     "width": "Genişlik (%)",
     "alignment": "Hizalama",
-    "styleEffects": "Stil ve Efektler",
+    "styleEffects": "Stiller ve Efektler",
     "shadow": "Gölge",
-    "borderRadius": "Köşe Yuvarlatma",
+    "borderRadius": "Köşe Yuvarlama",
     "stylePattern": "Stil ve Desen",
     "thickness": "Kalınlık",
     "contextType": "Bağlam Türü",
     "brandingColor": "Marka Rengi",
-    "stylePreset": "Stil Hazır Ayarı",
+    "stylePreset": "Stil Önayarı",
     "solidLine": "Düz Çizgi",
     "doubleLine": "Çift Çizgi",
     "dashedLine": "Kesikli Çizgi",
     "dottedLine": "Noktalı Çizgi",
-    "gradientFade": "Gradyan Geçiş",
+    "gradientFade": "Gradyan Geçişi",
     "ornament": "Süsleme"
   },
   "Theme": {
@@ -79,28 +154,28 @@
     "layout": "Genel Düzen",
     "typography": "Tipografi (Genel)",
     "bodyText": "Gövde Metni",
-    "headings": "Ana Başlıklar",
+    "headings": "Başlıklar",
     "baseScaling": "Temel Ölçeklendirme",
-    "fontSize": "Gövde Yazı Boyutu",
+    "fontSize": "Yazı Tipi Boyutu",
     "lineHeight": "Genel Satır Yüksekliği",
-    "colorPresets": "Renk Hazır Ayarları",
-    "lightMode": "Açık Mod",
-    "darkMode": "Karanlık Mod"
+    "colorPresets": "Renk Önayarları",
+    "lightMode": "Açık Tema",
+    "darkMode": "Koyu Tema"
   },
   "Presets": {
-    "title": "Stil Hazır Ayarları",
-    "empty": "Bir bloğun stilini yeniden kullanılabilir bir hazır ayar olarak kaydetmek için onu seçin.",
+    "title": "Stil Önayarları",
+    "empty": "Stilini yeniden kullanılabilir bir önayar olarak kaydetmek için bir blok seçin.",
     "selected": "Seçili Bağlam",
-    "canCapture": "Bu {type} bloğunun stilini kaydedebilirsiniz.",
-    "saveCurrent": "Mevcut stili kaydet",
+    "canCapture": "Bu {type} bloğu için stili kaydedebilirsiniz.",
+    "saveCurrent": "Mevcut Stili Kaydet",
     "library": "Genel Kütüphane",
     "typeStyle": "{type} Stili",
     "synced": "Kütüphane senkronize edildi"
   },
   "Wizard": {
     "createTitle": "Yeni Proje Oluştur",
-    "createMasterpiece": "Yeni Bir Şaheser Oluştur",
-    "stepInformation": "Bilgi",
+    "createMasterpiece": "Yeni Güvenli Proje",
+    "stepInformation": "Bilgiler",
     "stepLanguages": "Diller",
     "stepFormat": "Format",
     "stepTemplate": "Şablon",
@@ -112,79 +187,268 @@
     "categoryPlaceholder": "Örn: Kurgu, Eğitim",
     "sourceLang": "Kaynak Dil (L1)",
     "targetLang": "Hedef Dil (L2)",
-    "langWarning": "Uyarı: İki dilli bir proje için kaynak ve hedef diller farklı olmalıdır.",
-    "langTip": "İpucu: Çoğu kullanıcı hedef dil olarak kendi ana dilini, kaynak dil olarak ise öğrendiği dili seçer.",
+    "langWarning": "Uyarı: İki dilli bir projede kaynak ve hedef diller farklı olmalıdır.",
+    "langTip": "İpucu: Çoğu kişi hedef dil olarak ana dilini, kaynak dil olarak öğrendiği dili seçer.",
     "dimensions": "Fiziksel Boyutlar (mm)",
-    "custom": "Özel Tanım",
+    "custom": "Özel Ayar",
     "layoutStyle": "Düzen Stili",
     "back": "Geri",
     "next": "Sonraki Adım",
-    "creating": "Studio Hazırlanıyor...",
-    "launch": "Studio'yu Başlat",
-    "blankTemplate": "Boş Sayfadan Başla",
-    "blankDesc": "İçerik yok, temiz bir sayfa",
+    "creating": "Stüdyo hazırlanıyor...",
+    "launch": "Stüdyoyu Başlat",
+    "secureNote": "Şifrelenmiş ve izole edilmiş proje ortamı",
+    "blankTemplate": "Sıfırdan Başla",
+    "blankDesc": "Kendi düzenleriniz için boş sayfa",
     "classicTemplate": "Klasik Yan Yana",
-    "classicDesc": "Dengeli sütunlar, tırnaklı yazı tipleri",
-    "poetryTemplate": "Şiir / Dize",
-    "poetryDesc": "Numaralandırılmış satırlar, merkez odaklı",
+    "classicDesc": "Yoğun metinler için optimize edildi",
+    "poetryTemplate": "Şiir / Mısra",
+    "poetryDesc": "Mısra ve şarkı sözleri için optimize edildi (Modern)",
+    "academicTemplate": "Filolojik Çalışma",
+    "academicDesc": "Geniş kenar boşlukları, dipnotlar",
     "width": "Genişlik (mm)",
     "height": "Yükseklik (mm)",
     "upgradeToCreateMore": "Daha fazla oluşturmak için yükseltin",
-    "reachedFreeLimit": "Ücretsiz sınırına ulaştınız",
-    "freeLimitDesc": "Ücretsiz hesaplar 1 aktif proje ile sınırlandırılmıştır. Sınırsız proje ve gelişmiş yapay zeka özelliklerinin kilidini açmak için Pro'ya yükseltin.",
+    "reachedFreeLimit": "Ücretsiz limitine ulaşıldı",
+    "freeLimitDesc": "Ücretsiz hesaplar 1 aktif proje ile sınırlıdır. Sınırsız proje ve gelişmiş yapay zeka özelliklerinin kilidini açmak için Pro'ya yükseltin.",
     "upgradeToPro": "Pro'ya Yükselt",
-    "maybeLater": "Belki daha sonra",
-    "usTrade": "ABD Ticari Kağıt",
+    "maybeLater": "Belki sonra",
+    "usTrade": "US Trade Paper",
     "digest": "Digest",
     "intlStandard": "Uluslararası Standart"
   },
-  "Common": {
-    "delete": "Sil",
-    "copy": "Kopyala",
-    "duplicate": "Çoğalt",
-    "save": "Kaydet",
-    "cancel": "İptal",
-    "on": "Açık",
-    "off": "Kapalı",
-    "backToHome": "Ana Sayfaya Dön"
+  "Studio": {
+    "title": "Synoptic Studio",
+    "collaborate": "İş Birliği Yap",
+    "export": "Dışa Aktar",
+    "preview": "Ön İzleme",
+    "saving": "Taslak kaydediliyor...",
+    "saved": "Tüm değişiklikler buluta kaydedildi",
+    "ready": "İki dilli şaheseriniz için hazır",
+    "addPage": "Yeni Sayfa Ekle",
+    "pageSettings": "Sayfa {number} Ayarları",
+    "enteringStudio": "Stüdyoya giriliyor...",
+    "failedToLoadProject": "Proje yüklenemedi",
+    "retryConnection": "Bağlantıyı tekrar dene",
+    "pageManager": "Sayfa Yöneticisi",
+    "globalDesign": "Genel Tasarım",
+    "stylePresets": "Stil Önayarları",
+    "editorTools": "Düzenleme Araçları",
+    "canvasActions": "Tuval İşlemleri",
+    "drafting": "Taslak Oluşturma",
+    "chapterStart": "Bölüm Başlangıcı",
+    "manuscript": "Taslak Metin",
+    "chapters": "Bölümler",
+    "noChapters": "Tanımlanmış bölüm yok",
+    "deletePage": "Sayfayı Sil",
+    "resetFactory": "Fabrika Ayarlarına Dön",
+    "bilingualEditor": "İki Dilli Editör",
+    "bookStructure": "Kitap Yapısı",
+    "publishingPipeline": "Yayınlama Hattı",
+    "frontMatter": "Ön Sayfalar",
+    "backMatter": "Arka Sayfalar",
+    "titlePage": "Başlık Sayfası",
+    "copyrightPage": "Telif Hakkı Sayfası",
+    "dedicationPage": "İthaf Sayfası",
+    "tableOfContents": "İçindekiler",
+    "glossary": "Sözlük",
+    "aboutAuthor": "Yazar Hakkında",
+    "endNotes": "Son Notlar",
+    "autoGlossaryActive": "Otomatik Sözlük Aktif",
+    "refreshGlossary": "Sözlüğü Yenile",
+    "glossaryEntries": "{count} girdi toplandı",
+    "romanNumeralsInfo": "Ön sayfalarda Roma rakamları (i, ii, iii) kullanılır. Ana metin Arap rakamlarını (1, 2, 3) kullanır.",
+    "playAudio": "Sesli oku",
+    "stopAudio": "Durdur",
+    "normalSpeed": "Normal Hız",
+    "slowMode": "Yavaş Mod (0.7×)",
+    "audioSettings": "Ses Ayarları",
+    "grammarPainter": "Dilbilgisi Boyacısı",
+    "exitPaintMode": "Boyama Modundan Çık",
+    "subject": "Özne",
+    "verb": "Yüklem",
+    "object": "Nesne",
+    "adjective": "Sıfat",
+    "adverb": "Zarf",
+    "paintTip": "Dilbilgisi renklerini uygulamak için metni seçin",
+    "clearAllColors": "Tüm Renkleri Temizle",
+    "syntaxArrows": "Söz Dizimi Okları",
+    "addArrow": "Ok Ekle",
+    "deleteArrow": "Oku Sil",
+    "arrowStyle": "Ok Stili",
+    "curved": "Kavisli",
+    "angular": "Köşeli",
+    "straight": "Düz",
+    "arrowDrawer": "Söz Dizimsel Bağlayıcı",
+    "selectSource": "Kaynak kelimeyi seçin",
+    "selectTarget": "Hedef kelimeyi seçin",
+    "arrowCreated": "Bağlantı oluşturuldu",
+    "cancelLink": "İptal"
   },
-  "Dashboard": {
-    "title": "Projeleriniz",
-    "subtitle": "İki dilli kitaplarınızı yönetin ve düzenleyin.",
-    "emptyState": "Henüz herhangi bir proje oluşturmadınız.",
-    "noDescription": "Açıklama belirtilmedi.",
-    "lastUpdated": "Son Güncelleme"
+  "Editor": {
+    "toolbar": {
+      "bold": "Kalın",
+      "italic": "İtalik",
+      "underline": "Altı Çizili",
+      "strikeThrough": "Üstü Çizili",
+      "alignLeft": "Sola Hizala",
+      "alignCenter": "Ortala",
+      "alignRight": "Sağa Hizala",
+      "justify": "İki Yana Yasla",
+      "left": "Sol",
+      "center": "Orta",
+      "right": "Sağ",
+      "link": "Bağlantı",
+      "addBlock": "Blok Ekle",
+      "export": "Dışa Aktar",
+      "ai": "Yapay Zeka Asistanı"
+    },
+    "sidebar": {
+      "pages": "Sayfalar",
+      "style": "Stil",
+      "inspector": "Denetçi",
+      "chat": "Yapay Zeka Sohbeti"
+    },
+    "inspector": {
+      "layout": "Düzen",
+      "spacing": "Boşluklar",
+      "typography": "Tipografi",
+      "colors": "Renkler",
+      "border": "Kenarlık",
+      "shadow": "Gölge",
+      "actions": "İşlemler",
+      "labels": {
+        "color": "Renk",
+        "backgroundColor": "Arka Plan Rengi",
+        "fontSize": "Yazı Tipi Boyutu",
+        "lineHeight": "Satır Yüksekliği",
+        "letterSpacing": "Harf Aralığı",
+        "margin": "Kenar Boşluğu",
+        "padding": "İç Boşluk",
+        "width": "Genişlik",
+        "alignment": "Hizalama",
+        "fontFamily": "Yazı Tipi Ailesi"
+      }
+    },
+    "messages": {
+      "saved": "Proje kaydedildi",
+      "error": "Proje kaydedilirken hata oluştu"
+    },
+    "onboarding": {
+      "welcome": "Editöre Hoş Geldiniz",
+      "step1": "Bu sizin tuvaliniz. Başlamak için her iki tarafa da yazın.",
+      "step2": "Metni biçimlendirmek için araç çubuğunu kullanın.",
+      "step3": "Kitabınızı indirmek için Dışa Aktar'a tıklayın."
+    },
+    "blocks": {
+      "text": "Metin Paragrafı",
+      "image": "Görüntü",
+      "separator": "Ayırıcı",
+      "callout": "Bilgi Kutusu",
+      "verse": "Mısra / Şiir"
+    }
   },
-  "Auth": {
-    "login": "Giriş Yap",
-    "signup": "Kaydol",
-    "welcomeBack": "Tekrar hoş geldiniz",
-    "createAccount": "Hesap Oluştur",
-    "signInDesc": "Synoptic hesabınıza giriş yapın",
-    "signUpDesc": "Bugün iki dilli kitaplar oluşturmaya başlayın",
-    "email": "E-posta",
-    "password": "Şifre",
-    "emailPlaceholder": "ad@ornek.com",
-    "passwordPlaceholderLogin": "Şifrenizi girin",
-    "passwordPlaceholderSignup": "Bir şifre oluşturun",
-    "signIn": "Giriş Yap",
-    "signingIn": "Giriş yapılıyor...",
-    "creatingAccount": "Hesap oluşturuluyor...",
-    "noAccount": "Hesabınız yok mu?",
-    "hasAccount": "Zaten bir hesabınız var mı?",
-    "termsPrompt": "Devam ederek Synoptic'in Hizmet Şartlarını ve Gizlilik Politikasını kabul etmiş olursunuz.",
-    "failed": "Kimlik doğrulama başarısız",
-    "errorOccurred": "Bir hata oluştu"
+  "Models": {
+    "parallel": "Paralel Sütunlar",
+    "interlinear": "Satır Arası",
+    "bilingual": "Çift Taraflı",
+    "modern": "Modern Minimalist"
+  },
+  "Pricing": {
+    "title": "Basit ve Şeffaf Fiyatlandırma",
+    "subtitle": "Yayıncılık hedeflerinize en uygun planı seçin.",
+    "mostPopular": "En Popüler",
+    "month": "/ay",
+    "pageTitle": "Kitabınıza yatırım yapın.",
+    "pageSubtitle": "İster bir aile hatırasını çeviriyor ister ticari bir seri yayınlıyor olun, doğru araçlara sahibiz.",
+    "nonProfitTitle": "Kâr amacı gütmeyen bir kuruluş veya öğretmen misiniz?",
+    "nonProfitDesc": "Eğitim kurumları ve kâr amacı gütmeyen çeviriler için özel indirimler sunuyoruz. Teklif almak için bizimle iletişime geçin.",
+    "contactSupport": "Destekle İletişime Geçin",
+    "free": {
+      "name": "Ücretsiz",
+      "price": "0 ₺",
+      "desc": "Motoru test etmek için mükemmel.",
+      "description": "Motoru test etmek için mükemmel.",
+      "button": "Ücretsiz Başlayın"
+    },
+    "pro": {
+      "name": "Pro",
+      "price": "399 ₺",
+      "desc": "Bağımsız yazarlar ve dil meraklıları için.",
+      "description": "Bağımsız yazarlar ve dil meraklıları için.",
+      "button": "Pro'ya Yükselt"
+    },
+    "publisher": {
+      "name": "Yayıncı",
+      "price": "1.499 ₺",
+      "desc": "Yüksek hacimli üretimler için.",
+      "description": "Yüksek hacimli üretimler için.",
+      "button": "Yayıncı Planı"
+    },
+    "featuresList": {
+      "activeProject": "1 aktif proje",
+      "standardLayout": "Standart düzen motoru",
+      "manualTranslation": "Manuel çeviri",
+      "lowDpiPdf": "Düşük DPI PDF dışa aktarma",
+      "watermarked": "Filigranlı çıktı",
+      "unlimitedProjects": "Sınırsız proje",
+      "aiAssistedLayout": "Yapay zeka destekli düzen",
+      "aiWordsMonth": "Aylık 50.000 yapay zeka kelimesi",
+      "highDpiPdf": "300 DPI dışa aktarma (baskıya hazır)",
+      "epubMobi": "EPUB ve MOBI dışa aktarma",
+      "removeWatermarks": "Filigranların kaldırılması",
+      "priorityHistory": "Öncelikli bulut geçmişi",
+      "flashcards": "Dinamik flashcard oluşturma",
+      "tts": "Metinden sese okuma modu (TTS)",
+      "everythingPro": "Pro'daki her şey dahil",
+      "bigAiLimit": "Aylık 500.000 yapay zeka kelimesi",
+      "unlimitedAi": "Sınırsız yapay zeka kredisi",
+      "teamCollab": "Takım iş birliği",
+      "brandCustom": "Marka özelleştirme",
+      "fontUpload": "Kendi yazı tiplerinizi yükleyin",
+      "apiAccess": "API erişimi (yakında)",
+      "ttsPremium": "Premium nöral sesler",
+      "limitedAi": "Sınırlı yapay zeka"
+    },
+    "features": {
+      "unlimited": "Sınırsız proje",
+      "highDpi": "Yüksek kaliteli 300 DPI dışa aktarma",
+      "noWatermark": "Filigran yok",
+      "aiUnits": "Yapay Zeka Zeka Birimleri",
+      "customFonts": "Kendi yazı tiplerinizi yükleyin"
+    },
+    "cta": "Plan Seç",
+    "monthly": "aylık",
+    "yearly": "yıllık",
+    "popular": "En Popüler"
+  },
+  "Landing": {
+    "hero": {
+      "title": "İki dilli yayıncılık motoru.",
+      "subtitle": "Ham metni CSS ile mükemmel paralel kitaplara dönüştürün. InDesign yok. Senkronizasyon sorunu yok. Grid-Lock mimarisi hizalamayı tasarım gereği garanti eder.",
+      "cta": "Ücretsiz Yayınlamaya Başlayın"
+    },
+    "features": {
+      "title": "Grid-Lock Mimarisi Üzerine İnşa Edildi",
+      "items": {
+        "layout": "Grid-Lock Mimarisi",
+        "export": "Yerel PDF/X",
+        "sync": "Bulut Senkronizasyonu",
+        "ai": "Dilbilimsel Yapay Zeka",
+        "validation": "300 DPI Doğrulama"
+      }
+    }
   },
   "Marketing": {
     "nav": {
+      "toLearn": "Dil Öğrenimi İçin",
+      "toPublish": "Profesyonel Yayıncılık İçin",
       "features": "Özellikler",
       "pricing": "Fiyatlandırma",
       "library": "Kütüphane",
       "logIn": "Giriş Yap",
-      "joinNow": "Şimdi Katıl",
+      "joinNow": "Hemen Katıl",
       "templates": "Şablonlar",
-      "product": "Ürün",
+      "product": "Stüdyo",
       "company": "Şirket",
       "about": "Hakkımızda",
       "privacy": "Gizlilik",
@@ -192,133 +456,613 @@
     },
     "hero": {
       "badge": "Synoptic v1.0 Özel Beta",
-      "title": "<span>Mükemmel</span> <br /> İki Dilli Studio",
-      "subtitle": "Yapay zeka destekli dizgi, gerçek zamanlı bulut senkronizasyonu ve tek tıkla KDP yayıncılığı ile profesyonel yan yana kitaplar oluşturun.",
-      "ctaPrimary": "Ücretsiz Yazmaya Başla",
-      "ctaSecondary": "Kütüphaneyi Keşfet",
-      "aiSuggestion": "Yapay Zeka Önerisi"
+      "title": "<span>En iyi</span> <br /> iki dilli stüdyo",
+      "subtitle": "Ham metni CSS ile **mükemmel paralel kitaplara** dönüştürün. InDesign yok. Senkronizasyon sorunu yok.",
+      "subtitleShort": "İki dilli yayıncılık motoru.",
+      "featuresLine": "Grid-Lock Mimarisi • Yerel PDF/X • 300 DPI Doğrulama",
+      "ctaPrimary": "Ücretsiz Yayınlamaya Başlayın",
+      "ctaSecondary": "Kütüphaneyi Keşfedin",
+      "aiSuggestion": "Yapay Zeka Önerisi",
+      "aiTranslation": "Yapay Zeka ile Optimize Edilmiş Çeviri",
+      "pauseRotation": "Dil rotasyonunu duraklat",
+      "resumeRotation": "Dil rotasyonunu devam ettir",
+      "studioTitle": "Hero Başlığı — Synoptic Studio",
+      "titlePlain": "Dizgiyle uğraşmayı bırakın. Tek tıkla profesyonel senkronizasyon yakalayın.",
+      "neuralEngine": "Dilbilimsel Zeka",
+      "activeLayer": "Aktif Katman",
+      "typographyAssistant": "Tipografi Asistanı",
+      "syncingLocales": "{count} dil senkronize ediliyor",
+      "syncing": "Senkronize ediliyor...",
+      "readyStudio": "Hazır — Synoptic Studio v1.2",
+      "canvasA": "Tuval A",
+      "canvasB": "Tuval B",
+      "output": "Çıktı",
+      "livePreview": "Canlı Ön İzleme",
+      "origin": "Kaynak"
     },
     "footer": {
-      "tagline": "Yazarlar, dil öğrenenler ve yayınevleri için profesyonel iki dilli yayıncılık platformu. San Francisco'da tasarlandı, dünya için üretildi.",
+      "tagline": "Yazarlar, dil meraklıları ve küresel yayıncılar için profesyonel iki dilli stüdyo. Sınırların ötesinde netlik yaratıyoruz.",
       "copyright": "© 2025 Synoptic Studio. Tüm hakları saklıdır."
+    },
+    "carbon": {
+      "label": "Sürdürülebilirlik",
+      "calculating": "Ölçülüyor...",
+      "cleanerThan": "Diğerlerinden %{percentage} daha temiz",
+      "co2": "{amount} g CO2",
+      "ecoFriendly": "Çevre Dostu",
+      "measure": "Etkiyi Ölç"
     }
   },
   "Features": {
-    "title": "İçerik Üreticileri İçin Tasarlandı",
-    "subtitle": "Bir yayınevi altyapısını bir stüdyoya indirgedik.",
+    "title": "Her Ölçek İçin Tasarlandı",
+    "subtitle": "Kişisel **flashcardlar**, **çalışma kağıtları** ve **posterlerden** küresel kitap yayınlarına kadar.",
+    "ctaLearn": "Bir dilde nasıl uzmanlaşacağınızı öğrenin",
+    "ctaPublish": "Profesyonel yayıncılığı keşfedin",
+    "aiInsights": "Yapay Zeka Öngörüleri",
+    "learn": {
+      "title": "Dil Öğrencileri İçin",
+      "subtitle": "Kendi başınıza öğrenmek için en iyi araç.",
+      "items": {
+        "flashcards": {
+          "title": "Dinamik Flashcardlar",
+          "desc": "Okuduğunuz cümlelerden otomatik olarak hafıza kartları oluşturun."
+        },
+        "annotations": {
+          "title": "Filolojik Açıklamalar",
+          "desc": "Kelime kelime yapay zeka analizi ile dilbilgisine ve nüanslara derinlemesine dalın."
+        },
+        "immersion": {
+          "title": "Simetrik Daldırma",
+          "desc": "Beyniniz dilleri yan yana olduklarında doğal olarak eşleştirir. Bağlam asla kaybolmaz."
+        }
+      }
+    },
+    "publish": {
+      "title": "Profesyonel Yayıncılar İçin",
+      "subtitle": "İki dilli baskılar için endüstriyel kalitede dizgi.",
+      "items": {
+        "typesetting": {
+          "title": "Grid-Lock Mimarisi",
+          "desc": "Hizalamayı sadece 'tahmin' etmiyoruz. Kaynak ve hedef paragrafları matematiksel olarak kilitleyen katı bir CSS Grid motoru kullanıyoruz."
+        },
+        "multiformat": {
+          "title": "Yerel PDF/X ve EPUB 3.0",
+          "desc": "Aynalı kenar boşluklarına sahip düzenler oluşturun. Kindle ve Apple Books uyumlu EPUB 3.0 dosyaları dışa aktarın."
+        },
+        "distribution": {
+          "title": "Doğrulama ve Kalite",
+          "desc": "sRGB renk profillerine sahip 300 DPI çıktılar, Amazon KDP yüklemelerinizin sorunsuz geçmesini sağlar."
+        }
+      }
+    },
     "aiTypesetter": {
       "title": "Yapay Zeka Dizgicisi",
-      "desc": "Cümle uzunlukları farklı olsa bile kusursuz bir simetri sağlayarak 25'ten fazla dilde cümle çiftlerini otomatik olarak hizalar."
+      "desc": "25'ten fazla dilde cümle çiftlerini otomatik olarak ayarlayarak farklı uzunluklara rağmen simetriyi garanti eder."
     },
     "cloudSync": {
-      "title": "Bulut Senkronizasyon Motoru",
-      "desc": "Çalışmalarınız siz yazdıkça anında kaydedilir. Kalıcı ve sınırsız geri alma geçmişiyle stüdyonuza her cihazdan erişin."
+      "title": "Senkronizasyon Motoru",
+      "desc": "Çalışmanız siz yazarken anında kaydedilir. Stüdyonuza herhangi bir cihazdan sınırsız geçmişle erişin."
     },
     "pdfExport": {
       "title": "Baskıya Hazır PDF",
-      "desc": "Puppeteer motoru aracılığıyla yüksek çözünürlüklü dışa aktarma. Amazon KDP, IngramSpark ve yerel matbaalar için mükemmeldir."
+      "desc": "Puppeteer motoru ile yüksek kaliteli dışa aktarma. Amazon KDP, IngramSpark ve yerel matbaalar için uygundur."
     },
     "epubSupport": {
       "title": "EPUB 3.0 Desteği",
-      "desc": "Kindle ve Apple Books için optimize edilmiş, yerel iki dilli dönüşümlü moda sahip akışkan e-kitaplar oluşturun."
+      "desc": "Kindle ve Apple Books için optimize edilmiş, yerel iki dilli moda sahip esnek e-kitaplar oluşturun."
     },
     "deepAnnotation": {
-      "title": "Derin Açıklama",
-      "desc": "Yapay zeka destekli dilsel bilgiler. Kelime gruplandırma, ilişki okları ve bağlamsal açıklamalar parmaklarınızın ucunda."
+      "title": "Derin Açıklamalar",
+      "desc": "Yapay zeka aracılığıyla dilbilimsel içgörüler. Kelime gruplandırmaları, ilişki okları ve doğrudan metin içinde açıklamalar."
     },
     "marketplace": {
       "title": "Küresel Pazaryeri",
-      "desc": "Özel kitap şablonlarınızı paylaşın ve satın veya küratörlü profesyonel iki dilli tasarım kütüphanemize göz atın."
+      "desc": "Kendi kitap şablonlarınızı paylaşın ve satın veya profesyonel iki dilli tasarımlarımızı keşfedin."
     }
   },
-  "Pricing": {
-    "title": "Basit ve Adil Fiyatlandırma",
-    "subtitle": "Yayıncılık hedeflerinize uygun planı seçin.",
-    "mostPopular": "En Popüler",
-    "month": "/ay",
-    "pageTitle": "Kitabınıza yatırım yapın.",
-    "pageSubtitle": "İster bir aile hatırasını çevirin, ister ticari bir seri yayınlayın, sizin için doğru araçlara sahibiz.",
-    "nonProfitTitle": "Kar amacı gütmeyen bir kuruluş veya eğitimci misiniz?",
-    "nonProfitDesc": "Eğitim kurumları ve kar amacı gütmeyen çeviriler için özel indirimler sunuyoruz. Özel bir teklif için ekibimizle iletişime geçin.",
-    "contactSupport": "Destekle İletişime Geç",
-    "free": {
-      "name": "Ücretsiz",
-      "desc": "Stüdyoyu test etmek için mükemmeldir.",
-      "button": "Ücretsiz Başla"
+  "PricingPage": {
+    "title": "Depolama için değil, zeka için ödeyin",
+    "subtitle": "Projeler sınırsızdır. Yalnızca yapay zekayı kullandığınızda birim harcarsınız.",
+    "yearly": "Yıllık ödeme ile %20 tasarruf edin",
+    "tiers": {
+      "free": "Temel",
+      "pro": "Bağımsız yazarlar ve dil meraklıları için standart.",
+      "publisher": "Yayıncılar ve yüksek hacimli üretim için tasarlandı."
     },
-    "pro": {
-      "name": "Pro",
-      "desc": "Ciddi yazarlar ve çok dil bilenler için.",
-      "button": "Pro'ya Katıl"
-    },
-    "publisher": {
-      "name": "Yayıncı",
-      "desc": "Profesyonel yayınevleri için.",
-      "button": "Yayıncıya Geç"
-    },
-    "featuresList": {
-      "activeProject": "1 Aktif Proje",
-      "standardLayout": "Standart Düzen Motoru",
-      "manualTranslation": "Manuel Çeviri",
-      "lowDpiPdf": "Düşük DPI PDF Dışa Aktarımı",
-      "watermarked": "Filigranlı Yayıncılık",
-      "unlimitedProjects": "Sınırsız Proje",
-      "aiAssistedLayout": "Yapay Zeka Destekli Düzen",
-      "aiWordsMonth": "Aylık 50 bin YZ Kelimesi",
-      "highDpiPdf": "300 DPI Dışa Aktarma (Baskıya Hazır)",
-      "epubMobi": "EPUB ve MOBI Dışa Aktarımı",
-      "removeWatermarks": "Filigranların Kaldırılması",
-      "priorityHistory": "Öncelikli Bulut Geçmişi",
-      "everythingPro": "Pro'daki her şey dahil",
-      "unlimitedAi": "Sınırsız YZ Kredisi",
-      "teamCollab": "Takım İş Birliği",
-      "brandCustom": "Marka Özelleştirme",
-      "fontUpload": "Özel Yazı Tipi Yükleme",
-      "apiAccess": "API Erişimi (Yakında)"
+    "unitCalculator": {
+      "title": "1 Yapay Zeka Birimi = 1 Zihinsel İşlem",
+      "desc": "Kredileriniz bloklarla etkileşime girdiğinizde harcanır:",
+      "p1": "Bir paragrafı mı çeviriyorsunuz? **1 birim.**",
+      "p2": "Dilbilgisi notu mu oluşturuyorsunuz? **1 birim.**",
+      "fairUse": "Adil Kullanım: Dışa aktarmalar (PDF/EPUB) **her zaman ücretsizdir**. Kendi çalışmanızı indirmek için asla ödeme yapmazsınız."
     }
   },
   "Export": {
-    "publishingPipeline": "Yayıncılık Süreci",
+    "publishingPipeline": "Yayınlama Hattı",
     "pdfManuscript": "Baskıya Hazır PDF",
-    "epubEbook": "E-kitap (EPUB 3.0)",
+    "epubEbook": "e-Kitap (EPUB 3.0)",
     "generate": "Oluştur",
+    "generating": "Oluşturuluyor...",
     "quality": "Kalite",
-    "bleed": "Taşma Payı",
-    "preFlightTitle": "Yayın Öncesi Kontrol",
-    "symmetryCheck": "İki dilli simetri doğrulandı",
-    "largeDocWarning": "Büyük belgelerin işlenmesi 30 saniye kadar sürebilir.",
+    "bleed": "Taşma Payı (Bleed)",
+    "preFlightTitle": "Otomatik Bütünlük Sistemi",
+    "symmetryCheck": "Grid-Lock simetrisi aktif",
+    "largeDocWarning": "Büyük belgelerin yüklenmesi 30 saniye kadar sürebilir.",
     "upgradeToPro": "Pro'ya Yükselt",
-    "watermarkPolicy": "Filigranları kaldırın, yüksek DPI baskının kilidini açın ve ayda 50.000 YZ kelimesi kazanın.",
+    "watermarkPolicy": "Filigranları kaldırın, yüksek kaliteli baskının kilidini açın ve ayda 50.000 yapay zeka kelimesi kazanın.",
     "viewPlans": "Planları Görüntüle",
     "proQuality": "Pro Kalite (Taslak)",
-    "freeWarning": "Ücretsiz katmanda bu dışa aktarmaya filigran uygulanacaktır.",
-    "pdfDesc": "300 DPI Puppeteer motoruyla yüksek sadakatte dışa aktarma. Amazon KDP için optimize edildi.",
-    "epubDesc": "Akışkan iki dilli metin düzeni. Kindle ve Apple Books için optimize edildi.",
+    "freeWarning": "Bu dışa aktarma, ücretsiz planda bir filigran içerecektir.",
+    "pdfDesc": "300 DPI Puppeteer motoru ile yüksek kaliteli dışa aktarma. Amazon KDP için optimize edildi.",
+    "epubDesc": "İki dilli metin düzeni. Kindle ve Apple Books için optimize edildi.",
     "qualityPrint": "Baskı",
     "qualityWeb": "Web",
-    "qualityDraft": "Taslak"
+    "qualityDraft": "Taslak",
+    "pdfError": "PDF dışa aktarma başarısız oldu",
+    "pdfErrorDesc": "Dışa aktarma başarısız. Baskı motoruyla olan bağlantıyı kontrol edin.",
+    "epubError": "EPUB dışa aktarma başarısız oldu",
+    "epubErrorDesc": "EPUB dosyası oluşturulurken hata oluştu.",
+    "chapter": "Bölüm",
+    "engineLabel": "İKİ DİLLİ YAYINCILIK MOTORU",
+    "studyDeck": "Çalışma Seti (Anki/CSV)",
+    "deckDesc": "Yapay zeka açıklamalarınızı ve vurgulanan kelimelerinizi Anki, Quizlet veya Excel'e aktarın.",
+    "noCardsFound": "Flashcard bulunamadı. Önce 'Yapay Zeka Açıklamaları' aracını kullanarak oluşturun!",
+    "systemStatus": "Sistem Durumu",
+    "gridLock": "Grid-Lock Mimarisi",
+    "engineActive": "Motor Aktif",
+    "waitingContent": "İçerik bekleniyor...",
+    "mirrorGutter": "Aynalı Kenar Payı Mantığı",
+    "profileLoaded": "Profil yüklendi",
+    "audiobookEngine": "Nöral Sesli Kitap",
+    "audiobookDesc": "Microsoft Neural TTS ile stüdyo kalitesinde sesli kitaplar oluşturun. Dosyalar bir ZIP arşivinde bölümlere göre düzenlenir.",
+    "voicePersona": "Anlatıcı Sesi",
+    "selectVoice": "Ses seçin...",
+    "renderingChapter": "Bölüm {chapter} sentezleniyor...",
+    "exportAudioZip": "Sesi Dışa Aktar (ZIP)",
+    "neuralEngine": "Microsoft Neural TTS Motoru",
+    "noAudioContent": "Ses oluşturmak için metin içeriği bulunamadı. Önce metin blokları ekleyin!",
+    "audioExportError": "Ses dışa aktarma başarısız oldu. Bağlantınızı kontrol edip tekrar deneyin.",
+    "socialShare": "Sosyal Paylaşım",
+    "socialShareDesc": "İki dilli alıntılarınızı Instagram, Twitter veya Pinterest için güzel görsellere dönüştürün.",
+    "socialFormat": "Format",
+    "squareFormat": "Kare (Instagram)",
+    "storyFormat": "Hikaye (1080×1920)",
+    "twitterFormat": "Twitter Kartı",
+    "pinterestFormat": "Pinterest Pin",
+    "exportImage": "Görseli Dışa Aktar",
+    "includeBranding": "Synoptic Markasını Dahil Et",
+    "selectBlock": "Dışa aktarılacak metin bloğunu seçin"
   },
   "Onboarding": {
-    "tourDashboardContent": "Synoptic'e hoş geldiniz! Burası sizin proje merkezinizdir.",
-    "tourNewProjectContent": "İlk iki dilli şaheserinizi oluşturmaya buradan başlayın.",
-    "tourLibraryContent": "Kamu malı kütüphanemizden klasik metinleri içe aktarın.",
+    "tourDashboardContent": "Synoptic'e Hoş Geldiniz! Bu sizin proje kontrol panelinizdir.",
+    "tourNewProjectContent": "İlk iki dilli şaheserinizi oluşturmak için buradan başlayın.",
+    "tourLibraryContent": "Kamu malı eserler kütüphanemizden klasik metinleri içe aktarın.",
     "tourPageListContent": "Kitabınızın sayfaları arasında buradan gezinin.",
-    "tourToolsContent": "Metin blokları, resimler ve yapay zeka destekli açıklamalar ekleyin.",
+    "tourToolsContent": "Metin blokları, resimler ve yapay zeka açıklamaları ekleyin.",
     "tourPublishContent": "Baskıya hazır mısınız? Saniyeler içinde PDF veya EPUB olarak dışa aktarın.",
-    "tourWorkspaceContent": "Burası sizin tuvaliniz. Sol sütun kaynak, sağ sütun ise çevirinizdir."
+    "tourWorkspaceContent": "Bu sizin tuvaliniz. Sol sütun kaynak, sağ sütun çeviridir."
   },
   "CommandPalette": {
-    "placeholder": "Bir komut yazın veya arayın...",
+    "esc": "Esc",
+    "placeholder": "Bir komut yazın veya arama yapın...",
     "noResults": "Sonuç bulunamadı.",
     "actions": "İşlemler",
     "addText": "Metin bloğu ekle",
-    "undo": "İşlemi geri al",
-    "redo": "İşlemi yinele",
+    "undo": "Geri al",
+    "redo": "Yinele",
     "deleteBlock": "Seçili bloğu sil",
     "exportPdf": "PDF olarak dışa aktar",
     "select": "seç",
     "navigate": "gezin",
     "paletteTitle": "Synoptic Komut Paleti",
     "commandMenu": "Komut Menüsü"
+  },
+  "AboutPage": {
+    "title": "Çevirinin Geleceği",
+    "subtitle": "Synoptic basit bir gözlemden doğdu: Dünya birbirine yaklaşıyor ama kitaplarımız hâlâ tek dilli. İki dilli yayıncılık sanatına ve bilimine adanmış ilk stüdyoyu inşa ettik.",
+    "sovereignTitle": "Eğitim İçin Kullanılmama Garantisi",
+    "sovereignDesc": "Çoğu yapay zeka aracı verilerinizi ister. Biz istemiyoruz. Taslak metniniz küresel bir yapay zekayı eğitmek için kullanılmaz; sadece sizin özel alanınızda kalır.",
+    "soulTitle": "Bağlantısız İşleme",
+    "soulDesc": "Bağlantısız bir mimari (NextResponse) kullanıyoruz. Çeviri teslim edildiği anda temsilci kapanır ve bellek anında temizlenir.",
+    "values": "Değerlerimiz",
+    "privacyTitle": "Önce Gizlilik",
+    "privacyDesc": "Taslaklarınız sizin mülkiyetinizdir. Fikri mülkiyetinizin asla kontrolünüzden çıkmamasını sağlamak için güvenli altyapı kullanıyoruz.",
+    "perfTitle": "Yüksek Performans",
+    "perfDesc": "Modern web için inşa edildi. Bulut senkronizasyonundan 300 DPI PDF dışa aktarımına kadar her etkileşim hızlıdır.",
+    "communityTitle": "Topluluk İçin Üretildi",
+    "communityDesc": "Yazarlar, dil meraklıları ve eğitimcilerden oluşan topluluğumuzun geri bildirimleriyle sürekli gelişiyoruz.",
+    "cta": "Devrime Katılın"
+  },
+  "PrivacyPage": {
+    "title": "Gizlilik @ Synoptic",
+    "subtitle": "Taslaklarınızın ruhunuz olduğunu biliyoruz. Gizlilik politikamız fikri mülkiyetinizi korur.",
+    "philosophyTitle": "Gizlilik Felsefemiz",
+    "philosophyDesc": "Synoptic 'egemen bilgi' ilkesi üzerine inşa edilmiştir. Sadece kesinlikle gerekli olanı topluyoruz.",
+    "collectTitle": "Topladığımız Bilgiler",
+    "collectDesc": "Erişim için hesap verileri (e-posta), proje metadataları ve yalnızca işleme amaçlı kullanıcı içeriği.",
+    "collectItems": [
+      "Hesap verileri: Faturalandırma için ad ve e-posta.",
+      "Proje metadataları: Katalog durumunu korumak için.",
+      "Kullanıcı içeriği: Şifrelenmiş ve izole edilmiş."
+    ],
+    "aiProcessingTitle": "Yapay Zeka İşleme ve Veri İzolasyonu",
+    "aiProcessingDesc": "Standart yapay zeka araçlarından farklıyız. Taslaklarınız Küresel Modelleri eğitmek için KULLANILMAZ.",
+    "securityTitle": "Depolama ve Güvenlik",
+    "securityDesc": "Tüm veriler aktarım sırasında (TLS/SSL) ve bekleme durumunda şifrelenir. Projelerinizi istediğiniz zaman silebilirsiniz.",
+    "sharingTitle": "Üçüncü Taraf Paylaşımı",
+    "sharingDesc": "Verilerinizi satmıyoruz. Yalnızca Stripe (ödeme) ve AWS/DigitalOcean (altyapı) gibi temel hizmet sağlayıcılarla paylaşıyoruz.",
+    "contactTitle": "İletişim",
+    "contactDesc": "Gizlilik soruları için: privacy@getsynoptic.com",
+    "lastUpdated": "Son Güncelleme: Aralık 2025"
+  },
+  "TermsPage": {
+    "title": "Hizmet Şartları",
+    "subtitle": "Net kurallar. İş sizin. Araç bizim.",
+    "introTitle": "1. Giriş",
+    "introDesc": "Synoptic'e hoş geldiniz. Stüdyomuzu kullanarak bu şartları kabul etmiş olursunuz. Son güncelleme: Aralık 2025.",
+    "ipTitle": "2. Fikri Mülkiyet",
+    "ipDesc": "Araç ile İş/Eser arasında net bir ayrım yapıyoruz.",
+    "ipItems": [
+      "Sizin Egemenliğiniz: Taslaklarınızın ve çıktılarınızın %100 mülkiyetine sahipsiniz.",
+      "Bizim Teknolojimiz: Arayüz, dizgi motoru v4.0 ve kod Synoptic mülkiyetindedir."
+    ],
+    "obligationsTitle": "3. Kullanıcı Yükümlülükleri",
+    "obligationsDesc": "Motorumuza tersine mühendislik yapmamayı veya kütüphanemizden veri çekmek için betikler kullanmamayı kabul edersiniz.",
+    "paymentTitle": "4. Abonelikler ve Yapay Zeka Birimleri",
+    "paymentDesc": "Planlar aylık olarak faturalandırılır. Yapay zeka birimleri 'zihinsel işlem' başına tüketilir. Kullanılmayan birimler devretmez.",
+    "publishingTitle": "5. Yayınlama Sorumluluk Reddi",
+    "publishingDesc": "KDP için optimize edilmiş olsak da, üçüncü taraflarca kabul edilme garantisi vermiyoruz. Nihai düzeltme okumasından siz sorumlusunuz.",
+    "terminationTitle": "6. Fesih",
+    "terminationDesc": "Adil kullanım politikamızı ihlal eden hesapları askıya alma hakkımızı saklı tutarız."
+  },
+  "ModelsPage": {
+    "title": "Yapı Arşivi",
+    "subtitle": "Her hikaye kendi mimarisini gerektirir. Profesyonel iki dilli şablon koleksiyonumuzdan seçim yapın.",
+    "pixelPerfect": "Piksel mükemmel düzenler",
+    "gutterTitle": "Aynalı Kenar Payı Mantığı",
+    "gutterDesc": "Ciltleme türüne göre iç ve dış kenar boşluklarının otomatik ayarlanması.",
+    "symmetryTitle": "Simetri Muhafızı",
+    "symmetryDesc": "İki dilli bloklar sayfalar arasında senkronizasyonu kaybettiğinde gerçek zamanlı bildirimler.",
+    "templates": {
+      "classic": {
+        "title": "Klasik Paralel",
+        "desc": "İki dilli okumanın altın standardı. Yüksek kaliteli basılı sürümler için titizlikle hizalanmış sütunlar."
+      },
+      "alternating": {
+        "title": "Ardışık Daldırma",
+        "desc": "Dijital cihazlar için mükemmel. Odaklanmayı korumak için paragraf paragraf akış."
+      },
+      "academic": {
+        "title": "Filolojik Çalışma",
+        "desc": "Doğrudan kaynağın altında kelime kelime açıklamalar içeren derinlemesine akademik analiz."
+      },
+      "modern": {
+        "title": "Modern Mısra",
+        "desc": "Geniş sanatsal kenar boşlukları ile şiir için optimize edilmiş minimalist düzen."
+      }
+    },
+    "viewTemplate": "Yapıyı Keşfet",
+    "typesettingTitle": "İki Dilli Mantık",
+    "exampleSource": "The stars were bright above the silent lake.",
+    "exampleTarget": "Yıldızlar sessiz gölün üzerinde parlak bir şekilde ışıldıyordu.",
+    "labels": {
+      "source": "Kaynak ({lang})",
+      "translation": "Çeviri ({lang})",
+      "engine": "Dizgi Motoru v4.0"
+    }
+  },
+  "LearnPage": {
+    "title": "Herhangi Bir Dilde Daldırma Yoluyla Uzmanlaşın",
+    "subtitle": "Sıkıcı ders kitaplarını unutun. Gerçekten okumak istediğiniz hikayelerden kendi materyallerinizi oluşturun.",
+    "badge": "Dil Meraklıları ve Öğrenciler İçin",
+    "browseLibrary": "Kütüphaneye Göz At",
+    "features": {
+      "reader": {
+        "title": "Akıllı Okuyucu",
+        "desc": "Senkronize kaydırma ile rahatça okuyun. Gözleriniz çeviriyi asla kaybetmez."
+      },
+      "study": {
+        "title": "Yapay Zeka Çalışma Asistanı",
+        "desc": "Doğrudan metin içinde dilbilgisi soruları sorun. Her sayfada özel bir öğretmeniniz varmış gibi."
+      },
+      "custom": {
+        "title": "Özel Materyaller",
+        "desc": "Kendi makalelerinizi veya PDF'lerinizi içe aktarın. Synoptic bunları çalışma için mükemmel şekilde formatlar."
+      }
+    },
+    "immersion": {
+      "title": "Yan Yana Metnin Bilimi",
+      "p1": "Hedef dilinizde okumak, kelime dağarcığı edinmenin en etkili yoludur. Ancak yabancı bir kitaba başlamak korkutucu olabilir.",
+      "p2": "Synoptic bu engeli ortadan kaldırır. Cümle cümle hizalanmış bir çeviri sunarak beyninizin yeni kelimeleri doğal olarak eşleştirmesini sağlıyoruz.",
+      "tag1": "Doğal Edinim",
+      "tag2": "İki Dilli Eşleştirme",
+      "verified": "Doğrulanmış Yapay Zeka Çevirisi",
+      "flashcard": "Flashcard oluşturuldu!"
+    },
+    "ctaSection": {
+      "title": "Akıcılığa Hazır Mısınız?",
+      "subtitle": "Kılavuzları daldırma deneyimiyle değiştiren binlerce öğrenciye katılın.",
+      "button": "Ücretsiz Hesap Oluştur"
+    },
+    "cta": "Yolculuğumu Başlat"
+  },
+  "PublishPage": {
+    "title": "Endüstriyel Kalitede Yayıncılık",
+    "subtitle": "Synoptic yüksek hacimler için tasarlanmıştır. Altyapımız tutarlılık talep eden yayıncıları destekler.",
+    "infra": "Yayıncılar İçin Altyapı",
+    "cta": "Hemen Yayınlamaya Başlayın",
+    "enterprise": "Kurumsal Satış",
+    "features": {
+      "engine": {
+        "title": "Grid-Lock Motoru",
+        "desc": "CSS Grid motorumuz paragrafları matematiksel olarak kilitleyerek senkronizasyon bozulmasını önler."
+      },
+      "exports": {
+        "title": "Profesyonel Dışa Aktarımlar",
+        "desc": "sRGB renk profillerine sahip 300 DPI PDF'ler oluşturun. KDP yüklemeleriniz tüm kontrolleri geçecektir."
+      },
+      "distribution": {
+        "title": "Küresel Dağıtıma Hazır",
+        "desc": "Kindle, Apple Books ve tüm önde gelen satıcılar için uyumlu EPUB 3.0 dosyaları dışa aktarın."
+      }
+    },
+    "volumeTitle": "Üretim Hattı",
+    "volumeSubtitle": "Taslaktan pazara üç adımda.",
+    "step1": "İçe Aktar veya Oluştur",
+    "step1Desc": "Taslağınızı yapıştırın veya doğrudan yazın. Yapay zekamız temel formatlamayı halleder.",
+    "step2": "İşle ve Doğrula",
+    "step2Desc": "Mükemmel düzen için Grid-Lock editörünü kullanın. Simetri Muhafızı hataları önler.",
+    "step3": "Dışa Aktar ve Yayınla",
+    "step3Desc": "Hazır dosyalarınızı indirin. Doğrudan KDP, IngramSpark veya distribütörünüze yükleyin.",
+    "available": "Şimdi Kullanılabilir",
+    "epubTitle": "EPUB 3.0 + Sabit Düzen",
+    "epubDesc": "Hem akışkan hem de sabit düzenli EPUB formatları için tam destek. Resimli kitaplar için ideal.",
+    "compliant": "EPUB 3.0 uyumlu",
+    "fixed": "Sabit düzen desteği",
+    "scaleTitle": "Üretiminizi ölçeklendirmek mi istiyorsunuz?",
+    "scaleDesc": "ister 5 ister 500 kitap yayınlayın, Synoptic sizinle birlikte büyür.",
+    "sales": "Satış Ekibiyle İletişime Geçin"
+  },
+  "Library": {
+    "title": "Keşif Kütüphanesi",
+    "subtitle": "İki dilli kitaplarınız için 85'ten fazla ücretsiz içerik kaynağına göz atın.",
+    "searchPlaceholder": "Başlık, yazar veya anahtar kelimeye göre ara...",
+    "badge": "60'tan fazla ücretsiz içerik kaynağı",
+    "heroTitle": "Keşif Kütüphanesi",
+    "heroSubtitle": "İki dilli kitaplarınız için özenle seçilmiş içerikleri bulun. Kutsal metinler, klasik edebiyat ve daha fazlası, hepsi doğrulanmış lisanslarla.",
+    "browseLibrary": "Kütüphaneye Göz At",
+    "commercialSafe": "Ticari Kullanım İçin Güvenli",
+    "attributionRequired": "Atıf Gerekli",
+    "categories": {
+      "all": "Hepsi",
+      "sacred": "Kutsal ve Bilgelik",
+      "literature": "Edebiyat",
+      "visual": "Görsel ve Sanat",
+      "knowledge": "Bilgi ve Gerçekler",
+      "news": "Haberler ve Medya",
+      "history": "Tarih",
+      "language": "Dil Öğrenimi",
+      "academic": "Akademik ve Araştırma",
+      "popculture": "Popüler Kültür"
+    },
+    "categoryDescriptions": {
+      "sacred": "Dünya geleneklerinden manevi metinler",
+      "literature": "Romanlar, şiirler, tiyatro ve folklor",
+      "visual": "Müzelerden sanat eserleri, NASA fotoğrafları ve daha fazlası",
+      "news": "Manşetler, makaleler ve medya",
+      "history": "Tarihi belgeler ve arşivler",
+      "language": "Cümleler, kelimeler ve egzersizler",
+      "knowledge": "Gerçekler, alıntılar, yemek tarifleri ve coğrafya",
+      "academic": "Araştırmalar, resmi yazılar ve testler",
+      "popculture": "Çizgi romanlar, oyunlar ve eğlence"
+    },
+    "licenses": {
+      "all": "Tüm Lisanslar",
+      "commercialSafe": "Ticari Güvenli",
+      "attribution": "Atıf Gerekli",
+      "personalOnly": "Yalnızca Kişisel Kullanım",
+      "licenseType": "Lisans Türü"
+    },
+    "difficulty": {
+      "all": "Tüm Seviyeler",
+      "level": "Seviye",
+      "difficultyLevel": "Zorluk Seviyesi",
+      "beginner": "Başlangıç",
+      "intermediate": "Orta",
+      "expert": "Uzman"
+    },
+    "tile": {
+      "beginner": "Başlangıç",
+      "intermediate": "Orta",
+      "expert": "Uzman",
+      "studyOnly": "Yalnızca Çalışma"
+    },
+    "search": {
+      "placeholder": "Ara...",
+      "quickFilters": "Hızlı Filtreler:",
+      "showing": "Gösteriliyor",
+      "of": "/",
+      "templates": "şablon",
+      "clearAllFilters": "Filtreleri Temizle",
+      "noTemplatesFound": "Şablon bulunamadı",
+      "tryAdjusting": "Lütfen aramanızı veya filtrelerinizi ayarlamayı deneyin."
+    },
+    "quickTags": {
+      "bestsellers": "🏆 Çok Satanlar",
+      "dailyPractice": "📅 Günlük Pratik",
+      "quickSessions": "⚡ Hızlı Seanslar",
+      "giftIdeas": "🎁 Hediye Fikirleri",
+      "posters": "🖼️ Posterler",
+      "flashcards": "📚 Flashcardlar",
+      "vocabulary": "📖 Kelime Bilgisi",
+      "socialMedia": "📱 Sosyal Medya"
+    },
+    "wizard": {
+      "start": "Başla",
+      "back": "Geri",
+      "import": "İçeriği Aktar",
+      "cancel": "İptal",
+      "search": "Ara",
+      "preview": "Ön İzleme",
+      "randomize": "Beni Şaşırt!",
+      "loading": "İçerik getiriliyor...",
+      "error": "Bir şeyler yanlış gitti",
+      "whatYouCanDo": "Neler yapabilirsiniz",
+      "searchContent": "İçerik ara",
+      "pickByReference": "Referans ile seç",
+      "randomSelection": "Rastgele seçim",
+      "imagesIncluded": "Resimler dahil",
+      "audioIncluded": "Ses dahil",
+      "selectedChapters": "Seçili bölümler",
+      "fullBook": "Tam kitap",
+      "customRange": "Özel aralık",
+      "book": "Kitap",
+      "startChapter": "Başlangıç Bölümü",
+      "endChapter": "Bitiş Bölümü"
+    },
+    "license": {
+      "commercialSafeDesc": "Bu içerik ya kamu malıdır ya da ticari bir lisansa sahiptir. Buna dayalı eserler satabilirsiniz.",
+      "attributionDesc": "Kaynağa doğru şekilde atıfta bulunulması şartıyla ticari kullanıma izin verilir.",
+      "personalOnlyDesc": "Yalnızca kişisel çalışma içindir. Bu içeriğe dayalı eserlerin satılması yasaktır.",
+      "viewFull": "Tam lisansı gör →"
+    },
+    "warning": {
+      "title": "Kısıtlı Lisans",
+      "personalUseOnly": "Yalnızca Kişisel Kullanım",
+      "whyRestricted": "Neden kısıtlı?",
+      "youCan": "Bunlar için KULLANABİLİRSİNİZ:",
+      "youCannot": "BUNLARI YAPAMAZSINIZ:",
+      "personalStudy": "Kişisel çalışma",
+      "languagePractice": "Dil pratiği",
+      "teachingMaterials": "Öğretim materyalleri",
+      "academicResearch": "Akademik araştırma",
+      "sellTranslations": "Çevirileri satmak",
+      "publishEbook": "E-kitap olarak yayınlamak",
+      "commercialDistribution": "Ticari dağıtım",
+      "monetizeSocial": "Sosyal medyadan gelir elde etmek",
+      "acknowledge": "Bu içeriğin yalnızca kişisel çalışma için olduğunu ve satmayacağımı anlıyorum.",
+      "chooseAnother": "Başka bir kaynak seç",
+      "understand": "Anlıyorum, devam et"
+    },
+    "credits": {
+      "title": "Krediler ve Atıflar",
+      "intro": "Bu proje aşağıdaki kaynaklardan içerik kullanmaktadır:",
+      "generated": "Atıf Synoptic tarafından oluşturulma tarihi:",
+      "attributionRequired": "Atıf Gerekli"
+    },
+    "cta": {
+      "browseLibrary": "Kütüphaneye Göz At",
+      "getStartedFree": "Ücretsiz Başlayın",
+      "learnMore": "Daha Fazla Bilgi",
+      "readyToStart": "Kitabınız için hazır mısınız?",
+      "importAndStart": "Bir kaynak içe aktarın ve stüdyoda çeviriye başlayın."
+    },
+    "favorites": {
+      "title": "Kayıtlı Şablonlarım",
+      "quickAccess": "Favori içeriğinize hızlı erişim.",
+      "noSaved": "Henüz kaydedilmiş şablon yok",
+      "noSavedDesc": "Kütüphanemize göz atın ve hızlı erişim için favorilerinizi kaydedin.",
+      "exploreLibrary": "Kütüphaneyi Keşfedin",
+      "viewAll": "Tüm ({count}) kayıtlı şablonu gör",
+      "browseAll": "Hepsine Göz At",
+      "saved": "Kaydedildi",
+      "addToFavorites": "Favorilere Ekle",
+      "removeFromFavorites": "Favorilerden Kaldır",
+      "readyToCreate": "Oluşturmaya hazır mısınız?",
+      "signInToSave": "Kaydetmek ve oluşturmak için giriş yapın.",
+      "startCreating": "Oluşturmaya Başla",
+      "signInAndCreate": "Giriş Yap ve Oluştur"
+    }
+  },
+  "Tools": {
+    "aiDraft": {
+      "title": "AI Taslağı",
+      "button": "AI Taslağı",
+      "original": "Orijinal:",
+      "translation": "Çeviri:",
+      "translating": "Çevriliyor...",
+      "tryAgain": "Tekrar Dene",
+      "copy": "Kopyala",
+      "copied": "Kopyalandı!",
+      "applyToL2": "L2'ye Uygula",
+      "poweredBy": "LibreTranslate tarafından sunulmaktadır"
+    },
+    "grammar": {
+      "title": "Dilbilgisi Kontrolü",
+      "button": "Dilbilgisi",
+      "checking": "Kontrol ediliyor...",
+      "detected": "Tespit edilen:",
+      "noIssuesFound": "Hata bulunamadı!",
+      "textLooksGreat": "Metniniz harika görünüyor.",
+      "issuesFound": "{count} sorun bulundu",
+      "fixAll": "Hepsini Düzelt",
+      "tryAgain": "Tekrar Dene",
+      "poweredBy": "LanguageTool tarafından sunulmaktadır"
+    },
+    "definition": {
+      "origin": "Kaynak",
+      "lookingUp": "Aranıyor...",
+      "wordNotFound": "Kelime bulunamadı",
+      "more": "Daha fazla",
+      "poweredBy": "Free Dictionary API"
+    },
+    "synonyms": {
+      "synonymsFor": "Eş anlamlılar:",
+      "findingSynonyms": "Eş anlamlılar bulunuyor...",
+      "noSynonymsFound": "Eş anlamlı bulunamadı",
+      "synonyms": "Eş Anlamlılar",
+      "antonyms": "Zıt Anlamlılar",
+      "related": "İlgili",
+      "selectWordFirst": "Bir kelime seçin ve sağ tıklayın",
+      "poweredBy": "Datamuse tarafından sunulmaktadır"
+    },
+    "polisher": {
+      "title": "Metin İyileştirici",
+      "button": "İyileştir",
+      "polishing": "İyileştiriliyor...",
+      "suggestedImprovements": "Önerilen iyileştirmeler"
+    },
+    "assetBank": {
+      "title": "Emoji Bankası",
+      "noResults": "Emoji bulunamadı"
+    },
+    "socialShare": {
+      "square": "Kare",
+      "story": "Hikaye",
+      "wide": "Geniş"
+    }
+  },
+  "Settings": {
+    "title": "Kullanıcı Ayarları",
+    "displayName": "Görünen Ad",
+    "displayNamePlaceholder": "Adınız",
+    "interfaceLanguage": "Arayüz Dili",
+    "interfaceLanguageHint": "Stüdyonun varsayılan dilini ayarlar.",
+    "saving": "Kaydediliyor...",
+    "saveSettings": "Ayarları Kaydet",
+    "cancel": "İptal"
+  },
+  "Filters": {
+    "license": "Lisans",
+    "commercial": "Ticari",
+    "attribution": "Atıf",
+    "personal": "Kişisel"
+  },
+  "Errors": {
+    "translationFailed": "Çeviri başarısız oldu",
+    "grammarCheckFailed": "Kontrol başarısız oldu",
+    "lookupFailed": "Arama başarısız oldu",
+    "fetchFailed": "İçerik çekilemedi",
+    "connectionError": "Bağlantı hatası. Lütfen tekrar deneyin.",
+    "unexpectedError": "Beklenmedik bir hata oluştu"
+  },
+  "Accessibility": {
+    "openMenu": "Menüyü aç",
+    "closeMenu": "Menüyü kapat",
+    "loading": "Yükleniyor",
+    "searchResults": "Arama sonuçları",
+    "noResults": "Sonuç bulunamadı",
+    "sortBy": "Sırala",
+    "filterBy": "Filtrele"
   }
 }
