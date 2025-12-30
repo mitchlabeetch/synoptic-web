@@ -3,6 +3,8 @@
     "save": "Save",
     "cancel": "Cancel",
     "delete": "Delete",
+    "copy": "Copy",
+    "duplicate": "Duplicate",
     "edit": "Edit",
     "loading": "Loading...",
     "error": "An error occurred",
@@ -23,6 +25,7 @@
     "password": "Password",
     "forgotPassword": "Forgot password?",
     "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
     "haveAccount": "Already have an account?",
     "verifyEmail": "Verify Email",
     "welcomeBack": "Welcome back",
@@ -37,16 +40,19 @@
     "signingIn": "Signing in...",
     "creatingAccount": "Creating account...",
     "signIn": "Sign In",
-    "hasAccount": "Already have an account?",
     "termsPrompt": "By continuing, you agree to our Terms of Service and Privacy Policy."
   },
   "Dashboard": {
     "title": "My Projects",
+    "subtitle": "Manage and edit your bilingual books.",
     "newProject": "New Project",
     "noProjects": "No projects found. Create your first one!",
+    "emptyState": "You haven't created any projects yet.",
     "settings": "Settings",
     "profile": "Profile",
     "billing": "Billing",
+    "noDescription": "No description provided.",
+    "lastUpdated": "Last updated",
     "stats": {
       "projects": "Projects",
       "pages": "Pages",
@@ -57,18 +63,195 @@
       "open": "Open",
       "delete": "Delete",
       "confirmDelete": "Are you sure you want to delete this project?"
-    },
-    "noDescription": "No description provided.",
-    "lastUpdated": "Last updated"
+    }
+  },
+  "Blocks": {
+    "text": "Text Block",
+    "image": "Image Block",
+    "separator": "Separator",
+    "callout": "Callout Box",
+    "quiz": "Quiz Exercise",
+    "insertText": "Insert Text Block",
+    "addBlankPage": "Add Blank Page",
+    "media": "Media",
+    "ai": "Translation AI",
+    "settings": "Studio Settings",
+    "grammar": "Grammar Rule",
+    "culture": "Cultural Insight",
+    "vocabulary": "Vocabulary",
+    "tip": "Learning Tip",
+    "warning": "Grammar Warning",
+    "note": "General Note",
+    "pronunciation": "Pronunciation Guide",
+    "workbookExercise": "Workbook Exercise",
+    "autoHint": "Auto-Hint",
+    "regenerateHint": "Regenerate Hint",
+    "showAnswer": "Show Answer",
+    "hideAnswer": "Hide Answer",
+    "customHint": "Custom Hint",
+    "difficulty": "Difficulty",
+    "difficultyEasy": "Easy",
+    "difficultyMedium": "Medium",
+    "difficultyHard": "Hard"
+  },
+  "Inspector": {
+    "visibility": "Override Visibility",
+    "header": "Header",
+    "headerOverlay": "Header Overlay",
+    "footer": "Footer",
+    "footerOverlay": "Footer Overlay",
+    "pageNumber": "Page Number",
+    "content": "Override Content",
+    "typography": "Typography",
+    "layout": "Layout & Strategy",
+    "printingFlow": "Print & Flow",
+    "markChapterStart": "Mark as Chapter Start",
+    "forceBlank": "Force Blank Page",
+    "pageLocalOnly": "Changes here affect only the current page.",
+    "inspectorTitle": "{type} Inspector",
+    "lineHeight": "Line Height",
+    "paraSpacing": "Paragraph Spacing",
+    "dimensions": "Dimensions",
+    "width": "Width (%)",
+    "alignment": "Alignment",
+    "styleEffects": "Style & Effects",
+    "shadow": "Shadow",
+    "borderRadius": "Border Radius",
+    "stylePattern": "Style & Pattern",
+    "thickness": "Thickness",
+    "contextType": "Context Type",
+    "brandingColor": "Branding Color",
+    "stylePreset": "Style Preset",
+    "solidLine": "Solid Line",
+    "doubleLine": "Double Line",
+    "dashedLine": "Dashed Line",
+    "dottedLine": "Dotted Line",
+    "gradientFade": "Gradient Fade",
+    "ornament": "Ornament"
+  },
+  "Theme": {
+    "title": "Global Design",
+    "layout": "Global Layout",
+    "typography": "Typography (Global)",
+    "bodyText": "Body Text",
+    "headings": "Headings",
+    "baseScaling": "Base Scaling",
+    "fontSize": "Body Font Size",
+    "lineHeight": "Global Line Height",
+    "colorPresets": "Color Presets",
+    "lightMode": "Light Mode",
+    "darkMode": "Dark Mode"
+  },
+  "Presets": {
+    "title": "Style Presets",
+    "empty": "Select a block to save its style as a reusable preset.",
+    "selected": "Selected Context",
+    "canCapture": "You can save the style for this {type} block.",
+    "saveCurrent": "Save Current Style",
+    "library": "Global Library",
+    "typeStyle": "{type} Style",
+    "synced": "Library Synced"
+  },
+  "Wizard": {
+    "createTitle": "Create New Project",
+    "createMasterpiece": "New Secure Project",
+    "stepInformation": "Information",
+    "stepLanguages": "Languages",
+    "stepFormat": "Format",
+    "stepTemplate": "Template",
+    "projectTitle": "Project Title *",
+    "titlePlaceholder": "e.g. Twenty Thousand Leagues Under the Sea",
+    "author": "Author",
+    "authorPlaceholder": "Your name or original author",
+    "category": "Category / tag",
+    "categoryPlaceholder": "e.g. Fiction, Education",
+    "sourceLang": "Source Language (L1)",
+    "targetLang": "Target Language (L2)",
+    "langWarning": "Warning: Source and target languages must differ for a bilingual project.",
+    "langTip": "Tip: Most users select their native language as target and the language they are learning as source.",
+    "dimensions": "Physical Dimensions (mm)",
+    "custom": "Custom Definition",
+    "layoutStyle": "Layout Style",
+    "back": "Back",
+    "next": "Next Step",
+    "creating": "Initializing Studio...",
+    "launch": "Launch Studio",
+    "secureNote": "Encrypted & Siloed Project Environment",
+    "blankTemplate": "Start from Blank",
+    "blankDesc": "Clean slate for custom layouts",
+    "classicTemplate": "Classic Side-by-Side",
+    "classicDesc": "Optimized for dense prose",
+    "poetryTemplate": "Poetry / Verse",
+    "poetryDesc": "Optimized for verse & lyrics (Modern)",
+    "academicTemplate": "Philological Study",
+    "academicDesc": "Wide margins, footer annotations",
+    "width": "Width (mm)",
+    "height": "Height (mm)",
+    "upgradeToCreateMore": "Upgrade to Create More",
+    "reachedFreeLimit": "You've Reached the Free Limit",
+    "freeLimitDesc": "Free accounts are limited to 1 active project. Upgrade to Pro to unlock unlimited projects and advanced AI features.",
+    "upgradeToPro": "Upgrade to Pro",
+    "maybeLater": "Maybe Later",
+    "usTrade": "US Trade Paper",
+    "digest": "Digest",
+    "intlStandard": "International Standard"
+  },
+  "Studio": {
+    "title": "Synoptic Studio",
+    "collaborate": "Collaborate",
+    "export": "Export",
+    "preview": "Preview",
+    "saving": "Saving draft...",
+    "saved": "All changes saved to cloud",
+    "ready": "Ready for your bilingual masterpiece",
+    "addPage": "Add New Page",
+    "pageSettings": "Page {number} Settings",
+    "enteringStudio": "Entering Studio...",
+    "failedToLoadProject": "Failed to load project",
+    "retryConnection": "Retry Connection",
+    "pageManager": "Page Manager",
+    "globalDesign": "Global Design",
+    "stylePresets": "Style Presets",
+    "editorTools": "Editor Tools",
+    "canvasActions": "Canvas Actions",
+    "drafting": "Drafting",
+    "chapterStart": "Chapter Start",
+    "manuscript": "Manuscript",
+    "chapters": "Chapters",
+    "noChapters": "No chapters defined",
+    "deletePage": "Delete Page",
+    "resetFactory": "Reset to Factory Settings",
+    "bilingualEditor": "Bilingual Editor",
+    "bookStructure": "Book Structure",
+    "publishingPipeline": "Publishing Pipeline",
+    "frontMatter": "Front Matter",
+    "backMatter": "Back Matter",
+    "titlePage": "Title Page",
+    "copyrightPage": "Copyright Page",
+    "dedicationPage": "Dedication",
+    "tableOfContents": "Table of Contents",
+    "glossary": "Glossary",
+    "aboutAuthor": "About the Author",
+    "endNotes": "End Notes",
+    "autoGlossaryActive": "Auto-Glossary Active",
+    "refreshGlossary": "Refresh Glossary",
+    "glossaryEntries": "{count} entries compiled",
+    "romanNumeralsInfo": "Front matter uses Roman numerals (i, ii, iii). Body uses Arabic (1, 2, 3)."
   },
   "Editor": {
     "toolbar": {
       "bold": "Bold",
       "italic": "Italic",
       "underline": "Underline",
+      "strikeThrough": "Strikethrough",
       "alignLeft": "Align Left",
       "alignCenter": "Align Center",
       "alignRight": "Align Right",
+      "justify": "Justify",
+      "left": "Left",
+      "center": "Center",
+      "right": "Right",
+      "link": "Link",
       "addBlock": "Add Block",
       "export": "Export",
       "ai": "AI Assistant"
@@ -88,16 +271,16 @@
       "shadow": "Shadow",
       "actions": "Actions",
       "labels": {
-         "color": "Color",
-         "backgroundColor": "Background Color",
-         "fontSize": "Font Size",
-         "lineHeight": "Line Height",
-         "letterSpacing": "Letter Spacing",
-         "margin": "Margin",
-         "padding": "Padding",
-         "width": "Width",
-         "alignment": "Alignment",
-         "fontFamily": "Font Family"
+        "color": "Color",
+        "backgroundColor": "Background Color",
+        "fontSize": "Font Size",
+        "lineHeight": "Line Height",
+        "letterSpacing": "Letter Spacing",
+        "margin": "Margin",
+        "padding": "Padding",
+        "width": "Width",
+        "alignment": "Alignment",
+        "fontFamily": "Font Family"
       }
     },
     "messages": {
@@ -118,11 +301,6 @@
       "verse": "Verse / Poem"
     }
   },
-  "Studio": {
-    "collaborate": "Collaborate",
-    "export": "Export",
-    "preview": "Preview"
-  },
   "Models": {
     "parallel": "Parallel Columns",
     "interlinear": "Interlinear",
@@ -130,20 +308,56 @@
     "modern": "Modern Minimalist"
   },
   "Pricing": {
+    "title": "Simple and transparent pricing",
+    "subtitle": "Choose the plan that fits your publishing goals.",
+    "mostPopular": "Most Popular",
+    "month": "/mo",
+    "pageTitle": "Invest in your book.",
+    "pageSubtitle": "Whether you're translating a family memoir or publishing a commercial series, we have the right tools for you.",
+    "nonProfitTitle": "Are you a non-profit or educator?",
+    "nonProfitDesc": "We offer special discounts for educational institutions and non-profit translations. Contact our team for a custom quote.",
+    "contactSupport": "Contact Support",
     "free": {
       "name": "Free",
       "price": "$0",
-      "description": "Perfect for testing the engine."
+      "desc": "Perfect for testing the engine.",
+      "description": "Perfect for testing the engine.",
+      "button": "Start Free"
     },
     "pro": {
       "name": "Pro",
       "price": "$12",
-      "description": "For independent authors and polyglots."
+      "desc": "For independent authors and polyglots.",
+      "description": "For independent authors and polyglots.",
+      "button": "Join Pro"
     },
     "publisher": {
       "name": "Publisher",
       "price": "$49",
-      "description": "For high-volume production."
+      "desc": "For high-volume production.",
+      "description": "For high-volume production.",
+      "button": "Switch to Publisher"
+    },
+    "featuresList": {
+      "activeProject": "1 active project",
+      "standardLayout": "Standard layout engine",
+      "manualTranslation": "Manual translation",
+      "lowDpiPdf": "Low DPI PDF export",
+      "watermarked": "Watermarked output",
+      "unlimitedProjects": "Unlimited projects",
+      "aiAssistedLayout": "AI-assisted layout",
+      "aiWordsMonth": "50k AI words / month",
+      "highDpiPdf": "300 DPI export (print-ready)",
+      "epubMobi": "EPUB & MOBI export",
+      "removeWatermarks": "Watermark removal",
+      "priorityHistory": "Priority cloud history",
+      "everythingPro": "Everything in Pro",
+      "unlimitedAi": "Unlimited AI credits",
+      "teamCollab": "Team collaboration",
+      "brandCustom": "Brand customization",
+      "fontUpload": "Custom font upload",
+      "apiAccess": "API access (coming soon)",
+      "limitedAi": "Limited AI"
     },
     "features": {
       "unlimited": "Unlimited Projects",
@@ -192,6 +406,7 @@
     },
     "hero": {
       "badge": "Synoptic v1.0 Private Beta",
+      "title": "The <span>Ultimate</span> <br /> Bilingual Studio",
       "subtitle": "Turn raw text into **CSS-perfect** parallel books. No InDesign. No desynchronization.",
       "subtitleShort": "The Bilingual Publishing Engine.",
       "featuresLine": "Grid-Lock Architecture • Native PDF/X • 300 DPI Validation",
@@ -233,6 +448,7 @@
     "subtitle": "From private **flashcards**, **study sheets**, and **posters** to professional global book launches in a thriving niche.",
     "ctaLearn": "Learn how to master a language",
     "ctaPublish": "Explore professional publishing",
+    "aiInsights": "AI Insights",
     "learn": {
       "title": "For Language Learners",
       "subtitle": "The ultimate tool for self-acquisition.",
@@ -268,6 +484,30 @@
           "desc": "300 DPI output with sRGB color profiles ensuring your KDP upload passes pre-flight checks. Watermarked proofs available on free tier."
         }
       }
+    },
+    "aiTypesetter": {
+      "title": "AI Typesetter",
+      "desc": "Automatically adjusts sentence pairs in over 25 languages, ensuring perfect symmetry even with varying sentence lengths."
+    },
+    "cloudSync": {
+      "title": "Cloud Sync Engine",
+      "desc": "Your work is saved instantly as you write. Access your studio from any device with a permanent and unlimited undo history."
+    },
+    "pdfExport": {
+      "title": "Print-Ready PDF",
+      "desc": "High-resolution export via Puppeteer engine. Perfect for Amazon KDP, IngramSpark, and local print shops."
+    },
+    "epubSupport": {
+      "title": "EPUB 3.0 Support",
+      "desc": "Generate flexible e-books with native bilingual toggle mode, optimized for Kindle and Apple Books."
+    },
+    "deepAnnotation": {
+      "title": "Deep Annotation",
+      "desc": "AI-powered linguistic insights. Word grouping, relation arrows, and contextual explanations at your fingertips."
+    },
+    "marketplace": {
+      "title": "Global Marketplace",
+      "desc": "Share and sell your own book templates, or browse our library of curated professional bilingual designs."
     }
   },
   "PricingPage": {
@@ -313,7 +553,16 @@
     "epubError": "EPUB Export failed",
     "epubErrorDesc": "EPUB generation failed.",
     "chapter": "Chapter",
-    "engineLabel": "BILINGUAL PUBLISHING ENGINE"
+    "engineLabel": "BILINGUAL PUBLISHING ENGINE",
+    "studyDeck": "Study Deck (Anki/CSV)",
+    "deckDesc": "Export your AI-generated grammar notes and vocabulary highlights to Anki, Quizlet, or Excel.",
+    "noCardsFound": "No flashcards found. Use the 'AI Annotate' tool to create some first!",
+    "systemStatus": "System Status",
+    "gridLock": "Grid-Lock Architecture",
+    "engineActive": "Engine Active",
+    "waitingContent": "Waiting for content...",
+    "mirrorGutter": "Mirror Gutter Logic",
+    "profileLoaded": "Profile Loaded"
   },
   "Onboarding": {
     "tourDashboardContent": "Welcome to Synoptic! This is your project hub.",
@@ -467,5 +716,42 @@
       "button": "Create Free Account"
     },
     "cta": "Start my learning journey"
+  },
+  "PublishPage": {
+    "title": "Industrial-grade publishing",
+    "subtitle": "Synoptic is designed for high-volume production. Our infrastructure supports publishers who need consistency, speed, and quality at scale.",
+    "infra": "Publisher-Grade Infrastructure",
+    "cta": "Start Publishing Now",
+    "enterprise": "Contact for Enterprise",
+    "features": {
+      "engine": {
+        "title": "Grid-Lock Typesetting Engine",
+        "desc": "Our proprietary CSS Grid rendering engine mathematically locks source and target paragraphs together, preventing desynchronization across any page count."
+      },
+      "exports": {
+        "title": "Professional Exports",
+        "desc": "Generate print-ready PDFs at 300 DPI with sRGB color profiles. Your KDP uploads pass pre-flight checks every time."
+      },
+      "distribution": {
+        "title": "Global Distribution Ready",
+        "desc": "Export valid EPUB 3.0 with proper metadata for Kindle, Apple Books, Kobo, and all major e-book retailers."
+      }
+    },
+    "volumeTitle": "Production Workflow",
+    "volumeSubtitle": "From manuscript to market in three simple steps.",
+    "step1": "Import or create",
+    "step1Desc": "Paste your manuscript or type directly. Our AI handles the initial formatting.",
+    "step2": "Refine & validate",
+    "step2Desc": "Use the Grid-Lock editor to perfect your layout. Real-time symmetry guards prevent issues.",
+    "step3": "Export & publish",
+    "step3Desc": "Download print-ready PDFs or EPUB files. Upload directly to KDP, IngramSpark, or your distributor.",
+    "available": "Now Available",
+    "epubTitle": "EPUB 3.0 + Fixed Layout",
+    "epubDesc": "Full support for both reflowable and fixed-layout EPUB formats. Perfect for illustrated bilingual children's books.",
+    "compliant": "EPUB 3.0 Compliant",
+    "fixed": "Fixed-Layout Support",
+    "scaleTitle": "Ready to scale your catalog?",
+    "scaleDesc": "Whether you're publishing 5 titles or 500, Synoptic grows with your operation.",
+    "sales": "Talk to Sales"
   }
 }

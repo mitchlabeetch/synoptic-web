@@ -18,7 +18,9 @@ import {
   ChevronLeft,
   ChevronRight,
   Palette,
-  Printer
+  Printer,
+  BookOpen,
+  FileText
 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
@@ -33,10 +35,11 @@ import ThemeInspector from './ThemeInspector';
 import StylePresetManager from './StylePresetManager';
 import LocaleSwitcher from './LocaleSwitcher';
 import ExportManager from './ExportManager';
+import StructureManager from './StructureManager';
 
 export default function Sidebar() {
-  const { addBlock, addPage, currentPageIndex, meta } = useProjectStore();
-  const [activeTab, setActiveTab] = useState<'tools' | 'pages' | 'design' | 'presets' | 'publish'>('pages');
+  const { addBlock, addPage, addQuizBlock, currentPageIndex, meta } = useProjectStore();
+  const [activeTab, setActiveTab] = useState<'tools' | 'pages' | 'design' | 'presets' | 'publish' | 'structure'>('pages');
   const [isCollapsed, setIsCollapsed] = useState(false);
   const t = useTranslations('Blocks');
   const tStudio = useTranslations('Studio');
@@ -93,14 +96,20 @@ export default function Sidebar() {
     } as any);
   };
 
+  const handleAddQuizBlock = () => {
+    addQuizBlock(currentPageIndex, 'The word for book in French is', 'livre', '.');
+  };
+
   const tools = [
     { id: 'pages', icon: Layout, label: tStudio('pageManager'), onClick: () => { setActiveTab('pages'); setIsCollapsed(false); } },
+    { id: 'structure', icon: FileText, label: tStudio('bookStructure') || 'Book Structure', onClick: () => { setActiveTab('structure'); setIsCollapsed(false); } },
     { id: 'design', icon: Palette, label: tStudio('globalDesign'), onClick: () => { setActiveTab('design'); setIsCollapsed(false); } },
     { id: 'publish', icon: Printer, label: tStudio('publishingPipeline'), onClick: () => { setActiveTab('publish'); setIsCollapsed(false); } },
     { id: 'presets', icon: Layers, label: tStudio('stylePresets'), onClick: () => { setActiveTab('presets'); setIsCollapsed(false); } },
     { id: 'text', icon: Type, label: t('text'), onClick: handleAddTextBlock },
     { id: 'separator', icon: SeparatorHorizontal, label: t('separator'), onClick: handleAddSeparator },
     { id: 'callout', icon: MessageSquare, label: t('callout'), onClick: handleAddCallout },
+    { id: 'quiz', icon: BookOpen, label: t('quiz') || 'Quiz Exercise', onClick: handleAddQuizBlock },
     { id: 'media', icon: ImageIcon, label: t('media'), onClick: handleAddImageBlock },
     { id: 'ai', icon: Languages, label: t('ai'), onClick: () => {} },
     { id: 'settings', icon: Settings2, label: t('settings'), onClick: () => {} },
@@ -130,7 +139,7 @@ export default function Sidebar() {
                 <TooltipTrigger asChild>
                   <button
                     onClick={() => {
-                      if (['pages', 'design', 'presets', 'publish'].includes(tool.id)) {
+                      if (['pages', 'structure', 'design', 'presets', 'publish'].includes(tool.id)) {
                         setActiveTab(tool.id as any);
                         setIsCollapsed(false);
                       } else {
@@ -141,14 +150,15 @@ export default function Sidebar() {
                     }}
                     className={cn(
                       "w-full aspect-square flex items-center justify-center rounded-xl transition-all",
-                      (activeTab === tool.id) || (activeTab === 'tools' && !['pages', 'design', 'presets', 'settings', 'publish'].includes(tool.id))
+                      (activeTab === tool.id) || (activeTab === 'tools' && !['pages', 'structure', 'design', 'presets', 'settings', 'publish'].includes(tool.id))
                         ? "bg-primary text-primary-foreground shadow-md"
                         : "text-muted-foreground hover:bg-primary/10 hover:text-primary"
                     )}
                     data-tour={
                       tool.id === 'pages' ? 'sidebar-pages' : 
                       tool.id === 'publish' ? 'sidebar-publish' : 
-                      (['text', 'separator', 'callout', 'media', 'ai'].includes(tool.id)) ? 'sidebar-tools' : undefined
+                      tool.id === 'structure' ? 'sidebar-structure' :
+                      (['text', 'separator', 'callout', 'quiz', 'media', 'ai'].includes(tool.id)) ? 'sidebar-tools' : undefined
                     }
                   >
                     <tool.icon className="h-5 w-5" />
@@ -166,6 +176,7 @@ export default function Sidebar() {
         {!isCollapsed && (
           <div className="flex-1 flex flex-col overflow-hidden">
             {activeTab === 'pages' && <PageManager />}
+            {activeTab === 'structure' && <StructureManager />}
             {activeTab === 'design' && <ThemeInspector />}
             {activeTab === 'presets' && <StylePresetManager />}
             {activeTab === 'publish' && <ExportManager />}

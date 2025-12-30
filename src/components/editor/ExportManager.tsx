@@ -10,7 +10,11 @@ import {
   AlertTriangle,
   ChevronRight,
   Sparkles,
-  ExternalLink
+  ExternalLink,
+  Lock,
+  Grid,
+  Activity,
+  FileSpreadsheet
 } from 'lucide-react';
 import { 
   Select,
@@ -23,10 +27,14 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
 export default function ExportManager() {
-  const { meta } = useProjectStore();
+  const { meta, content, settings } = useProjectStore();
   const [isExporting, setIsExporting] = useState<string | null>(null);
   const [lastExport, setLastExport] = useState<{ type: string; url: string } | null>(null);
   const [tier, setTier] = useState<string>('free');
+  
+  // Dynamic logic to make the status "Real"
+  const hasContent = content?.pages && content.pages.length > 0 && 
+    content.pages.some(page => page.blocks && page.blocks.length > 0);
   
   const t = useTranslations('Export');
   const tCommon = useTranslations('Common');
@@ -226,19 +234,103 @@ export default function ExportManager() {
           </div>
         </section>
 
-        {/* PRE-FLIGHT CHECK */}
+        {/* STUDY DECK SECTION */}
+        <section className="space-y-4">
+          <div className="flex items-center gap-2 mb-2">
+             <div className="h-6 w-6 rounded-md bg-emerald-500/10 flex items-center justify-center">
+               <FileSpreadsheet className="h-4 w-4 text-emerald-600" />
+             </div>
+             <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+               {t('studyDeck')}
+             </h4>
+          </div>
+          <div className="p-4 rounded-xl border bg-gradient-to-br from-emerald-50/50 to-transparent dark:from-emerald-950/20 space-y-4">
+             <p className="text-[11px] text-muted-foreground leading-relaxed">
+               {t('deckDesc')}
+             </p>
+             <Button 
+               variant="outline" 
+               className="w-full gap-2 text-xs font-bold hover:bg-emerald-50 hover:text-emerald-700 hover:border-emerald-200" 
+               onClick={() => {
+                 // Extract flashcards from callout blocks and export as CSV
+                 if (!content?.pages) {
+                   alert(t('noCardsFound'));
+                   return;
+                 }
+                 const cards: string[] = [];
+                 content.pages.forEach(page => {
+                   page.blocks.forEach((block: any) => {
+                     if (block.type === 'callout') {
+                       const front = block.L2?.content || block.content || '...';
+                       const back = `${block.L1?.content || ''} <br/> <small>[${block.calloutType || 'note'}]</small>`;
+                       const tag = `Synoptic::${block.calloutType || 'note'}`;
+                       cards.push(`"${front.replace(/"/g, '""')}","${back.replace(/"/g, '""')}","${tag}"`);
+                     }
+                   });
+                 });
+                 if (cards.length === 0) {
+                   alert(t('noCardsFound'));
+                   return;
+                 }
+                 const csvContent = `#separator:Comma\n#html:true\n${cards.join('\n')}`;
+                 const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                 const url = URL.createObjectURL(blob);
+                 const a = document.createElement('a');
+                 a.href = url;
+                 a.download = `${meta?.title || 'deck'}_anki.csv`;
+                 document.body.appendChild(a);
+                 a.click();
+                 window.URL.revokeObjectURL(url);
+               }}
+             >
+               <FileSpreadsheet className="h-3 w-3" />
+               {t('generate')} CSV / Anki
+             </Button>
+          </div>
+        </section>
+
+        {/* SYSTEM STATUS SECTION */}
         <section className="space-y-4">
           <h4 className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-2">
-            <CheckCircle2 className="h-3.5 w-3.5 text-green-500" />
-            {t('preFlightTitle')}
+            <Activity className="h-3.5 w-3.5 text-primary" />
+            {t('systemStatus')}
           </h4>
+          
           <div className="space-y-2">
-            <div className="flex items-center justify-between p-2 rounded-lg bg-green-50/50 dark:bg-green-950/20 border border-green-500/20">
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-3 w-3 text-green-500" />
-                <span className="text-[10px] font-medium">{t('symmetryCheck')}</span>
+            {/* Grid-Lock Engine Status */}
+            <div className="flex items-center justify-between p-2.5 rounded-lg bg-emerald-50/50 dark:bg-emerald-950/20 border border-emerald-500/20">
+              <div className="flex items-center gap-2.5">
+                <div className="h-5 w-5 rounded bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center">
+                  <Grid className="h-3 w-3 text-emerald-600" />
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-[10px] font-bold text-emerald-700 dark:text-emerald-400">
+                    {t('gridLock')}
+                  </span>
+                  <span className="text-[9px] text-emerald-600/70 font-medium">
+                    {hasContent ? t('engineActive') : t('waitingContent')}
+                  </span>
+                </div>
               </div>
-              <ChevronRight className="h-3 w-3 text-muted-foreground/30" />
+              <Lock className="h-3 w-3 text-emerald-500/50" />
+            </div>
+
+            {/* Mirror Gutter Logic Status */}
+            <div className="flex items-center justify-between p-2.5 rounded-lg bg-blue-50/50 dark:bg-blue-950/20 border border-blue-500/20">
+              <div className="flex items-center gap-2.5">
+                 <div className="h-5 w-5 rounded bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center">
+                  <Book className="h-3 w-3 text-blue-600" />
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-[10px] font-bold text-blue-700 dark:text-blue-400">
+                    {t('mirrorGutter')}
+                  </span>
+                  <span className="text-[9px] text-blue-600/70 font-medium">
+                    {settings?.pageSize || 'Standard'} {t('profileLoaded')}
+                  </span>
+                </div>
+              </div>
+              <CheckCircle2 className="h-3 w-3 text-blue-500/50" />
             </div>
           </div>
         </section>

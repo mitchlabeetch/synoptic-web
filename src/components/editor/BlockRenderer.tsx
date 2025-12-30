@@ -4,11 +4,13 @@
 import {
   ContentBlock,
   TextBlock,
+  QuizBlock,
 } from '@/types/blocks';
 import { TextBlockComponent } from './blocks/TextBlock';
 import { ImageBlockComponent } from './blocks/ImageBlock';
 import { SeparatorBlockComponent } from './blocks/SeparatorBlock';
 import { CalloutBlockComponent } from './blocks/CalloutBlock';
+import { QuizBlockComponent } from './blocks/QuizBlock';
 import { useProjectStore } from '@/lib/store/projectStore';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
@@ -90,6 +92,14 @@ export default function BlockRenderer({
         return (
           <CalloutBlockComponent
             block={block as any}
+            {...commonProps}
+          />
+        );
+
+      case 'quiz':
+        return (
+          <QuizBlockComponent
+            block={block as QuizBlock}
             {...commonProps}
           />
         );

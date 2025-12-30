@@ -45,10 +45,22 @@ export async function POST(request: NextRequest) {
         width: 152, // Default 6x9 if not in project
         height: 229,
         bleed: options?.includeBleed ? 3.175 : 0,
+        
+        // NEW: Metadata Object for the PDF Engine
+        metadata: {
+          title: project.title || 'Untitled',
+          author: (project.settings?.author as string) || 'Synoptic Author',
+          subject: `Bilingual Edition (${project.source_lang}-${project.target_lang})`,
+          keywords: ['synoptic', 'bilingual', project.source_lang, project.target_lang].filter(Boolean),
+          creator: 'Synoptic Studio v1.0',
+          producer: 'Synoptic Publishing Engine'
+        },
+        
         options: {
           colorMode: options?.colorMode || 'sRGB',
           resolution: isFreeTier ? 150 : 300,
           watermark: isFreeTier,
+          lang: project.target_lang || 'en'
         },
       }),
     });
@@ -210,6 +222,42 @@ function renderBlock(block: any, project: any, isFirstInChapter: boolean): strin
         <table style="border-color: ${block.borderColor || '#dddddd'}; border-width: ${block.borderWidth || 1}px;">
           ${tableContent}
         </table>
+      </div>
+    `;
+  }
+
+  // ============================================
+  // QUIZ BLOCK (Workbook Cloze Deletion)
+  // ============================================
+  if (block.type === 'quiz') {
+    const hintHTML = block.hint 
+      ? `<div style="font-size: 8pt; color: #999; margin-top: 2mm; font-style: italic;">💡 Hint: ${escapeHTML(block.hint)}</div>` 
+      : '';
+
+    const difficultyBadge = block.difficulty 
+      ? `<span style="font-size: 7pt; padding: 1mm 2mm; border-radius: 2mm; background: ${
+          block.difficulty === 'easy' ? '#d1fae5' : 
+          block.difficulty === 'medium' ? '#fef3c7' : '#fee2e2'
+        }; color: ${
+          block.difficulty === 'easy' ? '#065f46' : 
+          block.difficulty === 'medium' ? '#92400e' : '#991b1b'
+        }; text-transform: uppercase; font-weight: bold; margin-left: 2mm;">${escapeHTML(block.difficulty)}</span>`
+      : '';
+
+    return `
+      <div class="block quiz-block" style="margin: 6mm 0; padding: 5mm; background-color: #f9f9f9; border: 1px dashed #ccc; border-radius: 4px; page-break-inside: avoid;">
+        <div style="font-size: 8pt; font-weight: bold; color: #666; text-transform: uppercase; letter-spacing: 0.5mm; margin-bottom: 3mm; display: flex; align-items: center;">
+          📚 Workbook Exercise ${difficultyBadge}
+        </div>
+        <div style="font-family: var(--primary-serif); font-size: 12pt; line-height: 2;">
+          ${escapeHTML(block.preText)}
+          <span style="display: inline-block; min-width: 30mm; border-bottom: 1.5pt solid #444; margin: 0 1mm;">&nbsp;</span>
+          ${escapeHTML(block.postText)}
+        </div>
+        ${hintHTML}
+        <div style="margin-top: 4mm; text-align: right; transform: rotate(180deg); transform-origin: right center; opacity: 0.6;">
+          <span style="font-size: 7pt; font-family: sans-serif; text-transform: uppercase; letter-spacing: 1px;">Answer: ${escapeHTML(block.answer)}</span>
+        </div>
       </div>
     `;
   }

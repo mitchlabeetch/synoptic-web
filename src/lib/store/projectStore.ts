@@ -14,6 +14,12 @@ import {
   AINote,
   ProjectContent,
   StylePreset,
+  FrontMatterPage,
+  BackMatterPage,
+  GlossaryEntry,
+  FrontMatterType,
+  BackMatterType,
+  QuizBlock,
 } from '@/types/blocks';
 import { isRTL } from '@/data/languages';
 
@@ -107,6 +113,21 @@ interface ProjectState {
   deletePreset: (presetId: string) => void;
   applyPreset: (pageIndex: number, blockId: string, presetId: string) => void;
 
+  // Front Matter / Back Matter (KDP Compliance)
+  addFrontMatterPage: (type: FrontMatterType) => void;
+  updateFrontMatterPage: (pageId: string, updates: Partial<FrontMatterPage>) => void;
+  deleteFrontMatterPage: (pageId: string) => void;
+  addBackMatterPage: (type: BackMatterType) => void;
+  updateBackMatterPage: (pageId: string, updates: Partial<BackMatterPage>) => void;
+  deleteBackMatterPage: (pageId: string) => void;
+
+  // Quiz Block (Workbook Generator)
+  addQuizBlock: (pageIndex: number, preText: string, answer: string, postText: string) => void;
+
+  // Glossary (Auto-Compiler)
+  generateGlossary: () => void;
+  clearGlossary: () => void;
+
   // Optimized Undo/Redo with patches
   history: HistoryEntry[];
   historyIndex: number;
@@ -128,6 +149,9 @@ interface ProjectState {
 
 const DEFAULT_CONTENT: ProjectContent = {
   pages: [{ id: 'page-1', number: 1, blocks: [], isBlankPage: false, avoidPageBreak: false }],
+  frontMatter: [],
+  backMatter: [],
+  glossary: [],
   wordGroups: [],
   arrows: [],
   notes: [],
@@ -319,6 +343,122 @@ export const useProjectStore = create<ProjectState>()(
       if (preset && block) {
         Object.assign(block, { ...preset.settings });
       }
+    }),
+
+    // ============================================
+    // FRONT MATTER / BACK MATTER (KDP Compliance)
+    // ============================================
+
+    addFrontMatterPage: (type) => set((state) => {
+      const newPage: FrontMatterPage = {
+        id: `fm-${Date.now()}`,
+        type,
+        blocks: [],
+        year: new Date().getFullYear(),
+      };
+      
+      if (!state.content.frontMatter) {
+        state.content.frontMatter = [];
+      }
+      state.content.frontMatter.push(newPage);
+    }),
+
+    updateFrontMatterPage: (pageId, updates) => set((state) => {
+      const page = state.content.frontMatter?.find(p => p.id === pageId);
+      if (page) {
+        Object.assign(page, updates);
+      }
+    }),
+
+    deleteFrontMatterPage: (pageId) => set((state) => {
+      if (state.content.frontMatter) {
+        state.content.frontMatter = state.content.frontMatter.filter(p => p.id !== pageId);
+      }
+    }),
+
+    addBackMatterPage: (type) => set((state) => {
+      const newPage: BackMatterPage = {
+        id: `bm-${Date.now()}`,
+        type,
+        blocks: [],
+      };
+      
+      if (!state.content.backMatter) {
+        state.content.backMatter = [];
+      }
+      state.content.backMatter.push(newPage);
+    }),
+
+    updateBackMatterPage: (pageId, updates) => set((state) => {
+      const page = state.content.backMatter?.find(p => p.id === pageId);
+      if (page) {
+        Object.assign(page, updates);
+      }
+    }),
+
+    deleteBackMatterPage: (pageId) => set((state) => {
+      if (state.content.backMatter) {
+        state.content.backMatter = state.content.backMatter.filter(p => p.id !== pageId);
+      }
+    }),
+
+    // ============================================
+    // QUIZ BLOCK (Workbook Generator)
+    // ============================================
+
+    addQuizBlock: (pageIndex, preText, answer, postText) => set((state) => {
+      const quizBlock: QuizBlock = {
+        id: `quiz-${Date.now()}`,
+        type: 'quiz',
+        order: state.content.pages[pageIndex].blocks.length,
+        layout: 'side-by-side',
+        visible: true,
+        printable: true,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        preText,
+        answer,
+        postText,
+        languageContext: 'L2',
+      };
+      
+      state.content.pages[pageIndex].blocks.push(quizBlock);
+    }),
+
+    // ============================================
+    // GLOSSARY (Auto-Compiler)
+    // ============================================
+
+    generateGlossary: () => set((state) => {
+      const entries: GlossaryEntry[] = [];
+      
+      // Scan all pages for callout blocks (vocabulary, grammar, culture)
+      state.content.pages.forEach((page) => {
+        page.blocks.forEach((block) => {
+          if (block.type === 'callout') {
+            const callout = block as any; // CalloutBlock
+            if (['vocabulary', 'grammar', 'culture', 'false-friend'].includes(callout.calloutType)) {
+              entries.push({
+                id: `gloss-${block.id}`,
+                term: callout.title || 'Untitled',
+                definition: callout.content || '',
+                sourceBlockId: block.id,
+                sourcePageId: page.id,
+                category: callout.calloutType,
+              });
+            }
+          }
+        });
+      });
+      
+      // Sort alphabetically by term
+      entries.sort((a, b) => a.term.localeCompare(b.term));
+      
+      state.content.glossary = entries;
+    }),
+
+    clearGlossary: () => set((state) => {
+      state.content.glossary = [];
     }),
 
     // Optimized Undo/Redo with debouncing

@@ -10,7 +10,8 @@ export type BlockType =
   | 'separator'
   | 'callout'
   | 'stamp'
-  | 'table';
+  | 'table'
+  | 'quiz';
 
 export type LayoutMode =
   | 'side-by-side'
@@ -233,6 +234,28 @@ export interface TableBlock extends BaseBlock {
 }
 
 // ============================================
+// QUIZ BLOCK (Workbook Cloze Deletion)
+// ============================================
+
+export interface QuizBlock extends BaseBlock {
+  type: 'quiz';
+  
+  // Sentence structure
+  preText: string;     // Text before the blank (e.g. "The cat sat on the")
+  answer: string;      // The hidden word (e.g. "mat")
+  postText: string;    // Text after the blank (e.g. ".")
+  
+  // Optional hint (auto-generated via Datamuse or manual)
+  hint?: string;       // e.g. "floor covering"
+  
+  // Difficulty level for workbook exercises
+  difficulty?: 'easy' | 'medium' | 'hard';
+  
+  // Source language context
+  languageContext?: 'L1' | 'L2';
+}
+
+// ============================================
 // ANNOTATION TYPES
 // ============================================
 
@@ -285,7 +308,8 @@ export type ContentBlock =
   | SeparatorBlock
   | CalloutBlock
   | StampBlock
-  | TableBlock;
+  | TableBlock
+  | QuizBlock;
 
 // ============================================
 // PAGE STRUCTURE
@@ -325,8 +349,52 @@ export interface PageData {
   isChapterStart?: boolean;
 }
 
+// ============================================
+// FRONT/BACK MATTER (KDP Compliance)
+// ============================================
+
+export type FrontMatterType = 'title' | 'copyright' | 'dedication' | 'toc';
+export type BackMatterType = 'glossary' | 'about' | 'notes';
+
+export interface FrontMatterPage {
+  id: string;
+  type: FrontMatterType;
+  blocks: ContentBlock[];
+  // For title page
+  title?: string;
+  subtitle?: string;
+  author?: string;
+  // For copyright
+  year?: number;
+  isbn?: string;
+  publisher?: string;
+  // For dedication
+  dedicationText?: string;
+}
+
+export interface BackMatterPage {
+  id: string;
+  type: BackMatterType;
+  blocks: ContentBlock[];
+  // For about page
+  authorBio?: string;
+}
+
+// Glossary entry for auto-compiled glossary
+export interface GlossaryEntry {
+  id: string;
+  term: string;       // L2 word/phrase
+  definition: string; // L1 translation/explanation
+  sourceBlockId: string;
+  sourcePageId: string;
+  category?: string;  // 'vocabulary', 'grammar', 'culture'
+}
+
 export interface ProjectContent {
   pages: PageData[];
+  frontMatter: FrontMatterPage[];
+  backMatter: BackMatterPage[];
+  glossary: GlossaryEntry[];
   wordGroups: WordGroup[];
   arrows: ArrowConnector[];
   notes: AINote[];

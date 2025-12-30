@@ -31,6 +31,8 @@ import {
   FileText,
   Sparkles,
   Plus,
+  School,
+  ShieldCheck,
 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
@@ -112,6 +114,12 @@ export default function ProjectWizard({ projectCount = 0, tier = 'free' }: Proje
       label: t('poetryTemplate'),
       description: t('poetryDesc'),
       icon: Sparkles,
+    },
+    {
+      id: 'academic',
+      label: t('academicTemplate'),
+      description: t('academicDesc'),
+      icon: School,
     },
   ];
 
@@ -518,13 +526,21 @@ export default function ProjectWizard({ projectCount = 0, tier = 'free' }: Proje
                     <ChevronRight className="w-4 h-4 ml-2" />
                   </Button>
                 ) : (
-                  <Button
-                    onClick={handleCreate}
-                    disabled={isCreating || !canProceed()}
-                    className="w-56 font-bold animate-pulse hover:animate-none"
-                  >
-                    {isCreating ? t('creating') : t('launch')}
-                  </Button>
+                  <div className="text-center">
+                    <Button
+                      onClick={handleCreate}
+                      disabled={isCreating || !canProceed()}
+                      className="w-56 font-bold animate-pulse hover:animate-none shadow-xl shadow-primary/20"
+                    >
+                      {isCreating ? t('creating') : t('launch')}
+                    </Button>
+                    
+                    {/* Trust Signal (Privacy Reassurance) */}
+                    <div className="mt-3 flex items-center justify-center gap-1.5 text-[10px] text-muted-foreground/60 font-medium">
+                      <ShieldCheck className="w-3 h-3 text-emerald-500/70" />
+                      {t('secureNote')}
+                    </div>
+                  </div>
                 )}
               </div>
             </div>

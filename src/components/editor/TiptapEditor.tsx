@@ -13,13 +13,14 @@ import TextAlign from '@tiptap/extension-text-align';
 import Underline from '@tiptap/extension-underline';
 import { TextStyle } from '@tiptap/extension-text-style';
 import { Color } from '@tiptap/extension-color';
-import { useCallback, useEffect, forwardRef, useImperativeHandle } from 'react';
+import { useCallback, useEffect, forwardRef, useImperativeHandle, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { 
   Bold, Italic, Underline as UnderlineIcon, 
   AlignLeft, AlignCenter, AlignRight, AlignJustify,
-  Sparkles, Loader2
+  Sparkles, Loader2, Wand2
 } from 'lucide-react';
+import { WordPolisher } from '@/components/tools/WordPolisher';
 
 export interface TiptapEditorRef {
   getHTML: () => string;
@@ -62,6 +63,8 @@ export const TiptapEditor = forwardRef<TiptapEditorRef, TiptapEditorProps>(
     },
     ref
   ) {
+    const [selectedText, setSelectedText] = useState('');
+    
     const editor = useEditor({
       extensions: [
         StarterKit.configure({
@@ -112,8 +115,9 @@ export const TiptapEditor = forwardRef<TiptapEditorRef, TiptapEditorProps>(
       onSelectionUpdate: ({ editor }) => {
         const { from, to } = editor.state.selection;
         const hasSelection = from !== to;
-        const selectedText = hasSelection ? editor.state.doc.textBetween(from, to) : '';
-        onSelectionChange?.(hasSelection, selectedText);
+        const text = hasSelection ? editor.state.doc.textBetween(from, to) : '';
+        setSelectedText(text);
+        onSelectionChange?.(hasSelection, text);
       },
     });
 
@@ -159,9 +163,19 @@ export const TiptapEditor = forwardRef<TiptapEditorRef, TiptapEditorProps>(
       [editor]
     );
 
+    // Handle word replacement from WordPolisher
+    const handleWordReplace = useCallback((newWord: string) => {
+      if (!editor) return;
+      // Replace the current selection with the new word
+      editor.chain().focus().insertContent(newWord).run();
+    }, [editor]);
+
     if (!editor) {
       return null;
     }
+
+    // Check if selection is a single word (for WordPolisher)
+    const isSingleWord = selectedText.trim().split(/\s+/).length === 1 && selectedText.trim().length > 1;
 
     return (
       <div className="tiptap-wrapper relative">
@@ -265,6 +279,17 @@ export const TiptapEditor = forwardRef<TiptapEditorRef, TiptapEditorProps>(
             <AlignJustify className="h-3.5 w-3.5" />
           </button>
 
+          {/* Word Polisher - Only for single word selections */}
+          {isSingleWord && (
+            <>
+              <div className="w-px h-4 bg-border mx-1" />
+              <WordPolisher 
+                selectedText={selectedText.trim()} 
+                onReplace={handleWordReplace}
+              />
+            </>
+          )}
+
           {onAiExplain && (
             <>
               <div className="w-px h-4 bg-border mx-1" />
@@ -291,3 +316,4 @@ export const TiptapEditor = forwardRef<TiptapEditorRef, TiptapEditorProps>(
     );
   }
 );
+

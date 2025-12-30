@@ -12,15 +12,24 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
+import { WordPolisher } from '@/components/tools/WordPolisher';
 
 interface FloatingToolbarProps {
   isVisible: boolean;
   position: { top: number; left: number };
   onAiExplain?: () => void;
+  selectedText?: string;
+  onReplaceText?: (newText: string) => void;
 }
 
-export function FloatingToolbar({ isVisible, position, onAiExplain }: FloatingToolbarProps) {
+export function FloatingToolbar({ 
+  isVisible, 
+  position, 
+  onAiExplain,
+  selectedText = '',
+  onReplaceText
+}: FloatingToolbarProps) {
   const [show, setShow] = useState(isVisible);
 
   useEffect(() => {
@@ -31,7 +40,20 @@ export function FloatingToolbar({ isVisible, position, onAiExplain }: FloatingTo
     document.execCommand(command, false);
   };
 
+  // Handle word replacement from WordPolisher
+  const handleWordReplace = (newWord: string) => {
+    if (onReplaceText) {
+      onReplaceText(newWord);
+    } else {
+      // Fallback: use execCommand to insert text
+      document.execCommand('insertText', false, newWord);
+    }
+  };
+
   if (!show) return null;
+
+  // Check if selected text is a single word (for WordPolisher)
+  const isSingleWord = selectedText.trim().split(/\s+/).length === 1 && selectedText.trim().length > 0;
 
   return (
     <div
@@ -52,6 +74,17 @@ export function FloatingToolbar({ isVisible, position, onAiExplain }: FloatingTo
       
       <ToolbarButton onClick={() => {}} icon={Highlighter} label="Highlight" color="text-yellow-500" />
       <ToolbarButton onClick={() => {}} icon={Link2} label="Link" />
+      
+      {/* Word Polisher - Only show for single word selections */}
+      {isSingleWord && (
+        <>
+          <div className="w-[1px] h-4 bg-muted mx-1" />
+          <WordPolisher 
+            selectedText={selectedText.trim()} 
+            onReplace={handleWordReplace} 
+          />
+        </>
+      )}
       
       {onAiExplain && (
         <>
@@ -91,3 +124,4 @@ function ToolbarButton({
     </Button>
   );
 }
+
