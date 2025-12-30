@@ -20,7 +20,7 @@ import { cn } from '@/lib/utils';
 import { 
   Bold, Italic, Underline as UnderlineIcon, 
   AlignLeft, AlignCenter, AlignRight, AlignJustify,
-  Sparkles, Loader2, Wand2, Languages, SpellCheck
+  Sparkles, Loader2
 } from 'lucide-react';
 import { WordPolisher } from '@/components/tools/WordPolisher';
 import { AIDraftButton } from '@/components/tools/AIDraftButton';

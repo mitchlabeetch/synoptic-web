@@ -25,6 +25,7 @@ import {
   ChevronRight
 } from 'lucide-react';
 import { synonymsService, SynonymResult } from '@/services/synonyms';
+import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 
 interface SynonymMenuProps {
@@ -46,6 +47,7 @@ export function SynonymMenu({
   const [antonyms, setAntonyms] = useState<SynonymResult[]>([]);
   const [related, setRelated] = useState<SynonymResult[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const t = useTranslations('Tools.synonyms');
 
   // Fetch synonyms when menu opens with a word
   const handleOpenChange = useCallback(async (open: boolean) => {
@@ -108,7 +110,7 @@ export function SynonymMenu({
             {/* Header showing the word */}
             <div className="px-2 py-1.5 border-b mb-1">
               <p className="text-xs text-muted-foreground">
-                Synonyms for: <span className="font-bold text-foreground">&ldquo;{activeWord}&rdquo;</span>
+                {t('synonymsFor')} <span className="font-bold text-foreground">&ldquo;{activeWord}&rdquo;</span>
               </p>
             </div>
 
@@ -116,7 +118,7 @@ export function SynonymMenu({
             {loading && (
               <div className="flex items-center justify-center py-4 gap-2 text-muted-foreground">
                 <Loader2 className="w-4 h-4 animate-spin" />
-                <span className="text-xs">Finding synonyms...</span>
+                <span className="text-xs">{t('findingSynonyms')}</span>
               </div>
             )}
 
@@ -131,7 +133,7 @@ export function SynonymMenu({
             {!loading && !error && synonyms.length === 0 && antonyms.length === 0 && (
               <div className="px-2 py-4 text-center">
                 <BookOpen className="w-8 h-8 text-muted-foreground/40 mx-auto mb-2" />
-                <p className="text-xs text-muted-foreground">No synonyms found</p>
+                <p className="text-xs text-muted-foreground">{t('noSynonymsFound')}</p>
               </div>
             )}
 
@@ -141,7 +143,7 @@ export function SynonymMenu({
                 <ContextMenuSub>
                   <ContextMenuSubTrigger className="gap-2">
                     <Wand2 className="w-4 h-4" />
-                    <span>Synonyms</span>
+                    <span>{t('synonyms')}</span>
                     <span className="ml-auto text-xs text-muted-foreground">
                       {synonyms.length}
                     </span>
@@ -180,7 +182,7 @@ export function SynonymMenu({
                 <ContextMenuSub>
                   <ContextMenuSubTrigger className="gap-2">
                     <ArrowRightLeft className="w-4 h-4" />
-                    <span>Antonyms</span>
+                    <span>{t('antonyms')}</span>
                     <span className="ml-auto text-xs text-muted-foreground">
                       {antonyms.length}
                     </span>
@@ -205,7 +207,7 @@ export function SynonymMenu({
               <ContextMenuSub>
                 <ContextMenuSubTrigger className="gap-2">
                   <Sparkles className="w-4 h-4" />
-                  <span>Related</span>
+                  <span>{t('related')}</span>
                   <span className="ml-auto text-xs text-muted-foreground">
                     {related.length}
                   </span>
@@ -231,7 +233,7 @@ export function SynonymMenu({
         {!activeWord && (
           <div className="px-2 py-3 text-center">
             <p className="text-xs text-muted-foreground">
-              Select a word first, then right-click
+              {t('selectWordFirst')}
             </p>
           </div>
         )}
@@ -239,7 +241,7 @@ export function SynonymMenu({
         {/* Footer - powered by */}
         <div className="px-2 py-1.5 border-t mt-1 flex items-center justify-center gap-1 text-[9px] text-muted-foreground/60">
           <Wand2 className="w-2.5 h-2.5" />
-          Powered by Datamuse
+          {t('poweredBy')}
         </div>
       </ContextMenuContent>
     </ContextMenu>

@@ -27,6 +27,7 @@ import {
 } from 'lucide-react';
 import { LibraryTile, WizardConfig, IngestedContent } from '@/services/library/types';
 import { BIBLE_BOOKS, BIBLE_CHAPTERS } from '@/services/library/adapters';
+import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 
 interface SourceWizardProps {
@@ -47,6 +48,7 @@ export const SourceWizard = memo(function SourceWizard({
   previewLoading,
 }: SourceWizardProps) {
   const { capabilities, sourceId } = tile;
+  const t = useTranslations('Library.wizard');
 
   // Update config helper
   const updateConfig = (updates: Partial<WizardConfig>) => {
@@ -60,7 +62,7 @@ export const SourceWizard = memo(function SourceWizard({
         <div className="space-y-3">
           <Label htmlFor="search" className="flex items-center gap-2">
             <Search className="w-4 h-4" />
-            Search
+            {t('search')}
           </Label>
           <div className="flex gap-2">
             <Input
@@ -167,7 +169,7 @@ export const SourceWizard = memo(function SourceWizard({
             }}
           >
             <Dice5 className="w-4 h-4" />
-            Surprise Me!
+            {t('randomize')}
           </Button>
         </div>
       )}
@@ -187,16 +189,16 @@ export const SourceWizard = memo(function SourceWizard({
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="chapters">Selected chapters</SelectItem>
-              <SelectItem value="full">Full book</SelectItem>
-              <SelectItem value="custom">Custom range</SelectItem>
+              <SelectItem value="chapters">{t('selectedChapters')}</SelectItem>
+              <SelectItem value="full">{t('fullBook')}</SelectItem>
+              <SelectItem value="custom">{t('customRange')}</SelectItem>
             </SelectContent>
           </Select>
 
           {config.importRange === 'chapters' && (
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1">
-                <Label className="text-xs">Start Chapter</Label>
+                <Label className="text-xs">{t('startChapter')}</Label>
                 <Input
                   type="number"
                   min={1}
@@ -205,7 +207,7 @@ export const SourceWizard = memo(function SourceWizard({
                 />
               </div>
               <div className="space-y-1">
-                <Label className="text-xs">End Chapter</Label>
+                <Label className="text-xs">{t('endChapter')}</Label>
                 <Input
                   type="number"
                   min={1}

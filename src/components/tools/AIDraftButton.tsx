@@ -15,6 +15,7 @@ import {
 import { Languages, Loader2, Copy, Check, Sparkles } from 'lucide-react';
 import { libreTranslate } from '@/services/libreTranslate';
 import { useProjectStore } from '@/lib/store/projectStore';
+import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 
 interface AIDraftButtonProps {
@@ -39,6 +40,7 @@ export function AIDraftButton({
   const { meta } = useProjectStore();
   const sourceLang = meta?.source_lang || 'en';
   const targetLang = meta?.target_lang || 'fr';
+  const t = useTranslations('Tools.aiDraft');
 
   const handleTranslate = useCallback(async () => {
     if (!selectedText) return;
@@ -96,7 +98,7 @@ export function AIDraftButton({
           )}
         >
           <Languages className="w-3.5 h-3.5" />
-          <span className="text-xs font-medium">AI Draft</span>
+          <span className="text-xs font-medium">{t('button')}</span>
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-80 p-4" align="start" sideOffset={5}>
@@ -106,7 +108,7 @@ export function AIDraftButton({
             <Sparkles className="w-4 h-4 text-blue-600" />
           </div>
           <div>
-            <h4 className="font-bold text-sm">AI Translation Draft</h4>
+            <h4 className="font-bold text-sm">{t('title')}</h4>
             <p className="text-[10px] text-muted-foreground">
               {sourceLang.toUpperCase()} → {targetLang.toUpperCase()}
             </p>
@@ -115,7 +117,7 @@ export function AIDraftButton({
 
         {/* Original Text */}
         <div className="mb-3 p-2 bg-muted/30 rounded-lg">
-          <p className="text-[10px] text-muted-foreground mb-1">Original:</p>
+          <p className="text-[10px] text-muted-foreground mb-1">{t('original')}</p>
           <p className="text-sm line-clamp-3">{selectedText}</p>
         </div>
 
@@ -124,7 +126,7 @@ export function AIDraftButton({
           {loading ? (
             <div className="flex items-center justify-center py-6 gap-2 text-muted-foreground">
               <Loader2 className="w-4 h-4 animate-spin" />
-              <span className="text-xs">Translating...</span>
+              <span className="text-xs">{t('translating')}</span>
             </div>
           ) : error ? (
             <div className="p-3 bg-destructive/10 rounded-lg border border-destructive/20">
@@ -135,13 +137,13 @@ export function AIDraftButton({
                 onClick={handleTranslate}
                 className="mt-2 text-xs h-7"
               >
-                Try Again
+                {t('tryAgain')}
               </Button>
             </div>
           ) : translation ? (
             <div className="p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg border border-blue-100 dark:border-blue-900">
               <p className="text-[10px] text-blue-600 dark:text-blue-400 mb-1 font-medium">
-                Translation:
+                {t('translation')}
               </p>
               <p className="text-sm">{translation}</p>
             </div>
@@ -160,12 +162,12 @@ export function AIDraftButton({
               {copied ? (
                 <>
                   <Check className="w-3 h-3" />
-                  Copied!
+                  {t('copied')}
                 </>
               ) : (
                 <>
                   <Copy className="w-3 h-3" />
-                  Copy
+                  {t('copy')}
                 </>
               )}
             </Button>
@@ -175,7 +177,7 @@ export function AIDraftButton({
                 onClick={handleApply}
                 className="flex-1 text-xs h-8"
               >
-                Apply to L2
+                {t('applyToL2')}
               </Button>
             )}
           </div>
@@ -184,7 +186,7 @@ export function AIDraftButton({
         {/* Powered by */}
         <div className="mt-3 pt-2 border-t flex items-center justify-center gap-1 text-[9px] text-muted-foreground/60">
           <Languages className="w-2.5 h-2.5" />
-          Powered by LibreTranslate
+          {t('poweredBy')}
         </div>
       </PopoverContent>
     </Popover>

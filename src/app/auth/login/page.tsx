@@ -5,10 +5,11 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { Loader2, ArrowLeft, Mail, Lock, Eye, EyeOff, Shield, Sparkles } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
+import { useAuthRedirect } from '@/components/auth/AuthCallback';
 
 export default function LoginPage() {
   const t = useTranslations('Auth');
@@ -20,6 +21,8 @@ export default function LoginPage() {
   const [googleLoading, setGoogleLoading] = useState(false);
   const [error, setError] = useState('');
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const { handleSuccessfulAuth } = useAuthRedirect();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,8 +42,8 @@ export default function LoginPage() {
         throw new Error(data.error || t('failed'));
       }
 
-      router.push('/dashboard');
-      router.refresh();
+      // Use auth redirect handler for pending imports
+      handleSuccessfulAuth();
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : t('errorOccurred');
       setError(message);
@@ -53,8 +56,18 @@ export default function LoginPage() {
     setGoogleLoading(true);
     setError('');
     try {
-      // Redirect to Google OAuth endpoint
-      window.location.href = '/api/auth/google';
+      // Preserve redirect params for Google OAuth
+      const returnTo = searchParams.get('returnTo') || '';
+      const source = searchParams.get('source') || '';
+      const tileId = searchParams.get('tileId') || '';
+      
+      const params = new URLSearchParams();
+      if (returnTo) params.set('returnTo', returnTo);
+      if (source) params.set('source', source);
+      if (tileId) params.set('tileId', tileId);
+      
+      const queryString = params.toString();
+      window.location.href = `/api/auth/google${queryString ? `?${queryString}` : ''}`;
     } catch {
       setError(t('errorOccurred'));
       setGoogleLoading(false);
@@ -102,16 +115,16 @@ export default function LoginPage() {
             >
               <div className="flex items-center gap-3 mb-4">
                 <Sparkles className="h-5 w-5 text-amber-300" />
-                <span className="font-semibold">Recent Activity</span>
+                <span className="font-semibold">{t('recentActivity')}</span>
               </div>
               <div className="space-y-3 text-sm text-white/80">
                 <div className="flex justify-between">
-                  <span>Last session</span>
-                  <span className="font-medium text-white">Saved securely</span>
+                  <span>{t('lastSession')}</span>
+                  <span className="font-medium text-white">{t('savedSecurely')}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Cloud sync</span>
-                  <span className="font-medium text-emerald-300">Active</span>
+                  <span>{t('cloudSync')}</span>
+                  <span className="font-medium text-emerald-300">{t('active')}</span>
                 </div>
               </div>
             </motion.div>
@@ -174,7 +187,7 @@ export default function LoginPage() {
                 <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
               </svg>
             )}
-            Continue with Google
+            {t('continueWithGoogle')}
           </Button>
           
           {/* Divider */}
@@ -183,7 +196,7 @@ export default function LoginPage() {
               <span className="w-full border-t" />
             </div>
             <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-background px-4 text-muted-foreground font-medium">or continue with email</span>
+              <span className="bg-background px-4 text-muted-foreground font-medium">{t('orContinueWithEmail')}</span>
             </div>
           </div>
           

@@ -10,6 +10,7 @@ import { cn } from '@/lib/utils';
 import { LibraryTile, TileCategory } from '@/services/library/types';
 import { TileCard } from './TileCard';
 import { SearchToolbar } from './SearchToolbar';
+import { useTranslations } from 'next-intl';
 
 interface LibraryGridProps {
   tiles: LibraryTile[];
@@ -45,6 +46,7 @@ export const LibraryGrid = memo(function LibraryGrid({
   const [selectedCategory, setSelectedCategory] = useState<TileCategory | 'all'>('all');
   const [licenseFilter, setLicenseFilter] = useState<'all' | 'commercial-safe' | 'attribution' | 'personal-only'>('all');
   const [difficultyFilter, setDifficultyFilter] = useState<'all' | 'beginner' | 'intermediate' | 'expert'>('all');
+  const t = useTranslations('Library.search');
 
   // Shuffle tiles once for randomized tetris-like display
   const shuffledTiles = useMemo(() => shuffleArray(tiles), [tiles]);
@@ -106,9 +108,9 @@ export const LibraryGrid = memo(function LibraryGrid({
       {filteredTiles.length === 0 && (
         <div className="text-center py-16">
           <div className="text-6xl mb-4">📚</div>
-          <h3 className="text-xl font-bold mb-2">No templates found</h3>
+          <h3 className="text-xl font-bold mb-2">{t('noTemplatesFound')}</h3>
           <p className="text-muted-foreground mb-4">
-            Try adjusting your search or filters.
+            {t('tryAdjusting')}
           </p>
           <button
             onClick={() => {
@@ -119,7 +121,7 @@ export const LibraryGrid = memo(function LibraryGrid({
             }}
             className="text-primary hover:underline"
           >
-            Clear all filters
+            {t('clearAllFilters')}
           </button>
         </div>
       )}

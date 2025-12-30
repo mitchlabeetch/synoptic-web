@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { languageTool, GrammarMatch } from '@/services/languageTool';
 import { useProjectStore } from '@/lib/store/projectStore';
+import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 
 interface GrammarCheckerProps {
@@ -46,6 +47,7 @@ export function GrammarChecker({
 
   const { meta } = useProjectStore();
   const targetLang = meta?.target_lang || 'en';
+  const t = useTranslations('Tools.grammar');
 
   const handleCheck = useCallback(async () => {
     if (!text || text.trim().length < 3) return;
@@ -151,7 +153,7 @@ export function GrammarChecker({
           )}
         >
           <SpellCheck className="w-3.5 h-3.5" />
-          <span className="text-xs font-medium">Grammar</span>
+          <span className="text-xs font-medium">{t('button')}</span>
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-96 p-4" align="start" sideOffset={5}>
@@ -162,7 +164,7 @@ export function GrammarChecker({
               <SpellCheck className="w-4 h-4 text-emerald-600" />
             </div>
             <div>
-              <h4 className="font-bold text-sm">Grammar Check</h4>
+              <h4 className="font-bold text-sm">{t('title')}</h4>
               {detectedLang && (
                 <p className="text-[10px] text-muted-foreground">
                   Detected: {detectedLang}
@@ -186,7 +188,7 @@ export function GrammarChecker({
           {loading ? (
             <div className="flex items-center justify-center py-8 gap-2 text-muted-foreground">
               <Loader2 className="w-4 h-4 animate-spin" />
-              <span className="text-xs">Checking grammar...</span>
+              <span className="text-xs">{t('checking')}</span>
             </div>
           ) : error ? (
             <div className="p-3 bg-destructive/10 rounded-lg border border-destructive/20">
@@ -197,15 +199,15 @@ export function GrammarChecker({
                 onClick={handleCheck}
                 className="mt-2 text-xs h-7"
               >
-                Try Again
+                {t('tryAgain')}
               </Button>
             </div>
           ) : matches.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-8 text-center">
               <CheckCircle className="w-10 h-10 text-emerald-500 mb-2" />
-              <p className="font-medium text-sm">No issues found!</p>
+              <p className="font-medium text-sm">{t('noIssuesFound')}</p>
               <p className="text-xs text-muted-foreground mt-1">
-                Your text looks great.
+                {t('textLooksGreat')}
               </p>
             </div>
           ) : (
@@ -222,7 +224,7 @@ export function GrammarChecker({
                     onClick={handleApplyAll}
                     className="text-xs h-6 px-2"
                   >
-                    Fix All
+                    {t('fixAll')}
                   </Button>
                 )}
               </div>
@@ -287,7 +289,7 @@ export function GrammarChecker({
         {/* Powered by */}
         <div className="mt-3 pt-2 border-t flex items-center justify-center gap-1 text-[9px] text-muted-foreground/60">
           <SpellCheck className="w-2.5 h-2.5" />
-          Powered by LanguageTool
+          {t('poweredBy')}
         </div>
       </PopoverContent>
     </Popover>

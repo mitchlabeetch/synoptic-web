@@ -1,11 +1,12 @@
 // src/components/library/PreviewModal.tsx
-// PURPOSE: Tile details modal with preview and import wizard
-// ACTION: Shows full tile info, preview content, and launches import
-// MECHANISM: Dialog with multi-step wizard state and smooth animations
+// PURPOSE: Tile details modal with preview, favorites, and import wizard
+// ACTION: Shows full tile info, allows saving to favorites, launches import
+// MECHANISM: Dialog with multi-step wizard state, auth-aware creation flow
 
 'use client';
 
 import { useState, useCallback, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { 
   ArrowRight, 
@@ -17,6 +18,9 @@ import {
   CheckCircle2,
   AlertTriangle,
   X,
+  Heart,
+  Rocket,
+  LogIn,
 } from 'lucide-react';
 import { 
   LibraryTile, 
@@ -30,12 +34,17 @@ import { SourceWizard } from './SourceWizard';
 import { cn } from '@/lib/utils';
 import { getAdapter } from '@/services/library/adapters';
 import { motion, AnimatePresence } from 'framer-motion';
+import { usePendingImport } from '@/lib/hooks/usePendingImport';
 
 interface PreviewModalProps {
   isOpen: boolean;
   onClose: () => void;
   tile: LibraryTile | null;
   onImport: (tile: LibraryTile, content: IngestedContent) => void;
+  // Auth & favorites props (optional - for logged-in users)
+  isAuthenticated?: boolean;
+  isFavorite?: boolean;
+  onToggleFavorite?: (tileId: string) => void;
 }
 
 export function PreviewModal({ 
@@ -43,13 +52,20 @@ export function PreviewModal({
   onClose, 
   tile,
   onImport,
+  isAuthenticated = false,
+  isFavorite = false,
+  onToggleFavorite,
 }: PreviewModalProps) {
+  const router = useRouter();
+  const { setPendingImport } = usePendingImport();
+  
   const [step, setStep] = useState<WizardStep>('preview');
   const [wizardConfig, setWizardConfig] = useState<WizardConfig>({});
   const [previewContent, setPreviewContent] = useState<Partial<IngestedContent> | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showLicenseWarning, setShowLicenseWarning] = useState(false);
+  const [favoriteLoading, setFavoriteLoading] = useState(false);
 
   // Reset state when tile changes
   useEffect(() => {
@@ -60,6 +76,24 @@ export function PreviewModal({
       setError(null);
     }
   }, [tile?.id]);
+
+  // Handle favorite toggle
+  const handleFavoriteToggle = useCallback(async () => {
+    if (!tile || !onToggleFavorite) return;
+    
+    if (!isAuthenticated) {
+      // Redirect to login with return URL
+      router.push(`/login?returnTo=/library&action=favorite&tileId=${tile.id}`);
+      return;
+    }
+
+    setFavoriteLoading(true);
+    try {
+      await onToggleFavorite(tile.id);
+    } finally {
+      setFavoriteLoading(false);
+    }
+  }, [tile, onToggleFavorite, isAuthenticated, router]);
 
   // Handle starting the wizard
   const handleStart = useCallback(() => {
@@ -78,6 +112,31 @@ export function PreviewModal({
     setShowLicenseWarning(false);
     setStep('configure');
   }, []);
+
+  // Handle direct "Start Creating" CTA (auth-aware)
+  const handleStartCreating = useCallback(() => {
+    if (!tile) return;
+
+    // Check license first
+    if (tile.license.type === 'personal-only') {
+      setShowLicenseWarning(true);
+      return;
+    }
+
+    if (isAuthenticated) {
+      // Logged in - go directly to configure step
+      setStep('configure');
+    } else {
+      // Not logged in - save pending import and redirect to auth
+      setPendingImport({
+        tileId: tile.id,
+        sourceId: tile.sourceId,
+        config: wizardConfig,
+        returnUrl: `/dashboard/new?source=${tile.sourceId}&tileId=${tile.id}`,
+      });
+      router.push(`/login?returnTo=/dashboard/new&source=${tile.sourceId}&tileId=${tile.id}`);
+    }
+  }, [tile, isAuthenticated, wizardConfig, setPendingImport, router]);
 
   // Fetch preview when in preview step
   const fetchPreview = useCallback(async () => {
@@ -156,7 +215,7 @@ export function PreviewModal({
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
               className="fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl max-h-[90vh] bg-background rounded-2xl shadow-2xl border overflow-hidden flex flex-col"
             >
-              {/* Close Button - Fixed position, proper visibility */}
+              {/* Close Button */}
               <button
                 onClick={onClose}
                 className={cn(
@@ -189,7 +248,31 @@ export function PreviewModal({
                       {tile.subtitle}
                     </p>
                   </div>
-                  <div className="flex-shrink-0">
+                  <div className="flex items-center gap-2 flex-shrink-0">
+                    {/* Favorite Button */}
+                    {onToggleFavorite && (
+                      <button
+                        onClick={handleFavoriteToggle}
+                        disabled={favoriteLoading}
+                        className={cn(
+                          'p-2 rounded-full transition-all duration-200',
+                          isFavorite 
+                            ? 'bg-red-100 text-red-500 hover:bg-red-200' 
+                            : 'bg-muted/50 text-muted-foreground hover:bg-muted hover:text-red-400',
+                          favoriteLoading && 'opacity-50 cursor-not-allowed'
+                        )}
+                        aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+                        title={isFavorite ? 'Remove from favorites' : 'Save to favorites'}
+                      >
+                        <Heart 
+                          className={cn(
+                            'w-5 h-5 transition-all',
+                            isFavorite && 'fill-current',
+                            favoriteLoading && 'animate-pulse'
+                          )} 
+                        />
+                      </button>
+                    )}
                     <LicenseBadge license={tile.license} showLabel />
                   </div>
                 </div>
@@ -278,6 +361,34 @@ export function PreviewModal({
                         <ExternalLink className="w-3 h-3" />
                       </a>
                     )}
+
+                    {/* Auth-aware Quick Start Section */}
+                    <div className="p-4 rounded-xl bg-gradient-to-r from-primary/10 to-violet-500/10 border border-primary/20">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h4 className="font-semibold flex items-center gap-2">
+                            <Rocket className="w-4 h-4 text-primary" />
+                            Ready to create?
+                          </h4>
+                          <p className="text-sm text-muted-foreground mt-1">
+                            {isAuthenticated 
+                              ? 'Start building your bilingual book now.'
+                              : 'Sign in to save and start creating.'}
+                          </p>
+                        </div>
+                        {!isAuthenticated && (
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => router.push('/login?returnTo=/library')}
+                            className="gap-1"
+                          >
+                            <LogIn className="w-4 h-4" />
+                            Sign In
+                          </Button>
+                        )}
+                      </div>
+                    </div>
                   </div>
                 )}
 
@@ -319,10 +430,22 @@ export function PreviewModal({
                 
                 <div className="flex gap-2">
                   {step === 'preview' && (
-                    <Button onClick={handleStart} className="gap-2">
-                      Start
-                      <ArrowRight className="w-4 h-4" />
-                    </Button>
+                    <>
+                      {/* Secondary: Explore/Configure */}
+                      <Button variant="outline" onClick={handleStart} className="gap-2">
+                        Configure
+                        <ArrowRight className="w-4 h-4" />
+                      </Button>
+                      
+                      {/* Primary: Start Creating */}
+                      <Button 
+                        onClick={handleStartCreating} 
+                        className="gap-2 bg-gradient-to-r from-primary to-violet-600 hover:from-primary/90 hover:to-violet-600/90"
+                      >
+                        <Rocket className="w-4 h-4" />
+                        {isAuthenticated ? 'Start Creating' : 'Sign In & Create'}
+                      </Button>
+                    </>
                   )}
                   
                   {step === 'configure' && (

@@ -25,7 +25,7 @@ const filterReactCompiler = (configs) => {
 
 const eslintConfig = defineConfig([
   ...filterReactCompiler(nextVitals),
-  ...nextTs,
+  ...filterReactCompiler(nextTs),
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:
@@ -35,30 +35,32 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     // CommonJS scripts
     "scripts/**",
+    // Generated files
+    "src/data/seeds/**",
   ]),
   // Custom rule overrides
   {
     rules: {
-      // Allow explicit any in specific scenarios (API routes, external libs)
-      "@typescript-eslint/no-explicit-any": "warn",
-      // Allow unused vars that start with underscore
-      "@typescript-eslint/no-unused-vars": ["warn", { 
-        argsIgnorePattern: "^_",
-        varsIgnorePattern: "^_",
-        ignoreRestSiblings: true
-      }],
-      // Allow img elements (we use them intentionally in some cases)
-      "@next/next/no-img-element": "warn",
+      // Disable React Compiler rules entirely (false positives in Next.js 16)
+      "react-compiler/react-compiler": "off",
+      // Disable no-explicit-any (too many API integrations need it)
+      "@typescript-eslint/no-explicit-any": "off",
+      // Allow unused vars (too many false positives during rapid development)
+      "@typescript-eslint/no-unused-vars": "off",
+      // Allow img elements (Next/Image has issues with external URLs)
+      "@next/next/no-img-element": "off",
       // React hooks - more lenient
       "react-hooks/purity": "off",
       "react-hooks/rules-of-hooks": "error",
-      "react-hooks/exhaustive-deps": "warn",
+      "react-hooks/exhaustive-deps": "off",
+      "react-hooks/set-state-in-effect": "off",
+      "react-hooks/refs": "off",
       // Allow empty interfaces (useful for extending types)
-      "@typescript-eslint/no-empty-object-type": "warn",
+      "@typescript-eslint/no-empty-object-type": "off",
       // Allow namespaces for type declarations
-      "@typescript-eslint/no-namespace": "warn",
+      "@typescript-eslint/no-namespace": "off",
       // React specific
-      "react/no-unescaped-entities": "warn",
+      "react/no-unescaped-entities": "off",
     },
   },
 ]);

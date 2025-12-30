@@ -40,6 +40,7 @@ import {
   SlidersHorizontal,
 } from 'lucide-react';
 import { TileCategory } from '@/services/library/types';
+import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 
 interface SearchToolbarProps {
@@ -101,6 +102,7 @@ export const SearchToolbar = memo(function SearchToolbar({
   filteredCount,
   tiles,
 }: SearchToolbarProps) {
+  const t = useTranslations('Library');
   const hasFilters = searchQuery || selectedCategory !== 'all' || licenseFilter !== 'all' || difficultyFilter !== 'all';
 
   // Handle quick tag click
@@ -154,7 +156,7 @@ export const SearchToolbar = memo(function SearchToolbar({
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">
-              <DropdownMenuLabel>License Type</DropdownMenuLabel>
+              <DropdownMenuLabel>{t('licenses.licenseType')}</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuRadioGroup value={licenseFilter} onValueChange={(v) => onLicenseChange(v as any)}>
                 <DropdownMenuRadioItem value="all">
@@ -191,7 +193,7 @@ export const SearchToolbar = memo(function SearchToolbar({
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-48">
-                <DropdownMenuLabel>Difficulty Level</DropdownMenuLabel>
+                <DropdownMenuLabel>{t('difficulty.difficultyLevel')}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuRadioGroup value={difficultyFilter} onValueChange={(v) => onDifficultyChange(v as any)}>
                   {DIFFICULTY_OPTIONS.map(opt => (

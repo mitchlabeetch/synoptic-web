@@ -5,6 +5,7 @@
 
 import { Metadata } from 'next';
 import { LibraryPageClient } from './LibraryPageClient';
+import { getCurrentUser } from '@/lib/auth/jwt';
 
 export const metadata: Metadata = {
   title: 'Discovery Library | Synoptic',
@@ -15,6 +16,17 @@ export const metadata: Metadata = {
   },
 };
 
-export default function LibraryPage() {
-  return <LibraryPageClient />;
+async function getAuthStatus(): Promise<boolean> {
+  try {
+    const user = await getCurrentUser();
+    return !!user;
+  } catch {
+    return false;
+  }
+}
+
+export default async function LibraryPage() {
+  const isAuthenticated = await getAuthStatus();
+  
+  return <LibraryPageClient isAuthenticated={isAuthenticated} />;
 }

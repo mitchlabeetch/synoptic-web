@@ -19,7 +19,7 @@ import {
   Headphones,
   Volume2,
   Instagram,
-  Image
+  Image as ImageIcon
 } from 'lucide-react';
 import { 
   Select,
@@ -518,7 +518,7 @@ export default function ExportManager() {
                   </SelectItem>
                   <SelectItem value="story" className="text-xs">
                     <span className="flex items-center gap-2">
-                      <Image className="h-3 w-3" />
+                      <ImageIcon className="h-3 w-3" />
                       {t('storyFormat')}
                     </span>
                   </SelectItem>
@@ -530,7 +530,7 @@ export default function ExportManager() {
                   </SelectItem>
                   <SelectItem value="pinterest" className="text-xs">
                     <span className="flex items-center gap-2">
-                      <Image className="h-3 w-3" />
+                      <ImageIcon className="h-3 w-3" />
                       {t('pinterestFormat')}
                     </span>
                   </SelectItem>

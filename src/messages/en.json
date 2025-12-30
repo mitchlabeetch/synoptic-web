@@ -15,7 +15,11 @@
     "on": "On",
     "off": "Off",
     "pdf": "PDF",
-    "epub": "EPUB"
+    "epub": "EPUB",
+    "close": "Close",
+    "original": "Original",
+    "translation": "Translation",
+    "importFailed": "Import Failed"
   },
   "Auth": {
     "login": "Log In",
@@ -49,7 +53,12 @@
     "strong": "Strong",
     "oauthError": "OAuth authentication failed. Please try again.",
     "emailNotVerified": "Please verify your email with Google first.",
-    "securityNote": "256-bit SSL encryption • GDPR compliant"
+    "securityNote": "256-bit SSL encryption • GDPR compliant",
+    "recentActivity": "Recent Activity",
+    "lastSession": "Last session",
+    "savedSecurely": "Saved securely",
+    "cloudSync": "Cloud sync",
+    "active": "Active"
   },
   "Dashboard": {
     "title": "My Projects",
@@ -57,6 +66,7 @@
     "newProject": "New Project",
     "noProjects": "No projects found. Create your first one!",
     "emptyState": "You haven't created any projects yet.",
+    "yourProjects": "Your Projects",
     "settings": "Settings",
     "profile": "Profile",
     "billing": "Billing",
@@ -101,7 +111,8 @@
     "difficulty": "Difficulty",
     "difficultyEasy": "Easy",
     "difficultyMedium": "Medium",
-    "difficultyHard": "Hard"
+    "difficultyHard": "Hard",
+    "emptyImageBlock": "Empty Image Block"
   },
   "Inspector": {
     "visibility": "Override Visibility",
@@ -901,7 +912,13 @@
       "pickByReference": "Pick by reference",
       "randomSelection": "Random selection",
       "imagesIncluded": "Images included",
-      "audioIncluded": "Audio included"
+      "audioIncluded": "Audio included",
+      "selectedChapters": "Selected chapters",
+      "fullBook": "Full book",
+      "customRange": "Custom range",
+      "book": "Book",
+      "startChapter": "Start Chapter",
+      "endChapter": "End Chapter"
     },
     "license": {
       "commercialSafeDesc": "This content is public domain or explicitly licensed for commercial use. You can publish and sell works using this content.",
@@ -939,6 +956,22 @@
       "learnMore": "Learn More",
       "readyToStart": "Ready to start your bilingual book?",
       "importAndStart": "Import any source above and start translating in Synoptic Studio."
+    },
+    "favorites": {
+      "title": "My Saved Templates",
+      "quickAccess": "Quick access to your favorite content sources.",
+      "noSaved": "No saved templates yet",
+      "noSavedDesc": "Browse our library and save your favorite content sources for quick access.",
+      "exploreLibrary": "Explore Library",
+      "viewAll": "View all {count} saved templates",
+      "browseAll": "Browse All",
+      "saved": "Saved",
+      "addToFavorites": "Add to favorites",
+      "removeFromFavorites": "Remove from favorites",
+      "readyToCreate": "Ready to create?",
+      "signInToSave": "Sign in to save and start creating.",
+      "startCreating": "Start Creating",
+      "signInAndCreate": "Sign In & Create"
     }
   },
   "Tools": {
@@ -985,8 +1018,18 @@
     },
     "polisher": {
       "title": "Word Polisher",
+      "button": "Improve",
       "polishing": "Polishing...",
       "suggestedImprovements": "Suggested Improvements"
+    },
+    "assetBank": {
+      "title": "Emoji Bank",
+      "noResults": "No emojis found"
+    },
+    "socialShare": {
+      "square": "Square",
+      "story": "Story",
+      "wide": "Wide"
     }
   },
   "Settings": {

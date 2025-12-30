@@ -1,6 +1,6 @@
 // src/app/(app)/dashboard/page.tsx
 // PURPOSE: Dashboard page showing user's projects
-// ACTION: Displays project list and creation wizard
+// ACTION: Displays project list, saved templates, and creation wizard
 // MECHANISM: Server component that fetches projects from PostgreSQL
 
 import { redirect } from 'next/navigation';
@@ -9,6 +9,7 @@ import ProjectWizard from '@/components/dashboard/ProjectWizard';
 import { OnboardingTour } from '@/components/onboarding/OnboardingTour';
 import { getCurrentUser, getUserId } from '@/lib/auth/jwt';
 import { getUserProjects, getUserProfile } from '@/lib/db/server';
+import { DashboardClient, SavedTemplatesWrapper } from './DashboardClient';
 
 import { getTranslations } from 'next-intl/server';
 import LocaleSwitcher from '@/components/ui/LocaleSwitcher';
@@ -31,6 +32,9 @@ export default async function DashboardPage() {
 
   return (
     <div className="container mx-auto py-8 px-4 relative">
+      {/* Client-side library import handler */}
+      <DashboardClient />
+      
       <OnboardingTour context="dashboard" />
       <div className="flex justify-between items-center mb-8">
         <div>
@@ -44,6 +48,16 @@ export default async function DashboardPage() {
           <div className="h-6 w-px bg-border mx-1" />
           <ProjectWizard tier={tier} projectCount={projectCount} />
         </div>
+      </div>
+      
+      {/* Saved Templates Section */}
+      <div className="mb-8" data-tour="saved-templates">
+        <SavedTemplatesWrapper />
+      </div>
+      
+      {/* Projects Section */}
+      <div className="mb-4">
+        <h2 className="text-xl font-semibold">{t('yourProjects') || 'Your Projects'}</h2>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-tour="dashboard-list">
@@ -60,3 +74,4 @@ export default async function DashboardPage() {
     </div>
   );
 }
+

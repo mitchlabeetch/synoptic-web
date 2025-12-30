@@ -52,7 +52,7 @@ export function CommandPalette() {
       L1: { content: '', lang: meta?.source_lang || 'en' },
       L2: { content: '', lang: meta?.target_lang || 'en' },
       layout: 'side-by-side'
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     
     } as any);
   }, [addBlock, currentPageIndex, generateBlockId, meta?.source_lang, meta?.target_lang]);
 
