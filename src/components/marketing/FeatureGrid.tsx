@@ -22,14 +22,14 @@ export function FeatureGrid() {
   
   const learnFeatures = [
     { key: "flashcards", icon: BrainCircuit, color: "text-amber-500", bg: "bg-amber-500/10" },
-    { key: "deepInsights", icon: Zap, color: "text-blue-500", bg: "bg-blue-500/10" },
-    { key: "sideBySide", icon: BookMarked, color: "text-green-500", bg: "bg-green-500/10" }
+    { key: "annotations", icon: Zap, color: "text-blue-500", bg: "bg-blue-500/10" },
+    { key: "immersion", icon: BookMarked, color: "text-green-500", bg: "bg-green-500/10" }
   ];
 
   const publishFeatures = [
-    { key: "kdpReady", icon: FileCheck, color: "text-red-500", bg: "bg-red-500/10" },
-    { key: "aiTypesetter", icon: Sparkles, color: "text-purple-500", bg: "bg-purple-500/10" },
-    { key: "branding", icon: Layout, color: "text-indigo-500", bg: "bg-indigo-500/10" }
+    { key: "distribution", icon: FileCheck, color: "text-red-500", bg: "bg-red-500/10" },
+    { key: "typesetting", icon: Sparkles, color: "text-purple-500", bg: "bg-purple-500/10" },
+    { key: "multiformat", icon: Layout, color: "text-indigo-500", bg: "bg-indigo-500/10" }
   ];
 
   const renderBoldText = (text: string) => {

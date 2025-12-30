@@ -1,226 +1,213 @@
 {
-  "Studio": {
-    "title": "Synoptic Studio",
-    "saving": "Entwurf wird gespeichert...",
-    "saved": "Alle Änderungen in der Cloud gespeichert",
-    "ready": "Bereit für Ihr zweisprachiges Meisterwerk",
-    "addPage": "Neue Seite hinzufügen",
-    "pageSettings": "Einstellungen für Seite {number}",
-    "enteringStudio": "Studio wird betreten...",
-    "failedToLoadProject": "Projekt konnte nicht geladen werden",
-    "retryConnection": "Verbindung erneut versuchen",
-    "pageManager": "Seiten-Manager",
-    "globalDesign": "Globales Design",
-    "stylePresets": "Stil-Vorlagen",
-    "editorTools": "Editor-Werkzeuge",
-    "canvasActions": "Leinwand-Aktionen",
-    "drafting": "Entwurf",
-    "chapterStart": "Kapitelbeginn",
-    "manuscript": "Manuskript",
-    "chapters": "Kapitel",
-    "noChapters": "Keine Kapitel definiert",
-    "deletePage": "Seite löschen",
-    "resetFactory": "Auf Werkseinstellungen zurücksetzen",
-    "bilingualEditor": "Zweisprachiger Editor",
-    "collaborate": "Zusammenarbeiten",
-    "export": "Exportieren",
-    "preview": "Vorschau"
-  },
-  "Blocks": {
-    "text": "Textblock",
-    "image": "Bildblock",
-    "separator": "Trennlinie",
-    "callout": "Hervorhebung",
-    "insertText": "Textblock einfügen",
-    "addBlankPage": "Leere Seite hinzufügen",
-    "media": "Medien",
-    "ai": "Übersetzungs-KI",
-    "settings": "Studio-Einstellungen",
-    "grammar": "Grammatikregel",
-    "culture": "Kulturelle Einblicke",
-    "vocabulary": "Vokabel-Funke",
-    "tip": "Lerntipp",
-    "warning": "Grammatik-Warnung",
-    "note": "Allgemeine Notiz",
-    "pronunciation": "Aussprachehilfe"
-  },
-  "Inspector": {
-    "visibility": "Sichtbarkeit überschreiben",
-    "header": "Kopfzeile",
-    "footer": "Fußzeile",
-    "pageNumber": "Seitenzahl",
-    "content": "Inhalt überschreiben",
-    "typography": "Typografie",
-    "layout": "Layout & Strategie",
-    "printingFlow": "Druck & Fluss",
-    "markChapterStart": "Als Kapitelbeginn markieren",
-    "forceBlank": "Erzwungene Leerseite",
-    "pageLocalOnly": "Änderungen hier betreffen nur die aktuelle Seite.",
-    "inspectorTitle": "{type}-Inspektor",
-    "lineHeight": "Zeilenhöhe",
-    "paraSpacing": "Absatzabstand",
-    "headerOverlay": "L1 Kopfzeile Overlay",
-    "footerOverlay": "L1 Fußzeile Overlay",
-    "aiInsights": "KI-Einblicke",
-    "dimensions": "Abmessungen",
-    "width": "Breite (%)",
-    "alignment": "Ausrichtung",
-    "styleEffects": "Stil & Effekte",
-    "shadow": "Schatten",
-    "borderRadius": "Eckenradius",
-    "stylePattern": "Stil & Muster",
-    "thickness": "Dicke",
-    "contextType": "Kontext-Typ",
-    "brandingColor": "Markenfarbe",
-    "stylePreset": "Stil-Vorlage",
-    "solidLine": "Durchgehende Linie",
-    "doubleLine": "Doppellinie",
-    "dashedLine": "Gestrichelte Linie",
-    "dottedLine": "Gepunktete Linie",
-    "gradientFade": "Farbverlauf",
-    "ornament": "Blumenornament",
-    "sideBySide": "Seite-an-Seite",
-    "interlinear": "Interlinear",
-    "stacked": "Gestapelt"
-  },
-  "Theme": {
-    "title": "Globales Design",
-    "layout": "Globales Layout",
-    "typography": "Typografie (Global)",
-    "bodyText": "Fließtext",
-    "headings": "Hauptüberschriften",
-    "baseScaling": "Basisskalierung",
-    "fontSize": "Schriftgröße Fließtext",
-    "lineHeight": "Globale Zeilenhöhe",
-    "colorPresets": "Farb-Presets",
-    "lightMode": "Hellmodus",
-    "darkMode": "Dunkelmodus"
-  },
-  "Presets": {
-    "title": "Stil-Vorlagen",
-    "empty": "Wählen Sie einen Block aus, um seinen Stil als wiederverwendbare Vorlage zu speichern.",
-    "selected": "Ausgewählter Kontext",
-    "canCapture": "Sie können den Stil dieses {type}-Blocks speichern.",
-    "saveCurrent": "Aktuellen Stil speichern",
-    "library": "Globale Bibliothek",
-    "typeStyle": "{type}-Stil",
-    "synced": "Bibliothek synchronisiert"
-  },
-  "Wizard": {
-    "createTitle": "Neues Projekt erstellen",
-    "createMasterpiece": "Neues Meisterwerk erstellen",
-    "stepInformation": "Informationen",
-    "stepLanguages": "Sprachen",
-    "stepFormat": "Format",
-    "stepTemplate": "Vorlage",
-    "projectTitle": "Projekttitel *",
-    "titlePlaceholder": "z.B. Zwanzigtausend Meilen unter dem Meer",
-    "author": "Autor",
-    "authorPlaceholder": "Ihr Name oder Originalautor",
-    "category": "Kategorie / Tag",
-    "categoryPlaceholder": "z.B. Belletristik, Bildung",
-    "sourceLang": "Quellsprache (S1)",
-    "targetLang": "Zielsprache (S2)",
-    "langWarning": "Warnung: Quell- und Zielsprache müssen für ein zweisprachiges Projekt unterschiedlich sein.",
-    "langTip": "Tipp: Die meisten Benutzer wählen ihre Muttersprache als Ziel und die zu lernende Sprache als Quelle.",
-    "dimensions": "Physische Abmessungen (mm)",
-    "custom": "Eigene definieren",
-    "layoutStyle": "Layout-Stil",
-    "back": "Zurück",
-    "next": "Nächster Schritt",
-    "creating": "Studio wird geschmiedet...",
-    "launch": "Studio starten",
-    "blankTemplate": "Leer beginnen",
-    "blankDesc": "Kein Inhalt, ein unbeschriebenes Blatt",
-    "classicTemplate": "Klassisch Seite-an-Seite",
-    "classicDesc": "Ausgewogene Spalten, Serifenschriften",
-    "poetryTemplate": "Poesie / Verse",
-    "poetryDesc": "Nummerierte Zeilen, zentrierter Fokus",
-    "width": "Breite (mm)",
-    "height": "Höhe (mm)",
-    "upgradeToCreateMore": "Upgrade für mehr Projekte",
-    "reachedFreeLimit": "Limit für kostenlose Konten erreicht",
-    "freeLimitDesc": "Kostenlose Konten sind auf 1 aktives Projekt begrenzt. Upgrade auf Pro für unbegrenzte Projekte und erweiterte KI-Funktionen.",
-    "upgradeToPro": "Upgrade auf Pro",
-    "maybeLater": "Vielleicht später",
-    "usTrade": "US Trade Paper",
-    "digest": "Digest",
-    "intlStandard": "Internationaler Standard"
-  },
   "Common": {
-    "delete": "Löschen",
-    "copy": "Kopieren",
-    "duplicate": "Duplizieren",
     "save": "Speichern",
     "cancel": "Abbrechen",
-    "on": "An",
-    "off": "Aus",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "loading": "Lädt...",
+    "error": "Ein Fehler ist aufgetreten",
+    "success": "Erfolg",
+    "back": "Zurück",
+    "next": "Weiter",
     "backToHome": "Zurück zur Startseite",
+    "on": "Ein",
+    "off": "Aus",
     "pdf": "PDF",
     "epub": "EPUB"
-  },
-  "Dashboard": {
-    "title": "Ihre Projekte",
-    "subtitle": "Verwalten und bearbeiten Sie Ihre zweisprachigen Bücher.",
-    "emptyState": "Sie haben noch keine Projekte erstellt.",
-    "noDescription": "Keine Beschreibung vorhanden.",
-    "lastUpdated": "Zuletzt aktualisiert"
   },
   "Auth": {
     "login": "Anmelden",
     "signup": "Registrieren",
-    "welcomeBack": "Willkommen zurück",
-    "createAccount": "Konto erstellen",
-    "signInDesc": "Melden Sie sich bei Ihrem Synoptic-Konto an",
-    "signUpDesc": "Beginnen Sie noch heute mit dem Erstellen zweisprachiger Bücher",
+    "logout": "Abmelden",
     "email": "E-Mail",
     "password": "Passwort",
-    "emailPlaceholder": "name@beispiel.de",
-    "passwordPlaceholderLogin": "Passwort eingeben",
-    "passwordPlaceholderSignup": "Passwort erstellen",
-    "signIn": "Einloggen",
-    "signingIn": "Anmeldung läuft...",
-    "creatingAccount": "Konto wird erstellt...",
+    "forgotPassword": "Passwort vergessen?",
     "noAccount": "Noch kein Konto?",
-    "hasAccount": "Bereits ein Konto?",
-    "termsPrompt": "Mit dem Fortfahren akzeptieren Sie die Nutzungsbedingungen und die Datenschutzrichtlinie von Synoptic.",
+    "haveAccount": "Bereits ein Konto?",
+    "verifyEmail": "E-Mail verifizieren",
+    "welcomeBack": "Willkommen zurück",
+    "createAccount": "Konto erstellen",
+    "signInDesc": "Melden Sie sich an, um auf Ihre Projekte zuzugreifen.",
+    "signUpDesc": "Erstellen Sie ein Konto, um zu veröffentlichen.",
+    "emailPlaceholder": "name@beispiel.de",
+    "passwordPlaceholderLogin": "••••••••",
+    "passwordPlaceholderSignup": "Mindestens 8 Zeichen",
     "failed": "Authentifizierung fehlgeschlagen",
-    "errorOccurred": "Etwas ist schiefgelaufen"
+    "errorOccurred": "Ein unerwarteter Fehler ist aufgetreten",
+    "signingIn": "Anmelden...",
+    "creatingAccount": "Konto wird erstellt...",
+    "signIn": "Anmelden",
+    "hasAccount": "Haben Sie bereits ein Konto?",
+    "termsPrompt": "Indem Sie fortfahren, akzeptieren Sie unsere AGB und Datenschutzrichtlinie."
+  },
+  "Dashboard": {
+    "title": "Meine Projekte",
+    "newProject": "Neues Projekt",
+    "noProjects": "Keine Projekte gefunden. Erstellen Sie Ihr erstes!",
+    "settings": "Einstellungen",
+    "profile": "Profil",
+    "billing": "Abrechnung",
+    "stats": {
+      "projects": "Projekte",
+      "pages": "Seiten",
+      "words": "Wörter"
+    },
+    "projectCard": {
+      "edited": "Bearbeitet",
+      "open": "Öffnen",
+      "delete": "Löschen",
+      "confirmDelete": "Sind Sie sicher, dass Sie dieses Projekt löschen möchten?"
+    },
+    "noDescription": "Keine Beschreibung vorhanden.",
+    "lastUpdated": "Zuletzt aktualisiert"
+  },
+  "Editor": {
+    "toolbar": {
+      "bold": "Fett",
+      "italic": "Kursiv",
+      "underline": "Unterstrichen",
+      "alignLeft": "Linksbündig",
+      "alignCenter": "Zentriert",
+      "alignRight": "Rechtsbündig",
+      "addBlock": "Block hinzufügen",
+      "export": "Exportieren",
+      "ai": "KI-Assistent"
+    },
+    "sidebar": {
+      "pages": "Seiten",
+      "style": "Stil",
+      "inspector": "Inspektor",
+      "chat": "KI-Chat"
+    },
+    "inspector": {
+      "layout": "Layout",
+      "spacing": "Abstand",
+      "typography": "Typografie",
+      "colors": "Farben",
+      "border": "Rahmen",
+      "shadow": "Schatten",
+      "actions": "Aktionen",
+      "labels": {
+        "color": "Farbe",
+        "backgroundColor": "Hintergrundfarbe",
+        "fontSize": "Schriftgröße",
+        "lineHeight": "Zeilenhöhe",
+        "letterSpacing": "Zeichenabstand",
+        "margin": "Außenabstand",
+        "padding": "Innenabstand",
+        "width": "Breite",
+        "alignment": "Ausrichtung",
+        "fontFamily": "Schriftart"
+      }
+    },
+    "messages": {
+      "saved": "Projekt erfolgreich gespeichert",
+      "error": "Speichern fehlgeschlagen"
+    },
+    "onboarding": {
+      "welcome": "Willkommen im Editor",
+      "step1": "Dies ist Ihre Leinwand. Schreiben Sie auf beiden Seiten.",
+      "step2": "Nutzen Sie die Werkzeugleiste zum Formatieren.",
+      "step3": "Klicken Sie auf Exportieren, um Ihr Buch herunterzuladen."
+    },
+    "blocks": {
+      "text": "Textabsatz",
+      "image": "Bild",
+      "separator": "Trennlinie",
+      "callout": "Hervorhebung",
+      "verse": "Vers / Gedicht"
+    }
+  },
+  "Studio": {
+    "collaborate": "Zusammenarbeiten",
+    "export": "Exportieren",
+    "preview": "Vorschau"
+  },
+  "Models": {
+    "parallel": "Parallele Spalten",
+    "interlinear": "Interlinear",
+    "bilingual": "Zweisprachige Doppelseite",
+    "modern": "Modern Minimalistisch"
+  },
+  "Pricing": {
+    "free": {
+      "name": "Kostenlos",
+      "price": "0 €",
+      "description": "Perfekt zum Testen der Engine."
+    },
+    "pro": {
+      "name": "Pro",
+      "price": "12 €",
+      "description": "Für unabhängige Autor*innen und Polyglotte."
+    },
+    "publisher": {
+      "name": "Publisher",
+      "price": "49 €",
+      "description": "Für Großproduktion und Verlage."
+    },
+    "features": {
+      "unlimited": "Unbegrenzte Projekte",
+      "highDpi": "High-DPI 300 DPI Exporte",
+      "noWatermark": "Kein Wasserzeichen",
+      "aiUnits": "KI-Intelligenz-Einheiten",
+      "customFonts": "Eigene Schriftarten"
+    },
+    "cta": "Plan wählen",
+    "monthly": "monatlich",
+    "yearly": "jährlich",
+    "popular": "Beliebt"
+  },
+  "Landing": {
+    "hero": {
+      "title": "Die Zweisprachige Publishing-Engine.",
+      "subtitle": "Verwandeln Sie Text in CSS-perfekte Parallelbücher. Kein InDesign. Keine Asynchronität. Grid-Lock Architektur garantiert Ausrichtung per Design.",
+      "cta": "Kostenlos Veröffentlichen"
+    },
+    "features": {
+      "title": "Basiert auf Grid-Lock Architektur",
+      "items": {
+        "layout": "Grid-Lock Architektur",
+        "export": "Natives PDF/X",
+        "sync": "Cloud Sync",
+        "ai": "Linguistische KI",
+        "validation": "300 DPI Validierung"
+      }
+    }
   },
   "Marketing": {
     "nav": {
-      "toLearn": "Für Sprachenlerner",
-      "toPublish": "Für Verlage",
+      "toLearn": "Zum Lernen",
+      "toPublish": "Zum Veröffentlichen",
       "features": "Funktionen",
       "pricing": "Preise",
       "library": "Bibliothek",
       "logIn": "Anmelden",
-      "joinNow": "Jetzt beitreten",
+      "joinNow": "Beitreten",
       "templates": "Vorlagen",
       "product": "Das Studio",
-      "company": "Unternehmen",
-      "about": "Über uns",
+      "company": "Über Uns",
+      "about": "Über",
       "privacy": "Datenschutz",
       "terms": "AGB"
     },
     "hero": {
       "badge": "Synoptic v1.0 Private Beta",
-      "subtitle": "Erstellen Sie professionelle Seite-an-Seite-Bücher mit KI-gestütztem Satzbau, Cloud-Synchronisierung in Echtzeit und Ein-Klick-KDP-Veröffentlichung.",
-      "subtitleShort": "Erstellen Sie professionelle Seite-an-Seite-Bücher mit KI-gestütztem Satzbau",
-      "featuresLine": "Cloud-Sync in Echtzeit • Druckfertiges PDF/EPUB • Ein-Klick-KDP-Veröffentlichung",
-      "ctaPrimary": "Kostenlos starten",
-      "ctaSecondary": "Bibliothek erkunden",
+      "subtitle": "Verwandeln Sie Text in **CSS-perfekte** Parallelbücher. Kein InDesign. Keine Asynchronität.",
+      "subtitleShort": "Die Zweisprachige Publishing-Engine.",
+      "featuresLine": "Grid-Lock Architektur • Native PDF/X • 300 DPI Validierung",
+      "ctaPrimary": "Kostenlos Starten",
+      "ctaSecondary": "Bibliothek Erkunden",
       "aiSuggestion": "KI-Vorschlag",
       "aiTranslation": "KI-gestützte Übersetzung",
-      "pauseRotation": "Sprachrotation pausieren",
-      "resumeRotation": "Sprachrotation fortsetzen",
-      "studioTitle": "Meisterwerk-Titel — Synoptic Studio",
-      "titlePlain": "Das intuitivste Werkzeug, um Ihre eigenen Bücher, Lernfächer und zweisprachigen Materialien von Grund auf mit den Inhalten zu erstellen, die Sie lieben.",
+      "pauseRotation": "Rotation pausieren",
+      "resumeRotation": "Rotation fortsetzen",
+      "studioTitle": "Hero Titel — Synoptic Studio",
+      "titlePlain": "Schluss mit Formatierungs-Kampf. Professionelle Symmetrie mit einem Klick.",
       "neuralEngine": "Linguistische Intelligenz",
       "activeLayer": "Aktive Ebene",
       "typographyAssistant": "Typografie-Assistent",
       "syncingLocales": "{count} Sprachen werden synchronisiert",
-      "syncing": "Synchronisierung...",
+      "syncing": "Synchronisiere...",
       "readyStudio": "Bereit — Synoptic Studio v1.2",
       "canvasA": "Leinwand A",
       "canvasB": "Leinwand B",
@@ -229,219 +216,122 @@
       "origin": "Ursprung"
     },
     "footer": {
-      "tagline": "Der professionelle zweisprachige Verlag für Autoren, Sprachenlerner und Verlagshäuser. Ihre Stimme ohne Grenzen.",
+      "tagline": "Das professionelle zweisprachige Studio für Autor*innen, Polyglotte und globale Verlage.",
       "copyright": "© 2025 Synoptic Studio. Alle Rechte vorbehalten."
     },
     "carbon": {
-      "calculating": "Messung läuft...",
+      "label": "Nachhaltigkeit",
+      "calculating": "Messe...",
       "cleanerThan": "Sauberer als {percentage}%",
       "co2": "{amount}g CO2",
       "ecoFriendly": "Umweltfreundlich",
-      "measure": "Auswirkung messen"
+      "measure": "Einfluss Messen"
     }
   },
   "Features": {
-    "title": "Für jeden Maßstab gebaut",
-    "subtitle": "Von privaten **Flashcards**, **Lernblättern** und **Postern** bis hin zu professionellen globalen Buchveröffentlichungen.",
-    "ctaLearn": "Lernen Sie eine Sprache meistern",
-    "ctaPublish": "Professionelles Verlagswesen erkunden",
+    "title": "Gebaut für jeden Maßstab",
+    "subtitle": "Von privaten **Lernkarten** und **Spickzetteln** bis zu professionellen globalen Buchveröffentlichungen.",
+    "ctaLearn": "Lernen Sie, eine Sprache zu meistern",
+    "ctaPublish": "Entdecken Sie professionelles Publishing",
     "learn": {
-      "title": "Für Sprachenlerner",
-      "subtitle": "Das ultimative Werkzeug für Selbststudium und Meisterschaft.",
+      "title": "Für Sprachlernende",
+      "subtitle": "Das ultimative Werkzeug zur Selbstaneignung.",
       "items": {
         "flashcards": {
-          "title": "Dynamische Flashcards",
-          "desc": "Verwandeln Sie jeden Satz aus Ihrem zweisprachigen Buch mit einem Klick in eine intelligente Flashcard."
+          "title": "Dynamische Lernkarten",
+          "desc": "Erstellen Sie automatisch Lernkarten aus den Sätzen, die Sie lesen."
         },
-        "deepInsights": {
-          "title": "Tiefe Einblicke",
-          "desc": "Grammatikregeln, kultureller Kontext und Aussprachehilfen direkt am Text."
+        "annotations": {
+          "title": "Philologische Anmerkungen",
+          "desc": "Tauchen Sie tief in Grammatik und Nuancen ein mit KI-gestützter Wort-für-Wort-Analyse."
         },
-        "sideBySide": {
-          "title": "Immersives Seite-an-Seite",
-          "desc": "Der natürlichste Weg, in Ihrer Zielsprache zu lesen, mit dem Sicherheitsnetz Ihrer Muttersprache."
+        "immersion": {
+          "title": "Symmetrische Immersion",
+          "desc": "Ihr Gehirn verknüpft Sprachen natürlich, wenn sie nebeneinander stehen. Kein Kontextverlust mehr."
         }
       }
     },
     "publish": {
-      "title": "Für Autoren & Verlage",
-      "subtitle": "Professionelle Werkzeuge, um Ihre Bücher in die Welt zu bringen.",
+      "title": "Für Professionelle Verlage",
+      "subtitle": "Industrielles Typesetting für zweisprachige Editionen.",
       "items": {
-        "kdpReady": {
-          "title": "KDP Ein-Klick",
-          "desc": "Exportieren Sie perfekt formatierte, beschnittfertige PDFs, die Amazons Prüfung jedes Mal bestehen."
+        "typesetting": {
+          "title": "Grid-Lock Architektur",
+          "desc": "Wir raten nicht beim Alignment. Wir nutzen eine strikte CSS Grid Engine, die Quell- und Zielabsätze mathematisch verbindet."
         },
-        "aiTypesetter": {
-          "title": "KI-Meister-Schriftsetzer",
-          "desc": "Gleichen Sie Spalten aus, verwalten Sie Schusterjungen und Hurenkinder und sorgen Sie automatisch für perfekte Symmetrie."
+        "multiformat": {
+          "title": "Natives PDF/X & EPUB 3.0",
+          "desc": "Generiert unterschiedliche Layouts für gerade/ungerade Seiten mit korrekten Spiegelrändern. Exportiert valides EPUB 3.0."
         },
-        "branding": {
-          "title": "Individuelles Branding",
-          "desc": "Fügen Sie Ihre eigenen Logos, Wasserzeichen und Schriftarten hinzu, um eine einzigartige Verlagsidentität zu schaffen."
+        "distribution": {
+          "title": "Validierung & Qualität",
+          "desc": "300 DPI Ausgabe mit sRGB Farbprofilen stellt sicher, dass Ihr KDP-Upload die Pre-Flight-Checks besteht."
         }
       }
     }
   },
-  "LearnPage": {
-    "title": "Meistern Sie jede Sprache durch Immersion",
-    "subtitle": "Vergessen Sie langweilige Lehrbücher. Erstellen Sie Ihre eigenen Lernmaterialien aus Büchern, die Sie wirklich lesen wollen.",
-    "features": {
-      "reader": {
-        "title": "Der intelligente Reader",
-        "desc": "Lesen Sie bequem mit unserem synchronisierten Scrollen. Ihre Augen verlieren nie die Übersetzung."
-      },
-      "study": {
-        "title": "KI-Lernassistent",
-        "desc": "Stellen Sie direkt im Text Fragen zur Grammatik oder Nuancen. Es ist, als hätten Sie auf jeder Seite einen Tutor."
-      },
-      "custom": {
-        "title": "Persönliche Materialien",
-        "desc": "Importieren Sie Ihre eigenen Artikel, PDFs oder Webclips. Synoptic formatiert sie perfekt zum Lernen."
-      }
+  "PricingPage": {
+    "title": "Zahlen Sie für Intelligenz, nicht Speicher",
+    "subtitle": "Projekte sind unbegrenzt. Sie nutzen Credits nur, wenn Sie die KI beanspruchen.",
+    "yearly": "Sparen Sie 20% jährlich",
+    "tiers": {
+      "free": "Basic",
+      "pro": "Standard für unabhängige Autor*innen.",
+      "publisher": "Für hohe Produktionsvolumen und Verlage."
     },
-    "cta": "Starten Sie Ihre Lernreise"
-  },
-  "PublishPage": {
-    "title": "Das Cloud-Studio für professionelle Verlage",
-    "subtitle": "Vom Manuskript ins Bücherregal in Rekordzeit. Professionelles zweisprachiges Schriftsetzen für Autoren und Verlage.",
-    "features": {
-      "engine": {
-        "title": "Hochleistungs-Engine",
-        "desc": "Bewältigt Manuskripte mit über 500 Seiten mühelos. Echtzeit-Vorschau der exakten Druckmaße."
-      },
-      "exports": {
-        "title": "Globale Exportstandards",
-        "desc": "Native Unterstützung für PDF/X, EPUB 3.0 und hochauflösende Bildpakete."
-      },
-      "distribution": {
-        "title": "Ein-Klick-Vertrieb",
-        "desc": "Optimierte Metadaten und Formatierung für Amazon KDP, Apple Books und IngramSpark."
-      }
-    },
-    "cta": "Starten Sie Ihr Verlagsimperium",
-    "infra": "Professionelle Verlagsinfrastruktur",
-    "enterprise": "Unternehmenslösungen",
-    "volumeTitle": "Für die Hochvolumenproduktion gebaut",
-    "volumeSubtitle": "Hören Sie auf, sich mit InDesign-Vorlagen und manueller Ausrichtung herumzuschlagen. Unsere Cloud-Engine erledigt das.",
-    "step1": "Manuskript importieren",
-    "step1Desc": "Laden Sie Ihren Quell- und Zieltext in jedem Format hoch. Unsere KI identifiziert sofort Absatzumbrüche und Kapitelstrukturen.",
-    "step2": "Auto-Satz",
-    "step2Desc": "Der KI-Schriftsetzer gleicht Spalten automatisch aus und eliminiert Umbruchfehler auf Hunderten von Seiten in Sekunden.",
-    "step3": "KDP in einem Klick",
-    "step3Desc": "Exportieren Sie ein druckfertiges PDF mit korrektem Beschnitt und Bundsteg. Garantiert für Amazons Qualitätscheck.",
-    "epubTitle": "Bilinguale EPUB 3.0 Unterstützung",
-    "epubDesc": "Erzeugen Sie anpassbare E-Books für Kindle und Apple Books mit nativer Auswahl zwischen Seite-an-Seite oder Alternativmodus.",
-    "available": "Jetzt verfügbar",
-    "compliant": "XHTML-konform",
-    "fixed": "Festes Layout Option",
-    "scaleTitle": "Skalieren Sie Ihr Veröffentlichungzentrum.",
-    "scaleDesc": "Egal, ob Sie ein unabhängiger Autor oder ein globales Verlagshaus sind, Synoptic skaliert mit Ihnen. Sicher, zuverlässig und bereit für Ihr nächstes Meisterwerk.",
-    "sales": "Vertrieb kontaktieren"
-  },
-  "Pricing": {
-    "title": "Einfache, faire Preise",
-    "subtitle": "Wählen Sie den Plan, der zu Ihren Veröffentlichungszielen passt.",
-    "mostPopular": "Am beliebtesten",
-    "month": "/Monat",
-    "pageTitle": "Investieren Sie in Ihre Bücher.",
-    "pageSubtitle": "Egal, ob Sie Familienerinnerungen übersetzen oder eine kommerzielle Serie veröffentlichen, wir haben die richtigen Werkzeuge für Sie.",
-    "nonProfitTitle": "Sind Sie gemeinnützig oder im Bildungsbereich tätig?",
-    "nonProfitDesc": "Wir bieten spezielle Rabatte für Bildungseinrichtungen und gemeinnützige Übersetzungen an. Kontaktieren Sie uns für ein Angebot.",
-    "contactSupport": "Support kontaktieren",
-    "free": {
-      "name": "Kostenlos",
-      "desc": "Perfekt zum Testen des Studios.",
-      "button": "Kostenlos starten"
-    },
-    "pro": {
-      "name": "Pro",
-      "desc": "Für ernsthafte Autoren und Polyglotte.",
-      "button": "Pro beitreten"
-    },
-    "publisher": {
-      "name": "Verlag",
-      "desc": "Für professionelle Verlagshäuser.",
-      "button": "Verlag wählen"
-    },
-    "featuresList": {
-      "activeProject": "1 aktives Projekt",
-      "standardLayout": "Standard-Layout-Engine",
-      "manualTranslation": "Manuelle Übersetzung",
-      "lowDpiPdf": "Nur-Online PDF (72 DPI)",
-      "watermarked": "Veröffentlichung mit Wasserzeichen",
-      "limitedAi": "20 KI-Einheiten* / Monat (Entwurf)",
-      "unlimitedProjects": "Unbegrenzte Cloud-Projekte",
-      "aiAssistedLayout": "KI-gestütztes Layout",
-      "aiWordsMonth": "500 KI-Einheiten* / Monat (Profi)",
-      "highDpiPdf": "300 DPI Export (Druckfertig)",
-      "epubMobi": "EPUB & e-Ink optimiert",
-      "removeWatermarks": "Wasserzeichen entfernen",
-      "priorityHistory": "Priorisierter Cloud-Speicher",
-      "flashcards": "Mastery Flashcards",
-      "tts": "Neural TTS (Standard)",
-      "models": "Modell-Bibliothek",
-      "about": "Über uns",
-      "everythingPro": "Alles in Pro",
-      "bigAiLimit": "5.000 KI-Einheiten* / Monat (Hochvolumen)",
-      "teamCollab": "Team-Zusammenarbeit",
-      "brandCustom": "Verlag-Branding",
-      "fontUpload": "Eigener Schrift-Upload",
-      "apiAccess": "API-Zugriff (Demnächst)",
-      "ttsPremium": "Neural TTS (Ultra-HD)"
-    },
-    "aiExplanation": {
-      "title": "* KI-Einheiten verstehen",
-      "note": "KI-Einheiten werden nur bei Verwendung unserer erweiterten Übersetzung und professionellen Satzfunktionen verbraucht. Manuelle Übersetzung bleibt kostenlos.",
-      "whatIsAUnit": "1 Einheit = 1 Vollständige linguistische Analyse",
-      "unitDesc": "Dies beinhaltet kontextuelle Übersetzung, semantische Gruppierung und intelligente Layout-Anpassung für einen Textblock.",
-      "tiers": {
-        "free": "Perfekt zum Testen an kurzen Auszügen.",
-        "pro": "Standard für unabhängige Autoren (ca. 100 Seiten/Monat).",
-        "publisher": "Für die Hochvolumenproduktion in Verlagshäusern."
-      }
+    "unitCalculator": {
+      "title": "1 KI-Einheit = 1 Intellektuelle Aktion",
+      "desc": "Ihre Credits werden pro Blockinteraktion abgezogen:",
+      "p1": "Einen Absatz übersetzen? **1 Einheit.**",
+      "p2": "Eine Grammatik-Notiz erstellen? **1 Einheit.**",
+      "fairUse": "Fair Use: Exporte (PDF/EPUB) sind **immer kostenlos**. Sie zahlen nie, um Ihre eigene Arbeit herunterzuladen."
     }
   },
   "Export": {
-    "publishingPipeline": "Veröffentlichungs-Pipeline",
+    "publishingPipeline": "Publishing-Pipeline",
     "pdfManuscript": "Druckfertiges PDF",
     "epubEbook": "eBook (EPUB 3.0)",
     "generate": "Generieren",
+    "generating": "Generiere...",
     "quality": "Qualität",
-    "bleed": "Beschnitt",
-    "preFlightTitle": "Integritätsprüfung vor dem Druck",
-    "symmetryCheck": "Zweisprachige Symmetrie verifiziert",
+    "bleed": "Beschnittzugabe (Bleed)",
+    "preFlightTitle": "Automatisiertes Integritätssystem",
+    "symmetryCheck": "Grid-Lock Symmetrie Aktiv",
     "largeDocWarning": "Große Dokumente können bis zu 30 Sekunden zum Rendern benötigen.",
     "upgradeToPro": "Upgrade auf Pro",
-    "watermarkPolicy": "Entfernen Sie Wasserzeichen, schalten Sie hochauflösenden Druck frei und erhalten Sie 50.000 KI-Wörter pro Monat.",
-    "viewPlans": "Pläne anzeigen",
-    "proQuality": "Pro-Qualität (Entwurf)",
-    "freeWarning": "In der kostenlosen Version wird ein Wasserzeichen auf diesen Export angewendet.",
-    "pdfDesc": "Hochwertiger Export über die 300 DPI Puppeteer-Engine. Optimiert für Amazon KDP.",
-    "epubDesc": "Anpassbares zweisprachiges Textlayout. Optimiert für Kindle und Apple Books.",
-    "qualityPrint": "Drucken",
+    "watermarkPolicy": "Entfernen Sie Wasserzeichen, entsperren Sie High-DPI-Druck und erhalten Sie 50.000 KI-Wörter pro Monat.",
+    "viewPlans": "Pläne ansehen",
+    "proQuality": "Pro Qualität (Entwurf)",
+    "freeWarning": "In der Free-Version wird ein Wasserzeichen angewendet.",
+    "pdfDesc": "High-Fidelity Export via 300 DPI Puppeteer Engine. Optimiert für Amazon KDP.",
+    "epubDesc": "Fließendes zweisprachiges Layout. Optimiert für Kindle und Apple Books.",
+    "qualityPrint": "Druck",
     "qualityWeb": "Web",
     "qualityDraft": "Entwurf",
-    "pdfError": "PDF Export fehlgeschlagen",
-    "pdfErrorDesc": "Export fehlgeschlagen. Bitte prüfen Sie Ihre Verbindung zur Druck-Engine.",
-    "epubError": "EPUB Export fehlgeschlagen",
-    "epubErrorDesc": "EPUB-Generierung fehlgeschlagen."
+    "pdfError": "PDF-Export fehlgeschlagen",
+    "pdfErrorDesc": "Export fehlgeschlagen. Bitte prüfen Sie Ihre Verbindung zur Print-Engine.",
+    "epubError": "EPUB-Export fehlgeschlagen",
+    "epubErrorDesc": "EPUB-Generierung fehlgeschlagen.",
+    "chapter": "Kapitel",
+    "engineLabel": "BILINGUAL PUBLISHING ENGINE"
   },
   "Onboarding": {
     "tourDashboardContent": "Willkommen bei Synoptic! Dies ist Ihr Projekt-Hub.",
-    "tourNewProjectContent": "Beginnen Sie hier, um Ihr erstes zweisprachiges Meisterwerk zu erstellen.",
+    "tourNewProjectContent": "Starten Sie hier, um Ihr erstes zweisprachiges Meisterwerk zu erstellen.",
     "tourLibraryContent": "Importieren Sie klassische Texte aus unserer Public-Domain-Bibliothek.",
     "tourPageListContent": "Navigieren Sie hier durch die Seiten Ihres Buches.",
-    "tourToolsContent": "Fügen Sie Textblöcke, Bilder und KI-gestützte Annotationen hinzu.",
+    "tourToolsContent": "Fügen Sie Textblöcke, Bilder und KI-Anmerkungen hinzu.",
     "tourPublishContent": "Bereit zum Drucken? Exportieren Sie in Sekunden als PDF oder EPUB.",
     "tourWorkspaceContent": "Dies ist Ihre Leinwand. Die linke Spalte ist die Quelle, die rechte Ihre Übersetzung."
   },
   "CommandPalette": {
+    "esc": "Esc",
     "placeholder": "Befehl eingeben oder suchen...",
     "noResults": "Keine Ergebnisse gefunden.",
     "actions": "Aktionen",
     "addText": "Textblock hinzufügen",
-    "undo": "Aktion rückgängig machen",
-    "redo": "Aktion wiederholen",
+    "undo": "Rückgängig",
+    "redo": "Wiederholen",
     "deleteBlock": "Ausgewählten Block löschen",
     "exportPdf": "Als PDF exportieren",
     "select": "auswählen",
@@ -451,80 +341,131 @@
   },
   "AboutPage": {
     "title": "Die Zukunft der Übersetzung",
-    "subtitle": "Synoptic entstand aus einer einfachen Erkenntnis: Die Welt rückt näher zusammen, aber unsere Bücher sind immer noch einsprachig. Wir haben das erste Cloud-Studio für zweisprachiges Publizieren geschaffen.",
-    "sovereignTitle": "Souveränes Wissen",
-    "sovereignDesc": "Sprache ist die Währung der Kultur. Unsere Mission ist es, Zweisprachigkeit für jeden zugänglich zu machen, vom unabhängigen Autor bis hin zu globalen Institutionen.",
-    "soulTitle": "KI mit Seele",
-    "soulDesc": "Wir „übersetzen“ nicht nur automatisch. Unsere Intelligenz-Engine basiert auf philologischer Präzision und sorgt dafür, dass die Nuancen Ihrer Stimme erhalten bleiben.",
+    "subtitle": "Synoptic entstand aus einer einfachen Erkenntnis: Die Welt rückt zusammen, aber unsere Bücher bleiben einsprachig. Wir bauten das erste Cloud-Native Studio für die Kunst (und Wissenschaft) des zweisprachigen Publishings.",
+    "sovereignTitle": "Keine-Training-Garantie",
+    "sovereignDesc": "Die meisten KI-Tools beanspruchen Ihre Daten. Wir beanspruchen nichts. Ihr Manuskript füttert kein globales Gehirn. Es bleibt in Ihrem privaten Tresor.",
+    "soulTitle": "Zustandsloses Verarbeiten (Stateless)",
+    "soulDesc": "Wir nutzen eine zustandslose Architektur (NextResponse). Sobald die Übersetzung zurückgegeben wird, wird der Inferenz-Agent beendet. Speicherpuffer werden sofort gelöscht.",
     "values": "Unsere Werte",
-    "privacyTitle": "Datenschutz zuerst",
-    "privacyDesc": "Ihre Manuskripte sind Ihr Eigentum. Wir nutzen sichere Infrastruktur, um sicherzustellen, dass Ihr geistiges Eigentum nie Ihre Kontrolle verlässt.",
+    "privacyTitle": "Datenschutz Zuerst",
+    "privacyDesc": "Ihre Manuskripte sind Ihr Eigentum. Wir nutzen abgeschottete Infrastruktur, um sicherzustellen, dass Ihr geistiges Eigentum nie Ihre Kontrolle verlässt.",
     "perfTitle": "Hohe Leistung",
-    "perfDesc": "Für das moderne Web gebaut. Jede Interaktion in Synoptic ist auf Geschwindigkeit ausgelegt, vom Cloud-Sync bis zum 300 DPI Profi-Export.",
-    "communityTitle": "Für die Community gebaut",
-    "communityDesc": "Wir entwickeln uns ständig weiter, basierend auf dem Feedback unserer Community aus Autoren und Polyglotten.",
-    "cta": "Werden Sie Teil der Revolution"
+    "perfDesc": "Gebaut für das moderne Web. Jede Interaktion in Synoptic ist auf Geschwindigkeit ausgelegt, vom Echtzeit-Cloud-Sync bis zum professionellen 300 DPI PDF-Export.",
+    "communityTitle": "Gebaut für die Community",
+    "communityDesc": "Wir entwickeln uns ständig weiter, basierend auf Feedback unserer Community aus Autor*innen, Polyglotten und Lehrenden.",
+    "cta": "Der Revolution beitreten"
   },
   "PrivacyPage": {
     "title": "Datenschutz @ Synoptic",
-    "subtitle": "Ihre Manuskripte sind Ihre Seele. Unsere Datenschutzrichtlinie schützt Ihr geistiges Eigentum.",
-    "collectTitle": "Was wir sammeln",
-    "collectDesc": "Nur was für das Studio notwendig ist: E-Mail für Auth und Projektdaten für Cloud-Sync und KI-Layout.",
+    "subtitle": "Wir verstehen, dass Ihre Manuskripte Ihre Seele sind. Unsere Richtlinie hat ein einziges Ziel: Den Schutz Ihres geistigen Eigentums.",
+    "philosophyTitle": "Unsere Philosophie",
+    "philosophyDesc": "Synoptic basiert auf dem Prinzip des 'Souveränen Wissens'. Wir sammeln nur, was strikt notwendig ist.",
+    "collectTitle": "Gesammelte Informationen",
+    "collectDesc": "Kontodaten (E-Mail) für Login, Projekt-Metadaten und Benutzerinhalte nur zur Verarbeitung.",
     "collectItems": [
-      "Kontoinformationen (E-Mail, Name)",
-      "Projekt-Metadaten (Titel, Kapitel)",
-      "Nutzungsdaten (zur UI-Verbesserung)"
+      "Kontodaten: Name und E-Mail für Abrechnung.",
+      "Metadaten: Um den Bibliotheksstatus zu erhalten.",
+      "Benutzerinhalte: Verschlüsselt und isoliert."
     ],
-    "protectTitle": "Datenschutz",
-    "protectDesc": "Wir nutzen Industriestandards zur Verschlüsselung Ihrer Daten. Unsere Infrastruktur wird rund um die Uhr überwacht.",
-    "aiPrivacyTitle": "KI-Datenschutz",
-    "aiPrivacyDesc": "Ihre Manuskripte werden NICHT zum Training globaler KI-Modelle verwendet. Wir nutzen isolierte Agenten, die Daten sofort nach der Aufgabe löschen.",
-    "lastUpdated": "Zuletzt aktualisiert: 29. Dezember 2025."
+    "aiProcessingTitle": "KI-Verarbeitung & Isolierung",
+    "aiProcessingDesc": "Wir unterscheiden uns von Standard-Tools. Ihre Manuskripte werden NICHT genutzt, um unsere globalen Modelle zu trainieren.",
+    "securityTitle": "Speicherung & Sicherheit",
+    "securityDesc": "Alle Daten sind bei Übertragung (TLS/SSL) und im Ruhezustand verschlüsselt. Sie können ein Projekt jederzeit löschen.",
+    "sharingTitle": "Drittanbieter",
+    "sharingDesc": "Wir verkaufen Ihre Daten nicht. Weitergabe nur an essentielle Provider (Stripe, AWS/DigitalOcean).",
+    "contactTitle": "Kontakt",
+    "contactDesc": "Für Datenschutzfragen: privacy@getsynoptic.com",
+    "lastUpdated": "Zuletzt aktualisiert: Dezember 2025"
   },
   "TermsPage": {
     "title": "Nutzungsbedingungen",
-    "subtitle": "Klare Regeln für ein besseres Studio. Mit der Nutzung von Synoptic stimmen Sie diesen zu.",
-    "ownershipTitle": "Eigentum",
-    "ownershipDesc": "Sie behalten 100% Eigentum an Ihren Manuskripten, Übersetzungen und Exports. Synoptic beansprucht keine Rechte an Ihrem geistigen Eigentum.",
-    "useTitle": "Zulässige Nutzung",
-    "useDesc": "Keine Nutzung für illegale oder diffamierende Inhalte. Urheberrechte müssen gewahrt bleiben.",
-    "useItems": [
-      "Kein automatisiertes Scraping.",
-      "Kein Reverse-Engineering der Engine.",
-      "Fair Use Policy für KI-Einheiten beachten."
+    "subtitle": "Klare Regeln. Ihnen gehört Ihre Arbeit. Uns gehört das Werkzeug.",
+    "introTitle": "1. Einführung",
+    "introDesc": "Willkommen bei Synoptic. Durch Nutzung unseres Cloud-Studios stimmen Sie diesen Bedingungen zu. Stand: Dezember 2025.",
+    "ipTitle": "2. Geistiges Eigentum",
+    "ipDesc": "Wir unterscheiden klar zwischen Werkzeug und Schöpfung.",
+    "ipItems": [
+      "Ihre Souveränität: Sie behalten 100% Eigentum an Ihren Manuskripten und Exporten.",
+      "Unsere Technologie: Das Interface, die Typesetting Engine v4.0 und der Code sind Eigentum von Synoptic."
     ],
-    "subTitle": "Abonnement & Kündigung",
-    "subDesc": "Abrechnung im Voraus. Kündigung jederzeit möglich. Zugriff bleibt bis zum Ende der Laufzeit bestehen."
+    "obligationsTitle": "3. Nutzerpflichten",
+    "obligationsDesc": "Sie stimmen zu, unsere Engine nicht zurückzuentwickeln (Reverse Engineering) oder automatisierte Skripte zu nutzen.",
+    "paymentTitle": "4. Abonnements & KI-Einheiten",
+    "paymentDesc": "Monatliche Abrechnung. KI-Einheiten werden pro 'intellektueller Aktion' verbraucht. Ungenutzte Einheiten verfallen.",
+    "publishingTitle": "5. Veröffentlichungs-Haftungsausschluss",
+    "publishingDesc": "Obwohl für KDP optimiert, garantieren wir keine Akzeptanz durch Drittanbieter. Sie sind für das finale Lektorat verantwortlich.",
+    "terminationTitle": "6. Kündigung",
+    "terminationDesc": "Wir behalten uns das Recht vor, Konten bei Verletzung der Fair-Use-Richtlinie zu suspendieren."
   },
   "ModelsPage": {
     "title": "Struktur-Bibliothek",
-    "subtitle": "Jede Geschichte braucht ihre eigene Architektur. Wählen Sie aus unseren professionellen bilinguale Vorlagen.",
-    "pixelPerfect": "Pixelperfekte Layouts",
-    "gutterTitle": "Spiegel-Bundsteg Logik",
-    "gutterDesc": "Automatische Anpassung der Ränder basierend auf der Bindung.",
-    "symmetryTitle": "Symmetrie-Schutz",
-    "symmetryDesc": "Echtzeit-Warnungen, falls Spalten auf Seiten desynchron werden.",
+    "subtitle": "Jede Geschichte verlangt ihre eigene Architektur. Wählen Sie aus unserer Sammlung professioneller zweisprachiger Vorlagen.",
+    "pixelPerfect": "Pixel-perfekte Layouts",
+    "gutterTitle": "Spiegelrand-Logik",
+    "gutterDesc": "Automatische Anpassung der Innen-/Außenränder basierend auf der Bindung.",
+    "symmetryTitle": "Symmetrie-Wächter",
+    "symmetryDesc": "Echtzeit-Warnung, wenn zweisprachige Blöcke asynchron werden.",
     "templates": {
       "classic": {
-        "title": "Klassisch parallel",
-        "desc": "Der Goldstandard. Streng ausgerichtete Spalten für Premium-Druckausgaben."
+        "title": "Klassisch Parallel",
+        "desc": "Der Goldstandard zweisprachigen Lesens. Strikt ausgerichtete Spalten für Premium-Druckausgaben."
       },
       "alternating": {
-        "title": "Abwechselnde Immersion",
-        "desc": "Perfekt für digitale Geräte. Absatzweiser Fluss ohne Kontextverlust."
+        "title": "Alternierende Immersion",
+        "desc": "Perfekt für digitale Geräte. Absatz-für-Absatz-Fluss, um den Fokus zu behalten ohne den Kontext zu verlieren."
       },
       "academic": {
         "title": "Philologische Studie",
-        "desc": "Tiefe akademische Analyse mit Wort-für-Wort Annotationen unter der Quelle."
+        "desc": "Tiefe akademische Analyse mit Wort-für-Wort-Anmerkungen direkt unter der Quelle."
       },
       "modern": {
-        "title": "Moderne Verse",
-        "desc": "Minimalistisches Layout optimiert für Poesie mit großzügigen künstlerischen Rändern."
+        "title": "Moderner Vers",
+        "desc": "Minimalistisches Layout, optimiert für Poesie und nummerierte Verse."
       }
     },
     "viewTemplate": "Struktur entdecken",
     "typesettingTitle": "Bilinguale Logik",
     "exampleSource": "The stars were bright above the silent lake.",
-    "exampleTarget": "Die Sterne leuchteten hell über dem stillen See."
+    "exampleTarget": "Die Sterne leuchteten über dem stillen See.",
+    "labels": {
+      "source": "Quelle ({lang})",
+      "translation": "Übersetzung ({lang})",
+      "engine": "Typesetting Engine v4.0"
+    }
+  },
+  "LearnPage": {
+    "title": "Meistern Sie jede Sprache durch Immersion",
+    "subtitle": "Vergessen Sie langweilige Lehrbücher. Erstellen Sie Ihr eigenes Lernmaterial aus den Büchern, die Sie wirklich lesen wollen.",
+    "badge": "Für Polyglotte & Studierende",
+    "browseLibrary": "Bibliothek durchstöbern",
+    "features": {
+      "reader": {
+        "title": "Der Intelligente Reader",
+        "desc": "Lesen Sie komfortabel mit synchronisiertem Scrollen. Ihre Augen verlieren nie die Übersetzung."
+      },
+      "study": {
+        "title": "KI-Lernassistent",
+        "desc": "Stellen Sie Grammatikfragen direkt im Text. Wie ein Tutor auf jeder Seite."
+      },
+      "custom": {
+        "title": "Persönliche Materialien",
+        "desc": "Importieren Sie eigene Artikel, PDFs oder Web-Clips. Synoptic formatiert sie perfekt zum Lernen."
+      }
+    },
+    "immersion": {
+      "title": "Die Wissenschaft des Seite-an-Seite",
+      "p1": "Lesen in der Zielsprache ist der effektivste Weg, Vokabular natürlich zu erwerben. Aber ein fremdes Buch kann überwältigend sein.",
+      "p2": "Synoptic beseitigt diese Hürde. Durch perfekt ausgerichtete Übersetzung direkt neben Ihrem Text kann sich Ihr Gehirn auf die Geschichte konzentrieren, während es mühelos neue Wörter verknüpft.",
+      "tag1": "Natürliche Aneignung",
+      "tag2": "Bilinguales Mapping",
+      "verified": "KI-Übersetzung Verifiziert",
+      "flashcard": "Lernkarte Generiert!"
+    },
+    "ctaSection": {
+      "title": "Bereit für fließendes Sprechen?",
+      "subtitle": "Schließen Sie sich Tausenden von Sprachlernenden an, die Lehrbücher für eine immersivere Erfahrung hinter sich gelassen haben.",
+      "button": "Kostenloses Konto erstellen"
+    },
+    "cta": "Meine Lernreise beginnen"
   }
 }

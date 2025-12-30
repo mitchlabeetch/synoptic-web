@@ -8,7 +8,12 @@
     "error": "An error occurred",
     "success": "Success",
     "back": "Back",
-    "next": "Next"
+    "next": "Next",
+    "backToHome": "Back to Home",
+    "on": "On",
+    "off": "Off",
+    "pdf": "PDF",
+    "epub": "EPUB"
   },
   "Auth": {
     "login": "Log In",
@@ -21,7 +26,19 @@
     "haveAccount": "Already have an account?",
     "verifyEmail": "Verify Email",
     "welcomeBack": "Welcome back",
-    "createAccount": "Create account"
+    "createAccount": "Create account",
+    "signInDesc": "Sign in to access your projects.",
+    "signUpDesc": "Create an account to start publishing.",
+    "emailPlaceholder": "name@example.com",
+    "passwordPlaceholderLogin": "••••••••",
+    "passwordPlaceholderSignup": "At least 8 characters",
+    "failed": "Authentication failed",
+    "errorOccurred": "An unexpected error occurred",
+    "signingIn": "Signing in...",
+    "creatingAccount": "Creating account...",
+    "signIn": "Sign In",
+    "hasAccount": "Already have an account?",
+    "termsPrompt": "By continuing, you agree to our Terms of Service and Privacy Policy."
   },
   "Dashboard": {
     "title": "My Projects",
@@ -40,7 +57,9 @@
       "open": "Open",
       "delete": "Delete",
       "confirmDelete": "Are you sure you want to delete this project?"
-    }
+    },
+    "noDescription": "No description provided.",
+    "lastUpdated": "Last updated"
   },
   "Editor": {
     "toolbar": {
@@ -99,6 +118,11 @@
       "verse": "Verse / Poem"
     }
   },
+  "Studio": {
+    "collaborate": "Collaborate",
+    "export": "Export",
+    "preview": "Preview"
+  },
   "Models": {
     "parallel": "Parallel Columns",
     "interlinear": "Interlinear",
@@ -135,17 +159,18 @@
   },
   "Landing": {
     "hero": {
-      "title": "The Future of Bilingual Publishing",
-      "subtitle": "Create professional books in any two languages. AI-powered layout, perfect symmetry, global distribution.",
-      "cta": "Get Started for Free"
+      "title": "The Bilingual Publishing Engine.",
+      "subtitle": "Turn raw text into CSS-perfect parallel books. No InDesign. No desynchronization. Grid-Lock Architecture guarantees alignment by design.",
+      "cta": "Start Publishing Free"
     },
     "features": {
-      "title": "Everything you need to publish",
+      "title": "Built on a Grid-Lock Architecture",
       "items": {
-        "layout": "Automatic Layout",
-        "export": "Professional Exports",
+        "layout": "Grid-Lock Architecture",
+        "export": "Native PDF/X",
         "sync": "Cloud Sync",
-        "ai": "Linguistic AI"
+        "ai": "Linguistic AI",
+        "validation": "300 DPI Validation"
       }
     }
   },
@@ -167,17 +192,17 @@
     },
     "hero": {
       "badge": "Synoptic v1.0 Private Beta",
-      "subtitle": "Craft professional side-by-side books with AI-assisted typesetting, real-time cloud sync, and one-click KDP publishing.",
-      "subtitleShort": "Craft professional side-by-side books with AI-assisted typesetting",
-      "featuresLine": "Real-time cloud sync • Print-ready PDF/EPUB • One-click KDP publishing",
-      "ctaPrimary": "Start Writing Free",
+      "subtitle": "Turn raw text into **CSS-perfect** parallel books. No InDesign. No desynchronization.",
+      "subtitleShort": "The Bilingual Publishing Engine.",
+      "featuresLine": "Grid-Lock Architecture • Native PDF/X • 300 DPI Validation",
+      "ctaPrimary": "Start Publishing Free",
       "ctaSecondary": "Explore Library",
       "aiSuggestion": "AI Suggestion",
       "aiTranslation": "AI-powered translation",
       "pauseRotation": "Pause language rotation",
       "resumeRotation": "Resume language rotation",
       "studioTitle": "Hero Title — Synoptic Studio",
-      "titlePlain": "The most intuitive tool to create your own books, study sheets, and bilingual assets from scratch with the content you love.",
+      "titlePlain": "Stop fighting with formatting. Get professional symmetry in one click.",
       "neuralEngine": "Linguistic Intelligence",
       "activeLayer": "Active Layer",
       "typographyAssistant": "Typography Assistant",
@@ -231,28 +256,35 @@
       "subtitle": "Industrial grade typesetting for bilingual editions.",
       "items": {
         "typesetting": {
-          "title": "Mirror Gutter Logic",
-          "desc": "Automatic margin adjustments for print binding. No manual calculations needed."
+          "title": "Grid-Lock Architecture",
+          "desc": "We don't just 'guess' alignment. We use a strict CSS Grid rendering engine that mathematically locks source and target paragraphs together, preventing desynchronization."
         },
         "multiformat": {
-          "title": "EPUB 3.0 Reflowable",
-          "desc": "The first engine that exports bilingual layouts to Kindle and Apple Books without breaking."
+          "title": "Native PDF/X & EPUB 3.0",
+          "desc": "Generates distinct even/odd page layouts with correct mirror gutters. Exports valid EPUB 3.0 with proper metadata for Kindle and Apple Books."
         },
         "distribution": {
-          "title": "KDP Mastery",
-          "desc": "Pre-flight checks specifically optimized for Amazon KDP and IngramSpark distribution."
+          "title": "Validation & Quality",
+          "desc": "300 DPI output with sRGB color profiles ensuring your KDP upload passes pre-flight checks. Watermarked proofs available on free tier."
         }
       }
     }
   },
   "PricingPage": {
-    "title": "Invest in your story",
-    "subtitle": "Transparent pricing for every stage of your publishing journey.",
+    "title": "Pay for Intelligence, not storage",
+    "subtitle": "Projects are unlimited. You only spend credits when you engage the AI.",
     "yearly": "Save 20% with yearly",
     "tiers": {
       "free": "Basic",
-      "pro": "Standard for independent authors and polyglots (approx. 100 pages/mo).",
+      "pro": "Standard for independent authors and polyglots.",
       "publisher": "Designed for heavy production and volume publishing houses."
+    },
+    "unitCalculator": {
+      "title": "1 AI Unit = 1 Intellectual Action",
+      "desc": "Your credits are deducted per block interaction:",
+      "p1": "Translating a paragraph? **1 Unit.**",
+      "p2": "Generating a grammar note? **1 Unit.**",
+      "fairUse": "Fair Use: Exports (PDF/EPUB) are **always free**. You never pay to download your own work."
     }
   },
   "Export": {
@@ -260,10 +292,11 @@
     "pdfManuscript": "Print-Ready PDF",
     "epubEbook": "eBook (EPUB 3.0)",
     "generate": "Generate",
+    "generating": "Generating...",
     "quality": "Quality",
     "bleed": "Bleed",
-    "preFlightTitle": "Pre-flight Integrity Check",
-    "symmetryCheck": "Bilingual Symmetry Verified",
+    "preFlightTitle": "Automated Integrity System",
+    "symmetryCheck": "Grid-Lock Symmetry Active",
     "largeDocWarning": "Large documents may take up to 30 seconds to render.",
     "upgradeToPro": "Upgrade to Pro",
     "watermarkPolicy": "Remove watermarks, unlock high-DPI printing, and get 50,000 AI words per month.",
@@ -292,6 +325,7 @@
     "tourWorkspaceContent": "This is your canvas. The left column is the source, the right is your translation."
   },
   "CommandPalette": {
+    "esc": "Esc",
     "placeholder": "Type a command or search...",
     "noResults": "No results found.",
     "actions": "Actions",
@@ -308,10 +342,10 @@
   "AboutPage": {
     "title": "The future of translation",
     "subtitle": "Synoptic was born from a simple realization: the world is getting closer, but our books are still monolingual. We built the first cloud-native studio dedicated to the art (and science) of bilingual publishing.",
-    "sovereignTitle": "Sovereign Knowledge",
-    "sovereignDesc": "We believe that language is the ultimate currency of culture. Our mission is to make bilingualism accessible to everyone, from independent authors to global institutions.",
-    "soulTitle": "AI with a Soul",
-    "soulDesc": "We don't just \"auto-translate\". Our intelligence engine is grounded in philological precision, ensuring that the nuance of your voice remains intact across every border.",
+    "sovereignTitle": "No-Training Guarantee",
+    "sovereignDesc": "Most AI tools claim your data. We claim nothing. Your manuscript does not feed a global brain. It stays in your private vault.",
+    "soulTitle": "Stateless Processing",
+    "soulDesc": "We use a stateless architecture (NextResponse). Once the translation is returned, the inference agent is terminated. Memory buffers are wiped instantly.",
     "values": "Our values",
     "privacyTitle": "Privacy First",
     "privacyDesc": "Your manuscripts are your property. We use secure, siloed infrastructure to ensure your intellectual property never leaves your control.",
@@ -324,33 +358,44 @@
   "PrivacyPage": {
     "title": "Privacy @ Synoptic",
     "subtitle": "We understand that your manuscripts are your soul. Our privacy policy is designed with a single goal: protecting your intellectual property.",
-    "collectTitle": "What we collect",
-    "collectDesc": "We only collect what is strictly necessary to run the studio: your email for authentication, and your project data to allow for real-time cloud sync and AI-assisted layout.",
+    "philosophyTitle": "Our Privacy Philosophy",
+    "philosophyDesc": "Synoptic was built on the principle of 'Sovereign Knowledge.' We believe your manuscripts are private property. We only collect what is strictly necessary.",
+    "collectTitle": "Information We Collect",
+    "collectDesc": "We collect account data (email, name) for login, project metadata (titles, structure), and user content (text files) solely for processing.",
     "collectItems": [
-      "Account Information (Email, Name)",
-      "Project Metadata (Titles, Chapters)",
-      "Usage Data (to improve the interface)"
+      "Account Data: Name and email for billing.",
+      "Project Metadata: To maintain library state.",
+      "User Content: Encrypted and siloed."
     ],
-    "protectTitle": "Data Protection",
-    "protectDesc": "We use industry-standard encryption to protect your data both in transit and at rest. Our secure infrastructure is monitored 24/7 for privacy and security.",
-    "aiPrivacyTitle": "AI Privacy",
-    "aiPrivacyDesc": "Your manuscripts are NOT used to train global AI models. We use specialized, siloed agents that process your text in real-time and clear the memory buffer immediately after the task is complete.",
-    "lastUpdated": "Last updated: December 29, 2025."
+    "aiProcessingTitle": "AI Processing & Data Siloing",
+    "aiProcessingDesc": "We differ from standard AI tools. Your manuscripts are NOT used to train our global AI models. We use specialized, siloed agents that are terminated immediately after the task.",
+    "securityTitle": "Data Storage & Security",
+    "securityDesc": "All data is encrypted in transit (TLS/SSL) and at rest. You may delete a project at any time to permanently remove it from our servers.",
+    "sharingTitle": "Third-Party Sharing",
+    "sharingDesc": "We do not sell your data. We share only with essential providers like Stripe (Billing) and AWS/DigitalOcean (Infrastructure).",
+    "contactTitle": "Contact Us",
+    "contactDesc": "For privacy concerns, contact us at privacy@getsynoptic.com",
+    "lastUpdated": "Last updated: December 2025"
   },
   "TermsPage": {
     "title": "Terms of Service",
-    "subtitle": "Clear rules for a better studio. By using Synoptic, you agree to these terms.",
-    "ownershipTitle": "Ownership",
-    "ownershipDesc": "You retain 100% ownership of your manuscripts, translations, and any generated exports. Synoptic does NOT claim any rights to your intellectual property.",
-    "useTitle": "Acceptable Use",
-    "useDesc": "You agree not to use Synoptic for generating or publishing material that is illegal, defamatory, or violates international copyright laws.",
-    "useItems": [
-      "No automated scraping or bulk API usage.",
-      "No reverse-engineering of our intelligence engine.",
-      "Respect the Fair Use policy for AI Units."
+    "subtitle": "Clear rules. You own your work. We own the tool.",
+    "introTitle": "1. Introduction",
+    "introDesc": "Welcome to Synoptic. By using our cloud studio and bilingual typesetting engine, you agree to these Terms. Last updated: December 2025.",
+    "ipTitle": "2. Intellectual Property & Content Ownership",
+    "ipDesc": "We differentiate clearly between the Tool and the Creation.",
+    "ipItems": [
+      "Your Sovereignty: You retain 100% ownership of your manuscripts, translations, and exports.",
+      "Our Technology: The interface, Typesetting Engine v4.0, and code are the property of Synoptic."
     ],
-    "subTitle": "Subscription & Termination",
-    "subDesc": "Subscriptions are billed in advance. You can cancel at any time. Upon cancellation, you will retain access to your projects until the end of the billing period."
+    "obligationsTitle": "3. User Obligations",
+    "obligationsDesc": "You agree strictly not to reverse engineer our engine or use automated scripts to scrape our library.",
+    "paymentTitle": "4. Subscriptions & AI Units",
+    "paymentDesc": "Plans are billed monthly. AI Units are consumed per 'intellectual operation' (e.g., 1 paragraph translation = 1 Unit). Unused units do not roll over unless explicitly stated.",
+    "publishingTitle": "5. Publishing Disclaimers",
+    "publishingDesc": "While our features are optimized for KDP, we do not guarantee acceptance by third-party platforms. You are responsible for the final proof review.",
+    "terminationTitle": "6. Termination",
+    "terminationDesc": "We reserve the right to suspend accounts that violate our Fair Use policy or engage in abusive behavior."
   },
   "ModelsPage": {
     "title": "Library of structures",

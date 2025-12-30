@@ -28,33 +28,54 @@ export default function TermsPage() {
         </motion.div>
 
         <div className="space-y-12">
+          {/* 1. Introduction */}
+          <section>
+            <h2 className="text-2xl font-bold mb-4">{t('introTitle')}</h2>
+            <p className="text-muted-foreground">{t('introDesc')}</p>
+          </section>
+
+          {/* 2. Intellectual Property */}
           <section className="p-8 rounded-3xl bg-muted/20 border border-border/50">
             <h2 className="text-2xl font-bold mb-4 flex items-center gap-3">
               <Scale className="h-5 w-5 text-primary" />
-              {t('ownershipTitle')}
+              {t('ipTitle')}
             </h2>
-            <p className="text-muted-foreground">{t('ownershipDesc')}</p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold mb-4">{t('useTitle')}</h2>
-            <p className="text-muted-foreground mb-4">{t('useDesc')}</p>
-            <div className="grid gap-4 mt-6">
-              {t.raw('useItems').map((item: string, i: number) => (
-                <div key={i} className="flex gap-3 items-center text-muted-foreground">
-                  <CheckCircle className="h-4 w-4 text-emerald-500" />
-                  <span className="text-sm">{item}</span>
-                </div>
+            <p className="text-muted-foreground mb-4">{t('ipDesc')}</p>
+            <ul className="grid gap-2">
+              {t.raw('ipItems').map((item: string, i: number) => (
+                <li key={i} className="flex gap-2 items-start text-muted-foreground text-sm">
+                  <CheckCircle className="h-4 w-4 mt-0.5 text-primary shrink-0" />
+                  <span>{item}</span>
+                </li>
               ))}
-            </div>
+            </ul>
           </section>
 
+          {/* 3. User Obligations */}
           <section>
             <h2 className="text-2xl font-bold mb-4 flex items-center gap-3">
               <Gavel className="h-5 w-5 text-amber-500" />
-              {t('subTitle')}
+              {t('obligationsTitle')}
             </h2>
-            <p className="text-muted-foreground">{t('subDesc')}</p>
+            <p className="text-muted-foreground">{t('obligationsDesc')}</p>
+          </section>
+
+          {/* 4. Subscriptions & AI Units */}
+          <section className="p-8 rounded-3xl bg-primary/5 border border-primary/10">
+            <h2 className="text-2xl font-bold mb-4 text-[#30b8c8]">{t('paymentTitle')}</h2>
+            <p className="text-muted-foreground">{t('paymentDesc')}</p>
+          </section>
+
+           {/* 5. Publishing Disclaimers */}
+           <section>
+            <h2 className="text-2xl font-bold mb-4">{t('publishingTitle')}</h2>
+            <p className="text-muted-foreground">{t('publishingDesc')}</p>
+          </section>
+
+          {/* 6. Termination */}
+          <section>
+            <h2 className="text-2xl font-bold mb-4 text-red-400">{t('terminationTitle')}</h2>
+            <p className="text-muted-foreground">{t('terminationDesc')}</p>
           </section>
         </div>
       </div>

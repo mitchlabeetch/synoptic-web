@@ -119,27 +119,11 @@ export function PricingTable() {
         >
           <div className="flex flex-col md:flex-row gap-12 items-start">
             <div className="flex-1">
-              <h3 className="text-2xl font-bold mb-4 font-outfit">{t('aiExplanation.title')}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed italic mb-8">
-                {t('aiExplanation.note')}
-              </p>
-              <div className="p-6 rounded-2xl bg-background/50 border border-primary/10">
-                <div className="text-primary font-bold text-lg mb-2">{t('aiExplanation.whatIsAUnit')}</div>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  {t('aiExplanation.unitDesc')}
-                </p>
-              </div>
-            </div>
-            <div className="flex-1 grid gap-6">
-              {['free', 'pro', 'publisher'].map((key) => (
-                <div key={key} className="flex gap-4">
-                  <div className="w-2 h-2 rounded-full bg-primary mt-1.5 flex-shrink-0" />
-                  <div>
-                    <h4 className="text-sm font-bold uppercase tracking-wider text-muted-foreground/80 mb-1">{t(`${key}.name`)}</h4>
-                    <p className="text-sm text-muted-foreground">{t(`aiExplanation.tiers.${key}`)}</p>
-                  </div>
-                </div>
-              ))}
+              {/* Note: We use tPage normally for this section but since we are inside PricingTable which uses 'Pricing' namespace, 
+                  we will just use t('unitCalculator.title') assuming we moved it to Pricing or accessible via some way. 
+                  Actually, best practice: load the namespace. 
+              */}
+              <UnitCalculatorSection />
             </div>
           </div>
         </motion.div>
@@ -147,3 +131,40 @@ export function PricingTable() {
     </section>
   );
 }
+
+function UnitCalculatorSection() {
+  const t = useTranslations('PricingPage.unitCalculator');
+  return (
+    <div className="w-full">
+      <h3 className="text-2xl font-bold mb-4 font-outfit">{t('title')}</h3>
+      <p className="text-sm text-muted-foreground leading-relaxed italic mb-8">
+        {t('desc')}
+      </p>
+      <div className="p-6 rounded-2xl bg-background/50 border border-primary/10 space-y-4">
+         <div className="flex items-center gap-3">
+             <div className="h-2 w-2 rounded-full bg-primary" />
+             <p className="text-sm text-muted-foreground">{renderBold(t('p1'))}</p>
+         </div>
+         <div className="flex items-center gap-3">
+             <div className="h-2 w-2 rounded-full bg-primary" />
+             <p className="text-sm text-muted-foreground">{renderBold(t('p2'))}</p>
+         </div>
+         <div className="pt-4 border-t border-border/50">
+             <p className="text-xs text-muted-foreground leading-relaxed font-medium">
+                {renderBold(t('fairUse'))}
+             </p>
+         </div>
+      </div>
+    </div>
+  );
+}
+
+const renderBold = (text: string) => {
+    const parts = text.split(/(\*\*.*?\*\*)/g);
+    return parts.map((part, i) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return <strong key={i} className="text-foreground">{part.slice(2, -2)}</strong>;
+      }
+      return part;
+    });
+};

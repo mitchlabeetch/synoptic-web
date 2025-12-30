@@ -102,7 +102,7 @@ export function CommandPalette() {
             className="flex-1 h-14 bg-transparent border-none outline-none text-sm px-4 focus:ring-0"
           />
           <div className="hidden md:flex items-center gap-1.5 px-2 py-0.5 rounded border bg-muted text-[10px] font-medium text-muted-foreground uppercase">
-             Esc
+             {t('esc')}
           </div>
         </div>
         
