@@ -178,6 +178,8 @@
   },
   "Marketing": {
     "nav": {
+      "toLearn": "Dành cho học ngoại ngữ",
+      "toPublish": "Dành cho xuất bản sách",
       "features": "Tính năng",
       "pricing": "Giá cả",
       "library": "Thư viện",
@@ -193,14 +195,18 @@
     "hero": {
       "badge": "Synoptic v1.0 Bản thử nghiệm riêng tư",
       "title": "Studio Song ngữ <span>Đỉnh cao</span>",
+      "titlePlain": "Công cụ trực quan nhất để tạo sách, fách học và tài sản song ngữ của riêng bạn từ đầu với nội dung bạn yêu thích.",
       "subtitle": "Tạo sách song song chuyên nghiệp với dàn trang hỗ trợ bởi AI, đồng bộ đám mây thời gian thực và xuất bản KDP chỉ với một cú nhấp chuột.",
       "ctaPrimary": "Bắt đầu viết miễn phí",
       "ctaSecondary": "Khám phá thư viện",
-      "aiSuggestion": "Gợi ý của AI"
+    "aiSuggestion": "Gợi ý của AI"
     },
     "footer": {
       "tagline": "Nền tảng xuất bản song ngữ chuyên nghiệp cho tác giả, người học ngôn ngữ và nhà xuất bản. Thiết kế tại SF, xây dựng cho thế giới.",
       "copyright": "© 2025 Synoptic Studio. Bảo lưu mọi quyền."
+    },
+    "carbon": {
+      "label": "Bền vững"
     }
   },
   "Features": {

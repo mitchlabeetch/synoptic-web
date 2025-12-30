@@ -31,10 +31,10 @@ export function MarketingHeader() {
       </Link>
 
       {/* Desktop Nav */}
-      <nav className="ml-auto hidden min-[1100px]:flex gap-4 xl:gap-8 items-center">
+      <nav className="ml-16 hidden 2xl:flex gap-4 xl:gap-8 items-center">
         <Link 
           className={cn(
-            "text-[10px] xl:text-sm font-semibold uppercase tracking-[0.15em] transition-colors font-outfit",
+            "text-sm font-semibold uppercase tracking-[0.15em] transition-colors font-outfit",
             pathname === '/learn' ? "text-primary" : "text-muted-foreground hover:text-primary"
           )} 
           href="/learn"
@@ -43,17 +43,17 @@ export function MarketingHeader() {
         </Link>
         <Link 
           className={cn(
-            "text-[10px] xl:text-sm font-semibold uppercase tracking-[0.15em] transition-colors font-outfit",
+            "text-sm font-semibold uppercase tracking-[0.15em] transition-colors font-outfit",
             pathname === '/publish' ? "text-primary" : "text-muted-foreground hover:text-primary"
           )} 
           href="/publish"
         >
           {t('toPublish')}
         </Link>
-        <Link className="text-[10px] xl:text-sm font-semibold uppercase tracking-[0.15em] text-muted-foreground hover:text-primary transition-colors font-outfit" href="/#pricing">{t('pricing')}</Link>
+        <Link className="text-sm font-semibold uppercase tracking-[0.15em] text-muted-foreground hover:text-primary transition-colors font-outfit" href="/#pricing">{t('pricing')}</Link>
         <Link 
           className={cn(
-            "text-[10px] xl:text-sm font-semibold uppercase tracking-[0.15em] transition-colors font-outfit",
+            "text-sm font-semibold uppercase tracking-[0.15em] transition-colors font-outfit",
             pathname === '/library' ? "text-primary" : "text-muted-foreground hover:text-primary"
           )} 
           href="/library"
@@ -61,23 +61,23 @@ export function MarketingHeader() {
           {t('library')}
         </Link>
         
-        <div className="h-4 w-px bg-muted mx-1 xl:mx-2" />
+        <div className="flex-1" />
         
-        <WebsiteCarbonBadge className="hidden lg:flex" />
+        <WebsiteCarbonBadge className="hidden min-[1700px]:flex" />
         <LocaleSwitcher />
 
-        <div className="h-4 w-px bg-muted mx-1 xl:mx-2" />
+        <div className="h-4 w-px bg-muted mx-2" />
         
         <Link href="/auth/login">
-          <Button variant="ghost" className="text-xs xl:text-sm font-bold rounded-full px-4 xl:px-6 transition-all hover:bg-primary/5 hover:text-primary">{t('logIn')}</Button>
+          <Button variant="ghost" className="text-sm font-bold rounded-full px-6 transition-all hover:bg-primary/10 hover:text-[#22687a] text-muted-foreground font-outfit uppercase tracking-widest">{t('logIn')}</Button>
         </Link>
         <Link href="/auth/signup">
-          <Button className="text-xs xl:text-sm font-bold rounded-full px-6 xl:px-8 bg-[#22687a] hover:bg-[#1a5160] transition-shadow shadow-lg shadow-primary/10">{t('joinNow')}</Button>
+          <Button className="text-sm font-extrabold rounded-full px-8 bg-[#22687a] hover:bg-[#1a5160] transition-all shadow-xl shadow-primary/20 font-outfit uppercase tracking-widest text-white">{t('joinNow')}</Button>
         </Link>
       </nav>
 
       {/* Mobile Menu Trigger & Actions */}
-      <div className="ml-auto flex min-[1100px]:hidden items-center gap-4">
+      <div className="ml-auto flex 2xl:hidden items-center gap-4">
         <LocaleSwitcher />
         <button 
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -95,7 +95,7 @@ export function MarketingHeader() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed inset-0 bg-background z-[1000] flex flex-col pt-24 px-8"
+            className="fixed inset-0 bg-white dark:bg-slate-950 z-[1000] flex flex-col pt-24 px-8 backdrop-blur-3xl"
           >
             <nav className="flex flex-col gap-6">
               <Link 
@@ -131,10 +131,10 @@ export function MarketingHeader() {
             <div className="mt-auto mb-10 flex flex-col gap-4">
               <WebsiteCarbonBadge className="mb-4" />
               <Link href="/auth/login" className="w-full">
-                <Button variant="outline" className="w-full font-bold rounded-full py-6 text-lg">{t('logIn')}</Button>
+                <Button variant="outline" className="w-full font-bold rounded-full py-7 text-lg border-2 border-primary/20 text-[#22687a] hover:bg-primary/5">{t('logIn')}</Button>
               </Link>
               <Link href="/auth/signup" className="w-full">
-                <Button className="w-full font-bold rounded-full py-6 text-lg bg-[#22687a]">{t('joinNow')}</Button>
+                <Button className="w-full font-black rounded-full py-7 text-lg bg-[#22687a] shadow-2xl shadow-primary/20 text-white">{t('joinNow')}</Button>
               </Link>
             </div>
           </motion.div>

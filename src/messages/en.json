@@ -233,6 +233,7 @@
       "copyright": "© 2025 Synoptic Studio. All rights reserved."
     },
     "carbon": {
+      "label": "Sustainability",
       "calculating": "Measuring...",
       "cleanerThan": "Cleaner than {percentage}%",
       "co2": "{amount}g CO2",

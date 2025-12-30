@@ -36,7 +36,13 @@ export function FeatureGrid() {
     const parts = text.split(/(\*\*.*?\*\*)/g);
     return parts.map((part, i) => {
       if (part.startsWith('**') && part.endsWith('**')) {
-        return <strong key={i} className="text-foreground">{part.slice(2, -2)}</strong>;
+        const content = part.slice(2, -2);
+        return (
+          <strong key={i} className="relative inline-block px-1 mx-0.5">
+            <span className="relative z-10 text-foreground font-black">{content}</span>
+            <span className="absolute bottom-1 left-0 w-full h-2 bg-[#30b8c8]/20 -z-0 rounded-sm blur-[1px]" />
+          </strong>
+        );
       }
       return part;
     });

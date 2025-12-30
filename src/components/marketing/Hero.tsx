@@ -22,67 +22,136 @@ interface LanguageData {
 
 const LANGUAGES_ANNOTATIONS: Record<string, LanguageData> = {
   en: {
-    segments: [
-      { text: "The ", role: "other" },
-      { text: "ultimate ", role: "adjective" },
-      { text: "bilingual ", role: "other", highlight: true },
-      { text: "studio", role: "noun" }
-    ],
+    segments: [{ text: "The", role: "other" }, { text: "ultimate", role: "adjective" }, { text: "bilingual", role: "other", highlight: true }, { text: "studio", role: "noun" }],
     arrow: [1, 3]
   },
   fr: {
-    segments: [
-      { text: "Le ", role: "other" },
-      { text: "studio ", role: "noun" },
-      { text: "bilingue ", role: "other", highlight: true },
-      { text: "ultime", role: "adjective" }
-    ],
+    segments: [{ text: "Le", role: "other" }, { text: "studio", role: "noun" }, { text: "bilingue", role: "other", highlight: true }, { text: "ultime", role: "adjective" }],
     arrow: [3, 1]
   },
   es: {
-    segments: [
-      { text: "El ", role: "other" },
-      { text: "estudio ", role: "noun" },
-      { text: "bilingüe ", role: "other", highlight: true },
-      { text: "definitivo", role: "adjective" }
-    ],
+    segments: [{ text: "El", role: "other" }, { text: "estudio", role: "noun" }, { text: "bilingüe", role: "other", highlight: true }, { text: "definitivo", role: "adjective" }],
     arrow: [3, 1]
   },
   de: {
-    segments: [
-      { text: "Das ", role: "other" },
-      { text: "ultimative ", role: "adjective" },
-      { text: "zweisprachige ", role: "other", highlight: true },
-      { text: "studio", role: "noun" }
-    ],
+    segments: [{ text: "Das", role: "other" }, { text: "ultimative", role: "adjective" }, { text: "zweisprachige", role: "other", highlight: true }, { text: "studio", role: "noun" }],
     arrow: [1, 3]
   },
   it: {
-    segments: [
-      { text: "Lo ", role: "other" },
-      { text: "studio ", role: "noun" },
-      { text: "bilingue ", role: "other", highlight: true },
-      { text: "definitivo", role: "adjective" }
-    ],
+    segments: [{ text: "Lo", role: "other" }, { text: "studio", role: "noun" }, { text: "bilingue", role: "other", highlight: true }, { text: "definitivo", role: "adjective" }],
     arrow: [3, 1]
+  },
+  pt: {
+    segments: [{ text: "O", role: "other" }, { text: "estúdio", role: "noun" }, { text: "bilingue", role: "other", highlight: true }, { text: "definitivo", role: "adjective" }],
+    arrow: [3, 1]
+  },
+  ro: {
+    segments: [{ text: "Studioul", role: "noun" }, { text: "bilingv", role: "other", highlight: true }, { text: "suprem", role: "adjective" }],
+    arrow: [2, 0]
+  },
+  nl: {
+    segments: [{ text: "De", role: "other" }, { text: "ultieme", role: "adjective" }, { text: "tweetalige", role: "other", highlight: true }, { text: "studio", role: "noun" }],
+    arrow: [1, 3]
+  },
+  sv: {
+    segments: [{ text: "Den", role: "other" }, { text: "ultimata", role: "adjective" }, { text: "tvåspråkiga", role: "other", highlight: true }, { text: "studion", role: "noun" }],
+    arrow: [1, 3]
+  },
+  da: {
+    segments: [{ text: "Det", role: "other" }, { text: "ultimative", role: "adjective" }, { text: "tosprogede", role: "other", highlight: true }, { text: "studie", role: "noun" }],
+    arrow: [1, 3]
+  },
+  no: {
+    segments: [{ text: "Det", role: "other" }, { text: "ultimative", role: "adjective" }, { text: "tospråklige", role: "other", highlight: true }, { text: "studioet", role: "noun" }],
+    arrow: [1, 3]
+  },
+  pl: {
+    segments: [{ text: "Najlepsze", role: "adjective" }, { text: "studio", role: "noun" }, { text: "dwujęzyczne", role: "other", highlight: true }],
+    arrow: [0, 1]
+  },
+  ru: {
+    segments: [{ text: "Лучшая", role: "adjective" }, { text: "двуязычная", role: "other", highlight: true }, { text: "студия", role: "noun" }],
+    arrow: [0, 2]
+  },
+  uk: {
+    segments: [{ text: "Найкраща", role: "adjective" }, { text: "двомовна", role: "other", highlight: true }, { text: "студія", role: "noun" }],
+    arrow: [0, 2]
+  },
+  tr: {
+    segments: [{ text: "En iyi", role: "adjective" }, { text: "iki dilli", "role": "other", highlight: true }, { text: "stüdyo", role: "noun" }],
+    arrow: [0, 2]
+  },
+  el: {
+    segments: [{ text: "Το", role: "other" }, { text: "απόλυτο", role: "adjective" }, { text: "δίγλωσσο", role: "other", highlight: true }, { text: "στούντιο", role: "noun" }],
+    arrow: [1, 3]
+  },
+  hi: {
+    segments: [{ text: "सर्वश्रेष्ठ", role: "adjective" }, { text: "द्विभाषी", role: "other", highlight: true }, { text: "स्टूडियो", role: "noun" }],
+    arrow: [0, 2]
+  },
+  vi: {
+    segments: [{ text: "Studio", role: "noun" }, { text: "song ngữ", role: "other", highlight: true }, { text: "tối thượng", role: "adjective" }],
+    arrow: [2, 0]
+  },
+  id: {
+    segments: [{ text: "Studio", role: "noun" }, { text: "dwibahasa", role: "other", highlight: true }, { text: "pamungkas", role: "adjective" }],
+    arrow: [2, 0]
   },
   ar: {
-    segments: [
-      { text: "ال", role: "other" },
-      { text: "استوديو ", role: "noun" },
-      { text: "ثنائي اللغة ", role: "other", highlight: true },
-      { text: "المثالي", role: "adjective" }
-    ],
+    segments: [{ text: "ال", role: "other" }, { text: "استوديو", role: "noun" }, { text: "ثنائي اللغة", role: "other", highlight: true }, { text: "المثالي", role: "adjective" }],
     arrow: [3, 1]
   },
+  he: {
+    segments: [{ text: "הסטודיו", role: "noun" }, { text: "הדו-לשוני", role: "other", highlight: true }, { text: "האולטימטיבי", role: "adjective" }],
+    arrow: [2, 0]
+  },
+  fa: {
+    segments: [{ text: "استودیو", role: "noun" }, { text: "دوزبانه", role: "other", highlight: true }, { text: "نهایی", role: "adjective" }],
+    arrow: [2, 0]
+  },
+  zh: {
+    segments: [{ text: "终极", role: "adjective" }, { text: "双语", "role": "other", highlight: true }, { text: "工作室", role: "noun" }],
+    arrow: [0, 2]
+  },
+  "zh-TW": {
+    segments: [{ text: "終極", role: "adjective" }, { text: "雙語", "role": "other", highlight: true }, { text: "工作室", role: "noun" }],
+    arrow: [0, 2]
+  },
   ja: {
-    segments: [
-      { text: "究極", role: "adjective" },
-      { text: "の", role: "other" },
-      { text: "バイリンガル", role: "other", highlight: true },
-      { text: "スタジオ", role: "noun" }
-    ],
+    segments: [{ text: "究極", role: "adjective" }, { text: "の", role: "other" }, { text: "バイリンガル", role: "other", highlight: true }, { text: "スタジオ", role: "noun" }],
     arrow: [0, 3]
+  },
+  ko: {
+    segments: [{ text: "궁극의", role: "adjective" }, { text: "이국어", role: "other", highlight: true }, { text: "스튜디오", role: "noun" }],
+    arrow: [0, 2]
+  },
+  th: {
+    segments: [{ text: "สตูดิโอ", role: "noun" }, { text: "สองภาษา", role: "other", highlight: true }, { text: "ที่ดีที่สุด", role: "adjective" }],
+    arrow: [2, 0]
+  },
+  ca: {
+    segments: [{ text: "L'estudi", role: "noun" }, { text: "bilingüe", role: "other", highlight: true }, { text: "definitiu", role: "adjective" }],
+    arrow: [2, 0]
+  },
+  cs: {
+    segments: [{ text: "Ultimátní", role: "adjective" }, { text: "bilingvní", role: "other", highlight: true }, { text: "studio", role: "noun" }],
+    arrow: [0, 2]
+  },
+  la: {
+    segments: [{ text: "Studium", role: "noun" }, { text: "bilingue", role: "other", highlight: true }, { text: "ultimum", role: "adjective" }],
+    arrow: [2, 0]
+  },
+  fi: {
+    segments: [{ text: "Lopullinen", role: "adjective" }, { text: "kaksikielinen", role: "other", highlight: true }, { text: "studio", role: "noun" }],
+    arrow: [0, 2]
+  },
+  hu: {
+    segments: [{ text: "A", role: "other" }, { text: "végső", role: "adjective" }, { text: "kétnyelvű", role: "other", highlight: true }, { text: "stúdió", role: "noun" }],
+    arrow: [1, 3]
+  },
+  grc: {
+    segments: [{ text: "Τὸ", role: "other" }, { text: "ἔσχατον", role: "adjective" }, { text: "δίγλωσσον", role: "other", highlight: true }, { text: "σπουδαστήριον", role: "noun" }],
+    arrow: [1, 3]
   }
 };
 
@@ -118,29 +187,43 @@ function CurvedArrow({ fromRef, toRef, containerRef, color, isRTL }: { fromRef: 
       const fromCenterX = fromRect.left - containerRect.left + fromRect.width / 2;
       const toCenterX = toRect.left - containerRect.left + toRect.width / 2;
       
-      // Dynamic attachment points to avoid overlapping the source word
-      if (fromCenterX < toCenterX) {
-        // Source is on the left
-        startX = fromRect.left - containerRect.left + fromRect.width * 0.7; // Start toward the right side of source
-        endX = toRect.left - containerRect.left + toRect.width * 0.3; // End toward the left side of target
+      const diffY = toRect.top - fromRect.top;
+      const verticalThreshold = 15;
+
+      startX = fromCenterX;
+      endX = toCenterX;
+
+      if (diffY < -verticalThreshold) {
+        // TARGET IS ABOVE ORIGIN
+        startY = fromRect.top - containerRect.top - padding;
+        endY = toRect.top - containerRect.top + toRect.height + padding;
+      } else if (diffY > verticalThreshold) {
+        // TARGET IS BELOW ORIGIN
+        startY = fromRect.top - containerRect.top + fromRect.height + padding;
+        endY = toRect.top - containerRect.top - padding;
       } else {
-        // Source is on the right
-        startX = fromRect.left - containerRect.left + fromRect.width * 0.3; // Start toward the left side of source
-        endX = toRect.left - containerRect.left + toRect.width * 0.7; // End toward the right side of target
+        // SAME LEVEL
+        startY = fromRect.top - containerRect.top + fromRect.height + padding;
+        endY = toRect.top - containerRect.top + toRect.height + padding;
       }
       
       const dist = Math.abs(startX - endX);
 
-      // Always use bottom for this specific bilingual annotation look
-      startY = fromRect.top - containerRect.top + fromRect.height + padding;
-      endY = toRect.top - containerRect.top + toRect.height + padding;
-      midY = Math.max(startY, endY) + Math.min(60, dist * 0.4 + 10);
+      // Increased curvature to "clear" intermediate words significantly
+      let controlY;
+      if (Math.abs(diffY) <= verticalThreshold) {
+        controlY = Math.max(startY, endY) + Math.min(150, dist * 0.8 + 40);
+      } else {
+        // For vertical transitions, move the control point horizontally to create a nice sweep
+        controlY = (startY + endY) / 2;
+      }
 
       const isWrapped = Math.abs(fromRect.top - toRect.top) > 30;
       let midX = (startX + endX) / 2;
+      midY = controlY;
       
       if (isWrapped) {
-        const curveOutward = isRTL_context ? -60 : 60;
+        const curveOutward = isRTL_context ? -120 : 120;
         midX = Math.min(startX, endX) - curveOutward;
         midY = (startY + endY) / 2;
       }
@@ -254,8 +337,18 @@ function AnnotatedSentence({
     }
   }, [active, typedSegments, data.segments.length, onComplete, showAnnotations, staticMode]);
 
+  const isRTL_lang = langCode === 'ar' || langCode === 'he' || langCode === 'fa';
+  const isNoGap_lang = langCode === 'zh' || langCode === 'zh-TW' || langCode === 'ja' || langCode === 'ko' || langCode === 'th';
+
   return (
-    <div ref={containerRef} className="relative flex flex-wrap gap-0 items-baseline font-quicksand" dir={langCode === 'ar' ? 'rtl' : 'ltr'}>
+    <div 
+      ref={containerRef} 
+      className={cn(
+        "relative flex flex-wrap items-baseline font-quicksand",
+        isNoGap_lang ? "gap-0" : "gap-x-[0.3em] gap-y-2"
+      )} 
+      dir={isRTL_lang ? 'rtl' : 'ltr'}
+    >
       {data.segments.map((s, i) => {
         const isCurrentlyTyping = i === typedSegments;
         const isPastTyped = i < typedSegments;
@@ -273,7 +366,7 @@ function AnnotatedSentence({
               color: showAnnotations && s.role && s.role !== 'other' ? roleColor : 'inherit'
             }}
             className={cn(
-              "text-[clamp(1.2rem,12cqw,5.5rem)] tracking-tight leading-[1.2] inline-block transition-colors duration-500 whitespace-nowrap relative truncate max-w-full",
+              "text-[clamp(1rem,10cqw,5rem)] tracking-tight leading-[1.3] inline-block transition-colors duration-500 whitespace-nowrap relative",
               showAnnotations && s.role === 'noun' ? 'font-bold' : 'font-medium'
             )}
           >
@@ -304,7 +397,7 @@ function AnnotatedSentence({
           toRef={segmentsRefs.current[data.arrow[1]]!} 
           containerRef={containerRef}
           color={ROLE_COLORS.adjective} 
-          isRTL={langCode === 'ar'}
+          isRTL={isRTL_lang}
         />
       )}
     </div>
@@ -340,11 +433,13 @@ export function Hero() {
 
   return (
     <section className="relative px-4 pt-12 pb-20 md:pt-16 md:pb-32 overflow-hidden bg-background">
-      {/* Enhanced Aesthetic Background Gradient */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[radial-gradient(circle_at_center,rgba(48,184,200,0.1),transparent_70%)] blur-[100px]" />
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[radial-gradient(circle_at_center,rgba(249,114,110,0.05),transparent_70%)] blur-[80px]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(34,104,122,0.02),transparent_60%)]" />
+      {/* Premium Mesh Gradient Background */}
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute top-[-10%] left-[-10%] w-[120%] h-[120%] bg-[#f8fafc] dark:bg-slate-950" />
+        <div className="absolute top-0 right-0 w-[1000px] h-[1000px] bg-[radial-gradient(circle_at_center,rgba(48,184,200,0.15),transparent_70%)] blur-[120px] animate-pulse" />
+        <div className="absolute bottom-[-10%] left-[-10%] w-[800px] h-[800px] bg-[radial-gradient(circle_at_center,rgba(249,114,110,0.1),transparent_70%)] blur-[100px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(34,104,122,0.05),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-[0.03] mix-blend-overlay" />
       </div>
       
       <div className="container px-4 mx-auto">
@@ -364,10 +459,6 @@ export function Hero() {
                 <div className="w-3 h-3 rounded-full bg-green-400/30" />
               </div>
               <div className="flex items-center gap-8">
-                <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-primary/5 border border-primary/10">
-                   <div className={cn("w-2 h-2 rounded-full transition-all duration-700", isSaving ? "bg-primary animate-pulse scale-110" : "bg-muted-foreground/20")} />
-                   <span className="text-[10px] font-bold uppercase tracking-wider text-primary/60">{isSaving ? t('syncing') : t('readyStudio')}</span>
-                </div>
                 <PenTool className="h-4 w-4 text-muted-foreground/20" />
               </div>
             </div>
@@ -414,12 +505,12 @@ export function Hero() {
            transition={{ delay: 0.8 }}
            className="mt-20 text-center max-w-6xl mx-auto space-y-10"
         >
-           <h1 className="text-4xl md:text-6xl lg:text-7xl xl:text-[6.5rem] font-bold tracking-tighter font-quicksand leading-[0.9] text-foreground">
+           <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight font-outfit leading-[1.1] text-foreground max-w-5xl mx-auto italic decoration-primary/30">
               {t('titlePlain')}
            </h1>
-           <p className="text-muted-foreground font-medium text-lg md:text-2xl leading-relaxed max-w-4xl mx-auto font-outfit opacity-70">
+            <p className="text-muted-foreground font-medium text-lg md:text-2xl leading-relaxed max-w-4xl mx-auto font-outfit opacity-80 decoration-primary/10 underline underline-offset-8 decoration-dashed">
               {t('subtitle')}
-           </p>
+            </p>
            <div className="pt-6 flex flex-col sm:flex-row items-center justify-center gap-6">
               <Link href="/auth/signup">
                  <Button size="lg" className="h-[72px] px-12 font-bold rounded-full gap-5 text-xl shadow-xl shadow-primary/20 bg-primary hover:bg-primary/90 transition-all hover:scale-[1.03] active:scale-95 font-outfit">
@@ -428,7 +519,7 @@ export function Hero() {
                  </Button>
               </Link>
               <Link href="/models">
-                 <Button variant="outline" size="lg" className="h-[72px] px-12 font-bold rounded-full text-xl hover:bg-muted/50 transition-all font-outfit border-2">
+                 <Button variant="outline" size="lg" className="h-[72px] px-12 font-bold rounded-full text-xl hover:bg-[#22687a] hover:text-white transition-all font-outfit border-2 border-[#22687a]/20">
                    {t('ctaSecondary')}
                  </Button>
               </Link>

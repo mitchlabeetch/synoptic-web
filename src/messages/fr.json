@@ -232,6 +232,9 @@
     "footer": {
       "tagline": "L'éditeur bilingue professionnel pour les auteurs, les apprenants et les maisons d'édition. Votre voix sans frontières.",
       "copyright": "© 2025 Synoptic Studio. Tous droits réservés."
+    },
+    "carbon": {
+      "label": "Durabilité"
     }
   },
   "Features": {

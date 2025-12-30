@@ -4,12 +4,16 @@
 import { Leaf, Award } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
+import { useTranslations } from 'next-intl';
+
 /**
  * Purpose: Displays a premium A+ Sustainability Grade badge.
  * Action: Links to the official Website Carbon report.
  * Mechanism: Aesthetic badge with glassmorphism and emerald accents.
  */
 export function WebsiteCarbonBadge({ className }: { className?: string }) {
+  const t = useTranslations('Marketing.carbon');
+  
   return (
     <a 
       href="https://www.websitecarbon.com/website/getsynoptic-com/"
@@ -25,10 +29,10 @@ export function WebsiteCarbonBadge({ className }: { className?: string }) {
       <div className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform duration-500">
         <Award className="w-5 h-5" />
       </div>
-
+      
       <div className="flex flex-col">
           <div className="flex items-center gap-1.5">
-            <span className="text-[9px] font-black uppercase tracking-[0.2em] text-emerald-600/50 dark:text-emerald-400/50">Sustainability</span>
+            <span className="text-[9px] font-black uppercase tracking-[0.2em] text-emerald-600/50 dark:text-emerald-400/50">{t('label')}</span>
             <span className="w-1 h-1 rounded-full bg-emerald-500/30" />
             <Leaf className="w-2.5 h-2.5 text-emerald-500/40" />
           </div>
