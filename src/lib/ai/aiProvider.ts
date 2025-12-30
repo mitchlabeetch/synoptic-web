@@ -7,10 +7,11 @@ import { AIProvider } from './types';
 import { OpenAIProvider } from '@/lib/ai/providers/openai';
 import { DOGenAIProvider } from '@/lib/ai/providers/digitalocean';
 import { GradientAIProvider } from '@/lib/ai/providers/gradient';
+import { RAGProvider } from '@/lib/ai/providers/rag';
 
-export type ProviderType = 'openai' | 'digitalocean' | 'gradient';
+export type ProviderType = 'openai' | 'digitalocean' | 'gradient' | 'rag';
 
-export function getAIProvider(type: ProviderType = 'gradient'): AIProvider {
+export function getAIProvider(type: ProviderType = 'rag'): AIProvider {
   switch (type) {
     case 'openai':
       return new OpenAIProvider();
@@ -18,9 +19,13 @@ export function getAIProvider(type: ProviderType = 'gradient'): AIProvider {
       return new DOGenAIProvider();
     case 'gradient':
       return new GradientAIProvider();
+    case 'rag':
+      // 🧠 Manual RAG: Local embeddings + pgvector + Llama 70B
+      // Most cost-effective option - no managed KB fees
+      return new RAGProvider();
     default:
-      // Default to Gradient AI for DigitalOcean deployment
-      return new GradientAIProvider();
+      // Default to RAG for cost efficiency
+      return new RAGProvider();
   }
 }
 

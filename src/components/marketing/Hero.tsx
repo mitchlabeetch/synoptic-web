@@ -425,18 +425,16 @@ export function Hero() {
 
                   {/* Right Side: Rotating Language */}
                   {/* ScaleToFitContainer protects the layout from long words */}
+                  {/* FIX: Both sides animate from T=0 - no conditional rendering */}
                   <div className="flex items-center justify-center md:justify-start overflow-hidden w-full min-w-0">
                     <ScaleToFitContainer>
-                      {/* Starts cycling only after Left Side finishes (introComplete) */}
-                      {introComplete && (
-                        <AnnotatedSentence 
-                          key={currentRotationLang} 
-                          langCode={currentRotationLang} 
-                          active={true} 
-                          staticMode={false} 
-                          onComplete={handleCycleComplete}
-                        />
-                      )}
+                      <AnnotatedSentence 
+                        key={currentRotationLang} 
+                        langCode={currentRotationLang} 
+                        active={true} 
+                        staticMode={false} 
+                        onComplete={handleCycleComplete}
+                      />
                     </ScaleToFitContainer>
                   </div>
                 </div>

@@ -101,20 +101,29 @@ export function TextBlockComponent({
       // Get plain text for translation
       const plainText = l1EditorRef.current?.getText() || block.L1.content.replace(/<[^>]*>/g, '');
       
+      // Pass glossary entries to enable AI pre-injection
+      // Format entries for the API (minimize payload)
+      const glossaryPayload = entries.map(e => ({
+        sourceTerm: e.sourceTerm,
+        targetTerm: e.targetTerm
+      }));
+      
       const response = await fetch('/api/ai/translate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           text: plainText,
           sourceLang,
-          targetLang
+          targetLang,
+          glossary: glossaryPayload // NEW: Pass glossary for AI pre-injection
         }),
       });
 
       if (!response.ok) throw new Error('Translation failed');
       const data = await response.json();
 
-      // Apply Glossary Guard overrides to the AI translation
+      // Double-layer enforcement: Apply Glossary Guard overrides AFTER AI translation
+      // This catches any terms the AI might have missed despite the prompt context
       const finalTranslation = entries.length > 0
         ? applyGlossaryToTranslation(data.translation, entries, 'L2')
         : data.translation;
@@ -125,6 +134,10 @@ export function TextBlockComponent({
       });
       l2EditorRef.current?.setContent(finalTranslation);
       pushHistory();
+      
+      // Lint the new translation for any remaining violations
+      const plainTranslation = finalTranslation.replace(/<[^>]*>/g, '');
+      lintContent(plainTranslation, block.id, currentPageId, 'L2');
     } catch (error) {
       console.error('AI Translation Error:', error);
     } finally {
