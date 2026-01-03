@@ -247,7 +247,7 @@ export function LibraryPageClient({ isAuthenticated = false }: LibraryPageClient
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Button size="lg" asChild>
-              <a href="/signup">{t('cta.getStartedFree')}</a>
+              <a href="/auth/signup">{t('cta.getStartedFree')}</a>
             </Button>
             <Button size="lg" variant="outline" asChild>
               <a href="/about">{t('cta.learnMore')}</a>

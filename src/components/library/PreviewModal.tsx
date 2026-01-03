@@ -83,7 +83,7 @@ export function PreviewModal({
     
     if (!isAuthenticated) {
       // Redirect to login with return URL
-      router.push(`/login?returnTo=/library&action=favorite&tileId=${tile.id}`);
+      router.push(`/auth/login?returnTo=/library&action=favorite&tileId=${tile.id}`);
       return;
     }
 
@@ -134,7 +134,7 @@ export function PreviewModal({
         config: wizardConfig,
         returnUrl: `/dashboard/new?source=${tile.sourceId}&tileId=${tile.id}`,
       });
-      router.push(`/login?returnTo=/dashboard/new&source=${tile.sourceId}&tileId=${tile.id}`);
+      router.push(`/auth/login?returnTo=/dashboard/new&source=${tile.sourceId}&tileId=${tile.id}`);
     }
   }, [tile, isAuthenticated, wizardConfig, setPendingImport, router]);
 
@@ -380,7 +380,7 @@ export function PreviewModal({
                           <Button
                             variant="outline"
                             size="sm"
-                            onClick={() => router.push('/login?returnTo=/library')}
+                            onClick={() => router.push('/auth/login?returnTo=/library')}
                             className="gap-1"
                           >
                             <LogIn className="w-4 h-4" />

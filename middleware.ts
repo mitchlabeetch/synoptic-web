@@ -61,14 +61,43 @@ function addSecurityHeaders(response: NextResponse): NextResponse {
   );
   
   // Content Security Policy - prevent XSS and injection attacks
-  // Note: This is a baseline CSP. Adjust based on your needs.
+  // Note: This includes all external API domains for library adapters
+  const connectSources = [
+    "'self'",
+    'https://api.languagetool.org',
+    'https://libretranslate.com',
+    'https://*.wiktionary.org',
+    'https://api.dictionaryapi.dev',
+    'https://api.alquran.cloud',
+    'https://bible-api.com',
+    'https://chroniclingamerica.loc.gov',
+    'https://api.datamuse.com',
+    'https://api.unsplash.com',
+    'https://openlibrary.org',
+    'https://standardebooks.org',
+    'https://gutenberg.org',
+    'https://www.gutenberg.org',
+    'https://poetrydb.org',
+    'https://api.nasa.gov',
+    'https://xkcd.com',
+    'https://www.themealdb.com',
+    'https://www.thecocktaildb.com',
+    'https://api.artic.edu',
+    'https://collectionapi.metmuseum.org',
+    'https://www.google-analytics.com',
+    'https://*.digitaloceanspaces.com',
+    'https://api.digitalocean.com',
+    'https://api.openai.com',
+    ...(isDev ? ['ws://localhost:*', 'http://localhost:*'] : []),
+  ].join(' ');
+  
   const cspDirectives = [
     "default-src 'self'",
     `script-src 'self'${isDev ? " 'unsafe-eval' 'unsafe-inline'" : " 'unsafe-inline'"}`,
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "font-src 'self' https://fonts.gstatic.com data:",
     "img-src 'self' data: blob: https:",
-    "connect-src 'self' https://api.languagetool.org https://libretranslate.com https://*.wiktionary.org https://api.dictionaryapi.dev" + (isDev ? ' ws://localhost:* http://localhost:*' : ''),
+    `connect-src ${connectSources}`,
     "media-src 'self' blob:",
     "object-src 'none'",
     "frame-ancestors 'none'",
