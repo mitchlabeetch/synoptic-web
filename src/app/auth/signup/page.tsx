@@ -42,8 +42,9 @@ export default function SignupPage() {
         throw new Error(data.error || t('failed'));
       }
 
-      // Use auth redirect handler for pending imports
-      handleSuccessfulAuth();
+      // Redirect to verify-email page to show "check your email" message
+      // The user is logged in but needs to verify before full access
+      router.push('/auth/verify-email');
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : t('errorOccurred');
       setError(message);

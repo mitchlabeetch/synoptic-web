@@ -11,6 +11,7 @@ import { getCurrentUser, getUserId } from '@/lib/auth/jwt';
 import { getUserProjects, getUserProfile } from '@/lib/db/server';
 import { DashboardClient, SavedTemplatesWrapper } from './DashboardClient';
 import { EmptyProjectsState } from './EmptyProjectsState';
+import { EmailVerificationBanner } from '@/components/dashboard/EmailVerificationBanner';
 
 import { getTranslations } from 'next-intl/server';
 import LocaleSwitcher from '@/components/ui/LocaleSwitcher';
@@ -30,11 +31,18 @@ export default async function DashboardPage() {
 
   const tier = profile?.tier || 'free';
   const projectCount = projects?.length || 0;
+  const emailVerified = profile?.email_verified ?? true; // Default to true for OAuth users
 
   return (
     <div className="container mx-auto py-8 px-4 relative">
       {/* Client-side library import handler */}
       <DashboardClient />
+      
+      {/* Email verification banner for unverified users */}
+      <EmailVerificationBanner 
+        email={profile?.email || ''} 
+        emailVerified={emailVerified} 
+      />
       
       <OnboardingTour context="dashboard" />
       <div className="flex justify-between items-center mb-8">
