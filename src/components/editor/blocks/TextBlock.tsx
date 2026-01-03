@@ -158,7 +158,13 @@ export function TextBlockComponent({
       const l1Text = l1EditorRef.current?.getText() || block.L1.content.replace(/<[^>]*>/g, '');
       const l2Text = l2EditorRef.current?.getText() || block.L2.content.replace(/<[^>]*>/g, '');
       
-      const response = await fetch('/api/ai/annotate', {
+      // Use streaming for long texts to avoid timeout issues
+      // Threshold: 500+ combined characters uses streaming endpoint
+      const useStreaming = (l1Text.length + l2Text.length) >= 500;
+      
+      const endpoint = useStreaming ? '/api/ai/annotate/stream' : '/api/ai/annotate';
+      
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -170,12 +176,63 @@ export function TextBlockComponent({
       });
 
       if (!response.ok) throw new Error('Annotation failed');
-      const data = await response.json();
+      
+      let data: Record<string, unknown> | undefined;
+      
+      if (useStreaming) {
+        // Parse SSE stream and get final result
+        const reader = response.body?.getReader();
+        if (!reader) throw new Error('No response body');
+        
+        const decoder = new TextDecoder();
+        let buffer = '';
+        
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          
+          buffer += decoder.decode(value, { stream: true });
+          
+          // Look for 'complete' event
+          const completeMatch = buffer.match(/event:\s*complete\ndata:\s*(.+)/);
+          if (completeMatch) {
+            try {
+              data = JSON.parse(completeMatch[1]);
+              break;
+            } catch {
+              // Continue reading if parse fails
+            }
+          }
+          
+          // Check for error event
+          const errorMatch = buffer.match(/event:\s*error\ndata:\s*(.+)/);
+          if (errorMatch) {
+            const errorData = JSON.parse(errorMatch[1]);
+            throw new Error(errorData.message || 'Streaming annotation failed');
+          }
+        }
+        
+        // If we finished reading without finding complete event
+        if (!data) throw new Error('Stream ended without result');
+      } else {
+        data = await response.json();
+      }
+      
+      // Ensure data is defined at this point
+      if (!data) throw new Error('No annotation data received');
+      
+      // Type-safe access to annotation data
+      const annotationData = data as {
+        wordGroups?: Array<Record<string, unknown>>;
+        arrows?: Array<Record<string, unknown>>;
+        notes?: Array<Record<string, unknown>>;
+        creditsUsed?: number;
+      };
 
       // Add annotations to store
       const store = useProjectStore.getState();
       
-      data.wordGroups?.forEach((g: Record<string, unknown>) => {
+      annotationData.wordGroups?.forEach((g) => {
         store.addWordGroup({
           id: `wg-${block.id}-${Math.random().toString(36).substr(2, 9)}`,
           blockId: block.id,
@@ -183,7 +240,7 @@ export function TextBlockComponent({
         } as Parameters<typeof store.addWordGroup>[0]);
       });
 
-      data.arrows?.forEach((a: Record<string, unknown>) => {
+      annotationData.arrows?.forEach((a) => {
         store.addArrow({
           id: `ar-${block.id}-${Math.random().toString(36).substr(2, 9)}`,
           blockId: block.id,
@@ -191,7 +248,7 @@ export function TextBlockComponent({
         } as Parameters<typeof store.addArrow>[0]);
       });
 
-      data.notes?.forEach((n: Record<string, unknown>) => {
+      annotationData.notes?.forEach((n) => {
         store.addNote({
           id: `nt-${block.id}-${Math.random().toString(36).substr(2, 9)}`,
           blockId: block.id,
@@ -199,8 +256,14 @@ export function TextBlockComponent({
         } as Parameters<typeof store.addNote>[0]);
       });
 
+      // Show success toast
+      if (annotationData.creditsUsed) {
+        toast.credits(annotationData.creditsUsed);
+      }
+
     } catch (error) {
       console.error('AI Annotation Error:', error);
+      toast.error('Annotation failed', { description: (error as Error).message });
     } finally {
       setIsAiProcessing(false);
     }

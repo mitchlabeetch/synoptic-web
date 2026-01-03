@@ -993,7 +993,7 @@
       "detected": "تم اكتشاف:",
       "noIssuesFound": "لم يتم العثور على أخطاء!",
       "textLooksGreat": "نصك يبدو رائعاً.",
-      "issuesFound": "تم العثور على {count} من المشكلات",
+      "issuesFound": "{count, plural, =0 {لم يتم العثور على مشكلات} one {تم العثور على مشكلة واحدة} two {تم العثور على مشكلتين} few {تم العثور على # مشكلات} many {تم العثور على # مشكلة} other {تم العثور على # مشكلة}}",
       "fixAll": "تصحيح الكل",
       "tryAgain": "حاول مرة أخرى",
       "poweredBy": "مدعوم بواسطة LanguageTool"

@@ -1,15 +1,18 @@
 // src/components/editor/Workspace.tsx
-// PURPOSE: Main editor workspace with virtualized page rendering
+// PURPOSE: Main editor workspace with virtualized page rendering and Grid-Lock alignment
 // ACTION: Renders the book canvas with performance optimization for large documents
-// MECHANISM: Uses IntersectionObserver-based virtualization for pages
+// MECHANISM: Uses IntersectionObserver-based virtualization, ResizeObserver for L1/L2 sync
 
 "use client";
 
 import { useProjectStore, getEffectiveDirection } from '@/lib/store/projectStore';
 import { useProjectSync } from '@/hooks/useProjectSync';
 import { useVirtualizedPages, PagePlaceholder } from '@/hooks/useVirtualizedPages';
+import { useGridLockSync } from '@/lib/hooks/useGridLockSync';
+import { useOfflineDraft } from '@/lib/hooks/useOfflineDraft';
 import PageRenderer from './PageRenderer';
-import { Loader2, CloudCheck, AlertCircle, PlusCircle, ChevronUp, ChevronDown } from 'lucide-react';
+import { DraftRecoveryModal } from './DraftRecoveryModal';
+import { Loader2, CloudCheck, AlertCircle, PlusCircle, ChevronUp, ChevronDown, HardDrive } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useTranslations } from 'next-intl';
 import { AnnotationLayer } from './annotations/AnnotationLayer';
@@ -29,7 +32,21 @@ export default function Workspace({ projectId }: WorkspaceProps) {
   const direction = useProjectStore((state) => getEffectiveDirection(state));
   const t = useTranslations('Studio');
   
+  // Keyboard shortcuts
   useKeyboardShortcuts();
+  
+  // Grid-Lock height synchronization for perfect L1/L2 alignment
+  const workspaceContentRef = useRef<HTMLDivElement>(null);
+  const { synchronizeHeights } = useGridLockSync(workspaceContentRef, {
+    enabled: settings.layout === 'side-by-side',
+    debounceMs: 100,
+  });
+  
+  // Offline draft persistence
+  const { hasPendingDraft, forceSave } = useOfflineDraft(projectId, {
+    autoSaveInterval: 5000, // Save every 5 seconds
+    enabled: true,
+  });
 
   // Virtualization for large documents
   const {
@@ -103,6 +120,7 @@ export default function Workspace({ projectId }: WorkspaceProps) {
       <FontLoader />
       <OnboardingTour context="editor" />
       <CommandPalette />
+      <DraftRecoveryModal projectId={projectId} />
       
       {/* Top Floating Status Indicator */}
       <div className="sticky top-4 z-50 flex justify-center pointer-events-none">
@@ -180,6 +198,7 @@ export default function Workspace({ projectId }: WorkspaceProps) {
       {/* The Actual Canvas */}
       <div className="p-12 pb-32">
         <div 
+          ref={workspaceContentRef}
           id="editor-workspace" 
           className="max-w-[1000px] mx-auto space-y-12 relative min-h-screen"
           role="region"

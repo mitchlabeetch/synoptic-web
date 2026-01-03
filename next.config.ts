@@ -1,6 +1,14 @@
 import type { NextConfig } from "next";
 import createNextIntlPlugin from 'next-intl/plugin';
 
+// =============================================================================
+// Bundle Analyzer (run: npm run analyze)
+// =============================================================================
+// Dynamic import to avoid require() error with ESM
+const withBundleAnalyzer = process.env.ANALYZE === 'true'
+  ? require('@next/bundle-analyzer')({ enabled: true })
+  : (config: NextConfig) => config;
+
 const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
@@ -30,8 +38,9 @@ const nextConfig: NextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920], // Max 1920px wide
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384], // Small icons/thumbnails
     
-    // Limit image optimization to prevent abuse
-    minimumCacheTTL: 60, // 1 minute minimum cache
+    // Cache optimized images for 7 days to prevent constant re-optimization
+    // This is especially important for external sources like Wikipedia
+    minimumCacheTTL: 604800, // 7 days (60 * 60 * 24 * 7)
     
     remotePatterns: [
       // Museums
@@ -67,7 +76,24 @@ const nextConfig: NextConfig = {
       { hostname: "standardebooks.org" },
     ],
   },
+  
+  // =============================================================================
+  // Webpack Configuration for Heavy Libraries
+  // =============================================================================
+  webpack: (config, { isServer }) => {
+    // @xenova/transformers should only be used server-side in rag.ts
+    // This ensures it's never accidentally imported in client bundles
+    if (!isServer) {
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        // Prevent @xenova/transformers from being bundled in client
+        // It's already dynamically imported only in server-side rag.ts
+        '@xenova/transformers': false,
+      };
+    }
+    return config;
+  },
 };
 
-export default withNextIntl(nextConfig);
-
+// Apply plugins in order: bundle-analyzer first (if enabled), then next-intl
+export default withBundleAnalyzer(withNextIntl(nextConfig));

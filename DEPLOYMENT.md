@@ -28,9 +28,21 @@ Configure these in your DigitalOcean App Platform settings:
 
 ### Services
 
-| Variable          | Value                      | Type    |
-| ----------------- | -------------------------- | ------- |
-| `PDF_SERVICE_URL` | `http://synoptic-pdf:3000` | Runtime |
+| Variable             | Value                                  | Type    |
+| -------------------- | -------------------------------------- | ------- |
+| `PDF_SERVICE_URL`    | `http://synoptic-pdf:3000`             | Runtime |
+| `PDF_SERVICE_SECRET` | (generate with `openssl rand -hex 32`) | SECRET  |
+
+### PDF Service Configuration (Optional)
+
+These are set on the `synoptic-pdf` container itself:
+
+| Variable                    | Default  | Description                          |
+| --------------------------- | -------- | ------------------------------------ |
+| `MAX_CONCURRENT_JOBS`       | `3`      | Max parallel PDF generation jobs     |
+| `DEFAULT_TIMEOUT_MS`        | `120000` | Default timeout (2 minutes)          |
+| `MAX_TIMEOUT_MS`            | `600000` | Max timeout for large books (10 min) |
+| `BROWSER_RESTART_THRESHOLD` | `100`    | Restart browser after N pages        |
 
 ## Database Initialization
 

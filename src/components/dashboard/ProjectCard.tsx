@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
-import { useTranslations } from 'next-intl'
+import { useTranslations, useFormatter } from 'next-intl'
 
 interface Project {
   id: string
@@ -15,6 +15,15 @@ interface Project {
 
 export default function ProjectCard({ project }: { project: Project }) {
   const t = useTranslations('Dashboard')
+  const format = useFormatter()
+
+  // Use next-intl's formatter for locale-aware date formatting
+  // This automatically respects the user's locale (e.g., "Jan 2, 2023" for US, "2 Jan 2023" for UK)
+  const formattedDate = format.dateTime(new Date(project.updated_at), {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  })
 
   return (
     <Link href={`/editor/${project.id}`}>
@@ -30,7 +39,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             {project.description || t('noDescription')}
           </p>
           <div className="mt-4 text-xs text-muted-foreground">
-            {t('lastUpdated')}: {new Date(project.updated_at).toLocaleDateString()}
+            {t('lastUpdated')}: {formattedDate}
           </div>
         </CardContent>
       </Card>

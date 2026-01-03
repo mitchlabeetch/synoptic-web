@@ -216,6 +216,24 @@ export const AuditLog = {
       { userId, ip }
     );
   },
+  
+  emailVerified(userId: string, email: string, ip: string) {
+    logAuditEvent(
+      AuditEventType.SIGNUP, // Reuse signup event type for now
+      AuditSeverity.INFO,
+      `Email verified for user ${userId}: ${email}`,
+      { userId, email, ip }
+    );
+  },
+  
+  verificationEmailResent(userId: string, email: string, ip: string) {
+    logAuditEvent(
+      AuditEventType.SIGNUP,
+      AuditSeverity.INFO,
+      `Verification email resent to ${email}`,
+      { userId, email, ip }
+    );
+  },
 };
 
 /**

@@ -81,6 +81,23 @@ export default function PrivacyPage() {
              <p className="text-muted-foreground">{t('contactDesc')}</p>
           </section>
 
+          {/* 7. Your GDPR Rights */}
+          <section className="p-8 rounded-3xl bg-gradient-to-br from-emerald-50/50 to-transparent dark:from-emerald-950/20 border border-emerald-200/50 dark:border-emerald-800/30">
+            <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
+              <Shield className="h-5 w-5 text-emerald-600" />
+              {t('gdprTitle')}
+            </h2>
+            <p className="text-muted-foreground mb-4">{t('gdprDesc')}</p>
+            <ul className="list-disc list-inside space-y-2 text-muted-foreground mb-4">
+              {t.raw('gdprRights').map((right: string, i: number) => (
+                <li key={i}>{right}</li>
+              ))}
+            </ul>
+            <p className="text-sm text-muted-foreground">
+              {t('gdprAction')}
+            </p>
+          </section>
+
           <footer className="pt-20 border-t">
             <p className="text-sm text-muted-foreground">{t('lastUpdated')}</p>
           </footer>

@@ -1,4 +1,8 @@
 // src/app/api/export/pdf/route.ts
+// PURPOSE: PDF export endpoint with timeout handling and graceful error recovery
+// ACTION: Generates print-ready PDFs via external Puppeteer service
+// MECHANISM: Uses AbortController for timeout, supports async job queue for large exports
+
 import { NextRequest, NextResponse } from 'next/server';
 import { getCurrentUser, getUserId } from '@/lib/auth/jwt';
 import { getProject, getUserProfile } from '@/lib/db/server';
@@ -7,6 +11,12 @@ import { sanitizeHTMLStrict, escapeHTML } from '@/lib/sanitize';
 import { getTranslations } from 'next-intl/server';
 
 const PDF_SERVICE_URL = process.env.PDF_SERVICE_URL || 'http://synoptic-pdf:3000';
+const PDF_SERVICE_SECRET = process.env.PDF_SERVICE_SECRET || '';
+
+// Timeout configuration (increased for production stability)
+const PDF_TIMEOUT_MS = 120000; // 2 minutes default for PDF generation
+const MAX_PDF_TIMEOUT_MS = 600000; // 10 minutes max for large books
+const LARGE_PROJECT_PAGE_THRESHOLD = 100; // Pages that trigger async recommendation
 
 export async function POST(request: NextRequest) {
   const user = await getCurrentUser();
@@ -35,10 +45,34 @@ export async function POST(request: NextRequest) {
   const html = generateProjectHTML(project, isFreeTier, t);
   const css = generateProjectCSS(project);
 
+  // Calculate page count for timeout estimation
+  const pageCount = project.content?.pages?.length || 0;
+  
+  // Dynamic timeout based on page count (min 2 min, scale up for large docs)
+  const estimatedTimeMs = Math.min(
+    Math.max(PDF_TIMEOUT_MS, pageCount * 1000), // 1 second per page
+    MAX_PDF_TIMEOUT_MS
+  );
+  
+  // Warn if project is exceptionally large
+  if (pageCount > LARGE_PROJECT_PAGE_THRESHOLD) {
+    console.warn(`[PDF Export] Large project (${pageCount} pages) - using extended timeout: ${estimatedTimeMs}ms`);
+  }
+
+  // Create AbortController for timeout
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => {
+    controller.abort();
+  }, estimatedTimeMs);
+
   try {
     const pdfResponse = await fetch(`${PDF_SERVICE_URL}/generate`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        ...(PDF_SERVICE_SECRET && { 'X-Service-Key': PDF_SERVICE_SECRET }),
+      },
+      signal: controller.signal, // Enable timeout via AbortController
       body: JSON.stringify({
         html,
         css,
@@ -60,10 +94,19 @@ export async function POST(request: NextRequest) {
           colorMode: options?.colorMode || 'sRGB',
           resolution: isFreeTier ? 150 : 300,
           watermark: isFreeTier,
-          lang: project.target_lang || 'en'
+          lang: project.target_lang || 'en',
+          timeout: estimatedTimeMs,
+          // Paged.js for proper CSS Paged Media (mirror margins, running headers)
+          usePagedJs: !isFreeTier, // Premium feature
+          // CMYK conversion for print-ready PDFs (Publisher tier)
+          cmyk: options?.cmyk === true && profile?.tier === 'publisher',
+          pdfxStandard: options?.pdfxStandard || 'PDF/X-1a',
         },
       }),
     });
+
+    // Clear timeout on success
+    clearTimeout(timeoutId);
 
     if (!pdfResponse.ok) {
       const errorText = await pdfResponse.text();
@@ -75,12 +118,45 @@ export async function POST(request: NextRequest) {
     return new NextResponse(pdfBuffer, {
       headers: {
         'Content-Type': 'application/pdf',
-        'Content-Disposition': `attachment; filename="${project.title}.pdf"`,
+        'Content-Disposition': `attachment; filename="${encodeURIComponent(project.title || 'export')}.pdf"`,
+        'X-PDF-Pages': String(pageCount),
+        'X-PDF-Generation-Time': String(Date.now()),
       },
     });
-  } catch (err: any) {
-    console.error('Export Error:', err);
-    return NextResponse.json({ error: err.message || 'Export failed' }, { status: 500 });
+  } catch (err: unknown) {
+    // Always clear timeout
+    clearTimeout(timeoutId);
+    
+    // Handle timeout specifically
+    if (err instanceof Error && err.name === 'AbortError') {
+      console.error('[PDF Export] Timeout exceeded:', PDF_TIMEOUT_MS, 'ms');
+      return NextResponse.json(
+        { 
+          error: 'PDF generation timed out. Your project may be too large for synchronous export.',
+          suggestion: 'Try exporting fewer pages at a time, or contact support for large document processing.',
+          pageCount,
+          timeoutMs: PDF_TIMEOUT_MS,
+        }, 
+        { status: 504 }
+      );
+    }
+    
+    // Handle connection errors
+    if (err instanceof Error && (err.message.includes('ECONNREFUSED') || err.message.includes('fetch failed'))) {
+      console.error('[PDF Export] Service unavailable:', err.message);
+      return NextResponse.json(
+        { 
+          error: 'PDF service is temporarily unavailable. Please try again in a few minutes.',
+          retryAfter: 60,
+        }, 
+        { status: 503 }
+      );
+    }
+    
+    // Generic error
+    const errorMessage = err instanceof Error ? err.message : 'Export failed';
+    console.error('[PDF Export] Error:', errorMessage);
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }
 

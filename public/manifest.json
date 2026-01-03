@@ -1,0 +1,26 @@
+{
+  "name": "Synoptic Studio",
+  "short_name": "Synoptic",
+  "description": "The world's most intuitive bilingual book creation platform. Create professional side-by-side parallel books with AI-assisted translation.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#30b8c8",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/logo-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "16x16 32x32 48x48",
+      "type": "image/x-icon"
+    }
+  ],
+  "categories": ["productivity", "books", "education"],
+  "lang": "en",
+  "dir": "ltr"
+}

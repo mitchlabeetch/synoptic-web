@@ -8,7 +8,6 @@
 import { memo } from 'react';
 import { cn } from '@/lib/utils';
 import { LibraryTile } from '@/services/library/types';
-import * as LucideIcons from 'lucide-react';
 import Image from 'next/image';
 import {
   Tooltip,
@@ -17,16 +16,49 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 
+// Import only the icons used in the library tiles
+import { 
+  FileText, 
+  ArrowRight, 
+  BookOpen, 
+  Image as ImageIcon, 
+  Music, 
+  Film, 
+  Newspaper, 
+  Globe, 
+  Utensils,
+  Palette,
+  Star,
+  Sparkles,
+  type LucideIcon 
+} from 'lucide-react';
+
+// Icon mapping for dynamic icon selection (tree-shakeable)
+const ICON_MAP: Record<string, LucideIcon> = {
+  FileText,
+  BookOpen,
+  Image: ImageIcon,
+  Music,
+  Film,
+  Newspaper,
+  Globe,
+  Utensils,
+  Palette,
+  Star,
+  Sparkles,
+  ArrowRight,
+};
+
+// Dynamic icon component (tree-shakeable version)
+function TileIcon({ name, className }: { name: string; className?: string }) {
+  const IconComponent = ICON_MAP[name] || FileText;
+  return <IconComponent className={className} />;
+}
+
 interface TileCardProps {
   tile: LibraryTile;
   onClick: (tile: LibraryTile) => void;
   className?: string;
-}
-
-// Dynamic icon component
-function TileIcon({ name, className }: { name: string; className?: string }) {
-  const IconComponent = (LucideIcons as any)[name] || LucideIcons.FileText;
-  return <IconComponent className={className} />;
 }
 
 // Difficulty indicator with label
@@ -186,7 +218,7 @@ export const TileCard = memo(function TileCard({
           'translate-x-2 group-hover:translate-x-0',
           'transition-all duration-200'
         )}>
-          <LucideIcons.ArrowRight className="w-5 h-5" />
+          <ArrowRight className="w-5 h-5" />
         </div>
       </div>
 

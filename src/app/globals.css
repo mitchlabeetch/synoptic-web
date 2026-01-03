@@ -19,7 +19,7 @@
 @theme inline {
   --color-background: var(--syn-background);
   --color-foreground: var(--syn-foreground);
-  --font-sans: var(--font-quicksand), system-ui, sans-serif;
+  --font-sans: var(--font-quicksand), "Noto Sans CJK SC", "Noto Sans CJK TC", "Noto Sans CJK JP", "Noto Sans CJK KR", "Microsoft YaHei", "微软雅黑", "PingFang SC", "苹方", "Hiragino Sans GB", "Heiti SC", "Malgun Gothic", system-ui, sans-serif;
   --font-mono: ui-monospace, "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace;
   --color-sidebar-ring: var(--syn-sidebar-ring);
   --color-sidebar-border: var(--syn-sidebar-border);
@@ -216,11 +216,25 @@
     transform: scaleX(-1);
   }
 
-  /* Book Specific RTL logic */
+  /* Book Specific RTL logic 
+   * In RTL mode: Source (L1) should visually appear on the RIGHT
+   *              Target (L2) should visually appear on the LEFT
+   * This matches reading direction where the original text starts from the right
+   */
   .book-grid-rtl {
     display: grid;
     grid-template-columns: 1fr 1fr;
     direction: rtl;
+    /* Explicitly reverse column order for RTL */
+    /* First child (L1) goes to column 2, Second child (L2) goes to column 1 */
+  }
+  
+  .book-grid-rtl > *:first-child {
+    grid-column: 2;
+  }
+  
+  .book-grid-rtl > *:last-child {
+    grid-column: 1;
   }
 
   .book-grid-ltr {

@@ -1,9 +1,9 @@
 // src/services/socialExport.ts
 // PURPOSE: Generates shareable, brand-watermarked images from text blocks for social media marketing
 // ACTION: Renders DOM elements to canvas with professional styling and exports as PNG
-// MECHANISM: Uses html2canvas to capture styled containers, adds branding, and triggers download
+// MECHANISM: Uses html2canvas (lazy-loaded) to capture styled containers, adds branding, and triggers download
 
-import html2canvas from 'html2canvas';
+// NOTE: html2canvas is dynamically imported when needed to avoid 194KB upfront bundle cost
 
 export type SocialFormat = 'square' | 'story' | 'twitter' | 'pinterest';
 
@@ -227,6 +227,9 @@ export async function exportAsImage(
   document.body.appendChild(container);
 
   try {
+    // Dynamically import html2canvas only when needed (saves ~194KB from initial bundle)
+    const html2canvas = (await import('html2canvas')).default;
+    
     // Render to canvas
     const canvas = await html2canvas(container, {
       scale: finalOptions.quality,

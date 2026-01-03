@@ -37,6 +37,13 @@ const newEnvVars = [
   { key: 'DO_GRADIENT_API_KEY', scope: 'RUN_TIME', type: 'SECRET' },
   // PDF Service
   { key: 'PDF_SERVICE_URL', scope: 'RUN_TIME', value: 'http://synoptic-pdf:3000' },
+  // PDF Service Authentication - REQUIRED for production security
+  { 
+    key: 'PDF_SERVICE_SECRET', 
+    scope: 'RUN_TIME',
+    type: 'SECRET',
+    value: 'synoptic-pdf-' + require('crypto').randomBytes(32).toString('hex')
+  },
 ];
 
 async function makeRequest(method, path, body = null) {

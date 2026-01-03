@@ -122,13 +122,16 @@ async function seed() {
       console.log('✓  Migration applied');
     }
     
-    // 3. Clear existing knowledge base (optional - uncomment to reset)
-    console.log('\n🗑️  Clearing existing knowledge base...');
-    await pool.query('DELETE FROM knowledge_base');
-    console.log('✓  Table cleared');
+    // Ensure unique constraint exists for idempotent upserts
+    console.log('\n🔧 Ensuring unique constraint for idempotent seeding...');
+    await pool.query(`
+      CREATE UNIQUE INDEX IF NOT EXISTS idx_knowledge_base_file_chunk 
+      ON knowledge_base(file_name, chunk_index)
+    `);
     
-    // 4. Scan translation guide directory
+    // 3. Scan translation guide directory (no DELETE - use UPSERT for idempotency)
     console.log('\n📂 Scanning:', KB_DIR);
+    console.log('   (Using UPSERT for idempotent operation - safe to run multiple times)');
     const files = await fs.readdir(KB_DIR);
     const mdFiles = files.filter(f => f.endsWith('.md'));
     console.log(`   Found ${mdFiles.length} markdown files`);
@@ -165,11 +168,18 @@ async function seed() {
         // Format as PostgreSQL vector literal
         const vectorLiteral = `[${embedding.join(',')}]`;
         
-        // Insert into database
+        // UPSERT into database (idempotent - safe to run multiple times)
         await pool.query(
           `INSERT INTO knowledge_base 
            (file_name, chunk_index, category, language, section_title, content, embedding)
-           VALUES ($1, $2, $3, $4, $5, $6, $7::vector)`,
+           VALUES ($1, $2, $3, $4, $5, $6, $7::vector)
+           ON CONFLICT (file_name, chunk_index) 
+           DO UPDATE SET 
+             category = EXCLUDED.category,
+             language = EXCLUDED.language,
+             section_title = EXCLUDED.section_title,
+             content = EXCLUDED.content,
+             embedding = EXCLUDED.embedding`,
           [
             file,
             i,

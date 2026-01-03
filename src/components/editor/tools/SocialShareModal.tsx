@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Switch } from '@/components/ui/switch';
 import { useTranslations } from 'next-intl';
-import html2canvas from 'html2canvas';
+// NOTE: html2canvas is dynamically imported when needed to avoid 194KB upfront bundle cost
 
 // ═══════════════════════════════════════════════════
 // TYPES
@@ -223,6 +223,9 @@ export function SocialShareModal({
 
       // Mount & Render
       document.body.appendChild(container);
+
+      // Dynamically import html2canvas only when needed (saves ~194KB from initial bundle)
+      const html2canvas = (await import('html2canvas')).default;
 
       const canvas = await html2canvas(container, {
         scale: 2, // Retina quality

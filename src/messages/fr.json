@@ -419,7 +419,12 @@
     "cta": "Choisir le plan",
     "monthly": "mensuel",
     "yearly": "annuel",
-    "popular": "Le plus populaire"
+    "popular": "Le plus populaire",
+    "monthlyLabel": "Mensuel",
+    "yearlyLabel": "Annuel",
+    "saveBadge": "Économisez 20 %",
+    "billedAnnually": "Facturé annuellement",
+    "year": "an"
   },
   "Landing": {
     "hero": {
@@ -1119,5 +1124,45 @@
     "maxPagesError": "KDP autorise maximum 828 pages.",
     "downloadTemplate": "Télécharger le gabarit",
     "kdpNote": "Ce gabarit suit les spécifications Amazon KDP."
+  },
+  "SocialProof": {
+    "badge": "Communauté de confiance",
+    "title": "Rejoignez des milliers d'auteur·rice·s bilingues",
+    "subtitle": "Des éditeur·rice·s indépendant·e·s aux maisons d'édition universitaires, Synoptic alimente la création de contenu bilingue.",
+    "authors": "Auteur·rice·s",
+    "booksCreated": "Livres créés",
+    "languages": "Langues",
+    "rating": "Note moyenne",
+    "trustedBy": "La confiance d'organisations du monde entier",
+    "testimonials": {
+      "quote1": "Synoptic a révolutionné ma façon de créer des supports bilingues pour mes cours de langue. La fonction Grid-Lock est incroyable.",
+      "author1": "Maria Chen",
+      "role1": "Professeure de langues, Université Stanford",
+      "quote2": "Nous avons réduit notre temps de production de livres bilingues de 70 %. La traduction assistée par IA est étonnamment précise.",
+      "author2": "Jean-Pierre Dubois",
+      "role2": "Directeur éditorial, Éditions Parallèles",
+      "quote3": "Enfin, un outil qui comprend les nuances de la mise en page de texte parallèle. Mes étudiant·e·s adorent l'exportation de flashcards.",
+      "author3": "Elena Rodriguez",
+      "role3": "Autrice et polyglotte, 8 langues"
+    }
+  },
+  "InteractiveDemo": {
+    "badge": "Essayez maintenant",
+    "title": "Découvrez la magie",
+    "subtitle": "Aucune inscription requise. Voyez comment Synoptic transforme votre texte en temps réel.",
+    "sandboxTitle": "Bac à sable Synoptic — Mode démo",
+    "translateTo": "Traduire vers",
+    "sourceLabel": "Source",
+    "translationLabel": "Traduction",
+    "clickToStart": "Cliquez sur « Essayez » pour voir la démo...",
+    "translationWaiting": "La traduction apparaîtra ici...",
+    "aiProcessing": "Traitement IA",
+    "complete": "Terminé",
+    "tryItNow": "Essayez",
+    "tryAgain": "Réessayer",
+    "createAccount": "Créer un compte gratuit",
+    "simulatingInput": "Simulation de saisie...",
+    "aiTranslating": "L'IA traduit...",
+    "note": "Ceci est une démo. Créez un compte gratuit pour sauvegarder votre travail et accéder à toutes les fonctionnalités."
   }
 }

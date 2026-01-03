@@ -24,7 +24,9 @@ import {
   Mic,
   Languages,
   Timer,
-  GraduationCap
+  GraduationCap,
+  Eye,
+  X
 } from 'lucide-react';
 import { 
   AudioExportMode, 
@@ -51,6 +53,11 @@ export default function ExportManager() {
   const [isExporting, setIsExporting] = useState<string | null>(null);
   const [lastExport, setLastExport] = useState<{ type: string; url: string } | null>(null);
   const [tier, setTier] = useState<string>('free');
+  
+  // PDF Preview State
+  const [pdfPreviewUrl, setPdfPreviewUrl] = useState<string | null>(null);
+  const [isGeneratingPreview, setIsGeneratingPreview] = useState(false);
+  const [showPreviewModal, setShowPreviewModal] = useState(false);
   
   // Audio Engine State
   const [audioProgress, setAudioProgress] = useState(0);
@@ -148,6 +155,52 @@ export default function ExportManager() {
       setIsExporting(null);
     }
   };
+
+  // ═══════════════════════════════════════════
+  // PDF PREVIEW HANDLER
+  // ═══════════════════════════════════════════
+  const handlePreviewPdf = async () => {
+    if (!meta?.id || isGeneratingPreview) return;
+    setIsGeneratingPreview(true);
+    
+    try {
+      // Request a low-res preview (72 DPI, first page only)
+      const response = await fetch('/api/export/pdf-preview', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          projectId: meta.id,
+          options: {
+            dpi: 72,
+            pageLimit: 1, // First page only
+            format: 'image', // Return as image instead of PDF
+          },
+        }),
+      });
+
+      if (!response.ok) throw new Error('Preview generation failed');
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      setPdfPreviewUrl(url);
+      setShowPreviewModal(true);
+    } catch (error) {
+      console.error('[ExportManager] Preview failed:', error);
+      // Fallback: just show a placeholder message
+      alert(t('previewError') || 'Preview generation failed. Try exporting directly.');
+    } finally {
+      setIsGeneratingPreview(false);
+    }
+  };
+
+  // Cleanup preview URL on unmount
+  useEffect(() => {
+    return () => {
+      if (pdfPreviewUrl) {
+        window.URL.revokeObjectURL(pdfPreviewUrl);
+      }
+    };
+  }, [pdfPreviewUrl]);
 
   const handleExportEpub = async () => {
     if (!meta?.id || isExporting) return;
@@ -526,16 +579,87 @@ export default function ExportManager() {
                </div>
              </div>
 
-             <Button 
-               className="w-full gap-2 font-bold shadow-lg shadow-red-500/10" 
-               onClick={handleExportPdf}
-               disabled={isExporting !== null}
-             >
-               {isExporting === 'pdf' ? <Loader2 className="h-4 w-4 animate-spin" /> : <Printer className="h-4 w-4" />}
-               {t('generate')} {tCommon('pdf')}
-             </Button>
+             {/* Preview and Export Buttons */}
+             <div className="grid grid-cols-2 gap-2">
+               <Button 
+                 variant="outline"
+                 className="gap-2 text-xs font-bold" 
+                 onClick={handlePreviewPdf}
+                 disabled={isExporting !== null || isGeneratingPreview}
+               >
+                 {isGeneratingPreview ? <Loader2 className="h-3 w-3 animate-spin" /> : <Eye className="h-3 w-3" />}
+                 {t('preview')}
+               </Button>
+               <Button 
+                 className="gap-2 font-bold shadow-lg shadow-red-500/10" 
+                 onClick={handleExportPdf}
+                 disabled={isExporting !== null}
+               >
+                 {isExporting === 'pdf' ? <Loader2 className="h-4 w-4 animate-spin" /> : <Printer className="h-4 w-4" />}
+                 {t('generate')} {tCommon('pdf')}
+               </Button>
+             </div>
           </div>
         </section>
+
+        {/* PDF Preview Modal */}
+        {showPreviewModal && pdfPreviewUrl && (
+          <div 
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
+            onClick={() => setShowPreviewModal(false)}
+          >
+            <div 
+              className="relative bg-background rounded-xl shadow-2xl max-w-lg w-full mx-4 overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Modal Header */}
+              <div className="flex items-center justify-between p-4 border-b">
+                <h3 className="font-bold text-sm">{t('previewTitle')}</h3>
+                <Button 
+                  variant="ghost" 
+                  size="icon"
+                  className="h-8 w-8"
+                  onClick={() => setShowPreviewModal(false)}
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              </div>
+              
+              {/* Preview Image */}
+              <div className="p-4 flex justify-center bg-muted/30">
+                <img 
+                  src={pdfPreviewUrl} 
+                  alt="PDF Preview - First Page"
+                  className="max-h-[60vh] w-auto shadow-lg rounded border"
+                />
+              </div>
+              
+              {/* Modal Footer */}
+              <div className="p-4 border-t space-y-2">
+                <p className="text-[10px] text-muted-foreground text-center">
+                  {t('previewNote')}
+                </p>
+                <div className="grid grid-cols-2 gap-2">
+                  <Button 
+                    variant="outline"
+                    onClick={() => setShowPreviewModal(false)}
+                  >
+                    {tCommon('cancel')}
+                  </Button>
+                  <Button 
+                    onClick={() => {
+                      setShowPreviewModal(false);
+                      handleExportPdf();
+                    }}
+                  >
+                    <Printer className="h-4 w-4 mr-2" />
+                    {t('downloadPdf')}
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* EPUB SECTION */}
         <section className="space-y-4">

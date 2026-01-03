@@ -58,7 +58,23 @@
     "lastSession": "Last session",
     "savedSecurely": "Saved securely",
     "cloudSync": "Cloud sync",
-    "active": "Active"
+    "active": "Active",
+    "emailVerified": "Email Verified!",
+    "emailVerifiedDesc": "Your email has been successfully verified. You can now sign in to your account.",
+    "verificationFailed": "Verification Failed",
+    "verifyMissingToken": "No verification token was provided. Please use the link from your email.",
+    "verifyTokenExpired": "This verification link has expired or is invalid. Please request a new one below.",
+    "verifyServerError": "Something went wrong on our end. Please try again later.",
+    "verifyUnknownError": "Verification failed. Please try requesting a new link.",
+    "resendVerificationPrompt": "Enter your email to receive a new verification link:",
+    "resendVerification": "Resend Verification Email",
+    "resendIn": "Resend in {seconds}s",
+    "verificationEmailSent": "Verification email sent! Check your inbox.",
+    "emailAlreadyVerified": "Your email is already verified. You can sign in.",
+    "checkYourEmail": "Check Your Email",
+    "checkEmailDesc": "We've sent a verification link to your email address. Click the link to verify your account.",
+    "verificationLinkExpires": "Link expires in 24 hours",
+    "didntReceiveEmail": "Didn't receive the email?"
   },
   "Dashboard": {
     "title": "My Projects",
@@ -345,7 +361,35 @@
       "separator": "Separator",
       "callout": "Callout Box",
       "verse": "Verse / Poem"
-    }
+    },
+    "printView": "Print View",
+    "webView": "Web View",
+    "switchToPrintView": "Switch to Print View (show page breaks and margins)",
+    "switchToWebView": "Switch to Web View (continuous scroll)",
+    "translationChanges": "AI Translation Changes",
+    "original": "Original",
+    "suggested": "Suggested",
+    "acceptChanges": "Accept",
+    "reject": "Reject",
+    "revert": "Revert",
+    "readingTime": "Reading Time",
+    "readingTimeDesc": "Estimated based on language difficulty",
+    "glossaryTermsHighlighted": "glossary terms highlighted",
+    "personaSelect": "AI Persona",
+    "personaDefault": "Standard",
+    "personaDefaultDesc": "Clear, balanced explanations",
+    "personaEli5": "Explain Like I'm 5",
+    "personaEli5Desc": "Super simple explanations",
+    "personaAcademic": "Academic",
+    "personaAcademicDesc": "Scholarly analysis with etymology",
+    "personaCasual": "Friendly Tutor",
+    "personaCasualDesc": "Warm, encouraging explanations",
+    "personaComparative": "Cross-Linguistic",
+    "personaComparativeDesc": "Compare across languages",
+    "personaImmersive": "Native Perspective",
+    "personaImmersiveDesc": "How natives think about language",
+    "personaMnemonic": "Memory Master",
+    "personaMnemonicDesc": "Memorable tricks and patterns"
   },
   "Models": {
     "parallel": "Parallel Columns",
@@ -419,7 +463,12 @@
     "cta": "Choose Plan",
     "monthly": "monthly",
     "yearly": "yearly",
-    "popular": "Most Popular"
+    "popular": "Most Popular",
+    "monthlyLabel": "Monthly",
+    "yearlyLabel": "Yearly",
+    "saveBadge": "Save 20%",
+    "billedAnnually": "Billed annually",
+    "year": "year"
   },
   "Landing": {
     "hero": {
@@ -647,7 +696,12 @@
     "pinterestFormat": "Pinterest Pin",
     "exportImage": "Export Image",
     "includeBranding": "Include Synoptic Branding",
-    "selectBlock": "Select a text block to export"
+    "selectBlock": "Select a text block to export",
+    "preview": "Preview",
+    "previewTitle": "Cover Page Preview",
+    "previewNote": "This is a low-resolution preview of your first page. The final export will be high-quality 300 DPI.",
+    "previewError": "Preview generation failed. Try exporting directly.",
+    "downloadPdf": "Download PDF"
   },
   "Onboarding": {
     "tourDashboardContent": "Welcome to Synoptic! This is your project hub.",
@@ -709,7 +763,17 @@
     "sharingDesc": "We do not sell your data. We share only with essential providers like Stripe (Billing) and AWS/DigitalOcean (Infrastructure).",
     "contactTitle": "Contact Us",
     "contactDesc": "For privacy concerns, contact us at privacy@getsynoptic.com",
-    "lastUpdated": "Last updated: December 2025"
+    "gdprTitle": "Your Data Rights (GDPR)",
+    "gdprDesc": "Under the General Data Protection Regulation (GDPR) and other applicable privacy laws, you have the following rights:",
+    "gdprRights": [
+      "Right to Access: Request a copy of all personal data we hold about you.",
+      "Right to Rectification: Correct any inaccurate personal data.",
+      "Right to Erasure: Request complete deletion of your account and all associated data.",
+      "Right to Portability: Export your data in a machine-readable format.",
+      "Right to Object: Opt out of certain data processing activities."
+    ],
+    "gdprAction": "To exercise any of these rights, visit your account settings or contact us at privacy@getsynoptic.com. Account deletion is available directly in Settings.",
+    "lastUpdated": "Last updated: January 2026"
   },
   "TermsPage": {
     "title": "Terms of Service",
@@ -1056,7 +1120,18 @@
     "interfaceLanguageHint": "This sets your default UI language across all devices.",
     "saving": "Saving...",
     "saveSettings": "Save Settings",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "deleteAccount": "Delete Account",
+    "deleteAccountTitle": "Delete Your Account",
+    "deleteAccountWarning": "This action is permanent and cannot be undone. All your projects, settings, and data will be deleted.",
+    "confirmDeletePhrase": "DELETE MY ACCOUNT",
+    "confirmDeleteHint": "Type the phrase above to confirm deletion.",
+    "accountDeleted": "Account Deleted",
+    "accountDeletedDesc": "Your account and all data have been permanently removed.",
+    "deleteAccountError": "Failed to delete account. Please try again or contact support.",
+    "dangerZone": "Danger Zone",
+    "dangerZoneDesc": "Permanently delete your account and all associated data.",
+    "gdprCompliance": "GDPR Compliant"
   },
   "Filters": {
     "license": "License",
@@ -1090,6 +1165,12 @@
     "sourceTermPlaceholder": "e.g., Warp Drive",
     "targetTermPlaceholder": "e.g., Propulseur Vitesse",
     "add": "Add",
+    "import": "Import",
+    "importCSV": "Import terms from CSV file",
+    "csvHint": "or import CSV",
+    "importSuccess": "Glossary imported",
+    "importNoNew": "No new terms to import",
+    "importFailed": "Import failed",
     "searchPlaceholder": "Search terms...",
     "allCategories": "All Categories",
     "noEntries": "No terms in your glossary yet.",
@@ -1135,5 +1216,46 @@
     "maxPagesError": "KDP allows a maximum of 828 pages.",
     "downloadTemplate": "Download Cover Template",
     "kdpNote": "This template follows Amazon KDP specifications. Use it as a guide when designing your cover in Photoshop, Canva, or any image editor."
+  },
+  "SocialProof": {
+    "badge": "Trusted Community",
+    "title": "Join thousands of bilingual authors",
+    "subtitle": "From indie publishers to university presses, Synoptic powers the world's bilingual content.",
+    "authors": "Authors",
+    "booksCreated": "Books Created",
+    "languages": "Languages",
+    "rating": "Average Rating",
+    "trustedBy": "Trusted by organizations worldwide",
+    "testimonials": {
+      "quote1": "Synoptic has revolutionized how I create bilingual materials for my language courses. The Grid-Lock feature is incredible.",
+      "author1": "Maria Chen",
+      "role1": "Language Instructor, Stanford University",
+      "quote2": "We've reduced our bilingual book production time by 70%. The AI-assisted translation is surprisingly accurate.",
+      "author2": "Jean-Pierre Dubois",
+      "role2": "Publishing Director, Éditions Parallèles",
+      "quote3": "Finally, a tool that understands the nuances of parallel text layout. My students love the flashcard export feature.",
+      "author3": "Elena Rodriguez",
+      "role3": "Author & Polyglot, 8 languages"
+    }
+  },
+  "InteractiveDemo": {
+    "badge": "Try It Now",
+    "title": "Experience the magic",
+    "subtitle": "No signup required. See how Synoptic transforms your text in real-time.",
+    "sandboxTitle": "Synoptic Sandbox — Demo Mode",
+    "translateTo": "Translate to",
+    "sourceLabel": "Source",
+    "translationLabel": "Translation",
+    "clickToStart": "Click 'Try it now' to see the demo...",
+    "translationWaiting": "Translation will appear here...",
+    "aiProcessing": "AI Processing",
+    "complete": "Complete",
+    "tryItNow": "Try It Now",
+    "tryAgain": "Try Again",
+    "createAccount": "Create Free Account",
+    "simulatingInput": "Simulating text input...",
+    "aiTranslating": "AI is translating...",
+    "note": "This is a demo. Create a free account to save your work and access all features."
   }
 }
+

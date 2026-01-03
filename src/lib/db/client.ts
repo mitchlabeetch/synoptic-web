@@ -137,13 +137,31 @@ function getSSLConfig(): { rejectUnauthorized: boolean; ca?: string } {
 }
 
 // =============================================================================
-// Connection Pool
+// Connection Pool (Serverless-Safe Global Cache)
 // =============================================================================
 
-// Lazy-initialized pool to avoid build-time errors
-// Note: In serverless environments (Vercel), this global state may not persist
-// between requests due to cold starts. The pool is re-created as needed.
-let pool: Pool | null = null;
+/**
+ * SERVERLESS CONNECTION POOLING
+ * 
+ * In serverless environments (Vercel, AWS Lambda), each function invocation
+ * may get a fresh module context, causing `let pool = null` to reset.
+ * Additionally, Next.js hot-reload in development recreates modules.
+ * 
+ * SOLUTION: Cache the pool on `globalThis` which persists across:
+ * - Hot reloads in development
+ * - Warm function invocations in serverless
+ * 
+ * The pool is still recreated on cold starts, but that's expected behavior.
+ * For extreme high-traffic apps, consider a connection bouncer (PgBouncer).
+ */
+
+// Extend the global type to include our pool cache
+const globalForDb = globalThis as unknown as {
+  pgPool: Pool | undefined;
+};
+
+// Use cached pool if available, otherwise will be created
+let pool: Pool | null = globalForDb.pgPool || null;
 
 /**
  * Get or create the connection pool.
@@ -212,6 +230,17 @@ function getPool(): Pool {
     pool.on('error', (err) => {
       logger.error('Unexpected pool error', err, { module: 'DB' });
     });
+    
+    // CRITICAL: Cache pool on globalThis for serverless persistence
+    // This prevents new pools on hot-reload and warm lambda invocations
+    if (process.env.NODE_ENV !== 'production') {
+      // Only cache in development to enable hot-reload persistence
+      // In production, the module singleton is sufficient
+      globalForDb.pgPool = pool;
+    } else {
+      // Production: also cache to handle edge cases with lambda reuse
+      globalForDb.pgPool = pool;
+    }
   }
   
   return pool;

@@ -5,7 +5,7 @@
 
 'use client';
 
-import { useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useProjectStore } from '@/lib/store/projectStore';
 import { useGlossaryStore } from '@/lib/store/glossaryStore';
 import { Button } from '@/components/ui/button';
@@ -30,9 +30,12 @@ import {
   Edit2,
   X,
   Eye,
-  EyeOff
+  EyeOff,
+  Upload,
+  FileSpreadsheet
 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { toast } from '@/components/ui/Toast';
 import {
   GlossaryCategory,
   GLOSSARY_CATEGORIES,
@@ -53,7 +56,8 @@ export default function GlossaryGuard({ className }: GlossaryGuardProps) {
     updateEntry, 
     deleteEntry,
     setLintingEnabled,
-    setHighlightWarnings
+    setHighlightWarnings,
+    importEntriesFromCSV
   } = useGlossaryStore();
   const t = useTranslations('GlossaryGuard');
   
@@ -64,6 +68,52 @@ export default function GlossaryGuard({ className }: GlossaryGuardProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [editingId, setEditingId] = useState<string | null>(null);
   const [filterCategory, setFilterCategory] = useState<GlossaryCategory | 'all'>('all');
+  const [isImporting, setIsImporting] = useState(false);
+  
+  // Hidden file input ref
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
+  
+  // CSV Import handler
+  const handleCSVImport = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    
+    setIsImporting(true);
+    
+    try {
+      const text = await file.text();
+      const result = importEntriesFromCSV(text);
+      
+      if (result.imported > 0) {
+        toast.success(t('importSuccess'), {
+          description: `${result.imported} terms imported${result.skipped > 0 ? `, ${result.skipped} skipped` : ''}`
+        });
+      } else if (result.skipped > 0) {
+        toast.info(t('importNoNew'), {
+          description: `${result.skipped} duplicate terms skipped`
+        });
+      } else {
+        toast.error(t('importFailed'), {
+          description: 'No valid entries found in file'
+        });
+      }
+      
+      if (result.errors.length > 0) {
+        console.warn('[GlossaryGuard] Import errors:', result.errors);
+      }
+    } catch (error) {
+      console.error('[GlossaryGuard] CSV import failed:', error);
+      toast.error(t('importFailed'), {
+        description: 'Could not read file'
+      });
+    } finally {
+      setIsImporting(false);
+      // Reset file input
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    }
+  };
 
   // Filtered entries
   const filteredEntries = useMemo(() => {
@@ -106,6 +156,16 @@ export default function GlossaryGuard({ className }: GlossaryGuardProps) {
 
   return (
     <div className={`flex flex-col h-full bg-card ${className}`}>
+      {/* Hidden CSV file input */}
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".csv,.txt,.tsv"
+        className="hidden"
+        onChange={handleCSVImport}
+        aria-label="Import glossary CSV"
+      />
+      
       {/* Header */}
       <div className="p-4 border-b bg-muted/20 flex items-center justify-between">
         <div className="flex items-center gap-2">
@@ -116,18 +176,36 @@ export default function GlossaryGuard({ className }: GlossaryGuardProps) {
             {t('title')}
           </h3>
         </div>
-        <div className="flex items-center gap-1 text-[10px] text-muted-foreground">
-          <CheckCircle2 className="h-3 w-3 text-emerald-500" />
-          <span>{stats.total} {t('termsProtected')}</span>
+        <div className="flex items-center gap-2">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="h-7 px-2 text-[10px] gap-1"
+            onClick={() => fileInputRef.current?.click()}
+            disabled={isImporting}
+            title={t('importCSV')}
+          >
+            <Upload className="h-3 w-3" />
+            <span className="hidden sm:inline">{t('import')}</span>
+          </Button>
+          <div className="flex items-center gap-1 text-[10px] text-muted-foreground">
+            <CheckCircle2 className="h-3 w-3 text-emerald-500" />
+            <span>{stats.total} {t('termsProtected')}</span>
+          </div>
         </div>
       </div>
 
       {/* Add New Entry Form */}
       <div className="p-4 border-b space-y-3">
-        <div className="flex items-center gap-2">
-          <Plus className="h-4 w-4 text-muted-foreground" />
-          <span className="text-[10px] font-bold uppercase text-muted-foreground tracking-wide">
-            {t('addTerm')}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Plus className="h-4 w-4 text-muted-foreground" />
+            <span className="text-[10px] font-bold uppercase text-muted-foreground tracking-wide">
+              {t('addTerm')}
+            </span>
+          </div>
+          <span className="text-[9px] text-muted-foreground">
+            {t('csvHint')}
           </span>
         </div>
         

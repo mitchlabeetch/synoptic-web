@@ -1,19 +1,26 @@
 // src/components/marketing/PricingTable.tsx
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Check, Sparkles } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
+import { useState } from 'react';
+import { cn } from '@/lib/utils';
 
 export function PricingTable() {
   const t = useTranslations('Pricing');
+  const [isYearly, setIsYearly] = useState(false);
+
+  // Calculate yearly prices (20% discount)
+  const YEARLY_DISCOUNT = 0.20;
 
   const tiers = [
     {
       key: "free",
-      price: "€0",
+      monthlyPrice: 0,
+      yearlyPrice: 0,
       features: [
         "activeProject",
         "standardLayout",
@@ -26,8 +33,8 @@ export function PricingTable() {
     },
     {
       key: "pro",
-      price: "€12",
-      period: t('month'),
+      monthlyPrice: 12,
+      yearlyPrice: Math.round(12 * 12 * (1 - YEARLY_DISCOUNT)), // €115/year instead of €144
       features: [
         "unlimitedProjects",
         "aiAssistedLayout",
@@ -44,8 +51,8 @@ export function PricingTable() {
     },
     {
       key: "publisher",
-      price: "€29",
-      period: t('month'),
+      monthlyPrice: 29,
+      yearlyPrice: Math.round(29 * 12 * (1 - YEARLY_DISCOUNT)), // €278/year instead of €348
       features: [
         "everythingPro",
         "bigAiLimit",
@@ -58,12 +65,80 @@ export function PricingTable() {
     }
   ];
 
+  const formatPrice = (tier: typeof tiers[0]) => {
+    if (tier.monthlyPrice === 0) return "€0";
+    if (isYearly) {
+      const monthlyEquivalent = Math.round(tier.yearlyPrice / 12);
+      return `€${monthlyEquivalent}`;
+    }
+    return `€${tier.monthlyPrice}`;
+  };
+
+  const getPeriodLabel = (tier: typeof tiers[0]) => {
+    if (tier.monthlyPrice === 0) return '';
+    return t('month');
+  };
+
+  const getYearlyTotal = (tier: typeof tiers[0]) => {
+    if (tier.monthlyPrice === 0) return null;
+    return `€${tier.yearlyPrice}/${t('year')}`;
+  };
+
   return (
     <section className="py-24" id="pricing">
       <div className="container px-4 mx-auto">
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <div className="text-center max-w-2xl mx-auto mb-12">
           <h2 className="text-3xl md:text-5xl font-black tracking-tight mb-4">{t('title')}</h2>
           <p className="text-muted-foreground text-lg">{t('subtitle')}</p>
+        </div>
+
+        {/* Billing Toggle */}
+        <div className="flex items-center justify-center gap-4 mb-16">
+          <button
+            onClick={() => setIsYearly(false)}
+            className={cn(
+              "text-sm font-semibold transition-colors px-4 py-2 rounded-full",
+              !isYearly 
+                ? "bg-primary text-primary-foreground" 
+                : "text-muted-foreground hover:text-foreground"
+            )}
+          >
+            {t('monthlyLabel')}
+          </button>
+          
+          {/* Toggle Switch */}
+          <button
+            onClick={() => setIsYearly(!isYearly)}
+            className="relative w-14 h-8 rounded-full bg-muted border border-border transition-colors"
+            aria-label="Toggle yearly billing"
+          >
+            <motion.div
+              className="absolute top-1 w-6 h-6 rounded-full bg-primary shadow-md"
+              animate={{ left: isYearly ? '1.75rem' : '0.25rem' }}
+              transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+            />
+          </button>
+          
+          <button
+            onClick={() => setIsYearly(true)}
+            className={cn(
+              "text-sm font-semibold transition-colors px-4 py-2 rounded-full flex items-center gap-2",
+              isYearly 
+                ? "bg-primary text-primary-foreground" 
+                : "text-muted-foreground hover:text-foreground"
+            )}
+          >
+            {t('yearlyLabel')}
+            {/* Savings Badge */}
+            <span className={cn(
+              "px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider transition-all",
+              isYearly 
+                ? "bg-emerald-500 text-white" 
+                : "bg-emerald-500/20 text-emerald-600"
+            )}>
+              {t('saveBadge')}
+            </span>
+          </button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -85,9 +160,29 @@ export function PricingTable() {
               <div className="mb-8">
                 <h3 className="text-xl font-bold mb-2">{t(`${tier.key}.name`)}</h3>
                 <div className="flex items-baseline gap-1">
-                  <span className="text-4xl font-black">{tier.price}</span>
-                  <span className="text-muted-foreground text-sm font-medium">{tier.period}</span>
+                  <AnimatePresence mode="wait">
+                    <motion.span
+                      key={`${tier.key}-${isYearly}`}
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      className="text-4xl font-black"
+                    >
+                      {formatPrice(tier)}
+                    </motion.span>
+                  </AnimatePresence>
+                  <span className="text-muted-foreground text-sm font-medium">{getPeriodLabel(tier)}</span>
                 </div>
+                {/* Yearly total */}
+                {isYearly && tier.monthlyPrice > 0 && (
+                  <motion.p
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    className="text-xs text-muted-foreground mt-1"
+                  >
+                    {t('billedAnnually')}: {getYearlyTotal(tier)}
+                  </motion.p>
+                )}
                 <p className="text-xs text-muted-foreground mt-2">{t(`${tier.key}.desc`)}</p>
               </div>
 
