@@ -1,6 +1,6 @@
 // src/app/api/auth/forgot-password/route.ts
 // PURPOSE: Request a password reset email
-// ACTION: Generates reset token and sends email (if email service configured)
+// ACTION: Generates reset token and sends email via Resend
 // MECHANISM: Rate-limited, timing-safe response to prevent email enumeration
 
 import { NextRequest, NextResponse } from 'next/server';
@@ -8,6 +8,7 @@ import { z } from 'zod';
 import { RateLimiters, getRateLimitHeaders, getClientIP } from '@/lib/security/rate-limit';
 import { AuditLog } from '@/lib/security/audit';
 import { createPasswordResetToken, getUserByEmailForReset } from '@/lib/auth/passwordReset';
+import { sendPasswordResetEmail } from '@/lib/email/resend';
 
 const ForgotPasswordSchema = z.object({
   email: z.string().email().max(255),
@@ -61,12 +62,19 @@ export async function POST(request: NextRequest) {
         const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://getsynoptic.com';
         const resetUrl = `${appUrl}/auth/reset-password?token=${token}`;
         
-        // Log the reset request (for debugging - in production this would send email)
-        console.log(`[Password Reset] Token generated for: ${normalizedEmail}`);
-        console.log(`[Password Reset] Reset URL: ${resetUrl}`);
+        // Send password reset email via Resend
+        const emailResult = await sendPasswordResetEmail(
+          normalizedEmail,
+          user.name,
+          resetUrl
+        );
         
-        // TODO: Send actual email when email service is configured
-        // await sendPasswordResetEmail(normalizedEmail, user.name, resetUrl);
+        if (emailResult.success) {
+          console.log(`[Password Reset] Email sent to ${normalizedEmail}, ID: ${emailResult.id}`);
+        } else {
+          // Log error but don't reveal to user (timing-safe)
+          console.error(`[Password Reset] Failed to send email: ${emailResult.error}`);
+        }
         
         AuditLog.passwordResetRequested(user.id, normalizedEmail, ip);
       }
