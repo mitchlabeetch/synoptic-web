@@ -175,6 +175,10 @@ export default function Toolbar() {
         size="sm" 
         className="gap-2"
         aria-label={t('export')}
+        onClick={() => {
+          // Dispatch event to open sidebar publish panel
+          window.dispatchEvent(new CustomEvent('open-sidebar-panel', { detail: 'publish' }));
+        }}
       >
         <Download className="h-4 w-4" aria-hidden="true" />
         <span className="hidden sm:inline">{t('export')}</span>

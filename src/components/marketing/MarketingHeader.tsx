@@ -8,13 +8,30 @@ import LocaleSwitcher from '@/components/ui/LocaleSwitcher';
 
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, LayoutDashboard } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export function MarketingHeader() {
   const t = useTranslations('Marketing.nav');
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Check auth state on mount
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const res = await fetch('/api/user/profile', { credentials: 'include' });
+        setIsAuthenticated(res.ok);
+      } catch {
+        setIsAuthenticated(false);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    checkAuth();
+  }, []);
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -71,12 +88,25 @@ export function MarketingHeader() {
         <div className="flex items-center justify-end gap-3">
           <LocaleSwitcher />
           <div className="h-4 w-px bg-muted mx-1" />
-          <Link href="/auth/login">
-            <Button variant="ghost" className="text-sm font-bold rounded-full px-4 transition-all hover:bg-primary/10 hover:text-[#22687a] text-muted-foreground font-outfit uppercase tracking-widest">{t('logIn')}</Button>
-          </Link>
-          <Link href="/auth/signup">
-            <Button className="text-sm font-extrabold rounded-full px-6 bg-[#22687a] hover:bg-[#1a5160] transition-all shadow-xl shadow-primary/20 font-outfit uppercase tracking-widest text-white">{t('joinNow')}</Button>
-          </Link>
+          {isLoading ? (
+            <div className="w-24 h-9 bg-muted animate-pulse rounded-full" />
+          ) : isAuthenticated ? (
+            <Link href="/dashboard">
+              <Button className="text-sm font-extrabold rounded-full px-6 bg-[#22687a] hover:bg-[#1a5160] transition-all shadow-xl shadow-primary/20 font-outfit uppercase tracking-widest text-white gap-2">
+                <LayoutDashboard className="h-4 w-4" />
+                {t('dashboard') || 'Dashboard'}
+              </Button>
+            </Link>
+          ) : (
+            <>
+              <Link href="/auth/login">
+                <Button variant="ghost" className="text-sm font-bold rounded-full px-4 transition-all hover:bg-primary/10 hover:text-[#22687a] text-muted-foreground font-outfit uppercase tracking-widest">{t('logIn')}</Button>
+              </Link>
+              <Link href="/auth/signup">
+                <Button className="text-sm font-extrabold rounded-full px-6 bg-[#22687a] hover:bg-[#1a5160] transition-all shadow-xl shadow-primary/20 font-outfit uppercase tracking-widest text-white">{t('joinNow')}</Button>
+              </Link>
+            </>
+          )}
         </div>
       </div>
 
@@ -143,12 +173,23 @@ export function MarketingHeader() {
             </nav>
 
             <div className="mt-auto mb-10 flex flex-col gap-4">
-              <Link href="/auth/login" className="w-full">
-                <Button variant="outline" className="w-full font-bold rounded-full py-7 text-lg border-2 border-primary/20 text-[#22687a] hover:bg-primary/5">{t('logIn')}</Button>
-              </Link>
-              <Link href="/auth/signup" className="w-full">
-                <Button className="w-full font-black rounded-full py-7 text-lg bg-[#22687a] shadow-2xl shadow-primary/20 text-white">{t('joinNow')}</Button>
-              </Link>
+              {isAuthenticated ? (
+                <Link href="/dashboard" className="w-full">
+                  <Button className="w-full font-black rounded-full py-7 text-lg bg-[#22687a] shadow-2xl shadow-primary/20 text-white gap-2">
+                    <LayoutDashboard className="h-5 w-5" />
+                    {t('dashboard') || 'Dashboard'}
+                  </Button>
+                </Link>
+              ) : (
+                <>
+                  <Link href="/auth/login" className="w-full">
+                    <Button variant="outline" className="w-full font-bold rounded-full py-7 text-lg border-2 border-primary/20 text-[#22687a] hover:bg-primary/5">{t('logIn')}</Button>
+                  </Link>
+                  <Link href="/auth/signup" className="w-full">
+                    <Button className="w-full font-black rounded-full py-7 text-lg bg-[#22687a] shadow-2xl shadow-primary/20 text-white">{t('joinNow')}</Button>
+                  </Link>
+                </>
+              )}
             </div>
           </motion.div>
         )}

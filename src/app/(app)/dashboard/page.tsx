@@ -4,6 +4,7 @@
 // MECHANISM: Server component that fetches projects from PostgreSQL
 
 import { redirect } from 'next/navigation';
+import Link from 'next/link';
 import ProjectCard from '@/components/dashboard/ProjectCard';
 import ProjectWizard from '@/components/dashboard/ProjectWizard';
 import { OnboardingTour } from '@/components/onboarding/OnboardingTour';
@@ -46,9 +47,14 @@ export default async function DashboardPage() {
       
       <OnboardingTour context="dashboard" />
       <div className="flex justify-between items-center mb-8">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">{t('title')}</h1>
-          <p className="text-muted-foreground mt-1">{t('subtitle')}</p>
+        <div className="flex items-center gap-4">
+          <Link href="/" className="flex items-center gap-2 group" title="Back to Home">
+            <div className="h-10 w-10 rounded-lg bg-primary flex items-center justify-center text-primary-foreground font-bold italic text-lg group-hover:scale-110 transition-transform">S</div>
+          </Link>
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight">{t('title')}</h1>
+            <p className="text-muted-foreground mt-1">{t('subtitle')}</p>
+          </div>
         </div>
         <div className="flex items-center gap-4" data-tour="new-project">
           <LocaleSwitcher />

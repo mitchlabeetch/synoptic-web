@@ -1,7 +1,7 @@
 // src/components/editor/Sidebar.tsx
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useProjectStore } from '@/lib/store/projectStore';
 import { cn } from '@/lib/utils';
 import { 
@@ -47,6 +47,20 @@ export default function Sidebar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const t = useTranslations('Blocks');
   const tStudio = useTranslations('Studio');
+
+  // Listen for external commands to open specific panels
+  useEffect(() => {
+    const handleOpenPanel = (e: CustomEvent<string>) => {
+      const panel = e.detail;
+      if (['tools', 'pages', 'design', 'presets', 'publish', 'structure', 'glossary', 'cover'].includes(panel)) {
+        setActiveTab(panel as typeof activeTab);
+        setIsCollapsed(false);
+      }
+    };
+    
+    window.addEventListener('open-sidebar-panel', handleOpenPanel as EventListener);
+    return () => window.removeEventListener('open-sidebar-panel', handleOpenPanel as EventListener);
+  }, []);
 
   const handleAddTextBlock = () => {
     addBlock(currentPageIndex, {
@@ -159,7 +173,7 @@ export default function Sidebar() {
                     }}
                     className={cn(
                       "w-full aspect-square flex items-center justify-center rounded-xl transition-all",
-                      (activeTab === tool.id) || (activeTab === 'tools' && !['pages', 'structure', 'design', 'presets', 'settings', 'publish'].includes(tool.id))
+                      activeTab === tool.id
                         ? "bg-primary text-primary-foreground shadow-md"
                         : "text-muted-foreground hover:bg-primary/10 hover:text-primary"
                     )}
