@@ -25,15 +25,31 @@ import {
 import { useTranslations } from 'next-intl';
 
 const FONT_OPTIONS = [
+  // Serif - Professional Publishing
   'Crimson Pro',
-  'Inter',
-  'Inter Tight',
   'EB Garamond',
   'Playfair Display',
   'Lora',
-  'Roboto Mono',
-  'Outfit',
   'Merriweather',
+  'Libre Baskerville',
+  'Source Serif Pro',
+  'Cormorant Garamond',
+  'Spectral',
+  'Bitter',
+  // Sans-serif - Modern
+  'Inter',
+  'Inter Tight',
+  'Outfit',
+  'Roboto',
+  'Open Sans',
+  'Lato',
+  'Poppins',
+  'Nunito',
+  // Monospace
+  'Roboto Mono',
+  'JetBrains Mono',
+  // Display
+  'Quicksand',
 ];
 
 export default function ThemeInspector() {
