@@ -885,3 +885,338 @@ ${BRAND.url}
   
   return { html, text, subject: '👑 Welcome to Synoptic Publisher! Your order confirmation' };
 }
+
+// -----------------------------------------------------------------------------
+// 10. Tips Email 3: Grid-Lock Deep Dive
+// -----------------------------------------------------------------------------
+export function tipsGridLockEmail(data: EmailData): { html: string; text: string; subject: string } {
+  const name = data.recipientName || 'there';
+  
+  const html = emailWrapper(emailCard(`
+    ${emailHeader()}
+    <tr>
+      <td style="padding: 40px;">
+        <p style="margin: 0 0 8px 0; font-size: 12px; font-weight: 600; color: ${BRAND.colors.secondary}; text-transform: uppercase; letter-spacing: 1px;">
+          🔒 Advanced Feature
+        </p>
+        <h2 style="margin: 0 0 16px 0; font-size: 24px; font-weight: 700; color: ${BRAND.colors.dark}; font-family: ${BRAND.fonts.heading};">Master the Grid-Lock Layout</h2>
+        <p style="margin: 0 0 24px 0; font-size: 16px; line-height: 1.6; color: ${BRAND.colors.muted};">
+          Hi ${name},
+        </p>
+        <p style="margin: 0 0 24px 0; font-size: 16px; line-height: 1.6; color: ${BRAND.colors.muted};">
+          Grid-Lock is what makes Synoptic unique. It guarantees your source text and translation <strong>always stay perfectly aligned</strong> — even when one language uses more words than the other.
+        </p>
+        
+        <div style="margin: 24px 0; padding: 24px; background-color: ${BRAND.colors.light}; border-radius: 12px; border-left: 4px solid ${BRAND.colors.secondary};">
+          <h3 style="margin: 0 0 16px 0; font-size: 16px; font-weight: 600; color: ${BRAND.colors.dark};">How it works:</h3>
+          <table role="presentation" style="width: 100%;">
+            <tr>
+              <td style="padding: 8px 0; font-size: 14px; color: ${BRAND.colors.muted};">
+                📏 <strong>Auto-height sync</strong> — Both columns dynamically resize to match each other
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; font-size: 14px; color: ${BRAND.colors.muted};">
+                📄 <strong>Print-safe</strong> — Layout preserved perfectly when exporting to PDF
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; font-size: 14px; color: ${BRAND.colors.muted};">
+                📖 <strong>Page-break aware</strong> — Paragraphs never split across pages unless necessary
+              </td>
+            </tr>
+          </table>
+        </div>
+        
+        <div style="margin: 24px 0; padding: 24px; background: linear-gradient(135deg, rgba(34,104,122,0.08) 0%, rgba(48,184,200,0.08) 100%); border-radius: 12px;">
+          <h3 style="margin: 0 0 12px 0; font-size: 14px; font-weight: 600; color: ${BRAND.colors.primary};">💡 Pro Tip</h3>
+          <p style="margin: 0; font-size: 14px; color: ${BRAND.colors.muted};">
+            For long paragraphs, try splitting them into smaller blocks. This gives Grid-Lock more flexibility and creates a better reading rhythm.
+          </p>
+        </div>
+        
+        ${ctaButton('Try Grid-Lock Mode', `${BRAND.url}/dashboard`)}
+      </td>
+    </tr>
+    ${emailFooter()}
+  `));
+  
+  const text = `
+Hi ${name},
+
+🔒 Master the Grid-Lock Layout
+
+Grid-Lock is what makes Synoptic unique. It guarantees your source text and translation always stay perfectly aligned — even when one language uses more words than the other.
+
+How it works:
+📏 Auto-height sync — Both columns dynamically resize to match each other
+📄 Print-safe — Layout preserved perfectly when exporting to PDF
+📖 Page-break aware — Paragraphs never split across pages unless necessary
+
+💡 Pro Tip: For long paragraphs, try splitting them into smaller blocks. This gives Grid-Lock more flexibility and creates a better reading rhythm.
+
+Try it now: ${BRAND.url}/dashboard
+
+---
+${BRAND.name} - ${BRAND.tagline}
+${BRAND.url}
+  `.trim();
+  
+  return { html, text, subject: '🔒 Master the Grid-Lock Layout' };
+}
+
+// -----------------------------------------------------------------------------
+// 11. Tips Email 4: PDF Export Mastery
+// -----------------------------------------------------------------------------
+export function tipsPdfExportEmail(data: EmailData): { html: string; text: string; subject: string } {
+  const name = data.recipientName || 'there';
+  
+  const html = emailWrapper(emailCard(`
+    ${emailHeader()}
+    <tr>
+      <td style="padding: 40px;">
+        <p style="margin: 0 0 8px 0; font-size: 12px; font-weight: 600; color: ${BRAND.colors.secondary}; text-transform: uppercase; letter-spacing: 1px;">
+          📄 Export Guide
+        </p>
+        <h2 style="margin: 0 0 16px 0; font-size: 24px; font-weight: 700; color: ${BRAND.colors.dark}; font-family: ${BRAND.fonts.heading};">Print-Perfect PDFs Every Time</h2>
+        <p style="margin: 0 0 24px 0; font-size: 16px; line-height: 1.6; color: ${BRAND.colors.muted};">
+          Hi ${name},
+        </p>
+        <p style="margin: 0 0 24px 0; font-size: 16px; line-height: 1.6; color: ${BRAND.colors.muted};">
+          Ready to turn your bilingual book into a print-ready masterpiece? Here's how to get professional results:
+        </p>
+        
+        <table role="presentation" style="width: 100%;">
+          <tr>
+            <td style="padding: 16px; background-color: ${BRAND.colors.light}; border-radius: 12px;">
+              <h4 style="margin: 0 0 8px 0; font-size: 14px; font-weight: 600; color: ${BRAND.colors.primary};">📐 Choose the Right DPI</h4>
+              <p style="margin: 0; font-size: 14px; color: ${BRAND.colors.muted};">
+                <strong>150 DPI</strong> = Fast preview, screen reading<br>
+                <strong>300 DPI</strong> = Professional print quality (recommended)
+              </p>
+            </td>
+          </tr>
+        </table>
+        <div style="height: 12px;"></div>
+        <table role="presentation" style="width: 100%;">
+          <tr>
+            <td style="padding: 16px; background-color: ${BRAND.colors.light}; border-radius: 12px;">
+              <h4 style="margin: 0 0 8px 0; font-size: 14px; font-weight: 600; color: ${BRAND.colors.primary};">📖 For Large Books (50+ pages)</h4>
+              <p style="margin: 0; font-size: 14px; color: ${BRAND.colors.muted};">
+                Export in sections for fastest results. Large exports run in the background — you'll get an email when ready!
+              </p>
+            </td>
+          </tr>
+        </table>
+        <div style="height: 12px;"></div>
+        <table role="presentation" style="width: 100%;">
+          <tr>
+            <td style="padding: 16px; background-color: ${BRAND.colors.light}; border-radius: 12px;">
+              <h4 style="margin: 0 0 8px 0; font-size: 14px; font-weight: 600; color: ${BRAND.colors.primary};">👀 Always Preview First</h4>
+              <p style="margin: 0; font-size: 14px; color: ${BRAND.colors.muted};">
+                Use <strong>Print View</strong> mode in the editor to see exactly how your book will look before exporting.
+              </p>
+            </td>
+          </tr>
+        </table>
+        
+        <div style="height: 24px;"></div>
+        ${ctaButton('Export Your Book', `${BRAND.url}/dashboard`)}
+      </td>
+    </tr>
+    ${emailFooter()}
+  `));
+  
+  const text = `
+Hi ${name},
+
+📄 Print-Perfect PDFs Every Time
+
+Ready to turn your bilingual book into a print-ready masterpiece? Here's how to get professional results:
+
+📐 Choose the Right DPI
+• 150 DPI = Fast preview, screen reading
+• 300 DPI = Professional print quality (recommended)
+
+📖 For Large Books (50+ pages)
+Export in sections for fastest results. Large exports run in the background — you'll get an email when ready!
+
+👀 Always Preview First
+Use Print View mode in the editor to see exactly how your book will look before exporting.
+
+Export now: ${BRAND.url}/dashboard
+
+---
+${BRAND.name} - ${BRAND.tagline}
+${BRAND.url}
+  `.trim();
+  
+  return { html, text, subject: '📄 Print-Perfect PDFs: Export like a pro' };
+}
+
+// -----------------------------------------------------------------------------
+// 12. Tips Email 5: Security & Quality Assurance
+// -----------------------------------------------------------------------------
+export function tipsSecurityEmail(data: EmailData): { html: string; text: string; subject: string } {
+  const name = data.recipientName || 'there';
+  
+  const html = emailWrapper(emailCard(`
+    ${emailHeader()}
+    <tr>
+      <td style="padding: 40px;">
+        <p style="margin: 0 0 8px 0; font-size: 12px; font-weight: 600; color: ${BRAND.colors.secondary}; text-transform: uppercase; letter-spacing: 1px;">
+          🔐 Your Data is Safe
+        </p>
+        <h2 style="margin: 0 0 16px 0; font-size: 24px; font-weight: 700; color: ${BRAND.colors.dark}; font-family: ${BRAND.fonts.heading};">Why Authors Trust Synoptic</h2>
+        <p style="margin: 0 0 24px 0; font-size: 16px; line-height: 1.6; color: ${BRAND.colors.muted};">
+          Hi ${name},
+        </p>
+        <p style="margin: 0 0 24px 0; font-size: 16px; line-height: 1.6; color: ${BRAND.colors.muted};">
+          We know your manuscripts are precious. That's why we've built Synoptic with <strong>industrial-strength security</strong> from day one.
+        </p>
+        
+        <div style="margin: 24px 0; padding: 24px; background: linear-gradient(135deg, rgba(34,104,122,0.08) 0%, rgba(48,184,200,0.08) 100%); border-radius: 12px;">
+          <h3 style="margin: 0 0 16px 0; font-size: 16px; font-weight: 600; color: ${BRAND.colors.dark};">Your protection:</h3>
+          <table role="presentation" style="width: 100%;">
+            <tr>
+              <td style="padding: 8px 0; font-size: 14px; color: ${BRAND.colors.muted};">
+                🔒 <strong>256-bit SSL encryption</strong> — Bank-level security for all data
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; font-size: 14px; color: ${BRAND.colors.muted};">
+                🚫 <strong>We never train AI on your content</strong> — Your manuscripts stay yours
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; font-size: 14px; color: ${BRAND.colors.muted};">
+                🇪🇺 <strong>GDPR compliant</strong> — Full data deletion available anytime
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; font-size: 14px; color: ${BRAND.colors.muted};">
+                💾 <strong>Auto-save & cloud backup</strong> — Never lose your work
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; font-size: 14px; color: ${BRAND.colors.muted};">
+                🔑 <strong>Secure authentication</strong> — OAuth 2.0 with password-free Google login
+              </td>
+            </tr>
+          </table>
+        </div>
+        
+        <p style="margin: 24px 0 0 0; font-size: 14px; line-height: 1.6; color: ${BRAND.colors.muted};">
+          Questions about security? Reply to this email — our team is happy to provide more details.
+        </p>
+        
+        ${ctaButton('Continue Writing', `${BRAND.url}/dashboard`)}
+      </td>
+    </tr>
+    ${emailFooter()}
+  `));
+  
+  const text = `
+Hi ${name},
+
+🔐 Why Authors Trust Synoptic
+
+We know your manuscripts are precious. That's why we've built Synoptic with industrial-strength security from day one.
+
+Your protection:
+🔒 256-bit SSL encryption — Bank-level security for all data
+🚫 We never train AI on your content — Your manuscripts stay yours
+🇪🇺 GDPR compliant — Full data deletion available anytime
+💾 Auto-save & cloud backup — Never lose your work
+🔑 Secure authentication — OAuth 2.0 with password-free Google login
+
+Questions about security? Reply to this email — our team is happy to provide more details.
+
+Continue writing: ${BRAND.url}/dashboard
+
+---
+${BRAND.name} - ${BRAND.tagline}
+${BRAND.url}
+  `.trim();
+  
+  return { html, text, subject: '🔐 Why Authors Trust Synoptic' };
+}
+
+// -----------------------------------------------------------------------------
+// 13. Re-engagement Email: Come Back
+// -----------------------------------------------------------------------------
+export function reengagementEmail(data: EmailData): { html: string; text: string; subject: string } {
+  const name = data.recipientName || 'there';
+  
+  const html = emailWrapper(emailCard(`
+    ${emailHeader()}
+    <tr>
+      <td style="padding: 40px;">
+        <h2 style="margin: 0 0 16px 0; font-size: 24px; font-weight: 700; color: ${BRAND.colors.dark}; font-family: ${BRAND.fonts.heading};">We miss you! 💚</h2>
+        <p style="margin: 0 0 24px 0; font-size: 16px; line-height: 1.6; color: ${BRAND.colors.muted};">
+          Hi ${name},
+        </p>
+        <p style="margin: 0 0 24px 0; font-size: 16px; line-height: 1.6; color: ${BRAND.colors.muted};">
+          It's been a while since we've seen you in Synoptic. Your bilingual book is still waiting for you, and we'd love to see you finish it!
+        </p>
+        
+        <div style="margin: 24px 0; padding: 24px; background-color: ${BRAND.colors.light}; border-radius: 12px; border-left: 4px solid ${BRAND.colors.accent};">
+          <h3 style="margin: 0 0 16px 0; font-size: 16px; font-weight: 600; color: ${BRAND.colors.dark};">Since you've been away:</h3>
+          <table role="presentation" style="width: 100%;">
+            <tr>
+              <td style="padding: 6px 0; font-size: 14px; color: ${BRAND.colors.muted};">
+                ✨ New AI models for better translations
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0; font-size: 14px; color: ${BRAND.colors.muted};">
+                🎨 Grammar Painter annotation tools
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0; font-size: 14px; color: ${BRAND.colors.muted};">
+                📱 Pimsleur audio export mode
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0; font-size: 14px; color: ${BRAND.colors.muted};">
+                📚 5,000+ new books in the library
+              </td>
+            </tr>
+          </table>
+        </div>
+        
+        ${ctaButton('Resume My Project', `${BRAND.url}/dashboard`)}
+        
+        <p style="margin: 24px 0 0 0; font-size: 14px; line-height: 1.6; color: ${BRAND.colors.muted}; text-align: center;">
+          Need help or have feedback? Just reply to this email.
+        </p>
+      </td>
+    </tr>
+    ${emailFooter()}
+  `));
+  
+  const text = `
+Hi ${name},
+
+We miss you! 💚
+
+It's been a while since we've seen you in Synoptic. Your bilingual book is still waiting for you, and we'd love to see you finish it!
+
+Since you've been away:
+✨ New AI models for better translations
+🎨 Grammar Painter annotation tools
+📱 Pimsleur audio export mode
+📚 5,000+ new books in the library
+
+Resume your project: ${BRAND.url}/dashboard
+
+Need help or have feedback? Just reply to this email.
+
+---
+${BRAND.name} - ${BRAND.tagline}
+${BRAND.url}
+  `.trim();
+  
+  return { html, text, subject: 'We miss you! Your book is waiting 💚' };
+}

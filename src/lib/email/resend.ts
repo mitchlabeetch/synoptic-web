@@ -12,6 +12,10 @@ import {
   marketingSuccessEmail,
   tipsGettingStartedEmail,
   tipsProFeaturesEmail,
+  tipsGridLockEmail,
+  tipsPdfExportEmail,
+  tipsSecurityEmail,
+  reengagementEmail,
   orderConfirmationProEmail,
   orderConfirmationPublisherEmail,
   type EmailData,
@@ -199,6 +203,66 @@ export async function sendTipsProFeaturesEmail(
   recipientName: string | null
 ): Promise<SendEmailResult> {
   const email = tipsProFeaturesEmail({
+    recipientEmail,
+    recipientName,
+  });
+  
+  return sendEmail(recipientEmail, email.subject, email.html, email.text);
+}
+
+/**
+ * Send Grid-Lock deep dive tips email
+ */
+export async function sendTipsGridLockEmail(
+  recipientEmail: string,
+  recipientName: string | null
+): Promise<SendEmailResult> {
+  const email = tipsGridLockEmail({
+    recipientEmail,
+    recipientName,
+  });
+  
+  return sendEmail(recipientEmail, email.subject, email.html, email.text);
+}
+
+/**
+ * Send PDF export mastery tips email
+ */
+export async function sendTipsPdfExportEmail(
+  recipientEmail: string,
+  recipientName: string | null
+): Promise<SendEmailResult> {
+  const email = tipsPdfExportEmail({
+    recipientEmail,
+    recipientName,
+  });
+  
+  return sendEmail(recipientEmail, email.subject, email.html, email.text);
+}
+
+/**
+ * Send security & trust tips email
+ */
+export async function sendTipsSecurityEmail(
+  recipientEmail: string,
+  recipientName: string | null
+): Promise<SendEmailResult> {
+  const email = tipsSecurityEmail({
+    recipientEmail,
+    recipientName,
+  });
+  
+  return sendEmail(recipientEmail, email.subject, email.html, email.text);
+}
+
+/**
+ * Send re-engagement email for inactive users
+ */
+export async function sendReengagementEmail(
+  recipientEmail: string,
+  recipientName: string | null
+): Promise<SendEmailResult> {
+  const email = reengagementEmail({
     recipientEmail,
     recipientName,
   });

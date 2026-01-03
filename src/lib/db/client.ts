@@ -25,6 +25,7 @@ const ALLOWED_TABLES = new Set([
   'glossary_entries',
   'user_settings',
   'embeddings', // RAG knowledge base
+  'drip_email_queue', // Email campaign queue
 ]);
 
 /**

@@ -7,6 +7,9 @@ import { query } from '@/lib/db/client';
 import {
   sendTipsGettingStartedEmail,
   sendTipsProFeaturesEmail,
+  sendTipsGridLockEmail,
+  sendTipsPdfExportEmail,
+  sendTipsSecurityEmail,
   sendMarketingSuccessEmail,
 } from './resend';
 
@@ -21,7 +24,8 @@ export interface DripEmail {
   description: string;
 }
 
-// Define the drip sequence
+// Define the drip sequence - 6 emails over 14 days
+// Based on expert tips for maximum value delivery
 export const DRIP_SEQUENCE: DripEmail[] = [
   {
     id: 'tips_getting_started',
@@ -30,15 +34,33 @@ export const DRIP_SEQUENCE: DripEmail[] = [
     description: '5 tips to master your first project',
   },
   {
+    id: 'tips_grid_lock',
+    name: 'Grid-Lock Deep Dive',
+    delayDays: 3,
+    description: 'Master the signature parallel alignment feature',
+  },
+  {
     id: 'tips_pro_features',
     name: 'Pro Features Tips',
-    delayDays: 4,
-    description: 'Hidden features you might have missed',
+    delayDays: 5,
+    description: 'Hidden features: ⌘K, Pimsleur, Glossary Guard',
+  },
+  {
+    id: 'tips_pdf_export',
+    name: 'PDF Export Mastery',
+    delayDays: 8,
+    description: 'Print-perfect PDFs: DPI, page limits, preview',
+  },
+  {
+    id: 'tips_security',
+    name: 'Security & Trust',
+    delayDays: 11,
+    description: 'Why authors trust Synoptic with their manuscripts',
   },
   {
     id: 'marketing_success',
     name: 'Success Story',
-    delayDays: 7,
+    delayDays: 14,
     description: 'Inspiring story from the community',
   },
 ];
@@ -133,16 +155,34 @@ export async function processDripQueue(): Promise<{ sent: number; failed: number
             error = result1.error || '';
             break;
 
-          case 'tips_pro_features':
-            const result2 = await sendTipsProFeaturesEmail(row.email, row.name);
+          case 'tips_grid_lock':
+            const result2 = await sendTipsGridLockEmail(row.email, row.name);
             success = result2.success;
             error = result2.error || '';
             break;
 
-          case 'marketing_success':
-            const result3 = await sendMarketingSuccessEmail(row.email, row.name);
+          case 'tips_pro_features':
+            const result3 = await sendTipsProFeaturesEmail(row.email, row.name);
             success = result3.success;
             error = result3.error || '';
+            break;
+
+          case 'tips_pdf_export':
+            const result4 = await sendTipsPdfExportEmail(row.email, row.name);
+            success = result4.success;
+            error = result4.error || '';
+            break;
+
+          case 'tips_security':
+            const result5 = await sendTipsSecurityEmail(row.email, row.name);
+            success = result5.success;
+            error = result5.error || '';
+            break;
+
+          case 'marketing_success':
+            const result6 = await sendMarketingSuccessEmail(row.email, row.name);
+            success = result6.success;
+            error = result6.error || '';
             break;
 
           default:
