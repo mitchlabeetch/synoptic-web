@@ -11,11 +11,14 @@ export interface User {
   email: string;
   name?: string;
   tier: string;
-  preferred_locale: string;
+  preferred_locale?: string;
   ai_credits_used: number;
   ai_credits_limit: number;
   created_at: string;
   updated_at: string;
+  avatar_url?: string;
+  auth_provider?: string;
+  email_verified?: boolean;
 }
 
 export interface Project {

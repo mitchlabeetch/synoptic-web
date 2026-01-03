@@ -36,6 +36,7 @@ const ALLOWED_COLUMNS: Record<string, Set<string>> = {
     'id', 'email', 'password_hash', 'name', 'tier', 'avatar_url',
     'ai_credits_used', 'ai_credits_limit', 'created_at', 'updated_at',
     'stripe_customer_id', 'stripe_subscription_id',
+    'preferred_locale', 'email_verified', 'onboarding', 'auth_provider',
   ]),
   projects: new Set([
     'id', 'user_id', 'title', 'description', 'content', 'l1_lang', 'l2_lang',

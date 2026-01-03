@@ -28,7 +28,7 @@ interface UserSettingsProps {
     id: string;
     email: string;
     name?: string;
-    preferred_locale: string;
+    preferred_locale?: string;
   };
 }
 
