@@ -89,15 +89,32 @@ function buildCSP(isDev: boolean): string {
     ],
     'connect-src': [
       "'self'",
-      // API endpoints
+      // External API endpoints for library sources
       'https://api.languagetool.org',
       'https://libretranslate.com',
       'https://api.dictionaryapi.dev',
       'https://*.wiktionary.org',
+      'https://api.alquran.cloud',           // Quran verses
+      'https://bible-api.com',               // Bible verses
+      'https://chroniclingamerica.loc.gov',  // Historical newspapers
+      'https://api.datamuse.com',            // Synonyms
+      'https://api.unsplash.com',            // Images
+      'https://openlibrary.org',             // Book metadata
+      'https://standardebooks.org',          // Free ebooks
+      'https://gutenberg.org',               // Project Gutenberg
+      'https://www.gutenberg.org',
+      'https://poetrydb.org',                // Poetry
+      'https://api.nasa.gov',                // NASA APOD
+      'https://xkcd.com',                    // XKCD comics
+      'https://www.themealdb.com',           // Recipes
+      'https://www.thecocktaildb.com',       // Cocktails
+      'https://api.artic.edu',               // Art Institute
+      'https://collectionapi.metmuseum.org', // Met Museum
       // Analytics
       'https://www.google-analytics.com',
       // DigitalOcean endpoints (for AI)
       'https://*.digitaloceanspaces.com',
+      'https://api.digitalocean.com',
       'https://api.openai.com',
       // Dev server
       ...(isDev ? ['ws://localhost:*', 'http://localhost:*'] : []),

@@ -39,7 +39,7 @@ const ALLOWED_COLUMNS: Record<string, Set<string>> = {
     'preferred_locale', 'email_verified', 'onboarding', 'auth_provider',
   ]),
   projects: new Set([
-    'id', 'user_id', 'title', 'description', 'content', 'l1_lang', 'l2_lang',
+    'id', 'user_id', 'title', 'description', 'content', 'source_lang', 'target_lang',
     'cover_image_url', 'is_published', 'created_at', 'updated_at', 'settings',
   ]),
   favorites: new Set([
