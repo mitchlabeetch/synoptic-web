@@ -1,31 +1,14 @@
 // src/app/api/auth/resend-verification/route.ts
 // PURPOSE: Handle resending email verification tokens
-// ACTION: Creates new token, invalidates old one, sends email
-// MECHANISM: Rate-limited to prevent abuse, sends email via configured provider
+// ACTION: Creates new token, invalidates old one, sends email via Resend
+// MECHANISM: Rate-limited to prevent abuse, sends email via Resend
 
 import { NextRequest, NextResponse } from 'next/server';
 import { query } from '@/lib/db/client';
-import { createVerificationToken, isEmailVerified } from '@/lib/auth/verification';
+import { createVerificationToken } from '@/lib/auth/verification';
 import { RateLimiters, getClientIP, getRateLimitHeaders } from '@/lib/security/rate-limit';
 import { AuditLog } from '@/lib/security/audit';
-
-// Email sending would be handled by your email provider (SendGrid, SES, etc.)
-// For now, we'll log and return the verification URL
-async function sendVerificationEmail(email: string, verificationUrl: string): Promise<boolean> {
-  // In production, integrate with your email service:
-  // await sendgrid.send({
-  //   to: email,
-  //   from: 'noreply@getsynoptic.com',
-  //   subject: 'Verify your Synoptic account',
-  //   html: `<p>Click <a href="${verificationUrl}">here</a> to verify your email.</p>`,
-  // });
-  
-  console.log('[Email] Verification email would be sent to:', email);
-  console.log('[Email] Verification URL:', verificationUrl);
-  
-  // Return true to indicate "success" in development
-  return true;
-}
+import { sendVerificationEmail } from '@/lib/email/resend';
 
 export async function POST(request: NextRequest) {
   const ip = getClientIP(request);
@@ -55,8 +38,8 @@ export async function POST(request: NextRequest) {
     }
 
     // 2. Find user by email
-    const userResult = await query(
-      'SELECT id, email, email_verified FROM profiles WHERE email = $1',
+    const userResult = await query<{ id: string; email: string; email_verified: boolean; name: string | null }>(
+      'SELECT id, email, email_verified, name FROM profiles WHERE email = $1',
       [email.toLowerCase().trim()]
     );
 
@@ -84,19 +67,21 @@ export async function POST(request: NextRequest) {
     const token = await createVerificationToken(user.id, user.email);
     
     // 5. Construct verification URL
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://getsynoptic.com';
     const verificationUrl = `${appUrl}/api/auth/verify-email?token=${token}`;
 
-    // 6. Send verification email
-    const emailSent = await sendVerificationEmail(user.email, verificationUrl);
+    // 6. Send verification email via Resend
+    const emailResult = await sendVerificationEmail(user.email, user.name, verificationUrl);
 
-    if (!emailSent) {
-      console.error('[Resend Verification] Failed to send email to:', user.email);
+    if (!emailResult.success) {
+      console.error('[Resend Verification] Failed to send email:', emailResult.error);
       return NextResponse.json(
         { error: 'Failed to send verification email. Please try again.' },
         { status: 500 }
       );
     }
+
+    console.log(`[Resend Verification] Email sent to ${user.email}, ID: ${emailResult.id}`);
 
     // 7. Log the resend
     AuditLog.verificationEmailResent(user.id, user.email, ip);

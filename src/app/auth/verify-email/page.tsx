@@ -111,7 +111,7 @@ export default function VerifyEmailPage() {
         {/* Back button */}
         <Link href="/auth/login" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-6">
           <ArrowLeft className="h-4 w-4" />
-          {tc('backToLogin')}
+          {t('backToLogin')}
         </Link>
 
         {/* SUCCESS STATE */}
@@ -209,7 +209,7 @@ export default function VerifyEmailPage() {
 
             <div className="text-center">
               <Link href="/auth/login" className="text-sm text-[#30b8c8] hover:underline">
-                {tc('backToLogin')}
+                {t('backToLogin')}
               </Link>
             </div>
           </div>

@@ -1,7 +1,7 @@
 // src/app/api/auth/signup/route.ts
 // PURPOSE: Handle new user registration
-// ACTION: Creates user account with hashed password
-// MECHANISM: Rate limits, validates input strongly, hashes password with bcrypt, inserts into database
+// ACTION: Creates user account with hashed password, sends verification email
+// MECHANISM: Rate limits, validates input strongly, hashes password with bcrypt, sends verification email
 
 import { NextRequest, NextResponse } from 'next/server';
 import { query } from '@/lib/db/client';
@@ -10,6 +10,8 @@ import { hashPassword } from '@/lib/security/password';
 import { RateLimiters, getClientIP, getRateLimitHeaders } from '@/lib/security/rate-limit';
 import { AuditLog } from '@/lib/security/audit';
 import { SignupRequestSchema } from '@/lib/security/validation';
+import { createVerificationToken } from '@/lib/auth/verification';
+import { sendVerificationEmail } from '@/lib/email/resend';
 
 export async function POST(request: NextRequest) {
   const ip = getClientIP(request);
@@ -62,14 +64,14 @@ export async function POST(request: NextRequest) {
     // 4. Hash password with bcrypt (cost factor is environment-aware)
     const passwordHash = await hashPassword(password);
 
-    // 5. Create user
+    // 5. Create user with email_verified = false
     const userId = crypto.randomUUID();
     const now = new Date().toISOString();
     const displayName = name || email.split('@')[0];
 
     await query(
-      `INSERT INTO profiles (id, email, name, password_hash, tier, ai_credits_used, ai_credits_limit, created_at, updated_at)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
+      `INSERT INTO profiles (id, email, name, password_hash, tier, ai_credits_used, ai_credits_limit, email_verified, auth_provider, created_at, updated_at)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`,
       [
         userId,
         email,
@@ -78,15 +80,36 @@ export async function POST(request: NextRequest) {
         'free',
         0,
         100, // Free tier limit
+        false, // Email not verified yet
+        'email', // Auth provider is email
         now,
         now,
       ]
     );
 
-    // 6. Log successful signup
+    // 6. Create verification token and send email
+    try {
+      const verificationToken = await createVerificationToken(userId, email);
+      const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://getsynoptic.com';
+      const verifyUrl = `${appUrl}/api/auth/verify-email?token=${verificationToken}`;
+      
+      const emailResult = await sendVerificationEmail(email, displayName, verifyUrl);
+      
+      if (emailResult.success) {
+        console.log(`[Signup] Verification email sent to ${email}, ID: ${emailResult.id}`);
+      } else {
+        // Log error but don't fail signup - user can request resend
+        console.error(`[Signup] Failed to send verification email: ${emailResult.error}`);
+      }
+    } catch (emailError) {
+      // Log but don't fail the signup
+      console.error('[Signup] Error sending verification email:', emailError);
+    }
+
+    // 7. Log successful signup
     AuditLog.signup(userId, email, ip);
 
-    // 7. Create JWT token
+    // 8. Create JWT token (user can login but will see verification reminder)
     const token = await createToken({
       id: userId,
       email,
@@ -94,10 +117,10 @@ export async function POST(request: NextRequest) {
       tier: 'free',
     });
 
-    // 8. Set auth cookie
+    // 9. Set auth cookie
     await setAuthCookie(token);
 
-    // 9. Return success response
+    // 10. Return success response with email_verified status
     return NextResponse.json({
       success: true,
       user: {
@@ -105,7 +128,9 @@ export async function POST(request: NextRequest) {
         email,
         name: displayName,
         tier: 'free',
+        email_verified: false,
       },
+      message: 'Account created. Please check your email to verify your account.',
     });
     
   } catch (error: unknown) {
@@ -118,4 +143,3 @@ export async function POST(request: NextRequest) {
     );
   }
 }
-

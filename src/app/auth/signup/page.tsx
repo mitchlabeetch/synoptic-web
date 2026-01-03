@@ -77,10 +77,10 @@ export default function SignupPage() {
   // Password strength indicator
   const getPasswordStrength = () => {
     if (password.length === 0) return { strength: 0, label: '' };
-    if (password.length < 6) return { strength: 1, label: 'Weak', color: 'bg-red-500' };
-    if (password.length < 10) return { strength: 2, label: 'Fair', color: 'bg-amber-500' };
-    if (password.match(/[A-Z]/) && password.match(/[0-9]/)) return { strength: 3, label: 'Strong', color: 'bg-emerald-500' };
-    return { strength: 2, label: 'Fair', color: 'bg-amber-500' };
+    if (password.length < 6) return { strength: 1, label: t('weak'), color: 'bg-red-500' };
+    if (password.length < 10) return { strength: 2, label: t('fair'), color: 'bg-amber-500' };
+    if (password.match(/[A-Z]/) && password.match(/[0-9]/)) return { strength: 3, label: t('strong'), color: 'bg-emerald-500' };
+    return { strength: 2, label: t('fair'), color: 'bg-amber-500' };
   };
 
   const passwordStrength = getPasswordStrength();
@@ -110,18 +110,18 @@ export default function SignupPage() {
               transition={{ delay: 0.2 }}
             >
               <h1 className="text-4xl font-black font-outfit leading-tight mb-4">
-                Start your bilingual publishing journey
+                {t('signupWelcomeTitle')}
               </h1>
               <p className="text-white/80 text-lg font-medium">
-                Join thousands of authors creating beautiful parallel text publications.
+                {t('signupWelcomeSubtitle')}
               </p>
             </motion.div>
             
             <div className="space-y-4">
               {[
-                'Unlimited project drafts',
-                'AI-powered translation assistance',
-                'Export to PDF & EPUB'
+                t('signupFeature1'),
+                t('signupFeature2'),
+                t('signupFeature3')
               ].map((feature, i) => (
                 <motion.div 
                   key={i}
@@ -140,7 +140,7 @@ export default function SignupPage() {
           {/* Security Badge */}
           <div className="flex items-center gap-3 text-white/60 text-sm">
             <Shield className="h-4 w-4" />
-            <span>256-bit SSL encryption • GDPR compliant • No training on your data</span>
+            <span>{t('signupSecurityNote')}</span>
           </div>
         </div>
       </div>
@@ -264,7 +264,7 @@ export default function SignupPage() {
                     ))}
                   </div>
                   <p className="text-xs text-muted-foreground">
-                    Password strength: <span className="font-semibold">{passwordStrength.label}</span>
+                    {t('passwordStrengthLabel')}: <span className="font-semibold">{passwordStrength.label}</span>
                   </p>
                 </div>
               )}

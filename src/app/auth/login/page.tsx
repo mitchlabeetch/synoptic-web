@@ -99,10 +99,10 @@ export default function LoginPage() {
               transition={{ delay: 0.2 }}
             >
               <h1 className="text-4xl font-black font-outfit leading-tight mb-4">
-                Welcome back to your studio
+                {t('loginWelcomeTitle')}
               </h1>
               <p className="text-white/80 text-lg font-medium">
-                Pick up where you left off. Your projects are waiting.
+                {t('loginWelcomeSubtitle')}
               </p>
             </motion.div>
             
@@ -133,7 +133,7 @@ export default function LoginPage() {
           {/* Security Badge */}
           <div className="flex items-center gap-3 text-white/60 text-sm">
             <Shield className="h-4 w-4" />
-            <span>Secure session • Auto-logout after inactivity</span>
+            <span>{t('secureSession')}</span>
           </div>
         </div>
       </div>

@@ -95,7 +95,17 @@
     "resetPassword": "Reset Password",
     "passwordReset": "Password Reset!",
     "passwordResetSuccess": "Your password has been reset successfully. You can now log in with your new password.",
-    "redirectingToLogin": "Redirecting to login..."
+    "redirectingToLogin": "Redirecting to login...",
+    "loginWelcomeTitle": "Welcome back to your studio",
+    "loginWelcomeSubtitle": "Pick up where you left off. Your projects are waiting.",
+    "secureSession": "Secure session • Auto-logout after inactivity",
+    "signupWelcomeTitle": "Start your bilingual publishing journey",
+    "signupWelcomeSubtitle": "Join thousands of authors creating beautiful parallel text publications.",
+    "signupFeature1": "Unlimited project drafts",
+    "signupFeature2": "AI-powered translation assistance",
+    "signupFeature3": "Export to PDF & EPUB",
+    "signupSecurityNote": "256-bit SSL encryption • GDPR compliant • No training on your data",
+    "passwordStrengthLabel": "Password strength"
   },
   "Dashboard": {
     "title": "My Projects",
