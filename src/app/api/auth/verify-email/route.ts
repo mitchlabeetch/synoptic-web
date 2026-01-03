@@ -1,12 +1,14 @@
 // src/app/api/auth/verify-email/route.ts
 // PURPOSE: Handle email verification token validation
-// ACTION: Validates tokens, marks email as verified, handles expiry
-// MECHANISM: Accepts token via query param, validates, provides graceful error handling
+// ACTION: Validates tokens, marks email as verified, sends welcome email
+// MECHANISM: Accepts token via query param, validates, sends welcome email
 
 import { NextRequest, NextResponse } from 'next/server';
 import { validateVerificationToken, markEmailVerified, getTokenExpiryInfo } from '@/lib/auth/verification';
 import { AuditLog } from '@/lib/security/audit';
 import { getClientIP } from '@/lib/security/rate-limit';
+import { sendWelcomeEmail } from '@/lib/email/resend';
+import { query } from '@/lib/db/client';
 
 export async function GET(request: NextRequest) {
   const ip = getClientIP(request);
@@ -37,6 +39,24 @@ export async function GET(request: NextRequest) {
     AuditLog.emailVerified(result.userId, result.email, ip);
 
     console.log('[Email Verification] Successfully verified email for user:', result.userId);
+
+    // Get user name for welcome email
+    const userResult = await query<{ name: string | null }>(
+      'SELECT name FROM profiles WHERE id = $1',
+      [result.userId]
+    );
+    const userName = userResult.rows[0]?.name || null;
+
+    // Send welcome email (non-blocking)
+    sendWelcomeEmail(result.email, userName).then(emailResult => {
+      if (emailResult.success) {
+        console.log(`[Email Verification] Welcome email sent to ${result.email}`);
+      } else {
+        console.error(`[Email Verification] Failed to send welcome email: ${emailResult.error}`);
+      }
+    }).catch(err => {
+      console.error('[Email Verification] Welcome email error:', err);
+    });
 
     // Redirect to success page
     return NextResponse.redirect(new URL('/auth/verify-email?success=true', request.url));
