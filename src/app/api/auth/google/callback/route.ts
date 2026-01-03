@@ -124,17 +124,25 @@ export async function GET(request: NextRequest) {
       tier: user.tier,
     });
 
-    // Set auth cookie
-    await setAuthCookie(token);
-
-    // Clear OAuth state cookie and redirect to dashboard
+    // Create redirect response and set cookies on it
     const response = NextResponse.redirect(new URL('/dashboard', appUrl));
+    
+    // Set auth cookie
+    response.cookies.set('synoptic-auth', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 60 * 60 * 24 * 7, // 7 days
+      path: '/',
+    });
+    
+    // Clear OAuth state cookie
     response.cookies.delete('oauth_state');
 
     return response;
 
   } catch (error) {
     console.error('[Google OAuth Callback Error]', error);
-    return NextResponse.redirect(new URL('/auth/login?error=oauth_failed', appUrl));
+    return NextResponse.redirect(new URL('/auth/login?error=auth_failed', appUrl));
   }
 }
