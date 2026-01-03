@@ -228,6 +228,24 @@ const migrations = [
       CREATE INDEX IF NOT EXISTS idx_security_audit_severity ON security_audit_log(severity);
     `,
   },
+
+  {
+    name: '010_oauth_support',
+    description: 'Add OAuth support columns (avatar_url, make password_hash nullable)',
+    sql: `
+      -- Add avatar_url column for profile pictures from OAuth providers
+      ALTER TABLE profiles ADD COLUMN IF NOT EXISTS avatar_url TEXT;
+      
+      -- Add auth_provider column to track how user signed up
+      ALTER TABLE profiles ADD COLUMN IF NOT EXISTS auth_provider VARCHAR(20) DEFAULT 'email';
+      
+      -- Make password_hash nullable for OAuth users (they don't have passwords)
+      ALTER TABLE profiles ALTER COLUMN password_hash DROP NOT NULL;
+      
+      -- Set email_verified to true for existing users without OAuth
+      UPDATE profiles SET email_verified = true WHERE password_hash IS NOT NULL AND email_verified IS NULL;
+    `,
+  },
 ];
 
 // ═══════════════════════════════════════════════════════════════════

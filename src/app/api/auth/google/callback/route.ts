@@ -105,11 +105,11 @@ export async function GET(request: NextRequest) {
         );
       }
     } else {
-      // Create new user
+      // Create new user (OAuth - no password needed)
       const userId = crypto.randomUUID();
       const result = await query(
-        `INSERT INTO profiles (id, email, name, tier, avatar_url, created_at, updated_at)
-         VALUES ($1, $2, $3, 'free', $4, NOW(), NOW())
+        `INSERT INTO profiles (id, email, name, tier, avatar_url, auth_provider, email_verified, created_at, updated_at)
+         VALUES ($1, $2, $3, 'free', $4, 'google', true, NOW(), NOW())
          RETURNING id, email, name, tier`,
         [userId, googleUser.email.toLowerCase(), googleUser.name, googleUser.picture]
       );
