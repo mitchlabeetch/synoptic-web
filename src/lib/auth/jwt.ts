@@ -6,9 +6,27 @@
 import { SignJWT, jwtVerify, JWTPayload } from 'jose';
 import { cookies } from 'next/headers';
 
-const JWT_SECRET = new TextEncoder().encode(
-  process.env.JWT_SECRET || 'synoptic-default-secret-change-in-production'
-);
+// SECURITY: Fail loudly if JWT_SECRET is not configured
+// No fallback - this protects against running with a known/weak secret
+function getJwtSecret(): Uint8Array {
+  const secret = process.env.JWT_SECRET;
+  if (!secret) {
+    throw new Error(
+      '[FATAL] JWT_SECRET environment variable is not set. ' +
+      'Application cannot start securely without a cryptographic secret.'
+    );
+  }
+  return new TextEncoder().encode(secret);
+}
+
+// Lazy-load the secret to allow env vars to be set during runtime
+let _jwtSecret: Uint8Array | null = null;
+function getSecret(): Uint8Array {
+  if (!_jwtSecret) {
+    _jwtSecret = getJwtSecret();
+  }
+  return _jwtSecret;
+}
 
 const JWT_ISSUER = 'synoptic';
 const JWT_AUDIENCE = 'synoptic-web';
@@ -42,7 +60,7 @@ export async function createToken(user: {
     .setAudience(JWT_AUDIENCE)
     .setSubject(user.id)
     .setExpirationTime(TOKEN_EXPIRY)
-    .sign(JWT_SECRET);
+    .sign(getSecret());
   
   return token;
 }
@@ -52,7 +70,7 @@ export async function createToken(user: {
  */
 export async function verifyToken(token: string): Promise<UserTokenPayload | null> {
   try {
-    const { payload } = await jwtVerify(token, JWT_SECRET, {
+    const { payload } = await jwtVerify(token, getSecret(), {
       issuer: JWT_ISSUER,
       audience: JWT_AUDIENCE,
     });

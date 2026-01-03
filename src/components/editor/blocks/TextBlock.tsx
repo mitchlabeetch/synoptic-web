@@ -17,6 +17,7 @@ import { LinePlayer } from '../tools/LinePlayer';
 import { GlossaryLintWarning } from '../GlossaryLintWarning';
 
 import { Sparkles, Loader2, Trash2, BookOpen, Volume2, Shield } from 'lucide-react';
+import { toast } from '@/components/ui/Toast';
 
 interface TextBlockComponentProps {
   block: TextBlock;
@@ -138,8 +139,12 @@ export function TextBlockComponent({
       // Lint the new translation for any remaining violations
       const plainTranslation = finalTranslation.replace(/<[^>]*>/g, '');
       lintContent(plainTranslation, block.id, currentPageId, 'L2');
+      
+      // Show success toast with AI credit usage
+      toast.credits(1, data.creditsRemaining);
     } catch (error) {
       console.error('AI Translation Error:', error);
+      toast.error('Translation failed', { description: 'Please check your connection and try again.' });
     } finally {
       setIsAiProcessing(false);
     }
@@ -237,8 +242,12 @@ export function TextBlockComponent({
   const currentLayout = block.layout || settings.layout || 'side-by-side';
 
   // Layout grid classes
+  // Note: bilingual-grid collapses to vertical stack on mobile (< 768px) for readability
   const layoutStyles = {
-    'side-by-side': direction === 'rtl' ? 'book-grid-rtl gap-8' : 'book-grid-ltr gap-8',
+    'side-by-side': cn(
+      'bilingual-grid gap-8',
+      direction === 'rtl' && 'book-grid-rtl'
+    ),
     'interlinear': 'flex flex-col gap-1',
     'stacked': 'flex flex-col gap-4',
     'alternating': 'flex flex-col gap-4',
@@ -257,7 +266,7 @@ export function TextBlockComponent({
   });
 
   return (
-    <div
+    <article
       className={cn(
         'group relative rounded-xl transition-all duration-300 outline-none mb-4 border border-transparent',
         isSelected 
@@ -272,13 +281,27 @@ export function TextBlockComponent({
         e.stopPropagation();
         onSelect();
       }}
+      aria-label={block.isTitle ? 'Title block' : block.isChapterHeading ? 'Chapter heading block' : 'Text block'}
+      aria-selected={isSelected}
+      aria-busy={isAiProcessing}
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onSelect();
+        }
+        if (e.key === 'Delete' && isSelected) {
+          e.preventDefault();
+          onDelete();
+        }
+      }}
     >
       <div className={cn(
         layoutStyles[currentLayout as keyof typeof layoutStyles],
         (block.isTitle || block.isChapterHeading) && "text-center"
       )}>
         {/* L1 (Source Language) */}
-        <div 
+        <section 
           className={cn(
             'p-2 rounded transition-colors',
             isEditing && 'hover:bg-primary/5 focus-within:bg-primary/5 focus-within:ring-1 focus-within:ring-primary/20',
@@ -287,6 +310,7 @@ export function TextBlockComponent({
             `script-${l1Script}`
           )}
           lang={sourceLang}
+          aria-label={`Source text (${sourceLang.toUpperCase()})`}
         >
           <TiptapEditor
             ref={l1EditorRef}
@@ -294,16 +318,17 @@ export function TextBlockComponent({
             editable={isEditing}
             direction={isL1RTL ? 'rtl' : 'ltr'}
             placeholder="Enter source text..."
+            locale={sourceLang}
             style={getEditorStyle(block.L1, true)}
             onBlur={handleL1Blur}
             onSelectionChange={(hasSelection, text) => setL1Selection({ hasSelection, text })}
             onAiExplain={() => handleAiExplain('L1')}
             isAiProcessing={isAiProcessing}
           />
-        </div>
+        </section>
 
         {/* L2 (Target Language) */}
-        <div 
+        <section 
           className={cn(
             'p-2 rounded transition-colors opacity-80 relative',
             isEditing && 'hover:bg-primary/5 focus-within:bg-primary/5 focus-within:ring-1 focus-within:ring-primary/20',
@@ -312,6 +337,7 @@ export function TextBlockComponent({
             `script-${l2Script}`
           )}
           lang={targetLang}
+          aria-label={`Translation (${targetLang.toUpperCase()})`}
         >
           {/* Glossary Lint Warnings */}
           {blockWarnings.length > 0 && (
@@ -334,6 +360,7 @@ export function TextBlockComponent({
             editable={isEditing}
             direction={isL2RTL ? 'rtl' : 'ltr'}
             placeholder="Enter translation..."
+            locale={targetLang}
             style={getEditorStyle(block.L2, false)}
             onBlur={handleL2Blur}
             onSelectionChange={(hasSelection, text) => setL2Selection({ hasSelection, text })}
@@ -342,18 +369,30 @@ export function TextBlockComponent({
           />
           
           {isAiProcessing && (
-            <div className="absolute inset-0 bg-background/50 flex items-center justify-center rounded-lg z-10 backdrop-blur-[1px]">
-               <Loader2 className="h-5 w-5 animate-spin text-primary" />
+            <div 
+              className="absolute inset-0 bg-background/50 flex items-center justify-center rounded-lg z-10 backdrop-blur-[1px]"
+              role="status"
+              aria-label="AI is processing"
+            >
+               <Loader2 className="h-5 w-5 animate-spin text-primary" aria-hidden="true" />
             </div>
           )}
-        </div>
+        </section>
       </div>
 
       {/* Block Actions Overlay */}
       {isSelected && (
-        <div className="absolute -right-14 top-0 flex flex-col gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
+        <div 
+          className="absolute -right-14 top-0 flex flex-col gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity"
+          role="toolbar"
+          aria-label="Block actions"
+        >
           {/* Audio Players Section */}
-          <div className="flex flex-col gap-0.5 p-1 bg-background/90 backdrop-blur-sm rounded-lg border shadow-sm">
+          <div 
+            className="flex flex-col gap-0.5 p-1 bg-background/90 backdrop-blur-sm rounded-lg border shadow-sm"
+            role="group"
+            aria-label="Audio playback"
+          >
             {/* L2 Player (Target - Priority) */}
             {block.L2.content && (
               <LinePlayer 
@@ -378,29 +417,34 @@ export function TextBlockComponent({
           <button 
             onClick={(e) => { e.stopPropagation(); handleAiTranslate(); }}
             disabled={isAiProcessing}
+            aria-label="AI Translate from source to target language"
             title="AI Translate (L1 → L2)"
             className="p-1.5 bg-primary text-primary-foreground rounded-md shadow-sm hover:scale-110 transition-transform disabled:opacity-50"
           >
-            {isAiProcessing ? <Loader2 className="h-[14px] w-[14px] animate-spin" /> : <Sparkles className="h-[14px] w-[14px]" />}
+            {isAiProcessing ? <Loader2 className="h-[14px] w-[14px] animate-spin" aria-hidden="true" /> : <Sparkles className="h-[14px] w-[14px]" aria-hidden="true" />}
           </button>
 
           <button 
             onClick={(e) => { e.stopPropagation(); handleAiAnnotate(); }}
             disabled={isAiProcessing}
+            aria-label="AI Deep Analysis"
             title="AI Deep Analysis"
             className="p-1.5 bg-accent text-accent-foreground rounded-md shadow-sm hover:scale-110 transition-transform disabled:opacity-50"
           >
-            <BookOpen className="h-[14px] w-[14px]" />
+            <BookOpen className="h-[14px] w-[14px]" aria-hidden="true" />
           </button>
           
           <button 
             onClick={(e) => { e.stopPropagation(); onDelete(); }}
+            aria-label="Delete this block"
+            title="Delete block"
             className="p-1.5 bg-destructive text-destructive-foreground rounded-md shadow-sm hover:scale-110 transition-transform"
           >
-            <Trash2 className="h-[14px] w-[14px]" />
+            <Trash2 className="h-[14px] w-[14px]" aria-hidden="true" />
           </button>
         </div>
       )}
-    </div>
+    </article>
   );
 }
+

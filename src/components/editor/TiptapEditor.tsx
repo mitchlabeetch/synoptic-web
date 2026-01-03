@@ -15,17 +15,19 @@ import { TextStyle } from '@tiptap/extension-text-style';
 import { Color } from '@tiptap/extension-color';
 import { GrammarMark } from './extensions/GrammarMark';
 import { ArrowAnchor } from './extensions/ArrowAnchor';
-import { useCallback, useEffect, forwardRef, useImperativeHandle, useState } from 'react';
+import { useCallback, useEffect, forwardRef, useImperativeHandle, useState, useRef } from 'react';
 import { cn } from '@/lib/utils';
 import { 
   Bold, Italic, Underline as UnderlineIcon, 
   AlignLeft, AlignCenter, AlignRight, AlignJustify,
-  Sparkles, Loader2
+  Sparkles, Loader2, MoreHorizontal, ChevronDown
 } from 'lucide-react';
 import { WordPolisher } from '@/components/tools/WordPolisher';
 import { AIDraftButton } from '@/components/tools/AIDraftButton';
 import { GrammarChecker } from '@/components/tools/GrammarChecker';
 import { AddToGlossary } from '@/components/tools/AddToGlossary';
+import { isSingleWord } from '@/lib/utils/wordTokenizer';
+import { sanitizePastedHTML } from '@/lib/utils/pasteSanitizer';
 
 export interface TiptapEditorRef {
   getHTML: () => string;
@@ -42,12 +44,53 @@ interface TiptapEditorProps {
   direction?: 'ltr' | 'rtl';
   className?: string;
   style?: React.CSSProperties;
+  locale?: string; // For word tokenization (CJK support)
   onUpdate?: (html: string) => void;
   onBlur?: (html: string) => void;
   onFocus?: () => void;
   onSelectionChange?: (hasSelection: boolean, selectedText: string) => void;
   onAiExplain?: () => void;
   isAiProcessing?: boolean;
+}
+
+// Accessible icon button component
+function IconButton({
+  onClick,
+  isActive,
+  title,
+  ariaLabel,
+  disabled,
+  className,
+  children,
+}: {
+  onClick: () => void;
+  isActive?: boolean;
+  title: string;
+  ariaLabel: string;
+  disabled?: boolean;
+  className?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      className={cn(
+        'p-1.5 rounded transition-colors',
+        isActive
+          ? 'bg-primary text-primary-foreground'
+          : 'hover:bg-muted',
+        disabled && 'opacity-50 cursor-not-allowed',
+        className
+      )}
+      title={title}
+      aria-label={ariaLabel}
+      aria-pressed={isActive}
+    >
+      {children}
+    </button>
+  );
 }
 
 export const TiptapEditor = forwardRef<TiptapEditorRef, TiptapEditorProps>(
@@ -59,6 +102,7 @@ export const TiptapEditor = forwardRef<TiptapEditorRef, TiptapEditorProps>(
       direction = 'ltr',
       className,
       style,
+      locale,
       onUpdate,
       onBlur,
       onFocus,
@@ -69,6 +113,9 @@ export const TiptapEditor = forwardRef<TiptapEditorRef, TiptapEditorProps>(
     ref
   ) {
     const [selectedText, setSelectedText] = useState('');
+    const [showOverflow, setShowOverflow] = useState(false);
+    const bubbleMenuRef = useRef<HTMLDivElement>(null);
+    const selectionRangeRef = useRef<{ from: number; to: number } | null>(null);
     
     const editor = useEditor({
       extensions: [
@@ -79,6 +126,12 @@ export const TiptapEditor = forwardRef<TiptapEditorRef, TiptapEditorProps>(
             HTMLAttributes: {
               class: 'border-l-4 border-primary/30 pl-4 italic',
             },
+          },
+          // UndoRedo extension is included in StarterKit
+          // It automatically groups rapid changes within 500ms (newGroupDelay default)
+          undoRedo: {
+            depth: 100,
+            newGroupDelay: 500, // Group rapid edits into single undo steps
           },
         }),
         Placeholder.configure({
@@ -111,6 +164,10 @@ export const TiptapEditor = forwardRef<TiptapEditorRef, TiptapEditorProps>(
             .map(([k, v]) => `${k.replace(/([A-Z])/g, '-$1').toLowerCase()}: ${v}`)
             .join('; '),
         },
+        // Sanitize pasted HTML from Word/Google Docs
+        transformPastedHTML(html) {
+          return sanitizePastedHTML(html);
+        },
       },
       onUpdate: ({ editor }) => {
         onUpdate?.(editor.getHTML());
@@ -126,6 +183,10 @@ export const TiptapEditor = forwardRef<TiptapEditorRef, TiptapEditorProps>(
         const hasSelection = from !== to;
         const text = hasSelection ? editor.state.doc.textBetween(from, to) : '';
         setSelectedText(text);
+        // Store selection range for focus restoration
+        if (hasSelection) {
+          selectionRangeRef.current = { from, to };
+        }
         onSelectionChange?.(hasSelection, text);
       },
     });
@@ -172,183 +233,249 @@ export const TiptapEditor = forwardRef<TiptapEditorRef, TiptapEditorProps>(
       [editor]
     );
 
-    // Handle word replacement from WordPolisher
+    // Handle word replacement from WordPolisher/AI tools
+    // Ensures focus returns to the exact selection range after AI actions
     const handleWordReplace = useCallback((newWord: string) => {
       if (!editor) return;
+      
+      // Store current selection for undo grouping
+      const storedRange = selectionRangeRef.current;
+      
       // Replace the current selection with the new word
+      // This is automatically grouped in undo history due to history config
       editor.chain().focus().insertContent(newWord).run();
+      
+      // Restore focus to editor after modal closes
+      requestAnimationFrame(() => {
+        editor.commands.focus();
+      });
+    }, [editor]);
+
+    // Focus management: restore selection after AI modal actions
+    const restoreFocusAndSelection = useCallback(() => {
+      if (!editor) return;
+      
+      requestAnimationFrame(() => {
+        editor.commands.focus();
+        // If we have a stored selection range, try to restore it
+        if (selectionRangeRef.current) {
+          const { from, to } = selectionRangeRef.current;
+          const docLength = editor.state.doc.content.size;
+          // Only restore if range is still valid
+          if (from <= docLength && to <= docLength) {
+            editor.commands.setTextSelection({ from, to });
+          }
+        }
+      });
     }, [editor]);
 
     if (!editor) {
       return null;
     }
 
-    // Check if selection is a single word (for WordPolisher)
-    const isSingleWord = selectedText.trim().split(/\s+/).length === 1 && selectedText.trim().length > 1;
+    // Check if selection is a single word (using robust multilingual tokenizer)
+    const singleWordCheck = isSingleWord(selectedText.trim(), locale);
+
+    // Determine which secondary actions to show
+    const hasAnySelection = selectedText.trim().length > 0;
+    const hasLongSelection = selectedText.trim().length > 10;
+    
+    // Primary formatting buttons (always visible)
+    const primaryButtons = (
+      <>
+        <IconButton
+          onClick={() => toggleFormat('bold')}
+          isActive={editor.isActive('bold')}
+          title="Bold (Ctrl+B)"
+          ariaLabel="Bold"
+        >
+          <Bold className="h-3.5 w-3.5" />
+        </IconButton>
+        <IconButton
+          onClick={() => toggleFormat('italic')}
+          isActive={editor.isActive('italic')}
+          title="Italic (Ctrl+I)"
+          ariaLabel="Italic"
+        >
+          <Italic className="h-3.5 w-3.5" />
+        </IconButton>
+        <IconButton
+          onClick={() => toggleFormat('underline')}
+          isActive={editor.isActive('underline')}
+          title="Underline (Ctrl+U)"
+          ariaLabel="Underline"
+        >
+          <UnderlineIcon className="h-3.5 w-3.5" />
+        </IconButton>
+
+        <div className="w-px h-4 bg-border mx-1" aria-hidden="true" />
+
+        <IconButton
+          onClick={() => setAlignment('left')}
+          isActive={editor.isActive({ textAlign: 'left' })}
+          title="Align Left"
+          ariaLabel="Align text left"
+        >
+          <AlignLeft className="h-3.5 w-3.5" />
+        </IconButton>
+        <IconButton
+          onClick={() => setAlignment('center')}
+          isActive={editor.isActive({ textAlign: 'center' })}
+          title="Align Center"
+          ariaLabel="Align text center"
+        >
+          <AlignCenter className="h-3.5 w-3.5" />
+        </IconButton>
+        <IconButton
+          onClick={() => setAlignment('right')}
+          isActive={editor.isActive({ textAlign: 'right' })}
+          title="Align Right"
+          ariaLabel="Align text right"
+        >
+          <AlignRight className="h-3.5 w-3.5" />
+        </IconButton>
+        <IconButton
+          onClick={() => setAlignment('justify')}
+          isActive={editor.isActive({ textAlign: 'justify' })}
+          title="Justify"
+          ariaLabel="Justify text"
+        >
+          <AlignJustify className="h-3.5 w-3.5" />
+        </IconButton>
+      </>
+    );
+
+    // Secondary/AI buttons (may overflow on mobile)
+    const secondaryButtons = (
+      <>
+        {/* Word Polisher - Only for single word selections */}
+        {singleWordCheck && (
+          <>
+            <div className="w-px h-4 bg-border mx-1" aria-hidden="true" />
+            <WordPolisher 
+              selectedText={selectedText.trim()} 
+              onReplace={handleWordReplace}
+            />
+          </>
+        )}
+
+        {/* AI Draft - Quick translation for selected text */}
+        {hasAnySelection && (
+          <>
+            <div className="w-px h-4 bg-border mx-1" aria-hidden="true" />
+            <AIDraftButton
+              selectedText={selectedText.trim()}
+              onApply={handleWordReplace}
+            />
+          </>
+        )}
+
+        {/* Grammar Check - For longer selections */}
+        {hasLongSelection && (
+          <>
+            <div className="w-px h-4 bg-border mx-1" aria-hidden="true" />
+            <GrammarChecker
+              text={selectedText.trim()}
+              onFix={handleWordReplace}
+            />
+          </>
+        )}
+
+        {/* Add to Glossary - For any selection */}
+        {hasAnySelection && (
+          <>
+            <div className="w-px h-4 bg-border mx-1" aria-hidden="true" />
+            <AddToGlossary
+              selectedText={selectedText.trim()}
+            />
+          </>
+        )}
+
+        {onAiExplain && (
+          <>
+            <div className="w-px h-4 bg-border mx-1" aria-hidden="true" />
+            <IconButton
+              onClick={() => {
+                onAiExplain();
+                // Schedule focus restoration after AI action completes
+                setTimeout(restoreFocusAndSelection, 100);
+              }}
+              disabled={isAiProcessing}
+              title="AI Explain Selection"
+              ariaLabel="Explain selected text with AI"
+              className="bg-violet-500/20 hover:bg-violet-500/30 text-violet-600"
+            >
+              {isAiProcessing ? (
+                <Loader2 className="h-3.5 w-3.5 animate-spin" />
+              ) : (
+                <Sparkles className="h-3.5 w-3.5" />
+              )}
+            </IconButton>
+          </>
+        )}
+      </>
+    );
+
+    // Check if we need overflow menu (for mobile/narrow screens)
+    const hasSecondaryActions = singleWordCheck || hasAnySelection || hasLongSelection || onAiExplain;
 
     return (
       <div className="tiptap-wrapper relative">
         {/* Bubble Menu - appears on text selection */}
         <BubbleMenu
           editor={editor}
-          className="flex items-center gap-0.5 bg-background/95 backdrop-blur-sm border border-border rounded-lg shadow-xl p-1"
+          className="flex items-center bg-background/95 backdrop-blur-sm border border-border rounded-lg shadow-xl p-1"
         >
-          <button
-            type="button"
-            onClick={() => toggleFormat('bold')}
-            className={cn(
-              'p-1.5 rounded transition-colors',
-              editor.isActive('bold')
-                ? 'bg-primary text-primary-foreground'
-                : 'hover:bg-muted'
-            )}
-            title="Bold (Ctrl+B)"
+          {/* Scrollable container for overflow handling */}
+          <div 
+            ref={bubbleMenuRef}
+            className="flex items-center gap-0.5 max-w-[calc(100vw-2rem)] overflow-x-auto scrollbar-thin scrollbar-thumb-muted scrollbar-track-transparent"
+            role="toolbar"
+            aria-label="Text formatting toolbar"
           >
-            <Bold className="h-3.5 w-3.5" />
-          </button>
-          <button
-            type="button"
-            onClick={() => toggleFormat('italic')}
-            className={cn(
-              'p-1.5 rounded transition-colors',
-              editor.isActive('italic')
-                ? 'bg-primary text-primary-foreground'
-                : 'hover:bg-muted'
-            )}
-            title="Italic (Ctrl+I)"
-          >
-            <Italic className="h-3.5 w-3.5" />
-          </button>
-          <button
-            type="button"
-            onClick={() => toggleFormat('underline')}
-            className={cn(
-              'p-1.5 rounded transition-colors',
-              editor.isActive('underline')
-                ? 'bg-primary text-primary-foreground'
-                : 'hover:bg-muted'
-            )}
-            title="Underline (Ctrl+U)"
-          >
-            <UnderlineIcon className="h-3.5 w-3.5" />
-          </button>
-
-          <div className="w-px h-4 bg-border mx-1" />
-
-          <button
-            type="button"
-            onClick={() => setAlignment('left')}
-            className={cn(
-              'p-1.5 rounded transition-colors',
-              editor.isActive({ textAlign: 'left' })
-                ? 'bg-primary text-primary-foreground'
-                : 'hover:bg-muted'
-            )}
-            title="Align Left"
-          >
-            <AlignLeft className="h-3.5 w-3.5" />
-          </button>
-          <button
-            type="button"
-            onClick={() => setAlignment('center')}
-            className={cn(
-              'p-1.5 rounded transition-colors',
-              editor.isActive({ textAlign: 'center' })
-                ? 'bg-primary text-primary-foreground'
-                : 'hover:bg-muted'
-            )}
-            title="Align Center"
-          >
-            <AlignCenter className="h-3.5 w-3.5" />
-          </button>
-          <button
-            type="button"
-            onClick={() => setAlignment('right')}
-            className={cn(
-              'p-1.5 rounded transition-colors',
-              editor.isActive({ textAlign: 'right' })
-                ? 'bg-primary text-primary-foreground'
-                : 'hover:bg-muted'
-            )}
-            title="Align Right"
-          >
-            <AlignRight className="h-3.5 w-3.5" />
-          </button>
-          <button
-            type="button"
-            onClick={() => setAlignment('justify')}
-            className={cn(
-              'p-1.5 rounded transition-colors',
-              editor.isActive({ textAlign: 'justify' })
-                ? 'bg-primary text-primary-foreground'
-                : 'hover:bg-muted'
-            )}
-            title="Justify"
-          >
-            <AlignJustify className="h-3.5 w-3.5" />
-          </button>
-
-          {/* Word Polisher - Only for single word selections */}
-          {isSingleWord && (
-            <>
-              <div className="w-px h-4 bg-border mx-1" />
-              <WordPolisher 
-                selectedText={selectedText.trim()} 
-                onReplace={handleWordReplace}
-              />
-            </>
-          )}
-
-          {/* AI Draft - Quick translation for selected text */}
-          {selectedText.trim().length > 0 && (
-            <>
-              <div className="w-px h-4 bg-border mx-1" />
-              <AIDraftButton
-                selectedText={selectedText.trim()}
-                onApply={handleWordReplace}
-              />
-            </>
-          )}
-
-          {/* Grammar Check - For longer selections */}
-          {selectedText.trim().length > 10 && (
-            <>
-              <div className="w-px h-4 bg-border mx-1" />
-              <GrammarChecker
-                text={selectedText.trim()}
-                onFix={handleWordReplace}
-              />
-            </>
-          )}
-
-          {/* Add to Glossary - For any selection */}
-          {selectedText.trim().length > 0 && (
-            <>
-              <div className="w-px h-4 bg-border mx-1" />
-              <AddToGlossary
-                selectedText={selectedText.trim()}
-              />
-            </>
-          )}
-
-          {onAiExplain && (
-            <>
-              <div className="w-px h-4 bg-border mx-1" />
-              <button
-                type="button"
-                onClick={onAiExplain}
-                disabled={isAiProcessing}
-                className="p-1.5 rounded transition-colors bg-violet-500/20 hover:bg-violet-500/30 text-violet-600 disabled:opacity-50"
-                title="AI Explain Selection"
-              >
-                {isAiProcessing ? (
-                  <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                ) : (
-                  <Sparkles className="h-3.5 w-3.5" />
+            {/* Primary formatting buttons - always visible */}
+            {primaryButtons}
+            
+            {/* Secondary buttons - in overflow dropdown on mobile */}
+            <div className="hidden sm:contents">
+              {secondaryButtons}
+            </div>
+            
+            {/* Overflow dropdown for mobile */}
+            {hasSecondaryActions && (
+              <div className="sm:hidden relative">
+                <div className="w-px h-4 bg-border mx-1" aria-hidden="true" />
+                <button
+                  type="button"
+                  onClick={() => setShowOverflow(!showOverflow)}
+                  className={cn(
+                    'p-1.5 rounded transition-colors hover:bg-muted flex items-center gap-0.5',
+                    showOverflow && 'bg-muted'
+                  )}
+                  aria-label="More formatting options"
+                  aria-expanded={showOverflow}
+                  aria-haspopup="menu"
+                >
+                  <MoreHorizontal className="h-3.5 w-3.5" />
+                  <ChevronDown className={cn(
+                    'h-2.5 w-2.5 transition-transform',
+                    showOverflow && 'rotate-180'
+                  )} />
+                </button>
+                
+                {/* Overflow dropdown menu */}
+                {showOverflow && (
+                  <div 
+                    className="absolute top-full right-0 mt-1 bg-background/95 backdrop-blur-sm border border-border rounded-lg shadow-xl p-1 flex flex-wrap gap-0.5 min-w-[200px] z-50"
+                    role="menu"
+                    aria-label="Additional formatting options"
+                  >
+                    {secondaryButtons}
+                  </div>
                 )}
-              </button>
-            </>
-          )}
+              </div>
+            )}
+          </div>
         </BubbleMenu>
 
         {/* Main Editor Content */}
@@ -357,4 +484,3 @@ export const TiptapEditor = forwardRef<TiptapEditorRef, TiptapEditorProps>(
     );
   }
 );
-

@@ -1,8 +1,14 @@
 "use client";
 
 import { ReactNode } from "react";
+import { ToastProvider } from "@/components/ui/Toast";
 
 export function Providers({ children }: { children: ReactNode }) {
-  // Add providers here (e.g., QueryClientProvider, AuthProvider, etc.)
-  return <>{children}</>;
+  return (
+    <>
+      {children}
+      {/* Global toast notification system */}
+      <ToastProvider />
+    </>
+  );
 }

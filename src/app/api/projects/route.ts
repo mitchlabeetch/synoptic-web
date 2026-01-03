@@ -19,8 +19,8 @@ export async function GET() {
     const projects = await getUserProjects(userId);
 
     return NextResponse.json({ projects });
-  } catch (error: any) {
-    console.error('[Projects GET Error]', error);
+  } catch (error: unknown) {
+    console.error('[Projects GET Error]', error instanceof Error ? error.message : error);
     return NextResponse.json(
       { error: 'Failed to fetch projects' },
       { status: 500 }
@@ -65,8 +65,8 @@ export async function POST(request: NextRequest) {
     });
 
     return NextResponse.json({ project }, { status: 201 });
-  } catch (error: any) {
-    console.error('[Projects POST Error]', error);
+  } catch (error: unknown) {
+    console.error('[Projects POST Error]', error instanceof Error ? error.message : error);
     return NextResponse.json(
       { error: 'Failed to create project' },
       { status: 500 }

@@ -67,6 +67,7 @@
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-joyride": "3.0.0-7",
+    "sonner": "^2.0.7",
     "tailwind-merge": "^3.4.0",
     "ws": "^8.18.3",
     "yjs": "^13.6.28",

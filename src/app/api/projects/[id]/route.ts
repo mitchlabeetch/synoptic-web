@@ -28,8 +28,8 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
     }
 
     return NextResponse.json({ project });
-  } catch (error: any) {
-    console.error('[Project GET Error]', error);
+  } catch (error: unknown) {
+    console.error('[Project GET Error]', error instanceof Error ? error.message : error);
     return NextResponse.json(
       { error: 'Failed to fetch project' },
       { status: 500 }
@@ -56,8 +56,8 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
     }
 
     return NextResponse.json({ project });
-  } catch (error: any) {
-    console.error('[Project PATCH Error]', error);
+  } catch (error: unknown) {
+    console.error('[Project PATCH Error]', error instanceof Error ? error.message : error);
     return NextResponse.json(
       { error: 'Failed to update project' },
       { status: 500 }
@@ -82,8 +82,8 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
     }
 
     return NextResponse.json({ success: true });
-  } catch (error: any) {
-    console.error('[Project DELETE Error]', error);
+  } catch (error: unknown) {
+    console.error('[Project DELETE Error]', error instanceof Error ? error.message : error);
     return NextResponse.json(
       { error: 'Failed to delete project' },
       { status: 500 }

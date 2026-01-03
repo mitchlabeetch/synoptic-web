@@ -48,11 +48,15 @@ export async function getUserProfile(userId: string): Promise<User | null> {
  * Update user profile
  */
 export async function updateUserProfile(userId: string, updates: Partial<Pick<User, 'name' | 'preferred_locale'>>): Promise<User | null> {
-  const keys = Object.keys(updates);
+  // SECURITY: Only allow updating explicit whitelist of columns
+  const ALLOWED_COLUMNS = new Set(['name', 'preferred_locale']);
+  const keys = Object.keys(updates).filter(k => ALLOWED_COLUMNS.has(k));
+  
   if (keys.length === 0) return getUserProfile(userId);
 
-  const setClause = keys.map((key, i) => `${key} = $${i + 2}`).join(', ');
-  const values = Object.values(updates);
+  // Escape column names properly
+  const setClause = keys.map((key, i) => `"${key.replace(/"/g, '""')}" = $${i + 2}`).join(', ');
+  const values = keys.map(k => updates[k as keyof typeof updates]);
 
   const result = await query<User>(
     `UPDATE profiles SET ${setClause}, updated_at = NOW() WHERE id = $1 RETURNING *`,
@@ -119,8 +123,11 @@ export async function updateProject(
   userId: string,
   updates: Partial<Pick<Project, 'title' | 'content' | 'settings'>>
 ): Promise<Project | null> {
-  // Prepare the update data
-  const updateData: Record<string, any> = {
+  // SECURITY: Only allow updating explicit whitelist of columns
+  const ALLOWED_COLUMNS = new Set(['title', 'content', 'settings', 'updated_at']);
+  
+  // Build update data with whitelisted columns only
+  const updateData: Record<string, unknown> = {
     updated_at: new Date().toISOString(),
   };
   
@@ -128,12 +135,19 @@ export async function updateProject(
   if (updates.content) updateData.content = JSON.stringify(updates.content);
   if (updates.settings) updateData.settings = JSON.stringify(updates.settings);
   
+  // Filter and validate keys
+  const keys = Object.keys(updateData).filter(k => ALLOWED_COLUMNS.has(k));
+  
+  // Escape column names properly  
+  const setClause = keys.map((k, i) => `"${k.replace(/"/g, '""')}" = $${i + 3}`).join(', ');
+  const values = keys.map(k => updateData[k]);
+  
   const result = await query<Project>(
     `UPDATE projects 
-     SET ${Object.keys(updateData).map((k, i) => `${k} = $${i + 3}`).join(', ')}
+     SET ${setClause}
      WHERE id = $1 AND user_id = $2 
      RETURNING *`,
-    [projectId, userId, ...Object.values(updateData)]
+    [projectId, userId, ...values]
   );
   
   return result.rows[0] || null;

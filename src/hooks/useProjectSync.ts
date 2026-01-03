@@ -71,11 +71,11 @@ export function useProjectSync(projectId: string) {
             error: null,
           });
         }
-      } catch (error: any) {
+      } catch (error: unknown) {
         setSyncStatus({
           status: 'error',
           lastSaved: null,
-          error: error.message,
+          error: error instanceof Error ? error.message : 'Unknown error',
         });
       }
     }
@@ -105,11 +105,11 @@ export function useProjectSync(projectId: string) {
         }
 
         setSyncStatus({ status: 'saved', lastSaved: new Date(), error: null });
-      } catch (error: any) {
+      } catch (error: unknown) {
         setSyncStatus({
           status: 'error',
           lastSaved: null,
-          error: error.message,
+          error: error instanceof Error ? error.message : 'Unknown error',
         });
       }
     }, 2000),

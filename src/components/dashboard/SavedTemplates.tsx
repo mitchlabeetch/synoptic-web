@@ -1,17 +1,20 @@
 // src/components/dashboard/SavedTemplates.tsx
 // PURPOSE: Display user's saved library templates on dashboard
 // ACTION: Shows favorites grid with quick-start buttons
-// MECHANISM: Fetches favorites from API, displays as compact cards
+// MECHANISM: Fetches favorites from API, displays as compact cards with skeleton loading
 
 'use client';
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Heart, ArrowRight, Loader2, Library, Sparkles } from 'lucide-react';
+import { Heart, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { LIBRARY_TILES, getTileById } from '@/services/library/registry';
+import { getTileById } from '@/services/library/registry';
 import { LibraryTile } from '@/services/library/types';
 import { cn } from '@/lib/utils';
+import { SavedTemplatesSkeleton } from '@/components/ui/Skeleton';
+import { EmptyState } from '@/components/ui/EmptyState';
+import { NextArrow } from '@/components/ui/DirectionalIcon';
 
 interface SavedTemplatesProps {
   className?: string;
@@ -57,33 +60,24 @@ export function SavedTemplates({ className }: SavedTemplatesProps) {
     router.push('/library');
   };
 
+  // Show skeleton while loading
   if (isLoading) {
-    return (
-      <div className={cn('rounded-xl border bg-card p-6', className)}>
-        <div className="flex items-center justify-center py-8">
-          <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
-        </div>
-      </div>
-    );
+    return <SavedTemplatesSkeleton />;
   }
 
-  // Empty state
+  // Empty state with illustration and CTA
   if (favoriteTiles.length === 0) {
     return (
       <div className={cn('rounded-xl border bg-card', className)}>
-        <div className="p-6 text-center">
-          <div className="mx-auto w-12 h-12 rounded-full bg-muted flex items-center justify-center mb-4">
-            <Library className="w-6 h-6 text-muted-foreground" />
-          </div>
-          <h3 className="font-semibold mb-2">No saved templates yet</h3>
-          <p className="text-sm text-muted-foreground mb-4">
-            Browse our library and save your favorite content sources for quick access.
-          </p>
-          <Button onClick={handleBrowseLibrary} variant="outline" size="sm" className="gap-2">
-            <Sparkles className="w-4 h-4" />
-            Explore Library
-          </Button>
-        </div>
+        <EmptyState
+          variant="templates"
+          compact
+          action={{
+            label: 'Explore Library',
+            onClick: handleBrowseLibrary,
+            icon: Sparkles,
+          }}
+        />
       </div>
     );
   }
@@ -101,7 +95,7 @@ export function SavedTemplates({ className }: SavedTemplatesProps) {
         </div>
         <Button variant="ghost" size="sm" onClick={handleBrowseLibrary} className="gap-1 text-xs">
           Browse All
-          <ArrowRight className="w-3 h-3" />
+          <NextArrow className="w-3 h-3" />
         </Button>
       </div>
 
@@ -136,9 +130,9 @@ export function SavedTemplates({ className }: SavedTemplatesProps) {
                 </div>
               </div>
               
-              {/* Hover arrow */}
+              {/* Hover arrow - RTL aware */}
               <div className="absolute right-3 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
-                <ArrowRight className="w-4 h-4 text-primary" />
+                <NextArrow className="w-4 h-4 text-primary" />
               </div>
             </button>
           ))}

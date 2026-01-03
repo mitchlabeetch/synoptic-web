@@ -10,6 +10,7 @@ import { OnboardingTour } from '@/components/onboarding/OnboardingTour';
 import { getCurrentUser, getUserId } from '@/lib/auth/jwt';
 import { getUserProjects, getUserProfile } from '@/lib/db/server';
 import { DashboardClient, SavedTemplatesWrapper } from './DashboardClient';
+import { EmptyState } from '@/components/ui/EmptyState';
 
 import { getTranslations } from 'next-intl/server';
 import LocaleSwitcher from '@/components/ui/LocaleSwitcher';
@@ -65,13 +66,25 @@ export default async function DashboardPage() {
           <ProjectCard key={project.id} project={project} />
         ))}
         {projects?.length === 0 && (
-          <div className="col-span-full flex flex-col items-center justify-center py-20 bg-muted/30 rounded-3xl border-2 border-dashed border-muted-foreground/20">
-            <p className="text-muted-foreground mb-6 text-lg font-medium italic">{t('emptyState')}</p>
-            <ProjectWizard tier={tier} projectCount={projectCount} />
+          <div className="col-span-full">
+            <EmptyState
+              variant="projects"
+              title={t('emptyState')}
+              description={t('noProjects')}
+              action={{
+                label: t('newProject'),
+                onClick: () => {
+                  // This triggers the wizard - handled by ProjectWizard component
+                  // We use a custom event to open it
+                  if (typeof window !== 'undefined') {
+                    window.dispatchEvent(new CustomEvent('open-project-wizard'));
+                  }
+                },
+              }}
+            />
           </div>
         )}
       </div>
     </div>
   );
 }
-
