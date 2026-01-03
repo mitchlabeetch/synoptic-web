@@ -1,13 +1,14 @@
 // src/app/api/auth/verify-email/route.ts
 // PURPOSE: Handle email verification token validation
-// ACTION: Validates tokens, marks email as verified, sends welcome email
-// MECHANISM: Accepts token via query param, validates, sends welcome email
+// ACTION: Validates tokens, marks email as verified, sends welcome email, schedules drip
+// MECHANISM: Accepts token via query param, validates, sends welcome email, schedules drip
 
 import { NextRequest, NextResponse } from 'next/server';
 import { validateVerificationToken, markEmailVerified, getTokenExpiryInfo } from '@/lib/auth/verification';
 import { AuditLog } from '@/lib/security/audit';
 import { getClientIP } from '@/lib/security/rate-limit';
 import { sendWelcomeEmail } from '@/lib/email/resend';
+import { scheduleDripEmails } from '@/lib/email/drip';
 import { query } from '@/lib/db/client';
 
 export async function GET(request: NextRequest) {
@@ -56,6 +57,13 @@ export async function GET(request: NextRequest) {
       }
     }).catch(err => {
       console.error('[Email Verification] Welcome email error:', err);
+    });
+
+    // Schedule drip campaign emails (non-blocking)
+    scheduleDripEmails(result.userId, result.email, userName).then(count => {
+      console.log(`[Email Verification] Scheduled ${count} drip emails for ${result.email}`);
+    }).catch(err => {
+      console.error('[Email Verification] Drip scheduling error:', err);
     });
 
     // Redirect to success page

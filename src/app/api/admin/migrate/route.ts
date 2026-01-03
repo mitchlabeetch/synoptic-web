@@ -246,6 +246,31 @@ const migrations = [
       UPDATE profiles SET email_verified = true WHERE password_hash IS NOT NULL AND email_verified IS NULL;
     `,
   },
+
+  {
+    name: '011_drip_email_queue',
+    description: 'Create drip email queue for automated campaigns',
+    sql: `
+      CREATE TABLE IF NOT EXISTS drip_email_queue (
+        id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+        user_id UUID NOT NULL REFERENCES profiles(id) ON DELETE CASCADE,
+        email VARCHAR(255) NOT NULL,
+        name VARCHAR(255),
+        email_type VARCHAR(50) NOT NULL,
+        scheduled_for TIMESTAMP WITH TIME ZONE NOT NULL,
+        status VARCHAR(20) DEFAULT 'pending',
+        sent_at TIMESTAMP WITH TIME ZONE,
+        error TEXT,
+        created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+        updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+        UNIQUE(user_id, email_type)
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_drip_queue_status ON drip_email_queue(status);
+      CREATE INDEX IF NOT EXISTS idx_drip_queue_scheduled ON drip_email_queue(scheduled_for);
+      CREATE INDEX IF NOT EXISTS idx_drip_queue_user ON drip_email_queue(user_id);
+    `,
+  },
 ];
 
 // ═══════════════════════════════════════════════════════════════════
