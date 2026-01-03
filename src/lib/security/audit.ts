@@ -234,6 +234,33 @@ export const AuditLog = {
       { userId, email, ip }
     );
   },
+  
+  passwordResetRequested(userId: string, email: string, ip: string) {
+    logAuditEvent(
+      AuditEventType.PASSWORD_RESET_REQUEST,
+      AuditSeverity.INFO,
+      `Password reset token generated for ${email}`,
+      { userId, email, ip }
+    );
+  },
+  
+  passwordResetSuccess(userId: string, email: string, ip: string) {
+    logAuditEvent(
+      AuditEventType.PASSWORD_RESET_COMPLETE,
+      AuditSeverity.INFO,
+      `Password successfully reset for ${email}`,
+      { userId, email, ip }
+    );
+  },
+  
+  passwordResetFailed(ip: string, reason: string) {
+    logAuditEvent(
+      AuditEventType.PASSWORD_RESET_COMPLETE,
+      AuditSeverity.WARN,
+      `Password reset failed: ${reason}`,
+      { ip, reason }
+    );
+  },
 };
 
 /**

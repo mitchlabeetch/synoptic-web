@@ -42,8 +42,8 @@ const ALLOWED_COLUMNS: Record<string, Set<string>> = {
     'id', 'user_id', 'title', 'description', 'content', 'source_lang', 'target_lang',
     'cover_image_url', 'is_published', 'created_at', 'updated_at', 'settings',
   ]),
-  favorites: new Set([
-    'id', 'user_id', 'item_id', 'item_type', 'source', 'metadata', 'created_at',
+  user_favorites: new Set([
+    'id', 'user_id', 'tile_id', 'saved_at',
   ]),
   sessions: new Set([
     'id', 'user_id', 'token', 'expires_at', 'created_at',
