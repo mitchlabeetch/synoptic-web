@@ -10,7 +10,7 @@ import { OnboardingTour } from '@/components/onboarding/OnboardingTour';
 import { getCurrentUser, getUserId } from '@/lib/auth/jwt';
 import { getUserProjects, getUserProfile } from '@/lib/db/server';
 import { DashboardClient, SavedTemplatesWrapper } from './DashboardClient';
-import { EmptyState } from '@/components/ui/EmptyState';
+import { EmptyProjectsState } from './EmptyProjectsState';
 
 import { getTranslations } from 'next-intl/server';
 import LocaleSwitcher from '@/components/ui/LocaleSwitcher';
@@ -67,21 +67,7 @@ export default async function DashboardPage() {
         ))}
         {projects?.length === 0 && (
           <div className="col-span-full">
-            <EmptyState
-              variant="projects"
-              title={t('emptyState')}
-              description={t('noProjects')}
-              action={{
-                label: t('newProject'),
-                onClick: () => {
-                  // This triggers the wizard - handled by ProjectWizard component
-                  // We use a custom event to open it
-                  if (typeof window !== 'undefined') {
-                    window.dispatchEvent(new CustomEvent('open-project-wizard'));
-                  }
-                },
-              }}
-            />
+            <EmptyProjectsState />
           </div>
         )}
       </div>
