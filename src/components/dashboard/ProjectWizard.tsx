@@ -1,7 +1,7 @@
 // src/components/dashboard/ProjectWizard.tsx
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { SUPPORTED_LANGUAGES, getLanguageByCode } from '@/data/languages';
@@ -64,6 +64,18 @@ export default function ProjectWizard({ projectCount = 0, tier = 'free' }: Proje
   const isLimited = tier === 'free' && projectCount >= 1;
   
   const t = useTranslations('Wizard');
+
+  // Listen for custom event to open wizard from empty state button
+  useEffect(() => {
+    const handleOpenWizard = () => {
+      if (!isLimited) {
+        setOpen(true);
+      }
+    };
+    
+    window.addEventListener('open-project-wizard', handleOpenWizard);
+    return () => window.removeEventListener('open-project-wizard', handleOpenWizard);
+  }, [isLimited]);
 
   const PAGE_SIZES = [
     {
